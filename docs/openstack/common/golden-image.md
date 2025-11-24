@@ -14,22 +14,37 @@ OpenStack 환경(Nova, Glance)에서 인스턴스 배포 시 즉시 사용 가�
 ```bash
 mkdir -p ~/golden-image-work
 cd ~/golden-image-work
+```
 
+**1. Ubuntu 24.04 LTS (Noble):**
+
+```bash
 # 1. Ubuntu 24.04 LTS (Noble)
 wget https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img -O ubuntu-24.04-base.qcow2
+```
 
-# 2. Rocky Linux 9
+**2. Rocky Linux 9:**
+
+```bash
 wget https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2 -O rocky-9-base.qcow2
+```
 
-# 3. AlmaLinux 9
+**3. AlmaLinux 9:**
+
+```bash
 wget https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2 -O AlmaLinux-9-base.qcow2
+```
 
-# 4. CentOS Stream 9
+**4. CentOS Stream 9:**
+
+```bash
 wget https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2 -O CentOS-Stream-9-base.qcow2
+```
 
-# 5. Debian 12
+**5. Debian 12:**
+
+```bash
 wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2 -O debian-12-base.qcow2
-
 ```
 
 ```bash
@@ -79,8 +94,15 @@ PasswordAuthentication yes
 ```
 
 ```bash
-# ssh 재시작
+# Ubuntu/Debian
+systemctl restart ssh
+
+# Rocky/RHEL
 systemctl restart sshd
+```
+
+```bash
+ssh root@localhost -p 2222
 ```
 
 > 작업 중 VM을 멈추거나 종료하고 싶다면 `Ctrl + A` 키를  눌렀다가 떼고, 바로 `x` 키를 누르면 KVM이 강제 종료됩니다.
