@@ -1,15 +1,15 @@
 # 🛠️ OpenStack 2025.1 (Epoxy) GPU/PCI Passthrough 설치 가이드
 
-## 0\. 사전 환경 가정
+## 0. 사전 환경 가정
 
-  * **OS:** Ubuntu 24.04 LTS (모든 노드 동일)
-  * **Control Node IP:** `10.10.10.60`
-  * **Compute Node IP:** `10.10.10.62` (GPU 장착)
-  * **Target GPU:** NVIDIA (Vendor: `10de`, Product: `20b7`)
+- **OS:** Ubuntu 24.04 LTS (모든 노드 동일)
+- **Control Node IP:** `10.10.10.60`
+- **Compute Node IP:** `10.10.10.62` (GPU 장착)
+- **Target GPU:** NVIDIA (Vendor: `10de`, Product: `20b7`)
 
 -----
 
-## 1\. [모든 노드] 공통 기본 설정
+## 1. [모든 노드] 공통 기본 설정
 
 > **대상:** Control Node(Master), Compute Node 등 모든 서버
 > **권한:** Root (`sudo -i`)
@@ -32,7 +32,7 @@ echo "10.10.10.62 compute" >> /etc/hosts
 
 -----
 
-## 2\. [Compute 노드] GPU 격리 및 하드웨어 설정
+## 2. [Compute 노드] GPU 격리 및 하드웨어 설정
 
 > **대상:** GPU가 장착된 Compute Node (`10.10.10.62`)
 > **목적:** 커널 레벨에서 GPU를 격리하여 VM에 할당할 준비를 합니다.
@@ -66,7 +66,7 @@ reboot
 
 -----
 
-## 3\. [Control 노드] Kolla-Ansible 설치 및 준비
+## 3. [Control 노드] Kolla-Ansible 설치 및 준비
 
 > **대상:** Control Node (`10.10.10.60`)
 > **목적:** 배포 도구 설치 및 기본 설정
@@ -112,7 +112,7 @@ ssh-copy-id root@10.10.10.62
 
 -----
 
-## 4\. [Control 노드] Placement & PCI 연동 설정 (★중요★)
+## 4. [Control 노드] Placement & PCI 연동 설정 (★중요★)
 
 > **대상:** Control Node (`10.10.10.60`)
 > **설명:** 배포 시 적용될 **Nova 설정 파일**을 미리 작성합니다.
@@ -155,7 +155,7 @@ EOF
 
 -----
 
-## 5\. [Control 노드] 배포 실행
+## 5. [Control 노드] 배포 실행
 
 > **대상:** Control Node (`10.10.10.60`)
 
@@ -177,7 +177,7 @@ pip install python-openstackclient
 
 -----
 
-## 6\. [Control 노드] 검증 및 Flavor 생성
+## 6. [Control 노드] 검증 및 Flavor 생성
 
 > **대상:** Control Node (`10.10.10.60`)
 > **설명:** 배포 후 GPU 자원이 정상적으로 Placement에 등록되었는지 확인하고 Flavor를 생성합니다.
