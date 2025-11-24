@@ -219,7 +219,7 @@ apt-get install -y build-essential linux-headers-$(uname -r) pkg-config libglvnd
 
 # 4. NVIDIA 드라이버 다운로드
 cd /root
-wget https://us.download.nvidia.com/XFree86/Linux-x86_64/535.129.03/NVIDIA-Linux-x86_64-535.129.03.run
+wget https://us.download.nvidia.com/XFree86/Linux-x86_64/550.127.05/NVIDIA-Linux-x86_64-550.127.05.run
 chmod +x NVIDIA-Linux-x86_64-*.run
 
 # 5. 드라이버 설치 (하드웨어 없이 설치)
@@ -248,7 +248,7 @@ yum install -y kernel-devel kernel-headers dkms gcc make wget pciutils
 
 # 드라이버 다운로드
 cd /root
-wget https://us.download.nvidia.com/XFree86/Linux-x86_64/535.129.03/NVIDIA-Linux-x86_64-535.129.03.run
+wget https://us.download.nvidia.com/XFree86/Linux-x86_64/550.127.05/NVIDIA-Linux-x86_64-550.127.05.run
 chmod +x NVIDIA-Linux-x86_64-*.run
 
 # 5. 드라이버 설치 (하드웨어 없이 설치)
