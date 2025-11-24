@@ -1,0 +1,50 @@
+site_name: Infra Cheatsheets
+site_url: https://사용자명.github.io/infra-cheatsheets/
+repo_url: https://github.com/사용자명/infra-cheatsheets/
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  palette: 
+    # 다크 모드/라이트 모드 자동 전환 버튼
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs        # 상단 탭 메뉴
+    - navigation.sections    # 사이드바 섹션 구분
+    - search.highlight       # 검색어 하이라이팅
+    - content.code.copy      # 코드 복사 버튼 (필수!)
+
+markdown_extensions:
+  - admonition               # 참고/주의 박스 (!!! note)
+  - pymdownx.details         # 접기/펼치기 기능
+  - pymdownx.superfences     # 코드 블록 중첩 지원
+  - pymdownx.highlight:      # 코드 하이라이팅
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables                   # 마크다운 테이블 지원
+
+# 메뉴 구조 (나중에 파일 만들면서 수정하면 됨)
+nav:
+  - Home: index.md
+  - OpenStack:
+      - Install:
+        - '오픈스택 설치': openstack/install/openstack2025.1-install.md
+      - 'PCI 설정': openstack/openstack2024.2_pci_placement.md
+      - 'Golden Image 생성': openstack/openstack-golden-image.md
+  - Kubernetes:
+      - 'Admin 토큰 확인': k8s/token-check.md
+  - Ubuntu:
+      - 'Ubuntu 기본 세팅': ubuntu/init-ubuntu-env.md

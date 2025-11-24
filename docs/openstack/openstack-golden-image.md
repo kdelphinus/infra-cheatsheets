@@ -47,8 +47,8 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 VMware Tools 대신 **QEMU Guest Agent**를 사용합니다.
 
-* **Ubuntu**: `apt install -y qemu-guest-agent cloud-init`
-* **Rocky/RHEL**: `yum install -y qemu-guest-agent cloud-init`
+- **Ubuntu**: `apt install -y qemu-guest-agent cloud-init`
+- **Rocky/RHEL**: `yum install -y qemu-guest-agent cloud-init`
 
 -----
 
@@ -58,14 +58,14 @@ VMware Tools 대신 **QEMU Guest Agent**를 사용합니다.
 
 > **전제**: 인스턴스에 이미 NVIDIA GPU가 Passthrough 되어 있거나, 로컬에서 드라이버 빌드 환경이 갖춰져야 합니다.
 
-### ✅ 설치 절차
+### 2.1 설치 절차
 
 1. **Nouveau 드라이버 비활성화 (필수)**
 2. **빌드 의존성 설치**
 3. **드라이버 설치 (CUDA Toolkit 포함 권장)**
 4. **Persistence Mode 활성화**
 
-### 💻 실행 명령어 (공통)
+### 2.2 실행 명령어 (공통)
 
 ```bash
 # 1. Nouveau 블랙리스트 처리
@@ -99,13 +99,13 @@ systemctl enable nvidia-persistenced
 
 > **대상**: Ubuntu 20.04, 22.04, 24.04 LTS
 
-### ✅ 작업 순서
+### 3.1 작업 순서
 
 1. DataSource를 OpenStack으로 고정
 2. SSH 설정
 3. 네트워크/식별자 초기화 (VMware 가이드 참조하여 수정)
 
-### 💻 실행 명령어
+### 3.2 실행 명령어
 
 ```bash
 # 1. DataSource를 OpenStack으로 설정
@@ -143,13 +143,13 @@ rm -rf /var/lib/apt/lists/*
 
 > **대상**: Rocky Linux 8/9, CentOS Stream 8/9
 
-### ✅ 작업 순서
+### 4.1 작업 순서
 
 1. DataSource 설정
 2. SELinux 설정 (필요시 Permissive)
 3. 네트워크 설정 파일 삭제
 
-### 💻 실행 명령어
+### 4.2 실행 명령어
 
 ```bash
 # 1. DataSource 설정
@@ -175,7 +175,7 @@ yum clean all
 
 -----
 
-## 5\. 공통: 최종 정리 및 이미지 변환
+## 5. 공통: 최종 정리 및 이미지 변환
 
 모든 설정이 끝났으면 마지막으로 cloud-init을 초기화하고 VM을 종료합니다.
 
@@ -225,4 +225,4 @@ openstack image create "Rocky-9-NVIDIA-GPU" \
 
 1. **이미지 용량 최적화**: `qemu-img convert -O qcow2 -c input.qcow2 output.qcow2` 명령어를 사용하여 최종 이미지를 압축(`-c`)하면 스토리지 효율이 좋아집니다.
 2. **CI/CD 파이프라인**: 이 과정을 수동으로 하기보다 **Packer**를 사용하여 '코드로서의 이미지(Image as Code)'를 구현하는 것을 강력히 권장합니다.
-      * Packer OpenStack Builder를 사용하면 위 스크립트를 프로비저너로 실행하여 자동화할 수 있습니다.
+      - Packer OpenStack Builder를 사용하면 위 스크립트를 프로비저너로 실행하여 자동화할 수 있습니다.
