@@ -775,6 +775,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="8. 옵션: GPU 드라이버 설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rtx-gpu-reset-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTX 계열 GPU 사용 시 문제점(Reset Bug)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1454,6 +1471,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="8. 옵션: GPU 드라이버 설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rtx-gpu-reset-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTX 계열 GPU 사용 시 문제점(Reset Bug)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1692,21 +1726,24 @@
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="s">options nouveau modeset=0</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="s">EOF</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># 2. 변경 사항 커널에 적용</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>update-initramfs<span class="w"> </span>-u
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># 옵션. RTX 계열의 개인 GPU 사용 시 MSI 비활성화</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;options nvidia NVreg_EnableMSI=0&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/modprobe.d/nvidia.conf
 <a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>
-<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="c1"># 3. 빌드 의존성 패키지 설치</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>apt-get<span class="w"> </span>update
-<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>linux-headers-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="w"> </span>pkg-config<span class="w"> </span>libglvnd-dev
-<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>
-<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="c1"># 4. NVIDIA 드라이버 다운로드</span>
-<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="nb">cd</span><span class="w"> </span>/root
-<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>wget<span class="w"> </span>https://us.download.nvidia.com/XFree86/Linux-x86_64/550.127.05/NVIDIA-Linux-x86_64-550.127.05.run
-<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>chmod<span class="w"> </span>+x<span class="w"> </span>NVIDIA-Linux-x86_64-*.run
-<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>
-<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="c1"># 5. 드라이버 설치 (하드웨어 없이 설치)</span>
-<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="c1"># 나중에 로그인해서 &#39;install-gpu&#39;만 치면 설치되도록 설정</span>
-<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;alias install-gpu=&#39;/root/NVIDIA-Linux-x86_64-*.run --silent --dkms &amp;&amp; echo \&quot;설치 완료! nvidia-smi를 입력해보세요.\&quot;&#39; &quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/root/.bashrc
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="c1"># 2. 변경 사항 커널에 적용</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>update-initramfs<span class="w"> </span>-u
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="c1"># 3. 빌드 의존성 패키지 설치</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>apt-get<span class="w"> </span>update
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>linux-headers-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="w"> </span>pkg-config<span class="w"> </span>libglvnd-dev
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="c1"># 4. NVIDIA 드라이버 다운로드</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="nb">cd</span><span class="w"> </span>/root
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a>wget<span class="w"> </span>https://us.download.nvidia.com/XFree86/Linux-x86_64/550.127.05/NVIDIA-Linux-x86_64-550.127.05.run
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>chmod<span class="w"> </span>+x<span class="w"> </span>NVIDIA-Linux-x86_64-*.run
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="c1"># 5. 드라이버 설치 (하드웨어 없이 설치)</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="c1"># 나중에 로그인해서 &#39;install-gpu&#39;만 치면 설치되도록 설정</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;alias install-gpu=&#39;/root/NVIDIA-Linux-x86_64-*.run --silent --dkms &amp;&amp; echo \&quot;설치 완료! nvidia-smi를 입력해보세요.\&quot;&#39; &quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/root/.bashrc
 </code></pre></div>
 <p><strong>Rocky/RHEL:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># 1. Nouveau(오픈소스 드라이버) 블랙리스트 처리</span>
@@ -1715,25 +1752,28 @@
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="s">options nouveau modeset=0</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="s">EOF</span>
 <a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="c1"># 2. 변경 사항 커널에 적용 (initramfs 갱신)</span>
-<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>dracut<span class="w"> </span>--force
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="c1"># 옵션. RTX 계열의 개인 GPU 사용 시 MSI 비활성화</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;options nvidia NVreg_EnableMSI=0&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/modprobe.d/nvidia.conf
 <a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>
-<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="c1"># 3. 빌드 의존성 패키지 설치</span>
-<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="c1"># (드라이버 컴파일을 위해 gcc, make, kernel source 등이 필요함)</span>
-<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>yum<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;Development Tools&quot;</span>
-<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
-<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>yum<span class="w"> </span>update<span class="w"> </span>-y<span class="w">  </span><span class="c1"># 커널 최신화 (중요)</span>
-<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>kernel-devel<span class="w"> </span>kernel-headers<span class="w"> </span>dkms<span class="w"> </span>gcc<span class="w"> </span>make<span class="w"> </span>wget<span class="w"> </span>pciutils
-<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>
-<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="c1"># 드라이버 다운로드</span>
-<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a><span class="nb">cd</span><span class="w"> </span>/root
-<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>wget<span class="w"> </span>https://us.download.nvidia.com/XFree86/Linux-x86_64/550.127.05/NVIDIA-Linux-x86_64-550.127.05.run
-<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>chmod<span class="w"> </span>+x<span class="w"> </span>NVIDIA-Linux-x86_64-*.run
-<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>
-<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a><span class="c1"># 5. 드라이버 설치 (하드웨어 없이 설치)</span>
-<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a><span class="c1"># --silent: 무인 설치</span>
-<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a><span class="c1"># 나중에 로그인해서 &#39;install-gpu&#39;만 치면 설치되도록 설정</span>
-<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;alias install-gpu=&#39;/root/NVIDIA-Linux-x86_64-*.run --silent --dkms &amp;&amp; echo \&quot;설치 완료! nvidia-smi를 입력해보세요.\&quot;&#39; &quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/root/.bashrc
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="c1"># 2. 변경 사항 커널에 적용 (initramfs 갱신)</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>dracut<span class="w"> </span>--force
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="c1"># 3. 빌드 의존성 패키지 설치</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="c1"># (드라이버 컴파일을 위해 gcc, make, kernel source 등이 필요함)</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>yum<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;Development Tools&quot;</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>yum<span class="w"> </span>update<span class="w"> </span>-y<span class="w">  </span><span class="c1"># 커널 최신화 (중요)</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>kernel-devel<span class="w"> </span>kernel-headers<span class="w"> </span>dkms<span class="w"> </span>gcc<span class="w"> </span>make<span class="w"> </span>wget<span class="w"> </span>pciutils
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="c1"># 드라이버 다운로드</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a><span class="nb">cd</span><span class="w"> </span>/root
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>wget<span class="w"> </span>https://us.download.nvidia.com/XFree86/Linux-x86_64/550.127.05/NVIDIA-Linux-x86_64-550.127.05.run
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>chmod<span class="w"> </span>+x<span class="w"> </span>NVIDIA-Linux-x86_64-*.run
+<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>
+<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a><span class="c1"># 5. 드라이버 설치 (하드웨어 없이 설치)</span>
+<a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a><span class="c1"># --silent: 무인 설치</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a><span class="c1"># 나중에 로그인해서 &#39;install-gpu&#39;만 치면 설치되도록 설정</span>
+<a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;alias install-gpu=&#39;/root/NVIDIA-Linux-x86_64-*.run --silent --dkms &amp;&amp; echo \&quot;설치 완료! nvidia-smi를 입력해보세요.\&quot;&#39; &quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/root/.bashrc
 </code></pre></div>
 <hr />
 <h2 id="6-vm">6. VM 정리 작업</h2>
@@ -1833,7 +1873,8 @@
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span>--disk-format<span class="w"> </span>qcow2<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span>--container-format<span class="w"> </span>bare<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">  </span>--public<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_qemu_guest_agent</span><span class="o">=</span>yes
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_machine_type</span><span class="o">=</span>q35<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_qemu_guest_agent</span><span class="o">=</span>yes
 </code></pre></div>
 <p><strong>GPU 포함 이미지 (메타데이터 중요):</strong>
 OpenStack Nova가 GPU를 적절히 스케줄링하도록 메타데이터를 추가할 수 있습니다.</p>
@@ -1843,16 +1884,25 @@ OpenStack Nova가 GPU를 적절히 스케줄링하도록 메타데이터를 추�
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">  </span>--container-format<span class="w"> </span>bare<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">  </span>--public<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_video_model</span><span class="o">=</span>vga<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_qemu_guest_agent</span><span class="o">=</span>yes
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_machine_type</span><span class="o">=</span>q35<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_qemu_guest_agent</span><span class="o">=</span>yes
 </code></pre></div>
+<blockquote>
+<p>만약 RTX 계열의 개인용 GPU 사용한다면 이미지 혹은 flavor에 <code>--property hw:kvm_hidden=true</code> 값을 넣어주어야 합니다.</p>
+</blockquote>
 <h2 id="8-gpu">8. 옵션: GPU 드라이버 설치</h2>
 <p>GPU 인스턴스 생성하고, 플로팅 IP를 연결하여 VM 내부에 접속한 뒤, 아래 명령어를 실행시킵니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># root 계정 사용</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>sudo<span class="w"> </span>su<span class="w"> </span>-
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
-<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="c1"># 사전에 받아둔 nvidia 드라이버 설치</span>
-<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>install-gpu
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># 사전에 받아둔 nvidia 드라이버 설치</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>install-gpu
+</code></pre></div>
+<h3 id="rtx-gpu-reset-bug">RTX 계열 GPU 사용 시 문제점(Reset Bug)</h3>
+<p>RTX 계열과 같은 소비자용 GPU는 가상화 환경을 고려하지 않기에 FLR(Function Level Reset) 기능을 지원하지 않습니다.
+따라서 GPU 인스턴스를 종료하거나 재부팅하면, GPU 하드웨어가 초기화되지 않고 Stuck 상태로 남아 데이터 찌꺼기를 가지고 있다가 VM의 다음 동작을 방해하고, 이를 호스트가 응답이 없는 것으로 인식하고 인스턴스를 PAUSED 상태로 강제 정지시켜버립니다.</p>
+<p>위에서 RTX 계열 GPU를 위한 설정을 추가했지만, 이것만으로 문제를 막을 수는 없습니다.
+FLR 기능이 없는 한 재부팅 혹은 삭제 시 높은 확률로 하드웨어 리셋 실패가 발생하기에 RTX 계열 GPU를 사용하지 않는 것을 권장합니다.</p>
 
 
 
