@@ -69,18 +69,92 @@ sudo virt-customize -a ubuntu-24.04-base.qcow2 --root-password password:root1234
 
 ## 3. KVM으로 VM 부팅 및 접속
 
+### 3.1 Ubuntu/Debian
+
 ```bash
-# KVM으로 부팅 (메모리 2G, CPU 2 Core)
+# Ubuntu는 기본 용량이 적어 용량을 늘려줍니다.
+qemu-img resize ubuntu-24.04-base.qcow2 +10G
+
+# KVM으로 부팅 (메모리 4G, CPU 2 Core)
 sudo kvm -m 2048 -smp 2 -hda ubuntu-24.04-base.qcow2 -net nic -net user,hostfwd=tcp::2222-:22 -nographic
 ```
 
 위에서 `login:` 화면이 뜨면 위에서 설정한 비밀번호로 접속합니다.
 
-만약 아래 `echo` 명령이 깨져서 나온다면, ssh 관련 설정을 변경하여 ssh로 접속해야 합니다.
+편하게 붙여넣기 위해서 ssh 접속 설정을 활성화해줍니다. (기존 터미널은 글자가 밀립니다.)
+
+기본 이미지에 키가 없는 경우가 있어서 키부터 생성합니다.
 
 ```bash
-echo "This is a test to see if copy and paste works correctly in the KVM console."
+# 출력 결과가 없다면 키를 만들어줘야 합니다.
+ls -l /etc/ssh/ssh_host_*
 ```
+
+```bash
+# 키 생성
+ssh-keygen -A
+
+# sshd 설정 중 아래 두 항목을 yes로 변경
+vi /etc/ssh/sshd_config
+...
+PermitRootLogin yes
+PasswordAuthentication yes
+...
+
+# Override 하는 설정 파일 제거
+rm -f /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+
+# ssh 재시작
+systemctl restart ssh
+
+# 설정 확인
+sshd -T | grep passwordauthentication
+```
+
+```bash
+# 상태 확인
+systemctl status ssh
+
+# 혹시 disable이라면 enable로 변경
+systemctl enable ssh
+```
+
+아래 명령 실행 시, ens3과 같은 네트워크가 DOWN 상태라면 아래 조치를 취합니다.
+
+```bash
+ip a
+```
+
+ens3은 실제 네트워크 이름으로 변경해야 합니다.
+
+```bash
+# 인터페이스 켜기
+ip link set ens3 up
+
+# IP 주소 할당(10.0.2.15는 KVM 기본 IP)
+ip addr add 10.0.2.15/24 dev ens3
+
+# 게이트웨이 연결
+ip route add default via 10.0.2.2
+
+# DNS 설정
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+```
+
+```bash
+# 네트워크 연결 확인
+ping -c 3 8.8.8.8
+```
+
+### 3.2 Rocky/RHEL
+
+Rocky는 CPU의 여러 기능을 요구합니다. 따라서 아래와 같이 호스트 CPU를 그대로 VM에 전달하도록 `-cpu host` 옵션을 사용합니다.
+
+```bash
+sudo kvm -m 4096 -smp 2 -cpu host -hda rocky-9-base.qcow2 -net nic -net user,hostfwd=tcp::2222-:22 -nographic
+```
+
+ssh 접속을 위해 설정을 변경합니다.
 
 ```bash
 # sshd 설정 중 아래 두 항목을 yes로 변경
@@ -90,15 +164,12 @@ vi /etc/ssh/sshd_config
 PermitRootLogin yes
 PasswordAuthentication yes
 ...
-```
 
-```bash
-# Ubuntu/Debian
-systemctl restart ssh
-
-# Rocky/RHEL
+# ssh 재시작
 systemctl restart sshd
 ```
+
+새로운 터미널을 열어 ssh로 접속합니다.
 
 ```bash
 ssh root@localhost -p 2222
@@ -125,19 +196,31 @@ pkill -f ubuntu-24.04-base.qcow2
 pkill -9 <PID>
 ```
 
-#### 2) Rocky 부팅 시 오류
+#### 2) KVM 용량을 늘려도 VM 용량이 동일한 경우
+
+현재 아래 명령을 통해 `sda` 는 늘린 용량인데, `sda1` 이 여전히 그대로인 것을 확인할 수 있습니다. 
 
 ```bash
-...
-[    2.456556] ---[ end Kernel panic - not syncing: Attempted to kill init! exitcode=0x00007f00 ]---
+# 현재 상황 확인
+lsblk
 ```
 
-위와 같은 오류 발생 시, Rocky Linux 9가 요구하는 CPU 기능을 KVM 기본 설정이 충족하지 못해서 발생하는 것입니다.
-
-이때는 기존의 KVM을 제거하고, 호스트 PC의 CPU 기능을 그대로 VM에 전달하도록 `-cpu host` 옵션을 추가합니다.
+우선 파티션을 디스크 끝까지 늘립니다.
 
 ```bash
-sudo kvm -m 2048 -smp 2 -cpu host -hda rocky-9-base.qcow2 -net nic -net user,hostfwd=tcp::2222-:22 -nographic
+growpart /dev/sda 1
+```
+
+늘어난 파티션에 맞춰서 파일시스템을 확장합니다.
+
+```bash
+resize2fs /dev/sda1
+```
+
+용량이 늘어났는지 확인합니다.
+
+```bash
+df -h
 ```
 
 ## 4. VM 내부 설정 변경
@@ -188,6 +271,7 @@ VMware Tools 대신 **QEMU Guest Agent**를 사용합니다.
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 # 필수 패키지 설치
+apt update
 apt install -y qemu-guest-agent cloud-init
 ```
 
@@ -213,7 +297,6 @@ Docker를 포함하는 경우에만 이 단계를 수행하세요.
 
 ```bash
 # 1. 필수 패키지 및 GPG Key 설정
-apt-get update
 apt-get install -y ca-certificates curl
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -258,6 +341,9 @@ dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 
 # 2. Docker 엔진 설치
 dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 옵션. Rocky 10의 경우 아래 패키지도 설치
+dnf install -y iptables-nft iptables-services
 
 # 3. Docker 실행 및 자동 시작 설정
 systemctl enable --now docker
@@ -304,7 +390,6 @@ echo "options nvidia NVreg_EnableMSI=0" | sudo tee /etc/modprobe.d/nvidia.conf
 update-initramfs -u
 
 # 3. 빌드 의존성 패키지 설치
-apt-get update
 apt-get install -y build-essential linux-headers-$(uname -r) pkg-config libglvnd-dev
 
 # 4. NVIDIA 드라이버 다운로드
