@@ -162,7 +162,16 @@ update-grub
 
 ```bash
 # /etc/default/grub 파일 수정
-sed -i 's/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="crashkernel=auto console=tty1 console=ttyS0,115200n8"/' /etc/default/grub
+cat > /etc/default/grub << 'EOF'
+GRUB_TIMEOUT=1
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=auto console=tty1 console=ttyS0,115200n8"
+GRUB_DISABLE_RECOVERY="true"
+GRUB_ENABLE_BLSCFG=true
+EOF
 
 # 수정 내용 적용
 grub2-mkconfig -o /boot/grub2/grub.cfg
@@ -194,7 +203,86 @@ yum install -y qemu-guest-agent cloud-init
 
 -----
 
-## 5. 옵션: NVIDIA GPU 드라이버 설치
+## 5. 옵션 소프트웨어 설치
+
+### 5.1 옵션: Docker 설치
+
+Docker를 포함하는 경우에만 이 단계를 수행하세요.
+
+**Ubuntu/Debian:**
+
+```bash
+# 1. 필수 패키지 및 GPG Key 설정
+apt-get update
+apt-get install -y ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+
+# 2. 저장소 추가
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt-get update
+
+# 3. Docker 설치
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 4. 활성화
+systemctl enable --now docker
+
+# -------------------------------------------------------
+# [GPU 이미지인 경우만] NVIDIA Container Toolkit 설치
+# -------------------------------------------------------
+
+# 5. 저장소 추가 및 설치
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+apt-get update
+apt-get install -y nvidia-container-toolkit
+
+# 6. Docker 설정 및 재시작
+nvidia-ctk runtime configure --runtime=docker
+systemctl restart docker
+```
+
+**Rocky/RHEL:**
+
+```bash
+# 1. Docker 저장소 추가
+dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# 2. Docker 엔진 설치
+dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 3. Docker 실행 및 자동 시작 설정
+systemctl enable --now docker
+
+# -------------------------------------------------------
+# [GPU 이미지인 경우만] NVIDIA Container Toolkit 설치
+# (Docker가 GPU를 쓰게 해주는 필수 도구입니다)
+# -------------------------------------------------------
+
+# 4. NVIDIA Toolkit 저장소 추가
+curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | \
+  tee /etc/yum.repos.d/nvidia-container-toolkit.repo
+
+# 5. Toolkit 설치
+dnf install -y nvidia-container-toolkit
+
+# 6. Docker가 NVIDIA Runtime을 쓰도록 설정 (중요!)
+# 이 명령어가 /etc/docker/daemon.json 파일을 자동으로 수정해줍니다.
+nvidia-ctk runtime configure --runtime=docker
+
+# 7. 적용을 위해 Docker 재시작
+systemctl restart docker
+```
+
+### 5.2 옵션: NVIDIA GPU 드라이버 설치
 
 **GPU 버전 이미지**를 생성할 때만 이 단계를 수행하세요. CPU 전용 이미지는 이 단계를 건너뜁니다.
 
@@ -389,4 +477,16 @@ openstack image create "Ubuntu-24.04-Golden-GPU" \
   --public \
   --property hw_video_model=vga \
   --property hw_qemu_guest_agent=yes
+```
+
+## 8. 옵션: GPU 드라이버 설치
+
+GPU 인스턴스 생성하고, 플로팅 IP를 연결하여 VM 내부에 접속한 뒤, 아래 명령어를 실행시킵니다.
+
+```bash
+# root 계정 사용
+sudo su -
+
+# 사전에 받아둔 nvidia 드라이버 설치
+install-gpu
 ```
