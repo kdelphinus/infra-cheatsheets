@@ -165,8 +165,11 @@ openstack flavor set \
   --property "pci_passthrough:alias"="<RESOURCE_NAME>:1" \
   --property "resources:<CUSTOM_RESOURCE_CLASS>=1" \
   --property "hw:pci_numa_affinity_policy"="preferred" \
+  --property hw_machine_type=q35 \
   gpu-flavor
 ```
+
+> 만약 RTX 계열의 개인용 GPU를 사용한다면 `--property hw:kvm_hidden=true` 옵션도 함께 적용합니다.
 
 ### 5.2. 인스턴스 시작
 

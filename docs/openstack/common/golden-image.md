@@ -297,6 +297,9 @@ blacklist nouveau
 options nouveau modeset=0
 EOF
 
+# 옵션. RTX 계열의 개인 GPU 사용 시 MSI 비활성화
+echo "options nvidia NVreg_EnableMSI=0" | sudo tee /etc/modprobe.d/nvidia.conf
+
 # 2. 변경 사항 커널에 적용
 update-initramfs -u
 
@@ -322,6 +325,9 @@ cat <<EOF > /etc/modprobe.d/blacklist-nouveau.conf
 blacklist nouveau
 options nouveau modeset=0
 EOF
+
+# 옵션. RTX 계열의 개인 GPU 사용 시 MSI 비활성화
+echo "options nvidia NVreg_EnableMSI=0" | sudo tee /etc/modprobe.d/nvidia.conf
 
 # 2. 변경 사항 커널에 적용 (initramfs 갱신)
 dracut --force
@@ -463,6 +469,7 @@ openstack image create "Ubuntu-24.04-Golden" \
   --disk-format qcow2 \
   --container-format bare \
   --public \
+  --property hw_machine_type=q35 \
   --property hw_qemu_guest_agent=yes
 ```
 
@@ -476,8 +483,11 @@ openstack image create "Ubuntu-24.04-Golden-GPU" \
   --container-format bare \
   --public \
   --property hw_video_model=vga \
+  --property hw_machine_type=q35 \
   --property hw_qemu_guest_agent=yes
 ```
+
+> 만약 RTX 계열의 개인용 GPU 사용한다면 이미지 혹은 flavor에 `--property hw:kvm_hidden=true` 값을 넣어주어야 합니다.
 
 ## 8. 옵션: GPU 드라이버 설치
 
@@ -486,7 +496,17 @@ GPU 인스턴스 생성하고, 플로팅 IP를 연결하여 VM 내부에 접속�
 ```bash
 # root 계정 사용
 sudo su -
+```
 
+```bash
 # 사전에 받아둔 nvidia 드라이버 설치
 install-gpu
 ```
+
+### RTX 계열 GPU 사용 시 문제점(Reset Bug)
+
+RTX 계열과 같은 소비자용 GPU는 가상화 환경을 고려하지 않기에 FLR(Function Level Reset) 기능을 지원하지 않습니다.
+따라서 GPU 인스턴스를 종료하거나 재부팅하면, GPU 하드웨어가 초기화되지 않고 Stuck 상태로 남아 데이터 찌꺼기를 가지고 있다가 VM의 다음 동작을 방해하고, 이를 호스트가 응답이 없는 것으로 인식하고 인스턴스를 PAUSED 상태로 강제 정지시켜버립니다.
+
+위에서 RTX 계열 GPU를 위한 설정을 추가했지만, 이것만으로 문제를 막을 수는 없습니다.
+FLR 기능이 없는 한 재부팅 혹은 삭제 시 높은 확률로 하드웨어 리셋 실패가 발생하기에 RTX 계열 GPU를 사용하지 않는 것을 권장합니다.
