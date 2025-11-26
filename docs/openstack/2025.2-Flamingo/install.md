@@ -206,14 +206,14 @@ vi /etc/hosts
 
 ```bash
 # 1. Bootstrap (기초 공사: Docker 설치 등)
-kolla-ansible -i ./multinode bootstrap-servers
+kolla-ansible bootstrap-servers -i ./multinode
 
 # 2. Prechecks (사전 검사: 설정 오류 확인)
-kolla-ansible -i ./multinode prechecks
+kolla-ansible prechecks -i ./multinode
 # -> 여기서 "SUCCESS"가 떠야만 다음으로 넘어갑니다.
 
 # 3. Deploy (본 게임: 컨테이너 배포)
-kolla-ansible -i ./multinode deploy
+kolla-ansible deploy -i ./multinode
 ```
 
 -----
