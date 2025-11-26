@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://Kdelphinus.github.io/infra-cheatsheets/openstack/2025.2-Flamingo/install/">
       
       
+        <link rel="prev" href="../../common/init-gpu-node/">
+      
+      
+        <link rel="next" href="../pci-placement/">
       
       
         
@@ -21,7 +25,7 @@
     
     
       
-        <title>🚀 OpenStack Flamingo (2025.2) 통합 설치 가이드 - Infra Cheatsheets</title>
+        <title>설치 - Infra Cheatsheets</title>
       
     
     
@@ -106,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              🚀 OpenStack Flamingo (2025.2) 통합 설치 가이드
+              설치
             
           </span>
         </div>
@@ -234,6 +238,8 @@
   
   
   
+    
+  
   
     
     
@@ -241,10 +247,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../../common/golden-image/" class="md-tabs__link">
           
   
@@ -396,26 +404,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -433,7 +446,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -457,17 +470,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
             
   
   
@@ -564,26 +580,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
             
   
   
@@ -601,7 +622,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -611,6 +632,297 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-os-os-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 0. OS별 사전 준비 (OS Preparation)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 0. OS별 사전 준비 (OS Preparation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rocky-linux-selinux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟠 [Rocky Linux] 필수 설정 (SELinux 해제)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟣 [Ubuntu] 필수 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-install-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 1. 의존성 패키지 설치 (Install Dependencies)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ 1. 의존성 패키지 설치 (Install Dependencies)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rocky-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟠 [Rocky Linux]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ubuntu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟣 [Ubuntu]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-virtual-environment-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐍 2. 가상환경 구성 (Virtual Environment) - [공통]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-kolla-ansible-install-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 3. Kolla-Ansible 설치 (Install) - [공통]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-globalsyml-os" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ 4. 설정 파일 수정 (globals.yml) - [OS별 차이점]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 5. 인벤토리 및 비밀번호 설정 - [공통]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 5. 인벤토리 및 비밀번호 설정 - [공통]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 비밀번호 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 SSH 접속 허용
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-vi-multinode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 인벤토리 수정 (vi multinode)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 통신 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Ansible 의존성 설치 (필수)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deploy-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 6. 배포 실행 (Deploy) - [공통]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-post-deploy-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 7. 클라이언트 설정 (Post-Deploy) - [공통]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devops-ubuntu-vs-rocky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 DevOps 엔지니어의 조언: Ubuntu vs Rocky 선택 가이드
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
             
               
                 
@@ -661,17 +973,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
             
   
   
