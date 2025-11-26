@@ -243,7 +243,7 @@ openstack compute service list
 ## 💡 DevOps 엔지니어의 조언: Ubuntu vs Rocky 선택 가이드
 
 - **Ubuntu 24.04:**
-  - **장점:** OpenStack 커뮤니티의 \*\*표준(De-facto)\*\*입니다. 트러블슈팅 자료가 제일 많고, `apt`가 빠릅니다.
+  - **장점:** OpenStack 커뮤니티의 **표준(De-facto)** 입니다. 트러블슈팅 자료가 제일 많고, `apt`가 빠릅니다.
   - **추천:** 특별한 이유가 없다면 Ubuntu로 가세요.
 - **Rocky Linux 9/10:**
   - **장점:** RHEL(RedHat) 기반이라 엔터프라이즈 환경에서 선호됩니다. 안정성이 높습니다.
