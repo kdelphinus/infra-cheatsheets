@@ -1862,12 +1862,55 @@
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># 존재하지 않는 옵션인지 확인 필요</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="na">pci_in_placement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
 </code></pre></div>
+<p>참고로 <code>device_type</code> 은 아래와 같은 옵션이 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">타입</th>
+<th style="text-align: left;">명칭</th>
+<th style="text-align: left;">설명</th>
+<th style="text-align: left;">비유</th>
+<th style="text-align: left;">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">type-PCI</td>
+<td style="text-align: left;">일반 PCI 장치</td>
+<td style="text-align: left;">"SR-IOV 기능이 없거나, 안 쓰는 일반 장치."</td>
+<td style="text-align: left;">"단독주택 (쪼갤 수 없음, 통째로 써야 함)"</td>
+<td style="text-align: left;">"일반적인 GPU Passthrough (RTX, T4 등을 통으로 쓸 때)"</td>
+</tr>
+<tr>
+<td style="text-align: left;">type-PF</td>
+<td style="text-align: left;">Physical Function</td>
+<td style="text-align: left;">SR-IOV를 지원하는 부모 장치. 자식(VF)을 생성할 능력이 있음.</td>
+<td style="text-align: left;">아파트 주인 (세를 놓을 수 있음)</td>
+<td style="text-align: left;">호스트 OS가 VF를 관리하기 위해 붙들고 있는 용도. (VM에 잘 안 줌)</td>
+</tr>
+<tr>
+<td style="text-align: left;">type-VF</td>
+<td style="text-align: left;">Virtual Function</td>
+<td style="text-align: left;">부모(PF)로부터 파생된 자식 장치.</td>
+<td style="text-align: left;">아파트 세입자 (한 호실만 빌려 씀)</td>
+<td style="text-align: left;"><strong>고성능 네트워크(SR-IOV)</strong>나 vGPU를 VM에 할당할 때 사용.</td>
+</tr>
+</tbody>
+</table>
+<p>SR-IOV를 지원하는지는 아래와 같은 명령으로 확인할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 먼저 GPU의 PCI 주소를 찾습니다.</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>nvidia
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 예: 41:00.0 3D controller: NVIDIA Corporation ...</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 2. 해당 주소(-s)의 상세 정보(-vvv)에서 SR-IOV 키워드를 검색합니다.</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sudo<span class="w"> </span>lspci<span class="w"> </span>-s<span class="w"> </span>&lt;PCI_ADDRESS&gt;<span class="w"> </span>-vvv<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;Single Root I/O Virtualization&quot;</span>
+</code></pre></div>
 <h3 id="11-20252">1.1 2025.2 버전에 추가된 항목</h3>
 <h4 id="gpu">GPU 보안 관련</h4>
 <p><code>device_spec</code> 에서 <code>one_time_use</code> 항목을 추가 시, 사용자가 쓰고 반납한 GPU는 <code>reserved</code> 상태가 되어 다른 사용자가 사용할 수 없는 상태가 됩니다.</p>
 <p>이를 관리자가 스크립트로 GPU 초기화 후, <code>openstack resource provider inventory set --reserved 0 ...</code> 명령을 실행해야 다시 사용할 수 있게 됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">[pci]</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">device_spec = [{&quot;vendor_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;VENDOR_ID&gt;&quot;</span><span class="na">, &quot;product_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;PRODUCT_ID&gt;&quot;</span><span class="na">, &quot;one_time_use&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="na">}]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[pci]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="na">device_spec = [{&quot;vendor_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;VENDOR_ID&gt;&quot;</span><span class="na">, &quot;product_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;PRODUCT_ID&gt;&quot;</span><span class="na">, &quot;one_time_use&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="na">}]</span>
 </code></pre></div>
 <h4 id="live-migration">Live Migration</h4>
 <p><strong>live_migratable</strong>은 <strong>"GPU를 달고 있는 VM도 끄지 않고 다른 서버로 이사(Live Migration)갈 수 있게 해주는 스위치"</strong>입니다.</p>
@@ -1876,32 +1919,32 @@
 <li>SR-IOV 사용 가능 여부</li>
 <li>NVIDIA vGPU 라이선스</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[pci]</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="na">device_spec = [{ &quot;vendor_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;VENDOR_ID&gt;&quot;</span><span class="na">, &quot;product_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;PRODUCT_ID&gt;&quot;</span><span class="na">, &quot;live_migratable&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="na">}]</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="na">alias = { &quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;RESOURCE_NAME&gt;&quot;</span><span class="na">, ... &quot;live_migratable&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="na">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[pci]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="na">device_spec = [{ &quot;vendor_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;VENDOR_ID&gt;&quot;</span><span class="na">, &quot;product_id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;PRODUCT_ID&gt;&quot;</span><span class="na">, &quot;live_migratable&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="na">}]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="na">alias = { &quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;RESOURCE_NAME&gt;&quot;</span><span class="na">, ... &quot;live_migratable&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="na">}</span>
 </code></pre></div>
 <hr />
 <h2 id="2-reconfigure">2. 설정 적용 (Reconfigure)</h2>
 <p>기존 오픈스택을 끄지 않고 설정만 업데이트합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 가상환경 활성화 필수</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">source</span><span class="w"> </span>~/kolla-venv/bin/activate
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 재설정 적용 (Nova 서비스들만 재시작됨)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>--tags<span class="w"> </span>nova
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 가상환경 활성화 필수</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">source</span><span class="w"> </span>~/kolla-venv/bin/activate
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 재설정 적용 (Nova 서비스들만 재시작됨)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>--tags<span class="w"> </span>nova
 </code></pre></div>
 <p><em>(전체를 다 돌리면 오래 걸리니 <code>--tags nova</code>로 시간 단축 가능합니다.)</em></p>
 <hr />
 <h2 id="3-placement">3. Placement 등록 검증</h2>
 <p>Nova가 GPU를 감지하고 Placement에 "나 GPU 있어!"라고 보고했는지 확인합니다.</p>
 <h3 id="31-compute-node-uuid">3.1. 물리 서버(Compute Node) UUID 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>list
 </code></pre></div>
 <ul>
 <li>여기서 GPU 노드의 자식 <code>ID</code> (UUID)를 복사하세요.</li>
 </ul>
 <h3 id="32">3.2. 인벤토리 조회</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># [UUID] 자리에 복사한 ID를 넣으세요</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>inventory<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>UUID<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># [UUID] 자리에 복사한 ID를 넣으세요</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>inventory<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>UUID<span class="o">]</span>
 </code></pre></div>
 <p><strong>[성공 판독]</strong>
 출력 결과에 아래와 비슷한 항목이 보여야 합니다.</p>
@@ -1919,34 +1962,34 @@
 </ul>
 <h3 id="41-flat">4.1. 네트워크 생성 (Flat 타입)</h3>
 <p>사내망 IP 대역을 그대로 쓰는 방식입니다. (예: 사내망이 <code>192.168.0.0/24</code>라고 가정)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 1. Provider Network 생성 (이름: public)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># physnet1은 kolla 기본 물리 네트워크 이름입니다.</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>openstack<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>--share<span class="w"> </span>--external<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>--provider-physical-network<span class="w"> </span>physnet1<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>--provider-network-type<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span>public
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># 2. Subnet 생성 (여기에 실제 사내망 정보를 넣어야 함!)</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># gateway: 사내망 게이트웨이 (예: 192.168.0.1)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># allocation-pool: DHCP로 쓸 범위 (예: 100~200번)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>openstack<span class="w"> </span>subnet<span class="w"> </span>create<span class="w"> </span>--network<span class="w"> </span>public<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">  </span>--allocation-pool<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">192</span>.168.0.100,end<span class="o">=</span><span class="m">192</span>.168.0.200<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">  </span>--dns-nameserver<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span>--gateway<span class="w"> </span><span class="m">192</span>.168.0.1<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">  </span>--subnet-range<span class="w"> </span><span class="m">192</span>.168.0.0/24<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span>public_subnet
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 1. Provider Network 생성 (이름: public)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># physnet1은 kolla 기본 물리 네트워크 이름입니다.</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>openstack<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>--share<span class="w"> </span>--external<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span>--provider-physical-network<span class="w"> </span>physnet1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span>--provider-network-type<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span>public
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># 2. Subnet 생성 (여기에 실제 사내망 정보를 넣어야 함!)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># gateway: 사내망 게이트웨이 (예: 192.168.0.1)</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># allocation-pool: DHCP로 쓸 범위 (예: 100~200번)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>openstack<span class="w"> </span>subnet<span class="w"> </span>create<span class="w"> </span>--network<span class="w"> </span>public<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span>--allocation-pool<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">192</span>.168.0.100,end<span class="o">=</span><span class="m">192</span>.168.0.200<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span>--dns-nameserver<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span>--gateway<span class="w"> </span><span class="m">192</span>.168.0.1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">  </span>--subnet-range<span class="w"> </span><span class="m">192</span>.168.0.0/24<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">  </span>public_subnet
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 3. 네트워크 관련 설정(MTU 조절)</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># VM 안에서 실행 (헤더 크기 감안해서 1450으로 핑)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>ping<span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1422</span><span class="w"> </span><span class="m">8</span>.8.8.8<span class="w">  </span><span class="c1"># (1422 + 28헤더 = 1450) -&gt; 잘 될 겁니다.</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>ping<span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1472</span><span class="w"> </span><span class="m">8</span>.8.8.8<span class="w">  </span><span class="c1"># (1472 + 28헤더 = 1500) -&gt; 실패하거나 타임아웃 날 겁니다.</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># 3-1. 1472 핑에서 오류 발생 시</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># /etc/kolla/globals.yml</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>network_mtu:<span class="w"> </span><span class="m">1450</span><span class="w"> </span><span class="c1"># (기본값 1500 -&gt; 1450 축소)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># 3-2. 수정 후 재배포</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 3. 네트워크 관련 설정(MTU 조절)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># VM 안에서 실행 (헤더 크기 감안해서 1450으로 핑)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>ping<span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1422</span><span class="w"> </span><span class="m">8</span>.8.8.8<span class="w">  </span><span class="c1"># (1422 + 28헤더 = 1450) -&gt; 잘 될 겁니다.</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>ping<span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1472</span><span class="w"> </span><span class="m">8</span>.8.8.8<span class="w">  </span><span class="c1"># (1472 + 28헤더 = 1500) -&gt; 실패하거나 타임아웃 날 겁니다.</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># 3-1. 1472 핑에서 오류 발생 시</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># /etc/kolla/globals.yml</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>network_mtu:<span class="w"> </span><span class="m">1450</span><span class="w"> </span><span class="c1"># (기본값 1500 -&gt; 1450 축소)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1"># 3-2. 수정 후 재배포</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode
 </code></pre></div>
 <blockquote>
 <h3 id="mtu">MTU 관련 속도 지연이 생기는 이유</h3>
@@ -1960,13 +2003,13 @@
 <p>이제 <strong>"GPU가 달린 + 인터넷이 되는"</strong> 인스턴스를 만듭니다.</p>
 <h3 id="51-gpu-flavor">5.1. GPU Flavor 생성</h3>
 <p>아까 <code>nova.conf</code>에서 정한 alias 이름(<code>nvidia-gpu</code>)을 씁니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>openstack<span class="w"> </span>flavor<span class="w"> </span>create<span class="w"> </span>--ram<span class="w"> </span><span class="m">8192</span><span class="w"> </span>--disk<span class="w"> </span><span class="m">50</span><span class="w"> </span>--vcpus<span class="w"> </span><span class="m">4</span><span class="w"> </span>gpu.flavor
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>openstack<span class="w"> </span>flavor<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;pci_passthrough:alias&quot;</span><span class="o">=</span><span class="s2">&quot;&lt;RESOURCE_NAME&gt;:1&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;resources:&lt;CUSTOM_RESOURCE_CLASS&gt;=1&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;hw:pci_numa_affinity_policy&quot;</span><span class="o">=</span><span class="s2">&quot;preferred&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_machine_type</span><span class="o">=</span>q35<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span>gpu-flavor
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>openstack<span class="w"> </span>flavor<span class="w"> </span>create<span class="w"> </span>--ram<span class="w"> </span><span class="m">8192</span><span class="w"> </span>--disk<span class="w"> </span><span class="m">50</span><span class="w"> </span>--vcpus<span class="w"> </span><span class="m">4</span><span class="w"> </span>gpu.flavor
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>openstack<span class="w"> </span>flavor<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;pci_passthrough:alias&quot;</span><span class="o">=</span><span class="s2">&quot;&lt;RESOURCE_NAME&gt;:1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;resources:&lt;CUSTOM_RESOURCE_CLASS&gt;=1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span>--property<span class="w"> </span><span class="s2">&quot;hw:pci_numa_affinity_policy&quot;</span><span class="o">=</span><span class="s2">&quot;preferred&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hw_machine_type</span><span class="o">=</span>q35<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span>gpu-flavor
 </code></pre></div>
 <blockquote>
 <p>만약 RTX 계열의 개인용 GPU를 사용한다면 <code>--property hw:kvm_hidden=true</code> 옵션도 함께 적용합니다.</p>
@@ -1974,10 +2017,10 @@
 두 개를 모두 설정하는 것이 안정적이지만 2개가 같이 차감된다면 <code>resources</code> 속성을 제거해야 합니다.</p>
 </blockquote>
 <h3 id="52">5.2. 인스턴스 시작</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>openstack<span class="w"> </span>server<span class="w"> </span>create<span class="w"> </span>--flavor<span class="w"> </span>gpu.flavor<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--image<span class="w"> </span><span class="s2">&quot;Ubuntu 24.04&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--network<span class="w"> </span>internal<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>my-gpu-vm
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>openstack<span class="w"> </span>server<span class="w"> </span>create<span class="w"> </span>--flavor<span class="w"> </span>gpu.flavor<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span>--image<span class="w"> </span><span class="s2">&quot;Ubuntu 24.04&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span>--network<span class="w"> </span>internal<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span>my-gpu-vm
 </code></pre></div>
 <h3 id="53">5.3. 최종 확인</h3>
 <p>VM 접속 후:</p>
@@ -1990,32 +2033,32 @@
 <p>CLI나 대시보드 상에서는 확인하기 어려운 <strong>"실제 리소스 점유 현황(Placement)"</strong>과 <strong>"Flavor 내부 설정(Nova)"</strong>을 API를 통해 직접 검증합니다.</p>
 <h3 id="60">6.0. 환경 변수 설정</h3>
 <p>검증에 필요한 변수들을 미리 선언합니다. <code>&lt; &gt;</code>로 표시된 부분에 실제 값을 입력하세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. 접속 정보</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CONTROLLER_IP</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>endpoint<span class="w"> </span>list<span class="w"> </span>--service<span class="w"> </span>keystone<span class="w"> </span>--interface<span class="w"> </span>public<span class="w"> </span>-c<span class="w"> </span>URL<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F/<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="k">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PLACEMENT_PORT</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>endpoint<span class="w"> </span>list<span class="w"> </span>--service<span class="w"> </span>placement<span class="w"> </span>--interface<span class="w"> </span>public<span class="w"> </span>-c<span class="w"> </span>URL<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d/<span class="w"> </span>-f1<span class="k">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOVA_PORT</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>endpoint<span class="w"> </span>list<span class="w"> </span>--service<span class="w"> </span>compute<span class="w"> </span>--interface<span class="w"> </span>public<span class="w"> </span>-c<span class="w"> </span>URL<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d/<span class="w"> </span>-f1<span class="k">)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># 2. 검증 대상 UUID (사전 확인 필요)</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># 생성된 인스턴스의 ID</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SERVER_ID</span><span class="o">=</span><span class="s2">&quot;&lt;INSTANCE_ID&gt;&quot;</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1"># 생성한 GPU Flavor의 ID</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FLAVOR_ID</span><span class="o">=</span><span class="s2">&quot;&lt;FLAVOR_ID&gt;&quot;</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="c1"># GPU 자원을 가진 물리 노드(혹은 자식 노드)의 UUID</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RP_UUID</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>allocation<span class="w"> </span>show<span class="w"> </span><span class="nv">$SERVER_ID</span><span class="w"> </span>-c<span class="w"> </span>resource_provider<span class="w"> </span>-c<span class="w"> </span>resources<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;CUSTOM_&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 1. 접속 정보</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CONTROLLER_IP</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>endpoint<span class="w"> </span>list<span class="w"> </span>--service<span class="w"> </span>keystone<span class="w"> </span>--interface<span class="w"> </span>public<span class="w"> </span>-c<span class="w"> </span>URL<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F/<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="k">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PLACEMENT_PORT</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>endpoint<span class="w"> </span>list<span class="w"> </span>--service<span class="w"> </span>placement<span class="w"> </span>--interface<span class="w"> </span>public<span class="w"> </span>-c<span class="w"> </span>URL<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d/<span class="w"> </span>-f1<span class="k">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOVA_PORT</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>endpoint<span class="w"> </span>list<span class="w"> </span>--service<span class="w"> </span>compute<span class="w"> </span>--interface<span class="w"> </span>public<span class="w"> </span>-c<span class="w"> </span>URL<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F:<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d/<span class="w"> </span>-f1<span class="k">)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1"># 2. 검증 대상 UUID (사전 확인 필요)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># 생성된 인스턴스의 ID</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SERVER_ID</span><span class="o">=</span><span class="s2">&quot;&lt;INSTANCE_ID&gt;&quot;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># 생성한 GPU Flavor의 ID</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FLAVOR_ID</span><span class="o">=</span><span class="s2">&quot;&lt;FLAVOR_ID&gt;&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="c1"># GPU 자원을 가진 물리 노드(혹은 자식 노드)의 UUID</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="nb">export</span><span class="w"> </span><span class="nv">RP_UUID</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>allocation<span class="w"> </span>show<span class="w"> </span><span class="nv">$SERVER_ID</span><span class="w"> </span>-c<span class="w"> </span>resource_provider<span class="w"> </span>-c<span class="w"> </span>resources<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;CUSTOM_&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
 </code></pre></div>
 <h3 id="61">6.1. 인증 토큰 발급 (토큰이 없는 경우)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 관리자 권한 로드 후 토큰 발급</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">source</span><span class="w"> </span>/etc/kolla/admin-openrc.sh
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OS_TOKEN</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>token<span class="w"> </span>issue<span class="w"> </span>-c<span class="w"> </span>id<span class="w"> </span>-f<span class="w"> </span>value<span class="k">)</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Token: </span><span class="nv">$OS_TOKEN</span><span class="s2">&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 관리자 권한 로드 후 토큰 발급</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">source</span><span class="w"> </span>/etc/kolla/admin-openrc.sh
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OS_TOKEN</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>token<span class="w"> </span>issue<span class="w"> </span>-c<span class="w"> </span>id<span class="w"> </span>-f<span class="w"> </span>value<span class="k">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Token: </span><span class="nv">$OS_TOKEN</span><span class="s2">&quot;</span>
 </code></pre></div>
 <h3 id="62-placement-api">6.2. Placement API 검증 (하드웨어 관점)</h3>
 <p>GPU 자원이 물리적으로 존재하며, 생성한 인스턴스가 이를 실제로 점유하고 있는지 확인합니다.</p>
 <h4 id="1-resource-inventory">1) Resource Inventory 조회 (재고 확인)</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PLACEMENT_PORT</span><span class="si">}</span><span class="s2">/resource_providers/</span><span class="si">${</span><span class="nv">RP_UUID</span><span class="si">}</span><span class="s2">/inventories&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;OpenStack-API-Version: placement 1.28&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PLACEMENT_PORT</span><span class="si">}</span><span class="s2">/resource_providers/</span><span class="si">${</span><span class="nv">RP_UUID</span><span class="si">}</span><span class="s2">/inventories&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;OpenStack-API-Version: placement 1.28&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
 </code></pre></div>
 <blockquote>
 <p><strong>[확인 포인트]</strong></p>
@@ -2025,10 +2068,10 @@
 </ul>
 </blockquote>
 <h4 id="2-resource-allocations">2) Resource Allocations 조회 (점유 확인 ★중요)</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PLACEMENT_PORT</span><span class="si">}</span><span class="s2">/resource_providers/</span><span class="si">${</span><span class="nv">RP_UUID</span><span class="si">}</span><span class="s2">/allocations&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;OpenStack-API-Version: placement 1.28&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">PLACEMENT_PORT</span><span class="si">}</span><span class="s2">/resource_providers/</span><span class="si">${</span><span class="nv">RP_UUID</span><span class="si">}</span><span class="s2">/allocations&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;OpenStack-API-Version: placement 1.28&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
 </code></pre></div>
 <blockquote>
 <p><strong>[확인 포인트]</strong></p>
@@ -2041,9 +2084,9 @@
 <p>인스턴스가 올바른 Flavor와 스펙으로 생성되었는지 확인합니다.</p>
 <h4 id="1-flavor-extra-specs">1) Flavor 상세 스펙(Extra Specs) 조회</h4>
 <p>Flavor 조회 시 기본 정보에는 GPU 관련 설정이 나오지 않으므로, <strong><code>/os-extra_specs</code></strong> 엔드포인트를 호출해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">NOVA_PORT</span><span class="si">}</span><span class="s2">/v2.1/flavors/</span><span class="si">${</span><span class="nv">FLAVOR_ID</span><span class="si">}</span><span class="s2">/os-extra_specs&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">NOVA_PORT</span><span class="si">}</span><span class="s2">/v2.1/flavors/</span><span class="si">${</span><span class="nv">FLAVOR_ID</span><span class="si">}</span><span class="s2">/os-extra_specs&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
 </code></pre></div>
 <blockquote>
 <p><strong>[확인 포인트]</strong></p>
@@ -2054,9 +2097,9 @@
 </ul>
 </blockquote>
 <h4 id="2-instance">2) Instance 상세 정보 조회</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">NOVA_PORT</span><span class="si">}</span><span class="s2">/v2.1/servers/</span><span class="si">${</span><span class="nv">SERVER_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">CONTROLLER_IP</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">NOVA_PORT</span><span class="si">}</span><span class="s2">/v2.1/servers/</span><span class="si">${</span><span class="nv">SERVER_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-Auth-Token: </span><span class="si">${</span><span class="nv">OS_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>json_pp
 </code></pre></div>
 <blockquote>
 <p><strong>[확인 포인트]</strong></p>
