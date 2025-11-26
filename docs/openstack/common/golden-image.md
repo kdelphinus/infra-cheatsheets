@@ -595,3 +595,5 @@ RTX 계열과 같은 소비자용 GPU는 가상화 환경을 고려하지 않기
 
 위에서 RTX 계열 GPU를 위한 설정을 추가했지만, 이것만으로 문제를 막을 수는 없습니다.
 FLR 기능이 없는 한 재부팅 혹은 삭제 시 높은 확률로 하드웨어 리셋 실패가 발생하기에 RTX 계열 GPU를 사용하지 않는 것을 권장합니다.
+
+테스트 용도로 사용 예정 시, [FLR 동작 임시 적용법](https://kdelphinus.github.io/infra-cheatsheets/openstack/common/init-gpu-node/#rtx-gpu)을 참고바랍니다.
