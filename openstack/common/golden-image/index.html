@@ -2115,6 +2115,7 @@ OpenStack Nova가 GPU를 적절히 스케줄링하도록 메타데이터를 추�
 따라서 GPU 인스턴스를 종료하거나 재부팅하면, GPU 하드웨어가 초기화되지 않고 Stuck 상태로 남아 데이터 찌꺼기를 가지고 있다가 VM의 다음 동작을 방해하고, 이를 호스트가 응답이 없는 것으로 인식하고 인스턴스를 PAUSED 상태로 강제 정지시켜버립니다.</p>
 <p>위에서 RTX 계열 GPU를 위한 설정을 추가했지만, 이것만으로 문제를 막을 수는 없습니다.
 FLR 기능이 없는 한 재부팅 혹은 삭제 시 높은 확률로 하드웨어 리셋 실패가 발생하기에 RTX 계열 GPU를 사용하지 않는 것을 권장합니다.</p>
+<p>테스트 용도로 사용 예정 시, <a href="https://kdelphinus.github.io/infra-cheatsheets/openstack/common/init-gpu-node/#rtx-gpu">FLR 동작 임시 적용법</a>을 참고바랍니다.</p>
 
 
 
