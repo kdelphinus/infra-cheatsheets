@@ -792,19 +792,19 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#devops" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtx-gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 DevOps 엔지니어의 다음 단계
+        RTX 계열의 GPU 사용 시
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1513,19 +1513,19 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#devops" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtx-gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 DevOps 엔지니어의 다음 단계
+        RTX 계열의 GPU 사용 시
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1656,8 +1656,74 @@
 </code></pre></div>
 <p>이후 다시 <code>lspci -nnk</code> 명령어로 확인합니다.</p>
 <hr />
-<h3 id="devops">💡 DevOps 엔지니어의 다음 단계</h3>
-<p>이제 OS 레벨의 준비는 모두 끝났습니다. 다음 단계는 OpenStack 설정 파일(<code>nova.conf</code> 등)을 수정하여 이 GPU를 Compute 서비스에 등록하는 것입니다.</p>
+<h2 id="rtx-gpu">RTX 계열의 GPU 사용 시</h2>
+<p>RTX 계열과 같은 소비자용 GPU는 가상화 환경을 고려하지 않기에 FLR(Function Level Reset) 기능을 지원하지 않습니다.
+따라서 GPU 인스턴스를 종료하거나 재부팅하면, GPU 하드웨어가 초기화되지 않고 Stuck 상태로 남아 데이터 찌꺼기를 가지고 있다가 VM의 다음 동작을 방해하고, 이를 호스트가 응답이 없는 것으로 인식하고 인스턴스를 PAUSED 상태로 강제 정지시켜버립니다.</p>
+<p>이를 막기 위해 <code>vendor-reset</code> 등의 프로그램을 사용하거나 임시로 쉘 스크립트를 실행하는 방법이 있습니다.
+아래는 쉘 스크립트로 FLR 기능을 임시 조치하는 방법입니다.
+모든 명령은 GPU 호스트 노드에서 실행해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; qemu-hook.sh</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="s">#!/bin/bash</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="s"># GPU reset hook for RTX Passthrough VMs</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="s">VM_NAME=&quot;$1&quot;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s">ACTION=&quot;$2&quot;</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s">PHASE=&quot;$3&quot;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="s"># 실제 ID는 lspci로 확인 후 수정 필요</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="s">GPU_PCI=&quot;0000:01:00.0&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="s">AUDIO_PCI=&quot;0000:01:00.1&quot; # 오디오 장치가 있다면 같이 리셋해야 안전함</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="s"># 로그 파일 위치 (Kolla 로그 폴더로 지정하여 호스트에서도 볼 수 있게 함)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="s">LOGFILE=&quot;/var/log/libvirt/gpu-reset.log&quot;</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="s">if [[ &quot;$ACTION&quot; == &quot;stopped&quot; &amp;&amp; &quot;$PHASE&quot; == &quot;end&quot; ]]; then</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="s">    echo &quot;[$(date)] VM $VM_NAME stopped. Resetting GPU...&quot; &gt;&gt; $LOGFILE</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="s">    # 1. Remove (장치 제거)</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="s">    echo 1 &gt; /sys/bus/pci/devices/$GPU_PCI/remove</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="s">    echo 1 &gt; /sys/bus/pci/devices/$AUDIO_PCI/remove 2&gt;/dev/null</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="s">    # 잠시 대기</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="s">    sleep 2</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="s">    # 2. Rescan (장치 재인식)</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="s">    echo 1 &gt; /sys/bus/pci/rescan</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="s">    echo &quot;[$(date)] GPU Reset done.&quot; &gt;&gt; $LOGFILE</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="s">fi</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="s">EOF</span>
+</code></pre></div>
+<p>위 쉘 스크립트를 컨테이너 내부에 복사하고, 권한을 부여합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 1. 컨테이너 내부 디렉토리 생성</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>nova_libvirt<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/libvirt/hooks
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># 2. 파일 복사 (docker cp 사용)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>sudo<span class="w"> </span>docker<span class="w"> </span>cp<span class="w"> </span>qemu-hook.sh<span class="w"> </span>nova_libvirt:/etc/libvirt/hooks/qemu
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># 3. 권한 설정 (실행 권한 필수)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>nova_libvirt<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/etc/libvirt/hooks/qemu
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>nova_libvirt<span class="w"> </span>chown<span class="w"> </span>root:root<span class="w"> </span>/etc/libvirt/hooks/qemu
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1"># 4. 컨테이너 재시작</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>sudo<span class="w"> </span>docker<span class="w"> </span>restart<span class="w"> </span>nova_libvirt
+</code></pre></div>
+<p>설정이 잘 적용되었다면, gpu 인스턴스가 삭제되었을 때마다 아래 로그가 찍히는 것을 확인할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nova_libvirt<span class="w"> </span>cat<span class="w"> </span>/var/log/libvirt/gpu-reset.log
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:44:01<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>VM<span class="w"> </span>instance-0000001a<span class="w"> </span>stopped.<span class="w"> </span>Resetting<span class="w"> </span>GPU...
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:44:03<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>GPU<span class="w"> </span>Reset<span class="w"> </span><span class="k">done</span>.
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:49:32<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>VM<span class="w"> </span>instance-0000001b<span class="w"> </span>stopped.<span class="w"> </span>Resetting<span class="w"> </span>GPU...
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:49:34<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>GPU<span class="w"> </span>Reset<span class="w"> </span><span class="k">done</span>.
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:51:46<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>VM<span class="w"> </span>instance-0000001b<span class="w"> </span>stopped.<span class="w"> </span>Resetting<span class="w"> </span>GPU...
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:51:49<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>GPU<span class="w"> </span>Reset<span class="w"> </span><span class="k">done</span>.
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:56:32<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>VM<span class="w"> </span>instance-0000001c<span class="w"> </span>stopped.<span class="w"> </span>Resetting<span class="w"> </span>GPU...
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">09</span>:56:35<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>GPU<span class="w"> </span>Reset<span class="w"> </span><span class="k">done</span>.
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">10</span>:02:11<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>VM<span class="w"> </span>instance-0000001d<span class="w"> </span>stopped.<span class="w"> </span>Resetting<span class="w"> </span>GPU...
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">10</span>:02:13<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>GPU<span class="w"> </span>Reset<span class="w"> </span><span class="k">done</span>.
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">10</span>:03:10<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>VM<span class="w"> </span>instance-0000001d<span class="w"> </span>stopped.<span class="w"> </span>Resetting<span class="w"> </span>GPU...
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="o">[</span>Wed<span class="w"> </span>Nov<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">10</span>:03:12<span class="w"> </span>KST<span class="w"> </span><span class="m">2025</span><span class="o">]</span><span class="w"> </span>GPU<span class="w"> </span>Reset<span class="w"> </span><span class="k">done</span>.
+</code></pre></div>
 
 
 
