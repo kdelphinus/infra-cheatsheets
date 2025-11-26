@@ -227,7 +227,7 @@ kolla-ansible deploy -i ./multinode
 pip install python-openstackclient
 
 # 2. 관리자 인증 파일 생성 (admin-openrc.sh)
-kolla-ansible post-deploy
+kolla-ansible post-deploy -i multinode
 
 # 3. 인증 로드 및 테스트
 source /etc/kolla/admin-openrc.sh
