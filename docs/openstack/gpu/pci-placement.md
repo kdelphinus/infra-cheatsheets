@@ -139,68 +139,11 @@ openstack resource provider inventory list [UUID]
 
 -----
 
-## 4. 외부 네트워크(External Network) 뚫기
-
-인스턴스가 외부(인터넷)와 통신하려면 **"물리 서버의 빈 깡통 인터페이스(예: eno2)"**와 연결된 가상 네트워크를 만들어야 합니다.
-
-**전제 조건:**
-
-- `globals.yml`에 `neutron_external_interface: "eno2"` (물리서버의 외부용 포트)가 설정되어 있어야 합니다.
-- 해당 포트는 스위치에서 인터넷이 되는 VLAN(또는 Untagged)에 꽂혀 있어야 합니다.
-
-### 4.1. 네트워크 생성 (Flat 타입)
-
-사내망 IP 대역을 그대로 쓰는 방식입니다. (예: 사내망이 `192.168.0.0/24`라고 가정)
-
-```bash
-# 1. Provider Network 생성 (이름: public)
-# physnet1은 kolla 기본 물리 네트워크 이름입니다.
-openstack network create --share --external \
-  --provider-physical-network physnet1 \
-  --provider-network-type flat \
-  public
-
-# 2. Subnet 생성 (여기에 실제 사내망 정보를 넣어야 함!)
-# gateway: 사내망 게이트웨이 (예: 192.168.0.1)
-# allocation-pool: DHCP로 쓸 범위 (예: 100~200번)
-openstack subnet create --network public \
-  --allocation-pool start=192.168.0.100,end=192.168.0.200 \
-  --dns-nameserver 8.8.8.8 \
-  --gateway 192.168.0.1 \
-  --subnet-range 192.168.0.0/24 \
-  public_subnet
-```
-
-```bash
-# 3. 네트워크 관련 설정(MTU 조절)
-# VM 안에서 실행 (헤더 크기 감안해서 1450으로 핑)
-ping -M do -s 1422 8.8.8.8  # (1422 + 28헤더 = 1450) -> 잘 될 겁니다.
-ping -M do -s 1472 8.8.8.8  # (1472 + 28헤더 = 1500) -> 실패하거나 타임아웃 날 겁니다.
-
-# 3-1. 1472 핑에서 오류 발생 시
-# /etc/kolla/globals.yml
-network_mtu: 1450 # (기본값 1500 -> 1450 축소)
-
-# 3-2. 수정 후 재배포
-kolla-ansible reconfigure -i multinode
-```
-
-혹은 스위치가 Jumbo(9000)까지 지원한다면 9000으로 증가시키는 것이 일반적입니다.
-
-> ### MTU 관련 속도 지연이 생기는 이유
->
-> 1) 기본 패킷 크기 제한이 1500 byte, 오픈스택 내부에서는 패킷에 오버헤드(VXLAN, UDP, IP, Ethernet 헤더 -> 총 50 byte)를 붙여서 포장 후 전송  
-> 2) 따라서 vm이 1500 byte 데이터를 전송 시, vm에서 50 byte추가되어 1550 byte 전송 요청  
-> 3) 물리 랜카드에서 패킷 크기 초과 인지 -> 패킷 폐기 또는 쪼개기  
-> 4) 패킷 손실 혹은 재전송이 발생하며 네트워크 속도 저하(특히 HTTPS 접속이나 대용량 다운로드 시)  
-
------
-
-## 5. 인스턴스 생성 테스트
+## 4. 인스턴스 생성 테스트
 
 이제 **"GPU가 달린 + 인터넷이 되는"** 인스턴스를 만듭니다.
 
-### 5.1. GPU Flavor 생성
+### 4.1. GPU Flavor 생성
 
 아까 `nova.conf`에서 정한 alias 이름(`nvidia-gpu`)을 씁니다.
 
@@ -219,7 +162,7 @@ openstack flavor set \
 > ※ 일부 환경에서는 alias + resources를 동시에 쓸 경우 이중 차감됨.
 > 이 경우 resources 항목만 제거하고 alias만 사용 권장.
 
-### 5.2. 인스턴스 시작
+### 4.2. 인스턴스 시작
 
 ```bash
 openstack server create --flavor gpu.flavor \
@@ -228,7 +171,7 @@ openstack server create --flavor gpu.flavor \
   my-gpu-vm
 ```
 
-### 5.3. 최종 확인
+### 4.3. 최종 확인
 
 VM 접속 후:
 
@@ -236,11 +179,11 @@ VM 접속 후:
 - `ping 8.8.8.8`: 인터넷이 되는지?
 - `nvidia-smi`: 드라이버 설치 후 GPU가 잡히는지?
 
-## 6. API 기반 할당 검증 (Advanced Verification)
+## 5. API 기반 할당 검증 (Advanced Verification)
 
 CLI나 대시보드 상에서는 확인하기 어려운 **"실제 리소스 점유 현황(Placement)"**과 **"Flavor 내부 설정(Nova)"**을 API를 통해 직접 검증합니다.
 
-### 6.0. 환경 변수 설정
+### 5.0. 환경 변수 설정
 
 검증에 필요한 변수들을 미리 선언합니다. `< >`로 표시된 부분에 실제 값을 입력하세요.
 
@@ -259,7 +202,7 @@ export FLAVOR_ID="<FLAVOR_ID>"
 export RP_UUID=$(openstack resource provider allocation show $SERVER_ID -c resource_provider -c resources -f value | grep "CUSTOM_" | awk '{print $1}')
 ```
 
-### 6.1. 인증 토큰 발급 (토큰이 없는 경우)
+### 5.1. 인증 토큰 발급 (토큰이 없는 경우)
 
 ```bash
 # 관리자 권한 로드 후 토큰 발급
@@ -268,7 +211,7 @@ export OS_TOKEN=$(openstack token issue -c id -f value)
 echo "Token: $OS_TOKEN"
 ```
 
-### 6.2. Placement API 검증 (하드웨어 관점)
+### 5.2. Placement API 검증 (하드웨어 관점)
 
 GPU 자원이 물리적으로 존재하며, 생성한 인스턴스가 이를 실제로 점유하고 있는지 확인합니다.
 
@@ -300,7 +243,7 @@ curl -s -X GET "http://${CONTROLLER_IP}:${PLACEMENT_PORT}/resource_providers/${R
 > - 응답 JSON의 Key 값(Consumer UUID)에 **`<INSTANCE_ID>`**가 포함되어 있어야 함
 > - 해당 인스턴스가 `CUSTOM_<RESOURCE_NAME>` 자원을 `1`개 사용 중이어야 함
 
-### 6.3. Nova API 검증 (소프트웨어 관점)
+### 5.3. Nova API 검증 (소프트웨어 관점)
 
 인스턴스가 올바른 Flavor와 스펙으로 생성되었는지 확인합니다.
 

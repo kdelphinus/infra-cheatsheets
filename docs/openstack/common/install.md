@@ -196,6 +196,11 @@ kolla_base_distro: "ubuntu"
 network_interface: "eno1"           # 관리망 (IP 10.10.10.60)
 neutron_external_interface: "eno2"  # 외부망 (IP 없음)
 
+# [공통] MTU 설정 변경
+# 스위치를 Jumbo Frame(9000)으로 바꿀 수 있다면 9000으로 설정
+# 스위치와 서버 모두 9000으로 맞춰야 정상 동작
+network_mtu: 1450 # VXLAN 헤더 크기인 50 byte 자리 확보
+
 # [공통] VIP 주소 (관리망 대역 내 미사용 IP, 같은 IP 사용 시 HAProxy 충돌 발생 가능성 높음)
 kolla_internal_vip_address: "10.10.10.60"  # HAProxy를 사용할 경우, 빈 IP 할당 필요
 
@@ -218,6 +223,13 @@ enable_keepalived: "no"                    # Keepalived 끔
 kolla_enable_tls_internal: "no" 
 kolla_enable_tls_external: "no"
 ```
+
+> ### MTU 관련 속도 지연이 생기는 이유
+>
+> 1) 기본 패킷 크기 제한이 1500 byte, 오픈스택 내부에서는 패킷에 오버헤드(VXLAN, UDP, IP, Ethernet 헤더 -> 총 50 byte)를 붙여서 포장 후 전송  
+> 2) 따라서 vm이 1500 byte 데이터를 전송 시, vm에서 50 byte추가되어 1550 byte 전송 요청  
+> 3) 물리 랜카드에서 패킷 크기 초과 인지 -> 패킷 폐기 또는 쪼개기  
+> 4) 패킷 손실 혹은 재전송이 발생하며 네트워크 속도 저하(특히 HTTPS 접속이나 대용량 다운로드 시)  
 
 -----
 
