@@ -48,10 +48,10 @@ nav:
     - About GPU:
       - 'GPU 노드 초기화': openstack/gpu/init-gpu-node.md
       - 'PCI Placement': openstack/gpu/pci-placement.md
-    - Cheatsheets: openstack/CheatSheet.md
+    - "Cheat Sheets": openstack/CheatSheet.md
   - Kubernetes:
-      - 'Admin 토큰 확인': k8s/token-check.md
+    - 'Cheat Sheets': k8s/CheatSheet.md
   - Ubuntu:
-      - 'Ubuntu 기본 설정': ubuntu/init-ubuntu-env.md
+    - 'Ubuntu 기본 설정': ubuntu/init-ubuntu-env.md
   - WSL:
-      - 'WSL 네트워크 설정': wsl/wsl-network-setting.md
+    - 'WSL 네트워크 설정': wsl/wsl-network-setting.md
