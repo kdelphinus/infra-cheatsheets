@@ -1,9 +1,5 @@
 # PCI Passthrougu + Placement API 적용
 
-## 주의 사항
-
-- 이 문서는 아직 검증되지 않았습니다. 추후 검증 후, 이 항목을 제거할 예정입니다.
-
 ## 0. 사전 확인 사항
 
 - Ubuntu 24.04 + Openstack 2025.2 환경에서 진행
