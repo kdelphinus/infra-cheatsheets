@@ -1501,7 +1501,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 인텔 CPU 기준 설정 (AMD의 경우 intel_iommu 대신 amd_iommu=on 사용)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># 기존 라인 뒤에 아래 옵션들을 추가합니다.</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># nouveau, nvidia 드라이버가 로드되지 않도록 blacklist 처리합니다.</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;... intel_iommu=on iommu=pt modprobe.blacklist=nouveau,nvidia,nvidia_drm&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s2">&quot;... intel_iommu=on iommu=pt modprobe.blacklist=nouveau,nvidia,nvidia_drm vfio-pci.ids=&lt;VENDOR_ID&gt;:&lt;PRODUCT_ID&gt;&quot;</span>
 </code></pre></div>
 <h3 id="2-grub-os">2. Grub 적용 및 재부팅 (OS별 선택)</h3>
 <p><strong>🅰️ Ubuntu 22.04:</strong></p>
