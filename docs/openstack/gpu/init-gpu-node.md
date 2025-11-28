@@ -21,7 +21,7 @@ CPU의 가상화 기능을 활성화하고, 호스트 OS가 GPU를 점유하지 
 # 인텔 CPU 기준 설정 (AMD의 경우 intel_iommu 대신 amd_iommu=on 사용)
 # 기존 라인 뒤에 아래 옵션들을 추가합니다.
 # nouveau, nvidia 드라이버가 로드되지 않도록 blacklist 처리합니다.
-GRUB_CMDLINE_LINUX="... intel_iommu=on iommu=pt modprobe.blacklist=nouveau,nvidia,nvidia_drm"
+GRUB_CMDLINE_LINUX="... intel_iommu=on iommu=pt modprobe.blacklist=nouveau,nvidia,nvidia_drm vfio-pci.ids=<VENDOR_ID>:<PRODUCT_ID>"
 ```
 
 ### 2. Grub 적용 및 재부팅 (OS별 선택)

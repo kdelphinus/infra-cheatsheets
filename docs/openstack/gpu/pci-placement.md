@@ -47,7 +47,7 @@ enabled_filters = ComputeFilter,ImagePropertiesFilter,PciPassthroughFilter
 pci_in_placement = true
 ```
 
-참고로 `device_type` 은 아래와 같은 옵션이 있습니다.
+참고로 `device_type` 은 아래와 같은 옵션이 있습니다. `SR-IOV` 기능이 있다면 `type-PF` 로 해야 인식합니다.
 
 |타입|명칭|설명|비유|용도|
 |:---|:---|:---|:---|:---|
@@ -148,13 +148,13 @@ openstack resource provider inventory list [UUID]
 아까 `nova.conf`에서 정한 alias 이름(`nvidia-gpu`)을 씁니다.
 
 ```bash
-openstack flavor create --ram 8192 --disk 50 --vcpus 4 gpu.flavor
+openstack flavor create --ram 8192 --disk 50 --vcpus 4 <FLAVOR_NAME>
 openstack flavor set \
   --property "pci_passthrough:alias"="<RESOURCE_NAME>:1" \
   --property "resources:<CUSTOM_RESOURCE_CLASS>=1" \
   --property "hw:pci_numa_affinity_policy"="preferred" \
   --property hw_machine_type=q35 \
-  gpu-flavor
+  <FLAVOR_NAME>
 ```
 
 > 만약 RTX 계열의 개인용 GPU를 사용한다면 `--property hw:kvm_hidden=true` 옵션도 함께 적용합니다.
