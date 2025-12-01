@@ -42,12 +42,14 @@ markdown_extensions:
 nav:
   - Home: index.md
   - OpenStack:
-    - Common:
-      - '설치': openstack/common/install.md
-      - 'Golden Image 생성': openstack/common/golden-image.md
+    - Base:
+      - '설치': openstack/base/install.md
+      - 'API 명세': openstack/base/api.md
     - About GPU:
       - 'GPU 노드 초기화': openstack/gpu/init-gpu-node.md
       - 'PCI Placement': openstack/gpu/pci-placement.md
+    - Utils:
+      - 'Golden Image 생성': openstack/base/golden-image.md
     - "Cheat Sheets": openstack/CheatSheet.md
   - Kubernetes:
     - 'Cheat Sheets': k8s/CheatSheet.md
