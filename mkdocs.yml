@@ -49,7 +49,7 @@ nav:
       - 'GPU 노드 초기화': openstack/gpu/init-gpu-node.md
       - 'PCI Placement': openstack/gpu/pci-placement.md
     - Utils:
-      - 'Golden Image 생성': openstack/base/golden-image.md
+      - 'Golden Image 생성': openstack/utils/golden-image.md
     - "Cheat Sheets": openstack/CheatSheet.md
   - Kubernetes:
     - 'Cheat Sheets': k8s/CheatSheet.md
