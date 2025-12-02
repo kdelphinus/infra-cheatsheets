@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://Kdelphinus.github.io/infra-cheatsheets/git/cheetsheet/">
+        <link rel="canonical" href="https://Kdelphinus.github.io/infra-cheatsheets/git/cheatsheet/">
       
       
+        <link rel="prev" href="../../ubuntu/wsl/wsl-network-setting/">
+      
+      
+        <link rel="next" href="../../openstack/cheatsheet/">
       
       
         
@@ -21,7 +25,7 @@
     
     
       
-        <title>🚀 DevOps Git Cheat Sheet (Oh-My-Zsh Edition) - Infra Cheatsheets</title>
+        <title>Cheat Sheets - Infra Cheatsheets</title>
       
     
     
@@ -106,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              🚀 DevOps Git Cheat Sheet (Oh-My-Zsh Edition)
+              Cheat Sheets
             
           </span>
         </div>
@@ -304,11 +308,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../cheatsheet.md" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -825,26 +831,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -862,7 +873,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -877,10 +888,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../cheatsheet.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -896,6 +934,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-one-pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 🌟 The One Pick (가장 추천하는 명령어)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 필수 설정 &amp; 트러블슈팅
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 실전 핵심 Alias (단축키)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 실전 핵심 Alias (단축키)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-basic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 작업 시작 &amp; 저장 (Basic)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 업로드 &amp; 동기화 (Sync)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. 브랜치 관리 (Branch)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-stash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. 임시 저장 (Stash)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-undoreset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E. 되돌리기 (Undo/Reset)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F. 이력 조회 (Log)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
