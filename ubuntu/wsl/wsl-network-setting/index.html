@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://Kdelphinus.github.io/infra-cheatsheets/ubuntu/init-ubuntu-env/">
+        <link rel="canonical" href="https://Kdelphinus.github.io/infra-cheatsheets/ubuntu/wsl/wsl-network-setting/">
       
       
-        <link rel="prev" href="../../k8s/cheatsheet/">
+        <link rel="prev" href="../../init-ubuntu-env/">
       
       
-        <link rel="next" href="../wsl/wsl-network-setting/">
+        <link rel="next" href="../../../openstack/cheatsheet/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Ubuntu 기본 설정 - Infra Cheatsheets</title>
+        <title>WSL 네트워크 설정 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +51,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ubuntu" class="md-skip">
+        <a href="#wsl" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ubuntu 기본 설정
+              WSL 네트워크 설정
             
           </span>
         </div>
@@ -221,7 +221,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -249,7 +249,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -272,7 +272,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../k8s/cheatsheet/" class="md-tabs__link">
+        <a href="../../../k8s/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -294,7 +294,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../../init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -314,7 +314,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../git/cheatsheet.md" class="md-tabs__link">
+        <a href="../../../git/cheatsheet.md" class="md-tabs__link">
           
   
   
@@ -334,7 +334,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -368,7 +368,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -398,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -529,7 +529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -624,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/cheatsheet/" class="md-nav__link">
+      <a href="../../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -713,6 +713,91 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../init-ubuntu-env/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu 기본 설정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WSL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
     
   
   
@@ -732,7 +817,7 @@
   <span class="md-ellipsis">
     
   
-    Ubuntu 기본 설정
+    WSL 네트워크 설정
   
 
     
@@ -750,7 +835,7 @@
   <span class="md-ellipsis">
     
   
-    Ubuntu 기본 설정
+    WSL 네트워크 설정
   
 
     
@@ -776,33 +861,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
+  <a href="#1-dns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Index
+        🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oh-my-zsh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Oh My Zsh 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Oh My Zsh 설치">
+    <nav class="md-nav" aria-label="🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-oh-my-zsh" class="md-nav__link">
+  <a href="#1-etcwslconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Oh My Zsh 설치
+        1. 자동 생성 설정 끄기 (/etc/wsl.conf)
       
     </span>
   </a>
@@ -810,10 +884,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-powerlevel10k" class="md-nav__link">
+  <a href="#2-dns-etcresolvconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Powerlevel10k 및 플러그인 설치
+        2. DNS 파일 직접 수정 (/etc/resolv.conf)
       
     </span>
   </a>
@@ -821,21 +895,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-zshrc" class="md-nav__link">
+  <a href="#3-wsl-powershell" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. ~/.zshrc 파일 수정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 셸 새로고침
+        3. WSL 재시작 (PowerShell에서)
       
     </span>
   </a>
@@ -848,22 +911,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#npm" class="md-nav__link">
+  <a href="#2-mirrored-windows-11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        npm 설치
+        🚀 해결 방법 2: "Mirrored" 모드 사용 (Windows 11 필수 ⭐⭐)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="npm 설치">
+    <nav class="md-nav" aria-label="🚀 해결 방법 2: &#34;Mirrored&#34; 모드 사용 (Windows 11 필수 ⭐⭐)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-nvm" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. NVM 설치
+        1. 윈도우 사용자 폴더에 설정 파일 생성
       
     </span>
   </a>
@@ -871,10 +934,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-nodejs" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Node.js 설치
+        2. 적용
       
     </span>
   </a>
@@ -883,6 +946,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 해결 방법 3: IPv6 비활성화 (특정 통신사/환경용)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        추가 정보
+      
+    </span>
+  </a>
   
 </li>
       
@@ -890,89 +975,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    WSL
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    WSL
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../wsl/wsl-network-setting/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    WSL 네트워크 설정
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1052,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/cheatsheet.md" class="md-nav__link">
+      <a href="../../../git/cheatsheet.md" class="md-nav__link">
         
   
   
@@ -1139,7 +1141,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -1219,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/install/" class="md-nav__link">
+      <a href="../../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -1247,7 +1249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/api/" class="md-nav__link">
+      <a href="../../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -1335,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -1363,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -1451,7 +1453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -1539,7 +1541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -1602,33 +1604,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
+  <a href="#1-dns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Index
+        🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oh-my-zsh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Oh My Zsh 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Oh My Zsh 설치">
+    <nav class="md-nav" aria-label="🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-oh-my-zsh" class="md-nav__link">
+  <a href="#1-etcwslconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Oh My Zsh 설치
+        1. 자동 생성 설정 끄기 (/etc/wsl.conf)
       
     </span>
   </a>
@@ -1636,10 +1627,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-powerlevel10k" class="md-nav__link">
+  <a href="#2-dns-etcresolvconf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Powerlevel10k 및 플러그인 설치
+        2. DNS 파일 직접 수정 (/etc/resolv.conf)
       
     </span>
   </a>
@@ -1647,21 +1638,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-zshrc" class="md-nav__link">
+  <a href="#3-wsl-powershell" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. ~/.zshrc 파일 수정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 셸 새로고침
+        3. WSL 재시작 (PowerShell에서)
       
     </span>
   </a>
@@ -1674,22 +1654,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#npm" class="md-nav__link">
+  <a href="#2-mirrored-windows-11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        npm 설치
+        🚀 해결 방법 2: "Mirrored" 모드 사용 (Windows 11 필수 ⭐⭐)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="npm 설치">
+    <nav class="md-nav" aria-label="🚀 해결 방법 2: &#34;Mirrored&#34; 모드 사용 (Windows 11 필수 ⭐⭐)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-nvm" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. NVM 설치
+        1. 윈도우 사용자 폴더에 설정 파일 생성
       
     </span>
   </a>
@@ -1697,10 +1677,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-nodejs" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Node.js 설치
+        2. 적용
       
     </span>
   </a>
@@ -1709,6 +1689,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 해결 방법 3: IPv6 비활성화 (특정 통신사/환경용)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        추가 정보
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1732,66 +1734,64 @@
   
 
 
-<h1 id="ubuntu">Ubuntu 기본 세팅</h1>
-<ul>
-<li>Ubuntu 24.04 기준</li>
-</ul>
-<h2 id="index">Index</h2>
-<ul>
-<li><a href="#oh-my-zsh-설치">Oh My Zsh 설치</a></li>
-<li><a href="#npm-설치">npm 설치</a></li>
-</ul>
-<h2 id="oh-my-zsh">Oh My Zsh 설치</h2>
-<h3 id="1-oh-my-zsh">1. Oh My Zsh 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># zsh 설치</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zsh
+<h1 id="wsl">WSL 속도 향상 설정</h1>
+<h2 id="1-dns">🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)</h2>
+<p>WSL2가 윈도우 호스트를 거쳐서 DNS를 조회하는 과정이 느리기 때문에, 구글(8.8.8.8)이나 클라우드플레어(1.1.1.1) DNS를 직접 바라보게 설정하면 속도가 비약적으로 빨라집니다.</p>
+<h3 id="1-etcwslconf">1. 자동 생성 설정 끄기 (<code>/etc/wsl.conf</code>)</h3>
+<p>WSL 내부 터미널에서 아래 명령어를 입력해 설정 파일을 만듭니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># wsl.conf 파일 생성/수정</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/wsl.conf
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># oh-my-zsh 설치</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<p>아래 내용을 복사해서 붙여넣으세요. (이미 내용이 있다면 <code>[network]</code> 부분에 추가)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">[network]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">generateResolvConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
 </code></pre></div>
-<h3 id="2-powerlevel10k">2. Powerlevel10k 및 플러그인 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Powerlevel10k</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>https://github.com/romkatv/powerlevel10k.git<span class="w"> </span><span class="si">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="si">}</span>/themes/powerlevel10k
+<p>(<code>Ctrl + O</code> 저장, <code>Enter</code>, <code>Ctrl + X</code> 종료)</p>
+<h3 id="2-dns-etcresolvconf">2. DNS 파일 직접 수정 (<code>/etc/resolv.conf</code>)</h3>
+<p>기존의 심볼릭 링크를 끊고 직접 DNS를 입력합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 기존 파일 삭제 (심볼릭 링크임)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/resolv.conf
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># zsh-autosuggestions</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zsh-users/zsh-autosuggestions.git<span class="w"> </span><span class="si">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="si">}</span>/plugins/zsh-autosuggestions
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># zsh-syntax-highlighting</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zsh-users/zsh-syntax-highlighting.git<span class="w"> </span><span class="si">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="si">}</span>/plugins/zsh-syntax-highlighting
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 새 파일 생성 및 DNS 입력</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf&#39;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;nameserver 1.1.1.1&quot; &gt;&gt; /etc/resolv.conf&#39;</span>
 </code></pre></div>
-<h3 id="3-zshrc">3. ~/.zshrc 파일 수정</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># ZSH_THEME=&quot;robbyrussell&quot;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">&quot;powerlevel10k/powerlevel10k&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">plugins</span><span class="o">=(</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>git
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span>zsh-autosuggestions
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>zsh-syntax-highlighting
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="o">)</span>
+<h3 id="3-wsl-powershell">3. WSL 재시작 (PowerShell에서)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">wsl</span> <span class="p">-</span><span class="n">-shutdown</span>
 </code></pre></div>
-<h3 id="4">4. 셸 새로고침</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">source</span><span class="w"> </span>~/.zshrc
+<p>다시 WSL을 켜서 <code>apt update</code> 등을 해보면 훨씬 빨라진 것을 느낄 수 있습니다.</p>
+<hr />
+<h2 id="2-mirrored-windows-11">🚀 해결 방법 2: "Mirrored" 모드 사용 (Windows 11 필수 ⭐⭐)</h2>
+<p>최신 Windows 11(22H2 이상)과 최신 WSL 버전을 쓰고 계시다면, **"미러링 모드"**를 켜는 것이 <strong>게임 체인저</strong>입니다. NAT를 거치지 않고 호스트(Windows)의 네트워크 인터페이스를 그대로 공유하므로 속도가 네이티브 급으로 빨라집니다.</p>
+<h3 id="1">1. 윈도우 사용자 폴더에 설정 파일 생성</h3>
+<p>윈도우 탐색기 주소창에 <code>%UserProfile%</code>을 입력하고 엔터를 칩니다.
+여기에 <strong><code>.wslconfig</code></strong> 라는 파일을 만들고(메모장 이용) 아래 내용을 넣으세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[wsl2]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="na">networkingMode</span><span class="o">=</span><span class="s">mirrored</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="na">dnsTunneling</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="na">firewall</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="na">autoProxy</span><span class="o">=</span><span class="s">true</span>
 </code></pre></div>
-<blockquote>
-<p>설정: source ~/.zshrc를 실행하면, <strong>설정 마법사(p10k configure)</strong>가 자동으로 실행됩니다. 질문에 답하면서 원하는 아이콘과 모양을 선택하면 됩니다.
-필수: 이 테마를 제대로 사용하려면 Nerd Fonts (예: MesloLGS NF)를 Tabby 터미널의 글꼴로 설정해야 합니다.</p>
-</blockquote>
-<h2 id="npm">npm 설치</h2>
-<h3 id="1-nvm">1. NVM 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># NVM 설치</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># NVM 활성화</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">source</span><span class="w"> </span>~/.zshrc
+<ul>
+<li><strong><code>networkingMode=mirrored</code></strong>: NAT를 없애고 윈도우 IP를 그대로 씁니다. (속도 대폭 향상)</li>
+<li><strong><code>dnsTunneling=true</code></strong>: DNS 요청을 가상화 계층 대신 터널링으로 처리해 딜레이를 줄입니다.</li>
+</ul>
+<h3 id="2">2. 적용</h3>
+<p>PowerShell에서 <code>wsl --shutdown</code> 후 다시 시작.</p>
+<hr />
+<h2 id="3-ipv6">🚀 해결 방법 3: IPv6 비활성화 (특정 통신사/환경용)</h2>
+<p><code>apt-get</code>이나 <code>curl</code>이 처음에 멈칫하다가 진행되는 경우, IPv6 연결을 시도하다가 타임아웃이 나서 IPv4로 넘어가는 딜레이일 수 있습니다.</p>
+<p><strong>WSL 내부에서 실행:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.ipv6.conf.all.disable_ipv6<span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.ipv6.conf.default.disable_ipv6<span class="o">=</span><span class="m">1</span>
 </code></pre></div>
-<h3 id="2-nodejs">2. Node.js 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Node.js LTS 버전 설치</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>nvm<span class="w"> </span>install<span class="w"> </span>--lts
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 설치 확인</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>node<span class="w"> </span>-v
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>npm<span class="w"> </span>-v
-</code></pre></div>
+<p>(이게 효과가 있다면 <code>/etc/sysctl.conf</code>에 영구 등록하세요.)</p>
+<hr />
+<h2 id="_1">추가 정보</h2>
+<ol>
+<li><strong>Windows 11</strong> 사용자라면 **[방법 2 (Mirrored Mode)]**가 가장 깔끔하고 성능이 좋습니다. (<code>apt</code> 속도뿐만 아니라 로컬호스트 접속 문제도 해결됨)</li>
+<li><strong>Windows 10</strong> 사용자거나 Mirrored 모드가 불안정하다면 **[방법 1 (DNS 고정)]**만 적용해도 충분히 빨라집니다.</li>
+</ol>
 
 
 
@@ -1841,10 +1841,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>
