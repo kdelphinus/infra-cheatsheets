@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/git/cheatsheet/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/db/galera-cluster/">
       
       
-        <link rel="prev" href="../../ubuntu/wsl/wsl-network-setting/">
-      
-      
-        <link rel="next" href="../../ide/vscode_shortcut/">
       
       
         
@@ -25,7 +21,7 @@
     
     
       
-        <title>Cheat Sheets - Infra Cheatsheets</title>
+        <title>📘 MariaDB Galera Cluster 3중화 가이드 - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#devops-git-cheat-sheet-oh-my-zsh-edition" class="md-skip">
+        <a href="#mariadb-galera-cluster-3" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cheat Sheets
+              📘 MariaDB Galera Cluster 3중화 가이드
             
           </span>
         </div>
@@ -308,13 +304,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -851,31 +845,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -893,7 +882,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -908,37 +897,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Cheat Sheets
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -954,131 +916,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-the-one-pick" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 🌟 The One Pick (가장 추천하는 명령어)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 필수 설정 &amp; 트러블슈팅
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-alias" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 실전 핵심 Alias (단축키)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 실전 핵심 Alias (단축키)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-basic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A. 작업 시작 &amp; 저장 (Basic)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-sync" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        B. 업로드 &amp; 동기화 (Sync)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-branch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        C. 브랜치 관리 (Branch)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#d-stash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        D. 임시 저장 (Stash)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#e-undoreset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        E. 되돌리기 (Undo/Reset)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#f-log" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        F. 이력 조회 (Log)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1728,10 +1565,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-the-one-pick" class="md-nav__link">
+  <a href="#1-topology" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 🌟 The One Pick (가장 추천하는 명령어)
+        1. 구성 정보 (Topology)
       
     </span>
   </a>
@@ -1739,33 +1576,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-os-3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 필수 설정 &amp; 트러블슈팅
+        2. OS 및 네트워크 설정 (3대 공통 수행)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-alias" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 실전 핵심 Alias (단축키)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 실전 핵심 Alias (단축키)">
+    <nav class="md-nav" aria-label="2. OS 및 네트워크 설정 (3대 공통 수행)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-basic" class="md-nav__link">
+  <a href="#21-etchosts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A. 작업 시작 &amp; 저장 (Basic)
+        2.1 호스트 파일 등록 (/etc/hosts)
       
     </span>
   </a>
@@ -1773,10 +1599,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-sync" class="md-nav__link">
+  <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. 업로드 &amp; 동기화 (Sync)
+        2.2 호스트네임 변경 (확인 사살)
       
     </span>
   </a>
@@ -1784,43 +1610,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-branch" class="md-nav__link">
+  <a href="#23-selinux" class="md-nav__link">
     <span class="md-ellipsis">
       
-        C. 브랜치 관리 (Branch)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#d-stash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        D. 임시 저장 (Stash)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#e-undoreset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        E. 되돌리기 (Undo/Reset)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#f-log" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        F. 이력 조회 (Log)
+        2.3 방화벽/SELinux (테스트용)
       
     </span>
   </a>
@@ -1829,6 +1622,89 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-online-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 설치 (Online) - 3대 공통
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-galera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Galera 설정 (설정 파일 작성)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 클러스터 기동 (순서 준수!)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 클러스터 기동 (순서 준수!)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-galera-cluster-1-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Step 1] galera-cluster-1 (Bootstrap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-galera-cluster-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Step 2] galera-cluster-2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-galera-cluster-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Step 3] galera-cluster-3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 검증 (Validation)
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1852,216 +1728,149 @@
   
 
 
-<h1 id="devops-git-cheat-sheet-oh-my-zsh-edition">🚀 DevOps Git Cheat Sheet (Oh-My-Zsh Edition)</h1>
-<h2 id="1-the-one-pick">1. 🌟 The One Pick (가장 추천하는 명령어)</h2>
-<p>팀의 커밋 히스토리를 깔끔하게 유지하는 비결입니다.</p>
+<h1 id="mariadb-galera-cluster-3">📘 MariaDB Galera Cluster 3중화 가이드</h1>
+<p><strong>변경 사항:</strong> 호스트명 반영 (<code>galera-cluster-1 ~ 3</code>)<br />
+<strong>환경:</strong> OpenStack / Rocky Linux 10 / MariaDB 11.4 LTS</p>
+<h2 id="1-topology">1. 구성 정보 (Topology)</h2>
+<ul>
+<li><strong>Cluster Logical Name:</strong> <code>my_galera_svc</code> (설정 파일 내부용)</li>
+<li><strong>User:</strong> <code>root</code></li>
+</ul>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">효과</th>
+<th style="text-align: left;">호스트명 (Hostname)</th>
+<th style="text-align: left;">역할</th>
+<th style="text-align: left;">IP (할당 대기중)</th>
+<th style="text-align: left;">비고</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong><code>gup</code></strong></td>
-<td style="text-align: left;"><code>git pull --rebase</code></td>
-<td style="text-align: left;">일반 <code>pull</code>과 달리, <strong>불필요한 Merge 커밋을 만들지 않고</strong> 내 커밋을 최신 코드 뒤에 깔끔하게 이어 붙입니다.</td>
+<td style="text-align: left;"><strong>galera-cluster-1</strong></td>
+<td style="text-align: left;"><strong>Primary</strong> (Bootstrap)</td>
+<td style="text-align: left;"><code>IP_1</code></td>
+<td style="text-align: left;">최초 클러스터 시작</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>galera-cluster-2</strong></td>
+<td style="text-align: left;">Member</td>
+<td style="text-align: left;"><code>IP_2</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>galera-cluster-3</strong></td>
+<td style="text-align: left;">Member</td>
+<td style="text-align: left;"><code>IP_3</code></td>
+<td style="text-align: left;">Quorum 유지</td>
 </tr>
 </tbody>
 </table>
-<h2 id="2">2. 필수 설정 &amp; 트러블슈팅</h2>
-<p>환경 세팅과 <code>.gitignore</code> 문제 해결용입니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">상황</th>
-<th style="text-align: left;">명령어 / 설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>유저 설정</strong></td>
-<td style="text-align: left;"><code>git config --global user.name "내이름"</code><br><code>git config --global user.email "이메일"</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>.gitignore<br>미적용 해결</strong></td>
-<td style="text-align: left;"><strong>(캐시 삭제 후 재커밋)</strong><br>1. <code>git rm -r --cached .</code><br>2. <code>git add .</code><br>3. <code>git commit -m "Fix .gitignore"</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="3-alias">3. 실전 핵심 Alias (단축키)</h2>
-<p>자주 쓰는 순서대로 정리했습니다.</p>
-<h3 id="a-basic">A. 작업 시작 &amp; 저장 (Basic)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gst</code></strong></td>
-<td style="text-align: left;"><code>git status</code></td>
-<td style="text-align: left;"><strong>[습관]</strong> 현재 파일 상태 확인 (수시로 입력)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gaa</code></strong></td>
-<td style="text-align: left;"><code>git add --all</code></td>
-<td style="text-align: left;">변경된 <strong>모든</strong> 파일을 스테이징</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gcmsg</code></strong></td>
-<td style="text-align: left;"><code>git commit -m</code></td>
-<td style="text-align: left;">메시지와 함께 커밋 (<code>gcmsg "메시지"</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gc!</code></strong></td>
-<td style="text-align: left;"><code>git commit --amend</code></td>
-<td style="text-align: left;"><strong>[수정]</strong> 방금 올린 커밋 내용/메시지 고치기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gd</code></strong></td>
-<td style="text-align: left;"><code>git diff</code></td>
-<td style="text-align: left;">코드 변경점 확인 (<code>add</code> 하기 전)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="b-sync">B. 업로드 &amp; 동기화 (Sync)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gp</code></strong></td>
-<td style="text-align: left;"><code>git push</code></td>
-<td style="text-align: left;">원격 저장소로 업로드</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gl</code></strong></td>
-<td style="text-align: left;"><code>git pull</code></td>
-<td style="text-align: left;">원격 저장소 내용 가져오기 (일반)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gup</code></strong></td>
-<td style="text-align: left;"><code>git pull --rebase</code></td>
-<td style="text-align: left;"><strong>[⭐추천]</strong> 깔끔하게 당겨오기 (Merge bubble 방지)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="c-branch">C. 브랜치 관리 (Branch)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gsw</code></strong></td>
-<td style="text-align: left;"><code>git switch</code></td>
-<td style="text-align: left;">브랜치 이동 (<code>gsw [브랜치명]</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gswc</code></strong></td>
-<td style="text-align: left;"><code>git switch -c</code></td>
-<td style="text-align: left;">새 브랜치 생성 후 이동 (<code>gswc [새브랜치명]</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gb</code></strong></td>
-<td style="text-align: left;"><code>git branch</code></td>
-<td style="text-align: left;">로컬 브랜치 목록 보기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gbD</code></strong></td>
-<td style="text-align: left;"><code>git branch -D</code></td>
-<td style="text-align: left;">브랜치 강제 삭제</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gm</code></strong></td>
-<td style="text-align: left;"><code>git merge</code></td>
-<td style="text-align: left;">브랜치 합치기</td>
-</tr>
-</tbody>
-</table>
-<h3 id="d-stash">D. 임시 저장 (Stash)</h3>
-<p>작업 중 급하게 다른 일을 해야 할 때 사용합니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gsta</code></strong></td>
-<td style="text-align: left;"><code>git stash push</code></td>
-<td style="text-align: left;">작업 코드 임시 보관함에 숨기기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gstp</code></strong></td>
-<td style="text-align: left;"><code>git stash pop</code></td>
-<td style="text-align: left;">숨겨둔 코드 다시 꺼내오기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gstl</code></strong></td>
-<td style="text-align: left;"><code>git stash list</code></td>
-<td style="text-align: left;">보관된 목록 확인</td>
-</tr>
-</tbody>
-</table>
-<h3 id="e-undoreset">E. 되돌리기 (Undo/Reset)</h3>
-<p>⚠️ 주의해서 사용하세요.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>grh</code></strong></td>
-<td style="text-align: left;"><code>git reset --hard</code></td>
-<td style="text-align: left;">특정 시점으로 <strong>완전 초기화</strong> (복구 불가)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>grs</code></strong></td>
-<td style="text-align: left;"><code>git reset --soft</code></td>
-<td style="text-align: left;">커밋만 취소하고, <strong>파일 변경분은 남김</strong></td>
-</tr>
-</tbody>
-</table>
-<h3 id="f-log">F. 이력 조회 (Log)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>glo</code></strong></td>
-<td style="text-align: left;"><code>git log --oneline --graph</code></td>
-<td style="text-align: left;">커밋 히스토리를 그래프로 깔끔하게 보기</td>
-</tr>
-</tbody>
-</table>
+<hr />
+<h2 id="2-os-3">2. OS 및 네트워크 설정 (3대 공통 수행)</h2>
+<h3 id="21-etchosts">2.1 호스트 파일 등록 (<code>/etc/hosts</code>)</h3>
+<p>인스턴스 생성 후 IP가 나오면 <strong>3대 서버 모두</strong> 아래 내용을 수정해서 넣습니다.
+(서로 이름으로 통신하기 위함입니다.)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># vi /etc/hosts</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># [IP주소]          [호스트명]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="m">192</span>.168.XXX.XX<span class="w">   </span>galera-cluster-1
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="m">192</span>.168.XXX.XX<span class="w">   </span>galera-cluster-2
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="m">192</span>.168.XXX.XX<span class="w">   </span>galera-cluster-3
+</code></pre></div>
+<h3 id="22">2.2 호스트네임 변경 (확인 사살)</h3>
+<p>OpenStack이 자동으로 설정해주겠지만, 확실하게 하기 위해 각 서버에서 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># [galera-cluster-1 서버에서]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>galera-cluster-1
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># [galera-cluster-2 서버에서]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>galera-cluster-2
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># [galera-cluster-3 서버에서]</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>galera-cluster-3
+</code></pre></div>
+<h3 id="23-selinux">2.3 방화벽/SELinux (테스트용)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># SELinux Permissive</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>setenforce<span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^SELINUX=enforcing/SELINUX=permissive/&#39;</span><span class="w"> </span>/etc/selinux/config
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 포트 오픈</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">={</span><span class="m">3306</span>,4567,4568,4444<span class="o">}</span>/tcp
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">=</span><span class="m">4567</span>/udp
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>firewall-cmd<span class="w"> </span>--reload
+</code></pre></div>
+<hr />
+<h2 id="3-online-3">3. 설치 (Online) - 3대 공통</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 필수 패키지</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2. MariaDB 11.4 Repo 설정</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>curl<span class="w"> </span>-LsS<span class="w"> </span>https://r.mariadb.com/downloads/mariadb_repo_setup<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>-s<span class="w"> </span>--<span class="w"> </span>--mariadb-server-version<span class="o">=</span><span class="s2">&quot;mariadb-11.4&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># 3. 설치</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>MariaDB-server<span class="w"> </span>MariaDB-client<span class="w"> </span>MariaDB-backup<span class="w"> </span>Galera-4
+</code></pre></div>
+<hr />
+<h2 id="4-galera">4. Galera 설정 (설정 파일 작성)</h2>
+<p>이 부분이 핵심입니다. <code>/etc/my.cnf.d/01-galera.cnf</code> 파일을 생성합니다.
+<strong>주의:</strong> <code>wsrep_node_address</code>와 <code>wsrep_node_name</code>은 서버마다 다르게 적어야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[mariadb]</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># --- Basic ---</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="na">bind-address</span><span class="o">=</span><span class="s">0.0.0.0</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="na">default_storage_engine</span><span class="o">=</span><span class="s">InnoDB</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="na">innodb_autoinc_lock_mode</span><span class="o">=</span><span class="s">2</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># --- Galera Provider ---</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="na">wsrep_on</span><span class="o">=</span><span class="s">ON</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="na">wsrep_provider</span><span class="o">=</span><span class="s">/usr/lib64/galera-4/libgalera_smm.so</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># --- Cluster Common Config (3대 모두 동일) ---</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="na">wsrep_cluster_name</span><span class="o">=</span><span class="s">&quot;my_galera_svc&quot;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># 3대 노드의 IP를 콤마로 나열 (공백 없이)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://IP_1,IP_2,IP_3&quot;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1"># --- Node Specific (⚠️ 각 서버에 맞게 수정!) ---</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># 현재 서버의 IP</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="na">wsrep_node_address</span><span class="o">=</span><span class="s">&quot;본인_서버_IP&quot;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="c1"># 현재 서버의 호스트명 (galera-cluster-1, 2, or 3)</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="na">wsrep_node_name</span><span class="o">=</span><span class="s">&quot;galera-cluster-X&quot;</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="c1"># --- SST Method ---</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">mariabackup</span>
+</code></pre></div>
+<hr />
+<h2 id="5">5. 클러스터 기동 (순서 준수!)</h2>
+<h3 id="step-1-galera-cluster-1-bootstrap">[Step 1] galera-cluster-1 (Bootstrap)</h3>
+<p><strong>반드시 1번 노드에서 먼저 실행합니다.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 새로운 클러스터 초기화 시작</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>galera_new_cluster
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 확인</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># 결과: 1</span>
+</code></pre></div>
+<h3 id="step-2-galera-cluster-2">[Step 2] galera-cluster-2</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1번 노드에 조인</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 확인 (1번 노드 등에서)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># 결과: 2</span>
+</code></pre></div>
+<h3 id="step-3-galera-cluster-3">[Step 3] galera-cluster-3</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 클러스터 완성</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 최종 확인</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># 결과: 3</span>
+</code></pre></div>
+<hr />
+<h2 id="6-validation">6. 검증 (Validation)</h2>
+<p><strong>[시나리오]</strong></p>
+<ol>
+<li><strong>galera-cluster-1</strong> 접속 -&gt; DB 생성 (<code>create database test;</code>)</li>
+<li><strong>galera-cluster-3</strong> 접속 -&gt; DB 확인 (<code>show databases;</code>) -&gt; <code>test</code> DB가 보이면 성공.</li>
+</ol>
 
 
 

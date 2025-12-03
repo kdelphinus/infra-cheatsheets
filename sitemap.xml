@@ -5,6 +5,10 @@
          <lastmod>2025-12-03</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/galera-cluster/</loc>
+         <lastmod>2025-12-03</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/git/cheatsheet/</loc>
          <lastmod>2025-12-03</lastmod>
     </url>
@@ -30,6 +34,10 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/openstack/base/install/</loc>
+         <lastmod>2025-12-03</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/openstack/base/reference/</loc>
          <lastmod>2025-12-03</lastmod>
     </url>
     <url>
