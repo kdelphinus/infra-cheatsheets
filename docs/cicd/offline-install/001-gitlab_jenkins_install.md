@@ -321,41 +321,68 @@ kubectl get svc -n gitlab gitlab-webservice-default
 
     ```groovy
     pipeline {
-          agent {
-              kubernetes {
-                  // yaml 병합을 통해 명시적으로 로컬 이미지를 사용하도록 지정
-                  yaml """
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        labels:
-          app: builder
-      spec:
-        containers:
-        # 1. 작업용 도구 (Busybox) - 로컬 이미지 사용 및 종료 방지 설정
-        - name: shell
-          image: '1.1.1.213:30002/library/busybox:latest'
-          command: ['/bin/sh', '-c', 'sleep 86400']
-          tty: true
-          
-        # 2. Jenkins 에이전트 (필수)
-        # 스크립트 내에도 명시하여 Docker Hub 접속 시도를 원천 차단
-        - name: jnlp
-          image: '1.1.1.213:30002/library/inbound-agent:latest'
-      """
-              }
-          }
-          stages {
-              stage('Connect Check') {
-                  steps {
-                      container('shell') {
-                          sh 'echo "🎉 폐쇄망 Jenkins-K8s 연동 성공!"'
-                          sh 'cat /etc/os-release' 
-                      }
-                  }
-              }
-          }
-      }
+        agent {
+            kubernetes {
+                // yaml 병합을 통해 명시적으로 로컬 이미지를 사용하도록 지정
+                yaml """
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      labels:
+        app: builder
+    spec:
+      containers:
+      # ---------------------------------------------------------
+      # 1. 작업용 도구 (Golden Image) - 우리가 만든 올인원 이미지 사용
+      # ---------------------------------------------------------
+      - name: shell
+        # [중요] busybox 대신 툴이 다 설치된 우리 이미지를 지정 (레지스트리 주소 포함)
+        image: '1.1.1.213:30002/library/cmp-jenkins-full:2.528.3'
+        # 컨테이너가 죽지 않고 계속 살아있도록 유지
+        command: ['/bin/sh', '-c', 'sleep 86400']
+        tty: true
+        volumeMounts:
+          - mountPath: "/home/jenkins/agent"
+            name: "workspace-volume"
+            readOnly: false
+
+      # ---------------------------------------------------------
+      # 2. Jenkins 에이전트 (필수 통신용)
+      # ---------------------------------------------------------
+      - name: jnlp
+        # Docker Hub 차단을 위해 로컬 레지스트리 명시
+        image: '1.1.1.213:30002/library/inbound-agent:latest'
+        volumeMounts:
+          - mountPath: "/home/jenkins/agent"
+            name: "workspace-volume"
+            readOnly: false
+    """
+            }
+        }
+        stages {
+            stage('Tool Verification') {
+                steps {
+                    // 'shell' 컨테이너(Golden Image) 내부에서 명령어 실행
+                    container('shell') {
+                        script {
+                            echo "🎉 1. OS 확인"
+                            sh 'cat /etc/os-release'
+
+                            echo "🎉 2. OpenTofu 버전 확인"
+                            sh 'tofu --version'
+
+                            echo "🎉 3. K8s 도구 (Kubectl & Helm) 확인"
+                            sh 'kubectl version --client'
+                            sh 'helm version'
+
+                            echo "🎉 4. Provider 번들링 확인"
+                            sh 'ls -al /usr/local/share/tofu-providers'
+                        }
+                    }
+                }
+            }
+        }
+    }
     ```
 
 4. **Save**
