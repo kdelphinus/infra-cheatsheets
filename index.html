@@ -548,33 +548,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#categories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📚 Topics
+        📂 Categories
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📂 Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☸️ Kubernetes
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-links" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#openstack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔥 Quick Links
+        ☁️ OpenStack
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔥 Quick Links">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#tip" class="md-nav__link">
+  <a href="#devops-utilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tip
+        🛠️ DevOps Utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Reference
       
     </span>
   </a>
@@ -884,7 +906,7 @@
   <span class="md-ellipsis">
     
   
-    2. Ingress를 HTTPRoute로 전환
+    2. Gateway API 및 HTTPRoute 사용법
   
 
     
@@ -2399,33 +2421,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#categories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📚 Topics
+        📂 Categories
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📂 Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☸️ Kubernetes
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-links" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#openstack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔥 Quick Links
+        ☁️ OpenStack
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔥 Quick Links">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#tip" class="md-nav__link">
+  <a href="#devops-utilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tip
+        🛠️ DevOps Utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Reference
       
     </span>
   </a>
@@ -2460,18 +2504,35 @@
 
 
 <h1 id="infra-cheatsheets">🚀 Infra Cheatsheets</h1>
-<blockquote>
-<p><strong>DevOps 실무를 위한 개인 지식 저장소 (Knowledge Base)</strong> &gt; 잊어버리기 쉬운 명령어, 설치 절차, 트러블슈팅 가이드를 모아두었습니다.</p>
-</blockquote>
+<p><strong>DevOps 실무를 위한 개인 지식 저장소 (Knowledge Base)</strong><br />
+잊어버리기 쉬운 명령어, 설치 절차, 트러블슈팅 가이드를 체계적으로 정리해 두었습니다.</p>
 <hr />
-<h2 id="topics">📚 Topics</h2>
-<p>추후 채워질 예정입니다.</p>
-<h2 id="quick-links">🔥 Quick Links</h2>
-<p>추후 채워질 예정입니다.</p>
-<blockquote>
-<h3 id="tip">Tip</h3>
-<p>상단 검색창(Search)을 이용하면 명령어 단위로 검색할 수 있습니다. <code>Ctrl + K</code> (또는 <code>Cmd + K</code>)를 눌러보세요!</p>
-</blockquote>
+<h2 id="categories">📂 Categories</h2>
+<h3 id="kubernetes">☸️ Kubernetes</h3>
+<ul>
+<li><a href="k8s/cheatsheet/"><strong>Cheat Sheets</strong></a> : 자주 사용하는 <code>kubectl</code> 명령어 모음</li>
+<li><strong>폐쇄망 설치</strong>: <a href="k8s/offline-install/001-ready-k8s-air-gapped-install/">준비</a> · <a href="k8s/offline-install/002-k8s-air-gapped-install/">K8s 설치</a> · <a href="k8s/offline-install/003-necessary_infra_install/">기반 인프라(Helm/Harbor) 구성</a></li>
+<li><strong>Gateway API</strong>: <a href="k8s/gateway-api/001-envoy-install/">Envoy 설치</a> · <a href="k8s/gateway-api/002-convert_ingress_to_httproute/">HTTPRoute 설정</a></li>
+</ul>
+<h3 id="openstack">☁️ OpenStack</h3>
+<ul>
+<li><a href="openstack/cheatsheet/"><strong>Cheat Sheets</strong></a> : OpenStack CLI 핵심 명령어</li>
+<li><strong>기본 가이드</strong>: <a href="openstack/base/reference/">서비스 목록</a> · <a href="openstack/base/install/">설치 가이드</a> · <a href="openstack/base/api/">API 명세</a></li>
+<li><strong>고급 설정</strong>: <a href="openstack/gpu/init-gpu-node/">GPU 노드 초기화</a> · <a href="openstack/gpu/pci-placement/">PCI Placement</a></li>
+<li><strong>Troubleshooting</strong>: <a href="openstack/troubleshooting/k8s-network-error/">K8s 네트워크 통신 장애 해결</a></li>
+</ul>
+<h3 id="devops-utilities">🛠️ DevOps Utilities</h3>
+<ul>
+<li><strong>CI/CD</strong>: <a href="cicd/offline-install/001-gitlab_jenkins_install/">폐쇄망 GitLab &amp; Jenkins 설치</a></li>
+<li><strong>Database</strong>: <a href="db/ha/galera-cluster/">MariaDB Galera Cluster</a> · <a href="db/install/ready-mariadb-air-gapped-install/">폐쇄망 설치 파일 준비</a></li>
+<li><strong>Ubuntu/WSL</strong>: <a href="ubuntu/init-ubuntu-env/">초기 환경 설정</a> · <a href="ubuntu/wsl/wsl-network-setting/">WSL 네트워크 설정</a></li>
+</ul>
+<h3 id="reference">📝 Reference</h3>
+<ul>
+<li><strong>Git</strong>: <a href="git/cheatsheet/">Cheat Sheets</a></li>
+<li><strong>IDE</strong>: <a href="ide/vscode_shortcut/">VSCode 단축키 모음</a></li>
+<li><strong>Network</strong>: <a href="network/tip/check-domain-ip/">도메인 실제 IP 체크</a></li>
+</ul>
 
 
 
