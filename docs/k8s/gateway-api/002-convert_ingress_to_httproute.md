@@ -405,7 +405,7 @@ spec:
 
 ---
 
-## 3. 요약 및 주의사항
+## 4. 요약 및 주의사항
 
 1. **Rewrite Target:** `annotation` 대신 `filters.urlRewrite`를 사용합니다.
 2. **CORS:** `annotation` 대신 `filters.responseHeaderModifier`를 사용합니다.
