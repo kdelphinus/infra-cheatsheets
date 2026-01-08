@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/git/cheatsheet/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/">
       
       
-        <link rel="prev" href="../../db/install/ready-mariadb-air-gapped-install/">
+        <link rel="prev" href="../../offline-install/003-necessary_infra_install/">
       
       
-        <link rel="next" href="../../ide/vscode_shortcut/">
+        <link rel="next" href="../002-convert_ingress_to_httproute/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Cheat Sheets - Infra Cheatsheets</title>
+        <title>1. Gateway API 설치 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +51,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#devops-git-cheat-sheet-oh-my-zsh-edition" class="md-skip">
+        <a href="#envoy" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cheat Sheets
+              1. Gateway API 설치
             
           </span>
         </div>
@@ -221,7 +221,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -238,6 +238,8 @@
   
   
   
+    
+  
   
     
     
@@ -245,11 +247,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -279,7 +283,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
           
   
   
@@ -302,7 +306,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -329,7 +333,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -348,13 +352,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -374,7 +376,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -401,7 +403,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -424,7 +426,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -458,7 +460,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -488,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -512,26 +514,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -549,7 +556,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -573,17 +580,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
             
   
   
@@ -619,7 +629,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -647,7 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -675,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -708,26 +718,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
             
   
   
@@ -745,7 +760,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -760,10 +775,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Gateway API 설치
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -779,6 +821,147 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-standard-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 아키텍처 개요 (Standard Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 설치
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 배포 후 상태 확인 및 IP 할당
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#case-c-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ [Case C] 수동 IP 할당 명령어
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 라우팅(HTTPRoute) 설정 및 검증
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 1: Gateway 이름 일치 여부
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 2: 백엔드 포트 (Connection Refused)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-url-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 3: 경로 재작성 (URL Rewrite)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 운영 및 로그 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 프록시(Data Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 컨트롤러(Control Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -791,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -827,7 +1010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/cheatsheet/" class="md-nav__link">
+      <a href="../../cheatsheet/" class="md-nav__link">
         
   
   
@@ -966,7 +1149,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
   
@@ -1061,7 +1244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -1141,7 +1324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -1288,7 +1471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -1376,7 +1559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -1416,31 +1599,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -1458,7 +1636,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1473,37 +1651,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Cheat Sheets
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -1519,131 +1670,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-the-one-pick" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 🌟 The One Pick (가장 추천하는 명령어)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 필수 설정 &amp; 트러블슈팅
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-alias" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 실전 핵심 Alias (단축키)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 실전 핵심 Alias (단축키)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-basic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A. 작업 시작 &amp; 저장 (Basic)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#b-sync" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        B. 업로드 &amp; 동기화 (Sync)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#c-branch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        C. 브랜치 관리 (Branch)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#d-stash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        D. 임시 저장 (Stash)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#e-undoreset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        E. 되돌리기 (Undo/Reset)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#f-log" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        F. 이력 조회 (Log)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1715,7 +1741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -1854,7 +1880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -1949,7 +1975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2029,7 +2055,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -2057,7 +2083,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/install/" class="md-nav__link">
+      <a href="../../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -2085,7 +2111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/api/" class="md-nav__link">
+      <a href="../../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -2173,7 +2199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -2201,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -2289,7 +2315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -2317,7 +2343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -2405,7 +2431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -2468,10 +2494,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-the-one-pick" class="md-nav__link">
+  <a href="#0-standard-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 🌟 The One Pick (가장 추천하는 명령어)
+        0. 아키텍처 개요 (Standard Architecture)
       
     </span>
   </a>
@@ -2479,10 +2505,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 필수 설정 &amp; 트러블슈팅
+        1. 설치
       
     </span>
   </a>
@@ -2490,85 +2516,101 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-alias" class="md-nav__link">
+  <a href="#2-ip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 실전 핵심 Alias (단축키)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 실전 핵심 Alias (단축키)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-basic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A. 작업 시작 &amp; 저장 (Basic)
+        2. 배포 후 상태 확인 및 IP 할당
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#b-sync" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#case-c-ip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        B. 업로드 &amp; 동기화 (Sync)
+        🛠️ [Case C] 수동 IP 할당 명령어
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#c-branch" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#3-httproute" class="md-nav__link">
     <span class="md-ellipsis">
       
-        C. 브랜치 관리 (Branch)
+        3. 라우팅(HTTPRoute) 설정 및 검증
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#d-stash" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#1-gateway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        D. 임시 저장 (Stash)
+        ✅ 체크리스트 1: Gateway 이름 일치 여부
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#e-undoreset" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#2-connection-refused" class="md-nav__link">
     <span class="md-ellipsis">
       
-        E. 되돌리기 (Undo/Reset)
+        ✅ 체크리스트 2: 백엔드 포트 (Connection Refused)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#f-log" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#3-url-rewrite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        F. 이력 조회 (Log)
+        ✅ 체크리스트 3: 경로 재작성 (URL Rewrite)
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 운영 및 로그 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 프록시(Data Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 컨트롤러(Control Plane) 로그
+      
+    </span>
+  </a>
   
 </li>
       
@@ -2592,216 +2634,132 @@
   
 
 
-<h1 id="devops-git-cheat-sheet-oh-my-zsh-edition">🚀 DevOps Git Cheat Sheet (Oh-My-Zsh Edition)</h1>
-<h2 id="1-the-one-pick">1. 🌟 The One Pick (가장 추천하는 명령어)</h2>
-<p>팀의 커밋 히스토리를 깔끔하게 유지하는 비결입니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">효과</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gup</code></strong></td>
-<td style="text-align: left;"><code>git pull --rebase</code></td>
-<td style="text-align: left;">일반 <code>pull</code>과 달리, <strong>불필요한 Merge 커밋을 만들지 않고</strong> 내 커밋을 최신 코드 뒤에 깔끔하게 이어 붙입니다.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="2">2. 필수 설정 &amp; 트러블슈팅</h2>
-<p>환경 세팅과 <code>.gitignore</code> 문제 해결용입니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">상황</th>
-<th style="text-align: left;">명령어 / 설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>유저 설정</strong></td>
-<td style="text-align: left;"><code>git config --global user.name "내이름"</code><br><code>git config --global user.email "이메일"</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>.gitignore<br>미적용 해결</strong></td>
-<td style="text-align: left;"><strong>(캐시 삭제 후 재커밋)</strong><br>1. <code>git rm -r --cached .</code><br>2. <code>git add .</code><br>3. <code>git commit -m "Fix .gitignore"</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="3-alias">3. 실전 핵심 Alias (단축키)</h2>
-<p>자주 쓰는 순서대로 정리했습니다.</p>
-<h3 id="a-basic">A. 작업 시작 &amp; 저장 (Basic)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gst</code></strong></td>
-<td style="text-align: left;"><code>git status</code></td>
-<td style="text-align: left;"><strong>[습관]</strong> 현재 파일 상태 확인 (수시로 입력)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gaa</code></strong></td>
-<td style="text-align: left;"><code>git add --all</code></td>
-<td style="text-align: left;">변경된 <strong>모든</strong> 파일을 스테이징</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gcmsg</code></strong></td>
-<td style="text-align: left;"><code>git commit -m</code></td>
-<td style="text-align: left;">메시지와 함께 커밋 (<code>gcmsg "메시지"</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gc!</code></strong></td>
-<td style="text-align: left;"><code>git commit --amend</code></td>
-<td style="text-align: left;"><strong>[수정]</strong> 방금 올린 커밋 내용/메시지 고치기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gd</code></strong></td>
-<td style="text-align: left;"><code>git diff</code></td>
-<td style="text-align: left;">코드 변경점 확인 (<code>add</code> 하기 전)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="b-sync">B. 업로드 &amp; 동기화 (Sync)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gp</code></strong></td>
-<td style="text-align: left;"><code>git push</code></td>
-<td style="text-align: left;">원격 저장소로 업로드</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gl</code></strong></td>
-<td style="text-align: left;"><code>git pull</code></td>
-<td style="text-align: left;">원격 저장소 내용 가져오기 (일반)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gup</code></strong></td>
-<td style="text-align: left;"><code>git pull --rebase</code></td>
-<td style="text-align: left;"><strong>[⭐추천]</strong> 깔끔하게 당겨오기 (Merge bubble 방지)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="c-branch">C. 브랜치 관리 (Branch)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gsw</code></strong></td>
-<td style="text-align: left;"><code>git switch</code></td>
-<td style="text-align: left;">브랜치 이동 (<code>gsw [브랜치명]</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gswc</code></strong></td>
-<td style="text-align: left;"><code>git switch -c</code></td>
-<td style="text-align: left;">새 브랜치 생성 후 이동 (<code>gswc [새브랜치명]</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gb</code></strong></td>
-<td style="text-align: left;"><code>git branch</code></td>
-<td style="text-align: left;">로컬 브랜치 목록 보기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gbD</code></strong></td>
-<td style="text-align: left;"><code>git branch -D</code></td>
-<td style="text-align: left;">브랜치 강제 삭제</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gm</code></strong></td>
-<td style="text-align: left;"><code>git merge</code></td>
-<td style="text-align: left;">브랜치 합치기</td>
-</tr>
-</tbody>
-</table>
-<h3 id="d-stash">D. 임시 저장 (Stash)</h3>
-<p>작업 중 급하게 다른 일을 해야 할 때 사용합니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>gsta</code></strong></td>
-<td style="text-align: left;"><code>git stash push</code></td>
-<td style="text-align: left;">작업 코드 임시 보관함에 숨기기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gstp</code></strong></td>
-<td style="text-align: left;"><code>git stash pop</code></td>
-<td style="text-align: left;">숨겨둔 코드 다시 꺼내오기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>gstl</code></strong></td>
-<td style="text-align: left;"><code>git stash list</code></td>
-<td style="text-align: left;">보관된 목록 확인</td>
-</tr>
-</tbody>
-</table>
-<h3 id="e-undoreset">E. 되돌리기 (Undo/Reset)</h3>
-<p>⚠️ 주의해서 사용하세요.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>grh</code></strong></td>
-<td style="text-align: left;"><code>git reset --hard</code></td>
-<td style="text-align: left;">특정 시점으로 <strong>완전 초기화</strong> (복구 불가)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>grs</code></strong></td>
-<td style="text-align: left;"><code>git reset --soft</code></td>
-<td style="text-align: left;">커밋만 취소하고, <strong>파일 변경분은 남김</strong></td>
-</tr>
-</tbody>
-</table>
-<h3 id="f-log">F. 이력 조회 (Log)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Alias</th>
-<th style="text-align: left;">실제 명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>glo</code></strong></td>
-<td style="text-align: left;"><code>git log --oneline --graph</code></td>
-<td style="text-align: left;">커밋 히스토리를 그래프로 깔끔하게 보기</td>
-</tr>
-</tbody>
-</table>
+<h1 id="envoy">🚀 Envoy 설치</h1>
+<p>2026년 3월부터 <code>Ingress Nginx</code> 에 대한 공식 지원이 종료됩니다.
+이에 따라 Kubernetes의 <code>Gateway API</code> 와 <code>Envoy</code> 를 사용하여 합니다.</p>
+<p>이 문서는 폐쇄망을 기준으로 합니다.
+<a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko">설치 파일</a>
+의 <code>envoy-1.36.3</code> 폴더를 받아주세요.</p>
+<h2 id="0-standard-architecture">0. 아키텍처 개요 (Standard Architecture)</h2>
+<p>쿠버네티스 보안 및 네트워크 표준을 준수하는 구성입니다.</p>
+<ul>
+<li><strong>Network:</strong> <code>hostNetwork: false</code> (Pod는 K8s 내부망 사용, 노드 네트워크와 격리)</li>
+<li><strong>Service:</strong> <code>type: LoadBalancer</code> (외부 트래픽 진입점)</li>
+<li><strong>Traffic Flow:</strong>
+<code>Client</code> -&gt; <code>External IP (LB)</code> -&gt; <code>Service (80/443)</code> -&gt; <code>Envoy Pod (10080/10443)</code>
+-&gt; <code>Backend Pod</code></li>
+</ul>
+<h2 id="1">1. 설치</h2>
+<p><strong>[실행 위치: Master 1, Worker 1~3 전체]</strong></p>
+<p>전체 노드에 <code>envoy</code> 이미지들을 로드합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>./envoy-1.36.3
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>./images/upload_images.sh
+</code></pre></div>
+<p><strong>[실행 위치: Master 1]</strong></p>
+<p><code>install_envoy-gateway.sh</code> 스크립트에서 아래 변수를 환경에 맞게 변경합니다.
+(기본값을 사용해도 괜찮습니다.)</p>
+<ul>
+<li><code>NAMESPACE:</code> Gateway Namespace</li>
+<li><code>CONTROLLER_CHART:</code> Controller Chart(기본값 고정)</li>
+<li><code>INFRA_CHART:</code> Infra Chart(기본값 고정)</li>
+<li><code>GW_NAME:</code> Gateway Name</li>
+<li><code>IMG_GATEWAY:</code> Gateway 이미지(기본값 고정)</li>
+<li><code>IMG_PROXY:</code> Proxy 이미지(기본값 고정)</li>
+<li><code>GW_CLASS_NAME:</code> 클러스터 레벨 리소스 이름</li>
+</ul>
+<p>이때 <code>NAMESPACE</code> 나 <code>GW_NAME</code> 를 변경했다면, <code>HTTPRoute</code> 파일에도 변경해야 합니다.</p>
+<p>수정이 끝나면 스크립트를 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>install_envoy-gateway.sh
+</code></pre></div>
+<h2 id="2-ip">2. 배포 후 상태 확인 및 IP 할당</h2>
+<p>배포가 완료되면 가장 먼저 <strong>Gateway Service의 External IP</strong> 할당 상태를 확인해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Envoy Gateway가 생성한 LoadBalancer 서비스 확인</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>load
+</code></pre></div>
+<p>위 명령 실행 결과(<code>EXTERNAL-IP</code>)에 따라 조치 방법이 다릅니다.</p>
+<ol>
+<li><strong>Case A: 클라우드 (AWS EKS, GKE, AKS 등)</strong></li>
+<li>
+<p><code>EXTERNAL-IP</code>에 자동으로 IP 또는 도메인이 할당됩니다. <strong>(별도 조치 불필요)</strong></p>
+</li>
+<li>
+<p><strong>Case B: 온프레미 (MetalLB가 있는 경우)</strong></p>
+<ul>
+<li>설정된 IP Pool에서 자동으로 IP가 할당됩니다. <strong>(별도 조치 불필요)</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Case C: 온프레미 (MetalLB가 없는 경우) - <code>&lt;pending&gt;</code> 상태</strong></p>
+<ul>
+<li>IP를 할당해 줄 컨트롤러가 없으므로 <strong>수동으로 VIP(Node IP)를 바인딩</strong>해야 합니다.</li>
+</ul>
+</li>
+</ol>
+<h2 id="case-c-ip">🛠️ [Case C] 수동 IP 할당 명령어</h2>
+<p>서비스가 <code>&lt;pending&gt;</code> 상태로 멈춰 있을 때만 실행합니다.
+<code>externalIPs</code> 에 있는 <code>1.1.1.213</code> 부분은 실제 사용할 노드 IP로 대체합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. IP가 할당되지 않은 서비스 이름 확인</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type==&quot;LoadBalancer&quot;)].metadata.name}&#39;</span><span class="k">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2. 실제 사용할 노드 IP로 패치 (IP 부분 수정 필수)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>--type<span class="w"> </span>merge<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;1.1.1.213&quot;]}}&#39;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ 서비스(</span><span class="nv">$SVC_NAME</span><span class="s2">)에 외부 IP(1.1.1.213)가 할당되었습니다.&quot;</span>
+</code></pre></div>
+<h2 id="3-httproute">3. 라우팅(HTTPRoute) 설정 및 검증</h2>
+<p>Gateway가 정상적으로 떴다면, 애플리케이션 연결 규칙(<code>HTTPRoute</code>)을 점검합니다.
+이 검증은 서비스에 접근하지 못할 때 진행해도 됩니다.</p>
+<blockquote>
+<p>서비스보다 먼저 envoy를 설치하기 때문에 현재는 생성된 HTTPRoute 자원이 없습니다.</p>
+</blockquote>
+<h2 id="1-gateway">✅ 체크리스트 1: Gateway 이름 일치 여부</h2>
+<p><code>HTTPRoute</code> 리소스가 현재 실행 중인 Gateway(<code>cmp-gateway</code>)를 정확히 가리키고 있어야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># parentRefs가 &#39;cmp-gateway&#39;인지 확인</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>httproute<span class="w"> </span>-A
+</code></pre></div>
+<p><strong>수정 방법:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>-p<span class="o">=</span><span class="s1">&#39;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/parentRefs/0/name&quot;, &quot;value&quot;: &quot;cmp-gateway&quot;}]&#39;</span>
+</code></pre></div>
+<h2 id="2-connection-refused">✅ 체크리스트 2: 백엔드 포트 (Connection Refused)</h2>
+<p>Envoy는 서비스(ClusterIP) 포트가 아닌 <strong>파드(Pod)의 실제 컨테이너 포트</strong>로 접속을 시도합니다.</p>
+<ul>
+<li><strong>증상:</strong> 503 Service Unavailable 또는 Connection Refused</li>
+<li><strong>해결:</strong> <code>HTTPRoute</code>의 <code>backendRefs</code> 포트를
+<strong>TargetPort(실제 앱 포트, 예: 8080)</strong> 로 설정해야 합니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 포트를 80 -&gt; 8080으로 변경하는 예시</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-p<span class="o">=</span><span class="s1">&#39;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/rules/0/backendRefs/0/port&quot;, &quot;value&quot;: 8080}]&#39;</span>
+</code></pre></div>
+<h2 id="3-url-rewrite">✅ 체크리스트 3: 경로 재작성 (URL Rewrite)</h2>
+<p>애플리케이션이 하위 경로(Context Path)를 인식하지 못해 404가 발생할 경우 사용합니다.</p>
+<ul>
+<li><strong>상황:</strong> <code>/oauth2/login</code> 호출 시 앱이 <code>/oauth2</code>를 경로로 인식하여 오류 발생.</li>
+<li><strong>해결:</strong> <code>URLRewrite</code> 필터 적용.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">filters</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">URLRewrite</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">urlRewrite</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplacePrefixMatch</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="nt">replacePrefixMatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+</code></pre></div>
+<h2 id="4">4. 운영 및 로그 확인</h2>
+<p>Envoy Gateway는 동적으로 리소스를 관리하므로 파드 이름이 변경됩니다.
+<strong>Label Selector(<code>-l</code>)</strong>를 사용하여 로그를 확인하는 것이 표준입니다.</p>
+<h2 id="data-plane">📋 프록시(Data Plane) 로그</h2>
+<p>실제 트래픽 처리, 접속 오류 확인 시 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Envoy Proxy 로그 실시간 확인</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cmp-gateway
+</code></pre></div>
+<h2 id="control-plane">🧠 컨트롤러(Control Plane) 로그</h2>
+<p>Gateway 설정 변환, 배포 실패 원인 분석 시 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Gateway Controller 로그 확인</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway
+</code></pre></div>
 
 
 
@@ -2851,10 +2809,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>

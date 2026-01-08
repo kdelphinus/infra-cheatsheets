@@ -29,6 +29,14 @@
          <lastmod>2026-01-08</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/</loc>
+         <lastmod>2026-01-08</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/002-convert_ingress_to_httproute/</loc>
+         <lastmod>2026-01-08</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/001-ready-k8s-air-gapped-install/</loc>
          <lastmod>2026-01-08</lastmod>
     </url>
