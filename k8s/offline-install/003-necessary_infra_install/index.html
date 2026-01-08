@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#3-helm-harbor-ingress" class="md-skip">
+        <a href="#3-helm-harbor-envoyingress" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -758,22 +758,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-ingress-storage" class="md-nav__link">
+  <a href="#phase-2-envoy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 2: 필수 인프라 설치 (Ingress &amp; Storage)
+        🚀 Phase 2: Envoy 설치
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 2: 필수 인프라 설치 (Ingress &amp; Storage)">
+    <nav class="md-nav" aria-label="🚀 Phase 2: Envoy 설치">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-local-path-provisioner" class="md-nav__link">
+  <a href="#0-standard-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Local Path Provisioner (저장소)
+        0. 아키텍처 개요 (Standard Architecture)
       
     </span>
   </a>
@@ -781,10 +781,138 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-ingress-nginx" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Ingress Nginx (접속 관문)
+        1. 이미지 로드 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 배포 후 상태 확인 및 IP 할당
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 IP 할당">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-c-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ [Case C] 수동 IP 할당 명령어
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 라우팅(HTTPRoute) 설정 및 검증
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 라우팅(HTTPRoute) 설정 및 검증">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 1: Gateway 이름 일치 여부
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 2: 백엔드 포트 (Connection Refused)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-url-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 3: 경로 재작성 (URL Rewrite)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 운영 및 로그 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 운영 및 로그 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 프록시(Data Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 컨트롤러(Control Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingress-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (예전)Ingress Nginx
       
     </span>
   </a>
@@ -797,16 +925,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-3-harbor-valuesyaml" class="md-nav__link">
+  <a href="#phase-3-harbor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 3: Harbor 설정 파일 작성 (values.yaml)
+        🚀 Phase 3: Harbor 설치
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설정 파일 작성 (values.yaml)">
+    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설치">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-local-path-provisioner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Local Path Provisioner (저장소, 선택)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Harbor 설치
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#2-harbor-pull-https" class="md-nav__link">
@@ -2354,22 +2504,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-ingress-storage" class="md-nav__link">
+  <a href="#phase-2-envoy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 2: 필수 인프라 설치 (Ingress &amp; Storage)
+        🚀 Phase 2: Envoy 설치
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 2: 필수 인프라 설치 (Ingress &amp; Storage)">
+    <nav class="md-nav" aria-label="🚀 Phase 2: Envoy 설치">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-local-path-provisioner" class="md-nav__link">
+  <a href="#0-standard-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Local Path Provisioner (저장소)
+        0. 아키텍처 개요 (Standard Architecture)
       
     </span>
   </a>
@@ -2377,10 +2527,138 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-ingress-nginx" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Ingress Nginx (접속 관문)
+        1. 이미지 로드 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 배포 후 상태 확인 및 IP 할당
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 IP 할당">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-c-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ [Case C] 수동 IP 할당 명령어
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 라우팅(HTTPRoute) 설정 및 검증
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 라우팅(HTTPRoute) 설정 및 검증">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 1: Gateway 이름 일치 여부
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 2: 백엔드 포트 (Connection Refused)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-url-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ 체크리스트 3: 경로 재작성 (URL Rewrite)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 운영 및 로그 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 운영 및 로그 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 프록시(Data Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 컨트롤러(Control Plane) 로그
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingress-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (예전)Ingress Nginx
       
     </span>
   </a>
@@ -2393,16 +2671,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-3-harbor-valuesyaml" class="md-nav__link">
+  <a href="#phase-3-harbor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 3: Harbor 설정 파일 작성 (values.yaml)
+        🚀 Phase 3: Harbor 설치
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설정 파일 작성 (values.yaml)">
+    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설치">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-local-path-provisioner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Local Path Provisioner (저장소, 선택)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Harbor 설치
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#2-harbor-pull-https" class="md-nav__link">
@@ -2451,7 +2751,7 @@
   
 
 
-<h1 id="3-helm-harbor-ingress">3. 폐쇄망에서 Helm, Harbor, Ingress 설치</h1>
+<h1 id="3-helm-harbor-envoyingress">3. 폐쇄망에서 Helm, Harbor, Envoy(Ingress는 비권장) 설치</h1>
 <ul>
 <li>가이드 환경</li>
 <li>OS: Rocky 9.6</li>
@@ -2477,70 +2777,202 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># 결과: version.BuildInfo{Version:&quot;v3.14.0&quot;, ...} 뜨면 성공</span>
 </code></pre></div>
 <hr />
-<h2 id="phase-2-ingress-storage">🚀 Phase 2: 필수 인프라 설치 (Ingress &amp; Storage)</h2>
-<p>Harbor가 정상 동작하려면 <strong>외부 접속용 문(Ingress)</strong>과 <strong>데이터 저장소(StorageClass)</strong>가 필수입니다.
-이것들이 없으면 Harbor 파드가 뜨다가 <code>Pending</code> 상태로 멈춥니다.</p>
-<p><strong>[실행 위치: K8s-Master-Node-1]</strong></p>
-<h3 id="1-local-path-provisioner">1. Local Path Provisioner (저장소)</h3>
-<p>폐쇄망에서 가장 쉬운 스토리지 해결책입니다. 로컬 디스크 경로를 PV로 씁니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/utils
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># 1. 설치</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>local-path-storage.yaml
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># 2. (중요) 기본 스토리지 클래스로 지정</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># 이걸 해야 Harbor가 &quot;나 용량 줘&quot; 할 때 자동으로 연결해줍니다.</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>storageclass<span class="w"> </span>local-path<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># 3. 확인 (local-path 옆에 (default)라고 떠야 함)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>kubectl<span class="w"> </span>get<span class="w"> </span>sc
+<h2 id="phase-2-envoy">🚀 Phase 2: Envoy 설치</h2>
+<p>2026년 3월부터 <code>Ingress Nginx</code> 에 대한 공식 지원이 종료됩니다.
+이에 따라 Kubernetes의 <code>Gateway API</code> 와 <code>Envoy</code> 를 사용하여 합니다.</p>
+<h3 id="0-standard-architecture">0. 아키텍처 개요 (Standard Architecture)</h3>
+<p>쿠버네티스 보안 및 네트워크 표준을 준수하는 구성입니다.</p>
+<ul>
+<li><strong>Network:</strong> <code>hostNetwork: false</code> (Pod는 K8s 내부망 사용, 노드 네트워크와 격리)</li>
+<li><strong>Service:</strong> <code>type: LoadBalancer</code> (외부 트래픽 진입점)</li>
+<li><strong>Traffic Flow:</strong>
+<code>Client</code> -&gt; <code>External IP (LB)</code> -&gt; <code>Service (80/443)</code> -&gt; <code>Envoy Pod (10080/10443)</code>
+-&gt; <code>Backend Pod</code></li>
+</ul>
+<h3 id="1">1. 이미지 로드 (전체 노드)</h3>
+<p><strong>[실행 위치: Master 1, Worker 1~3 전체]</strong></p>
+<p>전체 노드에 <code>envoy</code> 이미지들을 로드합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>./envoy-1.36.3
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>./images/upload_images.sh
 </code></pre></div>
-<h3 id="2-ingress-nginx">2. Ingress Nginx (접속 관문)</h3>
-<p>Harbor 웹 UI에 접속하기 위한 도구입니다.</p>
+<p><strong>[실행 위치: Master 1]</strong></p>
+<p>마스터 노드로 돌아와 설치 스크립트를 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>install_envoy-gateway.sh
+</code></pre></div>
+<h3 id="2-ip">2. 배포 후 상태 확인 및 IP 할당</h3>
+<p>배포가 완료되면 가장 먼저 <strong>Gateway Service의 External IP</strong> 할당 상태를 확인해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Envoy Gateway가 생성한 LoadBalancer 서비스 확인</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>load
+</code></pre></div>
+<p>위 명령 실행 결과(<code>EXTERNAL-IP</code>)에 따라 조치 방법이 다릅니다.</p>
+<ol>
+<li><strong>Case A: 클라우드 (AWS EKS, GKE, AKS 등)</strong></li>
+<li>
+<p><code>EXTERNAL-IP</code>에 자동으로 IP 또는 도메인이 할당됩니다. <strong>(별도 조치 불필요)</strong></p>
+</li>
+<li>
+<p><strong>Case B: 온프레미 (MetalLB가 있는 경우)</strong></p>
+<ul>
+<li>설정된 IP Pool에서 자동으로 IP가 할당됩니다. <strong>(별도 조치 불필요)</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Case C: 온프레미 (MetalLB가 없는 경우) - <code>&lt;pending&gt;</code> 상태</strong></p>
+<ul>
+<li>IP를 할당해 줄 컨트롤러가 없으므로 <strong>수동으로 VIP(Node IP)를 바인딩</strong>해야 합니다.</li>
+</ul>
+</li>
+</ol>
+<h4 id="case-c-ip">🛠️ [Case C] 수동 IP 할당 명령어</h4>
+<p>서비스가 <code>&lt;pending&gt;</code> 상태로 멈춰 있을 때만 실행합니다.
+<code>externalIPs</code> 에 있는 <code>1.1.1.213</code> 부분은 실제 사용할 노드 IP로 대체합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 1. IP가 할당되지 않은 서비스 이름 확인</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type==&quot;LoadBalancer&quot;)].metadata.name}&#39;</span><span class="k">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 2. 실제 사용할 노드 IP로 패치 (IP 부분 수정 필수)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>--type<span class="w"> </span>merge<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;1.1.1.213&quot;]}}&#39;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ 서비스(</span><span class="nv">$SVC_NAME</span><span class="s2">)에 외부 IP(1.1.1.213)가 할당되었습니다.&quot;</span>
+</code></pre></div>
+<h3 id="3-httproute">3. 라우팅(HTTPRoute) 설정 및 검증</h3>
+<p>Gateway가 정상적으로 떴다면, 애플리케이션 연결 규칙(<code>HTTPRoute</code>)을 점검합니다.
+이 검증은 서비스에 접근하지 못할 때 진행해도 됩니다.</p>
+<blockquote>
+<p>서비스보다 먼저 envoy를 설치하기 때문에 현재는 생성된 HTTPRoute 자원이 없습니다.</p>
+</blockquote>
+<h4 id="1-gateway">✅ 체크리스트 1: Gateway 이름 일치 여부</h4>
+<p><code>HTTPRoute</code> 리소스가 현재 실행 중인 Gateway(<code>cmp-gateway</code>)를 정확히 가리키고 있어야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># parentRefs가 &#39;cmp-gateway&#39;인지 확인</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>httproute<span class="w"> </span>-A
+</code></pre></div>
+<p><strong>수정 방법:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>-p<span class="o">=</span><span class="s1">&#39;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/parentRefs/0/name&quot;, &quot;value&quot;: &quot;cmp-gateway&quot;}]&#39;</span>
+</code></pre></div>
+<h4 id="2-connection-refused">✅ 체크리스트 2: 백엔드 포트 (Connection Refused)</h4>
+<p>Envoy는 서비스(ClusterIP) 포트가 아닌 <strong>파드(Pod)의 실제 컨테이너 포트</strong>로 접속을 시도합니다.</p>
+<ul>
+<li><strong>증상:</strong> 503 Service Unavailable 또는 Connection Refused</li>
+<li><strong>해결:</strong> <code>HTTPRoute</code>의 <code>backendRefs</code> 포트를
+<strong>TargetPort(실제 앱 포트, 예: 8080)</strong> 로 설정해야 합니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 포트를 80 -&gt; 8080으로 변경하는 예시</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>-p<span class="o">=</span><span class="s1">&#39;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/rules/0/backendRefs/0/port&quot;, &quot;value&quot;: 8080}]&#39;</span>
+</code></pre></div>
+<h4 id="3-url-rewrite">✅ 체크리스트 3: 경로 재작성 (URL Rewrite)</h4>
+<p>애플리케이션이 하위 경로(Context Path)를 인식하지 못해 404가 발생할 경우 사용합니다.</p>
+<ul>
+<li><strong>상황:</strong> <code>/oauth2/login</code> 호출 시 앱이 <code>/oauth2</code>를 경로로 인식하여 오류 발생.</li>
+<li><strong>해결:</strong> <code>URLRewrite</code> 필터 적용.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">filters</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">URLRewrite</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">urlRewrite</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplacePrefixMatch</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="nt">replacePrefixMatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+</code></pre></div>
+<h3 id="4">4. 운영 및 로그 확인</h3>
+<p>Envoy Gateway는 동적으로 리소스를 관리하므로 파드 이름이 변경됩니다.
+<strong>Label Selector(<code>-l</code>)</strong>를 사용하여 로그를 확인하는 것이 표준입니다.</p>
+<h4 id="data-plane">📋 프록시(Data Plane) 로그</h4>
+<p>실제 트래픽 처리, 접속 오류 확인 시 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Envoy Proxy 로그 실시간 확인</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cmp-gateway
+</code></pre></div>
+<h4 id="control-plane">🧠 컨트롤러(Control Plane) 로그</h4>
+<p>Gateway 설정 변환, 배포 실패 원인 분석 시 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Gateway Controller 로그 확인</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway
+</code></pre></div>
+<h3 id="ingress-nginx">(예전)Ingress Nginx</h3>
+<blockquote>
+<p>2026년 3월부터 Ingress Nginx에 대한 지원이 종료됩니다.
+이에 따라 Ingress Nginx 대신 위에 있는 Gateway API + Envoy를 사용을 적극 권장합니다.</p>
+</blockquote>
 <p>아래 명령을 실행하여, worker 노드 중 하나를 선택합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>node
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>node
 </code></pre></div>
 <p>Ingress Controller가 동작하는 노드를 고정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>node<span class="w"> </span>&lt;NODE_NAME&gt;<span class="w"> </span>ingress-ready<span class="o">=</span><span class="nb">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>node<span class="w"> </span>&lt;NODE_NAME&gt;<span class="w"> </span>ingress-ready<span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 <p><code>ingress-nginx.yaml</code> 파일을 열어 <code>spec &gt; template &gt; spec</code> 아래 <code>nodeSelector</code> 부분을 추가합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vi<span class="w"> </span>ingress-nginx.yaml
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kind:<span class="w"> </span>Deployment
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>...
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>spec:
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="c1"># ... (생략)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span>template:
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">      </span>spec:
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span>...
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span>nodeSelector:
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">          </span>ingress-ready:<span class="w"> </span><span class="s2">&quot;true&quot;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span>...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>vi<span class="w"> </span>ingress-nginx.yaml
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>kind:<span class="w"> </span>Deployment
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>...
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span>spec:
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="c1"># ... (생략)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span>template:
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">      </span>spec:
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">        </span>...
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">        </span>nodeSelector:
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">          </span>ingress-ready:<span class="w"> </span><span class="s2">&quot;true&quot;</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">        </span>...
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. 설치</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>ingress-nginx.yaml
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 2. 확인</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># ingress-nginx-controller 파드가 Running 상태가 될 때까지 기다리세요.</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>watch<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>ingress-nginx
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 1. 설치</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>ingress-nginx.yaml
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># 2. 확인</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># ingress-nginx-controller 파드가 Running 상태가 될 때까지 기다리세요.</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>watch<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>ingress-nginx
 </code></pre></div>
 <p>만약 LB가 없어서 노드에 직접 붙어야 하는 상황이라면 ingress-nginx.yaml 파일에 hostNetwork 옵션을 추가해주세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># &lt;--- 이 줄을 추가하세요! (dnsPolicy 근처에 두면 됩니다)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">      </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># &lt;--- 이 줄을 추가하세요! (dnsPolicy 근처에 두면 됩니다)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">      </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">controller</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </code></pre></div>
 <hr />
-<h2 id="phase-3-harbor-valuesyaml">🚀 Phase 3: Harbor 설정 파일 작성 (values.yaml)</h2>
-<p>Harbor는 드라이버에 올라가 있는 Harbor 파일을 사용합니다.</p>
-<ol>
-<li>이미지 폴더에서 이미지 업로드</li>
-<li>설치 폴더에 있는 설치 스크립트 실행</li>
-</ol>
+<h2 id="phase-3-harbor">🚀 Phase 3: Harbor 설치</h2>
+<h3 id="0-local-path-provisioner">0. Local Path Provisioner (저장소, 선택)</h3>
+<p><strong>[실행 위치: K8s-Master-Node-1]</strong></p>
+<p>폐쇄망에서 가장 쉬운 스토리지 해결책입니다. 로컬 디스크 경로를 PV로 씁니다.
+<code>Storage Class</code> 를 설치하지 않고 <code>manual</code> 로 정의해도 괜찮습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/utils
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1"># 1. 설치</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>local-path-storage.yaml
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="c1"># 2. (중요) 기본 스토리지 클래스로 지정</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1"># 이걸 해야 Harbor가 &quot;나 용량 줘&quot; 할 때 자동으로 연결해줍니다.</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>storageclass<span class="w"> </span>local-path<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="c1"># 3. 확인 (local-path 옆에 (default)라고 떠야 함)</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>kubectl<span class="w"> </span>get<span class="w"> </span>sc
+</code></pre></div>
+<h3 id="2-harbor">2. Harbor 설치</h3>
+<p><code>./harbor-1.14.3/harbor-iamges-upload</code> 폴더를 설치하고자 하는 노드로 옮깁니다.</p>
+<p><strong>[실행 위치: Harbor를 띄울 워커 노드 1개]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>harbor-iamges-upload/
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>upload_images.sh
+</code></pre></div>
+<p>hostPath로 사용할 디렉토리도 생성합니다. 이때 경로는 변경해도 됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/harbor
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/harbor
+</code></pre></div>
+<p>업로드가 끝나면 마스터 노드로 돌아옵니다.</p>
+<p><strong>[실행 위치: K8s-Master-Node-1]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>harbor-1.14.3/
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>vi<span class="w"> </span>harbor_install_offline.sh
+</code></pre></div>
+<p>위 설정 정보를 해당 환경에 맞게 변경합니다.</p>
+<ul>
+<li><code>EXTERNAL_HOSTNAME</code> : Harbor를 띄울 워커 노드 IP</li>
+<li><code>SAVE_PATH</code> : 호스트 패스 실제 위치(워커 노드에 생성한 디렉토리와 동일해야 함)</li>
+<li><code>NODE_NAME</code> : Harbor를 띄울 워커 노드 이름</li>
+<li><code>STORAGE_SIZE</code> : Harbor 저장소 크기</li>
+</ul>
+<p>설정이 끝나면 저장 후, 스크립트를 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>harbor_install_offline.sh
+</code></pre></div>
 <p><strong>해결책 (필수 적용):</strong></p>
 <ol>
 <li>
@@ -2559,44 +2991,44 @@
 <p>3.<strong>방화벽 해제:</strong> 워커 노드 <code>firewalld</code> 비활성화 확인.</p>
 <h3 id="2-harbor-pull-https">2. Harbor 이미지 Pull 시, https로 가져올 때</h3>
 <p>Http를 설정했는데, Https를 호출한다면 containerd 설정을 수정해야 합니다. 모든 워커 노드에서 수정해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>grep<span class="w"> </span><span class="s2">&quot;config_path&quot;</span><span class="w"> </span>/etc/containerd/config.toml
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># 결과</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nv">plugin_config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/etc/nri/conf.d&#39;</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>grep<span class="w"> </span><span class="s2">&quot;config_path&quot;</span><span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1"># 결과</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="nv">plugin_config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/etc/nri/conf.d&#39;</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">  </span><span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
 </code></pre></div>
 <p>위와 같이 <code>config_path</code> 에 빈값이 있거나, <code>:</code> 으로 나뉘어 있다면 모두 제거합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/containerd/config.toml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/containerd/config.toml
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="na">...</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># 빈 값이 들어간 config_path가 있다면 제거</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="na">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"> </span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="na">...</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="na">grep 명령어를 다시 출력 시, 아래와 같이 나와야 합니다.</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="na">```bash</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="na">grep &quot;config_path&quot; /etc/containerd/config.toml</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="na">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;/etc/containerd/certs.d&#39;</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="na">plugin_config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;/etc/nri/conf.d&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="na">...</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="c1"># 빈 값이 들어간 config_path가 있다면 제거</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="na">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="w"> </span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="na">...</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="na">grep 명령어를 다시 출력 시, 아래와 같이 나와야 합니다.</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="na">```bash</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="na">grep &quot;config_path&quot; /etc/containerd/config.toml</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">      </span><span class="na">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;/etc/containerd/certs.d&#39;</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">    </span><span class="na">plugin_config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;/etc/nri/conf.d&#39;</span>
 </code></pre></div>
 <p>그 후, tls 옵션을 끄는 설정을 추가합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 실제 하버 도메인 입력 필요</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/20.0.0.127:30002/
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 설정 추가</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/containerd/certs.d/20.0.0.127:30002/hosts.toml</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="s">server = &quot;http://20.0.0.127:30002&quot;</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="s">[host.&quot;http://20.0.0.127:30002&quot;]</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;]</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="s">  skip_verify = true</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="s">EOF</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># 실제 하버 도메인 입력 필요</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/20.0.0.127:30002/
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># 설정 추가</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/containerd/certs.d/20.0.0.127:30002/hosts.toml</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="s">server = &quot;http://20.0.0.127:30002&quot;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="s">[host.&quot;http://20.0.0.127:30002&quot;]</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;]</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="s">  skip_verify = true</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="s">EOF</span>
 </code></pre></div>
 <p>서비스를 재시작합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
 </code></pre></div>
 <hr />
 <h2 id="phase-4-pc">🚀 Phase 4: 접속 테스트 (PC 설정)</h2>
@@ -2604,7 +3036,7 @@
 <ol>
 <li>
 <p><strong>Ingress 접속 IP 확인:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ing<span class="w"> </span>-n<span class="w"> </span>harbor
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ing<span class="w"> </span>-n<span class="w"> </span>harbor
 </code></pre></div>
 <ul>
 <li><code>ADDRESS</code> 란에 IP가 나오면 그 IP입니다.</li>
@@ -2614,8 +3046,8 @@
 </li>
 <li>
 <p><strong>내 PC의 <code>/etc/hosts</code> (또는 윈도우 <code>C:\Windows\System32\drivers\etc\hosts</code>) 수정:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a># 예시 (워커 노드 IP가 20.0.0.73 이라고 가정)
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>20.0.0.73  harbor.my.domain
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a># 예시 (워커 노드 IP가 20.0.0.73 이라고 가정)
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>20.0.0.73  harbor.my.domain
 </code></pre></div>
 </li>
 <li>
@@ -2628,30 +3060,30 @@
 </li>
 <li>
 <p><strong>이미지 업로드 및 다운로드</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 컨테이너디에 이미지 등록</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>&lt;IMAGE&gt;
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># 등록된 이미지 명 확인</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;IMAGE_NAME&gt;
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># harbor 경로에 맞춰 이미지 이름 수정</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>tag<span class="w"> </span>&lt;CTR_IMAGE_NAME&gt;<span class="w"> </span>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAMAE&gt;
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="c1"># harbor에 등록</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1"># 현재 http 방식으로 띄었으므로 인증서 불필요</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>push<span class="w"> </span>--plain-http<span class="w"> </span>-u<span class="w"> </span>admin:Harbor12345<span class="w"> </span>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAME&gt;
-<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
-<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="c1"># local 이미지 삭제</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>remove<span class="w"> </span>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAME&gt;
-<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
-<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="c1"># harbor 이미지 다운로드</span>
-<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>pull<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>--plain-http<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>-u<span class="w"> </span>admin:Harbor12345<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAME&gt;
-<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>
-<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="c1"># 이미지 확인</span>
-<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;IMAGE_NAME&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># 컨테이너디에 이미지 등록</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>&lt;IMAGE&gt;
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1"># 등록된 이미지 명 확인</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;IMAGE_NAME&gt;
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="c1"># harbor 경로에 맞춰 이미지 이름 수정</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>tag<span class="w"> </span>&lt;CTR_IMAGE_NAME&gt;<span class="w"> </span>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAMAE&gt;
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="c1"># harbor에 등록</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="c1"># 현재 http 방식으로 띄었으므로 인증서 불필요</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>push<span class="w"> </span>--plain-http<span class="w"> </span>-u<span class="w"> </span>admin:Harbor12345<span class="w"> </span>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAME&gt;
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="c1"># local 이미지 삭제</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>remove<span class="w"> </span>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAME&gt;
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="c1"># harbor 이미지 다운로드</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>pull<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a>--plain-http<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a>-u<span class="w"> </span>admin:Harbor12345<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>harbor.my.domain/&lt;HARBOR_PROJECT&gt;/&lt;IMAGE_NAME&gt;
+<a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a>
+<a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a><span class="c1"># 이미지 확인</span>
+<a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;IMAGE_NAME&gt;
 </code></pre></div>
 </li>
 </ol>
