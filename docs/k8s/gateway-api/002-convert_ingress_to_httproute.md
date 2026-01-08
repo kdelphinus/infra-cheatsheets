@@ -16,7 +16,138 @@
 
 ---
 
-## 2. 실전 변환 케이스 (Case Study)
+네, 아주 좋은 생각입니다. 실전 예시(Rewrite, CORS)도 중요하지만, **"그래서 기본적으로 뭘 할 수 있는데?"** 를 설명하는 **기초 문법 가이드**가 있으면 개발자들이 문서를 볼 때 훨씬 이해하기 쉽습니다.
+
+가이드의 **[2. 변환 필수 규칙]** 뒤나 **[3. 실전 변환 예시]** 앞부분에 끼워 넣기 좋은 **[HTTPRoute 필수 기능 모음]** 섹션입니다.
+
+---
+
+## 2. Gateway API 기본 기능
+
+Gateway API에서 제공하는 기능 중 기본 기능입니다.
+
+### 1️⃣ 매칭 조건 (Matching Rules)
+
+경로뿐만 아니라 **헤더, 쿼리 파라미터, HTTP 메서드**로도 분기할 수 있습니다.
+
+```yaml
+rules:
+  - matches:
+    # 1. 경로 매칭 (Prefix vs Exact)
+    - path:
+        type: PathPrefix # /api로 시작하는 모든 요청
+        value: /api
+      
+    # 2. 헤더 매칭 (예: 디버그 모드)
+    - headers:
+      - name: x-debug-mode
+        value: "true"
+        
+    # 3. 메서드 매칭 (GET 요청만 허용)
+    - method: GET
+    
+    backendRefs:
+    - name: my-service
+      port: 8080
+
+```
+
+### 2️⃣ 트래픽 분할 (Canary Release)
+
+별도의 서비스 메시(Istio 등) 없이도 **가중치(Weight)** 기반의 카나리 배포가 가능합니다.
+
+```yaml
+rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /v1
+    backendRefs:
+    # 기존 버전 (90% 트래픽)
+    - name: app-v1-svc
+      port: 8080
+      weight: 90
+    # 신규 버전 (10% 트래픽)
+    - name: app-v2-svc
+      port: 8080
+      weight: 10
+
+```
+
+### 3️⃣ 리다이렉트 (Redirect)
+
+구형 URL을 신규 URL로 넘기거나, HTTP를 HTTPS로 강제할 때 사용합니다.
+
+```yaml
+rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /old-path
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https        # 프로토콜 변경 (옵션)
+        hostname: new.com    # 호스트 변경 (옵션)
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /new-path # 경로 변경
+        statusCode: 301      # 상태 코드 (301/302)
+
+```
+
+### 4️⃣ 헤더 조작 (Header Modification)
+
+백엔드 서버로 요청을 보내기 전(Request)이나, 클라이언트로 응답을 주기 전(Response)에 헤더를 추가/삭제합니다.
+
+```yaml
+filters:
+  # 요청 헤더 조작 (백엔드가 받을 헤더)
+  - type: RequestHeaderModifier
+    requestHeaderModifier:
+      add:
+      - name: "X-Envoy-Gateway"
+        value: "true"
+      remove: ["X-Internal-Secret"]
+
+  # 응답 헤더 조작 (클라이언트가 받을 헤더)
+  - type: ResponseHeaderModifier
+    responseHeaderModifier:
+      set:
+      - name: "Cache-Control"
+        value: "no-cache"
+
+```
+
+### 5️⃣ 미러링 (Traffic Mirroring)
+
+운영 환경의 트래픽을 복제하여 **사용자에게 영향 없이** 테스트 서버로 똑같이 보내봅니다. (Shadowing)
+
+```yaml
+rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /payment
+    
+    # 실제 트래픽 처리
+    backendRefs:
+    - name: payment-prod-svc
+      port: 8080
+      
+    # 트래픽 복제 (응답은 무시됨)
+    filters:
+    - type: RequestMirror
+      requestMirror:
+        backendRef:
+          name: payment-test-svc
+          port: 8080
+
+```
+
+---
+
+## 3. 실전 변환 케이스 (Case Study)
 
 ### 📂 Case A: 모니터링 (Grafana) - Rewrite & Sub-path
 
