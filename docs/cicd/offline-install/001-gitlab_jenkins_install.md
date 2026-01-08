@@ -7,6 +7,7 @@
 
 2. **전제 조건**
    - Kubernetes 클러스터가 정상 동작 중이어야 합니다 (`kubectl get nodes` -> Ready).
+   - Harbor가 설치되어 있어야 합니다.
    - 스토리지 클래스(`local-path`)가 구성되어 있어야 합니다.
    - 이 가이드는 마스터 노드의 `~/gitlab` , `~/jenkins` 경로에 준비되어 있다고 가정하고 시작합니다.
    - [설치 파일 위치](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing)
@@ -15,30 +16,24 @@
 
 ## 🚀 Phase 1: 이미지 로드 (전체 노드)
 
-K8s가 이미지를 가져올 수 있도록 `containerd`의 `k8s.io` 네임스페이스에 이미지를 등록합니다.
+Harbor에 이미지를 업로드합니다.
 
-**[실행 위치: Master 1, Worker 1~3 전체]**
+**[실행 위치: Master 1]**
+
+먼저 `upload_images_to_harbor_v2.sh` 설정 부분을 현재 환경에 맞게 변경합니다.
+
+- `HARBOR_REGISTRY` : Harbor domain
+- `HARBOR_PROJECT` : Harbor Project
+- `HARBOR_USER` : ID
+- `HARBOR_PASSWORD` : Password
+- `USE_PLAIN_HTTP` : HTTP 접속 여부
 
 ```bash
-# gitlab 이미지 업로드
-cd ~/gitlab/images
+cd ~/gitlab-18.7/images
+sudo bash upload_images_to_harbor_v2.sh
 
-for img in *.tar; do
-    echo "Loading $img..."
-    sudo ctr -n k8s.io images import "$img"
-done
-
-
-# jenkins 이미지 업로드
-cd ~/jenkins/images
-
-for img in *.tar; do
-    echo "Loading $img..."
-    sudo ctr -n k8s.io images import "$img"
-done
-
-# 로드 확인 (GitLab 및 Jenkins 이미지가 보여야 함)
-sudo ctr -n k8s.io images list | grep -E "gitlab|jenkins"
+cd ~/jenkins-2.528.3/images
+sudo bash upload_images_to_harbor_v2.sh
 ```
 
 ---
