@@ -3035,20 +3035,24 @@
 
 <h1 id="1-gitlab-jenkins">1. 폐쇄망에서 GitLab 및 Jenkins 설치 및 연동</h1>
 <ol>
-<li><strong>가이드 환경</strong></li>
+<li>
+<p><strong>가이드 환경</strong></p>
+<ul>
 <li>OS: Rocky Linux 9.6</li>
 <li>K8s Version: 1.30.14</li>
-<li>
-<p>Container Runtime: containerd (<code>ctr</code>)</p>
+<li>Container Runtime: containerd (<code>ctr</code>)</li>
+</ul>
 </li>
 <li>
 <p><strong>전제 조건</strong></p>
-</li>
+<ul>
 <li>Kubernetes 클러스터가 정상 동작 중이어야 합니다 (<code>kubectl get nodes</code> -&gt; Ready).</li>
 <li>Harbor가 설치되어 있어야 합니다.</li>
 <li>스토리지 클래스(<code>local-path</code>)가 구성되어 있어야 합니다.</li>
 <li>이 가이드는 마스터 노드의 <code>~/gitlab</code> , <code>~/jenkins</code> 경로에 준비되어 있다고 가정하고 시작합니다.</li>
 <li><a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing">설치 파일 위치</a></li>
+</ul>
+</li>
 </ol>
 <hr />
 <h2 id="phase-1">🚀 Phase 1: 이미지 로드 (전체 노드)</h2>
@@ -3237,22 +3241,26 @@ K8s 서비스의 포트를 임시로 포워딩하거나 NodePort를 확인합니
 <ol>
 <li>GitLab 접속 -&gt; 우측 상단 프로필 아이콘 -&gt; <strong>Preferences</strong>.</li>
 <li>좌측 메뉴 <strong>Personal Access Tokens</strong>.</li>
-<li><strong>Add new token</strong>:</li>
+<li><strong>Add new token</strong>:<ul>
 <li><strong>Name:</strong> <code>jenkins-integration</code></li>
 <li><strong>Scopes:</strong> <code>api</code> (체크)</li>
 <li><strong>Create personal access token</strong> 클릭 -&gt; <strong>토큰 값 복사</strong>.</li>
+</ul>
+</li>
 </ol>
 <h3 id="2-jenkins-credential">2. Jenkins: Credential 등록</h3>
 <ol>
 <li>Jenkins 접속 (<code>http://&lt;NodeIP&gt;:30000</code>).</li>
 <li><strong>Manage Jenkins</strong> -&gt; <strong>Credentials</strong> -&gt; <strong>System</strong> -&gt; <strong>Global credentials (unrestricted)</strong>.</li>
-<li><strong>Add Credentials</strong>:</li>
+<li><strong>Add Credentials</strong>:<ul>
 <li><strong>Kind:</strong> <code>GitLab API token</code></li>
 <li><strong>Scope:</strong> <code>Global</code></li>
 <li><strong>API token:</strong> (복사한 GitLab 토큰 붙여넣기)</li>
 <li><strong>ID:</strong> <code>gitlab-token-id</code></li>
 <li><strong>Description:</strong> GitLab Connection Token</li>
 <li><strong>Create</strong>.</li>
+</ul>
+</li>
 </ol>
 <h3 id="3-jenkins_1">3. Jenkins: 시스템 설정</h3>
 <ol>
@@ -3275,8 +3283,10 @@ K8s 서비스의 포트를 임시로 포워딩하거나 NodePort를 확인합니
 <h3 id="1-jenkins-job">1. Jenkins Job 생성</h3>
 <ol>
 <li><strong>New Item</strong> -&gt; 이름: <code>test-pipeline</code> -&gt; <strong>Pipeline</strong> 선택.</li>
-<li><strong>Build Triggers</strong>: <code>Build when a change is pushed to GitLab</code> 체크.</li>
+<li><strong>Build Triggers</strong>: <code>Build when a change is pushed to GitLab</code> 체크.<ul>
 <li>Advanced -&gt; <code>Secret token</code> 을 생성하고 복사합니다.</li>
+</ul>
+</li>
 <li>
 <p><strong>Pipeline Script</strong>: 아래 <code>image:</code> 경로는 실제 Harbor 경로로 변경해야 합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">pipeline</span><span class="w"> </span><span class="o">{</span>
@@ -3325,29 +3335,37 @@ K8s 서비스의 포트를 임시로 포워딩하거나 NodePort를 확인합니
 <ol>
 <li>GitLab의 우측 상단의 Profile 아이콘 -&gt; <strong>Admin</strong> 클릭</li>
 <li>LNB에서 <strong>Settings</strong> -&gt; <strong>Network</strong></li>
-<li><strong>Outbound requests</strong> -&gt; 아래 항목 체크</li>
+<li><strong>Outbound requests</strong> -&gt; 아래 항목 체크<ul>
 <li><code>Allow requests to the local network from webhooks and integrations</code></li>
 <li><code>Allow requests to the local network from system hooks</code></li>
+</ul>
+</li>
 <li><strong>Save</strong></li>
 </ol>
 <h3 id="3-webhook-gitlab">3. Webhook 등록 (GitLab)</h3>
 <ol>
-<li>Jenkins Job -&gt; Configuration 화면의 <strong>GitLab webhook URL</strong>을 복사합니다.</li>
-<li>예: <code>http://1.1.1.213:30000/project/test-pipeline</code></li>
 <li>
-<p>Floating IP로 되어있다면 위와 같이 project 앞부분을 내부 IP로 수정해야 합니다.</p>
+<p>Jenkins Job -&gt; Configuration 화면의 <strong>GitLab webhook URL</strong>을 복사합니다.</p>
+<ul>
+<li>예: <code>http://1.1.1.213:30000/project/test-pipeline</code></li>
+<li>Floating IP로 되어있다면 위와 같이 project 앞부분을 내부 IP로 수정해야 합니다.</li>
+</ul>
 </li>
 <li>
 <p>GitLab 프로젝트 -&gt; <strong>Project Settings</strong> -&gt; LNB의 <strong>Webhooks</strong> -&gt; <strong>Add new webhook</strong></p>
 </li>
-<li>아래 값 설정 후, Webhook 추가</li>
+<li>아래 값 설정 후, Webhook 추가<ul>
 <li><strong>URL:</strong> 위에서 수정한 내부 주소 입력.</li>
 <li><strong>Secret token:</strong> Jenkins에서 생성한 Secret token.</li>
 <li><strong>Trigger:</strong> Push events.</li>
 <li><strong>Add webhook</strong>.</li>
-<li><strong>Test</strong> -&gt; <strong>Push events</strong></li>
+</ul>
+</li>
+<li><strong>Test</strong> -&gt; <strong>Push events</strong><ul>
 <li><code>HTTP 200</code>이 뜨면 연동 성공입니다.</li>
 <li>Jenkins 대시보드에서 빌드가 수행되는지 확인하세요.</li>
+</ul>
+</li>
 </ol>
 <h3 id="4-jenkins-kubernetes-cloud">4. Jenkins Kubernetes Cloud 설정</h3>
 <p>Webhook을 통해 들어온 요청을 처리할 <strong>K8s 에이전트(Pod) 연결 정보</strong>를 설정합니다.
@@ -3356,29 +3374,27 @@ K8s 서비스의 포트를 임시로 포워딩하거나 NodePort를 확인합니
 <ol>
 <li>
 <p>Kubernetes 기본 설정</p>
-</li>
-<li>
-<p><strong>Name:</strong> <code>Kubernetes</code></p>
-</li>
+<ul>
+<li><strong>Name:</strong> <code>Kubernetes</code></li>
 <li><strong>Kubernetes URL:</strong> <code>https://kubernetes.default</code> (내부 API 통신용)</li>
 <li><strong>Kubernetes Namespace:</strong> <code>jenkins</code></li>
 <li><strong>Disable HTTPS certificate check:</strong> ✅ 체크 (Enable) -&gt;</li>
 <li><strong>Test Connection:</strong> <code>Credentials</code> 항목에 있는 <code>Test Connection</code> 확인</li>
 <li><strong>Jenkins URL:</strong> <code>http://jenkins.jenkins.svc.cluster.local:8080</code></li>
 <li><strong>Jenkins tunnel:</strong> <code>jenkins-agent.jenkins.svc.cluster.local:50000</code></li>
-<li>
-<p><strong>주의:</strong> <code>kubectl get svc -n jenkins</code> 명령어로 50000번 포트를 가진 서비스의 정확한 이름
-    (예: <code>jenkins</code> 또는 <code>cmp-jenkins</code>)을 확인하여 입력하세요.</p>
+<li><strong>주의:</strong> <code>kubectl get svc -n jenkins</code> 명령어로 50000번 포트를 가진 서비스의 정확한 이름
+(예: <code>jenkins</code> 또는 <code>cmp-jenkins</code>)을 확인하여 입력하세요.</li>
+</ul>
 </li>
 <li>
 <p>Pod Templates 설정 (Global Default)</p>
-</li>
-<li>
-<p><strong>Name:</strong> <code>kubernetes</code></p>
-</li>
+<ul>
+<li><strong>Name:</strong> <code>kubernetes</code></li>
 <li><strong>Namespace:</strong> <code>jenkins</code></li>
 <li><strong>Labels:</strong> <code>kubernetes</code> (파이프라인이 호출할 라벨)</li>
 <li><strong>Usage:</strong> <code>Use this node as much as possible</code> 선택</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h3 id="5-git-push-trigger">5. Git 설치 및 소스 코드 Push (Trigger)</h3>
@@ -3404,23 +3420,16 @@ K8s 서비스의 포트를 임시로 포워딩하거나 NodePort를 확인합니
 </li>
 <li>
 <p>테스트 파일 작성 및 Push</p>
-</li>
-<li>
-<p>Clone 받은 폴더 안에 파일을 하나 작성합니다.</p>
-</li>
-<li>작성 후 GitLab으로 푸시합니다.</li>
-</ol>
+<p>Clone 받은 폴더 안에 파일을 하나 작성합니다. 작성 후 GitLab으로 푸시합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Test Jenkins Pipeline&quot;</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
-<ol>
-<li>
-<p>결과 확인</p>
 </li>
 <li>
+<p>결과 확인</p>
 <p><code>git push</code> 성공 직후 Jenkins 대시보드에서
-    자동으로 빌드가 시작(<code>Pending</code> -&gt; <code>Running</code> -&gt; <code>Success</code>)되는지 확인합니다.</p>
+자동으로 빌드가 시작(<code>Pending</code> -&gt; <code>Running</code> -&gt; <code>Success</code>)되는지 확인합니다.</p>
 </li>
 </ol>
 
