@@ -1,6 +1,6 @@
-# 📘 [실전] Ingress to Gateway API (Envoy) 마이그레이션 가이드
+# 📘 HTTPRoute 기본 기능 및 Ingress to Gateway API (Envoy) 마이그레이션 가이드
 
-본 문서는 기존 NGINX `Ingress` 리소스를 Gateway API 표준인 `HTTPRoute`로 변환하는 가이드입니다.
+본 문서는 `HTTPRoute` 기본 기능 및 기존 NGINX `Ingress` 리소스 변환 가이드입니다.
 
 ---
 
