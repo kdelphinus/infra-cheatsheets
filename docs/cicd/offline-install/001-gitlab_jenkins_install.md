@@ -427,7 +427,7 @@ kubectl get svc -n gitlab gitlab-webservice-default
 Webhook을 통해 들어온 요청을 처리할 **K8s 에이전트(Pod) 연결 정보**를 설정합니다.
 이 설정이 선행되어야 Jenkins가 K8s 클러스터 내부에 에이전트를 생성할 수 있습니다.
 
-* **경로:** Manage Jenkins > Clouds > New cloud
+**경로:** Manage Jenkins > Clouds > New cloud
 
 1. Kubernetes 기본 설정
 
