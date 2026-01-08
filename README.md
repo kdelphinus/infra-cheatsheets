@@ -7,7 +7,7 @@
 이 레포지토리의 내용은 **GitHub Pages**를 통해 웹사이트 형태로 배포되고 있습니다.  
 가독성 좋은 문서를 보시려면 아래 링크를 방문해 주세요.
 
-### 👉 [Infra cheatsheets의 Github IO 주소](https://Kdelphinus.github.io/infra-cheatsheets/)
+### 👉 [Infra cheatsheets의 Github IO 주소](https://kdelphinus.github.io/infra-cheatsheets/)
 
 ## 🛠️ Built With
 
