@@ -13,6 +13,8 @@
 2. **Target Port 사용:** `backendRefs`의 포트는 Service Port(80) 대신
 **Pod Container Port(예: 8080, 3000)**를 사용하는 것이 안전합니다.
 3. **Namespace:** `HTTPRoute` 리소스는 반드시 연결하려는 **Service와 동일한 네임스페이스**에 생성해야 합니다.
+4. **Deployment의 containerPort:** `Envoy` 등 Service Mesh를 사용하기에,
+Deployment의 `containerPort` 항목은 필수로 작성되어야 합니다.
 
 ---
 

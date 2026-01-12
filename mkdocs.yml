@@ -52,6 +52,7 @@ nav:
     - 'Gateway API':
       - '1. Gateway API 설치': k8s/gateway-api/001-envoy-install.md
       - '2. Gateway API 및 HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
+      - 'ervice Endpoint가 있는데도 Connection Refused 발생할 때': k8s/gateway-api/missed-containerport.md
     - 'Cheat Sheets': k8s/cheatsheet.md
   - CI/CD:
     - 폐쇄망:
