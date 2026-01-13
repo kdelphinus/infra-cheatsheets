@@ -1,6 +1,7 @@
 # 🚀 Infra Cheatsheets
 
-> **DevOps 실무를 위한 개인 지식 저장소 (Knowledge Base)** > 잊어버리기 쉬운 인프라 설치 절차, 명령어, 트러블슈팅 가이드를 체계적으로 정리하는 공간입니다.
+> **DevOps 실무를 위한 개인 지식 저장소 (Knowledge Base)**
+> 잊어버리기 쉬운 인프라 설치 절차, 명령어, 트러블슈팅 가이드를 체계적으로 정리하는 공간입니다.
 
 ## 🌐 Documentation Site
 
@@ -8,6 +9,10 @@
 가독성 좋은 문서를 보시려면 아래 링크를 방문해 주세요.
 
 ### 👉 [Infra cheatsheets의 Github IO 주소](https://kdelphinus.github.io/infra-cheatsheets/)
+
+### 👉 [설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/)
+
+### 👉 [설치 파일 드라이브](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko/)
 
 ## 🛠️ Built With
 
