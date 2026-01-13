@@ -12,7 +12,7 @@ hide:
 
 ## 🌐 Documentation Site
 
-### 👉 [Infra cheatsheets의 Github IO 주소](https://kdelphinus.github.io/infra-cheatsheets/)
+### 👉 [Infra cheatsheets의 Github 주소](https://github.com/kdelphinus/infra-cheatsheets)
 
 ### 👉 [설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/)
 
