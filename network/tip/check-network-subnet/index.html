@@ -1904,10 +1904,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2-1-ip-link" class="md-nav__link">
+  <a href="#2-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2-1. 포트 사용 여부 판별 (ip link)
+        2-1. 물리 포트 위치 확인
       
     </span>
   </a>
@@ -1915,10 +1915,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-2-ethtool" class="md-nav__link">
+  <a href="#2-2-ip-link" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2-2. 하드웨어 스펙 상세 확인 (ethtool)
+        2-2. 포트 사용 여부 판별 (ip link)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-ethtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-3. 하드웨어 스펙 상세 확인 (ethtool)
       
     </span>
   </a>
@@ -2644,10 +2655,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2-1-ip-link" class="md-nav__link">
+  <a href="#2-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2-1. 포트 사용 여부 판별 (ip link)
+        2-1. 물리 포트 위치 확인
       
     </span>
   </a>
@@ -2655,10 +2666,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-2-ethtool" class="md-nav__link">
+  <a href="#2-2-ip-link" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2-2. 하드웨어 스펙 상세 확인 (ethtool)
+        2-2. 포트 사용 여부 판별 (ip link)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-ethtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-3. 하드웨어 스펙 상세 확인 (ethtool)
       
     </span>
   </a>
@@ -2780,53 +2802,61 @@
 <hr />
 <h2 id="2-physical-layer">2. 물리 포트 상태 및 연결 확인 (Physical Layer)</h2>
 <p>소프트웨어 설정이 맞아도, 실제 랜선이 꽂혀있는지(Link UP) 확인해야 합니다.</p>
-<h3 id="2-1-ip-link">2-1. 포트 사용 여부 판별 (<code>ip link</code>)</h3>
-<p>랜선이 꽂혀서 신호가 들어오는지, 비어있는 포트인지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 명령어</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>eno1
+<h3 id="2-1">2-1. 물리 포트 위치 확인</h3>
+<p>원하는 인터페이스 이름을 넣고 실행하면 실제 서버에서 점등됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 무한정 깜빡이기 (멈추려면 Ctrl+C)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>ethtool<span class="w"> </span>-p<span class="w"> </span>eno1
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># [상황 A] 연결됨 (사용 중)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; ...</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 20초 동안만 깜빡이기 (혼자 작업할 때 유용)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>ethtool<span class="w"> </span>-p<span class="w"> </span>eno1<span class="w"> </span><span class="m">20</span>
+</code></pre></div>
+<h3 id="2-2-ip-link">2-2. 포트 사용 여부 판별 (<code>ip link</code>)</h3>
+<p>랜선이 꽂혀서 신호가 들어오는지, 비어있는 포트인지 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 명령어</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>eno1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># [상황 A] 연결됨 (사용 중)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; ...</span>
 </code></pre></div>
 <ul>
 <li><strong><code>UP</code></strong>: OS에서 장치를 켰다는 뜻 (소프트웨어 상태).</li>
 <li><strong><code>LOWER_UP</code></strong>: <strong>랜선이 물리적으로 연결되어 신호가 잡힘 (핵심).</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># [상황 B] 연결 안 됨 (비어 있음)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; ... state DOWN ...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># [상황 B] 연결 안 됨 (비어 있음)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; ... state DOWN ...</span>
 </code></pre></div>
 <ul>
 <li><strong><code>NO-CARRIER</code></strong>: <strong>랜선이 뽑혀 있거나, 반대편 스위치가 꺼져 있음.</strong></li>
 <li><strong>활용:</strong> 비어있는 포트를 찾으려면 <code>NO-CARRIER</code> 상태인 인터페이스를 찾으세요.</li>
 </ul>
-<h3 id="2-2-ethtool">2-2. 하드웨어 스펙 상세 확인 (<code>ethtool</code>)</h3>
+<h3 id="2-3-ethtool">2-3. 하드웨어 스펙 상세 확인 (<code>ethtool</code>)</h3>
 <p>포트 속도(1G/10G)와 물리적 링크 감지 여부를 정밀하게 봅니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 명령어</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>ethtool<span class="w"> </span>eno1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;Speed|Link detected&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 출력 예시</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># Speed: 1000Mb/s         &lt;-- 1기가 포트</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Link detected: yes      &lt;-- 물리 연결됨 (no라면 선 빠짐)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 명령어</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>ethtool<span class="w"> </span>eno1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;Speed|Link detected&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 출력 예시</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Speed: 1000Mb/s         &lt;-- 1기가 포트</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Link detected: yes      &lt;-- 물리 연결됨 (no라면 선 빠짐)</span>
 </code></pre></div>
 <hr />
 <h2 id="3-connectivity-check">3. 연결 상태 최종 검증 (Connectivity Check)</h2>
 <p>설정과 물리 연결이 모두 정상이라면, 실제로 통신이 되는지 확인합니다.</p>
 <h3 id="3-1-gateway">3-1. Gateway 통신 확인 (내부망)</h3>
 <p>내 서버가 게이트웨이까지 도달하는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">10</span>.10.10.1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">10</span>.10.10.1
 </code></pre></div>
 <ul>
 <li><strong>성공:</strong> <code>0% packet loss</code></li>
 </ul>
 <h3 id="3-2">3-2. 외부 인터넷 연결 확인</h3>
 <p>외부망 통신이 필요한 경우 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">8</span>.8.8.8
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">8</span>.8.8.8
 </code></pre></div>
 <h3 id="3-3-dns">3-3. DNS 설정 확인</h3>
 <p>인터넷은 되는데 도메인(<code>google.com</code>)으로 접속이 안 될 때 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>resolvectl<span class="w"> </span>status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;DNS Servers&quot;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># 또는</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cat<span class="w"> </span>/etc/resolv.conf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>resolvectl<span class="w"> </span>status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;DNS Servers&quot;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># 또는</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>cat<span class="w"> </span>/etc/resolv.conf
 </code></pre></div>
 <hr />
 <h2 id="4-cidr-subnet-mask-reference">4. [참고] CIDR 표기법 대조표 (Subnet Mask Reference)</h2>
