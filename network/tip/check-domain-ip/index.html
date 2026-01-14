@@ -14,7 +14,7 @@
         <link rel="prev" href="../../../ide/vscode_shortcut/">
       
       
-        <link rel="next" href="../../../openstack/cheatsheet/">
+        <link rel="next" href="../check-network-subnet/">
       
       
         
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#url-ip" class="md-skip">
+        <a href="#fqdn-ip" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -1825,10 +1825,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-nslookup" class="md-nav__link">
+  <a href="#a-nslookup-dns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 A: nslookup (가장 정확함)
+        방법 A: nslookup (DNS 서버 조회)
       
     </span>
   </a>
@@ -1850,10 +1850,49 @@
   <a href="#check-point" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check Point
+        ✅ Check Point (주의사항)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="✅ Check Point (주의사항)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 사내망 연결 필수
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-l4l7-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 로드 밸런서(L4/L7) IP 가능성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-etchosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. /etc/hosts 파일 우선순위 (중요 ⚠️)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1861,6 +1900,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../check-network-subnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    현재 서버가 속한 네트워크의 서브넷과 게이트웨이 확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2459,10 +2526,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-nslookup" class="md-nav__link">
+  <a href="#a-nslookup-dns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 A: nslookup (가장 정확함)
+        방법 A: nslookup (DNS 서버 조회)
       
     </span>
   </a>
@@ -2484,10 +2551,49 @@
   <a href="#check-point" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check Point
+        ✅ Check Point (주의사항)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="✅ Check Point (주의사항)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 사내망 연결 필수
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-l4l7-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 로드 밸런서(L4/L7) IP 가능성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-etchosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. /etc/hosts 파일 우선순위 (중요 ⚠️)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2511,21 +2617,47 @@
   
 
 
-<h1 id="url-ip">도메인(URL)의 실제 IP 주소 확인</h1>
-<p>사내 서버 도메인이 실제 어떤 IP를 가리키는지 확인합니다.</p>
-<h2 id="a-nslookup">방법 A: nslookup (가장 정확함)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># DNS 서버에 등록된 정식 IP 조회</span>
+<h1 id="fqdn-ip">도메인(FQDN) 실제 IP 확인 방법</h1>
+<p>사내 서버 도메인(URL)이 현재 어떤 IP 주소로 연결(Resolve)되는지 확인하는 절차입니다.</p>
+<h2 id="a-nslookup-dns">방법 A: <code>nslookup</code> (DNS 서버 조회)</h2>
+<p>DNS 서버에 등록된 <strong>공식적인 IP</strong>를 확인할 때 가장 정확한 방법입니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 사용법: nslookup [도메인주소]</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>nslookup<span class="w"> </span>harbor.internal.company.com
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 출력 예시</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Address: 10.20.30.40  &lt;-- 이 부분이 실제 IP입니다.</span>
 </code></pre></div>
-<h2 id="b-ping">방법 B: ping (간단 확인)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 연결 확인과 동시에 IP 확인 가능</span>
+<h2 id="b-ping">방법 B: <code>ping</code> (간단 확인)</h2>
+<p>연결 상태를 확인함과 동시에, <strong>현재 내 서버가 인식하는 IP</strong>를 빠르게 볼 때 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 사용법: ping [도메인주소]</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ping<span class="w"> </span>harbor.internal.company.com
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 출력 예시</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># PING harbor.internal.company.com (10.20.30.40) ... &lt;-- 괄호 안 숫자가 IP</span>
 </code></pre></div>
-<h2 id="check-point">Check Point</h2>
+<blockquote>
+<p><strong>참고:</strong> 방화벽으로 인해 Ping 응답이 없더라도(Request timeout), 첫 줄에 IP가 떴다면 도메인 해석은 성공한 것입니다.</p>
+</blockquote>
+<hr />
+<h2 id="check-point">✅ Check Point (주의사항)</h2>
+<h3 id="1">1. 사내망 연결 필수</h3>
 <ul>
-<li>사내 도메인(internal 등)은 반드시 <strong>사내망(VPN)</strong>에 연결된 상태여야 IP가 보입니다.</li>
-<li>조회된 IP는 실제 서버가 아니라 앞단의 로드 밸런서(L4) IP일 수 있습니다 (방화벽 신청 시 이 IP 사용)</li>
+<li><code>internal</code> 등이 포함된 사내 도메인은 <strong>사내망(VPN 등)</strong>에 연결된 상태에서만 조회가 가능합니다.</li>
 </ul>
+<h3 id="2-l4l7-ip">2. 로드 밸런서(L4/L7) IP 가능성</h3>
+<ul>
+<li>조회된 IP가 실제 서버의 물리 IP가 아니라, 앞단에 있는 <strong>부하 분산 장비(VIP)</strong>일 수 있습니다.</li>
+<li><strong>방화벽 신청 시:</strong> 보통 이 조회된 IP(VIP)를 목적지로 적어내면 됩니다.</li>
+</ul>
+<h3 id="3-etchosts">3. <code>/etc/hosts</code> 파일 우선순위 (중요 ⚠️)</h3>
+<ul>
+<li>리눅스는 DNS 서버보다 <strong>내부 설정 파일(<code>/etc/hosts</code>)을 먼저 참조</strong>합니다.</li>
+<li>만약 <code>nslookup</code> 결과와 <code>ping</code> 결과의 IP가 다르다면,
+<code>/etc/hosts</code> 파일에 예전 IP가 하드코딩(강제 고정)되어 있는지 확인해야 합니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 로컬 강제 설정 확인</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cat<span class="w"> </span>/etc/hosts<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>harbor.internal.company.com
+</code></pre></div>
 
 
 

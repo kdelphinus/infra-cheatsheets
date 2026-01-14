@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/openstack/tools/add-ironic/">
       
       
-        <link rel="prev" href="../../offline-install/003-necessary_infra_install/">
-      
-      
-        <link rel="next" href="../002-convert_ingress_to_httproute/">
       
       
         
@@ -25,7 +21,7 @@
     
     
       
-        <title>1. Gateway API 설치 - Infra Cheatsheets</title>
+        <title>🟥 OpenStack Ironic 베어메탈 구축 매뉴얼 (물리적 격리망 방식) - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#envoy" class="md-skip">
+        <a href="#openstack-ironic" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Gateway API 설치
+              🟥 OpenStack Ironic 베어메탈 구축 매뉴얼 (물리적 격리망 방식)
             
           </span>
         </div>
@@ -238,8 +234,6 @@
   
   
   
-    
-  
   
     
     
@@ -247,13 +241,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -426,7 +418,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../cheatsheet/" class="md-tabs__link">
           
   
   
@@ -514,31 +506,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -556,7 +543,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -580,20 +567,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
   
   
@@ -629,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -657,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -685,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -718,31 +702,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   
@@ -760,7 +739,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -775,37 +754,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    1. Gateway API 설치
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
   
@@ -821,232 +773,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#0-standard-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 아키텍처 개요 (Standard Architecture)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 배포 후 상태 확인 및 네트워크 구성
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 구성">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#case-a-loadbalancer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ Case A: LoadBalancer 모드 (자동 할당 완료)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#case-b-loadbalancer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#case-c-nodeport" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ Case C: NodePort 모드 (포트 고정)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-httproute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 라우팅(HTTPRoute) 설정 및 검증
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 라우팅(HTTPRoute) 설정 및 검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-connection-refused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ 체크리스트 1: 백엔드 포트 (Connection Refused)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-url-rewrite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ 체크리스트 2: 경로 재작성 (URL Rewrite)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 운영 및 로그 확인
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 운영 및 로그 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-plane" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📋 프록시(Data Plane) 로그
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#control-plane" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 컨트롤러(Control Plane) 로그
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [별첨] Gateway 연결 상태 및 라우트 검증 가이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[별첨] Gateway 연결 상태 및 라우트 검증 가이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Gateway 관점: 연결된 라우트 수 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-httproute-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. HTTPRoute 관점: 부모 Gateway 연결 확인
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. HTTPRoute 관점: 부모 Gateway 연결 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        상세 디버깅 (연결 실패 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1059,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -1087,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -1115,7 +841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../missed-containerport/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -1151,7 +877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cheatsheet/" class="md-nav__link">
+      <a href="../../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2144,7 +1870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../cheatsheet/" class="md-nav__link">
         
   
   
@@ -2224,7 +1950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../base/reference/" class="md-nav__link">
         
   
   
@@ -2252,7 +1978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../base/install/" class="md-nav__link">
         
   
   
@@ -2280,7 +2006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../base/api/" class="md-nav__link">
         
   
   
@@ -2368,7 +2094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -2396,7 +2122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -2484,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -2512,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../utils/golden-image/" class="md-nav__link">
         
   
   
@@ -2600,7 +2326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -2663,44 +2389,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-standard-architecture" class="md-nav__link">
+  <a href="#1-ssh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 아키텍처 개요 (Standard Architecture)
+        1. [사전 준비] 타겟 서버 정보 설정 (SSH 접속)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 배포 후 상태 확인 및 네트워크 구성
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 구성">
+    <nav class="md-nav" aria-label="1. [사전 준비] 타겟 서버 정보 설정 (SSH 접속)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#case-a-loadbalancer" class="md-nav__link">
+  <a href="#11-mac" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ Case A: LoadBalancer 모드 (자동 할당 완료)
+        1.1 MAC 주소 확인 (필수)
       
     </span>
   </a>
@@ -2708,10 +2412,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-b-loadbalancer" class="md-nav__link">
+  <a href="#12-ilo-ipmi-ip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)
+        1.2 iLO (IPMI) 네트워크 고정 IP 할당
       
     </span>
   </a>
@@ -2719,10 +2423,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-c-nodeport" class="md-nav__link">
+  <a href="#13-pxe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ Case C: NodePort 모드 (포트 고정)
+        1.3 부팅 순서 변경 (PXE 우선)
       
     </span>
   </a>
@@ -2735,22 +2439,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-httproute" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 라우팅(HTTPRoute) 설정 및 검증
+        2. [물리 작업] 서버실 케이블 연결
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. 라우팅(HTTPRoute) 설정 및 검증">
+    <nav class="md-nav" aria-label="2. [물리 작업] 서버실 케이블 연결">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-connection-refused" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ 체크리스트 1: 백엔드 포트 (Connection Refused)
+        2.1 연결 다이어그램
       
     </span>
   </a>
@@ -2758,10 +2462,71 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-url-rewrite" class="md-nav__link">
+  <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ 체크리스트 2: 경로 재작성 (URL Rewrite)
+        2.2 작업 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hp-g8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 타겟 서버(HP G8) 케이블 연결 상세 (중요!)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. [설정] 컨트롤러 네트워크 구성
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. [설정] 컨트롤러 네트워크 구성">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-netplan-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Netplan 설정 (배포망 Gateway)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-kolla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Kolla 설정 변경
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 서비스 배포 (무중단)
       
     </span>
   </a>
@@ -2777,19 +2542,19 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 운영 및 로그 확인
+        4. [오픈스택] 리소스 생성 및 노드 등록
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 운영 및 로그 확인">
+    <nav class="md-nav" aria-label="4. [오픈스택] 리소스 생성 및 노드 등록">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#data-plane" class="md-nav__link">
+  <a href="#41-ipa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📋 프록시(Data Plane) 로그
+        4.1 배포용 이미지(IPA) 등록
       
     </span>
   </a>
@@ -2797,10 +2562,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#control-plane" class="md-nav__link">
+  <a href="#42-provisioning-network" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 컨트롤러(Control Plane) 로그
+        4.2 배포망(Provisioning Network) 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 베어메탈 노드 등록 (한방 스크립트)
       
     </span>
   </a>
@@ -2813,22 +2589,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gateway" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [별첨] Gateway 연결 상태 및 라우트 검증 가이드
+        5. [검증] 최종 테스트
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[별첨] Gateway 연결 상태 및 라우트 검증 가이드">
+    <nav class="md-nav" aria-label="5. [검증] 최종 테스트">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-gateway" class="md-nav__link">
+  <a href="#51-manage-provide" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Gateway 관점: 연결된 라우트 수 확인
+        5.1 노드 상태 변경 (Manage -&gt; Provide)
       
     </span>
   </a>
@@ -2836,30 +2612,24 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-httproute-gateway" class="md-nav__link">
+  <a href="#52" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. HTTPRoute 관점: 부모 Gateway 연결 확인
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. HTTPRoute 관점: 부모 Gateway 연결 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        상세 디버깅 (연결 실패 시)
+        5.2 상태 확인
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 문제 발생 시 해결 (Troubleshooting)
+      
+    </span>
+  </a>
   
 </li>
         
@@ -2888,186 +2658,274 @@
   
 
 
-<h1 id="envoy">🚀 Envoy 설치</h1>
-<p>2026년 3월부터 <code>Ingress Nginx</code> 에 대한 공식 지원이 종료됩니다.
-이에 따라 Kubernetes의 <code>Gateway API</code> 와 <code>Envoy</code> 를 사용하여 합니다.</p>
-<p>이 문서는 폐쇄망을 기준으로 합니다.
-<a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko">설치 파일</a>
-의 <code>envoy-1.36.3</code> 폴더를 받아주세요.</p>
-<h2 id="0-standard-architecture">0. 아키텍처 개요 (Standard Architecture)</h2>
-<p>쿠버네티스 보안 및 네트워크 표준을 준수하는 구성입니다.</p>
+<h1 id="openstack-ironic">🟥 OpenStack Ironic 베어메탈 구축 매뉴얼 (물리적 격리망 방식)</h1>
+<p><strong>작성일:</strong> 2026-01-14
+<strong>대상 장비:</strong> HP DL380 G9 (Controller), HP DL380 G8 2대(Nodes)
+<strong>네트워크 구성:</strong> 깡통 스위치(Unmanaged Switch)를 이용한 배포망 물리적 격리</p>
+<blockquote>
+<p><strong>⚠️ 경고 (작업 전 필독)</strong></p>
 <ul>
-<li><strong>Network:</strong> <code>hostNetwork: false</code> (Pod는 K8s 내부망 사용, 노드 네트워크와 격리)</li>
-<li><strong>Service:</strong> <code>type: LoadBalancer</code> (외부 트래픽 진입점)</li>
-<li><strong>Traffic Flow:</strong>
-<code>Client</code> -&gt; <code>External IP (LB)</code> -&gt; <code>Service (80/443)</code> -&gt; <code>Envoy Pod (10080/10443)</code>
--&gt; <code>Backend Pod</code></li>
+<li>컨트롤러 노드의 <strong><code>eno1</code> (관리망)</strong>, <strong><code>eno2</code> (외부망)</strong>
+  인터페이스는 <strong>절대 건드리지 마십시오.</strong> (서비스 중단 위험)</li>
+<li>모든 작업은 <strong>신규 구성하는 <code>eno3</code></strong>와 <strong>깡통 스위치</strong> 내에서만 이루어집니다.</li>
 </ul>
-<h2 id="1">1. 설치</h2>
-<p><strong>[실행 위치: Master 1, Worker 1~3 전체]</strong></p>
-<p>전체 노드에 <code>envoy</code> 이미지들을 로드합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>./envoy-1.36.3
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>./images/upload_images.sh
+</blockquote>
+<hr />
+<h2 id="1-ssh">1. [사전 준비] 타겟 서버 정보 설정 (SSH 접속)</h2>
+<p>아직 서버실에 가지 말고, 현재 OS가 살아있는 <strong>HP G8 (타겟 서버)</strong>에 SSH로 접속하여 수행합니다.</p>
+<h3 id="11-mac">1.1 MAC 주소 확인 (필수)</h3>
+<p>나중에 케이블을 1번 포트에 꽂을 예정이므로, <code>eno1</code>의 MAC 주소를 적어둡니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 타겟 서버(G8)에서 실행</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>eno1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ether
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># [출력 예시] link/ether d8:9d:67:12:34:56 brd ... </span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># 👉 &quot;d8:9d:67:12:34:56&quot; 이 값을 메모장에 기록하세요.</span>
 </code></pre></div>
-<p><strong>[실행 위치: Master 1]</strong></p>
-<p><code>install_envoy-gateway.sh</code> 스크립트에서 아래 변수를 환경에 맞게 변경합니다.
-(기본값을 사용해도 괜찮습니다.)</p>
-<ul>
-<li><code>NAMESPACE:</code> Gateway Namespace</li>
-<li><code>CONTROLLER_CHART:</code> Controller Chart(기본값 고정)</li>
-<li><code>INFRA_CHART:</code> Infra Chart(기본값 고정)</li>
-<li><code>GW_NAME:</code> Gateway Name</li>
-<li><code>IMG_GATEWAY:</code> Gateway 이미지(기본값 고정)</li>
-<li><code>IMG_PROXY:</code> Proxy 이미지(기본값 고정)</li>
-<li><code>GW_CLASS_NAME:</code> 클러스터 레벨 리소스 이름</li>
-<li><code>GLOBAL_POLICY_FILE:</code> 전역 설정 파일 이름(기본값 고정)</li>
-</ul>
-<p>이때 <code>NAMESPACE</code> 나 <code>GW_NAME</code> 를 변경했다면, <code>HTTPRoute</code> 파일에도 변경해야 합니다.</p>
-<p>수정이 끝나면 스크립트를 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>install_envoy-gateway.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 실제 물리적 포트 위치 확인</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># 사용법: sudo ethtool -p [인터페이스이름] [시간(초)]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 예: eno3 포트의 불을 10초 동안 깜빡여라!</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>ethtool<span class="w"> </span>-p<span class="w"> </span>eno3<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
-<h2 id="2">2. 배포 후 상태 확인 및 네트워크 구성</h2>
-<p>배포가 완료되면, 설치 시 선택한 모드에 따라 아래 Case 중 본인의 환경에 맞는 내용을 확인하세요.</p>
-<h3 id="case-a-loadbalancer">✅ Case A: LoadBalancer 모드 (자동 할당 완료)</h3>
-<p>스크립트에서 [1] LoadBalancer를 선택했고, 클라우드(AWS/GKE) 환경이거나 MetalLB가 구성된 경우입니다.</p>
-<ul>
-<li>확인: kubectl get svc -n envoy-gateway-system</li>
-<li>상태: EXTERNAL-IP 필드에 IP 주소나 도메인이 표시됩니다.</li>
-<li>조치: 별도 조치 불필요. 표시된 IP로 접속하면 됩니다.</li>
-</ul>
-<h3 id="case-b-loadbalancer">⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)</h3>
-<p>스크립트에서 [1] LoadBalancer를 선택했으나, IP를 할당해 줄 컨트롤러(MetalLB 등)가 없는 온프레미 환경입니다.</p>
-<ul>
-<li>확인: kubectl get svc -n envoy-gateway-system</li>
-<li>상태: EXTERNAL-IP가 <code>&lt;pending&gt;</code> 상태로 멈춰 있습니다.</li>
-<li>조치: 특정 노드의 IP를 VIP처럼 사용하도록 수동으로 IP를 바인딩해야 합니다.
-(아래 명령어의 1.1.1.213 부분을 실제 사용할 노드 IP로 변경하여 실행하세요.)</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. 대상 서비스 이름 추출</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type==&quot;LoadBalancer&quot;)].metadata.name}&#39;</span><span class="k">)</span>
+<h3 id="12-ilo-ipmi-ip">1.2 iLO (IPMI) 네트워크 고정 IP 할당</h3>
+<p>서버 뒷면을 보지 않고 명령어로 BMC(원격관리 칩) IP를 설정합니다. <strong>사내망 대역</strong> 중 남는 IP를 사용하세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 0. 도구 설치</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ipmitool<span class="w"> </span>-y
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 2. External IP 수동 패치 (사용할 노드 IP로 수정 필수!)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>--type<span class="w"> </span>merge<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;1.1.1.213&quot;]}}&#39;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ 서비스(</span><span class="nv">$SVC_NAME</span><span class="s2">)에 외부 IP가 수동 할당되었습니다.&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 장치 파일 확인</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ls<span class="w"> </span>-l<span class="w"> </span>/dev/ipmi*
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># 결과: /dev/ipmi0 같은 장치 파일이 보여야 정상입니다.</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># 만약 위에서 &quot;Could not open device&quot; 같은 에러가 난다면 아래 명령어를 실행하세요.</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>ipmi_devintf
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>ipmi_si
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># LAN 채널 번호 찾기(환경마다 번호가 다를 수 있습니다.)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..14<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sudo<span class="w"> </span>ipmitool<span class="w"> </span>channel<span class="w"> </span>info<span class="w"> </span><span class="nv">$i</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;802.3 LAN&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ 찾았습니다! LAN 채널은 [ </span><span class="nv">$i</span><span class="s2"> 번 ] 입니다.&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># 결과: ✅ 찾았습니다! LAN 채널은 [ 2 번 ] 입니다.</span>
 </code></pre></div>
-<h3 id="case-c-nodeport">⚙️ Case C: NodePort 모드 (포트 고정)</h3>
-<p>스크립트에서 [2] NodePort를 선택한 경우입니다.
-설치 스크립트에 의해 서비스 포트가 HTTP(30080), <strong>HTTPS(30443)</strong>으로 자동 고정되었습니다.</p>
+<p>이제 iLO IP를 설정합니다.
+이때 사용하는 IP는 아무도 사용하지 않는 IP를 할당해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># --- [네트워크 설정: 채널 2번이라 가정] ---</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 1. 고정 IP 모드로 변경</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>ipsrc<span class="w"> </span>static
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 2. IP 주소 입력 (아까 정한 .69 또는 .70)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>ipaddr<span class="w"> </span><span class="m">10</span>.10.10.69
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># 3. 서브넷 마스크 입력</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>netmask<span class="w"> </span><span class="m">255</span>.255.255.0
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># 4. 게이트웨이 입력</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>defgw<span class="w"> </span>ipaddr<span class="w"> </span><span class="m">10</span>.10.10.1
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># --- [계정 설정: 사용자 2번] ---</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># 5. 관리자(ID 2) 비밀번호 변경</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>user<span class="w"> </span><span class="nb">set</span><span class="w"> </span>password<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;새비밀번호123!&quot;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># 6. 관리자 계정 활성화</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<h3 id="13-pxe">1.3 부팅 순서 변경 (PXE 우선)</h3>
+<p>다음 부팅 시 자동으로 네트워크 부팅을 시도하도록 예약합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 부팅 시, PXE부터 찾도록 설정</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>chassis<span class="w"> </span>bootdev<span class="w"> </span>pxe<span class="w"> </span><span class="nv">options</span><span class="o">=</span>persistent
+</code></pre></div>
+<blockquote>
+<p><strong>완료:</strong> 위 작업이 끝났으면 서버를 끄셔도 됩니다 (<code>sudo poweroff</code>).</p>
+</blockquote>
+<hr />
+<h2 id="2">2. [물리 작업] 서버실 케이블 연결</h2>
+<p>이제 <strong>깡통 스위치</strong>와 <strong>랜선 3개</strong>를 들고 서버실로 이동합니다.</p>
+<h3 id="21">2.1 연결 다이어그램</h3>
+<p>눈으로 보고 정확한 위치에 꽂아주세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>       [ HP G9 (Controller) ]                  [ HP G8 (Target Node) ]
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>      (뒷면 포트 라벨 확인)                       (뒷면 포트 라벨 확인)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>             |                                       |          |
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a> [eno1] -----|---(기존 유지)                         |          |
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a> [eno2] -----|---(기존 유지)                         |          |
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>             |                                       |          |
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a> [eno3] -----+                                [NIC 1번]    [iLO 포트]
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    |        |                                   |             |
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    |  (새 랜선)                               (새 랜선)    (기존/새 랜선)
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    |        |                                   |             |
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    v        v                                   v             v
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>[ 깡통 스위치 (Unmanaged) ]                 [ 깡통 스위치 ]   [ 사내망 스위치 ]
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>(※ 사내망과 절대 연결 금지!)
+</code></pre></div>
+<h3 id="22">2.2 작업 체크리스트</h3>
+<ul>
+<li>[ ] <strong>G9 (컨트롤러):</strong> <code>eno3</code> 포트에 랜선을 꽂고 -&gt; <strong>깡통 스위치</strong>에 연결.</li>
+<li>[ ] <strong>G8 (타겟노드):</strong> <code>NIC 1</code> 포트에 랜선을 꽂고 -&gt; <strong>깡통 스위치</strong>에 연결.</li>
+<li>[ ] <strong>G8 (타겟노드):</strong> <code>iLO</code> 포트에 랜선을 꽂고 -&gt; <strong>사내망(관리망)</strong> 스위치에 연결.</li>
+</ul>
+<h3 id="23-hp-g8">2.3 타겟 서버(HP G8) 케이블 연결 상세 (중요!)</h3>
+<p>타겟 서버에는 반드시 <strong>두 종류의 케이블</strong>이 모두 연결되어야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">포트 이름</th>
+<th style="text-align: left;">연결할 곳</th>
+<th style="text-align: left;">역할 (Why?)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>NIC 1번</strong></td>
+<td style="text-align: left;"><strong>깡통 스위치</strong> (배포망)</td>
+<td style="text-align: left;"><strong>[Data]</strong> PXE 부팅을 통해 OS 이미지를 다운로드 받는 통로입니다. (사내망과 격리됨)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>iLO 포트</strong></td>
+<td style="text-align: left;"><strong>사내망 스위치</strong> (관리망)</td>
+<td style="text-align: left;"><strong>[Control]</strong> 오픈스택이 "전원 켜!" 신호를 보내는 통로입니다. 이게 없으면 자동화가 불가능합니다.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>주의:</strong> NIC 1번만 연결하고 iLO를 연결하지 않으면, 서버 등록은 되지만 <strong>전원 제어(Power On/Off)</strong> 가 실패합니다.</p>
+</blockquote>
+<hr />
+<h2 id="3">3. [설정] 컨트롤러 네트워크 구성</h2>
+<p>서버실에서 복귀 후, <strong>컨트롤러 노드(G9)</strong>에 SSH 접속하여 진행합니다.</p>
+<h3 id="31-netplan-gateway">3.1 Netplan 설정 (배포망 Gateway)</h3>
+<p><code>/etc/netplan/</code> 폴더 내의 설정 파일(예: <code>50-cloud-init.yaml</code>)을 엽니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/netplan/50-cloud-init.yaml
+</code></pre></div>
+<p>아래 내용을 참고하여 <strong><code>eno3</code> 부분만 추가/수정</strong>합니다. (<code>eno1</code>, <code>eno2</code>는 건드리지 마세요)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">network</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="c1"># ... (eno1, eno2 기존 설정 유지) ...</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="c1"># ▼▼▼ 여기부터 추가/수정 ▼▼▼</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">eno3</span><span class="p">:</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.100.1/24</span><span class="w">  </span><span class="c1"># 이 IP가 베어메탈들의 게이트웨이가 됩니다.</span>
+</code></pre></div>
+<p>저장(<code>Ctrl+O</code>, <code>Enter</code>) 후 빠져나와(<code>Ctrl+X</code>) 적용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
+</code></pre></div>
+<h3 id="32-kolla">3.2 Kolla 설정 변경</h3>
+<p><code>/etc/kolla/globals.yml</code> 파일을 수정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/kolla/globals.yml
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Ironic 활성화</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">enable_ironic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">enable_ironic_neutron_agent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nt">enable_ironic_pxe</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># [중요] Ironic이 사용할 인터페이스 지정 (eno3)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nt">ironic_dnsmasq_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eno3&quot;</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nt">ironic_cleaning_network</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;provisioning-net&quot;</span>
+</code></pre></div>
+<h3 id="33">3.3 서비스 배포 (무중단)</h3>
+<p>운영 중인 VM에 영향 없이 Ironic 컨테이너만 띄웁니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 1. Ironic 배포</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kolla-ansible<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>deploy<span class="w"> </span>--tags<span class="w"> </span>ironic
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># 2. 관련 설정 갱신</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kolla-ansible<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>reconfigure<span class="w"> </span>--tags<span class="w"> </span>nova,neutron
+</code></pre></div>
+<hr />
+<h2 id="4">4. [오픈스택] 리소스 생성 및 노드 등록</h2>
+<p>이제 오픈스택 명령어로 환경을 만듭니다.</p>
+<h3 id="41-ipa">4.1 배포용 이미지(IPA) 등록</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. 이미지 다운로드</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/coreos/files/ironic-python-agent-latest.tar
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>tar<span class="w"> </span>xvf<span class="w"> </span>ironic-python-agent-latest.tar
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># 2. Kernel 등록</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ironic-python-agent.kernel<span class="w"> </span>--public<span class="w"> </span>--container-format<span class="w"> </span>aki<span class="w"> </span>--disk-format<span class="w"> </span>aki<span class="w"> </span>deploy-kernel
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># 3. Ramdisk 등록</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ironic-python-agent.initramfs<span class="w"> </span>--public<span class="w"> </span>--container-format<span class="w"> </span>ari<span class="w"> </span>--disk-format<span class="w"> </span>ari<span class="w"> </span>deploy-ramdisk
+</code></pre></div>
+<h3 id="42-provisioning-network">4.2 배포망(Provisioning Network) 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 1. 네트워크 생성 (Flat)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>openstack<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>--share<span class="w"> </span>--provider-network-type<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>--provider-physical-network<span class="w"> </span>physnet1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span>provisioning-net
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1"># 2. 서브넷 생성 (Gateway: 192.168.100.1)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>openstack<span class="w"> </span>subnet<span class="w"> </span>create<span class="w"> </span>--network<span class="w"> </span>provisioning-net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span>--subnet-range<span class="w"> </span><span class="m">192</span>.168.100.0/24<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span>--gateway<span class="w"> </span><span class="m">192</span>.168.100.1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span>--allocation-pool<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">192</span>.168.100.10,end<span class="o">=</span><span class="m">192</span>.168.100.50<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span>--dns-nameserver<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span>provisioning-subnet
+</code></pre></div>
+<h3 id="43">4.3 베어메탈 노드 등록 (한방 스크립트)</h3>
+<p>아래 내용을 복사해서 <strong><code>enroll.sh</code></strong> 파일을 만들고, 정보만 바꿔서 실행하세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 편집: nano enroll.sh</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># ---------------------------------------------------------</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">#!/bin/bash</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># [변경 필요 1] 위에서 등록한 이미지의 ID를 복사해 넣으세요 (openstack image list 로 확인)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="nv">KERNEL_ID</span><span class="o">=</span><span class="s2">&quot;aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee&quot;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nv">RAMDISK_ID</span><span class="o">=</span><span class="s2">&quot;11111111-2222-3333-4444-555555555555&quot;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># [변경 필요 2] 1단계에서 적어둔 HP G8 정보</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nv">NODE_NAME</span><span class="o">=</span><span class="s2">&quot;hp-g8-01&quot;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="nv">NODE_MAC</span><span class="o">=</span><span class="s2">&quot;d8:9d:67:xx:xx:xx&quot;</span><span class="w">  </span><span class="c1"># 아까 메모한 MAC 주소</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="nv">IPMI_IP</span><span class="o">=</span><span class="s2">&quot;10.10.10.71&quot;</span><span class="w">         </span><span class="c1"># 아까 설정한 iLO IP</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="nv">IPMI_USER</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="w">             </span><span class="c1"># IPMI 사용자</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="nv">IPMI_PASS</span><span class="o">=</span><span class="s2">&quot;비밀번호&quot;</span><span class="w">          </span><span class="c1"># IPMI 비밀번호</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;노드 등록 중...&quot;</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>create<span class="w"> </span>--driver<span class="w"> </span>ipmi<span class="w"> </span>--name<span class="w"> </span><span class="nv">$NODE_NAME</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_address</span><span class="o">=</span><span class="nv">$IPMI_IP</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_username</span><span class="o">=</span><span class="nv">$IPMI_USER</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_password</span><span class="o">=</span><span class="nv">$IPMI_PASS</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_kernel</span><span class="o">=</span><span class="nv">$KERNEL_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_ramdisk</span><span class="o">=</span><span class="nv">$RAMDISK_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">cpus</span><span class="o">=</span><span class="m">24</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">memory_mb</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">local_gb</span><span class="o">=</span><span class="m">500</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">  </span>--network-interface<span class="w"> </span>flat
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;포트 연결 중...&quot;</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>port<span class="w"> </span>create<span class="w"> </span>--node<span class="w"> </span><span class="nv">$NODE_NAME</span><span class="w"> </span><span class="nv">$NODE_MAC</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;완료!&quot;</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="c1"># ---------------------------------------------------------</span>
+</code></pre></div>
+<p><strong>실행:</strong> <code>bash enroll.sh</code></p>
+<hr />
+<h2 id="5">5. [검증] 최종 테스트</h2>
+<p>등록된 노드를 활성화시켜 봅니다. 이 단계가 성공하면 구축 완료입니다.</p>
+<h3 id="51-manage-provide">5.1 노드 상태 변경 (Manage -&gt; Provide)</h3>
+<p>이 명령어를 내리면 서버 전원이 자동으로 켜져야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 1. 관리 모드로 전환 (Ironic이 IPMI 접속 테스트 수행)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>manage<span class="w"> </span>hp-g8-01
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># 2. (잠시 대기 후) 사용 가능 상태로 전환 (이때 전원이 켜지고 PXE 부팅 후 꺼짐)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>provide<span class="w"> </span>hp-g8-01
+</code></pre></div>
+<h3 id="52">5.2 상태 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>list
+</code></pre></div>
+<ul>
+<li><strong>Provisioning State</strong>가 <code>available</code>이고, <strong>Power State</strong>가 <code>power off</code>라면 <strong>성공입니다!</strong> 🎉</li>
+</ul>
+<hr />
+<h3 id="troubleshooting">🚨 문제 발생 시 해결 (Troubleshooting)</h3>
 <ol>
+<li><strong>Manage 단계에서 에러가 난다면?</strong></li>
 <li>
-<p>포트 확인</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 출력 확인: 80:30080/TCP, 443:30443/TCP</span>
-</code></pre></div>
+<p><code>Error connecting to IPMI...</code> -&gt; iLO IP(<code>10.10.10.71</code>)로 핑이 가는지 확인하세요. iLO 랜선이 사내망에 잘 꽂혔는지 확인하세요.</p>
 </li>
 <li>
-<p>환경별 접속 가이드</p>
-<ul>
-<li>[C-1] 외부 L4 스위치(Hardware LB) 연동 시:</li>
-<li>네트워크 담당자에게 <strong>"쿠버네티스 노드들의 IP와 고정 포트(30080, 30443)"</strong>를
-  L4 장비의 멤버(Real Server)로 등록 요청합니다.</li>
-<li>사용자는 L4 장비의 VIP(80/443)로 접속합니다.</li>
-<li>[C-2] L4 장비가 없는 경우 (로컬/폐쇄망 직접 접속):</li>
-<li>별도의 장비 없이 PC에서 직접 접속합니다.</li>
-<li>접속 주소:<ul>
-<li>HTTP: http://<Node_IP>:30080</li>
-<li>HTTPS: https://<Node_IP>:30443</li>
-</ul>
+<p><strong>Provide 단계에서 멈춘다면? (Cleaning 중)</strong></p>
 </li>
-<li>주의: 방화벽에서 해당 포트(30080, 30443)가 허용되어야 합니다.</li>
-</ul>
+<li>서버 전원은 켜졌는데 계속 <code>cleaning</code> 상태라면 -&gt; PXE 부팅이 안 된 것입니다.</li>
+<li>
+<p>깡통 스위치 전원이 켜져 있는지, <code>eno3</code>와 <code>NIC1</code>이 깡통 스위치에 잘 꽂혔는지 확인하세요.</p>
 </li>
+<li>
+<p><strong>OS 설치 화면에서 에러?</strong></p>
+</li>
+<li>BIOS 들어가서 <strong>Secure Boot</strong>가 켜져 있는지 확인하고 <strong>끄세요(Disabled)</strong>.</li>
 </ol>
-<h2 id="3-httproute">3. 라우팅(HTTPRoute) 설정 및 검증</h2>
-<p>Gateway가 정상적으로 떴다면, 애플리케이션 연결 규칙(<code>HTTPRoute</code>)을 점검합니다.
-이 검증은 서비스에 접근하지 못할 때 진행해도 됩니다.</p>
-<h3 id="1-connection-refused">✅ 체크리스트 1: 백엔드 포트 (Connection Refused)</h3>
-<p>Envoy는 서비스(ClusterIP) 포트가 아닌 <strong>파드(Pod)의 실제 컨테이너 포트</strong>로 접속을 시도합니다.</p>
-<ul>
-<li><strong>증상:</strong> 503 Service Unavailable 또는 Connection Refused</li>
-<li><strong>확인 방법:</strong> 실제 파드가 몇 번 포트를 열고 있는지 확인합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 1. 백엔드 앱의 파드 이름 확인</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 2. 파드 설정에서 &#39;containerPort&#39; 확인 (예: my-app-pod-xyz)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>&lt;POD_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>containerPort
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># 출력 예시: </span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># - containerPort: 8080  &lt;-- 이 번호가 정답입니다.</span>
-</code></pre></div>
-<ul>
-<li><strong>해결:</strong> 위에서 확인한 <strong>실제 포트(예: 8080)</strong> 를 <code>HTTPRoute</code>의 <code>backendRefs</code> 포트로 설정해야 합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 포트를 80 -&gt; 8080으로 변경하는 예시</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>-p<span class="o">=</span><span class="s1">&#39;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/rules/0/backendRefs/0/port&quot;, &quot;value&quot;: 8080}]&#39;</span>
-</code></pre></div>
-<h3 id="2-url-rewrite">✅ 체크리스트 2: 경로 재작성 (URL Rewrite)</h3>
-<p>애플리케이션이 하위 경로(Context Path)를 인식하지 못해 404가 발생할 경우 사용합니다.</p>
-<ul>
-<li><strong>상황:</strong> <code>/oauth2/login</code> 호출 시 앱이 <code>/oauth2</code>를 경로로 인식하여 오류 발생.</li>
-<li><strong>해결:</strong> <code>URLRewrite</code> 필터 적용.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">URLRewrite</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">urlRewrite</span><span class="p">:</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplacePrefixMatch</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="nt">replacePrefixMatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
-</code></pre></div>
-<h2 id="4">4. 운영 및 로그 확인</h2>
-<p>Envoy Gateway는 동적으로 리소스를 관리하므로 파드 이름이 변경됩니다.
-<strong>Label Selector(<code>-l</code>)</strong>를 사용하여 로그를 확인하는 것이 표준입니다.</p>
-<h3 id="data-plane">📋 프록시(Data Plane) 로그</h3>
-<p>실제 트래픽 처리, 접속 오류 확인 시 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Envoy Proxy 로그 실시간 확인</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cmp-gateway
-</code></pre></div>
-<h3 id="control-plane">🧠 컨트롤러(Control Plane) 로그</h3>
-<p>Gateway 설정 변환, 배포 실패 원인 분석 시 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Gateway Controller 로그 확인</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway
-</code></pre></div>
-<h2 id="gateway">[별첨] Gateway 연결 상태 및 라우트 검증 가이드</h2>
-<p>Gateway 리소스와 HTTPRoute 리소스가 정상적으로 연결(Binding)되었는지 확인하는 방법입니다.</p>
-<h3 id="1-gateway">1. Gateway 관점: 연결된 라우트 수 확인</h3>
-<p>Gateway 리소스의 상태(Status)를 조회하여 몇 개의 라우트가 연결되었는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Gateway 상태 상세 조회</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span>yaml
-</code></pre></div>
-<p>확인 포인트 (status.listeners 섹션):</p>
-<ul>
-<li><code>attachedRoutes:</code> 연결된 HTTPRoute의 개수입니다. 이 숫자가 0이면 연결된 라우트가 없는 것입니다.</li>
-<li><code>conditions:</code> Programmed 상태가 True여야 정상 작동 중입니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">status</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">attachedRoutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">  </span><span class="c1"># &lt;-- 현재 연결된 라우트 개수</span>
-</code></pre></div>
-<h3 id="2-httproute-gateway">2. HTTPRoute 관점: 부모 Gateway 연결 확인</h3>
-<p>개별 <code>HTTPRoute</code> 가 Gateway를 찾았는지, 거절당하지는 않았는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 네임스페이스 내의 모든 HTTPRoute 상태 요약 확인</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>httproute<span class="w"> </span>-A
-</code></pre></div>
-<p>확인 포인트:</p>
-<ul>
-<li>PARENTS: 연결된 Gateway 이름이 표시되어야 합니다.</li>
-<li>STATUS: True 또는 Accepted 상태여야 합니다.</li>
-</ul>
-<h4 id="_1">상세 디버깅 (연결 실패 시)</h4>
-<p>만약 연결이 안 된다면 describe 명령어로 상세 원인을 파악합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
-</code></pre></div>
-<p>주요 실패 원인:</p>
-<ul>
-<li>Gateway 이름 불일치: parentRefs의 name이 실제 Gateway 이름(cmp-gateway)과 다름.</li>
-<li>Namespace 불일치: Gateway가 다른 네임스페이스의 라우트를 허용하지 않음
-(Gateway Listener 설정의 allowedRoutes 확인 필요)</li>
-</ul>
 
 
 
