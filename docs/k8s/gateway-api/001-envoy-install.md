@@ -19,6 +19,8 @@
 
 ## 1. 설치
 
+### 1.0 이미지 업로드
+
 **[실행 위치: Master 1, Worker 1~3 전체]**
 
 전체 노드에 `envoy` 이미지들을 로드합니다.
@@ -27,6 +29,97 @@
 cd ./envoy-1.36.3
 sudo bash ./images/upload_images.sh
 ```
+
+### 1.1 사전 구성(TLS 및 멀티 테넌트 설정)
+
+**[실행 위치: Master 1]**
+
+Helm 배포 전, HTTPS 인증서와 네임스페이스 격리 해제 설정을 미리 적용합니다.
+
+1. TLS Secret 생성
+    - Gateway가 사용할 인증서(cert.pem, key.pem)을 이용해
+    Gateway 네임스페이스와 동일한 네임스페이스에 Secret을 생성합니다.
+    - 사용할 인증서는 모두 Secret으로 생성합니다.
+
+    ```bash
+    # 네임스페이스 생성 (아직 없다면)
+    kubectl create ns envoy-gateway-system --dry-run=client -o yaml | kubectl apply -f -
+
+    # Secret 생성
+    kubectl create secret tls strato-tls \
+      --cert=cert.pem \
+      --key=key.pem \
+      --namespace envoy-gateway-system
+    ```
+
+2. Gateway 파일 수정
+    - 추가된 `strato-tls` 외에 추가된 tls는 `template/main.yaml` 에 직접 추가해야 합니다.
+
+    ```yaml
+    # main.yaml
+    ...
+    spec:
+      gatewayClassName: eg-cluster-entry
+      listeners:
+      - name: http
+        protocol: HTTP
+        port: 80 # 서비스가 외부로 노출할 포트
+        allowedRoutes:
+          namespaces:
+            from: All
+      - name: https
+        protocol: HTTPS
+        port: 443
+        tls:
+          mode: Terminate
+          certificateRefs:
+          - name: {{ .Values.gateway.tls.name }}
+            kind: Secret
+        allowedRoutes:
+          namespaces:
+            from: All
+      # ▼▼▼ [새로 추가된 부분] ▼▼▼
+      - name: admin-https # Listener 이름
+        port: 443
+        protocol: HTTPS
+        hostname: "admin.cmp.test.com"  # 해당 Listener를 적용할 도메인
+        tls:
+          mode: Terminate
+          certificateRefs:
+          - name: admin-tls-secret      # 적용할 tls의 Secret 이름
+            kind: Secret
+        allowedRoutes:
+          namespaces:
+            from: All
+    ```
+
+3. HTTP만 사용할 경우
+    - 만약 HTTP만 사용한다면 `values.yaml` 과 `template/main.yaml` 에서 해당 설정을 제거해야 합니다.
+
+    ```yaml
+    # main.yaml
+    spec:
+      gatewayClassName: eg-cluster-entry
+      listeners:
+      - name: http
+        protocol: HTTP
+        port: 80 # 서비스가 외부로 노출할 포트
+        allowedRoutes:
+          namespaces:
+            from: All
+    # 밑에 HTTPS 관련 부분 모두 삭제
+    ```
+
+    ```yaml
+    # values.yaml
+    gateway:
+      name: "cmp-gateway" # 기본값 (스크립트에서 덮어쓸 예정)
+      # tls 부분 삭제
+      # tls:
+        # name: "strato-tls"
+    ```
+
+### 1.2 스크립트 실행
 
 **[실행 위치: Master 1]**
 
@@ -81,6 +174,15 @@ kubectl patch svc -n envoy-gateway-system $SVC_NAME \
   -p '{"spec":{"externalIPs":["1.1.1.213"]}}'
 
 echo "✅ 서비스($SVC_NAME)에 외부 IP가 수동 할당되었습니다."
+```
+
+- 만약 1분이 지나도 `Gateway` 가 **false** 상태라면 아래 명령어로 수동 바인딩합니다.
+
+```bash
+# Gateway IP 수동 할당
+kubectl patch gateway cmp-gateway -n envoy-gateway-system \
+  --type='merge' \
+  -p '{"spec":{"addresses":[{"type":"IPAddress","value":"1.1.1.213"}]}}'
 ```
 
 ### ⚙️ Case C: NodePort 모드 (포트 고정)
