@@ -11,8 +11,8 @@
 ip -4 addr show eno1
 
 # 출력 예시
-2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 ...
-    inet 10.10.10.60/24 brd 10.10.10.255 scope global eno1
+# 2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 ...
+#     inet 10.10.10.60/24 brd 10.10.10.255 scope global eno1
 
 ```
 
@@ -28,7 +28,7 @@ ip -4 addr show eno1
 ip route | grep default
 
 # 출력 예시
-default via 10.10.10.1 dev eno1 proto static
+# default via 10.10.10.1 dev eno1 proto static
 
 ```
 
