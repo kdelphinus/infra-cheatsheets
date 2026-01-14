@@ -2684,7 +2684,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 실제 물리적 포트 위치 확인</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># 사용법: sudo ethtool -p [인터페이스이름] [시간(초)]</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 예: eno3 포트의 불을 10초 동안 깜빡여라!</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 예: eno3 포트의 불을 10초 동안 점등</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>ethtool<span class="w"> </span>-p<span class="w"> </span>eno3<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
 <h3 id="12-ilo-ipmi-ip">1.2 iLO (IPMI) 네트워크 고정 IP 할당</h3>
@@ -2706,30 +2706,41 @@
 </code></pre></div>
 <p>이제 iLO IP를 설정합니다.
 이때 사용하는 IP는 아무도 사용하지 않는 IP를 할당해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># --- [네트워크 설정: 채널 2번이라 가정] ---</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 1. 고정 IP 모드로 변경</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>ipsrc<span class="w"> </span>static
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 2. IP 주소 입력 (아까 정한 .69 또는 .70)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>ipaddr<span class="w"> </span><span class="m">10</span>.10.10.69
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># 3. 서브넷 마스크 입력</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>netmask<span class="w"> </span><span class="m">255</span>.255.255.0
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># 4. 게이트웨이 입력</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>defgw<span class="w"> </span>ipaddr<span class="w"> </span><span class="m">10</span>.10.10.1
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># --- [계정 설정: 사용자 2번] ---</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># 5. 관리자(ID 2) 비밀번호 변경</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>user<span class="w"> </span><span class="nb">set</span><span class="w"> </span>password<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;새비밀번호123!&quot;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># 6. 관리자 계정 활성화</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span><span class="m">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 서브넷 확인 명령어</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ip<span class="w"> </span>-4<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>eno1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 결과 예시: 10.10.10.60/24를 통해 /24 서브넷 마스크 사용 확인</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2: eno1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 ...</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">#     inet 10.10.10.60/24 brd 10.10.10.255 scope global eno1</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># 게이트웨이 확인 명령어</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>default
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># 결과 예시:</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># default via 10.10.10.1 dev eno1 proto static</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># --- [네트워크 설정: 채널 2번이라 가정] ---</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># 1. 고정 IP 모드로 변경</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>ipsrc<span class="w"> </span>static
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># 2. IP 주소 입력 (아까 정한 .69 또는 .70)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>ipaddr<span class="w"> </span><span class="m">10</span>.10.10.69
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># 3. 서브넷 마스크 입력(/24 형식이 아닌 IP 형식으로 작성)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>netmask<span class="w"> </span><span class="m">255</span>.255.255.0
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># 4. 게이트웨이 입력</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>lan<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>defgw<span class="w"> </span>ipaddr<span class="w"> </span><span class="m">10</span>.10.10.1
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># --- [계정 설정: 사용자 2번] ---</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># 5. 관리자(ID 2) 비밀번호 변경</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>user<span class="w"> </span><span class="nb">set</span><span class="w"> </span>password<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;새비밀번호123!&quot;</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># 6. 관리자 계정 활성화</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <h3 id="13-pxe">1.3 부팅 순서 변경 (PXE 우선)</h3>
 <p>다음 부팅 시 자동으로 네트워크 부팅을 시도하도록 예약합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 부팅 시, PXE부터 찾도록 설정</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>chassis<span class="w"> </span>bootdev<span class="w"> </span>pxe<span class="w"> </span><span class="nv">options</span><span class="o">=</span>persistent
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 부팅 시, PXE부터 찾도록 설정</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>ipmitool<span class="w"> </span>chassis<span class="w"> </span>bootdev<span class="w"> </span>pxe<span class="w"> </span><span class="nv">options</span><span class="o">=</span>persistent
 </code></pre></div>
 <blockquote>
 <p><strong>완료:</strong> 위 작업이 끝났으면 서버를 끄셔도 됩니다 (<code>sudo poweroff</code>).</p>
@@ -2739,19 +2750,19 @@
 <p>이제 <strong>깡통 스위치</strong>와 <strong>랜선 3개</strong>를 들고 서버실로 이동합니다.</p>
 <h3 id="21">2.1 연결 다이어그램</h3>
 <p>눈으로 보고 정확한 위치에 꽂아주세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>       [ HP G9 (Controller) ]                  [ HP G8 (Target Node) ]
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>      (뒷면 포트 라벨 확인)                       (뒷면 포트 라벨 확인)
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>             |                                       |          |
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a> [eno1] -----|---(기존 유지)                         |          |
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a> [eno2] -----|---(기존 유지)                         |          |
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>             |                                       |          |
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a> [eno3] -----+                                [NIC 1번]    [iLO 포트]
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    |        |                                   |             |
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    |  (새 랜선)                               (새 랜선)    (기존/새 랜선)
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    |        |                                   |             |
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    v        v                                   v             v
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>[ 깡통 스위치 (Unmanaged) ]                 [ 깡통 스위치 ]   [ 사내망 스위치 ]
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>(※ 사내망과 절대 연결 금지!)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>       [ HP G9 (Controller) ]                  [ HP G8 (Target Node) ]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>      (뒷면 포트 라벨 확인)                       (뒷면 포트 라벨 확인)
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>             |                                       |          |
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> [eno1] -----|---(기존 유지)                         |          |
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> [eno2] -----|---(기존 유지)                         |          |
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>             |                                       |          |
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a> [eno3] -----+                                [NIC 1번]    [iLO 포트]
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    |        |                                   |             |
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    |  (새 랜선)                               (새 랜선)    (기존/새 랜선)
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    |        |                                   |             |
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    v        v                                   v             v
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>[ 깡통 스위치 (Unmanaged) ]                 [ 깡통 스위치 ]   [ 사내망 스위치 ]
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>(※ 사내망과 절대 연결 금지!)
 </code></pre></div>
 <h3 id="22">2.2 작업 체크리스트</h3>
 <ul>
@@ -2790,104 +2801,104 @@
 <p>서버실에서 복귀 후, <strong>컨트롤러 노드(G9)</strong>에 SSH 접속하여 진행합니다.</p>
 <h3 id="31-netplan-gateway">3.1 Netplan 설정 (배포망 Gateway)</h3>
 <p><code>/etc/netplan/</code> 폴더 내의 설정 파일(예: <code>50-cloud-init.yaml</code>)을 엽니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/netplan/50-cloud-init.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/netplan/50-cloud-init.yaml
 </code></pre></div>
 <p>아래 내용을 참고하여 <strong><code>eno3</code> 부분만 추가/수정</strong>합니다. (<code>eno1</code>, <code>eno2</code>는 건드리지 마세요)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">network</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="c1"># ... (eno1, eno2 기존 설정 유지) ...</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="c1"># ▼▼▼ 여기부터 추가/수정 ▼▼▼</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">eno3</span><span class="p">:</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.100.1/24</span><span class="w">  </span><span class="c1"># 이 IP가 베어메탈들의 게이트웨이가 됩니다.</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">network</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="c1"># ... (eno1, eno2 기존 설정 유지) ...</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="c1"># ▼▼▼ 여기부터 추가/수정 ▼▼▼</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">eno3</span><span class="p">:</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.100.1/24</span><span class="w">  </span><span class="c1"># 이 IP가 베어메탈들의 게이트웨이가 됩니다.</span>
 </code></pre></div>
 <p>저장(<code>Ctrl+O</code>, <code>Enter</code>) 후 빠져나와(<code>Ctrl+X</code>) 적용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
 </code></pre></div>
 <h3 id="32-kolla">3.2 Kolla 설정 변경</h3>
 <p><code>/etc/kolla/globals.yml</code> 파일을 수정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/kolla/globals.yml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/kolla/globals.yml
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Ironic 활성화</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">enable_ironic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">enable_ironic_neutron_agent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nt">enable_ironic_pxe</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># [중요] Ironic이 사용할 인터페이스 지정 (eno3)</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nt">ironic_dnsmasq_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eno3&quot;</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nt">ironic_cleaning_network</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;provisioning-net&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Ironic 활성화</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">enable_ironic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nt">enable_ironic_neutron_agent</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nt">enable_ironic_pxe</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1"># [중요] Ironic이 사용할 인터페이스 지정 (eno3)</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nt">ironic_dnsmasq_interface</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eno3&quot;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nt">ironic_cleaning_network</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;provisioning-net&quot;</span>
 </code></pre></div>
 <h3 id="33">3.3 서비스 배포 (무중단)</h3>
 <p>운영 중인 VM에 영향 없이 Ironic 컨테이너만 띄웁니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 1. Ironic 배포</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kolla-ansible<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>deploy<span class="w"> </span>--tags<span class="w"> </span>ironic
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># 2. 관련 설정 갱신</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kolla-ansible<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>reconfigure<span class="w"> </span>--tags<span class="w"> </span>nova,neutron
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. Ironic 배포</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>kolla-ansible<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>deploy<span class="w"> </span>--tags<span class="w"> </span>ironic
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># 2. 관련 설정 갱신</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>kolla-ansible<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>reconfigure<span class="w"> </span>--tags<span class="w"> </span>nova,neutron
 </code></pre></div>
 <hr />
 <h2 id="4">4. [오픈스택] 리소스 생성 및 노드 등록</h2>
 <p>이제 오픈스택 명령어로 환경을 만듭니다.</p>
 <h3 id="41-ipa">4.1 배포용 이미지(IPA) 등록</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 1. 이미지 다운로드</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/coreos/files/ironic-python-agent-latest.tar
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>tar<span class="w"> </span>xvf<span class="w"> </span>ironic-python-agent-latest.tar
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># 2. Kernel 등록</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ironic-python-agent.kernel<span class="w"> </span>--public<span class="w"> </span>--container-format<span class="w"> </span>aki<span class="w"> </span>--disk-format<span class="w"> </span>aki<span class="w"> </span>deploy-kernel
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># 3. Ramdisk 등록</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ironic-python-agent.initramfs<span class="w"> </span>--public<span class="w"> </span>--container-format<span class="w"> </span>ari<span class="w"> </span>--disk-format<span class="w"> </span>ari<span class="w"> </span>deploy-ramdisk
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 1. 이미지 다운로드</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/coreos/files/ironic-python-agent-latest.tar
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>tar<span class="w"> </span>xvf<span class="w"> </span>ironic-python-agent-latest.tar
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># 2. Kernel 등록</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ironic-python-agent.kernel<span class="w"> </span>--public<span class="w"> </span>--container-format<span class="w"> </span>aki<span class="w"> </span>--disk-format<span class="w"> </span>aki<span class="w"> </span>deploy-kernel
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># 3. Ramdisk 등록</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ironic-python-agent.initramfs<span class="w"> </span>--public<span class="w"> </span>--container-format<span class="w"> </span>ari<span class="w"> </span>--disk-format<span class="w"> </span>ari<span class="w"> </span>deploy-ramdisk
 </code></pre></div>
 <h3 id="42-provisioning-network">4.2 배포망(Provisioning Network) 생성</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 1. 네트워크 생성 (Flat)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>openstack<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>--share<span class="w"> </span>--provider-network-type<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>--provider-physical-network<span class="w"> </span>physnet1<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span>provisioning-net
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1"># 2. 서브넷 생성 (Gateway: 192.168.100.1)</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>openstack<span class="w"> </span>subnet<span class="w"> </span>create<span class="w"> </span>--network<span class="w"> </span>provisioning-net<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span>--subnet-range<span class="w"> </span><span class="m">192</span>.168.100.0/24<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span>--gateway<span class="w"> </span><span class="m">192</span>.168.100.1<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span>--allocation-pool<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">192</span>.168.100.10,end<span class="o">=</span><span class="m">192</span>.168.100.50<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span>--dns-nameserver<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span>provisioning-subnet
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 1. 네트워크 생성 (Flat)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>openstack<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>--share<span class="w"> </span>--provider-network-type<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>--provider-physical-network<span class="w"> </span>physnet1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span>provisioning-net
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># 2. 서브넷 생성 (Gateway: 192.168.100.1)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>openstack<span class="w"> </span>subnet<span class="w"> </span>create<span class="w"> </span>--network<span class="w"> </span>provisioning-net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span>--subnet-range<span class="w"> </span><span class="m">192</span>.168.100.0/24<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">  </span>--gateway<span class="w"> </span><span class="m">192</span>.168.100.1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">  </span>--allocation-pool<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">192</span>.168.100.10,end<span class="o">=</span><span class="m">192</span>.168.100.50<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">  </span>--dns-nameserver<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">  </span>provisioning-subnet
 </code></pre></div>
 <h3 id="43">4.3 베어메탈 노드 등록 (한방 스크립트)</h3>
 <p>아래 내용을 복사해서 <strong><code>enroll.sh</code></strong> 파일을 만들고, 정보만 바꿔서 실행하세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 편집: nano enroll.sh</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># ---------------------------------------------------------</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">#!/bin/bash</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># [변경 필요 1] 위에서 등록한 이미지의 ID를 복사해 넣으세요 (openstack image list 로 확인)</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="nv">KERNEL_ID</span><span class="o">=</span><span class="s2">&quot;aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee&quot;</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nv">RAMDISK_ID</span><span class="o">=</span><span class="s2">&quot;11111111-2222-3333-4444-555555555555&quot;</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># [변경 필요 2] 1단계에서 적어둔 HP G8 정보</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nv">NODE_NAME</span><span class="o">=</span><span class="s2">&quot;hp-g8-01&quot;</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="nv">NODE_MAC</span><span class="o">=</span><span class="s2">&quot;d8:9d:67:xx:xx:xx&quot;</span><span class="w">  </span><span class="c1"># 아까 메모한 MAC 주소</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="nv">IPMI_IP</span><span class="o">=</span><span class="s2">&quot;10.10.10.71&quot;</span><span class="w">         </span><span class="c1"># 아까 설정한 iLO IP</span>
-<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="nv">IPMI_USER</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="w">             </span><span class="c1"># IPMI 사용자</span>
-<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="nv">IPMI_PASS</span><span class="o">=</span><span class="s2">&quot;비밀번호&quot;</span><span class="w">          </span><span class="c1"># IPMI 비밀번호</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
-<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;노드 등록 중...&quot;</span>
-<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>create<span class="w"> </span>--driver<span class="w"> </span>ipmi<span class="w"> </span>--name<span class="w"> </span><span class="nv">$NODE_NAME</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_address</span><span class="o">=</span><span class="nv">$IPMI_IP</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_username</span><span class="o">=</span><span class="nv">$IPMI_USER</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_password</span><span class="o">=</span><span class="nv">$IPMI_PASS</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_kernel</span><span class="o">=</span><span class="nv">$KERNEL_ID</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_ramdisk</span><span class="o">=</span><span class="nv">$RAMDISK_ID</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">cpus</span><span class="o">=</span><span class="m">24</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">memory_mb</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">local_gb</span><span class="o">=</span><span class="m">500</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">  </span>--network-interface<span class="w"> </span>flat
-<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>
-<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;포트 연결 중...&quot;</span>
-<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>port<span class="w"> </span>create<span class="w"> </span>--node<span class="w"> </span><span class="nv">$NODE_NAME</span><span class="w"> </span><span class="nv">$NODE_MAC</span>
-<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>
-<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;완료!&quot;</span>
-<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="c1"># ---------------------------------------------------------</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 편집: nano enroll.sh</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># ---------------------------------------------------------</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1">#!/bin/bash</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c1"># [변경 필요 1] 위에서 등록한 이미지의 ID를 복사해 넣으세요 (openstack image list 로 확인)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="nv">KERNEL_ID</span><span class="o">=</span><span class="s2">&quot;aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee&quot;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nv">RAMDISK_ID</span><span class="o">=</span><span class="s2">&quot;11111111-2222-3333-4444-555555555555&quot;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="c1"># [변경 필요 2] 1단계에서 적어둔 HP G8 정보</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="nv">NODE_NAME</span><span class="o">=</span><span class="s2">&quot;hp-g8-01&quot;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="nv">NODE_MAC</span><span class="o">=</span><span class="s2">&quot;d8:9d:67:xx:xx:xx&quot;</span><span class="w">  </span><span class="c1"># 아까 메모한 MAC 주소</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="nv">IPMI_IP</span><span class="o">=</span><span class="s2">&quot;10.10.10.71&quot;</span><span class="w">         </span><span class="c1"># 아까 설정한 iLO IP</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="nv">IPMI_USER</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span><span class="w">             </span><span class="c1"># IPMI 사용자</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="nv">IPMI_PASS</span><span class="o">=</span><span class="s2">&quot;비밀번호&quot;</span><span class="w">          </span><span class="c1"># IPMI 비밀번호</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;노드 등록 중...&quot;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>create<span class="w"> </span>--driver<span class="w"> </span>ipmi<span class="w"> </span>--name<span class="w"> </span><span class="nv">$NODE_NAME</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_address</span><span class="o">=</span><span class="nv">$IPMI_IP</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_username</span><span class="o">=</span><span class="nv">$IPMI_USER</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_password</span><span class="o">=</span><span class="nv">$IPMI_PASS</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_kernel</span><span class="o">=</span><span class="nv">$KERNEL_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_ramdisk</span><span class="o">=</span><span class="nv">$RAMDISK_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">cpus</span><span class="o">=</span><span class="m">24</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">memory_mb</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">local_gb</span><span class="o">=</span><span class="m">500</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="w">  </span>--network-interface<span class="w"> </span>flat
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;포트 연결 중...&quot;</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>port<span class="w"> </span>create<span class="w"> </span>--node<span class="w"> </span><span class="nv">$NODE_NAME</span><span class="w"> </span><span class="nv">$NODE_MAC</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;완료!&quot;</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a><span class="c1"># ---------------------------------------------------------</span>
 </code></pre></div>
 <p><strong>실행:</strong> <code>bash enroll.sh</code></p>
 <hr />
@@ -2895,14 +2906,14 @@
 <p>등록된 노드를 활성화시켜 봅니다. 이 단계가 성공하면 구축 완료입니다.</p>
 <h3 id="51-manage-provide">5.1 노드 상태 변경 (Manage -&gt; Provide)</h3>
 <p>이 명령어를 내리면 서버 전원이 자동으로 켜져야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 1. 관리 모드로 전환 (Ironic이 IPMI 접속 테스트 수행)</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>manage<span class="w"> </span>hp-g8-01
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># 2. (잠시 대기 후) 사용 가능 상태로 전환 (이때 전원이 켜지고 PXE 부팅 후 꺼짐)</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>provide<span class="w"> </span>hp-g8-01
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># 1. 관리 모드로 전환 (Ironic이 IPMI 접속 테스트 수행)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>manage<span class="w"> </span>hp-g8-01
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># 2. (잠시 대기 후) 사용 가능 상태로 전환 (이때 전원이 켜지고 PXE 부팅 후 꺼짐)</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>provide<span class="w"> </span>hp-g8-01
 </code></pre></div>
 <h3 id="52">5.2 상태 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>list
 </code></pre></div>
 <ul>
 <li><strong>Provisioning State</strong>가 <code>available</code>이고, <strong>Power State</strong>가 <code>power off</code>라면 <strong>성공입니다!</strong> 🎉</li>
