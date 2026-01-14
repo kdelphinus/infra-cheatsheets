@@ -74,6 +74,7 @@ nav:
   - Network:
     - Tip:
       - '도메인 실제 IP 체크': network/tip/check-domain-ip.md
+      - '현재 서버가 속한 네트워크의 서브넷과 게이트웨이 확인': network/tip/check-network-subnet.md 
   - OpenStack:
     - 'Cheat Sheets': openstack/cheatsheet.md
     - Base:
