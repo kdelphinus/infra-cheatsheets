@@ -1,0 +1,3322 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cloud/use_terraform_with_gcp/">
+      
+      
+        <link rel="prev" href="../../k8s/cheatsheet/">
+      
+      
+        <link rel="next" href="../../cicd/offline-install/001-gitlab_jenkins_install/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기 - Infra Cheatsheets</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gcp-kubernetes" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Infra Cheatsheets
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Kdelphinus/infra-cheatsheets/" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+          
+  
+  
+  Kubernetes
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Cloud
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+          
+  
+  
+  CI/CD
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+          
+  
+  
+  Ubuntu
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
+          
+  
+  
+  DB
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../git/cheatsheet/" class="md-tabs__link">
+          
+  
+  
+  Git
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ide/vscode_shortcut/" class="md-tabs__link">
+          
+  
+  
+  IDE
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
+          
+  
+  
+  OpenStack
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Infra Cheatsheets
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Kdelphinus/infra-cheatsheets/" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kubernetes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    폐쇄망
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    폐쇄망
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 폐쇄망에서 K8s 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gateway API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Gateway API 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Gateway API 및 HTTPRoute 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Gateway 네트워크 구성 방법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ervice Endpoint가 있는데도 Connection Refused 발생할 때
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 1단계: 필수 도구 설치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 1단계: 필수 도구 설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-terraform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Terraform 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-google-cloud-sdk-gcloud-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Google Cloud SDK (gcloud CLI) 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 2단계: GCP 인증 및 사전 준비
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 2단계: GCP 인증 및 사전 준비">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-adc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 로그인 및 ADC 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 프로젝트 연결 및 API 활성화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. SSH 키 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-terraform-safe-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 3단계: Terraform 코드 작성 (Safe Mode)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 3단계: Terraform 코드 작성 (Safe Mode)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 파일 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-maintf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. main.tf 내용 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 4단계: 배포 및 접속 설정 (핵심)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 4단계: 배포 및 접속 설정 (핵심)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 인프라 배포
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sshconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 접속 편의성 설정 (~/.ssh/config)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 5단계: 접속 테스트 및 운영
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 5단계: 접속 테스트 및 운영">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 접속 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 파일 전송 (SCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. (선택) 3중화 확장
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-clean-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 6단계: 자원 삭제 (Clean Up)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CI/CD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    폐쇄망
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    폐쇄망
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망에서 GitLab과 Jenkins 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubuntu
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu 기본 설정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WSL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL 네트워크 설정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Install
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Git
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IDE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ide/vscode_shortcut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode 단축키
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tip
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tip
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    도메인 실제 IP 체크
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/tip/check-network-subnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    현재 서버가 속한 네트워크의 서브넷과 게이트웨이 확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenStack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    OpenStack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/base/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openstack 서비스 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/base/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/base/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 명세
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About GPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About GPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 노드 초기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PCI Placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud Init 비정상 동작 시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golden Image 생성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenStack K8s 네트워크 통신 장애 및 Harbor 배포 실패
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 1단계: 필수 도구 설치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 1단계: 필수 도구 설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-terraform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Terraform 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-google-cloud-sdk-gcloud-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Google Cloud SDK (gcloud CLI) 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 2단계: GCP 인증 및 사전 준비
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 2단계: GCP 인증 및 사전 준비">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-adc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 로그인 및 ADC 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 프로젝트 연결 및 API 활성화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. SSH 키 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-terraform-safe-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 3단계: Terraform 코드 작성 (Safe Mode)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 3단계: Terraform 코드 작성 (Safe Mode)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 파일 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-maintf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. main.tf 내용 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 4단계: 배포 및 접속 설정 (핵심)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 4단계: 배포 및 접속 설정 (핵심)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 인프라 배포
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sshconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 접속 편의성 설정 (~/.ssh/config)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 5단계: 접속 테스트 및 운영
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 5단계: 접속 테스트 및 운영">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. 접속 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. 파일 전송 (SCP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. (선택) 3중화 확장
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-clean-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 6단계: 자원 삭제 (Clean Up)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="gcp-kubernetes">📘 [GCP] 폐쇄망 Kubernetes 인프라 구축 완벽 가이드</h1>
+<p>이 문서는 <strong>Windows WSL2(Ubuntu)</strong> 환경에서 <strong>Google Cloud Platform(GCP)</strong>
+상에 <strong>완전 폐쇄망(Air-gapped)</strong> 기반의 인프라를 구축하는 매뉴얼입니다.
+신규 계정의 <strong>API 활성화</strong> 및 <strong>vCPU 할당량(Quota)</strong> 제한을 모두 고려했습니다.</p>
+<blockquote>
+<p>GCP 신규 계정 가입 시, $300 크레딧을 무료로 지급합니다. (사용기간 3개월)</p>
+</blockquote>
+<hr />
+<h2 id="1">🚀 1단계: 필수 도구 설치</h2>
+<p>GCP와 통신하기 위한 최신 도구를 설치합니다.</p>
+<h3 id="1-terraform">1. Terraform 설치</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gnupg<span class="w"> </span>software-properties-common
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="s2">https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>terraform
+</code></pre></div>
+<h3 id="2-google-cloud-sdk-gcloud-cli">2. Google Cloud SDK (gcloud CLI) 설치</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/apt/sources.list.d/google-cloud-sdk.list
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>curl<span class="w"> </span>https://packages.cloud.google.com/apt/doc/apt-key.gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>--keyring<span class="w"> </span>/usr/share/keyrings/cloud.google.gpg<span class="w"> </span>add<span class="w"> </span>-
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>google-cloud-cli
+</code></pre></div>
+<hr />
+<h2 id="2-gcp">🚀 2단계: GCP 인증 및 사전 준비</h2>
+<p>이 과정을 건너뛰면 <code>403 Forbidden</code> 에러가 발생합니다.</p>
+<h3 id="1-adc">1. 로그인 및 ADC 설정</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 브라우저 로그인 (계정 권한 획득)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>login
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Terraform용 인증 토큰 생성 (필수 과정)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>application-default<span class="w"> </span>login
+</code></pre></div>
+<h3 id="2-api">2. 프로젝트 연결 및 API 활성화</h3>
+<p>본인의 프로젝트 ID를 정확히 입력하세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># [수정] 본인의 프로젝트 ID로 변경</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">MY_PROJECT_ID</span><span class="o">=</span><span class="s2">&quot;rocky-k8s-airgap&quot;</span><span class="w"> </span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 프로젝트 지정</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>project<span class="w"> </span><span class="nv">$MY_PROJECT_ID</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Compute Engine API 활성화 (가상머신 생성 권한 켜기)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>gcloud<span class="w"> </span>services<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>compute.googleapis.com
+</code></pre></div>
+<h3 id="3-ssh">3. SSH 키 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 엔터만 계속 눌러서 기본 경로(~/.ssh/gcp_key)에 생성</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-f<span class="w"> </span>~/.ssh/gcp_key<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;rocky&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="3-terraform-safe-mode">🚀 3단계: Terraform 코드 작성 (Safe Mode)</h2>
+<p>신규 계정의 <strong>할당량(12 vCPU) 제한</strong>을 피하기 위해 노드 수를 조절한 코드입니다.</p>
+<h3 id="1_1">1. 파일 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>~/gcp-k8s-airgap<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/gcp-k8s-airgap
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>nano<span class="w"> </span>main.tf
+</code></pre></div>
+<h3 id="2-maintf">2. <code>main.tf</code> 내용 작성</h3>
+<p><img alt="main.tf 구성도" src="../../images/terraform-with-gcp.png" /></p>
+<p>아래 내용을 복사하되, <strong><code>project</code> 값은 반드시 수정</strong>하세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">provider</span><span class="w"> </span><span class="nv">&quot;google&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">  # ★ 본인의 프로젝트 ID로 반드시 수정하세요!</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="na">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rocky-k8s-airgap&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="na">region</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3&quot;</span><span class="c1">    # 서울 리전</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># SSH 키 프로젝트 전체 등록</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_project_metadata&quot;</span><span class="w"> </span><span class="nv">&quot;ssh_keys&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="nb">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="na">ssh-keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rocky:${file(&quot;~/.ssh/gcp_key.pub&quot;)}&quot;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># 1. VPC 네트워크 (폐쇄망)</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_network&quot;</span><span class="w"> </span><span class="nv">&quot;vpc&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span><span class="na">name</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;k8s-airgap-vpc&quot;</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">  </span><span class="na">auto_create_subnetworks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="p">}</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_subnetwork&quot;</span><span class="w"> </span><span class="nv">&quot;public_subnet&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">  </span><span class="na">name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;public-subnet&quot;</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">  </span><span class="na">ip_cidr_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.1.0/24&quot;</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">  </span><span class="na">region</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3&quot;</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">  </span><span class="na">network</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_network.vpc.id</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="p">}</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_subnetwork&quot;</span><span class="w"> </span><span class="nv">&quot;private_subnet&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">  </span><span class="na">name</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;private-subnet&quot;</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">  </span><span class="na">ip_cidr_range</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.0.2.0/24&quot;</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="w">  </span><span class="na">region</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3&quot;</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w">  </span><span class="na">network</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_network.vpc.id</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">  </span><span class="na">private_ip_google_access</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="c1"> # 완전 폐쇄 (인터넷 불가)</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="p">}</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="c1"># 2. 방화벽 규칙</span>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_firewall&quot;</span><span class="w"> </span><span class="nv">&quot;allow_ssh_bastion&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">  </span><span class="na">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;allow-ssh-bastion&quot;</span>
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="w">  </span><span class="na">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_network.vpc.id</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">  </span><span class="nb">allow</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="w">    </span><span class="na">protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="w">    </span><span class="na">ports</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;22&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a><span class="w">  </span><span class="na">source_ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a><span class="w">  </span><span class="na">target_tags</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bastion&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a><span class="p">}</span>
+<a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>
+<a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_firewall&quot;</span><span class="w"> </span><span class="nv">&quot;allow_internal&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a><span class="w">  </span><span class="na">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;allow-internal&quot;</span>
+<a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a><span class="w">  </span><span class="na">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_network.vpc.id</span>
+<a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a><span class="w">  </span><span class="nb">allow</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a><span class="w">  </span><span class="na">source_tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;internal-node&quot;, &quot;bastion&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a><span class="w">  </span><span class="na">target_tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;internal-node&quot;, &quot;bastion&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a><span class="p">}</span>
+<a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a>
+<a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a><span class="c1"># 3. VM 인스턴스 (할당량 12 vCPU 초과 방지 설정)</span>
+<a id="__codelineno-6-56" name="__codelineno-6-56" href="#__codelineno-6-56"></a><span class="c1"># 구성: Bastion(1) + Master(1) + Worker(2) + DB(1) = 9 vCPU</span>
+<a id="__codelineno-6-57" name="__codelineno-6-57" href="#__codelineno-6-57"></a>
+<a id="__codelineno-6-58" name="__codelineno-6-58" href="#__codelineno-6-58"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_instance&quot;</span><span class="w"> </span><span class="nv">&quot;bastion&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-59" name="__codelineno-6-59" href="#__codelineno-6-59"></a><span class="w">  </span><span class="na">name</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bastion-host&quot;</span>
+<a id="__codelineno-6-60" name="__codelineno-6-60" href="#__codelineno-6-60"></a><span class="w">  </span><span class="na">machine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;e2-micro&quot;</span>
+<a id="__codelineno-6-61" name="__codelineno-6-61" href="#__codelineno-6-61"></a><span class="w">  </span><span class="na">zone</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3-a&quot;</span>
+<a id="__codelineno-6-62" name="__codelineno-6-62" href="#__codelineno-6-62"></a><span class="w">  </span><span class="na">tags</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bastion&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a><span class="w">  </span><span class="nb">boot_disk</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-64" name="__codelineno-6-64" href="#__codelineno-6-64"></a><span class="w">    </span><span class="nb">initialize_params</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rocky-linux-cloud/rocky-linux-9&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a><span class="w">  </span><span class="nb">network_interface</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a><span class="w">    </span><span class="na">subnetwork</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_subnetwork.public_subnet.id</span>
+<a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a><span class="w">    </span><span class="nb">access_config</span><span class="w"> </span><span class="p">{}</span><span class="c1"> # 공인 IP 할당</span>
+<a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a><span class="p">}</span>
+<a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a>
+<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_instance&quot;</span><span class="w"> </span><span class="nv">&quot;k8s_masters&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a><span class="w">  </span><span class="na">count</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="c1"> # quota 부족 시, 수정</span>
+<a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a><span class="w">  </span><span class="na">name</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;k8s-master-${count.index + 1}&quot;</span>
+<a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a><span class="w">  </span><span class="na">machine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;e2-standard-2&quot;</span><span class="c1"> # 2 vCPU, 8GB Ram</span>
+<a id="__codelineno-6-76" name="__codelineno-6-76" href="#__codelineno-6-76"></a><span class="w">  </span><span class="na">zone</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3-a&quot;</span>
+<a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a><span class="w">  </span><span class="na">tags</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;k8s-master&quot;, &quot;internal-node&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-78" name="__codelineno-6-78" href="#__codelineno-6-78"></a><span class="w">  </span><span class="nb">boot_disk</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-79" name="__codelineno-6-79" href="#__codelineno-6-79"></a><span class="w">    </span><span class="nb">initialize_params</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rocky-linux-cloud/rocky-linux-9&quot;</span><span class="err">;</span><span class="w"> </span><span class="na">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-80" name="__codelineno-6-80" href="#__codelineno-6-80"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-81" name="__codelineno-6-81" href="#__codelineno-6-81"></a><span class="w">  </span><span class="nb">network_interface</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-82" name="__codelineno-6-82" href="#__codelineno-6-82"></a><span class="w">    </span><span class="na">subnetwork</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_subnetwork.private_subnet.id</span>
+<a id="__codelineno-6-83" name="__codelineno-6-83" href="#__codelineno-6-83"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-84" name="__codelineno-6-84" href="#__codelineno-6-84"></a><span class="p">}</span>
+<a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a>
+<a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_instance&quot;</span><span class="w"> </span><span class="nv">&quot;k8s_workers&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-87" name="__codelineno-6-87" href="#__codelineno-6-87"></a><span class="w">  </span><span class="na">count</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="c1"> # quota 부족 시, 수정</span>
+<a id="__codelineno-6-88" name="__codelineno-6-88" href="#__codelineno-6-88"></a><span class="w">  </span><span class="na">name</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;k8s-worker-${count.index + 1}&quot;</span>
+<a id="__codelineno-6-89" name="__codelineno-6-89" href="#__codelineno-6-89"></a><span class="w">  </span><span class="na">machine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;e2-standard-2&quot;</span>
+<a id="__codelineno-6-90" name="__codelineno-6-90" href="#__codelineno-6-90"></a><span class="w">  </span><span class="na">zone</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3-a&quot;</span>
+<a id="__codelineno-6-91" name="__codelineno-6-91" href="#__codelineno-6-91"></a><span class="w">  </span><span class="na">tags</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;k8s-worker&quot;, &quot;internal-node&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-92" name="__codelineno-6-92" href="#__codelineno-6-92"></a><span class="w">  </span><span class="nb">boot_disk</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-93" name="__codelineno-6-93" href="#__codelineno-6-93"></a><span class="w">    </span><span class="nb">initialize_params</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rocky-linux-cloud/rocky-linux-9&quot;</span><span class="err">;</span><span class="w"> </span><span class="na">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-94" name="__codelineno-6-94" href="#__codelineno-6-94"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-95" name="__codelineno-6-95" href="#__codelineno-6-95"></a><span class="w">  </span><span class="nb">network_interface</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-96" name="__codelineno-6-96" href="#__codelineno-6-96"></a><span class="w">    </span><span class="na">subnetwork</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_subnetwork.private_subnet.id</span>
+<a id="__codelineno-6-97" name="__codelineno-6-97" href="#__codelineno-6-97"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-98" name="__codelineno-6-98" href="#__codelineno-6-98"></a><span class="p">}</span>
+<a id="__codelineno-6-99" name="__codelineno-6-99" href="#__codelineno-6-99"></a>
+<a id="__codelineno-6-100" name="__codelineno-6-100" href="#__codelineno-6-100"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;google_compute_instance&quot;</span><span class="w"> </span><span class="nv">&quot;db_nodes&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-101" name="__codelineno-6-101" href="#__codelineno-6-101"></a><span class="w">  </span><span class="na">count</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="c1"> # quota 부족 시, 수정</span>
+<a id="__codelineno-6-102" name="__codelineno-6-102" href="#__codelineno-6-102"></a><span class="w">  </span><span class="na">name</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mariadb-node-${count.index + 1}&quot;</span>
+<a id="__codelineno-6-103" name="__codelineno-6-103" href="#__codelineno-6-103"></a><span class="w">  </span><span class="na">machine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;e2-standard-2&quot;</span>
+<a id="__codelineno-6-104" name="__codelineno-6-104" href="#__codelineno-6-104"></a><span class="w">  </span><span class="na">zone</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;asia-northeast3-a&quot;</span>
+<a id="__codelineno-6-105" name="__codelineno-6-105" href="#__codelineno-6-105"></a><span class="w">  </span><span class="na">tags</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;db-node&quot;, &quot;internal-node&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-106" name="__codelineno-6-106" href="#__codelineno-6-106"></a><span class="w">  </span><span class="nb">boot_disk</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-107" name="__codelineno-6-107" href="#__codelineno-6-107"></a><span class="w">    </span><span class="nb">initialize_params</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;rocky-linux-cloud/rocky-linux-9&quot;</span><span class="err">;</span><span class="w"> </span><span class="na">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-108" name="__codelineno-6-108" href="#__codelineno-6-108"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-109" name="__codelineno-6-109" href="#__codelineno-6-109"></a><span class="w">  </span><span class="nb">network_interface</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-110" name="__codelineno-6-110" href="#__codelineno-6-110"></a><span class="w">    </span><span class="na">subnetwork</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_subnetwork.private_subnet.id</span>
+<a id="__codelineno-6-111" name="__codelineno-6-111" href="#__codelineno-6-111"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-112" name="__codelineno-6-112" href="#__codelineno-6-112"></a><span class="p">}</span>
+<a id="__codelineno-6-113" name="__codelineno-6-113" href="#__codelineno-6-113"></a>
+<a id="__codelineno-6-114" name="__codelineno-6-114" href="#__codelineno-6-114"></a><span class="kr">output</span><span class="w"> </span><span class="nv">&quot;bastion_ip&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-115" name="__codelineno-6-115" href="#__codelineno-6-115"></a><span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">google_compute_instance.bastion.network_interface.0.access_config.0.nat_ip</span>
+<a id="__codelineno-6-116" name="__codelineno-6-116" href="#__codelineno-6-116"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="4">🚀 4단계: 배포 및 접속 설정 (핵심)</h2>
+<h3 id="1_2">1. 인프라 배포</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>terraform<span class="w"> </span>init
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>terraform<span class="w"> </span>plan
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>terraform<span class="w"> </span>apply
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># (yes 입력 시 생성 시작)</span>
+</code></pre></div>
+<p>생성 완료 후 출력되는 <strong><code>bastion_ip</code></strong>를 복사해 두세요.</p>
+<h3 id="2-sshconfig">2. 접속 편의성 설정 (<code>~/.ssh/config</code>)</h3>
+<p>IP와 키 경로를 매번 치지 않기 위해 설정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nano<span class="w"> </span>~/.ssh/config
+</code></pre></div>
+<p><strong>[붙여넣을 내용]</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># 1. Bastion Host
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Host bastion
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    HostName 34.xx.xx.xx        # ★ Terraform Output의 Bastion IP로 수정하세요!
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    User rocky
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    IdentityFile ~/.ssh/gcp_key
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a># 2. 내부 폐쇄망 노드 (자동 점프)
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>Host 10.0.2.*
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    User rocky
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    IdentityFile ~/.ssh/gcp_key
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    ProxyJump bastion             # Bastion을 거쳐서 접속
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    StrictHostKeyChecking no      # (테스트용) 지문 변경 경고 무시
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    UserKnownHostsFile /dev/null
+</code></pre></div>
+<hr />
+<h2 id="5">🚀 5단계: 접속 테스트 및 운영</h2>
+<p>이제 내 PC(WSL)에서 바로 내부 서버로 접속할 수 있습니다.</p>
+<h3 id="a">A. 접속 테스트</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 내부 마스터 노드(10.0.2.2)로 바로 접속</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ssh<span class="w"> </span><span class="m">10</span>.0.2.2
+</code></pre></div>
+<blockquote>
+<p>성공 시: <code>[rocky@k8s-master-1 ~]$</code> 프롬프트가 뜹니다.</p>
+</blockquote>
+<h3 id="b-scp">B. 파일 전송 (SCP)</h3>
+<p>설치 파일 등을 로컬에서 내부 서버로 바로 보낼 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 로컬 파일 -&gt; 내부 서버 전송</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>scp<span class="w"> </span>my-file.tar.gz<span class="w"> </span><span class="m">10</span>.0.2.2:/home/rocky/
+</code></pre></div>
+<h3 id="c-3">C. (선택) 3중화 확장</h3>
+<p>GCP 콘솔에서 할당량(Quota) 상향 승인을 받은 후,
+<code>main.tf</code>의 <code>count</code>를 3으로 수정하고 <code>terraform apply</code>를 다시 실행하면 자동으로 확장됩니다.</p>
+<hr />
+<h2 id="6-clean-up">🚀 6단계: 자원 삭제 (Clean Up)</h2>
+<p>테스트 종료 후 비용 발생을 막기 위해 반드시 삭제하세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>terraform<span class="w"> </span>destroy
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># (yes 입력)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
