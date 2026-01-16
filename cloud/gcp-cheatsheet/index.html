@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/openstack/cheatsheet/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cloud/gcp-cheatsheet/">
       
       
-        <link rel="prev" href="../../network/tip/check-network-subnet/">
+        <link rel="prev" href="../use_terraform_with_gcp/">
       
       
-        <link rel="next" href="../base/reference/">
+        <link rel="next" href="../../cicd/offline-install/001-gitlab_jenkins_install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Cheat Sheets - Infra Cheatsheets</title>
+        <title>Google Cloud SDK Cheat Sheet - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#openstack-cli-cheat-sheet" class="md-skip">
+        <a href="#google-cloud-sdk-gcloud" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cheat Sheets
+              Google Cloud SDK Cheat Sheet
             
           </span>
         </div>
@@ -268,11 +268,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -438,13 +440,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -935,26 +935,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -972,7 +977,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -990,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -1015,10 +1020,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../cloud/gcp-cheatsheet/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google Cloud SDK Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1034,6 +1066,227 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 환경 설정 및 인증 (필수)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-compute-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 인스턴스 (Compute Engine) 관리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 인스턴스 (Compute Engine) 관리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ 전원 및 상태 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 이미지 (Image) 관리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 이미지 (Image) 관리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 OS 이미지 찾기 (필터링)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-flavor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 머신 타입 (Flavor) 조회
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 머신 타입 (Flavor) 조회">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎮 GPU 인스턴스 생성 예시
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 네트워크 (VPC) 관리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 네트워크 (VPC) 관리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip-static-external-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 고정 IP (Static External IP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-disk-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 스토리지 (Disk &amp; Bucket) 관리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 스토리지 (Disk &amp; Bucket) 관리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#persistent-disk-cinder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 영구 디스크 (Persistent Disk) - Cinder 대응
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcs-object-storage-swifts3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 GCS 버킷 (Object Storage) - Swift/S3 대응
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-kubernetes-gke" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Kubernetes (GKE) 관리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. IAM 및 프로젝트 관리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. IAM 및 프로젝트 관리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 팁: 출력 포맷팅 (스크립트용)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1956,31 +2209,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
             
   
   
@@ -1998,7 +2246,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2013,37 +2261,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Cheat Sheets
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2059,221 +2280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 환경 설정 (필수)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 인스턴스 (Server) 관리
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. 인스턴스 (Server) 관리">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚡ 전원 관리 (중요)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-image" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 이미지 (Image) 관리
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 이미지 (Image) 관리">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔧 GPU/가상화 관련 속성 설정 (필수)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-flavor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 플레이버 (Flavor) 관리
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 플레이버 (Flavor) 관리">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#extra-specs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔧 플레이버 속성 (Extra Specs)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-network" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 네트워크 (Network) 관리
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 네트워크 (Network) 관리">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#floating-ip-ip" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🌐 Floating IP (공인 IP)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-admin" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 시스템 및 하이퍼바이저 관리 (Admin 전용)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-volume" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. 볼륨 (Volume) 관리
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-placement-resource" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Placement (Resource) 관리
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Placement (Resource) 관리">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#allocation-candidates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔍 자원 스케줄링 디버깅 (Allocation Candidates)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#resource-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💡 Resource Class (자원 클래스) 참고
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💡 팁: 출력 포맷 예쁘게 보기
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2292,20 +2298,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_2" >
         
           
-          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
             
   
   
@@ -2341,7 +2344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base/reference/" class="md-nav__link">
+      <a href="../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -2369,7 +2372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base/install/" class="md-nav__link">
+      <a href="../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -2397,7 +2400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base/api/" class="md-nav__link">
+      <a href="../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -2439,20 +2442,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
         
           
-          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
             
   
   
@@ -2488,7 +2488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -2516,7 +2516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gpu/pci-placement/" class="md-nav__link">
+      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -2558,20 +2558,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_4" >
         
           
-          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
             
   
   
@@ -2607,7 +2604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/cloud-init/" class="md-nav__link">
+      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -2635,7 +2632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/golden-image/" class="md-nav__link">
+      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -2677,20 +2674,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_5" >
         
           
-          <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
             
   
   
@@ -2726,7 +2720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -2792,7 +2786,7 @@
   <a href="#0" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 환경 설정 (필수)
+        0. 환경 설정 및 인증 (필수)
       
     </span>
   </a>
@@ -2800,22 +2794,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-server" class="md-nav__link">
+  <a href="#1-compute-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 인스턴스 (Server) 관리
+        1. 인스턴스 (Compute Engine) 관리
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 인스턴스 (Server) 관리">
+    <nav class="md-nav" aria-label="1. 인스턴스 (Compute Engine) 관리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚡ 전원 관리 (중요)
+        ⚡ 전원 및 상태 관리
       
     </span>
   </a>
@@ -2840,10 +2834,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
+  <a href="#os" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 GPU/가상화 관련 속성 설정 (필수)
+        🔧 OS 이미지 찾기 (필터링)
       
     </span>
   </a>
@@ -2859,19 +2853,19 @@
   <a href="#3-flavor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 플레이버 (Flavor) 관리
+        3. 머신 타입 (Flavor) 조회
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. 플레이버 (Flavor) 관리">
+    <nav class="md-nav" aria-label="3. 머신 타입 (Flavor) 조회">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#extra-specs" class="md-nav__link">
+  <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 플레이버 속성 (Extra Specs)
+        🎮 GPU 인스턴스 생성 예시
       
     </span>
   </a>
@@ -2884,22 +2878,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-network" class="md-nav__link">
+  <a href="#4-vpc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 네트워크 (Network) 관리
+        4. 네트워크 (VPC) 관리
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 네트워크 (Network) 관리">
+    <nav class="md-nav" aria-label="4. 네트워크 (VPC) 관리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#floating-ip-ip" class="md-nav__link">
+  <a href="#ip-static-external-ip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🌐 Floating IP (공인 IP)
+        🌐 고정 IP (Static External IP)
       
     </span>
   </a>
@@ -2912,44 +2906,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-admin" class="md-nav__link">
+  <a href="#5-disk-bucket" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 시스템 및 하이퍼바이저 관리 (Admin 전용)
+        5. 스토리지 (Disk &amp; Bucket) 관리
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-volume" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. 볼륨 (Volume) 관리
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-placement-resource" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Placement (Resource) 관리
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Placement (Resource) 관리">
+    <nav class="md-nav" aria-label="5. 스토리지 (Disk &amp; Bucket) 관리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#allocation-candidates" class="md-nav__link">
+  <a href="#persistent-disk-cinder" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 자원 스케줄링 디버깅 (Allocation Candidates)
+        💾 영구 디스크 (Persistent Disk) - Cinder 대응
       
     </span>
   </a>
@@ -2957,21 +2929,49 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#resource-class" class="md-nav__link">
+  <a href="#gcs-object-storage-swifts3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 Resource Class (자원 클래스) 참고
+        📦 GCS 버킷 (Object Storage) - Swift/S3 대응
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-kubernetes-gke" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Kubernetes (GKE) 관리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. IAM 및 프로젝트 관리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. IAM 및 프로젝트 관리">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 팁: 출력 포맷 예쁘게 보기
+        💡 팁: 출력 포맷팅 (스크립트용)
       
     </span>
   </a>
@@ -3003,341 +3003,360 @@
   
 
 
-<h1 id="openstack-cli-cheat-sheet">📘 OpenStack CLI 치트시트 (Cheat Sheet)</h1>
-<p>OpenStack 운영 및 관리를 위한 필수 명령어 모음입니다.</p>
+<h1 id="google-cloud-sdk-gcloud">📘 Google Cloud SDK (<code>gcloud</code>) 치트시트</h1>
+<p>GCP 리소스 관리를 위한 필수 명령어 모음입니다.</p>
 <blockquote>
 <p><strong>범례</strong>:</p>
 <ul>
-<li><code>&lt;값&gt;</code> : 필수 입력 값 (예: ID, 이름)</li>
+<li><code>&lt;값&gt;</code> : 필수 입력 값 (예: 인스턴스명, 프로젝트ID)</li>
 <li><code>[옵션]</code> : 선택 입력 값</li>
 </ul>
 </blockquote>
-<h2 id="0">0. 환경 설정 (필수)</h2>
-<p>명령어를 실행하기 전, 반드시 인증 정보를 로드해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 인증 파일 로드</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">source</span><span class="w"> </span>admin-openrc.sh
+<h2 id="0">0. 환경 설정 및 인증 (필수)</h2>
+<p>GCP CLI를 사용하기 위해 계정을 연동하고 프로젝트를 설정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 브라우저를 통한 인증 (초기 설정)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>login
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 토큰 잘 받아졌는지 확인</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>openstack<span class="w"> </span>token<span class="w"> </span>issue
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2. 프로젝트 설정 (작업 대상 프로젝트 지정)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>project<span class="w"> </span>&lt;프로젝트_ID&gt;
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 3. 기본 리전/존 설정 (매번 입력하기 귀찮을 때)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>compute/region<span class="w"> </span>asia-northeast3<span class="w">  </span><span class="c1"># 서울 리전</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>compute/zone<span class="w"> </span>asia-northeast3-a<span class="w">  </span><span class="c1"># 서울 A존</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># 4. 설정 확인</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>gcloud<span class="w"> </span>config<span class="w"> </span>list
 </code></pre></div>
+<blockquote>
+<p><strong>💡 팁: 다중 계정/환경 관리 (Configuration)</strong>
+OpenStack의 <code>source rc</code> 파일 교체와 비슷하게, GCP는 config 구성을 스위칭할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 새 프로필 생성</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>gcloud<span class="w"> </span>config<span class="w"> </span>configurations<span class="w"> </span>create<span class="w"> </span>&lt;새_프로필명&gt;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># 프로필 전환</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>gcloud<span class="w"> </span>config<span class="w"> </span>configurations<span class="w"> </span>activate<span class="w"> </span>&lt;프로필명&gt;
+</code></pre></div>
+</blockquote>
 <hr />
-<h2 id="1-server">1. 인스턴스 (Server) 관리</h2>
-<p>가상머신(VM)의 생명주기를 관리합니다.</p>
+<h2 id="1-compute-engine">1. 인스턴스 (Compute Engine) 관리</h2>
+<p>VM 인스턴스(GCE)의 생명주기를 관리합니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
-<th style="text-align: left;">설명</th>
+<th>작업</th>
+<th>명령어</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>목록 조회</strong></td>
-<td style="text-align: left;"><code>openstack server list --all-projects</code></td>
-<td style="text-align: left;">모든 프로젝트의 VM 목록 조회</td>
+<td><strong>목록 조회</strong></td>
+<td><code>gcloud compute instances list</code></td>
+<td>현재 프로젝트의 모든 VM 조회</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>상세 조회</strong></td>
-<td style="text-align: left;"><code>openstack server show &lt;인스턴스_ID&gt;</code></td>
-<td style="text-align: left;">특정 VM의 상세 정보(IP, 호스트, 상태) 조회</td>
+<td><strong>상세 조회</strong></td>
+<td><code>gcloud compute instances describe &lt;VM이름&gt;</code></td>
+<td>특정 VM의 상세 스펙/상태 조회 (YAML 출력)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>로그 확인</strong></td>
-<td style="text-align: left;"><code>openstack console log show &lt;인스턴스_ID&gt;</code></td>
-<td style="text-align: left;">부팅 로그(Console Log) 확인 (디버깅용)</td>
+<td><strong>생성</strong></td>
+<td><code>gcloud compute instances create &lt;VM이름&gt; --image-family &lt;OS계열&gt; --machine-type &lt;타입&gt;</code></td>
+<td>기본 VM 생성</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>콘솔 URL</strong></td>
-<td style="text-align: left;"><code>openstack console url show &lt;인스턴스_ID&gt;</code></td>
-<td style="text-align: left;">웹 VNC 접속 주소 확인</td>
+<td><strong>삭제</strong></td>
+<td><code>gcloud compute instances delete &lt;VM이름&gt;</code></td>
+<td>VM 삭제 (디스크 유지 옵션 가능)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>생성</strong></td>
-<td style="text-align: left;"><code>openstack server create --image &lt;이미지&gt; --flavor &lt;플레이버&gt; --network &lt;네트워크&gt; &lt;VM이름&gt;</code></td>
-<td style="text-align: left;">인스턴스 생성</td>
+<td><strong>시리얼 포트</strong></td>
+<td><code>gcloud compute instances get-serial-port-output &lt;VM이름&gt;</code></td>
+<td>부팅 로그 확인 (디버깅용)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>삭제</strong></td>
-<td style="text-align: left;"><code>openstack server delete &lt;인스턴스_ID&gt;</code></td>
-<td style="text-align: left;">인스턴스 삭제</td>
+<td><strong>SSH 접속</strong></td>
+<td><code>gcloud compute ssh &lt;VM이름&gt;</code></td>
+<td><strong>(강추)</strong> 키 관리 없이 바로 SSH 접속</td>
 </tr>
 </tbody>
 </table>
-<h3 id="_1">⚡ 전원 관리 (중요)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 부드러운 재부팅 (OS 레벨 재부팅)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>openstack<span class="w"> </span>server<span class="w"> </span>reboot<span class="w"> </span>&lt;인스턴스_ID&gt;
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 강제 재부팅 (전원 껐다 켜기 - GPU 오류 시 필수)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>openstack<span class="w"> </span>server<span class="w"> </span>reboot<span class="w"> </span>--hard<span class="w"> </span>&lt;인스턴스_ID&gt;
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># 인스턴스 일시 정지 해제 (Paused 상태 풀기)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>openstack<span class="w"> </span>server<span class="w"> </span>unpause<span class="w"> </span>&lt;인스턴스_ID&gt;
+<h3 id="_1">⚡ 전원 및 상태 관리</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># VM 시작 (Start)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>start<span class="w"> </span>&lt;VM이름&gt;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># VM 중지 (Stop - 과금 중단, 디스크 비용은 발생)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>stop<span class="w"> </span>&lt;VM이름&gt;
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># VM 재설정 (Reset - 강제 재부팅 효과)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>reset<span class="w"> </span>&lt;VM이름&gt;
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># 실행 중인 VM의 머신 타입 변경 (중지 후 실행 필요)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>set-machine-type<span class="w"> </span>&lt;VM이름&gt;<span class="w"> </span>--machine-type<span class="w"> </span>e2-standard-4
 </code></pre></div>
 <hr />
 <h2 id="2-image">2. 이미지 (Image) 관리</h2>
-<p>Glance 서비스 관련 명령어입니다.</p>
+<p>부팅 디스크용 OS 이미지 관련 명령어입니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
+<th>작업</th>
+<th>명령어</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>목록 조회</strong></td>
-<td style="text-align: left;"><code>openstack image list</code></td>
+<td><strong>목록 조회</strong></td>
+<td><code>gcloud compute images list</code></td>
+<td>사용 가능한 공용/사설 이미지 목록</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>상세 조회</strong></td>
-<td style="text-align: left;"><code>openstack image show &lt;이미지_ID&gt;</code></td>
+<td><strong>상세 조회</strong></td>
+<td><code>gcloud compute images describe &lt;이미지명&gt; --project &lt;프로젝트ID&gt;</code></td>
+<td>이미지 상세 정보 확인</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>이미지 등록</strong></td>
-<td style="text-align: left;"><code>openstack image create "&lt;이름&gt;" --file &lt;파일경로&gt; --disk-format qcow2 --container-format bare --public</code></td>
+<td><strong>이미지 생성</strong></td>
+<td><code>gcloud compute images create &lt;이미지명&gt; --source-disk &lt;원본디스크&gt; --source-disk-zone &lt;존&gt;</code></td>
+<td>디스크로부터 커스텀 이미지 생성</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>속성 수정</strong></td>
-<td style="text-align: left;"><code>openstack image set --property &lt;키&gt;=&lt;값&gt; &lt;이미지_ID&gt;</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>삭제</strong></td>
-<td style="text-align: left;"><code>openstack image delete &lt;이미지_ID&gt;</code></td>
+<td><strong>삭제</strong></td>
+<td><code>gcloud compute images delete &lt;이미지명&gt;</code></td>
+<td>커스텀 이미지 삭제</td>
 </tr>
 </tbody>
 </table>
-<h3 id="gpu">🔧 GPU/가상화 관련 속성 설정 (필수)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 머신 타입 Q35 설정 (PCIe Passthrough 필수)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>openstack<span class="w"> </span>image<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">hw_machine_type</span><span class="o">=</span>q35<span class="w"> </span>&lt;이미지_ID&gt;
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 하이퍼바이저 숨기기 (RTX 계열 필수)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>openstack<span class="w"> </span>image<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--property<span class="w"> </span>hw:kvm_hidden<span class="o">=</span><span class="nb">true</span><span class="w"> </span>&lt;이미지_ID&gt;
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Guest Agent 활성화 (IP 확인용)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>openstack<span class="w"> </span>image<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">hw_qemu_guest_agent</span><span class="o">=</span>yes<span class="w"> </span>&lt;이미지_ID&gt;
-</code></pre></div>
-<hr />
-<h2 id="3-flavor">3. 플레이버 (Flavor) 관리</h2>
-<p>인스턴스의 사양(CPU, RAM, Disk)을 정의합니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>목록 조회</strong></td>
-<td style="text-align: left;"><code>openstack flavor list</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>생성</strong></td>
-<td style="text-align: left;"><code>openstack flavor create --ram &lt;MB&gt; --disk &lt;GB&gt; --vcpus &lt;개수&gt; &lt;플레이버_이름&gt;</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>삭제</strong></td>
-<td style="text-align: left;"><code>openstack flavor delete &lt;플레이버_ID&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="extra-specs">🔧 플레이버 속성 (Extra Specs)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 속성 설정 (GPU용)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>openstack<span class="w"> </span>flavor<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--property<span class="w"> </span>hw:pci_numa_affinity_policy<span class="o">=</span>required<span class="w"> </span>&lt;플레이버_ID&gt;
+<h3 id="os">🔧 OS 이미지 찾기 (필터링)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Rocky Linux 9 계열 이미지 찾기</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>rocky-linux-cloud<span class="w"> </span>--filter<span class="o">=</span><span class="s2">&quot;name ~ rocky-linux-9&quot;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 속성 확인</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>openstack<span class="w"> </span>flavor<span class="w"> </span>show<span class="w"> </span>&lt;플레이버_ID&gt;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 특정 OS의 최신 버전 Family 확인</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>images<span class="w"> </span>describe-from-family<span class="w"> </span>rocky-linux-9<span class="w"> </span>--project<span class="w"> </span>rocky-linux-cloud
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># --show-deprecated 옵션을 통해 예전 이미지도 확인 가능</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span>--project<span class="w"> </span>rocky-linux-cloud<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span>--show-deprecated<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span>--sort-by<span class="o">=</span><span class="s2">&quot;~creationTimestamp&quot;</span>
 </code></pre></div>
 <hr />
-<h2 id="4-network">4. 네트워크 (Network) 관리</h2>
-<p>Neutron 서비스 관련 명령어입니다.</p>
+<h2 id="3-flavor">3. 머신 타입 (Flavor) 조회</h2>
+<p>GCP는 사용자가 Flavor를 직접 만들기보다, 미리 정의된 <strong>Machine Type</strong>을 조회하여 사용합니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
-<th style="text-align: left;">설명</th>
+<th>작업</th>
+<th>명령어</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>네트워크 목록</strong></td>
-<td style="text-align: left;"><code>openstack network list</code></td>
-<td style="text-align: left;">내부/외부 네트워크 목록</td>
+<td><strong>목록 조회</strong></td>
+<td><code>gcloud compute machine-types list</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>서브넷 목록</strong></td>
-<td style="text-align: left;"><code>openstack subnet list</code></td>
-<td style="text-align: left;">IP 대역 확인</td>
+<td><strong>필터링 조회</strong></td>
+<td><code>gcloud compute machine-types list --filter="name ~ e2-standard"</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>보안그룹 목록</strong></td>
-<td style="text-align: left;"><code>openstack security group list</code></td>
-<td style="text-align: left;">방화벽 그룹 확인</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>규칙 추가</strong></td>
-<td style="text-align: left;"><code>openstack security group rule create --proto tcp --dst-port &lt;포트&gt; &lt;그룹ID&gt;</code></td>
-<td style="text-align: left;">포트 개방 (예: 22, 80)</td>
+<td><strong>상세 스펙</strong></td>
+<td><code>gcloud compute machine-types describe &lt;타입명&gt;</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="floating-ip-ip">🌐 Floating IP (공인 IP)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Floating IP 목록 조회</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>openstack<span class="w"> </span>floating<span class="w"> </span>ip<span class="w"> </span>list
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 새 IP 생성 (할당)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>openstack<span class="w"> </span>floating<span class="w"> </span>ip<span class="w"> </span>create<span class="w"> </span>&lt;외부_네트워크_이름&gt;
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># 인스턴스에 연결</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>openstack<span class="w"> </span>server<span class="w"> </span>add<span class="w"> </span>floating<span class="w"> </span>ip<span class="w"> </span>&lt;인스턴스_ID&gt;<span class="w"> </span>&lt;IP주소&gt;
+<h3 id="gpu">🎮 GPU 인스턴스 생성 예시</h3>
+<p>GCP에서 GPU를 붙일 때는 <code>--accelerator</code> 옵션을 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># T4 GPU 1개를 부착한 인스턴스 생성</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>create<span class="w"> </span>&lt;VM이름&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>--machine-type<span class="w"> </span>n1-standard-4<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span>--accelerator<span class="w"> </span><span class="nv">type</span><span class="o">=</span>nvidia-tesla-t4,count<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span>--maintenance-policy<span class="w"> </span>TERMINATE<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span>--image-family<span class="w"> </span>common-cu113<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span>--image-project<span class="w"> </span>deeplearning-platform-release
 </code></pre></div>
 <hr />
-<h2 id="5-admin">5. 시스템 및 하이퍼바이저 관리 (Admin 전용)</h2>
-<p>운영자(Operator)가 클러스터 상태를 점검할 때 씁니다.</p>
+<h2 id="4-vpc">4. 네트워크 (VPC) 관리</h2>
+<p>VPC 네트워크 및 방화벽 규칙 관리입니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
-<th style="text-align: left;">설명</th>
+<th>작업</th>
+<th>명령어</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>하이퍼바이저 상태</strong></td>
-<td style="text-align: left;"><code>openstack hypervisor list</code></td>
-<td style="text-align: left;">각 노드의 UP/DOWN 상태 확인</td>
+<td><strong>네트워크 목록</strong></td>
+<td><code>gcloud compute networks list</code></td>
+<td>VPC 목록 조회</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>컴퓨트 서비스</strong></td>
-<td style="text-align: left;"><code>openstack compute service list</code></td>
-<td style="text-align: left;">nova-compute 서비스 상태 확인</td>
+<td><strong>서브넷 목록</strong></td>
+<td><code>gcloud compute networks subnets list</code></td>
+<td>서브넷 IP 대역 확인</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>자원 사용량</strong></td>
-<td style="text-align: left;"><code>openstack hypervisor stats show</code></td>
-<td style="text-align: left;">전체 클러스터 자원 통계</td>
+<td><strong>방화벽 목록</strong></td>
+<td><code>gcloud compute firewall-rules list</code></td>
+<td>적용된 방화벽 규칙 확인</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>노드 상세 정보</strong></td>
-<td style="text-align: left;"><code>openstack hypervisor show &lt;호스트명&gt;</code></td>
-<td style="text-align: left;">특정 노드의 CPU/RAM 상세 스펙</td>
+<td><strong>방화벽 생성</strong></td>
+<td><code>gcloud compute firewall-rules create &lt;규칙명&gt; --allow tcp:80,tcp:443</code></td>
+<td>포트 개방</td>
+</tr>
+<tr>
+<td><strong>방화벽 삭제</strong></td>
+<td><code>gcloud compute firewall-rules delete &lt;규칙명&gt;</code></td>
+<td>규칙 삭제</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="6-volume">6. 볼륨 (Volume) 관리</h2>
-<p>Cinder 서비스 관련 명령어입니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>목록 조회</strong></td>
-<td style="text-align: left;"><code>openstack volume list</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>생성</strong></td>
-<td style="text-align: left;"><code>openstack volume create --size &lt;GB&gt; &lt;볼륨이름&gt;</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>연결</strong></td>
-<td style="text-align: left;"><code>openstack server add volume &lt;인스턴스_ID&gt; &lt;볼륨_ID&gt;</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>해제</strong></td>
-<td style="text-align: left;"><code>openstack server remove volume &lt;인스턴스_ID&gt; &lt;볼륨_ID&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="7-placement-resource">7. Placement (Resource) 관리</h2>
-<p>Placement 서비스 관련 명령어로, 물리 노드 및 GPU 같은 특수 자원의 재고(Inventory)와 할당(Allocation) 상태를 확인합니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">작업</th>
-<th style="text-align: left;">명령어</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>RP 목록 조회</strong></td>
-<td style="text-align: left;"><code>openstack resource provider list</code></td>
-<td style="text-align: left;">등록된 모든 자원 제공자(Compute Node, GPU 등) 목록</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>재고(Inventory) 확인</strong></td>
-<td style="text-align: left;"><code>openstack resource provider inventory list &lt;RP_UUID&gt;</code></td>
-<td style="text-align: left;">특정 노드의 CPU, RAM, GPU <strong>총량 및 여유분</strong> 조회</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>사용량(Usage) 확인</strong></td>
-<td style="text-align: left;"><code>openstack resource provider usage show &lt;RP_UUID&gt;</code></td>
-<td style="text-align: left;">특정 노드의 자원별 <strong>실제 사용량</strong> 조회</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>할당(Allocation) 확인</strong></td>
-<td style="text-align: left;"><code>openstack resource provider allocation show &lt;RP_UUID&gt;</code></td>
-<td style="text-align: left;">어떤 인스턴스가 이 노드의 자원을 점유 중인지 확인</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>트레이트(Trait) 조회</strong></td>
-<td style="text-align: left;"><code>openstack resource provider trait list &lt;RP_UUID&gt;</code></td>
-<td style="text-align: left;">노드의 특성 태그(예: <code>HW_CPU_X86_AVX512</code>) 조회</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>이름 변경</strong></td>
-<td style="text-align: left;"><code>openstack resource provider set --name &lt;새이름&gt; &lt;RP_UUID&gt;</code></td>
-<td style="text-align: left;">리소스 프로바이더 이름 변경</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>RP 삭제</strong></td>
-<td style="text-align: left;"><code>openstack resource provider delete &lt;RP_UUID&gt;</code></td>
-<td style="text-align: left;">(주의) 자원 제공자 삭제 (좀비 레코드 정리 시 사용)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="allocation-candidates">🔍 자원 스케줄링 디버깅 (Allocation Candidates)</h3>
-<p>"내 VM이 왜 생성이 안 되지? (No Valid Host)" 에러가 날 때, 스케줄러 입장에서 **"배포 가능한 후보지"**가 있는지 미리 조회해보는 명령어입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 스펙에 맞는 후보 호스트 조회 (예: CPU 1개, 메모리 512MB)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>openstack<span class="w"> </span>allocation<span class="w"> </span>candidate<span class="w"> </span>list<span class="w"> </span>--resource<span class="w"> </span><span class="nv">VCPU</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>--resource<span class="w"> </span><span class="nv">MEMORY_MB</span><span class="o">=</span><span class="m">512</span>
+<h3 id="ip-static-external-ip">🌐 고정 IP (Static External IP)</h3>
+<p>OpenStack의 Floating IP에 해당합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 고정 IP 예약 (생성)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>addresses<span class="w"> </span>create<span class="w"> </span>&lt;IP이름&gt;<span class="w"> </span>--region<span class="w"> </span>&lt;리전&gt;
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># GPU가 포함된 후보 호스트 조회 (예: GPU 1개 필요)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># (사용자 환경에 따라 클래스 이름이 VGPU 또는 PCI_DEVICE 등으로 다를 수 있음)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>openstack<span class="w"> </span>allocation<span class="w"> </span>candidate<span class="w"> </span>list<span class="w"> </span>--resource<span class="w"> </span><span class="nv">VCPU</span><span class="o">=</span><span class="m">4</span><span class="w"> </span>--resource<span class="w"> </span><span class="nv">CUSTOM_GPU_RTX3060</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 예약된 IP 목록 확인 (실제 IP 주소 확인)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>addresses<span class="w"> </span>list
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># 인스턴스 생성 시 고정 IP 할당</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>create<span class="w"> </span>&lt;VM이름&gt;<span class="w"> </span>--address<span class="w"> </span>&lt;IP주소_또는_IP이름&gt;
 </code></pre></div>
 <hr />
-<h3 id="resource-class">💡 Resource Class (자원 클래스) 참고</h3>
-<p>명령어 사용 시 자주 보이는 자원 이름(Class)들입니다.</p>
-<ul>
-<li><strong><code>VCPU</code></strong>: 가상 CPU 코어 수</li>
-<li><strong><code>MEMORY_MB</code></strong>: 메모리 용량 (MB)</li>
-<li><strong><code>DISK_GB</code></strong>: 로컬 디스크 용량 (GB)</li>
-<li><strong><code>PCI_DEVICE</code></strong> 또는 <strong><code>CUSTOM_...</code></strong>: GPU 같은 특수 장치</li>
-</ul>
-<p><strong>예시: 특정 컴퓨트 노드(<code>openstack22</code>)의 GPU 재고 확인하기</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1. 목록에서 openstack22의 UUID 찾기</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>list<span class="w"> </span>--name<span class="w"> </span>openstack22
+<h2 id="5-disk-bucket">5. 스토리지 (Disk &amp; Bucket) 관리</h2>
+<p>블록 스토리지(Persistent Disk)와 객체 스토리지(GCS) 관리입니다.</p>
+<h3 id="persistent-disk-cinder">💾 영구 디스크 (Persistent Disk) - Cinder 대응</h3>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>명령어</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>목록 조회</strong></td>
+<td><code>gcloud compute disks list</code></td>
+</tr>
+<tr>
+<td><strong>생성</strong></td>
+<td><code>gcloud compute disks create &lt;디스크명&gt; --size 100GB --type pd-ssd</code></td>
+</tr>
+<tr>
+<td><strong>크기 확장</strong></td>
+<td><code>gcloud compute disks resize &lt;디스크명&gt; --size 200GB</code></td>
+</tr>
+<tr>
+<td><strong>VM 부착</strong></td>
+<td><code>gcloud compute instances attach-disk &lt;VM이름&gt; --disk &lt;디스크명&gt;</code></td>
+</tr>
+<tr>
+<td><strong>스냅샷</strong></td>
+<td><code>gcloud compute disks snapshot &lt;디스크명&gt; --snapshot-names &lt;스냅샷명&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="gcs-object-storage-swifts3">📦 GCS 버킷 (Object Storage) - Swift/S3 대응</h3>
+<p><code>gcloud storage</code> 또는 구형 <code>gsutil</code> 명령어를 사용합니다. (최신 버전은 <code>gcloud storage</code> 권장)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 버킷 목록 조회</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>gcloud<span class="w"> </span>storage<span class="w"> </span>buckets<span class="w"> </span>list
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 2. 해당 UUID로 재고 확인 (GPU 개수 확인용)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>openstack<span class="w"> </span>resource<span class="w"> </span>provider<span class="w"> </span>inventory<span class="w"> </span>list<span class="w"> </span>&lt;openstack22_UUID&gt;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 파일 업로드 (로컬 -&gt; 버킷)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>gcloud<span class="w"> </span>storage<span class="w"> </span>cp<span class="w"> </span>&lt;로컬파일&gt;<span class="w"> </span>gs://&lt;버킷명&gt;/
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># 파일 다운로드 (버킷 -&gt; 로컬)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>gcloud<span class="w"> </span>storage<span class="w"> </span>cp<span class="w"> </span>gs://&lt;버킷명&gt;/&lt;파일&gt;<span class="w"> </span>&lt;로컬경로&gt;
 </code></pre></div>
 <hr />
-<h3 id="_2">💡 팁: 출력 포맷 예쁘게 보기</h3>
-<p>명령어 뒤에 <code>-c</code> (컬럼 선택)와 <code>-f</code> (포맷) 옵션을 쓰면 필요한 정보만 깔끔하게 볼 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># ID와 이름, 상태만 보고 싶을 때 (테이블 형식)</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>openstack<span class="w"> </span>server<span class="w"> </span>list<span class="w"> </span>-c<span class="w"> </span>ID<span class="w"> </span>-c<span class="w"> </span>Name<span class="w"> </span>-c<span class="w"> </span>Status
+<h2 id="6-kubernetes-gke">6. Kubernetes (GKE) 관리</h2>
+<p>GCP의 핵심인 관리형 쿠버네티스 엔진 명령어입니다.</p>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>클러스터 목록</strong></td>
+<td><code>gcloud container clusters list</code></td>
+<td>GKE 클러스터 상태 확인</td>
+</tr>
+<tr>
+<td><strong>클러스터 생성</strong></td>
+<td><code>gcloud container clusters create &lt;이름&gt; --num-nodes 3</code></td>
+<td>기본 클러스터 생성</td>
+</tr>
+<tr>
+<td><strong>자격증명 가져오기</strong></td>
+<td><code>gcloud container clusters get-credentials &lt;이름&gt;</code></td>
+<td><strong>(필수)</strong> <code>kubectl</code> 사용을 위한 kubeconfig 자동 설정</td>
+</tr>
+<tr>
+<td><strong>노드풀 관리</strong></td>
+<td><code>gcloud container node-pools list --cluster &lt;클러스터명&gt;</code></td>
+<td>노드 그룹 확인</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-iam">7. IAM 및 프로젝트 관리</h2>
+<p>권한 및 프로젝트 설정입니다.</p>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>프로젝트 목록</strong></td>
+<td><code>gcloud projects list</code></td>
+<td>접근 가능한 프로젝트 ID 확인</td>
+</tr>
+<tr>
+<td><strong>현재 설정</strong></td>
+<td><code>gcloud config list</code></td>
+<td>현재 활성화된 계정/프로젝트/리전 확인</td>
+</tr>
+<tr>
+<td><strong>IAM 정책 조회</strong></td>
+<td><code>gcloud projects get-iam-policy &lt;프로젝트ID&gt;</code></td>
+<td>누구에게 어떤 권한이 있는지 확인</td>
+</tr>
+<tr>
+<td><strong>서비스 계정 키</strong></td>
+<td><code>gcloud iam service-accounts keys create key.json --iam-account &lt;계정메일&gt;</code></td>
+<td>API 키 파일(JSON) 다운로드</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_2">💡 팁: 출력 포맷팅 (스크립트용)</h3>
+<p>OpenStack의 <code>-c</code>, <code>-f</code> 옵션과 유사하게 GCP는 <code>--format</code> 플래그가 매우 강력합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 1. 테이블에서 특정 컬럼만 보기</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>list<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;table(name, status, networkInterfaces[0].networkIP)&quot;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 값만 뽑아서 스크립트에 쓰고 싶을 때 (Value 형식)</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>openstack<span class="w"> </span>server<span class="w"> </span>show<span class="w"> </span>&lt;ID&gt;<span class="w"> </span>-c<span class="w"> </span>status<span class="w"> </span>-f<span class="w"> </span>value
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 2. JSON 형태로 전체 보기</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>describe<span class="w"> </span>&lt;VM이름&gt;<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;json&quot;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># 3. 특정 값만 딱 뽑아내기 (스크립트 변수 할당용)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># 예: 특정 VM의 외부 IP(NAT IP)만 추출</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>describe<span class="w"> </span>&lt;VM이름&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span>--format<span class="o">=</span><span class="s2">&quot;value(networkInterfaces[0].accessConfigs[0].natIP)&quot;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># 4. 필터 및 정렬</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># 예: 생성된 시간에 따라 정렬</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span>--project<span class="w"> </span>rocky-linux-cloud<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">  </span>--sort-by<span class="o">=</span><span class="s2">&quot;~creationTimestamp&quot;</span>
 </code></pre></div>
 
 
