@@ -2758,10 +2758,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-2-cleaning" class="md-nav__link">
+  <a href="#6-2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6-2. [추가] Cleaning 활성화
+        6-2. 라우터 생성(외부 접근용)
       
     </span>
   </a>
@@ -2769,10 +2769,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-3-flavor" class="md-nav__link">
+  <a href="#6-3-cleaning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6-3. 이미지 및 Flavor 생성
+        6-3. Cleaning 활성화
       
     </span>
   </a>
@@ -2780,10 +2780,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-4-2" class="md-nav__link">
+  <a href="#6-4-flavor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6-4. 노드 등록 (2대)
+        6-4. 이미지 및 Flavor 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6-5. 노드 등록 (2대)
       
     </span>
   </a>
@@ -3153,126 +3164,145 @@
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">  </span>--allocation-pool<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">172</span>.20.50.10,end<span class="o">=</span><span class="m">172</span>.20.50.50<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span>--dns-nameserver<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span>provisioning-subnet
 </code></pre></div>
-<h3 id="6-2-cleaning">6-2. [추가] Cleaning 활성화</h3>
-<p>네트워크가 생성되었으므로 Cleaning을 켭니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/kolla/globals.yml
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># ironic_cleaning: &quot;metadata&quot;</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># ironic_cleaning_network: &quot;provisioning-net&quot;</span>
+<h3 id="6-2">6-2. 라우터 생성(외부 접근용)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># 1. 현재 외부망 이름 확인</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>openstack<span class="w"> </span>network<span class="w"> </span>list<span class="w"> </span>--external
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># 결과 예: external (이 이름을 아래에서 사용)</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># 설정 적용</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>--tags<span class="w"> </span>ironic
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># 2. 라우터 생성</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>openstack<span class="w"> </span>router<span class="w"> </span>create<span class="w"> </span>ironic-router
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># 3. 외부망 연결 (Gateway 설정)</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1"># &quot;external&quot; 부분을 실제 외부망 이름으로 변경하세요</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>openstack<span class="w"> </span>router<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--external-gateway<span class="w"> </span>external<span class="w"> </span>ironic-router
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="c1"># 4. 배포망 연결 (Interface 추가)</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>openstack<span class="w"> </span>router<span class="w"> </span>add<span class="w"> </span>subnet<span class="w"> </span>ironic-router<span class="w"> </span>provisioning-subnet
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="c1"># 5. 라우터 상태 확인</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>openstack<span class="w"> </span>router<span class="w"> </span>show<span class="w"> </span>ironic-router
 </code></pre></div>
-<h3 id="6-3-flavor">6-3. 이미지 및 Flavor 생성</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># 작업 디렉토리</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ironic_images<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/ironic_images
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># IPA 이미지 다운로드</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/dib/files/ipa-centos9-master.kernel
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/dib/files/ipa-centos9-master.initramfs
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="c1"># IPA 이미지 등록</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ipa-centos9-master.kernel<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">  </span>--public<span class="w"> </span>--container-format<span class="w"> </span>aki<span class="w"> </span>--disk-format<span class="w"> </span>aki<span class="w"> </span>deploy-kernel
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ipa-centos9-master.initramfs<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">  </span>--public<span class="w"> </span>--container-format<span class="w"> </span>ari<span class="w"> </span>--disk-format<span class="w"> </span>ari<span class="w"> </span>deploy-ramdisk
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="c1"># OS 이미지 다운로드 및 등록</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>wget<span class="w"> </span>https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
-<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>jammy-server-cloudimg-amd64.img<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">  </span>--disk-format<span class="w"> </span>qcow2<span class="w"> </span>--container-format<span class="w"> </span>bare<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hypervisor_type</span><span class="o">=</span>ironic<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="w">  </span>--public<span class="w"> </span>ubuntu-22.04
-<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>
-<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="c1"># Flavor 생성</span>
-<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>openstack<span class="w"> </span>flavor<span class="w"> </span>create<span class="w"> </span>--ram<span class="w"> </span><span class="m">65536</span><span class="w"> </span>--vcpus<span class="w"> </span><span class="m">24</span><span class="w"> </span>--disk<span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="w">  </span>--property<span class="w"> </span>resources:VCPU<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="w">  </span>--property<span class="w"> </span>resources:MEMORY_MB<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="w">  </span>--property<span class="w"> </span>resources:DISK_GB<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="w">  </span>--property<span class="w"> </span>resources:CUSTOM_BAREMETAL_HP_G8<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="w">  </span>bm.hp-g8
+<h3 id="6-3-cleaning">6-3. Cleaning 활성화</h3>
+<p>네트워크가 생성되었으므로 Cleaning을 켭니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/kolla/globals.yml
 </code></pre></div>
-<h3 id="6-4-2">6-4. 노드 등록 (2대)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">ironic_cleaning</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;metadata&quot;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">ironic_cleaning_network</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;provisioning-net&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 설정 적용</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>--tags<span class="w"> </span>ironic
+</code></pre></div>
+<h3 id="6-4-flavor">6-4. 이미지 및 Flavor 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 작업 디렉토리</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ironic_images<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/ironic_images
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># IPA 이미지 다운로드</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/dib/files/ipa-centos9-master.kernel
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>wget<span class="w"> </span>https://tarballs.opendev.org/openstack/ironic-python-agent/dib/files/ipa-centos9-master.initramfs
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1"># IPA 이미지 등록</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ipa-centos9-master.kernel<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">  </span>--public<span class="w"> </span>--container-format<span class="w"> </span>aki<span class="w"> </span>--disk-format<span class="w"> </span>aki<span class="w"> </span>deploy-kernel
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>ipa-centos9-master.initramfs<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">  </span>--public<span class="w"> </span>--container-format<span class="w"> </span>ari<span class="w"> </span>--disk-format<span class="w"> </span>ari<span class="w"> </span>deploy-ramdisk
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="c1"># OS 이미지 다운로드 및 등록</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>wget<span class="w"> </span>https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>openstack<span class="w"> </span>image<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>jammy-server-cloudimg-amd64.img<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="w">  </span>--disk-format<span class="w"> </span>qcow2<span class="w"> </span>--container-format<span class="w"> </span>bare<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">hypervisor_type</span><span class="o">=</span>ironic<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="w">  </span>--public<span class="w"> </span>ubuntu-22.04
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="c1"># Flavor 생성</span>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>openstack<span class="w"> </span>flavor<span class="w"> </span>create<span class="w"> </span>--ram<span class="w"> </span><span class="m">65536</span><span class="w"> </span>--vcpus<span class="w"> </span><span class="m">24</span><span class="w"> </span>--disk<span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="w">  </span>--property<span class="w"> </span>resources:VCPU<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a><span class="w">  </span>--property<span class="w"> </span>resources:MEMORY_MB<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="w">  </span>--property<span class="w"> </span>resources:DISK_GB<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="w">  </span>--property<span class="w"> </span>resources:CUSTOM_BAREMETAL_HP_G8<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="w">  </span>bm.hp-g8
+</code></pre></div>
+<h3 id="6-5-2">6-5. 노드 등록 (2대)</h3>
 <p>만약 <code>Ironic</code> 플러그인이 없다면 먼저 설치합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># 1. Ironic 클라이언트 플러그인 설치</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>pip<span class="w"> </span>install<span class="w"> </span>python-ironicclient
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># 2. 설치가 잘 됐는지 확인 (이제 명령어가 먹혀야 합니다)</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 1. Ironic 클라이언트 플러그인 설치</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>pip<span class="w"> </span>install<span class="w"> </span>python-ironicclient
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># 2. 설치가 잘 됐는지 확인 (이제 명령어가 먹혀야 합니다)</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>list
 </code></pre></div>
 <p>아래 node1을 등록하듯이, 값만 바꿔서 여러 노드를 등록할 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nv">KERNEL_ID</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>image<span class="w"> </span>show<span class="w"> </span>deploy-kernel<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span>-c<span class="w"> </span>id<span class="k">)</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">RAMDISK_ID</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>image<span class="w"> </span>show<span class="w"> </span>deploy-ramdisk<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span>-c<span class="w"> </span>id<span class="k">)</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nv">ILO_PASS</span><span class="o">=</span><span class="s2">&quot;FVQBAQ2Q&quot;</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1"># Node 1 등록</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>create<span class="w"> </span>--driver<span class="w"> </span>ipmi<span class="w"> </span>--name<span class="w"> </span>hp-g8-01<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_address</span><span class="o">=</span><span class="m">10</span>.10.10.69<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_username</span><span class="o">=</span>Administrator<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_password</span><span class="o">=</span><span class="nv">$ILO_PASS</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_kernel</span><span class="o">=</span><span class="nv">$KERNEL_ID</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_ramdisk</span><span class="o">=</span><span class="nv">$RAMDISK_ID</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">  </span>--resource-class<span class="w"> </span>BAREMETAL_HP_G8<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">  </span>--network-interface<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">cpus</span><span class="o">=</span><span class="m">24</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">memory_mb</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">local_gb</span><span class="o">=</span><span class="m">500</span>
-<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>
-<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="c1"># 생성된 baremetal node의 uuid 확인</span>
-<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>hp-g8-01
-<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>
-<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="c1"># 등록</span>
-<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>port<span class="w"> </span>create<span class="w"> </span>--node<span class="w"> </span>&lt;hp-g8-01의<span class="w"> </span>uuid&gt;<span class="w"> </span><span class="s2">&quot;ac:16:2d:77:93:94&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">KERNEL_ID</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>image<span class="w"> </span>show<span class="w"> </span>deploy-kernel<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span>-c<span class="w"> </span>id<span class="k">)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nv">RAMDISK_ID</span><span class="o">=</span><span class="k">$(</span>openstack<span class="w"> </span>image<span class="w"> </span>show<span class="w"> </span>deploy-ramdisk<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span>-c<span class="w"> </span>id<span class="k">)</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="nv">ILO_PASS</span><span class="o">=</span><span class="s2">&quot;FVQBAQ2Q&quot;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="c1"># Node 1 등록</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>create<span class="w"> </span>--driver<span class="w"> </span>ipmi<span class="w"> </span>--name<span class="w"> </span>hp-g8-01<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_address</span><span class="o">=</span><span class="m">10</span>.10.10.69<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_username</span><span class="o">=</span>Administrator<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">ipmi_password</span><span class="o">=</span><span class="nv">$ILO_PASS</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_kernel</span><span class="o">=</span><span class="nv">$KERNEL_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="w">  </span>--driver-info<span class="w"> </span><span class="nv">deploy_ramdisk</span><span class="o">=</span><span class="nv">$RAMDISK_ID</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="w">  </span>--resource-class<span class="w"> </span>BAREMETAL_HP_G8<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="w">  </span>--network-interface<span class="w"> </span>flat<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="w">  </span>--property<span class="w"> </span><span class="nv">cpus</span><span class="o">=</span><span class="m">24</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">memory_mb</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span>--property<span class="w"> </span><span class="nv">local_gb</span><span class="o">=</span><span class="m">500</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="c1"># 생성된 baremetal node의 uuid 확인</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>hp-g8-01
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a><span class="c1"># 등록</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>port<span class="w"> </span>create<span class="w"> </span>--node<span class="w"> </span>&lt;hp-g8-01의<span class="w"> </span>uuid&gt;<span class="w"> </span><span class="s2">&quot;ac:16:2d:77:93:94&quot;</span>
 </code></pre></div>
 <hr />
 <h2 id="7-controller">7. [Controller] 최종 검증</h2>
 <p><strong><code>[Controller Node - cstation]</code></strong>에서 수행</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 1. 관리 모드 전환 (Ironic -&gt; iLO 연결 테스트)</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>manage<span class="w"> </span>hp-g8-01
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># 2. 상태 확인 (manageable)</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;openstack baremetal node list&quot;</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="c1"># 3. 사용 가능 모드 전환 (Cleaning 수행됨 -&gt; 전원 켜짐/꺼짐 반복)</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>provide<span class="w"> </span>hp-g8-01
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="c1"># 4. Keypair 생성</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>openstack<span class="w"> </span>keypair<span class="w"> </span>create<span class="w"> </span>--public-key<span class="w"> </span>~/.ssh/id_rsa.pub<span class="w"> </span>mykey<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
-<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="c1"># 5. 인스턴스 생성 (available 상태가 된 후)</span>
-<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>openstack<span class="w"> </span>server<span class="w"> </span>create<span class="w"> </span>--flavor<span class="w"> </span>bm.hp-g8<span class="w"> </span>--image<span class="w"> </span>ubuntu-22.04<span class="w"> </span>--network<span class="w"> </span>provisioning-net<span class="w"> </span>--key-name<span class="w"> </span>mykey<span class="w"> </span>test-bm
-<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>
-<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="c1"># 6. 상태 확인</span>
-<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>watch<span class="w"> </span>openstack<span class="w"> </span>server<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 1. 관리 모드 전환 (Ironic -&gt; iLO 연결 테스트)</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>manage<span class="w"> </span>hp-g8-01
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># 2. 상태 확인 (manageable)</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;openstack baremetal node list&quot;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1"># 3. 사용 가능 모드 전환 (Cleaning 수행됨 -&gt; 전원 켜짐/꺼짐 반복)</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>provide<span class="w"> </span>hp-g8-01
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="c1"># 4. Keypair 생성</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>openstack<span class="w"> </span>keypair<span class="w"> </span>create<span class="w"> </span>--public-key<span class="w"> </span>~/.ssh/id_rsa.pub<span class="w"> </span>mykey<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="c1"># 5. 인스턴스 생성 (available 상태가 된 후)</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>openstack<span class="w"> </span>server<span class="w"> </span>create<span class="w"> </span>--flavor<span class="w"> </span>bm.hp-g8<span class="w"> </span>--image<span class="w"> </span>ubuntu-22.04<span class="w"> </span>--network<span class="w"> </span>provisioning-net<span class="w"> </span>--key-name<span class="w"> </span>mykey<span class="w"> </span>test-bm
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="c1"># 6. 상태 확인</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>watch<span class="w"> </span>openstack<span class="w"> </span>server<span class="w"> </span>list
 </code></pre></div>
 <hr />
 <h2 id="8">8. 트러블슈팅</h2>
 <ul>
 <li><strong>IPMI 에러:</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Controller에서 실행</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>ipmitool<span class="w"> </span>-I<span class="w"> </span>lanplus<span class="w"> </span>-H<span class="w"> </span><span class="m">10</span>.10.10.69<span class="w"> </span>-U<span class="w"> </span>Administrator<span class="w"> </span>-P<span class="w"> </span><span class="s1">&#39;FVQBAQ2Q&#39;</span><span class="w"> </span>power<span class="w"> </span>status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Controller에서 실행</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>ipmitool<span class="w"> </span>-I<span class="w"> </span>lanplus<span class="w"> </span>-H<span class="w"> </span><span class="m">10</span>.10.10.69<span class="w"> </span>-U<span class="w"> </span>Administrator<span class="w"> </span>-P<span class="w"> </span><span class="s1">&#39;FVQBAQ2Q&#39;</span><span class="w"> </span>power<span class="w"> </span>status
 </code></pre></div>
 <ul>
 <li><strong>OVS 확인:</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Network Node에서</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>openvswitch_vswitchd<span class="w"> </span>ovs-vsctl<span class="w"> </span>show
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Network Node에서</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>openvswitch_vswitchd<span class="w"> </span>ovs-vsctl<span class="w"> </span>show
 </code></pre></div>
 <ul>
 <li><strong>Ironic 로그:</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># Network Node에서</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>docker<span class="w"> </span>logs<span class="w"> </span>ironic_conductor<span class="w"> </span>--tail<span class="w"> </span><span class="m">100</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Network Node에서</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>docker<span class="w"> </span>logs<span class="w"> </span>ironic_conductor<span class="w"> </span>--tail<span class="w"> </span><span class="m">100</span>
 </code></pre></div>
 <ul>
 <li><strong>PXE 패킷:</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Network Node에서</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>br-ironic<span class="w"> </span>-n<span class="w"> </span>port<span class="w"> </span><span class="m">67</span><span class="w"> </span>or<span class="w"> </span>port<span class="w"> </span><span class="m">68</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># Network Node에서</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>br-ironic<span class="w"> </span>-n<span class="w"> </span>port<span class="w"> </span><span class="m">67</span><span class="w"> </span>or<span class="w"> </span>port<span class="w"> </span><span class="m">68</span>
 </code></pre></div>
 <ul>
 <li><strong>Node 에러:</strong></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Controller에서 실행</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>show<span class="w"> </span>hp-g8-01<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.last_error&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># Controller에서 실행</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>openstack<span class="w"> </span>baremetal<span class="w"> </span>node<span class="w"> </span>show<span class="w"> </span>hp-g8-01<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.last_error&#39;</span>
 </code></pre></div>
 <hr />
 <h2 id="_1">📋 최종 체크리스트</h2>
