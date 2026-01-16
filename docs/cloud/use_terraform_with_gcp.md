@@ -189,9 +189,13 @@ resource "google_compute_instance" "bastion" {
   machine_type = "e2-micro"
   zone         = "asia-northeast3-a"
   tags         = ["bastion"]
+  
   boot_disk {
-    initialize_params { image = "rocky-linux-cloud/rocky-linux-9" }
+    initialize_params {
+      image = "rocky-linux-cloud/rocky-linux-9"
+    }
   }
+  
   network_interface {
     subnetwork = google_compute_subnetwork.public_subnet.id
     access_config {} # 공인 IP 할당
@@ -204,9 +208,14 @@ resource "google_compute_instance" "k8s_masters" {
   machine_type = "e2-standard-2" # 2 vCPU, 8GB Ram
   zone         = "asia-northeast3-a"
   tags         = ["k8s-master", "internal-node"]
+  
   boot_disk {
-    initialize_params { image = "rocky-linux-cloud/rocky-linux-9"; size = 30 }
+    initialize_params {
+      image = "rocky-linux-cloud/rocky-linux-9"
+      size  = 30
+    }
   }
+  
   network_interface {
     subnetwork = google_compute_subnetwork.private_subnet.id
   }
@@ -218,9 +227,14 @@ resource "google_compute_instance" "k8s_workers" {
   machine_type = "e2-standard-2"
   zone         = "asia-northeast3-a"
   tags         = ["k8s-worker", "internal-node"]
+  
   boot_disk {
-    initialize_params { image = "rocky-linux-cloud/rocky-linux-9"; size = 30 }
+    initialize_params {
+      image = "rocky-linux-cloud/rocky-linux-9"
+      size  = 30
+    }
   }
+  
   network_interface {
     subnetwork = google_compute_subnetwork.private_subnet.id
   }
@@ -232,9 +246,14 @@ resource "google_compute_instance" "db_nodes" {
   machine_type = "e2-standard-2"
   zone         = "asia-northeast3-a"
   tags         = ["db-node", "internal-node"]
+  
   boot_disk {
-    initialize_params { image = "rocky-linux-cloud/rocky-linux-9"; size = 30 }
+    initialize_params {
+      image = "rocky-linux-cloud/rocky-linux-9"
+      size  = 30
+    }
   }
+  
   network_interface {
     subnetwork = google_compute_subnetwork.private_subnet.id
   }
