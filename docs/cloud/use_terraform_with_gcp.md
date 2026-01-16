@@ -145,7 +145,7 @@ resource "google_compute_project_metadata" "ssh_keys" {
 # 1. VPC 네트워크 (폐쇄망)
 resource "google_compute_network" "vpc" {
   name                    = "k8s-airgap-vpc"
-  auto_create_subnetworks = false
+  auto_create_subnetworks = false  # 서브넷 자동 생성 비활성화
 }
 
 resource "google_compute_subnetwork" "public_subnet" {
