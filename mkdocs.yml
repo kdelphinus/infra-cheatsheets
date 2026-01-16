@@ -57,6 +57,7 @@ nav:
     - 'Cheat Sheets': k8s/cheatsheet.md
   - Cloud:
     - 'Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기': cloud/use_terraform_with_gcp.md
+    - 'Google Cloud SDK Cheat Sheet': cloud/gcp-cheatsheet.md
   - CI/CD:
     - 폐쇄망:
       - '1. 폐쇄망에서 GitLab과 Jenkins 설치': cicd/offline-install/001-gitlab_jenkins_install.md
