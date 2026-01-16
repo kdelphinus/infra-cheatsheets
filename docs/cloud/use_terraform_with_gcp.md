@@ -1,10 +1,10 @@
 # 📘 [GCP] 폐쇄망 Kubernetes 인프라 구축 완벽 가이드
 
-이 문서는 **Windows WSL2(Ubuntu)** 환경에서 **Google Cloud Platform(GCP)**
-상에 **완전 폐쇄망(Air-gapped)** 기반의 인프라를 구축하는 매뉴얼입니다.
-신규 계정의 **API 활성화** 및 **vCPU 할당량(Quota)** 제한을 모두 고려했습니다.
+이 문서는 **Windows WSL2(Ubuntu)** 환경에서 **Google Cloud Platform(GCP)** 상에
+**완전 폐쇄망(Air-gapped)** 기반의 고가용성(HA) 인프라를 구축하는 매뉴얼입니다.
 
-> GCP 신규 계정 가입 시, $300 크레딧을 무료로 지급합니다. (사용기간 3개월)
+> **구성 목표:** Bastion(1대) + Master(3대) + Worker(3대) + DB(3대) = **총 10대**
+> **주의:** 신규 계정은 vCPU 제한(12개)이 있어, **반드시 할당량 상향 요청(Step 3)**을 먼저 수행해야 합니다.
 
 ---
 
@@ -83,9 +83,34 @@ ssh-keygen -t rsa -f ~/.ssh/gcp_key -C "rocky"
 
 ---
 
-## 🚀 3단계: Terraform 코드 작성 (Safe Mode)
+## 🚀 3단계: vCPU 할당량(Quota) 상향 요청 (★ 필수)
 
-신규 계정의 **할당량(12 vCPU) 제한**을 피하기 위해 노드 수를 조절한 코드입니다.
+본 가이드의 3중화 구성은 **약 19 vCPU**가 필요합니다.
+하지만 신규 계정의 기본 한도는 **12 vCPU**이므로, 배포 전 반드시 한도를 늘려야 합니다.
+
+### 📊 필요 자원 계산
+
+- Bastion (e2-micro): **약 1 vCPU**
+- Master 3대 (e2-standard-2): 2 * 3 = **6 vCPU**
+- Worker 3대 (e2-standard-2): 2 * 3 = **6 vCPU**
+- DB 3대 (e2-standard-2): 2 * 3 = **6 vCPU**
+- **총합: 19 vCPU 필요** (여유 있게 **24** 이상으로 요청 권장)
+
+### 🛠️ 상향 요청 방법 (웹 콘솔)
+
+1. [GCP 콘솔 - 할당량(Quotas) 페이지](https://console.cloud.google.com/iam-admin/quotas)
+로 이동합니다.
+2. 필터 창에 `CPUS_ALL_REGIONS`라고 입력합니다.
+3. 서비스가 **Compute Engine API**인 항목(`CPUS-ALL-REGIONS-per-project`)을 찾아 체크박스를 선택합니다.
+4. 상단의 **[할당량 수정 (EDIT QUOTAS)]** 버튼을 클릭합니다.
+5. 새 한도 입력 칸에 **24** (또는 32)를 입력합니다.
+6. 요청 사유에 `Kubernetes HA Cluster Test` 라고 적고 제출합니다.
+    - *승인은 보통 몇 분 내로 완료되지만, 신규 계정 검토로 인해 최대 1~2일이 걸릴 수도 있습니다.*
+    - *승인 메일을 받으면 4단계로 넘어가세요.*
+
+---
+
+## 🚀 4단계: Terraform 코드 작성
 
 ### 1. 파일 생성
 
@@ -97,9 +122,11 @@ nano main.tf
 
 ### 2. `main.tf` 내용 작성
 
+생성할 자원들 구성은 아래와 같습니다.
+
 ![main.tf 구성도](../images/terraform-with-gcp.png)
 
-아래 내용을 복사하되, **`project` 값은 반드시 수정**하세요.
+**`project` 값은 반드시 본인 ID로 수정**하세요.
 
 ```hcl
 provider "google" {
@@ -156,9 +183,7 @@ resource "google_compute_firewall" "allow_internal" {
   target_tags = ["internal-node", "bastion"]
 }
 
-# 3. VM 인스턴스 (할당량 12 vCPU 초과 방지 설정)
-# 구성: Bastion(1) + Master(1) + Worker(2) + DB(1) = 9 vCPU
-
+# 3. VM 인스턴스
 resource "google_compute_instance" "bastion" {
   name         = "bastion-host"
   machine_type = "e2-micro"
@@ -174,7 +199,7 @@ resource "google_compute_instance" "bastion" {
 }
 
 resource "google_compute_instance" "k8s_masters" {
-  count        = 3 # quota 부족 시, 수정
+  count        = 3
   name         = "k8s-master-${count.index + 1}"
   machine_type = "e2-standard-2" # 2 vCPU, 8GB Ram
   zone         = "asia-northeast3-a"
@@ -188,7 +213,7 @@ resource "google_compute_instance" "k8s_masters" {
 }
 
 resource "google_compute_instance" "k8s_workers" {
-  count        = 3 # quota 부족 시, 수정
+  count        = 3
   name         = "k8s-worker-${count.index + 1}"
   machine_type = "e2-standard-2"
   zone         = "asia-northeast3-a"
@@ -202,7 +227,7 @@ resource "google_compute_instance" "k8s_workers" {
 }
 
 resource "google_compute_instance" "db_nodes" {
-  count        = 3 # quota 부족 시, 수정
+  count        = 3
   name         = "mariadb-node-${count.index + 1}"
   machine_type = "e2-standard-2"
   zone         = "asia-northeast3-a"
@@ -223,7 +248,7 @@ output "bastion_ip" {
 
 ---
 
-## 🚀 4단계: 배포 및 접속 설정 (핵심)
+## 🚀 5단계: 배포 및 접속 설정
 
 ### 1. 인프라 배포
 
@@ -231,15 +256,15 @@ output "bastion_ip" {
 terraform init
 terraform plan
 terraform apply
-# (yes 입력 시 생성 시작)
+# (내용 확인 후 yes 입력)
 
 ```
 
-생성 완료 후 출력되는 **`bastion_ip`**를 복사해 두세요.
+> **참고:** 할당량 상향이 아직 안 되었다면 여기서 에러가 발생합니다.
 
 ### 2. 접속 편의성 설정 (`~/.ssh/config`)
 
-IP와 키 경로를 매번 치지 않기 위해 설정합니다.
+배포 후 출력된 **`bastion_ip`**를 사용하여 설정 파일을 수정합니다.
 
 ```bash
 nano ~/.ssh/config
@@ -267,23 +292,21 @@ Host 10.0.2.*
 
 ---
 
-## 🚀 5단계: 접속 테스트 및 운영
-
-이제 내 PC(WSL)에서 바로 내부 서버로 접속할 수 있습니다.
+## 🚀 6단계: 접속 테스트 및 운영
 
 ### A. 접속 테스트
 
+내 PC(WSL) 터미널에서 바로 내부 IP를 입력하여 접속합니다.
+
 ```bash
-# 내부 마스터 노드(10.0.2.2)로 바로 접속
+# Bastion을 거쳐 마스터 1번 노드로 바로 접속
 ssh 10.0.2.2
 
 ```
 
-> 성공 시: `[rocky@k8s-master-1 ~]$` 프롬프트가 뜹니다.
+> `[rocky@k8s-master-1 ~]$` 프롬프트가 뜨면 성공입니다.
 
 ### B. 파일 전송 (SCP)
-
-설치 파일 등을 로컬에서 내부 서버로 바로 보낼 수 있습니다.
 
 ```bash
 # 로컬 파일 -> 내부 서버 전송
@@ -291,16 +314,11 @@ scp my-file.tar.gz 10.0.2.2:/home/rocky/
 
 ```
 
-### C. (선택) 3중화 확장
-
-GCP 콘솔에서 할당량(Quota) 상향 승인을 받은 후,
-`main.tf`의 `count`를 3으로 수정하고 `terraform apply`를 다시 실행하면 자동으로 확장됩니다.
-
 ---
 
-## 🚀 6단계: 자원 삭제 (Clean Up)
+## 🚀 7단계: 자원 삭제 (Clean Up)
 
-테스트 종료 후 비용 발생을 막기 위해 반드시 삭제하세요.
+비용 발생을 막기 위해 테스트가 끝나면 반드시 자원을 정리해야 합니다.
 
 ```bash
 terraform destroy
