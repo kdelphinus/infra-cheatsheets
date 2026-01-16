@@ -386,21 +386,46 @@ openstack subnet create --network provisioning-net \
 
 ```
 
-### 6-2. [추가] Cleaning 활성화
+### 6-2. 라우터 생성(외부 접근용)
+
+```bash
+# 1. 현재 외부망 이름 확인
+openstack network list --external
+# 결과 예: external (이 이름을 아래에서 사용)
+
+# 2. 라우터 생성
+openstack router create ironic-router
+
+# 3. 외부망 연결 (Gateway 설정)
+# "external" 부분을 실제 외부망 이름으로 변경하세요
+openstack router set --external-gateway external ironic-router
+
+# 4. 배포망 연결 (Interface 추가)
+openstack router add subnet ironic-router provisioning-subnet
+
+# 5. 라우터 상태 확인
+openstack router show ironic-router
+```
+
+### 6-3. Cleaning 활성화
 
 네트워크가 생성되었으므로 Cleaning을 켭니다.
 
 ```bash
 sudo nano /etc/kolla/globals.yml
-# ironic_cleaning: "metadata"
-# ironic_cleaning_network: "provisioning-net"
-
-# 설정 적용
-kolla-ansible reconfigure -i multinode --tags ironic
-
 ```
 
-### 6-3. 이미지 및 Flavor 생성
+```yaml
+ironic_cleaning: "metadata"
+ironic_cleaning_network: "provisioning-net"
+```
+
+```bash
+# 설정 적용
+kolla-ansible reconfigure -i multinode --tags ironic
+```
+
+### 6-4. 이미지 및 Flavor 생성
 
 ```bash
 # 작업 디렉토리
@@ -432,7 +457,7 @@ openstack flavor create --ram 65536 --vcpus 24 --disk 500 \
   bm.hp-g8
 ```
 
-### 6-4. 노드 등록 (2대)
+### 6-5. 노드 등록 (2대)
 
 만약 `Ironic` 플러그인이 없다면 먼저 설치합니다.
 
