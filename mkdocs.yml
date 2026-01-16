@@ -92,3 +92,5 @@ nav:
       - 'Golden Image 생성': openstack/utils/golden-image.md
     - Troubleshooting:
       - 'OpenStack K8s 네트워크 통신 장애 및 Harbor 배포 실패': openstack/troubleshooting/k8s-network-error.md
+    - Tools:
+      - 'Ironic 추가하기': openstack/tools/add-ironic.md

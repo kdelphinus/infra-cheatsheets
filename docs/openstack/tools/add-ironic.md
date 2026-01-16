@@ -501,14 +501,58 @@ openstack baremetal port create --node <hp-g8-01의 uuid> "ac:16:2d:77:93:94"
 **`[Controller Node - cstation]`**에서 수행
 
 ```bash
-# 1. 관리 모드 전환 (Ironic -> iLO 연결 테스트)
-openstack baremetal node manage hp-g8-01
+# 1. 연결 확인
+openstack baremetal node validate [Node_UUID]
 
-# 2. 상태 확인 (manageable)
+# 출력 결과
++------------+--------+--------+
+| Interface  | Result | Reason |
++------------+--------+--------+
+| boot       | True   |        |
+| deploy     | True   |        |
+| management | True   |        |
+| network    | True   |        |
+| power      | True   |        |
++------------+--------+--------+
+```
+
+출력 결과에 위 항목들은 `True` 가 나와야 합니다.
+(다른 기능은 부가 혹은 고급 기능들입니다.)
+
+만약 `deploy` 에 `Missing are: ['instance_info.image_source']`
+항목이 뜬다면 아직 instance 배포 전이기 때문에 OS가 결정되지 않아서 나오는 오류입니다.
+즉, 배포 시 사라질 오류입니다.
+
+`Driver ipmi does not support` 이 출력되는 것은 현재 드라이버가 지원하지 않는 것입니다.
+
+전체 기능은 다음과 같습니다.
+
+| 항목 (Interface) | 현재 상태 | 중요도 | 기능 설명 (역할) | 비고 (현재 상황 분석) |
+| :--- | :---: | :---: | :--- | :--- |
+| **Power** | **True** ✅ | **필수** | **전원 제어** (On/Off/Reboot) | Ironic이 서버 전원을 켜고 끌 수 있음 (**성공**) |
+| **Management** | **True** ✅ | **필수** | **관리 통신** (BMC/iLO 연결) | Ironic과 서버 간의 제어 채널 연결됨 (**성공**) |
+| **Boot** | **True** ✅ | **필수** | **부팅 순서 제어** (PXE ↔ Disk) | 설치 시 네트워크(PXE), 완료 시 디스크 부팅 전환 가능 |
+| **Network** | **True** ✅ | **필수** | **네트워크 검증** | 멀티테넌트 네트워킹 설정 확인 완료 |
+| **Deploy** | **False** ⏳ | **필수** | **OS 설치** (이미지 굽기) | **오류 아님.** 배포할 OS 이미지를 지정하지 않아 대기 중인 상태 |
+| **Storage** | **True** ✅ | 선택 | **스토리지 연결** | Cinder 볼륨 등을 붙일 때 사용 (현재는 로컬 디스크 사용) |
+| **Console** | **False** | 선택 | **원격 화면 보기** (VNC/Serial) | `ipmi` 드라이버 미지원 기능 (없어도 설치에 지장 없음) |
+| **Inspect** | **False** | 선택 | **하드웨어 스펙 자동 탐지** | CPU/RAM 등을 자동 등록하는 기능 (수동 입력했으므로 불필요) |
+| **RAID** | **False** | 선택 | **RAID 구성** | 디스크 미러링 등 설정 (단일 디스크 사용 시 불필요) |
+| **BIOS** | **False** | 선택 | **BIOS 설정 변경** | 원격 BIOS 설정 (이미 수동 설정했으므로 불필요) |
+| **Rescue** | **False** | 선택 | **응급 복구** | 장애 발생 시 복구용 OS 부팅 (운영 단계 기능) |
+
+```bash
+# 1. 관리 모드 전환 (Ironic -> iLO 연결 테스트)
+openstack baremetal node manage [Node_UUID]
+
+# 2. 하드웨어 스펙 검사 (선택 사항이지만 추천 - CPU/RAM 자동 등록됨)
 watch -n 5 "openstack baremetal node list"
 
+# (이때 스위치를 통해 PXE 부팅이 한 번 일어납니다!)
+openstack baremetal node inspect [Node_UUID]
+
 # 3. 사용 가능 모드 전환 (Cleaning 수행됨 -> 전원 켜짐/꺼짐 반복)
-openstack baremetal node provide hp-g8-01
+openstack baremetal node provide [Node_UUID]
 
 # 4. Keypair 생성
 openstack keypair create --public-key ~/.ssh/id_rsa.pub mykey 2>/dev/null || true
@@ -572,3 +616,135 @@ watch openstack server list
 - [ ] 6. 서비스 배포 (deploy -> reconfigure)
 - [ ] 7. 리소스 생성 (Network, Cleaning활성화, Image, Node)
 - [ ] 8. 검증 (Manage -> Provide -> Create)
+
+---
+
+## 📌 [별첨] 왜 이렇게 복잡하게 연결했는가? (Architecture Review)
+
+지금 구성이 복잡해 보이지만, 사실 **"오픈스택의 표준"**과 **"현실적인 제약(보안 이슈)"** 사이에서
+ **최적의 타협점**을 찾은 결과입니다. 각 연결의 목적과 데이터 흐름을 명확히 정리해 드립니다.
+
+---
+
+### 1. 굳이 분리해서 연결한 이유 (The "Why")
+
+우리는 두 개의 서로 다른 네트워크 경로를 만들었습니다.
+
+#### A. Controller ↔ iLO (직결)
+
+- **역할:** **[관리망 (Management Network)]**
+- **비유:** 컴퓨터의 **"전원 버튼"**과 **"모니터 선"**을 연결한 것.
+- **이유:**
+  - 오픈스택(Ironic)이 베어메탈 서버를 **켜고 끄기 위해** 필요합니다.
+  - 원래는 사내 스위치를 쓰려 했으나, **MAC 보안 문제(포트 차단)** 때문에 스위치를 못 쓰게 되어서 **부득이하게 직결**했습니다.
+  - 데이터(인터넷, 파일 전송)는 이리로 다니지 않습니다. 오직 "전원 ON/OFF" 명령만 다닙니다.
+
+#### B. Network Node ↔ NIC 1 (깡통 스위치)
+
+- **역할:** **[데이터망 (Data/Provisioning Network)]**
+
+- **비유:** 컴퓨터의 **"랜선"**을 연결한 것.
+
+- **이유:**
+  - 실제 **OS 설치 파일(3GB+)**을 전송하고, 나중에 사용자가 **SSH 접속**을 하거나 웹 서비스를 돌릴 때 쓰는 **진짜 통로**입니다.
+  - 사내망과 섞이면 DHCP 충돌이 나므로, **깡통 스위치로 물리적 격리**를 시킨 것입니다.
+
+---
+
+### 2. 각 포트의 역할 정의
+
+| 포트 이름 | 연결 대상 | 역할 (Mission) | 트래픽 종류 |
+| :--- | :--- | :--- | :--- |
+| **iLO** | Controller (eno4) | **원격 제어 (Remote Control)** | 전원 켜기/끄기, 부팅 순서 변경, 센서 감시 |
+| **NIC 1** | Network Node (br-ironic) | **실제 통신 (Data Plane)** | PXE 부팅, OS 설치, SSH 접속, 서비스 트래픽 |
+
+---
+
+### 3. 네트워크 흐름 (Traffic Flow)
+
+#### 상황 1: 인스턴스 생성 시 (Provisioning)
+
+사용자가 `openstack server create` 명령을 내렸을 때:
+
+1. **전원 켜기:**
+    - `Client` → `Controller (Nova/Ironic)` → **[직결 라인]** → `Baremetal iLO`
+    - 명령: "야, 일어나! (Power On)"
+2. **OS 설치 (PXE):**
+    - `Baremetal (깨어남)` → `NIC 1` → **[깡통 스위치]** → `Network Node (DHCP/TFTP)`
+    - 데이터: "IP 주세요!", "OS 이미지 주세요!" (수 기가바이트 전송)
+
+#### 상황 2: Floating IP로 접속 시 (SSH)
+
+사용자가 `ssh ubuntu@10.10.10.200` (Floating IP)으로 접속할 때:
+
+1. **진입:**
+    - `Client` → `사내망` → `Network Node (외부망 인터페이스)`
+2. **변환 (NAT):**
+    - `Network Node (Router)`: "`10.10.10.200`은 내부의 `172.20.50.15`구나." (DNAT)
+3. **도착:**
+    - `Network Node` → `br-ironic` → **[깡통 스위치]** → `Baremetal NIC 1`
+    - **iLO(직결 라인)는 전혀 쓰이지 않습니다.** 오직 데이터망(NIC 1)만 사용합니다.
+
+## 🚀 [별첨] Future Architecture: To-Be Model
+
+지금은 물리적 제약과 보안 이슈로 인해 **"직결 + 깡통 스위치"**라는 우회로를 택했지만,
+운영 환경이 안정화되고 규모가 커진다면 **표준화된 아키텍처**로 나아가야 합니다.
+
+우리가 지향해야 할 **이상적인 베어메탈 네트워크 구성**을 제안합니다.
+
+---
+
+### 1. 이상적인 구성도 (Target Architecture)
+
+![Ironic 구조도](../../images/ironic.png)
+
+---
+
+### 2. 무엇이 달라지는가? (Key Improvements)
+
+#### A. "깡통" 대신 "매니지드(L3) 스위치" 도입
+
+- **현재:** 깡통 스위치는 VLAN을 모릅니다. 그래서 물리적으로 선을 따로따로(iLO용, 데이터용) 꽂아야 했습니다.
+- **미래:** **VLAN 지원 스위치(ToR)**를 도입합니다.
+  - 스위치 하나에 모든 선을 꽂고, **소프트웨어(VLAN)**로 망을 나눕니다.
+  - `VLAN 10`: iLO 관리망
+  - `VLAN 20`: 베어메탈 배포망
+  - **효과:** 선 정리가 깔끔해지고, 포트 낭비가 사라집니다.
+
+#### B. Controller 직결 제거 (표준화)
+
+- **현재:** Controller와 iLO를 1:1로 연결했습니다. (Controller가 죽으면 iLO 제어 불가능)
+- **미래:** iLO를 **관리망 스위치(VLAN 10)**에 연결합니다.
+  - Controller, Network Node 어디서든 iLO에 접근할 수 있습니다.
+  - **효과:** **고가용성(HA)** 확보. Controller 1번이 죽어도 2번이 iLO를 제어할 수 있습니다.
+
+#### C. Multi-Tenant Network (진정한 클라우드)
+
+- **현재:** `NIC 1`은 오직 '배포망'으로만 씁니다. 서비스용으로 쓰려면 Floating IP를 붙여야 합니다.
+- **미래:** **Neutron ML2/OVS**가 스위치 포트 설정을 동적으로 바꿉니다.
+  - 배포할 땐 `VLAN 20`(배포망)으로 썼다가,
+  - OS 설치가 끝나면 자동으로 `VLAN 100`(인사팀망), `VLAN 200`(개발팀망)으로 **포트 성격을 바꿉니다.**
+  - **효과:** 베어메탈 서버도 VM처럼 **원하는 네트워크에 자유롭게 배치**할 수 있습니다.
+
+---
+
+### 3. 단계별 로드맵 (Roadmap)
+
+#### 1단계: 현재 (Stabilization)
+
+- **목표:** 일단 되게 하라. (기능 구현)
+- **구성:** Controller 직결 + 깡통 스위치 격리.
+- **한계:** 확장성 부족, 수동 관리 포인트 존재.
+
+#### 2단계: 네트워크 통합 (Integration) - **[권장 다음 단계]**
+
+- **목표:** 깡통 스위치 제거 및 사내망 통합.
+- **선결 과제:** 사내 네트워크 팀과 협의하여 **MAC 보안 예외 처리** 및 **iLO 전용 VLAN 할당**.
+- **작업:** 
+  - 직결 라인 제거 → 사내 스위치로 통합.
+  - 깡통 스위치 제거 → 사내 스위치(VLAN 분리)로 통합.
+
+#### 3단계: 자동화 및 고도화 (Optimization)
+
+- **목표:** 스위치 설정 자동화 (Networking-Generic-Switch).
+- **작업:** Ironic이 직접 물리 스위치의 설정을 제어하도록 연동.
