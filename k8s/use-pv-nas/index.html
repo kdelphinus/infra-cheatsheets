@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/ubuntu/init-ubuntu-env/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/use-pv-nas/">
       
       
-        <link rel="prev" href="../../cicd/offline-install/001-gitlab_jenkins_install/">
+        <link rel="prev" href="../gateway-api/missed-containerport/">
       
       
-        <link rel="next" href="../wsl/wsl-network-setting/">
+        <link rel="next" href="../cheatsheet/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Ubuntu 기본 설정 - Infra Cheatsheets</title>
+        <title>NAS PV 연결 가이드 - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ubuntu" class="md-skip">
+        <a href="#nas-pv" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ubuntu 기본 설정
+              NAS PV 연결 가이드
             
           </span>
         </div>
@@ -238,6 +238,8 @@
   
   
   
+    
+  
   
     
     
@@ -245,11 +247,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -318,13 +322,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -532,26 +534,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -569,7 +576,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -593,17 +600,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
             
   
   
@@ -639,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -667,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -695,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -737,17 +747,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
             
   
   
@@ -783,7 +796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
+      <a href="../gateway-api/001-envoy-install/" class="md-nav__link">
         
   
   
@@ -811,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -839,7 +852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -867,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
+      <a href="../gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -900,26 +913,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
             
   
   
@@ -937,7 +955,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -952,10 +970,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../k8s/use-pv-nas/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAS PV 연결 가이드
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -971,6 +1016,187 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-a-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0단계: 공통 사전 준비 (A안, B안 공통)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0단계: 공통 사전 준비 (A안, B안 공통)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: 오프라인 패키지 설치 및 서비스 기동
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-nas-export-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: NAS 출입구(Export Path) 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: 워커 노드 마운트 및 하위 폴더 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [A안] 신규 서비스 생성 시
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[A안] 신규 서비스 생성 시">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-a-1-pv-pvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step A-1: PV 및 PVC 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-a-2-deployment-initcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step A-2: Deployment 배포 (InitContainer 포함)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [B안] 기존 데이터 이관 시
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[B안] 기존 데이터 이관 시">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-b-1-pv-pvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-1: PV 및 PVC 사전 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-2: 1차 데이터 동기화 (무중단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-3: 컷오버 및 최종 동기화 (최소 중단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-4-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-4: Deployment 업데이트 및 재개
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설계 트레이드오프 분석
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -991,7 +1217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/cheatsheet/" class="md-nav__link">
+      <a href="../cheatsheet/" class="md-nav__link">
         
   
   
@@ -1285,31 +1511,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -1327,7 +1548,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1342,37 +1563,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ubuntu 기본 설정
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -1388,137 +1582,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Index
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oh-my-zsh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Oh My Zsh 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Oh My Zsh 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-oh-my-zsh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Oh My Zsh 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-powerlevel10k" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Powerlevel10k 및 플러그인 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-zshrc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. ~/.zshrc 파일 수정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 셸 새로고침
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#npm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        npm 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="npm 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-nvm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. NVM 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-nodejs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Node.js 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1537,20 +1600,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
         
           
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
             
   
   
@@ -1586,7 +1646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -2872,33 +2932,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
+  <a href="#0-a-b" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Index
+        0단계: 공통 사전 준비 (A안, B안 공통)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oh-my-zsh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Oh My Zsh 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Oh My Zsh 설치">
+    <nav class="md-nav" aria-label="0단계: 공통 사전 준비 (A안, B안 공통)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-oh-my-zsh" class="md-nav__link">
+  <a href="#step-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Oh My Zsh 설치
+        Step 1: 오프라인 패키지 설치 및 서비스 기동
       
     </span>
   </a>
@@ -2906,10 +2955,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-powerlevel10k" class="md-nav__link">
+  <a href="#step-2-nas-export-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Powerlevel10k 및 플러그인 설치
+        Step 2: NAS 출입구(Export Path) 확인
       
     </span>
   </a>
@@ -2917,21 +2966,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-zshrc" class="md-nav__link">
+  <a href="#step-3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. ~/.zshrc 파일 수정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 셸 새로고침
+        Step 3: 워커 노드 마운트 및 하위 폴더 생성
       
     </span>
   </a>
@@ -2944,22 +2982,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#npm" class="md-nav__link">
+  <a href="#a" class="md-nav__link">
     <span class="md-ellipsis">
       
-        npm 설치
+        [A안] 신규 서비스 생성 시
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="npm 설치">
+    <nav class="md-nav" aria-label="[A안] 신규 서비스 생성 시">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-nvm" class="md-nav__link">
+  <a href="#step-a-1-pv-pvc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. NVM 설치
+        Step A-1: PV 및 PVC 생성
       
     </span>
   </a>
@@ -2967,10 +3005,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-nodejs" class="md-nav__link">
+  <a href="#step-a-2-deployment-initcontainer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Node.js 설치
+        Step A-2: Deployment 배포 (InitContainer 포함)
       
     </span>
   </a>
@@ -2979,6 +3017,78 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [B안] 기존 데이터 이관 시
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[B안] 기존 데이터 이관 시">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-b-1-pv-pvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-1: PV 및 PVC 사전 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-2: 1차 데이터 동기화 (무중단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-3: 컷오버 및 최종 동기화 (최소 중단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-4-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B-4: Deployment 업데이트 및 재개
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설계 트레이드오프 분석
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3002,66 +3112,184 @@
   
 
 
-<h1 id="ubuntu">Ubuntu 기본 세팅</h1>
-<ul>
-<li>Ubuntu 24.04 기준</li>
-</ul>
-<h2 id="index">Index</h2>
-<ul>
-<li><a href="#oh-my-zsh-설치">Oh My Zsh 설치</a></li>
-<li><a href="#npm-설치">npm 설치</a></li>
-</ul>
-<h2 id="oh-my-zsh">Oh My Zsh 설치</h2>
-<h3 id="1-oh-my-zsh">1. Oh My Zsh 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># zsh 설치</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zsh
+<h1 id="nas-pv">💽 NAS PV 연결 가이드</h1>
+<p>이 가이드는 쿠버네티스(K8s) 환경에서 NAS(NFS)를 영구 볼륨(PV)으로 연결하는 방법을 설명합니다. 신규 서비스 배포와 기존 데이터 이관 상황에 맞춰 선택하여 적용하실 수 있습니다.</p>
+<hr />
+<h2 id="0-a-b">0단계: 공통 사전 준비 (A안, B안 공통)</h2>
+<p>K8s PV를 생성하기 전, NAS 서버 내부에 각 서비스가 사용할 하위 디렉토리를 미리 생성해야 합니다.</p>
+<h3 id="step-1">Step 1: 오프라인 패키지 설치 및 서비스 기동</h3>
+<p>모든 워커 노드에서 NFS 클라이언트 패키지를 설치하고 서비스를 활성화합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>/경로/nfs_package_bundle
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>localinstall<span class="w"> </span>*.rpm<span class="w"> </span>-y
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>rpcbind
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># oh-my-zsh 설치</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<h3 id="step-2-nas-export-path">Step 2: NAS 출입구(Export Path) 확인</h3>
+<p>임의의 워커 노드에서 아래 명령어를 실행하여 NAS 서버가 허용한 경로를 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>showmount<span class="w"> </span>-e<span class="w"> </span>&lt;NAS_IP&gt;
 </code></pre></div>
-<h3 id="2-powerlevel10k">2. Powerlevel10k 및 플러그인 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Powerlevel10k</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>https://github.com/romkatv/powerlevel10k.git<span class="w"> </span><span class="si">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="si">}</span>/themes/powerlevel10k
+<div class="admonition info">
+<p class="admonition-title">결과 예시</p>
+<p><code>/applog *</code> (이 가이드에서는 <code>/applog</code>가 NAS의 기본 출입구라고 가정합니다.)</p>
+</div>
+<h3 id="step-3">Step 3: 워커 노드 마운트 및 하위 폴더 생성</h3>
+<p>NAS 내부 공간에 서비스별 전용 폴더를 생성합니다. 이 작업은 <strong>하나의 노드에서 한 번만</strong> 수행하면 됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. 임시 마운트 포인트 생성</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/nas_root
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># zsh-autosuggestions</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zsh-users/zsh-autosuggestions.git<span class="w"> </span><span class="si">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="si">}</span>/plugins/zsh-autosuggestions
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 2. NAS 출입구를 임시 폴더에 연결</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs<span class="w"> </span>&lt;NAS_IP&gt;:/applog<span class="w"> </span>/mnt/nas_root
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># zsh-syntax-highlighting</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zsh-users/zsh-syntax-highlighting.git<span class="w"> </span><span class="si">${</span><span class="nv">ZSH_CUSTOM</span><span class="k">:-</span><span class="p">~/.oh-my-zsh/custom</span><span class="si">}</span>/plugins/zsh-syntax-highlighting
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># 3. NAS 내부로 이동하여 서비스별 폴더 생성</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nb">cd</span><span class="w"> </span>/mnt/nas_root
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>mkdir<span class="w"> </span>grafana<span class="w"> </span>mariadb<span class="w"> </span>prometheus
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># 4. 권한 부여 (Pod가 접근할 수 있도록 권한을 개방합니다)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/mnt/nas_root/*
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># 5. 작업 완료 후 마운트 해제</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="nb">cd</span><span class="w"> </span>~
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/nas_root
 </code></pre></div>
-<h3 id="3-zshrc">3. ~/.zshrc 파일 수정</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># ZSH_THEME=&quot;robbyrussell&quot;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">&quot;powerlevel10k/powerlevel10k&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">plugins</span><span class="o">=(</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>git
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span>zsh-autosuggestions
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>zsh-syntax-highlighting
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="o">)</span>
+<div class="admonition tip">
+<p class="admonition-title">PV 작성 시 경로 매핑 공식</p>
+<p>쿠버네티스 PV YAML의 <code>path</code>는 다음과 같이 조합됩니다.</p>
+<ul>
+<li><strong>공식:</strong> <code>NAS 출입구 경로</code> + <code>/</code> + <code>생성한 하위 디렉토리 이름</code></li>
+<li><strong>예시:</strong> <code>path: /applog/grafana</code></li>
+</ul>
+</div>
+<hr />
+<h2 id="a">[A안] 신규 서비스 생성 시</h2>
+<p>기존 데이터가 없는 상태에서 처음부터 NAS를 연결하여 배포하는 방식입니다.</p>
+<h3 id="step-a-1-pv-pvc">Step A-1: PV 및 PVC 생성</h3>
+<p>0단계에서 생성한 하위 경로를 지정하여 K8s 객체를 생성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># a-storage.yaml</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolume</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pv-grafana</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;ReadWriteMany&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nt">persistentVolumeReclaimPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Retain</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual-nas</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">nfs</span><span class="p">:</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;NAS_IP&gt;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/applog/grafana</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="nn">---</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pvc-grafana</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;ReadWriteMany&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual-nas</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">  </span><span class="nt">volumeName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pv-grafana</span>
 </code></pre></div>
-<h3 id="4">4. 셸 새로고침</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">source</span><span class="w"> </span>~/.zshrc
+<h3 id="step-a-2-deployment-initcontainer">Step A-2: Deployment 배포 (InitContainer 포함)</h3>
+<p>권한 문제를 방지하기 위해 <code>initContainers</code>를 포함하여 배포합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># a-deployment.yaml</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">      </span><span class="nt">securityContext</span><span class="p">:</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="nt">fsGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">472</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">      </span><span class="nt">initContainers</span><span class="p">:</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fix-permissions</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">busybox</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sh&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;chown</span><span class="nv"> </span><span class="s">-R</span><span class="nv"> </span><span class="s">472:472</span><span class="nv"> </span><span class="s">/var/lib/grafana&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">          </span><span class="nt">securityContext</span><span class="p">:</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">            </span><span class="nt">runAsUser</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-storage</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/grafana</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-storage</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/grafana</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-storage</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">          </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="w">            </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pvc-grafana</span>
 </code></pre></div>
-<blockquote>
-<p>설정: source ~/.zshrc를 실행하면, <strong>설정 마법사(p10k configure)</strong>가 자동으로 실행됩니다. 질문에 답하면서 원하는 아이콘과 모양을 선택하면 됩니다.
-필수: 이 테마를 제대로 사용하려면 Nerd Fonts (예: MesloLGS NF)를 Tabby 터미널의 글꼴로 설정해야 합니다.</p>
-</blockquote>
-<h2 id="npm">npm 설치</h2>
-<h3 id="1-nvm">1. NVM 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># NVM 설치</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<hr />
+<h2 id="b">[B안] 기존 데이터 이관 시</h2>
+<p>운영 중인 <code>hostPath</code> 데이터를 보존하면서 스토리지를 NAS로 교체하는 방식입니다.</p>
+<h3 id="step-b-1-pv-pvc">Step B-1: PV 및 PVC 사전 생성</h3>
+<p>[A안]의 <code>Step A-1</code>과 동일하게 PV와 PVC를 미리 생성해 둡니다.</p>
+<h3 id="step-b-2-1">Step B-2: 1차 데이터 동기화 (무중단)</h3>
+<p>서비스 중단 없이 기존 데이터를 NAS로 복사합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/nas_temp
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs<span class="w"> </span>&lt;NAS_IP&gt;:/applog<span class="w"> </span>/mnt/nas_temp
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># NVM 활성화</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">source</span><span class="w"> </span>~/.zshrc
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 기존 hostPath에서 NAS로 데이터 복사 (원본 경로 뒤에 /를 붙여주세요)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>sudo<span class="w"> </span>rsync<span class="w"> </span>-avh<span class="w"> </span>/monitoring/grafana/<span class="w"> </span>/mnt/nas_temp/grafana/
 </code></pre></div>
-<h3 id="2-nodejs">2. Node.js 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Node.js LTS 버전 설치</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>nvm<span class="w"> </span>install<span class="w"> </span>--lts
+<h3 id="step-b-3">Step B-3: 컷오버 및 최종 동기화 (최소 중단)</h3>
+<p>쓰기 작업을 방지하기 위해 Pod를 정지시킨 후 잔여 데이터를 복사합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1. Pod 일시 중지</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>grafana<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--replicas<span class="o">=</span><span class="m">0</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 2. 최종 데이터 동기화 (삭제된 파일까지 일치시킵니다)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>sudo<span class="w"> </span>rsync<span class="w"> </span>-avh<span class="w"> </span>--delete<span class="w"> </span>/monitoring/grafana/<span class="w"> </span>/mnt/nas_temp/grafana/
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 설치 확인</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>node<span class="w"> </span>-v
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>npm<span class="w"> </span>-v
+<h3 id="step-b-4-deployment">Step B-4: Deployment 업데이트 및 재개</h3>
+<p><code>hostPath</code> 설정을 제거하고 생성한 PVC로 교체합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># b-deployment-update.yaml (Volumes 부분 수정)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-storage</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pvc-grafana</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">마무리</p>
+<p>정상 기동이 확인되면 임시 마운트를 해제합니다: <code>sudo umount /mnt/nas_temp</code></p>
+</div>
+<hr />
+<h2 id="_1">설계 트레이드오프 분석</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">비교 항목</th>
+<th style="text-align: left;">[A안] 신규 생성</th>
+<th style="text-align: left;">[B안] 기존 데이터 이관</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>작업 복잡도</strong></td>
+<td style="text-align: left;"><strong>매우 낮음.</strong> YAML 배포로 완료.</td>
+<td style="text-align: left;"><strong>높음.</strong> 수동 복사 작업 필요.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>데이터 보존</strong></td>
+<td style="text-align: left;">초기화 상태로 시작.</td>
+<td style="text-align: left;">기존 설정과 데이터가 완벽히 유지됨.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>서비스 중단</strong></td>
+<td style="text-align: left;">영향 없음.</td>
+<td style="text-align: left;">동기화 시점에 수 분 이내의 중단 발생.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>권장 상황</strong></td>
+<td style="text-align: left;">신규 구축 또는 테스트 환경.</td>
+<td style="text-align: left;">운영 중인 프로덕션 시스템.</td>
+</tr>
+</tbody>
+</table>
 
 
 
