@@ -54,6 +54,8 @@ nav:
       - '2. Gateway API 및 HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
       - 'Envoy Gateway 네트워크 구성 방법': k8s/gateway-api/envoy-gateway-network-config.md
       - 'ervice Endpoint가 있는데도 Connection Refused 발생할 때': k8s/gateway-api/missed-containerport.md
+    - Storage:
+      - 'NAS PV 연결 가이드': k8s/use-pv-nas.md
     - 'Cheat Sheets': k8s/cheatsheet.md
   - Cloud:
     - 'Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기': cloud/use_terraform_with_gcp.md
