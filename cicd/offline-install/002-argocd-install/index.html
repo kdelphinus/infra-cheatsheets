@@ -3251,7 +3251,7 @@
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># Networking</span>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="nv">NODEPORT</span><span class="o">=</span><span class="s2">&quot;30001&quot;</span><span class="w">                    </span><span class="c1"># NodePort 번호</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="nv">DOMAIN</span><span class="o">=</span><span class="s2">&quot;argocd.devops.internal&quot;</span><span class="w">     </span><span class="c1"># HTTPRoute 도메인, &quot;&quot; 이면 HTTPRoute 미생성</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="nv">DOMAIN</span><span class="o">=</span><span class="s2">&quot;argocd.devops.internal&quot;</span><span class="w">     </span><span class="c1"># HTTPRoute 도메인, &quot;&quot; 이면 HTTPRoute 미생성 및 CoreDNS 등록 건너뜀</span>
 <a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="nv">TLS_ENABLED</span><span class="o">=</span><span class="s2">&quot;false&quot;</span><span class="w">                 </span><span class="c1"># &quot;true&quot; | &quot;false&quot; — https/http 결정</span>
 <a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="nv">GATEWAY_NAME</span><span class="o">=</span><span class="s2">&quot;cmp-gateway&quot;</span>
 <a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="nv">GATEWAY_NAMESPACE</span><span class="o">=</span><span class="s2">&quot;envoy-gateway-system&quot;</span>
@@ -3267,8 +3267,17 @@
 <li>NAS PV/PVC 적용 (nas 선택 시)</li>
 <li>Helm 설치 (Harbor 이미지 경로 + 스토리지 설정 반영)</li>
 <li>NodePort 서비스 생성</li>
-<li>HTTPRoute 생성 (DOMAIN 설정 시)</li>
+<li>HTTPRoute 생성 (<code>DOMAIN</code> 설정 시)</li>
+<li>CoreDNS에 도메인 등록 (<code>DOMAIN</code> 설정 시)</li>
 </ul>
+<p><code>DOMAIN</code>이 설정된 경우 스크립트 실행 중 DNS 서버 등록 여부를 묻습니다.</p>
+<ul>
+<li>DNS 서버에 이미 등록된 경우 → CoreDNS 등록을 건너뜁니다.</li>
+<li>미등록(hosts 방식) → 클러스터 내부 CoreDNS에 자동 등록합니다.</li>
+</ul>
+<blockquote>
+<p><strong>클라이언트 PC hosts 등록은 별도로 필요합니다.</strong> 스크립트 완료 시 안내 문구가 출력됩니다.</p>
+</blockquote>
 <hr />
 <h2 id="phase-4">🚀 Phase 4: 설치 확인 및 접속</h2>
 <h3 id="1-pod">1. Pod 상태 확인</h3>
