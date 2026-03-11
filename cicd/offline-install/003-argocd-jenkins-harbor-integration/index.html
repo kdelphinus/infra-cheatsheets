@@ -1417,6 +1417,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#c-uigui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1450,6 +1461,17 @@
     <span class="md-ellipsis">
       
         YAML로 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-uigui_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용
       
     </span>
   </a>
@@ -3167,6 +3189,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#c-uigui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3200,6 +3233,17 @@
     <span class="md-ellipsis">
       
         YAML로 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-uigui_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용
       
     </span>
   </a>
@@ -3422,6 +3466,21 @@
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>gitops-repo-secret.yaml
 </code></pre></div>
+<h3 id="c-uigui">방법 C — 웹 UI(GUI) 사용</h3>
+<ol>
+<li>ArgoCD 웹 접속 (<code>https://&lt;NODE_IP&gt;:30001</code>) 및 로그인</li>
+<li>좌측 메뉴 <strong>Settings</strong> &gt; <strong>Repositories</strong> 클릭</li>
+<li>상단 <strong>+ CONNECT REPO</strong> 버튼 클릭</li>
+<li>설정 입력:<ul>
+<li><strong>Choose connection method</strong>: <code>VIA HTTPS</code></li>
+<li><strong>Type</strong>: <code>git</code></li>
+<li><strong>Repository URL</strong>: <code>http://&lt;GITLAB_IP&gt;:&lt;PORT&gt;/.../&lt;GITOPS_REPO&gt;.git</code></li>
+<li><strong>Username / Password</strong>: GitLab 사용자명 및 Access Token 입력</li>
+<li><strong>TLS Skip Server Verification</strong>: 체크 (사설 인증서 사용 시)</li>
+</ul>
+</li>
+<li><strong>CONNECT</strong> 클릭하여 <code>Successful</code> 상태 확인</li>
+</ol>
 <hr />
 <h2 id="phase-2-argocd-application">🚀 Phase 2: ArgoCD Application 생성</h2>
 <p>GitLab GitOps 레포의 매니페스트를 배포하는 Application을 생성합니다.</p>
@@ -3459,6 +3518,28 @@
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>argocd-app.yaml
 </code></pre></div>
+<h3 id="c-uigui_1">방법 C — 웹 UI(GUI) 사용</h3>
+<ol>
+<li>ArgoCD 메인 화면에서 <strong>+ NEW APP</strong> 클릭</li>
+<li><strong>General</strong> 설정:<ul>
+<li><strong>Application Name</strong>: <code>my-app</code></li>
+<li><strong>Project Name</strong>: <code>default</code></li>
+<li><strong>Sync Policy</strong>: <code>Automatic</code> (권장) 또는 <code>Manual</code></li>
+</ul>
+</li>
+<li><strong>Source</strong> 설정:<ul>
+<li><strong>Repository URL</strong>: 위에서 등록한 GitLab 레포지토리 선택</li>
+<li><strong>Revision</strong>: <code>main</code> (또는 배포 브랜치)</li>
+<li><strong>Path</strong>: <code>k8s/overlays/prod</code> (매니페스트 경로)</li>
+</ul>
+</li>
+<li><strong>Destination</strong> 설정:<ul>
+<li><strong>Cluster URL</strong>: <code>https://kubernetes.default.svc</code> (내부 배포 시)</li>
+<li><strong>Namespace</strong>: <code>my-app</code></li>
+</ul>
+</li>
+<li>상단 <strong>CREATE</strong> 클릭하여 배포 상태 확인</li>
+</ol>
 <hr />
 <h2 id="phase-3-jenkins-argocd-sync">🚀 Phase 3: Jenkins에서 ArgoCD Sync 트리거</h2>
 <h3 id="1-argocd-api">1. ArgoCD API 토큰 발급</h3>
