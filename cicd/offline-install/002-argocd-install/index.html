@@ -3252,9 +3252,10 @@
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># Networking</span>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="nv">NODEPORT</span><span class="o">=</span><span class="s2">&quot;30001&quot;</span><span class="w">                    </span><span class="c1"># NodePort 번호</span>
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="nv">DOMAIN</span><span class="o">=</span><span class="s2">&quot;argocd.devops.internal&quot;</span><span class="w">     </span><span class="c1"># HTTPRoute 도메인, &quot;&quot; 이면 HTTPRoute 미생성</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="nv">GATEWAY_NAME</span><span class="o">=</span><span class="s2">&quot;cmp-gateway&quot;</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="nv">GATEWAY_NAMESPACE</span><span class="o">=</span><span class="s2">&quot;envoy-gateway-system&quot;</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="c1"># ================================================</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="nv">TLS_ENABLED</span><span class="o">=</span><span class="s2">&quot;false&quot;</span><span class="w">                 </span><span class="c1"># &quot;true&quot; | &quot;false&quot; — https/http 결정</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="nv">GATEWAY_NAME</span><span class="o">=</span><span class="s2">&quot;cmp-gateway&quot;</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="nv">GATEWAY_NAMESPACE</span><span class="o">=</span><span class="s2">&quot;envoy-gateway-system&quot;</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="c1"># ================================================</span>
 </code></pre></div>
 <p>설정 후 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>~/argocd-2.12.1/install-argocd.sh
