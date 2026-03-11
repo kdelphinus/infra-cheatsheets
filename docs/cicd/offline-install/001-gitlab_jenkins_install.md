@@ -62,6 +62,9 @@ sudo chmod -R 777 /data
 sudo mkdir -p /data/gitlab_data/minio
 sudo chmod -R 777 /data/gitlab_data/minio
 
+# Gradle 캐시 디렉토리 (빌드 에이전트 Pod에서 사용)
+sudo mkdir -p /data/gradle-cache
+sudo chmod -R 777 /data/gradle-cache
 ```
 
 ### 2. PV 생성 (Master 노드)
@@ -71,6 +74,9 @@ sudo chmod -R 777 /data/gitlab_data/minio
 ```bash
 cd ~/jenkins
 kubectl apply -f pv-volume.yaml
+
+# Gradle 캐시용 PV/PVC 적용 (빌드 파이프라인에서 의존성 캐시 재사용)
+kubectl apply -f gradle-cache-pv-pvc.yaml
 ```
 
 ---
@@ -363,6 +369,8 @@ Jenkins 접속 경로: `http://<NodeIP>:30000` → **Manage Jenkins** → **Cred
           - mountPath: "/home/jenkins/agent"
             name: "workspace-volume"
             readOnly: false
+          - mountPath: "/var/jenkins_home/.gradle"
+            name: "gradle-cache"
 
       # ---------------------------------------------------------
       # 2. Jenkins 에이전트 (필수 통신용)
@@ -374,6 +382,13 @@ Jenkins 접속 경로: `http://<NodeIP>:30000` → **Manage Jenkins** → **Cred
           - mountPath: "/home/jenkins/agent"
             name: "workspace-volume"
             readOnly: false
+
+  volumes:
+    - name: workspace-volume
+      emptyDir: {}
+    - name: gradle-cache
+      persistentVolumeClaim:
+        claimName: gradle-cache-pvc
     """
             }
         }
