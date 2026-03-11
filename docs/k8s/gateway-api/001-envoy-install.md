@@ -220,6 +220,9 @@ kubectl patch gateway cmp-gateway -n envoy-gateway-system \
       - 네트워크 담당자에게 **"쿠버네티스 노드들의 IP와 고정 포트(30080, 30443)"**를
       L4 장비의 멤버(Real Server)로 등록 요청합니다.
       - 사용자는 L4 장비의 VIP(80/443)로 접속합니다.
+      - **Service의 EXTERNAL-IP와 Gateway 주소에 VIP 대신 Worker Node IP가 표시되는 것은 정상입니다.**
+        VIP는 외부 LB가 소유하며 Kubernetes는 알 수 없습니다. `spec.addresses` 패치 불필요합니다.
+        트래픽 흐름: `클라이언트 → VIP(외부 LB) → Worker Node IP:30080/30443 → Envoy → 백엔드`
     - [C-2] L4 장비가 없는 경우 (로컬/폐쇄망 직접 접속):
       - 별도의 장비 없이 PC에서 직접 접속합니다.
       - 접속 주소:
