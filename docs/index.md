@@ -40,7 +40,7 @@ hide:
 ### 🛠️ DevOps Utilities
 
 - **Cloud**: [GCP Terraform 연동](cloud/use_terraform_with_gcp.md)
-- **CI/CD**: [폐쇄망 GitLab & Jenkins 설치](cicd/offline-install/001-gitlab_jenkins_install.md)
+- **CI/CD**: [폐쇄망 GitLab & Jenkins 설치](cicd/offline-install/001-gitlab_jenkins_install.md) · [ArgoCD 설치](cicd/offline-install/002-argocd-install.md) · [ArgoCD — Jenkins · Harbor 연동](cicd/offline-install/003-argocd-jenkins-harbor-integration.md) · [Harbor 이미지 재배포 운영](cicd/operation/redeploy-with-new-image.md)
 - **Database**: [MariaDB Galera Cluster](db/ha/galera-cluster.md) · [폐쇄망 설치 파일 준비](db/install/ready-mariadb-air-gapped-install.md)
 - **Ubuntu/WSL**: [초기 환경 설정](ubuntu/init-ubuntu-env.md) · [WSL 네트워크 설정](ubuntu/wsl/wsl-network-setting.md)
 

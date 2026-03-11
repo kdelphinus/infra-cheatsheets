@@ -53,7 +53,7 @@ nav:
       - '1. Gateway API 설치': k8s/gateway-api/001-envoy-install.md
       - '2. Gateway API 및 HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
       - 'Envoy Gateway 네트워크 구성 방법': k8s/gateway-api/envoy-gateway-network-config.md
-      - 'ervice Endpoint가 있는데도 Connection Refused 발생할 때': k8s/gateway-api/missed-containerport.md
+      - 'Service Endpoint가 있는데도 Connection Refused 발생할 때': k8s/gateway-api/missed-containerport.md
     - Storage:
       - 'NAS PV 연결 가이드': k8s/use-pv-nas.md
     - 'Cheat Sheets': k8s/cheatsheet.md
@@ -63,6 +63,10 @@ nav:
   - CI/CD:
     - 폐쇄망:
       - '1. 폐쇄망에서 GitLab과 Jenkins 설치': cicd/offline-install/001-gitlab_jenkins_install.md
+      - '2. 폐쇄망에서 ArgoCD 설치': cicd/offline-install/002-argocd-install.md
+      - '3. ArgoCD — Jenkins · Harbor 연동': cicd/offline-install/003-argocd-jenkins-harbor-integration.md
+    - 운영:
+      - 'Harbor 기반 이미지 업데이트 및 재배포': cicd/operation/redeploy-with-new-image.md
   - Ubuntu:
     - 'Ubuntu 기본 설정': ubuntu/init-ubuntu-env.md
     - WSL:

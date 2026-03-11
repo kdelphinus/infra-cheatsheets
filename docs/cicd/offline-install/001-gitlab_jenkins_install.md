@@ -283,15 +283,33 @@ kubectl get svc -n gitlab gitlab-webservice-default
 
 ### 2. Jenkins: Credential 등록
 
-1. Jenkins 접속 (`http://<NodeIP>:30000`).
-2. **Manage Jenkins** -> **Credentials** -> **System** -> **Global credentials (unrestricted)**.
-3. **Add Credentials**:
-    - **Kind:** `GitLab API token`
-    - **Scope:** `Global`
-    - **API token:** (복사한 GitLab 토큰 붙여넣기)
-    - **ID:** `gitlab-token-id`
-    - **Description:** GitLab Connection Token
-    - **Create**.
+파이프라인 실행을 위해 아래 세 가지 Credential이 반드시 등록되어 있어야 합니다.
+
+Jenkins 접속 경로: `http://<NodeIP>:30000` → **Manage Jenkins** → **Credentials** → **System** → **Global credentials (unrestricted)**
+
+#### 2.1 GitLab API Token (Jenkins-GitLab 연동용)
+
+- **Kind:** `GitLab API token`
+- **Scope:** `Global`
+- **API token:** (복사한 GitLab 토큰 붙여넣기)
+- **ID:** `gitlab-token-id`
+- **Description:** GitLab Connection Token
+
+#### 2.2 GitLab 계정 정보 (소스 Checkout용)
+
+- **Kind:** `Username with password`
+- **Username:** GitLab 사용자 계정 (예: `root`)
+- **Password:** GitLab 사용자 비밀번호 또는 Personal Access Token
+- **ID:** `<GITLAB_IP>:<PORT>` (파이프라인의 `credentialsId`와 일치해야 함)
+- **Description:** GitLab Access Credential
+
+#### 2.3 Harbor Registry 정보 (이미지 Push용)
+
+- **Kind:** `Username with password`
+- **Username:** Harbor 사용자 계정 (예: `admin`)
+- **Password:** Harbor 사용자 비밀번호
+- **ID:** `0-harbor-product-Credential` (파이프라인의 `credentialsId`와 일치해야 함)
+- **Description:** Harbor Registry Push Credential
 
 ### 3. Jenkins: 시스템 설정
 

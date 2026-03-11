@@ -335,3 +335,87 @@ kubectl describe httproute <ROUTE_NAME> -n <NAMESPACE>
 - Gateway 이름 불일치: parentRefs의 name이 실제 Gateway 이름(cmp-gateway)과 다름.
 - Namespace 불일치: Gateway가 다른 네임스페이스의 라우트를 허용하지 않음
 (Gateway Listener 설정의 allowedRoutes 확인 필요)
+
+---
+
+## [심화] 와일드카드 인증서 적용 가이드
+
+`*.test.com` 와일드카드 인증서 하나로 `a.test.com`, `b.test.com` 등 모든 서브 도메인의 HTTPS 처리를 통합 관리합니다.
+
+### 1단계: 쿠버네티스 Secret 생성
+
+인증서 파일(`.crt`, `.key`)을 Gateway가 위치한 네임스페이스에 Secret으로 등록합니다.
+
+> **중요:** Gateway 리소스가 있는 네임스페이스와 **동일한 곳**에 Secret을 만들어야 Gateway가 읽을 수 있습니다.
+
+```bash
+kubectl create secret tls wildcard-tls-secret \
+  --cert=fullchain.pem \
+  --key=privkey.pem \
+  -n envoy-gateway-system
+```
+
+### 2단계: Gateway 리스너 설정
+
+`Gateway` 리소스를 수정하여 HTTPS 리스너가 하나의 Secret을 참조하도록 설정합니다.
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: cmp-gateway
+  namespace: envoy-gateway-system
+spec:
+  gatewayClassName: eg-cluster-entry
+  listeners:
+    - name: https
+      port: 443
+      protocol: HTTPS
+      hostname: "*.test.com"       # 모든 서브도메인 허용
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: wildcard-tls-secret  # Secret 이름 하나만 지정
+            kind: Secret
+      allowedRoutes:
+        namespaces:
+          from: All
+```
+
+### 3단계: HTTPRoute 추가 (서비스별)
+
+인증서 설정 없이 HTTPRoute만 추가하면 HTTPS가 자동 적용됩니다.
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nexus-route
+  namespace: nexus
+spec:
+  parentRefs:
+    - name: cmp-gateway
+      namespace: envoy-gateway-system
+  hostnames:
+    - "nexus.test.com"      # 와일드카드 범위 내 도메인
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: nexus-svc
+          port: 8081
+```
+
+### 검증
+
+```bash
+# -v 옵션으로 SSL Handshake 과정 확인
+curl -v https://nexus.test.com --resolve nexus.test.com:443:<GATEWAY_IP>
+```
+
+성공 기준: `Server certificate:` 항목에 `CN=*.test.com` 표시, `SSL certificate verify ok` 또는 연결 성공.
+
+> **Q.** 새 서브도메인을 추가하려면 Secret을 다시 만들어야 하나요?
+> **A.** 아닙니다. Gateway가 이미 `*.test.com`을 처리하므로 HTTPRoute만 추가하면 됩니다.
