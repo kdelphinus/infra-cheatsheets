@@ -92,7 +92,7 @@ HOSTPATH_REPO="/data/argocd/repo-cache"
 
 # Networking
 NODEPORT="30001"                    # NodePort 번호
-DOMAIN="argocd.devops.internal"     # HTTPRoute 도메인, "" 이면 HTTPRoute 미생성
+DOMAIN="argocd.devops.internal"     # HTTPRoute 도메인, "" 이면 HTTPRoute 미생성 및 CoreDNS 등록 건너뜀
 TLS_ENABLED="false"                 # "true" | "false" — https/http 결정
 GATEWAY_NAME="cmp-gateway"
 GATEWAY_NAMESPACE="envoy-gateway-system"
@@ -112,7 +112,15 @@ chmod +x ~/argocd-2.12.1/install-argocd.sh
 - NAS PV/PVC 적용 (nas 선택 시)
 - Helm 설치 (Harbor 이미지 경로 + 스토리지 설정 반영)
 - NodePort 서비스 생성
-- HTTPRoute 생성 (DOMAIN 설정 시)
+- HTTPRoute 생성 (`DOMAIN` 설정 시)
+- CoreDNS에 도메인 등록 (`DOMAIN` 설정 시)
+
+`DOMAIN`이 설정된 경우 스크립트 실행 중 DNS 서버 등록 여부를 묻습니다.
+
+- DNS 서버에 이미 등록된 경우 → CoreDNS 등록을 건너뜁니다.
+- 미등록(hosts 방식) → 클러스터 내부 CoreDNS에 자동 등록합니다.
+
+> **클라이언트 PC hosts 등록은 별도로 필요합니다.** 스크립트 완료 시 안내 문구가 출력됩니다.
 
 ---
 

@@ -243,34 +243,45 @@ kubectl get secret gitlab-gitlab-initial-root-password \
 
 ## 🚀 Phase 5: 네트워크 및 PC 접속 설정
 
-로드밸런서나 Gateway가 아직 구성되지 않은 상태에서 웹 접속을 확인하기 위해,
-K8s 서비스의 포트를 임시로 포워딩하거나 NodePort를 확인합니다.
+### 1. 클러스터 내부 DNS 등록 (CoreDNS)
 
-### 1. GitLab 서비스 노출 (임시 NodePort)
+ArgoCD·Jenkins 등 Pod에서 `gitlab.devops.internal`로 통신하려면 클러스터 내부 DNS에 등록이 필요합니다.
 
-GitLab Webservice를 외부에서 접속하기 위해 NodePort로 변경합니다.
+`install-gitlab.sh`의 `DOMAIN` 변수를 설정하면 스크립트 실행 시 자동으로 처리됩니다.
 
 ```bash
-# gitlab-webservice-default 서비스 수정
-kubectl patch svc gitlab-webservice-default -n gitlab -p '{"spec": {"type": "NodePort"}}'
-
-# 할당된 포트 확인 (30000번대 포트 확인)
-kubectl get svc -n gitlab gitlab-webservice-default
-
+DOMAIN="gitlab.devops.internal"   # "" 이면 CoreDNS 등록 건너뜀
 ```
+
+스크립트 실행 중 DNS 서버 등록 여부를 묻습니다.
+
+- **DNS 서버에 이미 등록된 경우** → CoreDNS 등록을 건너뜁니다.
+- **미등록(hosts 방식)** → 클러스터 내부 CoreDNS에 자동 등록합니다.
 
 ### 2. 사용자 PC Hosts 설정
 
-사용자 PC(Windows/Mac)의 `hosts` 파일에 도메인을 등록합니다.
+사용자 PC(Windows/Mac/Linux)의 `hosts` 파일에 도메인을 등록합니다.
+스크립트 완료 시 안내 문구가 출력되며, 등록은 수동으로 해야 합니다.
 
 ```text
-# 예시: 워커노드 IP와 NodePort 사용 시
-# <Worker-Node-IP>  gitlab.devops.internal
-10.10.10.73  gitlab.devops.internal
-
+<GATEWAY_IP>  gitlab.devops.internal
 ```
 
-이제 브라우저에서 `http://gitlab.devops.internal:<NodePort>` 로 접속하여 `root` 계정으로 로그인합니다.
+- Windows: `C:\Windows\System32\drivers\etc\hosts`
+- Linux/Mac: `/etc/hosts`
+
+이제 브라우저에서 `http://gitlab.devops.internal` 로 접속하여 `root` 계정으로 로그인합니다.
+
+### 3. GitLab 서비스 노출 (임시 NodePort, Gateway 미구성 시)
+
+Envoy Gateway가 구성되지 않은 경우 NodePort로 임시 노출합니다.
+
+```bash
+kubectl patch svc gitlab-webservice-default -n gitlab -p '{"spec": {"type": "NodePort"}}'
+
+# 할당된 포트 확인
+kubectl get svc -n gitlab gitlab-webservice-default
+```
 
 ---
 
