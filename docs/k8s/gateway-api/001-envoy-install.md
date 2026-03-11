@@ -178,11 +178,28 @@ echo "✅ 서비스($SVC_NAME)에 외부 IP가 수동 할당되었습니다."
 
 - 만약 1분이 지나도 `Gateway` 가 **false** 상태라면 아래 명령어로 수동 바인딩합니다.
 
+단일 노드:
+
 ```bash
-# Gateway IP 수동 할당
 kubectl patch gateway cmp-gateway -n envoy-gateway-system \
   --type='merge' \
-  -p '{"spec":{"addresses":[{"type":"IPAddress","value":"1.1.1.213"}]}}'
+  -p '{"spec":{"addresses":[{"type":"IPAddress","value":"<NODE_IP>"}]}}'
+```
+
+다중 노드 (DaemonSet 구성):
+
+```bash
+kubectl patch gateway cmp-gateway -n envoy-gateway-system \
+  --type='merge' \
+  -p '{
+    "spec":{
+      "addresses":[
+        {"type":"IPAddress","value":"<NODE_IP_1>"},
+        {"type":"IPAddress","value":"<NODE_IP_2>"},
+        {"type":"IPAddress","value":"<NODE_IP_3>"}
+      ]
+    }
+  }'
 ```
 
 ### ⚙️ Case C: NodePort 모드 (포트 고정)
