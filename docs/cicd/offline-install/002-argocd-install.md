@@ -93,6 +93,7 @@ HOSTPATH_REPO="/data/argocd/repo-cache"
 # Networking
 NODEPORT="30001"                    # NodePort 번호
 DOMAIN="argocd.devops.internal"     # HTTPRoute 도메인, "" 이면 HTTPRoute 미생성
+TLS_ENABLED="false"                 # "true" | "false" — https/http 결정
 GATEWAY_NAME="cmp-gateway"
 GATEWAY_NAMESPACE="envoy-gateway-system"
 # ================================================
