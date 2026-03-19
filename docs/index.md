@@ -46,8 +46,8 @@ hide:
 
 ### 💾 Database
 
-- **HA**: [MariaDB Galera Cluster](db/ha/galera-cluster.md)
-- **폐쇄망 설치**: [MariaDB 설치 파일 준비](db/install/ready-mariadb-air-gapped-install.md)
+- **HA**: [MariaDB Galera Cluster](db/ha/galera-cluster.md) · [장애 복구](db/ha/galera-recovery.md)
+- **폐쇄망 설치**: [MariaDB 설치 파일 준비](db/install/ready-mariadb-air-gapped-install.md) · [트러블슈팅 및 주의사항](db/install/mariadb-troubleshooting.md)
 
 ### ☁️ OpenStack
 
