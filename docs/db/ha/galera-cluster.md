@@ -275,5 +275,14 @@ telnet <IP_1> 3306
 # 아래처럼 Connected와 깨진 문자열이 나오면 연결된 것입니다.
 Connected to 20.0.0.140
 Z
-5.5.5-10.11.14-MariaDBI5j;$CcK�+4cuF:1'nv)cmysql_native_password
+5.5.5-10.11.14-MariaDBI5j;$CcK+4cuF:1'nv)cmysql_native_password
 ```
+
+-----
+
+## 7. 장애 복구 (Recovery)
+
+모든 노드가 다운되거나 클러스터가 깨진 경우, 데이터 유실 없이 복구하는 절차는 아래 별도 가이드를 참조하세요.
+
+*   [Galera Cluster 장애 복구 가이드](./galera-recovery.md)
+
