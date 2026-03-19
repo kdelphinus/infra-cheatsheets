@@ -37,3 +37,8 @@ Gemini, you must adopt one of the following modes based on the user's request:
 
 - Always provide the direct file path when suggesting changes.
 - If modifying `mkdocs.yml`, warn about potential plugin conflicts.
+
+## 5. Git & Workflow Guidelines
+
+- **Atomic Commits**: 여러 개의 독립적인 작업을 수행한 경우, 하나의 거대한 커밋으로 합치지 말고 **의미 단위로 커밋을 나누어** 진행하십시오. (예: 문서 추가 커밋과 설정 변경 커밋 분리)
+- **Push Policy**: 모든 커밋이 완료된 후 최종적으로 푸시를 진행하여 히스토리를 깔끔하게 유지하십시오.
