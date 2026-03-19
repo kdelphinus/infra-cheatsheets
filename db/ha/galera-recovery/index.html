@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/ubuntu/wsl/wsl-network-setting/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-recovery/">
       
       
-        <link rel="prev" href="../../init-ubuntu-env/">
+        <link rel="prev" href="../galera-cluster/">
       
       
-        <link rel="next" href="../../../db/ha/galera-cluster/">
+        <link rel="next" href="../../install/ready-mariadb-air-gapped-install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>WSL 네트워크 설정 - Infra Cheatsheets</title>
+        <title>Galera Cluster 장애 복구 - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#wsl" class="md-skip">
+        <a href="#mariadb-galera-cluster-full-crash-recovery" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              WSL 네트워크 설정
+              Galera Cluster 장애 복구
             
           </span>
         </div>
@@ -318,13 +318,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../init-ubuntu-env/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -340,6 +338,8 @@
   
   
   
+    
+  
   
     
     
@@ -347,11 +347,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../galera-cluster/" class="md-tabs__link">
           
   
   
@@ -1429,31 +1431,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -1471,7 +1468,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1489,7 +1486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../init-ubuntu-env/" class="md-nav__link">
+      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -1514,6 +1511,158 @@
                 
   
   
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WSL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL 네트워크 설정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
     
   
   
@@ -1535,17 +1684,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    WSL
+    HA
   
 
     
@@ -1556,16 +1705,44 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_1">
             <span class="md-nav__icon md-icon"></span>
             
   
-    WSL
+    HA
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../galera-cluster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1590,7 +1767,7 @@
   <span class="md-ellipsis">
     
   
-    WSL 네트워크 설정
+    Galera Cluster 장애 복구
   
 
     
@@ -1608,7 +1785,7 @@
   <span class="md-ellipsis">
     
   
-    WSL 네트워크 설정
+    Galera Cluster 장애 복구
   
 
     
@@ -1634,83 +1811,66 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-dns" class="md-nav__link">
+  <a href="#1-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)
+        1. 복구 논리 (Logic)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-etcwslconf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 자동 생성 설정 끄기 (/etc/wsl.conf)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-dns-etcresolvconf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. DNS 파일 직접 수정 (/etc/resolv.conf)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-wsl-powershell" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. WSL 재시작 (PowerShell에서)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-mirrored-windows-11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 해결 방법 2: "Mirrored" 모드 사용 (Windows 11 필수 ⭐⭐)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 해결 방법 2: &#34;Mirrored&#34; 모드 사용 (Windows 11 필수 ⭐⭐)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 윈도우 사용자 폴더에 설정 파일 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 적용
+        2. 복구 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 복구 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-db-primary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: DB 클러스터 상태 확인 및 Primary 노드 판별
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-primary-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: Primary 노드 부트스트랩 (Bootstrap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 나머지 노드 합류 (Join)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-k8s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: K8s 애플리케이션 파드 정상화
       
     </span>
   </a>
@@ -1723,21 +1883,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-ipv6" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 해결 방법 3: IPv6 비활성화 (특정 통신사/환경용)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        추가 정보
+        3. 최종 복구 체크리스트
       
     </span>
   </a>
@@ -1761,15 +1910,8 @@
 
               
             
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
+              
+                
   
   
   
@@ -1780,186 +1922,21 @@
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    DB
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    DB
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
-        
           
-          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    HA
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_1">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    HA
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Galera Cluster 설치
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Galera Cluster 장애 복구
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
         
           
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="">
             
   
   
@@ -1995,7 +1972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -3046,83 +3023,66 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-dns" class="md-nav__link">
+  <a href="#1-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)
+        1. 복구 논리 (Logic)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-etcwslconf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 자동 생성 설정 끄기 (/etc/wsl.conf)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-dns-etcresolvconf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. DNS 파일 직접 수정 (/etc/resolv.conf)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-wsl-powershell" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. WSL 재시작 (PowerShell에서)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-mirrored-windows-11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 해결 방법 2: "Mirrored" 모드 사용 (Windows 11 필수 ⭐⭐)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 해결 방법 2: &#34;Mirrored&#34; 모드 사용 (Windows 11 필수 ⭐⭐)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 윈도우 사용자 폴더에 설정 파일 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 적용
+        2. 복구 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 복구 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-db-primary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: DB 클러스터 상태 확인 및 Primary 노드 판별
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-primary-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: Primary 노드 부트스트랩 (Bootstrap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 나머지 노드 합류 (Join)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-k8s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: K8s 애플리케이션 파드 정상화
       
     </span>
   </a>
@@ -3135,21 +3095,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-ipv6" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 해결 방법 3: IPv6 비활성화 (특정 통신사/환경용)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        추가 정보
+        3. 최종 복구 체크리스트
       
     </span>
   </a>
@@ -3176,64 +3125,100 @@
   
 
 
-<h1 id="wsl">WSL 속도 향상 설정</h1>
-<h2 id="1-dns">🚀 해결 방법 1: DNS 서버 수동 고정 (가장 효과적 ⭐)</h2>
-<p>WSL2가 윈도우 호스트를 거쳐서 DNS를 조회하는 과정이 느리기 때문에, 구글(8.8.8.8)이나 클라우드플레어(1.1.1.1) DNS를 직접 바라보게 설정하면 속도가 비약적으로 빨라집니다.</p>
-<h3 id="1-etcwslconf">1. 자동 생성 설정 끄기 (<code>/etc/wsl.conf</code>)</h3>
-<p>WSL 내부 터미널에서 아래 명령어를 입력해 설정 파일을 만듭니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># wsl.conf 파일 생성/수정</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/wsl.conf
-</code></pre></div>
-<p>아래 내용을 복사해서 붙여넣으세요. (이미 내용이 있다면 <code>[network]</code> 부분에 추가)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">[network]</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">generateResolvConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
-</code></pre></div>
-<p>(<code>Ctrl + O</code> 저장, <code>Enter</code>, <code>Ctrl + X</code> 종료)</p>
-<h3 id="2-dns-etcresolvconf">2. DNS 파일 직접 수정 (<code>/etc/resolv.conf</code>)</h3>
-<p>기존의 심볼릭 링크를 끊고 직접 DNS를 입력합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 기존 파일 삭제 (심볼릭 링크임)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/resolv.conf
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 새 파일 생성 및 DNS 입력</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf&#39;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;nameserver 1.1.1.1&quot; &gt;&gt; /etc/resolv.conf&#39;</span>
-</code></pre></div>
-<h3 id="3-wsl-powershell">3. WSL 재시작 (PowerShell에서)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">wsl</span> <span class="p">-</span><span class="n">-shutdown</span>
-</code></pre></div>
-<p>다시 WSL을 켜서 <code>apt update</code> 등을 해보면 훨씬 빨라진 것을 느낄 수 있습니다.</p>
+<h1 id="mariadb-galera-cluster-full-crash-recovery">🛠️ MariaDB Galera Cluster 장애 복구 가이드 (Full Crash Recovery)</h1>
+<p>모든 노드가 비정상 종료되어 서비스가 전면 중단된 경우(Full Crash)의 복구 절차를 안내합니다.</p>
+<blockquote>
+<p>💡 <strong>[중요] 데이터 디렉토리 경로 확인</strong></p>
+<p>본 가이드는 <code>/app/mariadb_data</code> 경로를 기준으로 작성되었습니다. <strong>실제 서버의 설치 구성에 따라 데이터 경로가 다를 수 있으므로</strong>, 명령어 실행 전 실제 데이터 저장 경로를 반드시 확인하고 해당 경로로 치환하여 사용하시기 바랍니다.</p>
+</blockquote>
 <hr />
-<h2 id="2-mirrored-windows-11">🚀 해결 방법 2: "Mirrored" 모드 사용 (Windows 11 필수 ⭐⭐)</h2>
-<p>최신 Windows 11(22H2 이상)과 최신 WSL 버전을 쓰고 계시다면, **"미러링 모드"**를 켜는 것이 <strong>게임 체인저</strong>입니다. NAT를 거치지 않고 호스트(Windows)의 네트워크 인터페이스를 그대로 공유하므로 속도가 네이티브 급으로 빨라집니다.</p>
-<h3 id="1">1. 윈도우 사용자 폴더에 설정 파일 생성</h3>
-<p>윈도우 탐색기 주소창에 <code>%UserProfile%</code>을 입력하고 엔터를 칩니다.
-여기에 <strong><code>.wslconfig</code></strong> 라는 파일을 만들고(메모장 이용) 아래 내용을 넣으세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">[wsl2]</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="na">networkingMode</span><span class="o">=</span><span class="s">mirrored</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="na">dnsTunneling</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="na">firewall</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="na">autoProxy</span><span class="o">=</span><span class="s">true</span>
-</code></pre></div>
+<h2 id="1-logic">1. 복구 논리 (Logic)</h2>
 <ul>
-<li><strong><code>networkingMode=mirrored</code></strong>: NAT를 없애고 윈도우 IP를 그대로 씁니다. (속도 대폭 향상)</li>
-<li><strong><code>dnsTunneling=true</code></strong>: DNS 요청을 가상화 계층 대신 터널링으로 처리해 딜레이를 줄입니다.</li>
+<li><strong>최신 트랜잭션 판별:</strong> 모든 노드가 다운된 경우, 가장 최신 트랜잭션(<code>seqno</code>)을 보유한 노드를 찾아 Primary(Bootstrap 대상)로 승격시켜야 데이터 유실 및 무거운 전체 동기화(SST)를 방지할 수 있습니다.</li>
+<li><strong>커스텀 경로 스캔:</strong> 데이터가 커스텀 경로에 저장된 경우, 엔진 내부 상태를 강제 스캔할 때 반드시 <code>--datadir</code> 옵션을 명시해야 합니다.</li>
 </ul>
-<h3 id="2">2. 적용</h3>
-<p>PowerShell에서 <code>wsl --shutdown</code> 후 다시 시작.</p>
 <hr />
-<h2 id="3-ipv6">🚀 해결 방법 3: IPv6 비활성화 (특정 통신사/환경용)</h2>
-<p><code>apt-get</code>이나 <code>curl</code>이 처음에 멈칫하다가 진행되는 경우, IPv6 연결을 시도하다가 타임아웃이 나서 IPv4로 넘어가는 딜레이일 수 있습니다.</p>
-<p><strong>WSL 내부에서 실행:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.ipv6.conf.all.disable_ipv6<span class="o">=</span><span class="m">1</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.ipv6.conf.default.disable_ipv6<span class="o">=</span><span class="m">1</span>
-</code></pre></div>
-<p>(이게 효과가 있다면 <code>/etc/sysctl.conf</code>에 영구 등록하세요.)</p>
-<hr />
-<h2 id="_1">추가 정보</h2>
+<h2 id="2">2. 복구 절차</h2>
+<h3 id="1-db-primary">1단계: DB 클러스터 상태 확인 및 Primary 노드 판별</h3>
 <ol>
-<li><strong>Windows 11</strong> 사용자라면 **[방법 2 (Mirrored Mode)]**가 가장 깔끔하고 성능이 좋습니다. (<code>apt</code> 속도뿐만 아니라 로컬호스트 접속 문제도 해결됨)</li>
-<li><strong>Windows 10</strong> 사용자거나 Mirrored 모드가 불안정하다면 **[방법 1 (DNS 고정)]**만 적용해도 충분히 빨라집니다.</li>
+<li><strong>프로세스 확인:</strong> 3대 서버 모두에서 MariaDB 프로세스가 없는지 확인합니다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mysql
+</code></pre></div></li>
+<li><strong>복구 위치(seqno) 추출:</strong> 3대 서버 모두에서 아래 명령어를 실행하여 트랜잭션 번호를 찾습니다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>/usr/sbin/mariadbd<span class="w"> </span>--wsrep-recover<span class="w"> </span>--datadir<span class="o">=</span>/app/mariadb_data
+</code></pre></div></li>
+<li><strong>Primary 노드 선정:</strong> 로그 마지막의 <code>Recovered position: UUID:seqno</code> 값 중 <strong>숫자(seqno)가 가장 큰 노드</strong>를 Primary로 선정합니다.<ul>
+<li>숫자가 같다면 <code>grastate.dat</code>의 <code>safe_to_bootstrap: 1</code>인 노드를 선택합니다.</li>
+</ul>
+</li>
 </ol>
+<h3 id="2-primary-bootstrap">2단계: Primary 노드 부트스트랩 (Bootstrap)</h3>
+<ol>
+<li><strong>상태 파일 수정:</strong> Primary 노드의 <code>/app/mariadb_data/grastate.dat</code> 파일에서 <code>safe_to_bootstrap: 1</code>로 수정합니다.</li>
+<li><strong>클러스터 초기화 실행:</strong> Primary 노드에서만 실행합니다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>galera_new_cluster
+</code></pre></div></li>
+<li><strong>검증:</strong> 아래 명령어로 결과가 <code>1</code>인지 확인합니다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
+</code></pre></div></li>
+</ol>
+<h3 id="3-join">3단계: 나머지 노드 합류 (Join)</h3>
+<ol>
+<li><strong>서비스 순차 시작:</strong> 나머지 노드에서 <strong>하나씩</strong> 서비스를 시작합니다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+</code></pre></div></li>
+<li><strong>최종 검증:</strong> 아무 노드에서나 클러스터 사이즈가 <code>3</code>으로 복구되었는지 확인합니다.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
+</code></pre></div></li>
+</ol>
+<h3 id="4-k8s">4단계: K8s 애플리케이션 파드 정상화</h3>
+<p>DB 접속 실패로 <code>CrashLoopBackOff</code> 상태인 파드들을 재시작하여 연결을 복구합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deployment<span class="w"> </span>--all<span class="w"> </span>-n<span class="w"> </span><span class="o">[</span>네임스페이스<span class="o">]</span>
+</code></pre></div>
+<hr />
+<h2 id="3">3. 최종 복구 체크리스트</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">완료</th>
+<th style="text-align: left;">분류</th>
+<th style="text-align: left;">점검 대상 및 명령어</th>
+<th style="text-align: left;">기준 / 비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">[ ]</td>
+<td style="text-align: left;"><strong>사전 조사</strong></td>
+<td style="text-align: left;"><code>ps -ef \| grep mysql</code></td>
+<td style="text-align: left;">3대 모두 잔여 DB 프로세스 없음</td>
+</tr>
+<tr>
+<td style="text-align: center;">[ ]</td>
+<td style="text-align: left;"><strong>상태 추출</strong></td>
+<td style="text-align: left;"><code>--wsrep-recover --datadir=[경로]</code></td>
+<td style="text-align: left;">3대 중 <code>seqno</code> 최고값 판별 완료</td>
+</tr>
+<tr>
+<td style="text-align: center;">[ ]</td>
+<td style="text-align: left;"><strong>부트스트랩</strong></td>
+<td style="text-align: left;">Primary 노드: <code>sudo galera_new_cluster</code></td>
+<td style="text-align: left;"><code>wsrep_cluster_size</code> = 1 확인</td>
+</tr>
+<tr>
+<td style="text-align: center;">[ ]</td>
+<td style="text-align: left;"><strong>노드 합류</strong></td>
+<td style="text-align: left;">나머지 노드: <code>sudo systemctl start mariadb</code></td>
+<td style="text-align: left;"><code>wsrep_cluster_size</code> = 3 확인</td>
+</tr>
+<tr>
+<td style="text-align: center;">[ ]</td>
+<td style="text-align: left;"><strong>파드 복구</strong></td>
+<td style="text-align: left;">K8s: <code>kubectl rollout restart deployment</code></td>
+<td style="text-align: left;">앱 파드 <code>Running</code> 상태 확인</td>
+</tr>
+</tbody>
+</table>
 
 
 
