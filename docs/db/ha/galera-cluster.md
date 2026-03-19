@@ -285,4 +285,5 @@ Z
 모든 노드가 다운되거나 클러스터가 깨진 경우, 데이터 유실 없이 복구하는 절차는 아래 별도 가이드를 참조하세요.
 
 *   [Galera Cluster 장애 복구 가이드](./galera-recovery.md)
+*   [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)
 
