@@ -41,4 +41,5 @@ Gemini, you must adopt one of the following modes based on the user's request:
 ## 5. Git & Workflow Guidelines
 
 - **Atomic Commits**: 여러 개의 독립적인 작업을 수행한 경우, 하나의 거대한 커밋으로 합치지 말고 **의미 단위로 커밋을 나누어** 진행하십시오. (예: 문서 추가 커밋과 설정 변경 커밋 분리)
+- **Commit Messages**: 커밋 메시지는 가능한 한 **한글**로 작성하여 직관적으로 내용을 파악할 수 있게 하십시오.
 - **Push Policy**: 모든 커밋이 완료된 후 최종적으로 푸시를 진행하여 히스토리를 깔끔하게 유지하십시오.
