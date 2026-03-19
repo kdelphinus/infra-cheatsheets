@@ -3807,7 +3807,7 @@ PV를 생성하는 것을 권장합니다.</p>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">https</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="nt">image</span><span class="p">:</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.1.213:30002</span><span class="w"> </span><span class="c1"># Harbor domain 맞춰 변경</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">harbor.example.com:8443</span><span class="w"> </span><span class="c1"># Harbor domain 맞춰 변경</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">library</span><span class="w"> </span><span class="c1"># Harbor Project 맞춰서 변경</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
@@ -3850,7 +3850,7 @@ PV를 생성하는 것을 권장합니다.</p>
 <a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a><span class="c1">#       # 컨트롤러 값도 유니크하게 변경</span>
 <a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a><span class="c1">#       controllerValue: &quot;k8s.io/gitlab-nginx&quot;</span>
 <a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a><span class="c1">#     image:</span>
-<a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a><span class="c1">#       registry: 1.1.1.213:30002 # Harbor domain</span>
+<a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a><span class="c1">#       registry: harbor.example.com:8443 # Harbor domain</span>
 <a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a><span class="c1">#       repository: library/ingress-nginx-controller # Harbor에 올라간 이미지</span>
 <a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a><span class="c1">#       tag: &quot;v1.11.8&quot;</span>
 <a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a><span class="c1">#       digest: &quot;&quot;</span>
@@ -4007,7 +4007,7 @@ spec:
   # ---------------------------------------------------------
   - name: shell
     # [중요] busybox 대신 툴이 다 설치된 우리 이미지를 지정 (레지스트리 주소 포함)
-    image: '1.1.1.213:30002/library/cmp-jenkins-full:2.528.3'
+    image: 'harbor.example.com:8443/<HARBOR_PROJECT>/cmp-jenkins-full:2.528.3'
     # 컨테이너가 죽지 않고 계속 살아있도록 유지
     command: ['/bin/sh', '-c', 'sleep 86400']
     tty: true
@@ -4018,11 +4018,24 @@ spec:
       - mountPath: "/var/jenkins_home/.gradle"
         name: "gradle-cache"</p>
 <p># ---------------------------------------------------------
-  # 2. Jenkins 에이전트 (필수 통신용)
+  # 2. 이미지 빌드용 컨테이너 (Podman)
+  # ---------------------------------------------------------
+  - name: podman
+    image: 'harbor.example.com:8443/<HARBOR_PROJECT>/podman:v5'
+    command: ['/bin/sh', '-c', 'sleep 86400']
+    tty: true
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - mountPath: "/home/jenkins/agent"
+        name: "workspace-volume"
+        readOnly: false</p>
+<p># ---------------------------------------------------------
+  # 3. Jenkins 에이전트 (필수 통신용)
   # ---------------------------------------------------------
   - name: jnlp
     # Docker Hub 차단을 위해 로컬 레지스트리 명시
-    image: '1.1.1.213:30002/library/inbound-agent:latest'
+    image: 'harbor.example.com:8443/<HARBOR_PROJECT>/inbound-agent:latest'
     volumeMounts:
       - mountPath: "/home/jenkins/agent"
         name: "workspace-volume"
@@ -4082,7 +4095,7 @@ spec:
 <li>
 <p>Jenkins Job -&gt; Configuration 화면의 <strong>GitLab webhook URL</strong>을 복사합니다.</p>
 <ul>
-<li>예: <code>http://1.1.1.213:30000/project/test-pipeline</code></li>
+<li>예: <code>http://&lt;NODE_IP&gt;:30000/project/test-pipeline</code></li>
 <li>Floating IP로 되어있다면 위와 같이 project 앞부분을 내부 IP로 수정해야 합니다.</li>
 </ul>
 </li>
