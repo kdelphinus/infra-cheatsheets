@@ -25,7 +25,9 @@ hide:
 ### ☸️ Kubernetes
 
 - [**Cheat Sheets**](k8s/cheatsheet.md) : 자주 사용하는 `kubectl` 명령어 모음
-- **폐쇄망 설치**: [준비](k8s/offline-install/001-ready-k8s-air-gapped-install.md) · [K8s 설치](k8s/offline-install/002-k8s-air-gapped-install.md) · [기반 인프라(Helm/Harbor) 구성](k8s/offline-install/003-necessary_infra_install.md)
+- **폐쇄망 설치**: [준비](k8s/offline-install/001-ready-k8s-air-gapped-install.md) · [K8s 설치](k8s/offline-install/002-k8s-air-gapped-install.md) · [기반 인프라](k8s/offline-install/003-necessary_infra_install.md) · [MetalLB](k8s/offline-install/004-metallb-install.md)
+- **Monitoring**: [Prometheus & Grafana](k8s/monitoring/001-kube-prometheus-stack.md)
+- **Backup & Restore**: [Velero 설치](k8s/backup-restore/001-velero-install.md)
 - **Gateway API**: [Envoy 설치](k8s/gateway-api/001-envoy-install.md) · [HTTPRoute 설정](k8s/gateway-api/002-convert_ingress_to_httproute.md) · [네트워크 설정](k8s/gateway-api/envoy-gateway-network-config.md) · [ContainerPort 누락 해결](k8s/gateway-api/missed-containerport.md)
 - **Storage**: [NAS PV 연결 가이드](k8s/use-pv-nas.md)
 
@@ -36,7 +38,7 @@ hide:
 
 ### 🚀 CI/CD
 
-- **폐쇄망 설치**: [GitLab & Jenkins](cicd/offline-install/001-gitlab_jenkins_install.md) · [ArgoCD 설치](cicd/offline-install/002-argocd-install.md) · [ArgoCD-Jenkins-Harbor 연동](cicd/offline-install/003-argocd-jenkins-harbor-integration.md)
+- **폐쇄망 설치**: [GitLab & Jenkins](cicd/offline-install/001-gitlab_jenkins_install.md) · [ArgoCD](cicd/offline-install/002-argocd-install.md) · [Nexus](cicd/offline-install/004-nexus-install.md) · [연동 가이드](cicd/offline-install/003-argocd-jenkins-harbor-integration.md)
 - **운영**: [Harbor 기반 이미지 재배포](cicd/operation/redeploy-with-new-image.md)
 
 ### 🐧 Ubuntu & WSL
