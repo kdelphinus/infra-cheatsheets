@@ -14,7 +14,7 @@
 [GitLab] ──webhook──▶ [Jenkins]
                           │
                     1. 소스 빌드 (Gradle)
-                    2. Kaniko → 이미지 빌드 & Harbor Push
+                    2. Podman → 이미지 빌드 & Harbor Push
                     3. GitOps 레포 manifest 이미지 태그 업데이트
                     4. ArgoCD sync 트리거
                           │
@@ -188,7 +188,7 @@ Jenkins 관리 > Credentials > (global) > Add Credentials
 
 ### 3. Jenkinsfile에 stage 추가
 
-기존 `stage('2. Kaniko Build & Push')` 이후에 아래 stage를 추가합니다.
+기존 `stage('2. Podman Build & Push')` 이후에 아래 stage를 추가합니다.
 
 ```groovy
 stage('3. Update GitOps Manifest') {

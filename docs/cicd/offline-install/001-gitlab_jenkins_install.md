@@ -137,7 +137,7 @@ global:
     https: false
 
   image:
-    registry: 1.1.1.213:30002 # Harbor domain 맞춰 변경
+    registry: harbor.example.com:8443 # Harbor domain 맞춰 변경
     repository: library # Harbor Project 맞춰서 변경
     pullPolicy: IfNotPresent
 
@@ -180,7 +180,7 @@ nginx-ingress:
 #       # 컨트롤러 값도 유니크하게 변경
 #       controllerValue: "k8s.io/gitlab-nginx"
 #     image:
-#       registry: 1.1.1.213:30002 # Harbor domain
+#       registry: harbor.example.com:8443 # Harbor domain
 #       repository: library/ingress-nginx-controller # Harbor에 올라간 이미지
 #       tag: "v1.11.8"
 #       digest: ""
@@ -372,7 +372,7 @@ Jenkins 접속 경로: `http://<NodeIP>:30000` → **Manage Jenkins** → **Cred
       # ---------------------------------------------------------
       - name: shell
         # [중요] busybox 대신 툴이 다 설치된 우리 이미지를 지정 (레지스트리 주소 포함)
-        image: '1.1.1.213:30002/library/cmp-jenkins-full:2.528.3'
+        image: 'harbor.example.com:8443/<HARBOR_PROJECT>/cmp-jenkins-full:2.528.3'
         # 컨테이너가 죽지 않고 계속 살아있도록 유지
         command: ['/bin/sh', '-c', 'sleep 86400']
         tty: true
@@ -384,11 +384,25 @@ Jenkins 접속 경로: `http://<NodeIP>:30000` → **Manage Jenkins** → **Cred
             name: "gradle-cache"
 
       # ---------------------------------------------------------
-      # 2. Jenkins 에이전트 (필수 통신용)
+      # 2. 이미지 빌드용 컨테이너 (Podman)
+      # ---------------------------------------------------------
+      - name: podman
+        image: 'harbor.example.com:8443/<HARBOR_PROJECT>/podman:v5'
+        command: ['/bin/sh', '-c', 'sleep 86400']
+        tty: true
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - mountPath: "/home/jenkins/agent"
+            name: "workspace-volume"
+            readOnly: false
+
+      # ---------------------------------------------------------
+      # 3. Jenkins 에이전트 (필수 통신용)
       # ---------------------------------------------------------
       - name: jnlp
         # Docker Hub 차단을 위해 로컬 레지스트리 명시
-        image: '1.1.1.213:30002/library/inbound-agent:latest'
+        image: 'harbor.example.com:8443/<HARBOR_PROJECT>/inbound-agent:latest'
         volumeMounts:
           - mountPath: "/home/jenkins/agent"
             name: "workspace-volume"
@@ -443,7 +457,7 @@ Jenkins 접속 경로: `http://<NodeIP>:30000` → **Manage Jenkins** → **Cred
 ### 3. Webhook 등록 (GitLab)
 
 1. Jenkins Job -> Configuration 화면의 **GitLab webhook URL**을 복사합니다.
-    - 예: `http://1.1.1.213:30000/project/test-pipeline`
+    - 예: `http://<NODE_IP>:30000/project/test-pipeline`
     - Floating IP로 되어있다면 위와 같이 project 앞부분을 내부 IP로 수정해야 합니다.
 
 2. GitLab 프로젝트 -> **Project Settings** -> LNB의 **Webhooks** -> **Add new webhook**
