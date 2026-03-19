@@ -17,6 +17,10 @@
          <lastmod>2026-03-19</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/004-nexus-install/</loc>
+         <lastmod>2026-03-19</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/cicd/operation/redeploy-with-new-image/</loc>
          <lastmod>2026-03-19</lastmod>
     </url>
@@ -61,6 +65,10 @@
          <lastmod>2026-03-19</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/backup-restore/001-velero-install/</loc>
+         <lastmod>2026-03-19</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/</loc>
          <lastmod>2026-03-19</lastmod>
     </url>
@@ -77,6 +85,10 @@
          <lastmod>2026-03-19</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/001-kube-prometheus-stack/</loc>
+         <lastmod>2026-03-19</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/001-ready-k8s-air-gapped-install/</loc>
          <lastmod>2026-03-19</lastmod>
     </url>
@@ -86,6 +98,10 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/003-necessary_infra_install/</loc>
+         <lastmod>2026-03-19</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/004-metallb-install/</loc>
          <lastmod>2026-03-19</lastmod>
     </url>
     <url>

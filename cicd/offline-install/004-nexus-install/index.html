@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/ide/vscode_shortcut/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/004-nexus-install/">
       
       
-        <link rel="prev" href="../../git/cheatsheet/">
+        <link rel="prev" href="../003-argocd-jenkins-harbor-integration/">
       
       
-        <link rel="next" href="../../network/tip/check-domain-ip/">
+        <link rel="next" href="../../operation/redeploy-with-new-image/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
-        <title>VSCode 단축키 - Infra Cheatsheets</title>
+        <title>4. Nexus Repository 설치 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +51,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#vs-code" class="md-skip">
+        <a href="#nexus-repository-ctr" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              VSCode 단축키
+              4. Nexus Repository 설치
             
           </span>
         </div>
@@ -221,7 +221,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -249,7 +249,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+        <a href="../../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -272,7 +272,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -288,6 +288,8 @@
   
   
   
+    
+  
   
     
     
@@ -295,11 +297,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../001-gitlab_jenkins_install/" class="md-tabs__link">
           
   
   
@@ -322,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -349,7 +353,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -372,7 +376,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../git/cheatsheet/" class="md-tabs__link">
+        <a href="../../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -388,13 +392,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -421,7 +423,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -444,7 +446,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -478,7 +480,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -508,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -639,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -667,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -695,7 +697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -723,7 +725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/offline-install/004-metallb-install/" class="md-nav__link">
+      <a href="../../../k8s/offline-install/004-metallb-install/" class="md-nav__link">
         
   
   
@@ -811,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -899,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -987,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
   
@@ -1015,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -1043,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -1071,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -1159,7 +1161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/use-pv-nas/" class="md-nav__link">
+      <a href="../../../k8s/use-pv-nas/" class="md-nav__link">
         
   
   
@@ -1195,7 +1197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s/cheatsheet/" class="md-nav__link">
+      <a href="../../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -1282,7 +1284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -1310,7 +1312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -1342,26 +1344,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -1379,7 +1386,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1394,26 +1401,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
             
   
   
@@ -1431,7 +1443,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1449,7 +1461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../001-gitlab_jenkins_install/" class="md-nav__link">
         
   
   
@@ -1477,7 +1489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
+      <a href="../002-argocd-install/" class="md-nav__link">
         
   
   
@@ -1505,7 +1517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../003-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -1530,10 +1542,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Nexus Repository 설치
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1549,6 +1588,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 로드 및 푸시
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-helm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: Helm 설치 (폴더 방식)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 초기 비밀번호 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1575,17 +1667,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
             
   
   
@@ -1621,7 +1716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -1716,7 +1811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -1796,7 +1891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -1943,7 +2038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -1971,7 +2066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -2059,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -2087,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2182,7 +2277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/cheatsheet/" class="md-nav__link">
+      <a href="../../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2214,31 +2309,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -2256,7 +2346,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2271,37 +2361,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    VSCode 단축키
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -2317,81 +2380,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🖥️ 환경 설정 및 기본 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#editing-multi-cursor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✏️ 편집 및 다중 커서 (Editing &amp; Multi-Cursor)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#navigation-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ 탐색 및 코드 분석 (Navigation &amp; Analysis)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-source-control" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📂 Git 및 소스 제어 (Source Control)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐞 디버깅 (Debugging)
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2515,7 +2503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -2543,7 +2531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/tip/check-network-subnet/" class="md-nav__link">
+      <a href="../../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -2638,7 +2626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2718,7 +2706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -2746,7 +2734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/install/" class="md-nav__link">
+      <a href="../../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -2774,7 +2762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/base/api/" class="md-nav__link">
+      <a href="../../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -2862,7 +2850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -2890,7 +2878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -2978,7 +2966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -3006,7 +2994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -3094,7 +3082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -3182,7 +3170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -3245,10 +3233,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🖥️ 환경 설정 및 기본 실행
+        1단계: 이미지 로드 및 푸시
       
     </span>
   </a>
@@ -3256,10 +3244,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#editing-multi-cursor" class="md-nav__link">
+  <a href="#2-helm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✏️ 편집 및 다중 커서 (Editing &amp; Multi-Cursor)
+        2단계: Helm 설치 (폴더 방식)
       
     </span>
   </a>
@@ -3267,32 +3255,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#navigation-analysis" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ 탐색 및 코드 분석 (Navigation &amp; Analysis)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-source-control" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📂 Git 및 소스 제어 (Source Control)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐞 디버깅 (Debugging)
+        3단계: 초기 비밀번호 확인
       
     </span>
   </a>
@@ -3319,222 +3285,34 @@
   
 
 
-<h1 id="vs-code">🚀 VS Code 핵심 단축키</h1>
-<h2 id="_1">🖥️ 환경 설정 및 기본 실행</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">기능</th>
-<th style="text-align: left;">Windows</th>
-<th style="text-align: left;">macOS</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>현재 폴더 열기</strong></td>
-<td style="text-align: left;"><code>code .</code></td>
-<td style="text-align: left;"><code>code .</code></td>
-<td style="text-align: left;"><strong>터미널</strong>에서 현재 디렉토리를 VS Code로 열기 (단축키 아님)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>액션 검색 (Command Palette)</strong></td>
-<td style="text-align: left;">Ctrl + Shift + P</td>
-<td style="text-align: left;">Cmd + Shift + P</td>
-<td style="text-align: left;">모든 VS Code 명령 실행 (가장 중요)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>파일 찾기 (Go to File)</strong></td>
-<td style="text-align: left;">Ctrl + P</td>
-<td style="text-align: left;">Cmd + P</td>
-<td style="text-align: left;">프로젝트 내 파일 이름을 검색하여 열기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>통합 터미널 토글</strong></td>
-<td style="text-align: left;">Ctrl + `</td>
-<td style="text-align: left;">Ctrl + `</td>
-<td style="text-align: left;">내장 터미널 열기/닫기</td>
-</tr>
-</tbody>
-</table>
-<h2 id="editing-multi-cursor">✏️ 편집 및 다중 커서 (Editing &amp; Multi-Cursor)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">기능</th>
-<th style="text-align: left;">Windows</th>
-<th style="text-align: left;">macOS</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>다음 동일 단어 선택</strong></td>
-<td style="text-align: left;">Ctrl + D</td>
-<td style="text-align: left;">Cmd + D</td>
-<td style="text-align: left;">선택한 단어의 다음 일치 항목에 <strong>커서 하나</strong> 추가</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>모든 동일 단어 선택</strong></td>
-<td style="text-align: left;">Ctrl + Shift + L</td>
-<td style="text-align: left;">Cmd + Shift + L</td>
-<td style="text-align: left;">파일 내 모든 일치 항목에 <strong>모든 커서</strong> 추가</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>윗줄/아랫줄에 커서 추가</strong></td>
-<td style="text-align: left;">Ctrl + Alt + Up/Down</td>
-<td style="text-align: left;">Option + Cmd + Up/Down</td>
-<td style="text-align: left;">방향키를 이용한 커서 복제</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>줄 이동 (위/아래)</strong></td>
-<td style="text-align: left;">Alt + Up/Down</td>
-<td style="text-align: left;">Option + Up/Down</td>
-<td style="text-align: left;">현재 줄 전체를 위/아래로 이동</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>줄 복사 (위/아래)</strong></td>
-<td style="text-align: left;">Shift + Alt + Up/Down</td>
-<td style="text-align: left;">Shift + Option + Up/Down</td>
-<td style="text-align: left;">현재 줄을 복사하여 추가</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>줄 삭제</strong></td>
-<td style="text-align: left;">Ctrl + Shift + K</td>
-<td style="text-align: left;">Cmd + Shift + K</td>
-<td style="text-align: left;">현재 줄 전체 삭제</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>주석 처리/해제</strong></td>
-<td style="text-align: left;">Ctrl + /</td>
-<td style="text-align: left;">Cmd + /</td>
-<td style="text-align: left;">현재 줄을 주석으로 처리/해제</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>코드 포맷팅</strong></td>
-<td style="text-align: left;">Shift + Alt + F</td>
-<td style="text-align: left;">Shift + Option + F</td>
-<td style="text-align: left;">문서 전체의 코드 스타일 정리</td>
-</tr>
-</tbody>
-</table>
-<h2 id="navigation-analysis">🛠️ 탐색 및 코드 분석 (Navigation &amp; Analysis)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">기능</th>
-<th style="text-align: left;">Windows</th>
-<th style="text-align: left;">macOS</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>선언으로 이동</strong></td>
-<td style="text-align: left;">F12</td>
-<td style="text-align: left;">F12</td>
-<td style="text-align: left;">함수/변수의 정의된 위치로 이동</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>정의 참조 찾기</strong></td>
-<td style="text-align: left;">Shift + F12</td>
-<td style="text-align: left;">Shift + F12</td>
-<td style="text-align: left;">해당 기호가 사용된 모든 위치를 확인</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>심볼 이름 변경 (Rename)</strong></td>
-<td style="text-align: left;">F2</td>
-<td style="text-align: left;">F2</td>
-<td style="text-align: left;">변수/함수 등의 이름을 프로젝트 전체에서 안전하게 변경</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>이전 커서 위치로</strong></td>
-<td style="text-align: left;">Alt + Left</td>
-<td style="text-align: left;">Ctrl + -</td>
-<td style="text-align: left;">커서의 이전 작업 위치로 되돌아가기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>파일 내 기호 찾기</strong></td>
-<td style="text-align: left;">Ctrl + Shift + O</td>
-<td style="text-align: left;">Cmd + Shift + O</td>
-<td style="text-align: left;">현재 파일 내 기호(함수, 클래스) 목록 검색</td>
-</tr>
-</tbody>
-</table>
-<h2 id="git-source-control">📂 Git 및 소스 제어 (Source Control)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">기능</th>
-<th style="text-align: left;">Windows</th>
-<th style="text-align: left;">macOS</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>소스 제어 열기</strong></td>
-<td style="text-align: left;">Ctrl + Shift + G</td>
-<td style="text-align: left;">Ctrl + Shift + G</td>
-<td style="text-align: left;">소스 제어(Git) 사이드바 열기</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>다음 변경 사항</strong></td>
-<td style="text-align: left;">F7</td>
-<td style="text-align: left;">F7</td>
-<td style="text-align: left;">파일 내에서 다음 Diff(변경된 내용)로 이동</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>이전 변경 사항</strong></td>
-<td style="text-align: left;">Shift + F7</td>
-<td style="text-align: left;">Shift + F7</td>
-<td style="text-align: left;">파일 내에서 이전 Diff(변경된 내용)로 이동</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>스테이징된 파일 커밋</strong></td>
-<td style="text-align: left;">(별도 설정)</td>
-<td style="text-align: left;">(별도 설정)</td>
-<td style="text-align: left;">소스 제어 사이드바에서 커밋 메시지 입력 후 Ctrl + Enter로 커밋</td>
-</tr>
-</tbody>
-</table>
-<h2 id="debugging">🐞 디버깅 (Debugging)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">기능</th>
-<th style="text-align: left;">Windows</th>
-<th style="text-align: left;">macOS</th>
-<th style="text-align: left;">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>디버깅 시작/계속</strong></td>
-<td style="text-align: left;">F5</td>
-<td style="text-align: left;">F5</td>
-<td style="text-align: left;">디버깅 시작 또는 중단점에서 계속 진행</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>중단점 설정/해제</strong></td>
-<td style="text-align: left;">F9</td>
-<td style="text-align: left;">F9</td>
-<td style="text-align: left;">현재 줄에 중단점(Breakpoint) 설정/해제</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>한 단계씩 실행 (Step Over)</strong></td>
-<td style="text-align: left;">F10</td>
-<td style="text-align: left;">F10</td>
-<td style="text-align: left;">함수 내부로 진입하지 않고 다음 줄로 이동</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>함수 내부로 진입 (Step Into)</strong></td>
-<td style="text-align: left;">F11</td>
-<td style="text-align: left;">F11</td>
-<td style="text-align: left;">함수 호출 내부로 진입</td>
-</tr>
-</tbody>
-</table>
+<h1 id="nexus-repository-ctr">🚀 Nexus Repository 오프라인 설치 가이드 (ctr 기반)</h1>
+<p>폐쇄망 환경에서 <code>ctr</code>을 사용하여 Nexus3를 설치하고 라이브러리 저장소를 구성하는 절차입니다.</p>
+<h2 id="1">1단계: 이미지 로드 및 푸시</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 이미지 로드 (ctr 사용)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>images/sonatype-nexus3-3.70.1.tar
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 2. Harbor push — 공통 업로드 스크립트 사용</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># harbor-1.14.3/utils/upload_images_to_harbor_v3-lite.sh 내 아래 변수를 수정 후 실행합니다.</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">#   IMAGE_DIR      : &lt;이 디렉터리&gt;/images</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">#   HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">#   HARBOR_PROJECT : library</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">#   HARBOR_USER    : admin</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">#   HARBOR_PASSWORD: &lt;Harbor 관리자 비밀번호&gt;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>bash<span class="w"> </span>../harbor-1.14.3/utils/upload_images_to_harbor_v3-lite.sh
+</code></pre></div>
+<h2 id="2-helm">2단계: Helm 설치 (폴더 방식)</h2>
+<p><code>charts/nexus-repository-manager</code> 폴더를 사용하여 설치합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 네임스페이스 생성</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>nexus<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 헬름 설치 (폴더 지정)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>helm<span class="w"> </span>install<span class="w"> </span>nexus<span class="w"> </span>./charts/nexus-repository-manager<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>-n<span class="w"> </span>nexus<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml
+</code></pre></div>
+<h2 id="3">3단계: 초기 비밀번호 확인</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nexus-0<span class="w"> </span>-n<span class="w"> </span>nexus<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/nexus-data/admin.password
+</code></pre></div>
 
 
 
@@ -3584,10 +3362,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
