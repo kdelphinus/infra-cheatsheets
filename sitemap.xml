@@ -93,6 +93,10 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/002-operation-guide/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/001-ready-k8s-air-gapped-install/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
