@@ -1,51 +1,67 @@
-# 🚀 Monitoring (kube-prometheus-stack) 오프라인 설치 가이드 (ctr 기반)
+# 🚀 Monitoring 오프라인 설치 가이드 (ctr 기반)
 
 폐쇄망 환경에서 `ctr`을 사용하여 통합 모니터링(Prometheus/Grafana)을 구축하는 절차입니다.
 
-## 1단계: 오프라인 이미지 로드 및 푸시
+## 1단계: 이미지 Harbor 업로드
 
-모니터링 스택은 여러 이미지를 사용합니다. `images/` 폴더 내의 모든 `.tar` 파일(총 11개)을 로드합니다.
-
-> Prometheus, Alertmanager, Prometheus Operator, Config Reloader, Webhook Certgen,
-> Grafana, Grafana Sidecar (k8s-sidecar), busybox (initChownData),
-> Node Exporter, kube-state-metrics, Prometheus Adapter
+모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.
 
 ```bash
 # 1. 이미지 로드 (ctr 사용)
 for f in images/*.tar; do sudo ctr -n k8s.io images import "$f"; done
+
+# 2. upload_images_to_harbor_v3-lite.sh 상단 Config 수정
+# IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)
+# HARBOR_REGISTRY: <NODE_IP>:30002
+
+chmod +x images/upload_images_to_harbor_v3-lite.sh
+./images/upload_images_to_harbor_v3-lite.sh
 ```
 
+## 2단계: 설치 실행
+
+모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.
+
 ```bash
-# 2. Harbor push — 공통 업로드 스크립트 사용
-# harbor-1.14.3/utils/upload_images_to_harbor_v3-lite.sh 내 아래 변수를 수정 후 실행합니다.
-#   IMAGE_DIR      : <이 디렉터리>/images
-#   HARBOR_REGISTRY: <NODE_IP>:30002
-#   HARBOR_PROJECT : library
-#   HARBOR_USER    : admin
-#   HARBOR_PASSWORD: <Harbor 관리자 비밀번호>
-bash ../harbor-1.14.3/utils/upload_images_to_harbor_v3-lite.sh
+# 헬름 설치 (루트의 values.yaml 자동 반영)
+chmod +x scripts/install.sh
+./scripts/install.sh
 ```
 
-## 2단계: Helm 설치 (폴더 방식)
+## 3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)
 
-압축 해제된 차트 폴더(`charts/kube-prometheus-stack`)를 사용하여 설치를 진행합니다.
+Envoy Gateway를 Ingress로 사용하는 경우 HTTPRoute를 적용합니다.
+`manifests/httproute.yaml` 상단의 hostname을 실제 도메인으로 수정한 뒤 실행합니다.
 
 ```bash
-# 네임스페이스 생성
-kubectl create namespace monitoring --dry-run=client -o yaml | kubectl apply -f -
-
-# 헬름 설치 (폴더 지정)
-helm install prometheus ./charts/kube-prometheus-stack \
-  -n monitoring \
-  -f values.yaml
+# hostname 확인 및 수정
+# grafana.devops.internal / prometheus.devops.internal / alertmanager.devops.internal
+kubectl apply -f manifests/httproute.yaml
 ```
 
-## 3단계: 접속 및 확인
+## 4단계: 재설치 시 PVC 처리 (선택)
+
+Helm은 `uninstall` 시 PVC를 삭제하지 않습니다. 데이터를 초기화하려면 수동으로 삭제해야 합니다.
 
 ```bash
-# Grafana 접속 (Port-forward 예시)
+# 1. Helm 릴리즈 제거
+helm uninstall prometheus -n monitoring
+
+# 2. 데이터 초기화 필요 시 PVC/PV 삭제
+kubectl delete pvc --all -n monitoring
+# (ReclaimPolicy가 Retain인 경우 PV도 수동 삭제 필요)
+```
+
+## 5단계: 설치 확인 및 접속
+
+```bash
+# Grafana 접속 (Port-forward 테스트)
 kubectl port-forward svc/prometheus-grafana 3000:80 -n monitoring
-
-# 초기 정보
-# ID: admin / PW: admin (values.yaml 설정값)
 ```
+
+Grafana 초기 로그인 정보 (변경 시 `values.yaml`의 `grafana.adminUser` / `grafana.adminPassword` 참고):
+
+| 항목 | 기본값 |
+| :--- | :--- |
+| ID | `admin` |
+| Password | `admin` |
