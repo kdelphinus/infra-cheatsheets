@@ -26,7 +26,7 @@ hide:
 
 - [**Cheat Sheets**](k8s/cheatsheet.md) : 자주 사용하는 `kubectl` 명령어 모음
 - **폐쇄망 설치**: [준비](k8s/offline-install/001-ready-k8s-air-gapped-install.md) · [K8s 설치](k8s/offline-install/002-k8s-air-gapped-install.md) · [기반 인프라](k8s/offline-install/003-necessary_infra_install.md) · [MetalLB](k8s/offline-install/004-metallb-install.md)
-- **Monitoring**: [Prometheus & Grafana](k8s/monitoring/001-kube-prometheus-stack.md)
+- **Monitoring**: [설치 가이드](k8s/monitoring/001-kube-prometheus-stack.md) · [운영 가이드](k8s/monitoring/002-operation-guide.md)
 - **Backup & Restore**: [Velero 설치](k8s/backup-restore/001-velero-install.md)
 - **Gateway API**: [Envoy 설치](k8s/gateway-api/001-envoy-install.md) · [HTTPRoute 설정](k8s/gateway-api/002-convert_ingress_to_httproute.md) · [네트워크 설정](k8s/gateway-api/envoy-gateway-network-config.md) · [ContainerPort 누락 해결](k8s/gateway-api/missed-containerport.md)
 - **Storage**: [NAS PV 연결 가이드](k8s/use-pv-nas.md)
@@ -49,7 +49,7 @@ hide:
 ### 💾 Database
 
 - **HA**: [MariaDB Galera Cluster](db/ha/galera-cluster.md) · [장애 복구](db/ha/galera-recovery.md)
-- **폐쇄망 설치**: [MariaDB 설치 파일 준비](db/install/ready-mariadb-air-gapped-install.md) · [트러블슈팅 및 주의사항](db/install/mariadb-troubleshooting.md)
+- **폐쇄망 설치**: [파일 준비](db/install/ready-mariadb-air-gapped-install.md) · [MariaDB 설치](db/install/mariadb-air-gapped-install.md) · [트러블슈팅](db/install/mariadb-troubleshooting.md)
 
 ### ☁️ OpenStack
 
