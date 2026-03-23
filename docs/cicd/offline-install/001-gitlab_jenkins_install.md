@@ -1,131 +1,124 @@
 # 🚀 GitLab & Jenkins 오프라인 설치 및 연동 가이드
 
-폐쇄망 환경에서 GitLab EE v18.7과 Jenkins v2.528.3을 Kubernetes 위에 설치하고 상호 연동하는 절차를 안내합니다.
+본 문서는 폐쇄망 Kubernetes 환경에서 **GitLab v18.7**과 **Jenkins v2.528.3**을 설치하고 CI/CD 파이프라인 구축을 위해 상호 연동하는 절차를 정의합니다.
 
-## 전제 조건
+## 📋 구성 명세
+
+| 항목 | 버전 | 용도 |
+| :--- | :--- | :--- |
+| **GitLab EE** | **v18.7** | 소스 코드 관리 및 형상 관리 |
+| **Jenkins** | **v2.528.3** | 빌드 및 배포 자동화 (CI/CD) |
+| **Helm Charts** | 최신 stable | 각 컴포넌트 배포용 차트 |
+
+---
+
+## 🛠️ 설치 전제 조건
 
 - Kubernetes 클러스터 구성 완료
-- Helm v3.14.0 설치 완료
-- `kubectl` CLI 사용 가능
+- Helm v3.x 설치 완료
 - Harbor 레지스트리 접근 가능 (`<NODE_IP>:30002`)
-- 스토리지 클래스(`local-path`) 구성 완료
+- (도메인 접속 시) Envoy Gateway 또는 Ingress-Nginx 설치 완료
 
 ---
 
-## 1단계: 호스트 디렉토리 및 이미지 준비
+## 1단계: 호스트 디렉토리 준비
 
-모든 작업은 각 컴포넌트(`gitlab/`, `jenkins/`) 루트 디렉토리에서 실행합니다.
-
-### 1.1 데이터 저장 경로 생성 (모든 워커 노드)
+모든 작업은 각 컴포넌트 루트 디렉토리에서 실행합니다. PV 데이터 저장 경로를 대상 노드에 미리 생성합니다.
 
 ```bash
-# GitLab 및 Jenkins 데이터 폴더 생성
-sudo mkdir -p /data/jenkins_home
-sudo mkdir -p /data/gitlab_data
-sudo mkdir -p /data/gitlab_pg
-sudo mkdir -p /data/gitlab_redis
-sudo mkdir -p /data/gradle-cache
-
-sudo chmod -R 777 /data
+# GitLab 및 Jenkins 컴포넌트 루트에서 실행
+chmod +x scripts/setup-host-dirs.sh
+./scripts/setup-host-dirs.sh
 ```
 
-### 1.2 이미지 Harbor 업로드
+**주요 생성 경로:**
+- GitLab: `/data/gitlab` (Config, Data, Redis 등)
+- Jenkins: `/data/jenkins_home`, `/data/gradle-cache`
 
-각 디렉토리의 `images/upload_images_to_harbor_v3-lite.sh`를 실행합니다.
+---
+
+## 2단계: 이미지 Harbor 업로드
 
 ```bash
-# GitLab 이미지 업로드
-cd ~/gitlab-18.7
-./images/upload_images_to_harbor_v3-lite.sh
+# images/upload_images_to_harbor_v3-lite.sh 상단 Config 수정
+# HARBOR_REGISTRY: <NODE_IP>:30002
 
-# Jenkins 이미지 업로드
-cd ~/jenkins-2.528.3
 ./images/upload_images_to_harbor_v3-lite.sh
 ```
 
 ---
 
-## 2단계: GitLab 설치
+## 3단계: 운영 설정 (values.yaml 및 PV)
 
-### 2.1 운영 설정 (values.yaml 및 PV)
+설치 전 컴포넌트 루트의 설정 파일들을 환경에 맞게 수정합니다.
 
-`values.yaml`에서 도메인 및 이미지 경로를 수정하고, `manifests/gitlab-pv.yaml`에서 노드 정보를 수정합니다.
-
-### 2.2 설치 실행
-
-```bash
-cd ~/gitlab-18.7
-chmod +x scripts/install.sh
-./scripts/install.sh
-```
-
-- **초기 root 비밀번호 확인**:
-  ```bash
-  kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -o jsonpath="{.data.password}" | base64 -d && echo
-  ```
+| 컴포넌트 | 파일명 | 주요 수정 항목 |
+| :--- | :--- | :--- |
+| **GitLab** | `values.yaml` | 도메인, 이미지 경로, 리소스 제한 |
+| | `manifests/gitlab-pv.yaml` | 노드 이름(`nodeAffinity`), 저장 경로 |
+| **Jenkins** | `values.yaml` | 이미지 경로, 리소스 제한, 서비스 타입 |
+| | `manifests/pv-volume.yaml` | 노드 이름(`nodeAffinity`), 저장 경로 |
 
 ---
 
-## 3단계: Jenkins 설치
+## 4단계: 설치 실행 (GitLab & Jenkins)
 
-### 3.1 운영 설정 (values.yaml 및 PV)
-
-`values.yaml`에서 이미지 경로를 수정하고, `manifests/pv-volume.yaml` 및 `manifests/gradle-cache-pv-pvc.yaml`을 확인합니다.
-
-### 3.2 설치 실행
+각 컴포넌트 디렉토리에서 설치 스크립트를 실행합니다.
 
 ```bash
+# 1. GitLab 설치
+cd ~/gitlab-18.7
+chmod +x scripts/install.sh
+./scripts/install.sh
+
+# 2. Jenkins 설치
 cd ~/jenkins-2.528.3
 chmod +x scripts/install.sh
 ./scripts/install.sh
 ```
 
-- **초기 admin 비밀번호 확인**:
+**스크립트 주요 기능:**
+- 네임스페이스 (`gitlab`, `jenkins`) 생성 및 PV/PVC 적용
+- 노드 고정 (NodeSelector) 처리
+- Helm 배포 (Harbor 이미지 경로 자동 반영)
+- 초기 관리자 비밀번호 자동 출력
+
+---
+
+## 5단계: 초기 접속 및 비밀번호 확인
+
+### 5.1 GitLab 초기 접속
+
+- **URL**: `http://<NODE_IP>` 또는 설정 도메인
+- **계정**: `root`
+- **비밀번호 확인**:
   ```bash
-  kubectl get secret jenkins -n jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 -d && echo
+  kubectl get secret gitlab-gitlab-initial-root-password \
+    -n gitlab -o jsonpath="{.data.password}" | base64 -d && echo
+  ```
+
+### 5.2 Jenkins 초기 접속
+
+- **URL**: `http://<NODE_IP>:30000` (NodePort)
+- **계정**: `admin`
+- **비밀번호 확인**:
+  ```bash
+  kubectl get secret jenkins -n jenkins \
+    -o jsonpath="{.data.jenkins-admin-password}" | base64 -d && echo
   ```
 
 ---
 
-## 4단계: GitLab <-> Jenkins 연동
+## 🔗 GitLab-Jenkins 연동 가이드
 
-### 4.1 GitLab: Personal Access Token 발급
-- **Preferences > Personal Access Tokens**에서 `api` 스코프의 토큰을 생성합니다.
-
-### 4.2 Jenkins: Credentials 등록
-- **GitLab API Token**: 발급받은 토큰 등록
-- **GitLab 계정**: 소스 체크아웃용 (ID/PW)
-- **Harbor Registry**: 이미지 푸시용 (ID/PW)
-
-### 4.3 Jenkins: 시스템 설정
-- **Manage Jenkins > System > GitLab** 섹션에서 Connection 설정
-- **GitLab host URL**: 클러스터 내부 주소 사용 (예: `http://gitlab-webservice-default.gitlab.svc.cluster.local:8181`)
-
-### 4.4 Webhook 설정 (GitLab)
-- 프로젝트 **Settings > Webhooks**에서 Jenkins Job URL 등록
-- **URL**: `http://<JENKINS_INTERNAL_IP>:8080/project/<JOB_NAME>`
+1. **GitLab Access Token 생성**: Jenkins가 GitLab API에 접근할 수 있도록 Personal Access Token을 발급합니다.
+2. **Jenkins GitLab Plugin 설정**: Jenkins 관리 > 시스템 설정에서 GitLab 서버 정보를 등록합니다.
+3. **WebHook 설정**: GitLab 프로젝트 설정 > Webhooks에서 Jenkins 빌드 트리거 URL을 등록합니다.
 
 ---
 
-## 💡 운영 팁
-
-- **리소스 관리**: GitLab은 메모리를 많이 소모하므로 최소 8GB 이상의 여유 공간이 있는 노드에 배치하십시오.
-- **도메인 접속**: 사용자 PC의 `hosts` 파일에 게이트웨이 IP와 도메인을 등록해야 합니다.
-  `<GATEWAY_IP>  gitlab.devops.internal`
-- **에이전트 설정**: Jenkins 관리의 **Nodes and Clouds** 설정에서 K8s 클러스터 연결 정보를 정확히 입력해야 빌드 에이전트 Pod이 생성됩니다.
-
-## 디렉토리 구조 (Standard Structure)
-
-| 경로 | 설명 |
-| :--- | :--- |
-| `charts/` | Helm 차트 파일 |
-| `images/` | 컨테이너 이미지 및 업로드 스크립트 |
-| `manifests/` | PV, PVC, HTTPRoute 등 K8s 리소스 |
-| `scripts/` | 설치, 삭제, 호스트 준비 스크립트 |
-
-## 삭제
+## 🗑️ 삭제 (Uninstall)
 
 ```bash
-# 각 디렉토리에서 실행
 ./scripts/uninstall.sh
 ```

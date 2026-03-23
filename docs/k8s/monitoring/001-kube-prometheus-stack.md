@@ -1,76 +1,107 @@
-# 🚀 Monitoring 오프라인 설치 가이드 (kube-prometheus-stack)
+# 🚀 Monitoring 오프라인 설치 가이드 (ctr 기반)
 
-폐쇄망 환경에서 `kube-prometheus-stack`을 사용하여 통합 모니터링 체계(Prometheus, Grafana, Alertmanager)를 구축하는 절차입니다.
+본 문서는 폐쇄망 Kubernetes 환경에서 **kube-prometheus-stack**을 기반으로 통합 모니터링 체계(Prometheus/Grafana)를 구축하는 절차를 정의합니다.
 
-## 전제 조건
+## 📋 구성 명세
+
+| 항목 | 버전 | 용도 |
+| :--- | :--- | :--- |
+| **Kube-Prometheus-Stack** | **v62.7.0** | 모니터링 통합 스택 (Helm) |
+| **Prometheus** | **v2.54.1** | 시계열 데이터 수집 및 쿼리 |
+| **Grafana** | **v11.2.0** | 데이터 시각화 및 대시보드 |
+| **Alertmanager** | **v0.27.0** | 경고 및 알림 관리 |
+
+---
+
+## 🛠️ 설치 전제 조건
 
 - Kubernetes 클러스터 구성 완료
-- Helm v3.14.0 설치 완료
-- `kubectl` CLI 사용 가능
+- Helm v3.x 설치 완료
 - Harbor 레지스트리 접근 가능 (`<NODE_IP>:30002`)
+- (도메인 접속 시) Envoy Gateway 설치 완료
+
+---
 
 ## 1단계: 이미지 Harbor 업로드
 
-모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.
+컴포넌트 루트 디렉토리에서 실행합니다.
 
 ```bash
-# upload_images_to_harbor_v3-lite.sh 상단 Config 수정
-# IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)
+# 1. 이미지 로드 (ctr 사용)
+for f in images/*.tar; do sudo ctr -n k8s.io images import "$f"; done
+
+# 2. upload_images_to_harbor_v3-lite.sh 상단 Config 수정
 # HARBOR_REGISTRY: <NODE_IP>:30002
 
 chmod +x images/upload_images_to_harbor_v3-lite.sh
 ./images/upload_images_to_harbor_v3-lite.sh
 ```
 
+---
+
 ## 2단계: 설치 실행
 
-루트 디렉토리의 `values.yaml`을 환경에 맞게 수정한 뒤 실행합니다.
+모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.
 
 ```bash
-# 헬름 설치
+# 헬름 설치 (루트의 values.yaml 자동 반영)
 chmod +x scripts/install.sh
 ./scripts/install.sh
 ```
 
-스크립트 자동 처리 항목:
-- 네임스페이스(`monitoring`) 생성
-- Helm 배포 (Harbor 이미지 경로 반영)
+**스크립트 자동 처리 항목:**
+- 네임스페이스 (`monitoring`) 생성 및 스토리지 설정 적용
+- Helm 배포 (Harbor 이미지 경로 자동 생성)
+- Grafana 초기 비밀번호 설정
+
+---
 
 ## 3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)
 
-Envoy Gateway를 통해 모니터링 대시보드를 노출하려면 `manifests/httproute.yaml`을 적용합니다.
+Envoy Gateway를 통해 모니터링 대시보드를 노출하려면 `HTTPRoute`를 적용합니다.
+`manifests/httproute.yaml` 상단의 `hostname`을 실제 도메인으로 수정한 뒤 실행합니다.
 
 ```bash
-# hostname 확인 및 수정 (grafana.devops.internal 등)
+# 도메인 예시: grafana.devops.internal / prometheus.devops.internal
 kubectl apply -f manifests/httproute.yaml
 ```
 
+---
+
 ## 4단계: 설치 확인 및 접속
 
-```bash
-# 파드 및 서비스 상태 확인
-kubectl get pods,svc -n monitoring
+### 4.1 설치 상태 확인
 
-# Grafana 초기 로그인 (values.yaml 설정 확인)
-# ID: admin / Password: admin
+```bash
+kubectl get pods -n monitoring
+kubectl get svc -n monitoring
 ```
 
-| 서비스 | 내부 도메인 | 비고 |
-| :--- | :--- | :--- |
-| **Grafana** | `grafana.devops.internal` | 대시보드 |
-| **Prometheus** | `prometheus.devops.internal` | 메트릭 조회 |
-| **Alertmanager** | `alertmanager.devops.internal` | 알람 관리 |
+### 4.2 Grafana 접속
 
-## 디렉토리 구조 (Standard Structure)
+포트 포워딩을 통해 로컬에서 즉시 접속 테스트를 진행할 수 있습니다.
 
-| 경로 | 설명 |
+```bash
+kubectl port-forward svc/prometheus-grafana 3000:80 -n monitoring
+```
+
+**초기 로그인 정보 (values.yaml 참고):**
+
+| 항목 | 기본값 |
 | :--- | :--- |
-| `charts/` | kube-prometheus-stack Helm 차트 |
-| `images/` | 컨테이너 이미지 및 업로드 스크립트 |
-| `manifests/` | HTTPRoute, ServiceMonitor 등 K8s 리소스 |
-| `scripts/` | 설치/삭제 자동화 스크립트 |
+| **ID** | `admin` |
+| **Password** | `admin` |
 
-## 삭제
+---
+
+## 💡 운영 및 재설치 팁
+
+- **PVC 유지**: Helm `uninstall` 시 PVC는 삭제되지 않습니다. 데이터를 완전히 초기화하려면 `kubectl delete pvc --all -n monitoring` 명령어를 수동으로 실행하십시오.
+- **리소스 제한**: Grafana와 Prometheus의 리소스 사용량을 관찰하고, 필요 시 `values.yaml`에서 `resources`를 조정하십시오.
+
+---
+
+## 🗑️ 삭제 (Uninstall)
 
 ```bash
 ./scripts/uninstall.sh

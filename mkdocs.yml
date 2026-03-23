@@ -48,28 +48,30 @@ nav:
     - 폐쇄망:
       - '1. 폐쇄망용 설치 파일 준비': k8s/offline-install/001-ready-k8s-air-gapped-install.md
       - '2. 폐쇄망에서 K8s 설치': k8s/offline-install/002-k8s-air-gapped-install.md
-      - '3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치': k8s/offline-install/003-necessary_infra_install.md
-      - '4. MetalLB 설치 및 L2 설정': k8s/offline-install/004-metallb-install.md
+      - '3. 기반 인프라 설치': k8s/offline-install/003-necessary_infra_install.md
+      - '4. MetalLB 설치': k8s/offline-install/004-metallb-install.md
     - 'Monitoring':
-      - '1. Prometheus & Grafana 설치': k8s/monitoring/001-kube-prometheus-stack.md
-      - '2. 모니터링 운영 가이드': k8s/monitoring/002-operation-guide.md
+      - 'Prometheus & Grafana 설치': k8s/monitoring/001-kube-prometheus-stack.md
+      - '모니터링 운영 가이드': k8s/monitoring/002-operation-guide.md
     - 'Backup & Restore':
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Gateway API':
-      - '1. Gateway API 설치': k8s/gateway-api/001-envoy-install.md
-      - '2. Gateway API 및 HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
-      - 'Envoy Gateway 네트워크 구성 방법': k8s/gateway-api/envoy-gateway-network-config.md
-      - 'Service Endpoint가 있는데도 Connection Refused 발생할 때': k8s/gateway-api/missed-containerport.md
+      - 'Ingress-Nginx 설치': k8s/gateway-api/000-ingress-nginx-install.md
+      - 'Envoy Gateway 설치': k8s/gateway-api/001-envoy-install.md
+      - 'HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
+      - 'Envoy Gateway 네트워크 구성': k8s/gateway-api/envoy-gateway-network-config.md
+      - 'ContainerPort 누락 트러블슈팅': k8s/gateway-api/missed-containerport.md
     - Storage:
-      - 'NAS PV 연결 가이드': k8s/use-pv-nas.md
+      - 'NFS Provisioner 설치': k8s/use-pv-nas.md
     - 'Cheat Sheets': k8s/cheatsheet.md
   - Cloud:
     - 'Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기': cloud/use_terraform_with_gcp.md
     - 'Google Cloud SDK Cheat Sheet': cloud/gcp-cheatsheet.md
   - CI/CD:
     - 폐쇄망:
-      - '1. 폐쇄망에서 GitLab과 Jenkins 설치': cicd/offline-install/001-gitlab_jenkins_install.md
-      - '2. 폐쇄망에서 ArgoCD 설치': cicd/offline-install/002-argocd-install.md
+      - '0. Harbor 설치': cicd/offline-install/000-harbor-install.md
+      - '1. GitLab & Jenkins 설치': cicd/offline-install/001-gitlab_jenkins_install.md
+      - '2. ArgoCD 설치': cicd/offline-install/002-argocd-install.md
       - '3. ArgoCD — Jenkins · Harbor 연동': cicd/offline-install/003-argocd-jenkins-harbor-integration.md
       - '4. Nexus Repository 설치': cicd/offline-install/004-nexus-install.md
     - 운영:
