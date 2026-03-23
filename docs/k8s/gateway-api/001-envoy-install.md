@@ -107,8 +107,15 @@ kubectl patch gateway cmp-gateway -n envoy-gateway-system --type='merge' \
   -p '{"spec":{"addresses":[{"type":"IPAddress","value":"10.10.10.73"}]}}'
 ```
 
-### Case C: NodePort — VIP(HAProxy) 연동
-NodePort 모드 설치 시 HTTP **30080**, HTTPS **30443** 포트로 고정됩니다. 앞단에 HAProxy를 두어 80/443으로 변환합니다.
+### Case C: NodePort — VIP 연동
+NodePort 모드 설치 시 HTTP **30080**, HTTPS **30443** 포트로 고정됩니다. 환경에 따라 아래 방식 중 하나를 선택하여 연동합니다.
+
+#### 1) L4 스위치(Hardware LB) 연동 시
+네트워크 담당자에게 워커 노드 IP와 고정 포트(**30080, 30443**)를 L4 장비의 **Real Server**로 등록 요청합니다. 사용자는 L4 장비의 VIP(80/443)를 통해 접속합니다.
+- **트래픽 흐름**: `Client → VIP(L4) → Worker IP:30080/30443 → Envoy Pod`
+
+#### 2) L4 장비가 없는 경우 (Keepalived + HAProxy)
+워커 노드에 소프트웨어 로드밸런서를 구성하여 80/443 포트를 30080/30443으로 중계합니다.
 
 ```bash
 # HAProxy 설정 예시 (/etc/haproxy/haproxy.cfg)
