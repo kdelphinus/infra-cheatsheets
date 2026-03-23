@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2-kubernetes-helm" class="md-skip">
+        <a href="#2-폐쇄망에서-kubernetes와-helm-설치" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -739,7 +739,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#phase-0" class="md-nav__link">
+  <a href="#-phase-0-설치-파일-배포" class="md-nav__link">
     <span class="md-ellipsis">
       
         📦 Phase 0: 설치 파일 배포
@@ -750,7 +750,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-1-os" class="md-nav__link">
+  <a href="#-phase-1-로컬-패키지-설치-및-os-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 1: 로컬 패키지 설치 및 OS 설정
@@ -762,7 +762,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-dnf-localinstall" class="md-nav__link">
+  <a href="#11-패키지-설치-dnf-localinstall" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.1 패키지 설치 (dnf localinstall)
@@ -773,7 +773,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-os" class="md-nav__link">
+  <a href="#12-os-커널-및-보안-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2 OS 커널 및 보안 설정
@@ -784,7 +784,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-containerd-harbor" class="md-nav__link">
+  <a href="#13-containerd-설정-harbor-연동-대비" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.3 Containerd 설정 (Harbor 연동 대비)
@@ -800,7 +800,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2" class="md-nav__link">
+  <a href="#-phase-2-이미지-로드-전체-노드" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 2: 이미지 로드 (전체 노드)
@@ -811,7 +811,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-3-lb-ha-3" class="md-nav__link">
+  <a href="#-phase-3-로드밸런서lb-구성-ha-3중화-시에만" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)
@@ -823,7 +823,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-vip-keepalived-haproxy-" class="md-nav__link">
+  <a href="#옵션-a-vip-방식-keepalived--haproxy---권장" class="md-nav__link">
     <span class="md-ellipsis">
       
         옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)
@@ -835,7 +835,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-haproxy-etchaproxyhaproxycfg" class="md-nav__link">
+  <a href="#1-haproxy-설정-etchaproxyhaproxycfg" class="md-nav__link">
     <span class="md-ellipsis">
       
         1) HAProxy 설정 (/etc/haproxy/haproxy.cfg)
@@ -846,7 +846,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-keepalived-etckeepalivedkeepalivedconf" class="md-nav__link">
+  <a href="#2-keepalived-설정-etckeepalivedkeepalivedconf" class="md-nav__link">
     <span class="md-ellipsis">
       
         2) Keepalived 설정 (/etc/keepalived/keepalived.conf)
@@ -862,7 +862,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-localhost-lb-vip" class="md-nav__link">
+  <a href="#옵션-b-localhost-lb-방식-vip-불가-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
         옵션 B: Localhost LB 방식 (VIP 불가 환경)
@@ -878,7 +878,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-4-master-1" class="md-nav__link">
+  <a href="#-phase-4-마스터-초기화-master-1" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 4: 마스터 초기화 (Master-1)
@@ -890,7 +890,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ha-vip" class="md-nav__link">
+  <a href="#-ha-구성-vip-사용-초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
         🅰️ HA 구성 (VIP 사용) 초기화
@@ -906,7 +906,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-5-cni" class="md-nav__link">
+  <a href="#-phase-5-cni-및-추가-작업" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 5: CNI 및 추가 작업
@@ -918,7 +918,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-calico-cni" class="md-nav__link">
+  <a href="#51-calico-cni-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
         5.1 Calico CNI 설치
@@ -929,7 +929,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-helm" class="md-nav__link">
+  <a href="#52-helm-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
         5.2 Helm 설치
@@ -940,7 +940,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53" class="md-nav__link">
+  <a href="#53-워커-노드-조인" class="md-nav__link">
     <span class="md-ellipsis">
       
         5.3 워커 노드 조인
@@ -956,7 +956,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#-재설치-시-초기화-절차" class="md-nav__link">
     <span class="md-ellipsis">
       
         🧹 재설치 시 초기화 절차
@@ -3577,7 +3577,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#phase-0" class="md-nav__link">
+  <a href="#-phase-0-설치-파일-배포" class="md-nav__link">
     <span class="md-ellipsis">
       
         📦 Phase 0: 설치 파일 배포
@@ -3588,7 +3588,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-1-os" class="md-nav__link">
+  <a href="#-phase-1-로컬-패키지-설치-및-os-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 1: 로컬 패키지 설치 및 OS 설정
@@ -3600,7 +3600,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-dnf-localinstall" class="md-nav__link">
+  <a href="#11-패키지-설치-dnf-localinstall" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.1 패키지 설치 (dnf localinstall)
@@ -3611,7 +3611,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-os" class="md-nav__link">
+  <a href="#12-os-커널-및-보안-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2 OS 커널 및 보안 설정
@@ -3622,7 +3622,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-containerd-harbor" class="md-nav__link">
+  <a href="#13-containerd-설정-harbor-연동-대비" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.3 Containerd 설정 (Harbor 연동 대비)
@@ -3638,7 +3638,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2" class="md-nav__link">
+  <a href="#-phase-2-이미지-로드-전체-노드" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 2: 이미지 로드 (전체 노드)
@@ -3649,7 +3649,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-3-lb-ha-3" class="md-nav__link">
+  <a href="#-phase-3-로드밸런서lb-구성-ha-3중화-시에만" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)
@@ -3661,7 +3661,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a-vip-keepalived-haproxy-" class="md-nav__link">
+  <a href="#옵션-a-vip-방식-keepalived--haproxy---권장" class="md-nav__link">
     <span class="md-ellipsis">
       
         옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)
@@ -3673,7 +3673,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-haproxy-etchaproxyhaproxycfg" class="md-nav__link">
+  <a href="#1-haproxy-설정-etchaproxyhaproxycfg" class="md-nav__link">
     <span class="md-ellipsis">
       
         1) HAProxy 설정 (/etc/haproxy/haproxy.cfg)
@@ -3684,7 +3684,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-keepalived-etckeepalivedkeepalivedconf" class="md-nav__link">
+  <a href="#2-keepalived-설정-etckeepalivedkeepalivedconf" class="md-nav__link">
     <span class="md-ellipsis">
       
         2) Keepalived 설정 (/etc/keepalived/keepalived.conf)
@@ -3700,7 +3700,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-localhost-lb-vip" class="md-nav__link">
+  <a href="#옵션-b-localhost-lb-방식-vip-불가-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
         옵션 B: Localhost LB 방식 (VIP 불가 환경)
@@ -3716,7 +3716,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-4-master-1" class="md-nav__link">
+  <a href="#-phase-4-마스터-초기화-master-1" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 4: 마스터 초기화 (Master-1)
@@ -3728,7 +3728,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ha-vip" class="md-nav__link">
+  <a href="#-ha-구성-vip-사용-초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
         🅰️ HA 구성 (VIP 사용) 초기화
@@ -3744,7 +3744,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-5-cni" class="md-nav__link">
+  <a href="#-phase-5-cni-및-추가-작업" class="md-nav__link">
     <span class="md-ellipsis">
       
         🚀 Phase 5: CNI 및 추가 작업
@@ -3756,7 +3756,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-calico-cni" class="md-nav__link">
+  <a href="#51-calico-cni-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
         5.1 Calico CNI 설치
@@ -3767,7 +3767,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-helm" class="md-nav__link">
+  <a href="#52-helm-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
         5.2 Helm 설치
@@ -3778,7 +3778,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53" class="md-nav__link">
+  <a href="#53-워커-노드-조인" class="md-nav__link">
     <span class="md-ellipsis">
       
         5.3 워커 노드 조인
@@ -3794,7 +3794,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#-재설치-시-초기화-절차" class="md-nav__link">
     <span class="md-ellipsis">
       
         🧹 재설치 시 초기화 절차
@@ -3824,7 +3824,7 @@
   
 
 
-<h1 id="2-kubernetes-helm">2. 폐쇄망에서 Kubernetes와 Helm 설치</h1>
+<h1 id="2-폐쇄망에서-kubernetes와-helm-설치">2. 폐쇄망에서 Kubernetes와 Helm 설치</h1>
 <p>본 문서는 폐쇄망 환경에서 <strong>kubeadm</strong>을 사용하여 Kubernetes v1.30.x 클러스터를 구축하는 절차를 정의합니다.</p>
 <ul>
 <li><strong>가이드 환경</strong></li>
@@ -3840,7 +3840,7 @@
 <p>폐쇄망 환경이라도 각 노드 간의 통신은 전면 허용되어야 하며, <code>169.254.169.254/32</code> (cloud-init 메타데이터 IP)에 대한 80포트 아웃바운드 규칙이 허용되어야 정상적인 노드 초기화가 가능합니다.</p>
 </blockquote>
 <hr />
-<h2 id="phase-0">📦 Phase 0: 설치 파일 배포</h2>
+<h2 id="-phase-0-설치-파일-배포">📦 Phase 0: 설치 파일 배포</h2>
 <p>마스터-1 노드에 준비된 설치 파일(<code>k8s-1.30.tar.gz</code>)을 모든 워커 및 추가 마스터 노드에 배포합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 배포 대상 노드 IP 목록 (환경에 맞게 수정)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">NODES</span><span class="o">=(</span><span class="s2">&quot;10.10.10.71&quot;</span><span class="w"> </span><span class="s2">&quot;10.10.10.72&quot;</span><span class="w"> </span><span class="s2">&quot;10.10.10.73&quot;</span><span class="w"> </span><span class="s2">&quot;10.10.10.74&quot;</span><span class="o">)</span>
@@ -3854,9 +3854,9 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>~/k8s-1.30.tar.gz
 </code></pre></div>
 <hr />
-<h2 id="phase-1-os">🚀 Phase 1: 로컬 패키지 설치 및 OS 설정</h2>
+<h2 id="-phase-1-로컬-패키지-설치-및-os-설정">🚀 Phase 1: 로컬 패키지 설치 및 OS 설정</h2>
 <p>모든 노드(Master, Worker 공통)에서 수행합니다.</p>
-<h3 id="11-dnf-localinstall">1.1 패키지 설치 (dnf localinstall)</h3>
+<h3 id="11-패키지-설치-dnf-localinstall">1.1 패키지 설치 (dnf localinstall)</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># Repo 설정을 무시하고 로컬 RPM 파일을 일괄 설치합니다.</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>localinstall<span class="w"> </span>-y<span class="w"> </span>--disablerepo<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>common/rpms/*.rpm<span class="w"> </span>k8s/rpms/*.rpm
@@ -3864,7 +3864,7 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 설치 확인</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>rpm<span class="w"> </span>-qa<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;kubelet|containerd|haproxy&quot;</span>
 </code></pre></div>
-<h3 id="12-os">1.2 OS 커널 및 보안 설정</h3>
+<h3 id="12-os-커널-및-보안-설정">1.2 OS 커널 및 보안 설정</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. Swap 비활성화</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/swap/d&#39;</span><span class="w"> </span>/etc/fstab
@@ -3888,7 +3888,7 @@
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s">EOF</span>
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
 </code></pre></div>
-<h3 id="13-containerd-harbor">1.3 Containerd 설정 (Harbor 연동 대비)</h3>
+<h3 id="13-containerd-설정-harbor-연동-대비">1.3 Containerd 설정 (Harbor 연동 대비)</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 기본 설정 생성</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>containerd<span class="w"> </span>config<span class="w"> </span>default<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
@@ -3907,7 +3907,7 @@
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>kubelet
 </code></pre></div>
 <hr />
-<h2 id="phase-2">🚀 Phase 2: 이미지 로드 (전체 노드)</h2>
+<h2 id="-phase-2-이미지-로드-전체-노드">🚀 Phase 2: 이미지 로드 (전체 노드)</h2>
 <p>폐쇄망이므로 <code>docker pull</code> 대신 로컬 이미지를 <code>ctr</code> 명령어로 로드합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/images
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
@@ -3921,9 +3921,9 @@
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>kube-apiserver
 </code></pre></div>
 <hr />
-<h2 id="phase-3-lb-ha-3">🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)</h2>
+<h2 id="-phase-3-로드밸런서lb-구성-ha-3중화-시에만">🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)</h2>
 <p>마스터 3대 구성 시 API Server의 고가용성을 위해 LB를 구성합니다.</p>
-<h3 id="a-vip-keepalived-haproxy-">옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)</h3>
+<h3 id="옵션-a-vip-방식-keepalived--haproxy---권장">옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)</h3>
 <ul>
 <li><strong>전제</strong>: 마스터 노드 3대 및 가상 IP(VIP: <code>10.10.10.200</code>) 필요.</li>
 <li><strong>커널 설정</strong>: VIP 바인딩 허용</li>
@@ -3931,7 +3931,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;net.ipv4.ip_nonlocal_bind = 1&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/haproxy.conf
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
 </code></pre></div>
-<h4 id="1-haproxy-etchaproxyhaproxycfg">1) HAProxy 설정 (<code>/etc/haproxy/haproxy.cfg</code>)</h4>
+<h4 id="1-haproxy-설정-etchaproxyhaproxycfg">1) HAProxy 설정 (<code>/etc/haproxy/haproxy.cfg</code>)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>frontend<span class="w"> </span>k8s-api
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nb">bind</span><span class="w"> </span><span class="m">10</span>.10.10.200:6443<span class="w"> </span><span class="c1"># VIP로 바인딩하여 API 서버와 포트 충돌 방지</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>default_backend<span class="w"> </span>k8s-masters
@@ -3942,15 +3942,15 @@
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>server<span class="w"> </span>master2<span class="w"> </span><span class="m">10</span>.10.10.71:6443<span class="w"> </span>check
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>server<span class="w"> </span>master3<span class="w"> </span><span class="m">10</span>.10.10.72:6443<span class="w"> </span>check
 </code></pre></div>
-<h4 id="2-keepalived-etckeepalivedkeepalivedconf">2) Keepalived 설정 (<code>/etc/keepalived/keepalived.conf</code>)</h4>
+<h4 id="2-keepalived-설정-etckeepalivedkeepalivedconf">2) Keepalived 설정 (<code>/etc/keepalived/keepalived.conf</code>)</h4>
 <ul>
 <li>Master-1은 <code>state MASTER</code>, <code>priority 101</code>. 나머지는 <code>BACKUP</code>, <code>100/99</code>로 설정합니다.</li>
 </ul>
-<h3 id="b-localhost-lb-vip">옵션 B: Localhost LB 방식 (VIP 불가 환경)</h3>
+<h3 id="옵션-b-localhost-lb-방식-vip-불가-환경">옵션 B: Localhost LB 방식 (VIP 불가 환경)</h3>
 <p>VIP 사용이 어려운 경우 각 노드(마스터/워커 전체)에 HAProxy를 설치하고 <code>127.0.0.1:8443</code>을 통해 마스터로 통신하게 합니다.</p>
 <hr />
-<h2 id="phase-4-master-1">🚀 Phase 4: 마스터 초기화 (Master-1)</h2>
-<h3 id="ha-vip">🅰️ HA 구성 (VIP 사용) 초기화</h3>
+<h2 id="-phase-4-마스터-초기화-master-1">🚀 Phase 4: 마스터 초기화 (Master-1)</h2>
+<h3 id="-ha-구성-vip-사용-초기화">🅰️ HA 구성 (VIP 사용) 초기화</h3>
 <p>RHEL/Rocky 9 계열은 SAN 검증이 엄격하므로 모든 마스터 IP를 명시해야 합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;10.10.10.200:6443&quot;</span><span class="w"> </span><span class="se">\</span>
@@ -3969,18 +3969,18 @@
 <code>- --bind-address=10.10.10.70</code> (각 마스터의 실제 IP)</p>
 </blockquote>
 <hr />
-<h2 id="phase-5-cni">🚀 Phase 5: CNI 및 추가 작업</h2>
-<h3 id="51-calico-cni">5.1 Calico CNI 설치</h3>
+<h2 id="-phase-5-cni-및-추가-작업">🚀 Phase 5: CNI 및 추가 작업</h2>
+<h3 id="51-calico-cni-설치">5.1 Calico CNI 설치</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>~/k8s-1.30/k8s/utils/calico.yaml
 </code></pre></div>
-<h3 id="52-helm">5.2 Helm 설치</h3>
+<h3 id="52-helm-설치">5.2 Helm 설치</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>~/k8s-1.30/k8s/binaries/helm<span class="w"> </span>/usr/local/bin/helm
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/helm
 </code></pre></div>
-<h3 id="53">5.3 워커 노드 조인</h3>
+<h3 id="53-워커-노드-조인">5.3 워커 노드 조인</h3>
 <p>Master-1 초기화 결과로 나온 <code>kubeadm join</code> 명령어를 각 워커 노드에서 실행합니다.</p>
 <hr />
-<h2 id="_1">🧹 재설치 시 초기화 절차</h2>
+<h2 id="-재설치-시-초기화-절차">🧹 재설치 시 초기화 절차</h2>
 <p>설치 중 오류가 발생하여 처음부터 다시 시작해야 하는 경우 다음 명령어를 순서대로 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1. kubeadm 리셋</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>reset<span class="w"> </span>-f

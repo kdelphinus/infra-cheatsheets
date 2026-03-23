@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#envoy-gateway" class="md-skip">
+        <a href="#-envoy-gateway-네트워크-구성-선택-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -1208,7 +1208,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#option-1" class="md-nav__link">
+  <a href="#option-1-고가용성-최우선-추천-" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option 1] 고가용성 최우선 (추천 ⭐)
@@ -1219,7 +1219,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#option-2-ip-performance-logging" class="md-nav__link">
+  <a href="#option-2-클라이언트-ip-보존-필수-performance--logging" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option 2] 클라이언트 IP 보존 필수 (Performance &amp; Logging)
@@ -1230,7 +1230,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#option-3-sw-lb" class="md-nav__link">
+  <a href="#option-3-외부-장비-없음-sw-lb" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option 3] 외부 장비 없음 (S/W LB)
@@ -1242,7 +1242,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#-한눈에-보는-비교표" class="md-nav__link">
     <span class="md-ellipsis">
       
         📊 한눈에 보는 비교표
@@ -3399,7 +3399,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#option-1" class="md-nav__link">
+  <a href="#option-1-고가용성-최우선-추천-" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option 1] 고가용성 최우선 (추천 ⭐)
@@ -3410,7 +3410,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#option-2-ip-performance-logging" class="md-nav__link">
+  <a href="#option-2-클라이언트-ip-보존-필수-performance--logging" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option 2] 클라이언트 IP 보존 필수 (Performance &amp; Logging)
@@ -3421,7 +3421,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#option-3-sw-lb" class="md-nav__link">
+  <a href="#option-3-외부-장비-없음-sw-lb" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option 3] 외부 장비 없음 (S/W LB)
@@ -3433,7 +3433,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#-한눈에-보는-비교표" class="md-nav__link">
     <span class="md-ellipsis">
       
         📊 한눈에 보는 비교표
@@ -3468,9 +3468,9 @@
   
 
 
-<h1 id="envoy-gateway">🌐 Envoy Gateway 네트워크 구성 선택 가이드</h1>
+<h1 id="-envoy-gateway-네트워크-구성-선택-가이드">🌐 Envoy Gateway 네트워크 구성 선택 가이드</h1>
 <p>현재 상황(On-Premise, 외부 LB 유무, IP 필요 여부)에 따라 최적의 방식을 선택하세요.</p>
-<h2 id="option-1">[Option 1] 고가용성 최우선 (추천 ⭐)</h2>
+<h2 id="option-1-고가용성-최우선-추천-">[Option 1] 고가용성 최우선 (추천 ⭐)</h2>
 <blockquote>
 <p><strong>"노드가 죽어도 서비스는 살아야 하고, 구성이 제일 간단해야 한다."</strong></p>
 </blockquote>
@@ -3488,7 +3488,7 @@
 </li>
 <li><em>(해결책: 외부 LB에서 Proxy Protocol 활성화)</em></li>
 </ul>
-<h2 id="option-2-ip-performance-logging">[Option 2] 클라이언트 IP 보존 필수 (Performance &amp; Logging)</h2>
+<h2 id="option-2-클라이언트-ip-보존-필수-performance--logging">[Option 2] 클라이언트 IP 보존 필수 (Performance &amp; Logging)</h2>
 <blockquote>
 <p><strong>"사용자 IP 로그를 꼭 남겨야 하거나, 네트워크 홉(Hop)을 줄여 속도를 높여야 한다."</strong></p>
 </blockquote>
@@ -3507,7 +3507,7 @@
 <li><strong>리소스 낭비:</strong> 트래픽이 적어도 모든 노드에 Envoy 파드를 띄워야 함.</li>
 <li>업데이트 시 롤링 배포 관리가 조금 더 까다로움.</li>
 </ul>
-<h2 id="option-3-sw-lb">[Option 3] 외부 장비 없음 (S/W LB)</h2>
+<h2 id="option-3-외부-장비-없음-sw-lb">[Option 3] 외부 장비 없음 (S/W LB)</h2>
 <blockquote>
 <p><strong>"비싼 L4 스위치가 없다. 맨땅에 헤딩해야 한다."</strong></p>
 </blockquote>
@@ -3519,7 +3519,7 @@
 <li><strong>단점:</strong> L2 모드 사용 시 Failover에 수 초~수십 초 딜레이가 발생할 수 있음.</li>
 </ul>
 <hr />
-<h3 id="_1">📊 한눈에 보는 비교표</h3>
+<h3 id="-한눈에-보는-비교표">📊 한눈에 보는 비교표</h3>
 <table>
 <thead>
 <tr>

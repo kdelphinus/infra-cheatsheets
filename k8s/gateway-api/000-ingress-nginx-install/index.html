@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ingress-nginx-v4101" class="md-skip">
+        <a href="#-ingress-nginx-v4101-오프라인-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -1096,7 +1096,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#전제-조건" class="md-nav__link">
     <span class="md-ellipsis">
       
         전제 조건
@@ -1107,7 +1107,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-harbor" class="md-nav__link">
+  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
         1단계: 이미지 Harbor 업로드
@@ -1118,7 +1118,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2단계-설치-스크립트-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
         2단계: 설치 스크립트 설정
@@ -1129,7 +1129,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-ingress-controller" class="md-nav__link">
+  <a href="#3단계-ingress-controller-설치-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
         3단계: Ingress Controller 설치 실행
@@ -1140,7 +1140,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4단계-설치-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
         4단계: 설치 확인
@@ -1152,7 +1152,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#포트-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
         포트 확인
@@ -1168,7 +1168,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#-주의-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
         💡 주의 사항
@@ -1179,7 +1179,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
         삭제
@@ -3443,7 +3443,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#전제-조건" class="md-nav__link">
     <span class="md-ellipsis">
       
         전제 조건
@@ -3454,7 +3454,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-harbor" class="md-nav__link">
+  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
         1단계: 이미지 Harbor 업로드
@@ -3465,7 +3465,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2단계-설치-스크립트-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
         2단계: 설치 스크립트 설정
@@ -3476,7 +3476,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-ingress-controller" class="md-nav__link">
+  <a href="#3단계-ingress-controller-설치-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
         3단계: Ingress Controller 설치 실행
@@ -3487,7 +3487,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4단계-설치-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
         4단계: 설치 확인
@@ -3499,7 +3499,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#포트-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
         포트 확인
@@ -3515,7 +3515,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#-주의-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
         💡 주의 사항
@@ -3526,7 +3526,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
         삭제
@@ -3556,16 +3556,16 @@
   
 
 
-<h1 id="ingress-nginx-v4101">🚀 Ingress-Nginx v4.10.1 오프라인 설치 가이드</h1>
+<h1 id="-ingress-nginx-v4101-오프라인-설치-가이드">🚀 Ingress-Nginx v4.10.1 오프라인 설치 가이드</h1>
 <p>폐쇄망 환경에서 Ingress-Nginx Controller v4.10.1을 Kubernetes 위에 Helm으로 설치하는 절차를 안내합니다.</p>
-<h2 id="_1">전제 조건</h2>
+<h2 id="전제-조건">전제 조건</h2>
 <ul>
 <li>Kubernetes 클러스터 구성 완료 (master + worker)</li>
 <li>Helm v3.14.0 설치 완료</li>
 <li><code>kubectl</code> CLI 사용 가능</li>
 <li>Ingress Controller 이미지 <code>.tar</code> 파일 준비 완료</li>
 </ul>
-<h2 id="1-harbor">1단계: 이미지 Harbor 업로드</h2>
+<h2 id="1단계-이미지-harbor-업로드">1단계: 이미지 Harbor 업로드</h2>
 <p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)</span>
@@ -3577,7 +3577,7 @@
 <p>이미지 로드 확인:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ingress
 </code></pre></div>
-<h2 id="2">2단계: 설치 스크립트 설정</h2>
+<h2 id="2단계-설치-스크립트-설정">2단계: 설치 스크립트 설정</h2>
 <p><code>scripts/install.sh</code> 상단 Config 블록을 환경에 맞게 수정합니다.</p>
 <table>
 <thead>
@@ -3605,16 +3605,16 @@
 </tr>
 </tbody>
 </table>
-<h2 id="3-ingress-controller">3단계: Ingress Controller 설치 실행</h2>
+<h2 id="3단계-ingress-controller-설치-실행">3단계: Ingress Controller 설치 실행</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./scripts/install.sh
 </code></pre></div>
 <p>특정 노드를 지정하여 설치합니다. 외부에서 해당 노드의 IP로 접근 가능하면 Ingress Controller를 통해 Kubernetes 서비스에 접근할 수 있습니다.</p>
-<h2 id="4">4단계: 설치 확인</h2>
+<h2 id="4단계-설치-확인">4단계: 설치 확인</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>ingress-nginx
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>ingress-nginx
 </code></pre></div>
-<h3 id="_2">포트 확인</h3>
+<h3 id="포트-확인">포트 확인</h3>
 <table>
 <thead>
 <tr>
@@ -3639,13 +3639,13 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_3">💡 주의 사항</h2>
+<h2 id="-주의-사항">💡 주의 사항</h2>
 <ul>
 <li><strong>HostNetwork 모드</strong>: HostNetwork 모드로 동작하므로 해당 노드에서 80, 443 포트를 다른 프로세스가 사용하고 있지 않아야 합니다.</li>
 <li><strong>TLS 설정</strong>: TLS 사용 시 DNS 등록과 TLS 인증서 내 도메인이 일치해야 합니다.</li>
 <li><strong>트러블슈팅</strong>: 문제 발생 시 <code>kubectl logs</code>로 Ingress Pod 로그를 확인합니다.</li>
 </ul>
-<h2 id="_4">삭제</h2>
+<h2 id="삭제">삭제</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./scripts/uninstall.sh
 </code></pre></div>
 

@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cloud-init" class="md-skip">
+        <a href="#cloud-init이-제대로-동작하지-않을-때" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -3087,7 +3087,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#오류" class="md-nav__link">
     <span class="md-ellipsis">
       
         오류
@@ -3098,7 +3098,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-cloud-init" class="md-nav__link">
+  <a href="#1--cloud-init-필수-규칙-메타데이터" class="md-nav__link">
     <span class="md-ellipsis">
       
         1. 🎯 Cloud-init 필수 규칙 (메타데이터)
@@ -3110,7 +3110,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2-kubernetes" class="md-nav__link">
+  <a href="#2--kubernetes-및-기본-동작을-위한-필수-규칙" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. 🧩 Kubernetes 및 기본 동작을 위한 필수 규칙
@@ -3122,7 +3122,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a" class="md-nav__link">
+  <a href="#a-내부-네트워크-통신-노드끼리-통신" class="md-nav__link">
     <span class="md-ellipsis">
       
         A. 내부 네트워크 통신 (노드끼리 통신)
@@ -3133,7 +3133,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-dns" class="md-nav__link">
+  <a href="#b-dns-도메인-해석" class="md-nav__link">
     <span class="md-ellipsis">
       
         B. DNS (도메인 해석)
@@ -3414,7 +3414,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#오류" class="md-nav__link">
     <span class="md-ellipsis">
       
         오류
@@ -3425,7 +3425,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-cloud-init" class="md-nav__link">
+  <a href="#1--cloud-init-필수-규칙-메타데이터" class="md-nav__link">
     <span class="md-ellipsis">
       
         1. 🎯 Cloud-init 필수 규칙 (메타데이터)
@@ -3437,7 +3437,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2-kubernetes" class="md-nav__link">
+  <a href="#2--kubernetes-및-기본-동작을-위한-필수-규칙" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. 🧩 Kubernetes 및 기본 동작을 위한 필수 규칙
@@ -3449,7 +3449,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a" class="md-nav__link">
+  <a href="#a-내부-네트워크-통신-노드끼리-통신" class="md-nav__link">
     <span class="md-ellipsis">
       
         A. 내부 네트워크 통신 (노드끼리 통신)
@@ -3460,7 +3460,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-dns" class="md-nav__link">
+  <a href="#b-dns-도메인-해석" class="md-nav__link">
     <span class="md-ellipsis">
       
         B. DNS (도메인 해석)
@@ -3500,13 +3500,13 @@
   
 
 
-<h1 id="cloud-init">Cloud-Init이 제대로 동작하지 않을 때</h1>
-<h2 id="_1">오류</h2>
+<h1 id="cloud-init이-제대로-동작하지-않을-때">Cloud-Init이 제대로 동작하지 않을 때</h1>
+<h2 id="오류">오류</h2>
 <ul>
 <li>hostname이 제대로 변경되지 않음</li>
 <li>키파일이 등록되지 않음</li>
 </ul>
-<h2 id="1-cloud-init">1. 🎯 Cloud-init 필수 규칙 (메타데이터)</h2>
+<h2 id="1--cloud-init-필수-규칙-메타데이터">1. 🎯 Cloud-init 필수 규칙 (메타데이터)</h2>
 <p><code>cloud-init</code>이 작동하려면 VM이 이 IP 주소로 요청을 보낼 수 있어야 합니다.
 보안 그룹의 <strong>Outbound(Egress, 송신)</strong> 규칙에 추가해야 합니다.</p>
 <table>
@@ -3536,10 +3536,10 @@
 만약 Outbound를 다 막아두셨다면 이 규칙을 <strong>반드시</strong> 추가해야 합니다.</li>
 </ul>
 <hr />
-<h3 id="2-kubernetes">2. 🧩 Kubernetes 및 기본 동작을 위한 필수 규칙</h3>
+<h3 id="2--kubernetes-및-기본-동작을-위한-필수-규칙">2. 🧩 Kubernetes 및 기본 동작을 위한 필수 규칙</h3>
 <p>메타데이터 외에도, 현재 K8s 클러스터를 구축 중이시므로 <strong>노드 간 통신</strong>과 <strong>DNS</strong>가 막히면 아무것도 안 됩니다.
 "Any"를 쓰지 않고 정확히 열어야 할 IP 대역은 다음과 같습니다.</p>
-<h4 id="a">A. 내부 네트워크 통신 (노드끼리 통신)</h4>
+<h4 id="a-내부-네트워크-통신-노드끼리-통신">A. 내부 네트워크 통신 (노드끼리 통신)</h4>
 <p>마스터와 워커 노드가 서로 통신하려면 <strong>VPC(서브넷) 내부 대역</strong>은 서로 열려 있어야 합니다.</p>
 <table>
 <thead>
@@ -3561,7 +3561,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="b-dns">B. DNS (도메인 해석)</h4>
+<h4 id="b-dns-도메인-해석">B. DNS (도메인 해석)</h4>
 <p>이게 막히면 <code>yum install</code>, <code>docker pull</code> 등이 다 실패합니다.</p>
 <table>
 <thead>

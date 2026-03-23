@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-kubernetes-mariadb" class="md-skip">
+        <a href="#1-kubernetes--mariadb-폐쇄망-설치용-파일-만들기" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -711,7 +711,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#-1단계-작업-환경-준비-외부망-서버" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 1단계: 작업 환경 준비 (외부망 서버)
@@ -722,7 +722,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#-2단계-레포지토리-등록-소스-확보" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 2단계: 레포지토리 등록 (소스 확보)
@@ -733,7 +733,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-rpm" class="md-nav__link">
+  <a href="#-3단계-rpm-패키지-다운로드-핵심" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 3단계: RPM 패키지 다운로드 (핵심)
@@ -744,7 +744,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#-4단계-바이너리-파일-다운로드" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 4단계: 바이너리 파일 다운로드
@@ -755,7 +755,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#-5단계-컨테이너-이미지-다운로드-스크립트-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 5단계: 컨테이너 이미지 다운로드 (스크립트 실행)
@@ -766,7 +766,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#-6단계-최종-포장-압축" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 6단계: 최종 포장 (압축)
@@ -3415,7 +3415,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#-1단계-작업-환경-준비-외부망-서버" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 1단계: 작업 환경 준비 (외부망 서버)
@@ -3426,7 +3426,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#-2단계-레포지토리-등록-소스-확보" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 2단계: 레포지토리 등록 (소스 확보)
@@ -3437,7 +3437,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-rpm" class="md-nav__link">
+  <a href="#-3단계-rpm-패키지-다운로드-핵심" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 3단계: RPM 패키지 다운로드 (핵심)
@@ -3448,7 +3448,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#-4단계-바이너리-파일-다운로드" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 4단계: 바이너리 파일 다운로드
@@ -3459,7 +3459,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#-5단계-컨테이너-이미지-다운로드-스크립트-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 5단계: 컨테이너 이미지 다운로드 (스크립트 실행)
@@ -3470,7 +3470,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#-6단계-최종-포장-압축" class="md-nav__link">
     <span class="md-ellipsis">
       
         📌 6단계: 최종 포장 (압축)
@@ -3500,13 +3500,13 @@
   
 
 
-<h1 id="1-kubernetes-mariadb">1. Kubernetes &amp; MariaDB 폐쇄망 설치용 파일 만들기</h1>
+<h1 id="1-kubernetes--mariadb-폐쇄망-설치용-파일-만들기">1. Kubernetes &amp; MariaDB 폐쇄망 설치용 파일 만들기</h1>
 <ul>
 <li>이 문서는 Rocky 9.6 버전을 기준으로 만들어졌습니다.</li>
 <li>사용하고자 하는 환경과 동일한 서버에서 작업해야 합니다.</li>
 <li>K8s, MariaDB 외에도 Harbor 등의 설치 파일도 생성하니 확인하고 필요한 서비스만 받아야 합니다.</li>
 </ul>
-<h2 id="1">📌 1단계: 작업 환경 준비 (외부망 서버)</h2>
+<h2 id="-1단계-작업-환경-준비-외부망-서버">📌 1단계: 작업 환경 준비 (외부망 서버)</h2>
 <p>가져갈 파일들을 모을 디렉토리를 만듭니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 작업 디렉토리 생성</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/offline-dist-split
@@ -3535,7 +3535,7 @@
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>docker<span class="w"> </span>version
 </code></pre></div>
 <hr />
-<h2 id="2">📌 2단계: 레포지토리 등록 (소스 확보)</h2>
+<h2 id="-2단계-레포지토리-등록-소스-확보">📌 2단계: 레포지토리 등록 (소스 확보)</h2>
 <p>Rocky 9.6 기본 레포지토리 외에 우리가 필요한 <strong>Docker, K8s, MariaDB</strong> 공식 저장소를 등록합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Docker Repo (K8s 노드에 깔 &#39;containerd.io&#39; 확보를 위해 필수!)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--add-repo<span class="w"> </span>https://download.docker.com/linux/centos/docker-ce.repo
@@ -3563,7 +3563,7 @@
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>makecache
 </code></pre></div>
 <hr />
-<h2 id="3-rpm">📌 3단계: RPM 패키지 다운로드 (핵심)</h2>
+<h2 id="-3단계-rpm-패키지-다운로드-핵심">📌 3단계: RPM 패키지 다운로드 (핵심)</h2>
 <p><code>--resolve --alldeps</code> 옵션으로 의존성 라이브러리까지 싹 긁어옵니다. <strong>여기가 제일 중요합니다.</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 시스템 기본 도구 및 HA(고가용성) 도구</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># createrepo_c: 폐쇄망 내부에서 repo 만들 때 필수! (절대 누락 금지)</span>
@@ -3597,7 +3597,7 @@
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>galera-4<span class="w"> </span>rsync
 </code></pre></div>
 <hr />
-<h2 id="4">📌 4단계: 바이너리 파일 다운로드</h2>
+<h2 id="-4단계-바이너리-파일-다운로드">📌 4단계: 바이너리 파일 다운로드</h2>
 <p>RPM으로 설치 안 되는 실행 파일들입니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Helm v3 (K8s에 Harbor 배포 시 필수)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>wget<span class="w"> </span>https://get.helm.sh/helm-v3.14.0-linux-amd64.tar.gz<span class="w"> </span>-P<span class="w"> </span>./k8s/binaries/
@@ -3633,7 +3633,7 @@
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>helm<span class="w"> </span>pull<span class="w"> </span>harbor/harbor<span class="w"> </span>--destination<span class="w"> </span>./k8s/charts/
 </code></pre></div>
 <hr />
-<h2 id="5">📌 5단계: 컨테이너 이미지 다운로드 (스크립트 실행)</h2>
+<h2 id="-5단계-컨테이너-이미지-다운로드-스크립트-실행">📌 5단계: 컨테이너 이미지 다운로드 (스크립트 실행)</h2>
 <p>K8s와 네트워크 플러그인(Calico) 이미지를 받아 <code>.tar</code>로 저장합니다. 아래 명령어를 한 번에 실행시켜야 합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 이미지 리스트 정의</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">K8S_IMAGES</span><span class="o">=(</span>
@@ -3679,7 +3679,7 @@
 <a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a><span class="k">done</span>
 </code></pre></div>
 <hr />
-<h2 id="6">📌 6단계: 최종 포장 (압축)</h2>
+<h2 id="-6단계-최종-포장-압축">📌 6단계: 최종 포장 (압축)</h2>
 <p>이제 모든 파일이 <code>~/offline-dist</code>에 모였습니다. 이걸 하나로 묶어서 USB나 망연계 솔루션을 통해 넘기시면 됩니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span>~
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
