@@ -25,8 +25,8 @@ hide:
 ### ☸️ Kubernetes
 
 - [**Cheat Sheets**](k8s/cheatsheet.md) : 자주 사용하는 `kubectl` 명령어 모음
-- **폐쇄망 설치**: [준비](k8s/offline-install/001-ready-k8s-air-gapped-install.md) · [K8s 설치](k8s/offline-install/002-k8s-air-gapped-install.md) · [기반 인프라](k8s/offline-install/003-necessary_infra_install.md) · [MetalLB](k8s/offline-install/004-metallb-install.md)
-- **Monitoring**: [설치 가이드](k8s/monitoring/001-kube-prometheus-stack.md) · [운영 가이드](k8s/monitoring/002-operation-guide.md)
+- **폐쇄망 설치 (v1.30 / Rocky 9)**: [준비](k8s/offline-install/001-ready-k8s-air-gapped-install.md) · [K8s 설치(HA 포함)](k8s/offline-install/002-k8s-air-gapped-install.md) · [기반 인프라](k8s/offline-install/003-necessary_infra_install.md) · [MetalLB](k8s/offline-install/004-metallb-install.md)
+- **Monitoring**: [Prometheus/Grafana 설치](k8s/monitoring/001-kube-prometheus-stack.md) · [운영 가이드](k8s/monitoring/002-operation-guide.md)
 - **Backup & Restore**: [Velero 설치](k8s/backup-restore/001-velero-install.md)
 - **Gateway API**: [Ingress-Nginx](k8s/gateway-api/000-ingress-nginx-install.md) · [Envoy](k8s/gateway-api/001-envoy-install.md) · [HTTPRoute 설정](k8s/gateway-api/002-convert_ingress_to_httproute.md) · [네트워크 설정](k8s/gateway-api/envoy-gateway-network-config.md) · [ContainerPort 누락 해결](k8s/gateway-api/missed-containerport.md)
 - **Storage**: [NFS Provisioner](k8s/use-pv-nas.md)

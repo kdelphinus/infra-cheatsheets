@@ -1,75 +1,64 @@
 # 2. 폐쇄망에서 Kubernetes와 Helm 설치
 
-- 가이드 환경
-  - OS: Rocky 9.6
-  - kubelet: 1.30.14
-- 폐쇄망용 K8s 설치 파일이 준비되어 있어야 합니다.
-- [설치 파일 위치](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing)
+본 문서는 폐쇄망 환경에서 **kubeadm**을 사용하여 Kubernetes v1.30.x 클러스터를 구축하는 절차를 정의합니다.
 
-> 만약 폐쇄망용 환경을 만든다면, 각 노드들간의 통신과 `169.254.169.254/32` 80포트의 아웃바운드 규칙은 허용되어 있어야 합니다.
-> `169.254.169.254/32` 는 cloud-init이 메타데이터를 받아오는 ip입니다.
+- **가이드 환경**
+  - **OS**: Rocky Linux 9.6 (추천) / Ubuntu 22.04+
+  - **K8s Version**: v1.30.14
+  - **Container Runtime**: containerd v2.x
+- [설치 파일 위치 (Google Drive)](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing)
 
-## 📦 Phase 0: 파일 배포 (Master -> Workers)
+> !!! note "네트워크 전제 조건"
+> 폐쇄망 환경이라도 각 노드 간의 통신은 전면 허용되어야 하며, `169.254.169.254/32` (cloud-init 메타데이터 IP)에 대한 80포트 아웃바운드 규칙이 허용되어야 정상적인 노드 초기화가 가능합니다.
 
-현재 마스터 노드(`Master`)에 `k8s-1.30.tar.gz` 파일이 있다고 가정합니다.
-설치를 위해 **워커 노드 3대에도 이 파일이 똑같이 있어야 합니다.**
+---
 
-**[실행 위치: K8s-Master-Node]**
+## 📦 Phase 0: 설치 파일 배포
+
+마스터-1 노드에 준비된 설치 파일(`k8s-1.30.tar.gz`)을 모든 워커 및 추가 마스터 노드에 배포합니다.
 
 ```bash
-# 워커 노드 IP 리스트 (환경에 맞게 수정하세요)
-WORKER_IPS=("10.10.10.73" "10.10.10.74" "10.10.10.75")
+# 배포 대상 노드 IP 목록 (환경에 맞게 수정)
+NODES=("10.10.10.71" "10.10.10.72" "10.10.10.73" "10.10.10.74")
 
-# 반복문으로 파일 전송
-for IP in "${WORKER_IPS[@]}"; do
-    echo "Sending file to $IP..."
+for IP in "${NODES[@]}"; do
+    echo "Sending to $IP..."
     scp ~/k8s-1.30.tar.gz rocky@$IP:~/
 done
+
+# 모든 노드에서 압축 해제
+tar -zxvf ~/k8s-1.30.tar.gz
 ```
 
-> **Note:** 전송이 끝나면, \*\*모든 노드(Master 1대, Worker 3대)\*\*에서 압축을 풀어주세요.
->
-> ```bash
-> tar -zxvf ~/k8s-1.30.tar.gz
-> ```
+---
 
------
+## 🚀 Phase 1: 로컬 패키지 설치 및 OS 설정
 
-## 🚀 Phase 1: 로컬 패키지 설치 & OS 설정 (전체 노드)
+모든 노드(Master, Worker 공통)에서 수행합니다.
 
-**[실행 위치: Master 1, Worker 1~3 전체]**
-
-Repo 설정(`yum.repos.d`)을 건드리지 않고, `dnf` 명령어로 다운받은 RPM 파일들을 직접 설치합니다.
-
-### 1. RPM 파일 설치 (Local Install)
+### 1.1 패키지 설치 (dnf localinstall)
 
 ```bash
-# 압축 푼 디렉토리로 이동
 cd ~/k8s-1.30
+# Repo 설정을 무시하고 로컬 RPM 파일을 일괄 설치합니다.
+sudo dnf localinstall -y --disablerepo='*' common/rpms/*.rpm k8s/rpms/*.rpm
 
-# 1. 기존 Repo 비활성화 후 로컬 RPM 일괄 설치
-# -Uvh: Upgrade (설치 또는 업그레이드) + Verbose (상세표시) + Hash (진행바)
-# --force: 이미 설치된 패키지라도 강제로 덮어쓰기
-# --nodeps: 순환 의존성 오류 무시 (일단 다 설치해라)
-sudo rpm -Uvh --force --nodeps common/rpms/*.rpm k8s/rpms/*.rpm
-
-# 2. 설치 확인
+# 설치 확인
 rpm -qa | grep -E "kubelet|containerd|haproxy"
-# 결과에 패키지 이름들이 뜨면 성공입니다.
 ```
 
-### 2. 필수 OS 설정 (매우 중요)
+### 1.2 OS 커널 및 보안 설정
 
 ```bash
 # 1. Swap 비활성화
 sudo swapoff -a
 sudo sed -i '/swap/d' /etc/fstab
 
-# 2. SELinux Permissive 모드
+# 2. SELinux Permissive 모드 (Rocky Linux 필수)
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-# 3. 커널 모듈 로드
+# 3. 커널 모듈 로드 및 sysctl 설정
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -77,7 +66,6 @@ EOF
 sudo modprobe overlay
 sudo modprobe br_netfilter
 
-# 4. 커널 파라미터 적용
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -86,7 +74,7 @@ EOF
 sudo sysctl --system
 ```
 
-### 3. Containerd 설정 및 실행
+### 1.3 Containerd 설정 (Harbor 연동 대비)
 
 ```bash
 # 1. 기본 설정 생성
@@ -96,10 +84,10 @@ containerd config default | sudo tee /etc/containerd/config.toml > /dev/null
 # 2. SystemdCgroup 활성화 (필수!)
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 
-# 3. pause 버전 변경(이전 설치 파일에서 3.9 버전으로 준비)
+# 3. Pause 이미지 버전 고정 (폐쇄망 반입 이미지와 일치)
 sudo sed -i 's/pause:3.10.1/pause:3.9/g' /etc/containerd/config.toml
 
-# 4. harbor 설정을 위한 옵션값 수정
+# 4. Harbor 사설 인증서 경로 설정
 sudo sed -i "s|config_path = '/etc/containerd/certs.d:/etc/docker/certs.d'|config_path = '/etc/containerd/certs.d'|g" /etc/containerd/config.toml 
 
 # 5. 서비스 시작
@@ -107,507 +95,117 @@ sudo systemctl enable --now containerd
 sudo systemctl enable --now kubelet
 ```
 
-#### Kubernete가 잠깐 동작하다가 오류가 나는 경우
-
-아래 명령어로 `SystemdCgroup = true` 가 출력되야 합니다.
-
-```bash
-cat /etc/containerd/config.toml | grep SystemdCgroup
-```
-
-만약 없다면 직접 추가해야 합니다.
-
-```conf
-          [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options]
-            BinaryName = ''
-            CriuImagePath = ''
-            CriuWorkPath = ''
-            IoGid = 0
-            IoUid = 0
-            NoNewKeyring = false
-            Root = ''
-            ShimCgroup = ''
-            SystemdCgroup = true # 여기 추가!
-```
-
-추가한 후, `containerd` 와 `kubelet` 을 재시작 합니다.
-
-```bash
-sudo systemctl restart containerd
-sudo systemctl restart kubelet
-```
-
-#### 컨테이너 이미지 저장 위치 변경 시
-
-만약 컨테이너 이미지도 `/app` 폴더 안으로 이동해야 한다면 파일 링크를 걸어줍니다.
-
-```bash
-# 만약 실행 중이라면
-# 실행 중인 컨테이너 런타임 중지
-sudo systemctl stop containerd
-sudo systemctl stop kubelet
-```
-
-```bash
-# 1. 실제 데이터를 저장할 폴더 생성
-sudo mkdir -p /app/containerd_data
-
-# 2. (만약 이미 데이터가 있었다면) 기존 데이터 이동
-# 처음 설치라면 생략 가능하지만, 안전을 위해 확인
-if [ -d "/var/lib/containerd" ]; then
-    sudo mv /var/lib/containerd/* /app/containerd_data/
-    sudo rmdir /var/lib/containerd
-fi
-
-# 3. 링크 생성: /var/lib/containerd -> /app/containerd_data
-sudo ln -s /app/containerd_data /var/lib/containerd
-
-# 4. 확인 (화살표가 보여야 함)
-ls -ld /var/lib/containerd
-# 결과 예시: lrwxrwxrwx ... /var/lib/containerd -> /app/containerd_data
-```
-
-```bash
-# 서비스 재시작
-sudo systemctl start containerd
-sudo systemctl start kubelet
-```
-
-### 4. hosts 파일 설정
-
-```bash
-sudo vi /etc/hosts
-
-<master node ip> <master node hostname>
-<worker1 node ip> <worker1 node hostname>
-<worker2 node ip> <worker2 node hostname>
-<worker3 node ip> <worker3 node hostname>
-```
-
------
+---
 
 ## 🚀 Phase 2: 이미지 로드 (전체 노드)
 
-Repo가 없으니 `docker pull`은 불가능합니다. 가져온 `.tar` 파일을 `containerd`에 직접 집어넣습니다.
-
-**[실행 위치: Master 1, Worker 1\~3 전체]**
+폐쇄망이므로 `docker pull` 대신 로컬 이미지를 `ctr` 명령어로 로드합니다.
 
 ```bash
-# 이미지 폴더로 이동
 cd ~/k8s-1.30/k8s/images
 
-# 반복문으로 로드 (시간 소요됨)
-# k8s.io 네임스페이스에 이미지를 등록합니다.
+# k8s.io 네임스페이스에 이미지 로드
 for img in *.tar; do
     echo "Loading $img..."
     sudo ctr -n k8s.io images import "$img"
 done
 
-# 확인
+# 로드 확인
 sudo ctr -n k8s.io images list | grep kube-apiserver
 ```
 
------
+---
 
-## 🚀 Phase 3: 로드밸런서(LB) 구성 (Master가 1대라면 Phase 4로 넘어갑니다)
+## 🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)
 
-> Master 1대면 Phasre 4로 넘어가시면 됩니다.
+마스터 3대 구성 시 API Server의 고가용성을 위해 LB를 구성합니다.
 
-Master 노드 3대(`10.10.10.70`, `71`, `72`)와 **가상 IP(VIP, `10.10.10.200`)** 를 환경을 가정했습니다.
+### 옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)
 
-현재 **K8s-Master-Node-1**에서 이 작업을 수행하시면 됩니다.
+- **전제**: 마스터 노드 3대 및 가상 IP(VIP: `10.10.10.200`) 필요.
+- **커널 설정**: VIP 바인딩 허용
+  ```bash
+  echo "net.ipv4.ip_nonlocal_bind = 1" | sudo tee /etc/sysctl.d/haproxy.conf
+  sudo sysctl --system
+  ```
 
-이 설정은 **K8s API Server(6443 포트)** 앞단에 VIP를 두어, 마스터 노드가 죽어도 API 통신이 끊기지 않게 합니다.
-
-### 1. 사전 커널 설정 (필수)
-
-가상 IP(VIP)가 내 인터페이스에 없어도 바인딩할 수 있도록 커널 파라미터를 수정해야 합니다.
-이 작업을 수행하지 않으면 HAProxy가 시작 실패할 수 있습니다.
-
+#### 1) HAProxy 설정 (`/etc/haproxy/haproxy.cfg`)
 ```bash
-cat <<EOF | sudo tee /etc/sysctl.d/haproxy.conf
-net.ipv4.ip_nonlocal_bind = 1
-EOF
-
-sudo sysctl --system
-```
-
-### 2. HAProxy 설정 (Load Balancer)
-
-실제 마스터 노드 3대로 트래픽을 분산시키는 설정입니다.
-
-- **파일:** `/etc/haproxy/haproxy.cfg`
-- **수정:** 기존 내용을 백업하고 아래 내용으로 덮어쓰세요.
-- **주의:** `server` 섹션의 IP들은 사용자 환경의 실제 마스터 IP로 맞춰주세요.
-
-<!-- end list -->
-
-```bash
-# 기존 파일 백업
-sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
-
-# 설정 파일 작성
-cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg
-global
-    log         127.0.0.1 local2
-    chroot      /var/lib/haproxy
-    pidfile     /var/run/haproxy.pid
-    maxconn     4000
-    user        haproxy
-    group       haproxy
-    daemon
-
-defaults
-    mode                    tcp
-    log                     global
-    option                  tcplog
-    option                  dontlognull
-    option                  redispatch
-    retries                 3
-    timeout queue           1m
-    timeout connect         10s
-    timeout client          1m
-    timeout server          1m
-    timeout check           10s
-    maxconn                 3000
-
-# ---------------------------------------------------------------------
-# Kubernetes API Server LB
-# ---------------------------------------------------------------------
 frontend k8s-api
-    bind *:6443
-    mode tcp
-    option tcplog
+    bind 10.10.10.200:6443 # VIP로 바인딩하여 API 서버와 포트 충돌 방지
     default_backend k8s-masters
 
 backend k8s-masters
-    mode tcp
     balance roundrobin
-    option tcp-check
-    
-    # 3대 노드 등록 (현재 1대만 켜져 있어도 설정은 다 넣어둡니다)
-    server master1 10.10.10.70:6443 check fall 3 rise 2
-    server master2 10.10.10.71:6443 check fall 3 rise 2
-    server master3 10.10.10.72:6443 check fall 3 rise 2
-EOF
+    server master1 10.10.10.70:6443 check
+    server master2 10.10.10.71:6443 check
+    server master3 10.10.10.72:6443 check
 ```
 
-### 3. Keepalived 설정 (VIP 관리)
+#### 2) Keepalived 설정 (`/etc/keepalived/keepalived.conf`)
+- Master-1은 `state MASTER`, `priority 101`. 나머지는 `BACKUP`, `100/99`로 설정합니다.
 
-VIP(`10.10.10.200`)를 띄우는 설정입니다.
+### 옵션 B: Localhost LB 방식 (VIP 불가 환경)
 
-- **파일:** `/etc/keepalived/keepalived.conf`
-- **확인할 것:** `interface` 부분이 `eth0`인지 `ens3`인지 `ip addr` 명령어로 꼭 확인하고 수정하세요\!
+VIP 사용이 어려운 경우 각 노드(마스터/워커 전체)에 HAProxy를 설치하고 `127.0.0.1:8443`을 통해 마스터로 통신하게 합니다.
 
-<!-- end list -->
+---
 
-```bash
-# 설정 파일 작성
-cat <<EOF | sudo tee /etc/keepalived/keepalived.conf
-global_defs {
-    router_id LVS_DEVEL
-}
+## 🚀 Phase 4: 마스터 초기화 (Master-1)
 
-vrrp_script check_haproxy {
-    script "/usr/bin/killall -0 haproxy"
-    interval 3
-    weight -2
-    fall 10
-    rise 2
-}
+### 🅰️ HA 구성 (VIP 사용) 초기화
 
-vrrp_instance VI_1 {
-    state MASTER            # Master-1은 MASTER, 나머지는 BACKUP
-    interface eth0          # <--- 본인 네트워크 인터페이스명으로 변경 필수! (예: ens3)
-    virtual_router_id 51
-    priority 101            # Master-1은 101, 나머지는 100
-    advert_int 1
-    
-    authentication {
-        auth_type PASS
-        auth_pass 42        # 암호는 아무거나 (모든 노드 동일하게)
-    }
-
-    virtual_ipaddress {
-        10.10.10.200        # 사용할 VIP (가상 IP)
-    }
-
-    track_script {
-        check_haproxy
-    }
-}
-EOF
-```
-
-### 4. 서비스 시작 및 검증
-
-이제 두 서비스를 시작합니다.
+RHEL/Rocky 9 계열은 SAN 검증이 엄격하므로 모든 마스터 IP를 명시해야 합니다.
 
 ```bash
-# 서비스 시작
-sudo systemctl enable --now haproxy
-sudo systemctl enable --now keepalived
-
-# 상태 확인
-systemctl status haproxy keepalived
-```
-
-#### ✅ 성공 확인 방법 (매우 중요)
-
-VIP가 제대로 떴는지 확인해봅니다.
-
-```bash
-ip addr show eth0  # (또는 설정한 인터페이스)
-```
-
-출력 결과에 `inet 10.10.10.200/32 ... secondary` 처럼 **VIP가 보이면 성공**입니다\!
-
------
-
-**Tip:** 현재 Master 2, 3번은 꺼져 있거나 K8s가 안 돌고 있습니다.
-따라서 `HAProxy` 로그를 보면 master2, master3는 `DOWN` 상태라고 나올 겁니다.
-정상이니 무시하고 **Master 1이 UP 상태**이고 **VIP가 핑이 되는지**만 확인하세요.
-
-3중화 작업을 했다면 이후부턴 초기화할 때 이 할당한 VIP(예시에선 10.10.10.200)를 써야 합니다.
-
------
-
-## 🚀 Phase 4: 마스터 초기화 (Master-1 Only)
-
-**[실행 위치: K8s-Master-Node-1]**
-
-상황에 맞는 옵션 하나를 선택해서 실행하세요. 이때 `join` 명령어를 꼭 저장해두세요.
-
-```bash
-# 2. (중요) Join 명령어 저장
-# 화면 맨 아래에 출력된 토큰 정보를 복사해서 메모장에 저장해두세요.
-# HA 구성(옵션 A)을 했다면 명령어라 두 종류가 나옵니다.
-# 1) Master Node Join용 (certificate-key 포함됨)
-# 2) Worker Node Join용 (token, hash만 있음)
-```
-
-### 🅰️ 옵션 A: [추천] HA(3중화) 확장 대비 구성 (VIP 사용)
-
-- **조건:** Phase 3에서 HAProxy와 VIP(`10.10.10.200`) 설정을 마친 경우.
-- **장점:** 지금은 마스터가 1대여도, 나중에 명령어 한 줄로 마스터 2, 3번을 추가할 수 있습니다.
-- **핵심:** `--control-plane-endpoint`에 VIP를 적고, `--upload-certs`를 추가합니다.
-
-<!-- end list -->
-
-```bash
-# 1. 초기화 실행 (HA 모드)
-# --upload-certs: 인증서를 K8s Secret에 올려서 다른 마스터가 쉽게 조인하게 함
-# service-cidr, pod-network-cidr, host network가 겹치지 않도록 조정 필요
 sudo kubeadm init \
   --control-plane-endpoint "10.10.10.200:6443" \
   --upload-certs \
+  --apiserver-cert-extra-sans="10.10.10.200,10.10.10.70,10.10.10.71,10.10.10.72,127.0.0.1" \
   --pod-network-cidr=192.168.0.0/16 \
   --service-cidr=10.96.0.0/12 \
   --kubernetes-version v1.30.0
 ```
 
-### 🅱️ 옵션 B: 단순 1대 구성 (IP 직접 사용)
+> !!! warning "포트 충돌 방지 (중요)"
+> HAProxy가 VIP의 6443을 점유하고 있으므로, 초기화 후 **kube-apiserver의 bind-address를 실제 IP로 수정**해야 합니다.
+> `/etc/kubernetes/manifests/kube-apiserver.yaml` 수정:
+> `- --bind-address=10.10.10.70` (각 마스터의 실제 IP)
 
-- **조건:** 로드밸런서 없이 그냥 혼자 쓸 경우.
-- **단점:** 나중에 마스터를 늘리려면 인증서를 다시 생성하고 설정을 뜯어고쳐야 해서 매우 복잡합니다.
+---
 
-<!-- end list -->
+## 🚀 Phase 5: CNI 및 추가 작업
 
+### 5.1 Calico CNI 설치
 ```bash
-# 1. 초기화 실행 (단일 모드)
-# 엔드포인트에 본인 IP(10.10.10.70)를 넣거나 아예 생략 가능
-# service-cidr, pod-network-cidr, host network가 겹치지 않도록 조정 필요
-sudo kubeadm init \
-  --control-plane-endpoint "10.10.10.70:6443" \
-  --service-cidr=10.96.0.0/12 \
-  --pod-network-cidr=192.168.0.0/16 \
-  --kubernetes-version v1.30.0
+kubectl apply -f ~/k8s-1.30/k8s/utils/calico.yaml
 ```
 
-### CIDR가 잘 설정되었는지 확인 방법
-
-`kube-controller-manager` 을 확인합니다.
-
+### 5.2 Helm 설치
 ```bash
-kubectl get pod -n kube-system po <kube-controller-manager pod name> -o yaml | grep cluster
+sudo mv ~/k8s-1.30/k8s/binaries/helm /usr/local/bin/helm
+chmod +x /usr/local/bin/helm
 ```
 
-이때 `--cluster-cidr` 값이 설정한 pod 대역으로,
-`--service-cluster-ip-range` 가 설정한 service 대역으로 나와야 합니다.
+### 5.3 워커 노드 조인
+Master-1 초기화 결과로 나온 `kubeadm join` 명령어를 각 워커 노드에서 실행합니다.
 
-calico의 IP Pool도 확인하여 pod의 ip와 동일한 대역으로 설정되어 있는지 확인합니다.
+---
 
-```bash
-kubectl get ippools -o yaml
-```
+## 🧹 재설치 시 초기화 절차
 
-### 오류 발생으로 재설치 시
-
-#### 🧹 1단계: Kubeadm Reset 실행 (가장 중요)
-
-먼저 `kubeadm`이 생성한 리소스들을 공식 명령어로 되돌려야 합니다.
+설치 중 오류가 발생하여 처음부터 다시 시작해야 하는 경우 다음 명령어를 순서대로 실행합니다.
 
 ```bash
-# -f 옵션은 확인 질문 없이 강제로 진행합니다.
+# 1. kubeadm 리셋
 sudo kubeadm reset -f
-```
 
-#### 🧽 2단계: 네트워크 설정 및 잔여 파일 제거 (필수)
+# 2. 잔여 설정 및 데이터 삭제
+sudo rm -rf /etc/cni/net.d $HOME/.kube /var/lib/etcd /var/lib/kubelet
 
-`reset` 명령어가 지우지 않는 CNI 설정과 사용자 설정 파일을 수동으로 지워야 꼬이지 않습니다.
-특히 `--pod-network-cidr` 옵션을 바꾸거나 다시 설정할 때 이 과정이 없으면 문제가 생깁니다.
-
-```bash
-# CNI 네트워크 설정 파일 삭제 (이전 설정이 남아 충돌 방지)
-sudo rm -rf /etc/cni/net.d
-
-# root 또는 현재 사용자의 kube 설정 폴더 삭제
-rm -rf $HOME/.kube
-sudo rm -rf /root/.kube
-
-# (선택) 이전 데이터가 남아있을 수 있는 etcd 등 폴더 삭제
-# kubeadm reset이 대부분 처리하지만 확실하게 하기 위함
-sudo rm -rf /var/lib/etcd
-sudo rm -rf /var/lib/kubelet
-```
-
-#### 🔄 3단계: IPtables 규칙 초기화 및 런타임 재시작
-
-네트워크 라우팅 규칙(iptables)이 메모리에 남아 있으면, 재설치 후 파드(Pod) 통신이 안 될 수 있습니다. **이 과정은 매우 중요합니다.**
-
-```bash
-# iptables 규칙 초기화
+# 3. 네트워크 규칙 초기화
 sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F && sudo iptables -X
 
-# 컨테이너 런타임 재시작 (보통 containerd를 사용하실 겁니다)
+# 4. 런타임 재시작
 sudo systemctl restart containerd
-# 만약 docker를 쓴다면: sudo systemctl restart docker
 ```
-
------
-
-#### ▶️ 4단계: 다시 실행
-
-이제 시스템이 깨끗해졌습니다. 다시 명령어를 실행하기 전에 **Swap 메모리가 꺼져 있는지** 한 번 더 확인하세요.
-(재부팅했다면 다시 켜졌을 수 있습니다.)
-
-```bash
-# Swap 비활성화 확인
-sudo swapoff -a
-
-# 초기화 명령어 다시 실행
-sudo kubeadm init \
-  --control-plane-endpoint "10.10.10.200:6443" \
-  --upload-certs \
-  --pod-network-cidr=192.168.0.0/16 \
-  --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.30.0
-```
-
-**Tip:** 만약 `10.10.10.200` IP가 현재 서버의 IP가 아니라 로드밸런서 VIP라면,
-해당 IP로 통신이 가능한 상태인지 먼저 확인하시기 바랍니다.
-단일 마스터 노드라면 현재 서버 IP를 입력해야 합니다.
-
------
-
-### 📋 공통 후속 작업 (초기화 성공 후)
-
-초기화가 성공적으로 끝나면 `Your Kubernetes control-plane has initialized successfully!` 가 뜹니다.
-그 후 아래 작업을 수행하세요.
-
-```bash
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-```
-
------
-
-## 🚀 Phase 5: CNI (Calico) 설치
-
-CNI 설치는 단일/다중 마스터 여부와 상관없이 **동일합니다.**
-마스터 노드가 `NotReady` 상태에서 `Ready` 상태로 바뀌게 해줍니다.
-
-이때 `calico.yaml` 파일 내부에 있는 `CALICO_IPV4POOL_CIDR` 값과
-k8s의 `pod-network-cidr` 값이 동일해야 합니다.
-
-**[실행 위치: K8s-Master-Node-1]**
-
-```bash
-# 1. Calico 매니페스트 위치로 이동
-cd ~/k8s-1.30/k8s/utils
-
-# 2. Calico 설치
-kubectl apply -f calico.yaml
-
-# 3. 설치 확인 (Watch 모드)
-# 처음엔 NotReady였다가, calico-node 파드가 뜨면 Ready로 바뀝니다.
-watch kubectl get nodes
-```
-
-만약 `calico` 가 배포되지 않는다면 kubelet에서 오류가 발생했을 확률이 높습니다.
-이때는 아래 방법으로 초기화 후, `kubeadm init` 명령어를 재실행합니다.
-
-```bash
-# 1. 기존에 하다 만 설정 싹 지우기
-sudo kubeadm reset -f
-
-# 2. CNI 설정 파일 및 기존 인증서 잔여물 삭제 (충돌 방지)
-sudo rm -rf /etc/cni/net.d
-rm -rf $HOME/.kube/config
-rm -rf /var/lib/etcd/
-```
-
------
-
-## 🚀 Phase 6: 워커 노드 조인 (Worker 1~3 Only)
-
-**[실행 위치: Worker 1, 2, 3]**
-
-아까 복사해 둔 `kubeadm join` 명령어를 붙여넣으세요.
-
-```bash
-# 예시
-sudo kubeadm join 10.10.10.70:6443 --token <토큰> \
-    --discovery-token-ca-cert-hash sha256:<해시값>
-```
-
-만약 `[WARNING Hostname]: hostname "k8s-worker-node-1.novalocal" could not be reached`와
-같은 오류가 발생한다면 `hosts` 파일에 해당 이름을 추가해야 합니다.
-
-```ini
-20.0.0.22 k8s-master-node
-20.0.0.203 k8s-worker-node-1 k8s-worker-node-1.novalocal
-20.0.0.222 k8s-worker-node-2 k8s-worker-node-2.novalocal
-20.0.0.153 k8s-worker-node-3 k8s-worker-node-3.novalocal
-```
-
-### 💡 (참고) Worker Node Join 방법 차이
-
-나중에 워커 노드를 붙일 때(`Phase 6`)도 구성에 따라 명령어가 약간 다릅니다. 미리 참고하세요.
-
-- **HA 구성(옵션 A) 시:** 워커 노드는 **VIP(10.10.10.200)**를 바라보고 Join 합니다.
-
-    ```bash
-    kubeadm join 10.10.10.200:6443 --token <토큰> ...
-    ```
-
-- **단일 구성(옵션 B) 시:** 워커 노드는 **Master IP(10.10.10.70)**를 바라보고 Join 합니다.
-
-    ```bash
-    kubeadm join 10.10.10.70:6443 --token <토큰> ...
-    ```
-
-여기까지 완료되면 `kubectl get nodes` 명령어로 **Master 노드가 Ready 상태**인지 확인해 주세요.
-
------
-
-## ✅ 완료 확인
-
-다시 마스터 노드에서:
-
-```bash
-kubectl get nodes
-```
-
-모두 `Ready` 상태라면 K8s가 정상 설치된 것입니다.
