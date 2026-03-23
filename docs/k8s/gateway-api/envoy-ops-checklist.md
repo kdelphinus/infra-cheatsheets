@@ -94,6 +94,18 @@ curl -s -o /dev/null -w "%{http_code}\n" https://<DOMAIN>/
 kubectl patch gateway cmp-gateway -n envoy-gateway-system --type='merge' \
   -p '{"spec":{"addresses":[{"type":"IPAddress","value":"<WORKER_NODE_IP>"}]}}'
 
-# 2. PP 정책을 삭제했다면 다시 적용
-kubectl apply -f manifests/policy-proxy-protocol.yaml
+# 2. PP 정책을 삭제했다면 재생성 (히어독 방식)
+kubectl apply -f - <<'EOF'
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: enable-proxy-protocol
+  namespace: envoy-gateway-system
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: cmp-gateway
+  enableProxyProtocol: true
+EOF
 ```
