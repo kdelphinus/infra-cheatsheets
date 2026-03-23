@@ -1,0 +1,32 @@
+/* ─── 홈 페이지 카드 가시성 개선 ─── */
+
+/* 카드 테두리 강조 (라이트 & 다크 공통) */
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > ol > li:hover {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 다크 모드: 카드 배경 살짝 밝게, 구분선 강조 */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ol > li {
+  background-color: var(--md-code-bg-color);
+  border-color: var(--md-default-fg-color--light);
+}
+
+/* 다크 모드: 카드 내 일반 텍스트 가시성 */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards p,
+[data-md-color-scheme="slate"] .md-typeset .grid.cards li {
+  color: var(--md-default-fg-color);
+}
+
+/* 홈 페이지 상단 버튼 간격 */
+.md-typeset .md-button {
+  margin: 0.2rem 0.4rem 0.2rem 0;
+}
