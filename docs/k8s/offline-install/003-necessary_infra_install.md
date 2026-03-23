@@ -85,21 +85,33 @@ kubectl get svc -n envoy-gateway-system | grep -i load
 3. **Case C: 온프레미 (MetalLB가 없는 경우) - `<pending>` 상태**
     - IP를 할당해 줄 컨트롤러가 없으므로 **수동으로 VIP(Node IP)를 바인딩**해야 합니다.
 
-#### 🛠️ [Case C] 수동 IP 할당 명령어
+4. **Case D: 온프레미 (NodePort 모드로 설치한 경우)**
+    - 서비스 타입이 `NodePort`인 경우, 외부 L4 또는 소프트웨어 LB와의 연동이 필요합니다.
 
-서비스가 `<pending>` 상태로 멈춰 있을 때만 실행합니다.
-`externalIPs` 에 있는 `1.1.1.213` 부분은 실제 사용할 노드 IP로 대체합니다.
+#### 🛠️ [Case C] 수동 IP 할당 명령어 (LoadBalancer 타입)
+서비스가 `<pending>` 상태로 멈춰 있을 때만 실행합니다. `externalIPs`에 실제 사용할 노드 IP를 입력합니다.
 
 ```bash
-# 1. IP가 할당되지 않은 서비스 이름 확인
+# 1. 서비스 이름 확인
 SVC_NAME=$(kubectl get svc -n envoy-gateway-system -o jsonpath='{.items[?(@.spec.type=="LoadBalancer")].metadata.name}')
 
-# 2. 실제 사용할 노드 IP로 패치 (IP 부분 수정 필수)
-kubectl patch svc -n envoy-gateway-system $SVC_NAME \
-  --type merge \
-  -p '{"spec":{"externalIPs":["1.1.1.213"]}}'
+# 2. 노드 IP로 패치
+kubectl patch svc -n envoy-gateway-system $SVC_NAME -p '{"spec":{"externalIPs":["10.10.10.73"]}}'
+```
 
-echo "✅ 서비스($SVC_NAME)에 외부 IP(1.1.1.213)가 할당되었습니다."
+#### 🛠️ [Case D] VIP/L4 연동 (NodePort 타입)
+NodePort 모드 설치 시 HTTP **30080**, HTTPS **30443** 포트가 사용됩니다.
+
+- **하드웨어 L4 사용 시**: 네트워크 담당자에게 워커 노드 IP와 포트(**30080, 30443**)를 **Real Server**로 등록 요청합니다. (VIP 80/443 사용)
+- **소프트웨어 LB(HAProxy) 사용 시**: 앞단에 HAProxy를 구성하여 80/443 트래픽을 워커 노드의 30080/30443으로 중계합니다.
+
+```bash
+# HAProxy 설정 예시
+frontend envoy-http
+    bind *:80
+    default_backend envoy-workers
+backend envoy-workers
+    server worker1 10.10.10.73:30080 check
 ```
 
 ### 3. 라우팅(HTTPRoute) 설정 및 검증
