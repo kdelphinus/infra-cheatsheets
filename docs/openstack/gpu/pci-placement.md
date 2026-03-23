@@ -1,4 +1,4 @@
-# PCI Passthrougu + Placement API 적용
+# PCI Passthrough + Placement API 적용
 
 ## 0. 사전 확인 사항
 
@@ -102,7 +102,7 @@ alias = { "name": "<RESOURCE_NAME>", ... "live_migratable": "true" }
 
 ```bash
 # 가상환경 활성화 필수
-source ~/kolla-venv/bin/activate
+source ~/venv/bin/activate
 
 # 재설정 적용 (Nova 서비스들만 재시작됨)
 kolla-ansible reconfigure -i multinode --tags nova
