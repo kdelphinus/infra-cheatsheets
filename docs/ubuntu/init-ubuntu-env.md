@@ -2,11 +2,6 @@
 
 - Ubuntu 24.04 기준
 
-## Index
-
-- [Oh My Zsh 설치](#oh-my-zsh-설치)
-- [npm 설치](#npm-설치)
-
 ## Oh My Zsh 설치
 
 ### 1. Oh My Zsh 설치

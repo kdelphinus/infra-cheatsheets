@@ -27,6 +27,10 @@ theme:
     - content.code.copy      # 코드 복사 버튼 (필수!)
 
 markdown_extensions:
+  - toc:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - admonition               # 참고/주의 박스 (!!! note)
   - pymdownx.details         # 접기/펼치기 기능
   - pymdownx.superfences     # 코드 블록 중첩 지원
