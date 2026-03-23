@@ -1,441 +1,110 @@
-# 🚀 Envoy 설치
+# 🚀 Envoy Gateway v1.36.3 오프라인 설치 가이드
 
-2026년 3월부터 `Ingress Nginx` 에 대한 공식 지원이 종료됩니다.
-이에 따라 Kubernetes의 `Gateway API` 와 `Envoy` 를 사용하여 합니다.
+폐쇄망 환경에서 Envoy Gateway를 Kubernetes 위에 설치하는 절차를 안내합니다.
 
-이 문서는 폐쇄망을 기준으로 합니다.
-[설치 파일](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko)
-의 `envoy-1.36.3` 폴더를 받아주세요.
+## 전제 조건
 
-## 0. 아키텍처 개요 (Standard Architecture)
+- Kubernetes 클러스터 구성 완료
+- Helm v3.14.0 설치 완료
+- `kubectl` CLI 사용 가능
+- Harbor 레지스트리 접근 가능 (`<NODE_IP>:30002`)
 
-쿠버네티스 보안 및 네트워크 표준을 준수하는 구성입니다.
+## 1단계: 이미지 Harbor 업로드
 
-- **Network:** `hostNetwork: false` (Pod는 K8s 내부망 사용, 노드 네트워크와 격리)
-- **Service:** `type: LoadBalancer` (외부 트래픽 진입점)
-- **Traffic Flow:**
-`Client` -> `External IP (LB)` -> `Service (80/443)` -> `Envoy Pod (10080/10443)`
--> `Backend Pod`
-
-## 1. 설치
-
-### 1.0 이미지 업로드
-
-**[실행 위치: Master 1, Worker 1~3 전체]**
-
-전체 노드에 `envoy` 이미지들을 로드합니다.
+모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.
 
 ```bash
-cd ./envoy-1.36.3
-sudo bash ./images/upload_images.sh
+# upload_images_to_harbor_v3-lite.sh 상단 Config 수정
+# IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)
+# HARBOR_REGISTRY: <NODE_IP>:30002
+
+chmod +x images/upload_images_to_harbor_v3-lite.sh
+./images/upload_images_to_harbor_v3-lite.sh
 ```
 
-### 1.1 사전 구성(TLS 및 멀티 테넌트 설정)
+## 2단계: 설치 및 운영 설정 (values.yaml)
 
-**[실행 위치: Master 1]**
+루트 디렉토리의 설정 파일들을 환경에 맞게 수정합니다.
 
-Helm 배포 전, HTTPS 인증서와 네임스페이스 격리 해제 설정을 미리 적용합니다.
+| 파일명 | 용도 | 비고 |
+| :--- | :--- | :--- |
+| **`values-controller.yaml`** | Envoy Gateway Controller 설정 | 이미지 경로 및 리소스 제한 등 |
+| **`values-infra.yaml`** | Infrastructure (Gateway) 설정 | 서비스 타입(LB/NodePort), 포트 등 |
+| **`manifests/policy-global.yaml`** | 전역 보안 및 트래픽 정책 | EnvoyPatchPolicy 등 |
 
-1. TLS Secret 생성
-    - Gateway가 사용할 인증서(cert.pem, key.pem)을 이용해
-    Gateway 네임스페이스와 동일한 네임스페이스에 Secret을 생성합니다.
-    - 사용할 인증서는 모두 Secret으로 생성합니다.
-
-    ```bash
-    # 네임스페이스 생성 (아직 없다면)
-    kubectl create ns envoy-gateway-system --dry-run=client -o yaml | kubectl apply -f -
-
-    # Secret 생성
-    kubectl create secret tls strato-tls \
-      --cert=cert.pem \
-      --key=key.pem \
-      --namespace envoy-gateway-system
-    ```
-
-2. Gateway 파일 수정
-    - 추가된 `strato-tls` 외에 추가된 tls는 `template/main.yaml` 에 직접 추가해야 합니다.
-
-    ```yaml
-    # main.yaml
-    ...
-    spec:
-      gatewayClassName: eg-cluster-entry
-      listeners:
-      - name: http
-        protocol: HTTP
-        port: 80 # 서비스가 외부로 노출할 포트
-        allowedRoutes:
-          namespaces:
-            from: All
-      - name: https
-        protocol: HTTPS
-        port: 443
-        tls:
-          mode: Terminate
-          certificateRefs:
-          - name: {{ .Values.gateway.tls.name }}
-            kind: Secret
-        allowedRoutes:
-          namespaces:
-            from: All
-      # ▼▼▼ [새로 추가된 부분] ▼▼▼
-      - name: admin-https # Listener 이름
-        port: 443
-        protocol: HTTPS
-        hostname: "admin.cmp.test.com"  # 해당 Listener를 적용할 도메인
-        tls:
-          mode: Terminate
-          certificateRefs:
-          - name: admin-tls-secret      # 적용할 tls의 Secret 이름
-            kind: Secret
-        allowedRoutes:
-          namespaces:
-            from: All
-    ```
-
-3. HTTP만 사용할 경우
-    - 만약 HTTP만 사용한다면 `values.yaml` 과 `template/main.yaml` 에서 해당 설정을 제거해야 합니다.
-
-    ```yaml
-    # main.yaml
-    spec:
-      gatewayClassName: eg-cluster-entry
-      listeners:
-      - name: http
-        protocol: HTTP
-        port: 80 # 서비스가 외부로 노출할 포트
-        allowedRoutes:
-          namespaces:
-            from: All
-    # 밑에 HTTPS 관련 부분 모두 삭제
-    ```
-
-    ```yaml
-    # values.yaml
-    gateway:
-      name: "cmp-gateway" # 기본값 (스크립트에서 덮어쓸 예정)
-      # tls 부분 삭제
-      # tls:
-        # name: "strato-tls"
-    ```
-
-### 1.2 스크립트 실행
-
-**[실행 위치: Master 1]**
-
-`install_envoy-gateway.sh` 스크립트에서 아래 변수를 환경에 맞게 변경합니다.
-(기본값을 사용해도 괜찮습니다.)
-
-- `NAMESPACE:` Gateway Namespace
-- `CONTROLLER_CHART:` Controller Chart(기본값 고정)
-- `INFRA_CHART:` Infra Chart(기본값 고정)
-- `GW_NAME:` Gateway Name
-- `IMG_GATEWAY:` Gateway 이미지(기본값 고정)
-- `IMG_PROXY:` Proxy 이미지(기본값 고정)
-- `GW_CLASS_NAME:` 클러스터 레벨 리소스 이름
-- `GLOBAL_POLICY_FILE:` 전역 설정 파일 이름(기본값 고정)
-
-이때 `NAMESPACE` 나 `GW_NAME` 를 변경했다면, `HTTPRoute` 파일에도 변경해야 합니다.
-
-수정이 끝나면 스크립트를 실행합니다.
+## 3단계: 설치 실행
 
 ```bash
-sudo bash install_envoy-gateway.sh
+chmod +x scripts/install.sh
+./scripts/install.sh
 ```
 
-## 2. 배포 후 상태 확인 및 네트워크 구성
+스크립트 실행 중 다음 항목을 선택합니다:
 
-배포가 완료되면, 설치 시 선택한 모드에 따라 아래 Case 중 본인의 환경에 맞는 내용을 확인하세요.
+1. **설치 모드**: `1` (LoadBalancer) 또는 `2` (NodePort - 권장)
+2. **노드 고정**: Envoy Proxy를 배치할 특정 노드 이름 입력 (선택)
+3. **전역 정책**: `manifests/policy-global.yaml` 적용 여부
 
-### ✅ Case A: LoadBalancer 모드 (자동 할당 완료)
-
-스크립트에서 [1] LoadBalancer를 선택했고, 클라우드(AWS/GKE) 환경이거나 MetalLB가 구성된 경우입니다.
-
-- 확인: kubectl get svc -n envoy-gateway-system
-- 상태: EXTERNAL-IP 필드에 IP 주소나 도메인이 표시됩니다.
-- 조치: 별도 조치 불필요. 표시된 IP로 접속하면 됩니다.
-
-### ⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)
-
-스크립트에서 [1] LoadBalancer를 선택했으나, IP를 할당해 줄 컨트롤러(MetalLB 등)가 없는 온프레미 환경입니다.
-
-- 확인: kubectl get svc -n envoy-gateway-system
-- 상태: EXTERNAL-IP가 `<pending>` 상태로 멈춰 있습니다.
-- 조치: 특정 노드의 IP를 VIP처럼 사용하도록 수동으로 IP를 바인딩해야 합니다.
-(아래 명령어의 1.1.1.213 부분을 실제 사용할 노드 IP로 변경하여 실행하세요.)
+## 4단계: 설치 확인
 
 ```bash
-# 1. 대상 서비스 이름 추출
-SVC_NAME=$(kubectl get svc -n envoy-gateway-system -o jsonpath='{.items[?(@.spec.type=="LoadBalancer")].metadata.name}')
+# 파드 상태 확인
+kubectl get pods -n envoy-gateway-system
 
-# 2. External IP 수동 패치 (사용할 노드 IP로 수정 필수!)
-kubectl patch svc -n envoy-gateway-system $SVC_NAME \
-  --type merge \
-  -p '{"spec":{"externalIPs":["1.1.1.213"]}}'
-
-echo "✅ 서비스($SVC_NAME)에 외부 IP가 수동 할당되었습니다."
+# Gateway 및 서비스 확인
+kubectl get gateway,svc -n envoy-gateway-system
 ```
 
-- 만약 1분이 지나도 `Gateway` 가 **false** 상태라면 아래 명령어로 수동 바인딩합니다.
+## 5단계: 서비스 노출 (HTTPRoute)
 
-단일 노드:
-
-```bash
-kubectl patch gateway cmp-gateway -n envoy-gateway-system \
-  --type='merge' \
-  -p '{"spec":{"addresses":[{"type":"IPAddress","value":"<NODE_IP>"}]}}'
-```
-
-다중 노드 (DaemonSet 구성):
-
-```bash
-kubectl patch gateway cmp-gateway -n envoy-gateway-system \
-  --type='merge' \
-  -p '{
-    "spec":{
-      "addresses":[
-        {"type":"IPAddress","value":"<NODE_IP_1>"},
-        {"type":"IPAddress","value":"<NODE_IP_2>"},
-        {"type":"IPAddress","value":"<NODE_IP_3>"}
-      ]
-    }
-  }'
-```
-
-### ⚙️ Case C: NodePort 모드 (포트 고정)
-
-스크립트에서 [2] NodePort를 선택한 경우입니다.
-설치 스크립트에 의해 서비스 포트가 HTTP(30080), **HTTPS(30443)**으로 자동 고정되었습니다.
-
-1. 포트 확인
-
-    ```bash
-    kubectl get svc -n envoy-gateway-system
-    # 출력 확인: 80:30080/TCP, 443:30443/TCP
-    ```
-
-2. 환경별 접속 가이드
-
-    - [C-1] 외부 L4 스위치(Hardware LB) 연동 시:
-      - 네트워크 담당자에게 **"쿠버네티스 노드들의 IP와 고정 포트(30080, 30443)"**를
-      L4 장비의 멤버(Real Server)로 등록 요청합니다.
-      - 사용자는 L4 장비의 VIP(80/443)로 접속합니다.
-      - **Service의 EXTERNAL-IP와 Gateway 주소에 VIP 대신 Worker Node IP가 표시되는 것은 정상입니다.**
-        VIP는 외부 LB가 소유하며 Kubernetes는 알 수 없습니다. `spec.addresses` 패치 불필요합니다.
-        트래픽 흐름: `클라이언트 → VIP(외부 LB) → Worker Node IP:30080/30443 → Envoy → 백엔드`
-    - [C-2] L4 장비가 없는 경우 (로컬/폐쇄망 직접 접속):
-      - 별도의 장비 없이 PC에서 직접 접속합니다.
-      - 접속 주소:
-        - HTTP: http://<Node_IP>:30080
-        - HTTPS: https://<Node_IP>:30443
-      - 주의: 방화벽에서 해당 포트(30080, 30443)가 허용되어야 합니다.
-
-## 3. 라우팅(HTTPRoute) 설정 및 검증
-
-Gateway가 정상적으로 떴다면, 애플리케이션 연결 규칙(`HTTPRoute`)을 점검합니다.
-이 검증은 서비스에 접근하지 못할 때 진행해도 됩니다.
-
-### ✅ 체크리스트 1: 백엔드 포트 (Connection Refused)
-
-Envoy는 서비스(ClusterIP) 포트가 아닌 **파드(Pod)의 실제 컨테이너 포트**로 접속을 시도합니다.
-
-- **증상:** 503 Service Unavailable 또는 Connection Refused
-- **확인 방법:** 실제 파드가 몇 번 포트를 열고 있는지 확인합니다.
-
-```bash
-# 1. 백엔드 앱의 파드 이름 확인
-kubectl get pods -n <NAMESPACE>
-
-# 2. 파드 설정에서 'containerPort' 확인 (예: my-app-pod-xyz)
-kubectl get pod <POD_NAME> -n <NAMESPACE> -o yaml | grep containerPort
-# 출력 예시: 
-# - containerPort: 8080  <-- 이 번호가 정답입니다.
-```
-
-- **해결:** 위에서 확인한 **실제 포트(예: 8080)** 를 `HTTPRoute`의 `backendRefs` 포트로 설정해야 합니다.
-
-```bash
-# 포트를 80 -> 8080으로 변경하는 예시
-kubectl patch httproute <ROUTE_NAME> -n <NAMESPACE> --type='json' \
-  -p='[{"op": "replace", "path": "/spec/rules/0/backendRefs/0/port", "value": 8080}]'
-```
-
-### ✅ 체크리스트 2: 경로 재작성 (URL Rewrite)
-
-애플리케이션이 하위 경로(Context Path)를 인식하지 못해 404가 발생할 경우 사용합니다.
-
-- **상황:** `/oauth2/login` 호출 시 앱이 `/oauth2`를 경로로 인식하여 오류 발생.
-- **해결:** `URLRewrite` 필터 적용.
-
-```yaml
-
-filters:
-- type: URLRewrite
-  urlRewrite:
-    path:
-      type: ReplacePrefixMatch
-      replacePrefixMatch: /
-
-```
-
-## 4. 운영 및 로그 확인
-
-Envoy Gateway는 동적으로 리소스를 관리하므로 파드 이름이 변경됩니다.
-**Label Selector(`-l`)**를 사용하여 로그를 확인하는 것이 표준입니다.
-
-### 📋 프록시(Data Plane) 로그
-
-실제 트래픽 처리, 접속 오류 확인 시 사용합니다.
-
-```bash
-# Envoy Proxy 로그 실시간 확인
-kubectl logs -n envoy-gateway-system -f -l gateway.envoyproxy.io/owning-gateway-name=cmp-gateway
-
-```
-
-### 🧠 컨트롤러(Control Plane) 로그
-
-Gateway 설정 변환, 배포 실패 원인 분석 시 사용합니다.
-
-```bash
-# Gateway Controller 로그 확인
-kubectl logs -n envoy-gateway-system -f -l app.kubernetes.io/name=envoy-gateway
-
-```
-
-## [별첨] Gateway 연결 상태 및 라우트 검증 가이드
-
-Gateway 리소스와 HTTPRoute 리소스가 정상적으로 연결(Binding)되었는지 확인하는 방법입니다.
-
-### 1. Gateway 관점: 연결된 라우트 수 확인
-
-Gateway 리소스의 상태(Status)를 조회하여 몇 개의 라우트가 연결되었는지 확인합니다.
-
-```bash
-# Gateway 상태 상세 조회
-kubectl get gateway cmp-gateway -n envoy-gateway-system -o yaml
-```
-
-확인 포인트 (status.listeners 섹션):
-
-- `attachedRoutes:` 연결된 HTTPRoute의 개수입니다. 이 숫자가 0이면 연결된 라우트가 없는 것입니다.
-- `conditions:` Programmed 상태가 True여야 정상 작동 중입니다.
-
-```yaml
-status:
-  listeners:
-  - name: http
-    attachedRoutes: 1  # <-- 현재 연결된 라우트 개수
-```
-
-### 2. HTTPRoute 관점: 부모 Gateway 연결 확인
-
-개별 `HTTPRoute` 가 Gateway를 찾았는지, 거절당하지는 않았는지 확인합니다.
-
-```bash
-# 네임스페이스 내의 모든 HTTPRoute 상태 요약 확인
-kubectl get httproute -A
-```
-
-확인 포인트:
-
-- PARENTS: 연결된 Gateway 이름이 표시되어야 합니다.
-- STATUS: True 또는 Accepted 상태여야 합니다.
-
-#### 상세 디버깅 (연결 실패 시)
-
-만약 연결이 안 된다면 describe 명령어로 상세 원인을 파악합니다.
-
-```bash
-kubectl describe httproute <ROUTE_NAME> -n <NAMESPACE>
-```
-
-주요 실패 원인:
-
-- Gateway 이름 불일치: parentRefs의 name이 실제 Gateway 이름(cmp-gateway)과 다름.
-- Namespace 불일치: Gateway가 다른 네임스페이스의 라우트를 허용하지 않음
-(Gateway Listener 설정의 allowedRoutes 확인 필요)
-
----
-
-## [심화] 와일드카드 인증서 적용 가이드
-
-`*.test.com` 와일드카드 인증서 하나로 `a.test.com`, `b.test.com` 등 모든 서브 도메인의 HTTPS 처리를 통합 관리합니다.
-
-### 1단계: 쿠버네티스 Secret 생성
-
-인증서 파일(`.crt`, `.key`)을 Gateway가 위치한 네임스페이스에 Secret으로 등록합니다.
-
-> **중요:** Gateway 리소스가 있는 네임스페이스와 **동일한 곳**에 Secret을 만들어야 Gateway가 읽을 수 있습니다.
-
-```bash
-kubectl create secret tls wildcard-tls-secret \
-  --cert=fullchain.pem \
-  --key=privkey.pem \
-  -n envoy-gateway-system
-```
-
-### 2단계: Gateway 리스너 설정
-
-`Gateway` 리소스를 수정하여 HTTPS 리스너가 하나의 Secret을 참조하도록 설정합니다.
-
-```yaml
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: cmp-gateway
-  namespace: envoy-gateway-system
-spec:
-  gatewayClassName: eg-cluster-entry
-  listeners:
-    - name: https
-      port: 443
-      protocol: HTTPS
-      hostname: "*.test.com"       # 모든 서브도메인 허용
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: wildcard-tls-secret  # Secret 이름 하나만 지정
-            kind: Secret
-      allowedRoutes:
-        namespaces:
-          from: All
-```
-
-### 3단계: HTTPRoute 추가 (서비스별)
-
-인증서 설정 없이 HTTPRoute만 추가하면 HTTPS가 자동 적용됩니다.
+신규 서비스를 Envoy를 통해 노출하려면 `HTTPRoute` 리소스를 생성하여 적용합니다.
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: nexus-route
-  namespace: nexus
+  name: my-app-route
+  namespace: default
 spec:
   parentRefs:
     - name: cmp-gateway
       namespace: envoy-gateway-system
   hostnames:
-    - "nexus.test.com"      # 와일드카드 범위 내 도메인
+    - "my-app.internal"
   rules:
     - matches:
-        - path:
-            type: PathPrefix
-            value: /
+        - path: { type: PathPrefix, value: / }
       backendRefs:
-        - name: nexus-svc
-          port: 8081
+        - name: my-app-service
+          port: 80
 ```
 
-### 검증
+## 💡 운영 및 트러블슈팅
+
+### 네트워크 모드별 접속 가이드
+
+- **LoadBalancer 모드**: MetalLB 등이 구성된 경우 `EXTERNAL-IP`로 접속합니다. 온프레미스에서 IP가 `<pending>`인 경우 특정 노드 IP를 수동으로 패치해야 할 수 있습니다.
+- **NodePort 모드**: 기본적으로 HTTP(30080), HTTPS(30443) 포트로 고정됩니다. `externalTrafficPolicy: Local` 설정을 통해 클라이언트 실 IP를 보존할 수 있습니다.
+
+### 체크리스트: 서비스 접근 불가 시
+
+1. **백엔드 포트**: Envoy는 서비스 포트가 아닌 파드의 실제 `containerPort`로 접속을 시도합니다. 503 오류 발생 시 `HTTPRoute`의 포트가 실제 앱 포트와 일치하는지 확인하십시오.
+2. **Gateway 상태**: `kubectl get gateway` 결과가 `false`일 경우 `kubectl describe gateway cmp-gateway` 명령어로 원인을 분석하십시오.
+3. **로그 확인**: 
+    - 프록시 로그: `kubectl logs -n envoy-gateway-system -f -l gateway.envoyproxy.io/owning-gateway-name=cmp-gateway`
+    - 컨트롤러 로그: `kubectl logs -n envoy-gateway-system -f -l app.kubernetes.io/name=envoy-gateway`
+
+## 디렉토리 구조 (Standard Structure)
+
+| 경로 | 설명 |
+| :--- | :--- |
+| `charts/` | Envoy Gateway Helm 차트 |
+| `images/` | 컨테이너 이미지 및 업로드 스크립트 |
+| `manifests/` | Global Policy, HTTPRoute 예시 등 |
+| `scripts/` | 설치/삭제 자동화 스크립트 |
+
+## 삭제
 
 ```bash
-# -v 옵션으로 SSL Handshake 과정 확인
-curl -v https://nexus.test.com --resolve nexus.test.com:443:<GATEWAY_IP>
+./scripts/uninstall.sh
 ```
-
-성공 기준: `Server certificate:` 항목에 `CN=*.test.com` 표시, `SSL certificate verify ok` 또는 연결 성공.
-
-> **Q.** 새 서브도메인을 추가하려면 Secret을 다시 만들어야 하나요?
-> **A.** 아닙니다. Gateway가 이미 `*.test.com`을 처리하므로 HTTPRoute만 추가하면 됩니다.

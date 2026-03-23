@@ -1,196 +1,83 @@
-# 💽 NAS PV 연결 가이드
+# NFS Provisioner v4.0.2 오프라인 설치 가이드
 
-이 가이드는 쿠버네티스(K8s) 환경에서 NAS(NFS)를 영구 볼륨(PV)으로 연결하는 방법을 설명합니다. 신규 서비스 배포와 기존 데이터 이관 상황에 맞춰 선택하여 적용하실 수 있습니다.
+폐쇄망 환경의 Kubernetes 클러스터에 NFS 동적 스토리지 프로비저닝(NFS Subdir External Provisioner)을 구성하는 절차를 안내합니다.
 
----
+## 전제 조건
 
-## 0단계: 공통 사전 준비 (A안, B안 공통)
-
-K8s PV를 생성하기 전, NAS 서버 내부에 각 서비스가 사용할 하위 디렉토리를 미리 생성해야 합니다.
-
-### Step 1: 오프라인 패키지 설치 및 서비스 기동
-
-모든 워커 노드에서 NFS 클라이언트 패키지를 설치하고 서비스를 활성화합니다.
-
-```bash
-cd /경로/nfs_package_bundle
-sudo dnf localinstall *.rpm -y
-sudo systemctl enable --now rpcbind
-```
-
-### Step 2: NAS 출입구(Export Path) 확인
-
-임의의 워커 노드에서 아래 명령어를 실행하여 NAS 서버가 허용한 경로를 확인합니다.
-
-```bash
-showmount -e <NAS_IP>
-```
-
-!!! info "결과 예시"
-    `/applog *` (이 가이드에서는 `/applog`가 NAS의 기본 출입구라고 가정합니다.)
-
-### Step 3: 워커 노드 마운트 및 하위 폴더 생성
-
-NAS 내부 공간에 서비스별 전용 폴더를 생성합니다. 이 작업은 **하나의 노드에서 한 번만** 수행하면 됩니다.
-
-```bash
-# 1. 임시 마운트 포인트 생성
-mkdir -p /mnt/nas_root
-
-# 2. NAS 출입구를 임시 폴더에 연결
-sudo mount -t nfs <NAS_IP>:/applog /mnt/nas_root
-
-# 3. NAS 내부로 이동하여 서비스별 폴더 생성
-cd /mnt/nas_root
-mkdir grafana mariadb prometheus
-
-# 4. 권한 부여 (Pod가 접근할 수 있도록 권한을 개방합니다)
-chmod -R 777 /mnt/nas_root/*
-
-# 5. 작업 완료 후 마운트 해제
-cd ~
-sudo umount /mnt/nas_root
-```
-
-!!! tip "PV 작성 시 경로 매핑 공식"
-    쿠버네티스 PV YAML의 `path`는 다음과 같이 조합됩니다.
-    
-    *   **공식:** `NAS 출입구 경로` + `/` + `생성한 하위 디렉토리 이름`
-    *   **예시:** `path: /applog/grafana`
+- Kubernetes 클러스터 구성 완료
+- `kubectl` CLI 사용 가능
+- NFS 서버로 사용할 노드 또는 외부 NAS 준비
 
 ---
 
-## [A안] 신규 서비스 생성 시
+## Phase 1: OS 패키지 설치 (NFS 클라이언트)
 
-기존 데이터가 없는 상태에서 처음부터 NAS를 연결하여 배포하는 방식입니다.
-
-### Step A-1: PV 및 PVC 생성
-
-0단계에서 생성한 하위 경로를 지정하여 K8s 객체를 생성합니다.
-
-```yaml
-# a-storage.yaml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-grafana
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes: ["ReadWriteMany"]
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: manual-nas
-  nfs:
-    server: <NAS_IP>
-    path: /applog/grafana
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-grafana
-  namespace: monitoring
-spec:
-  accessModes: ["ReadWriteMany"]
-  storageClassName: manual-nas
-  resources:
-    requests:
-      storage: 10Gi
-  volumeName: pv-grafana
-```
-
-### Step A-2: Deployment 배포 (InitContainer 포함)
-
-권한 문제를 방지하기 위해 `initContainers`를 포함하여 배포합니다.
-
-```yaml
-# a-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: grafana
-  namespace: monitoring
-spec:
-  replicas: 1
-  template:
-    spec:
-      securityContext:
-        fsGroup: 472
-      initContainers:
-        - name: fix-permissions
-          image: busybox
-          command: ["sh", "-c", "chown -R 472:472 /var/lib/grafana"]
-          securityContext:
-            runAsUser: 0
-          volumeMounts:
-            - name: grafana-storage
-              mountPath: /var/lib/grafana
-      containers:
-        - name: grafana
-          volumeMounts:
-            - name: grafana-storage
-              mountPath: /var/lib/grafana
-      volumes:
-        - name: grafana-storage
-          persistentVolumeClaim:
-            claimName: pvc-grafana
-```
-
----
-
-## [B안] 기존 데이터 이관 시
-
-운영 중인 `hostPath` 데이터를 보존하면서 스토리지를 NAS로 교체하는 방식입니다.
-
-### Step B-1: PV 및 PVC 사전 생성
-
-[A안]의 `Step A-1`과 동일하게 PV와 PVC를 미리 생성해 둡니다.
-
-### Step B-2: 1차 데이터 동기화 (무중단)
-
-서비스 중단 없이 기존 데이터를 NAS로 복사합니다.
+모든 워커 노드에서 실행하여 `mount.nfs` 기능을 활성화합니다.
 
 ```bash
-mkdir -p /mnt/nas_temp
-sudo mount -t nfs <NAS_IP>:/applog /mnt/nas_temp
+# Ubuntu의 경우
+cd scripts/ubuntu
+chmod +x install.sh
+./install.sh
 
-# 기존 hostPath에서 NAS로 데이터 복사 (원본 경로 뒤에 /를 붙여주세요)
-sudo rsync -avh /monitoring/grafana/ /mnt/nas_temp/grafana/
+# RHEL / Rocky Linux의 경우
+cd scripts/rhel_rocky
+chmod +x install.sh
+./install.sh
 ```
 
-### Step B-3: 컷오버 및 최종 동기화 (최소 중단)
-
-쓰기 작업을 방지하기 위해 Pod를 정지시킨 후 잔여 데이터를 복사합니다.
+## Phase 2: 컨테이너 이미지 로드
 
 ```bash
-# 1. Pod 일시 중지
-kubectl scale deployment grafana -n monitoring --replicas=0
-
-# 2. 최종 데이터 동기화 (삭제된 파일까지 일치시킵니다)
-sudo rsync -avh --delete /monitoring/grafana/ /mnt/nas_temp/grafana/
+# images/load_image.sh 실행 (ctr을 사용하여 로컬 로드)
+chmod +x images/load_image.sh
+./images/load_image.sh
 ```
 
-### Step B-4: Deployment 업데이트 및 재개
+대상 이미지: `registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2`
 
-`hostPath` 설정을 제거하고 생성한 PVC로 교체합니다.
+## Phase 3: 매니페스트 수정 및 배포
 
-```yaml
-# b-deployment-update.yaml (Volumes 부분 수정)
-volumes:
-  - name: grafana-storage
-    persistentVolumeClaim:
-      claimName: pvc-grafana
-```
+`manifests/nfs-provisioner.yaml` 파일에서 아래 항목을 환경에 맞게 수정합니다.
 
-!!! note "마무리"
-    정상 기동이 확인되면 임시 마운트를 해제합니다: `sudo umount /mnt/nas_temp`
-
----
-
-## 설계 트레이드오프 분석
-
-| 비교 항목 | [A안] 신규 생성 | [B안] 기존 데이터 이관 |
+| 항목 | 설명 | 예시 |
 | :--- | :--- | :--- |
-| **작업 복잡도** | **매우 낮음.** YAML 배포로 완료. | **높음.** 수동 복사 작업 필요. |
-| **데이터 보존** | 초기화 상태로 시작. | 기존 설정과 데이터가 완벽히 유지됨. |
-| **서비스 중단** | 영향 없음. | 동기화 시점에 수 분 이내의 중단 발생. |
-| **권장 상황** | 신규 구축 또는 테스트 환경. | 운영 중인 프로덕션 시스템. |
+| `image` | 내부 레지스트리 이미지 주소 | `<NODE_IP>:30002/library/nfs-subdir-external-provisioner:v4.0.2` |
+| `NFS_SERVER` | NFS 서버 IP | `192.168.1.100` |
+| `NFS_PATH` | NFS 공유 디렉토리 경로 | `/data/nfs-share` |
+
+수정 후 배포합니다.
+
+```bash
+kubectl apply -f manifests/nfs-provisioner.yaml
+```
+
+## Phase 4: 설치 확인
+
+```bash
+# 파드 및 스토리지 클래스 확인
+kubectl get pods -n nfs-provisioner
+kubectl get storageclass
+```
+
+---
+
+## 💡 운영 참고 사항
+
+- **StorageClass 설정**: `archiveOnDelete: "false"` 설정은 PVC 삭제 시 실제 데이터를 삭제합니다. 데이터 보호가 필요하면 `true` 로 변경하세요.
+- **방화벽 확인**: 노드 간 **TCP/UDP 2049(NFS), 111(RPC)** 포트가 열려 있어야 정상적으로 마운트됩니다.
+
+## 디렉토리 구조 (Standard Structure)
+
+| 경로 | 설명 |
+| :--- | :--- |
+| `images/` | 컨테이너 이미지 `.tar` 및 로드 스크립트 |
+| `manifests/` | Deployment, StorageClass, RBAC 정의 |
+| `scripts/` | OS별 NFS 패키지 설치/삭제 스크립트 |
+
+## 삭제
+
+```bash
+# 각 OS 환경에 맞는 스크립트 실행
+./scripts/ubuntu/uninstall.sh
+```
