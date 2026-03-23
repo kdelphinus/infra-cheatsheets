@@ -54,7 +54,7 @@ source ~/.zshrc
 ```
 
 > 설정: source ~/.zshrc를 실행하면, **설정 마법사(p10k configure)**가 자동으로 실행됩니다. 질문에 답하면서 원하는 아이콘과 모양을 선택하면 됩니다.
-> 필수: 이 테마를 제대로 사용하려면 Nerd Fonts (예: MesloLGS NF)를 Tabby 터미널의 글꼴로 설정해야 합니다.
+> 필수: 이 테마를 제대로 사용하려면 Nerd Fonts (예: MesloLGS NF)를 사용 중인 터미널의 글꼴로 설정해야 합니다.
 
 ## npm 설치
 

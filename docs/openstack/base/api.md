@@ -1,6 +1,6 @@
-# Openstack API Basic
+# OpenStack API Basic
 
-## 1\. 베이스 URL 확인 (전제 조건)
+## 1. 베이스 URL 확인 (전제 조건)
 
 먼저 각 서비스의 포트와 주소를 알아야 합니다. (보통 `cstation` 노드 IP)
 
@@ -12,7 +12,7 @@
 
 -----
 
-## 2\. 핵심 서비스 조회 API 목록
+## 2. 핵심 서비스 조회 API 목록
 
 ### 🌐 네트워크 (Neutron) - VPC, Subnet 관련
 
@@ -52,7 +52,7 @@
 
 | 리소스 | API 경로 (URI) | 설명 |
 | :--- | :--- | :--- |
-| **Res Provider**| **`GET /resource_providers`** | 자원 제공자(Compute Node) 목록 |
+| **Res Provider** | **`GET /resource_providers`** | 자원 제공자(Compute Node) 목록 |
 | **Inventory** | **`GET /resource_providers/{uuid}/inventories`** | 특정 노드의 자원(GPU, vCPU) 재고 |
 | **Usage** | **`GET /resource_providers/{uuid}/usages`** | 특정 노드의 자원 사용량 |
 

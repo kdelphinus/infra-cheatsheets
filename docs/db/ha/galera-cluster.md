@@ -4,7 +4,7 @@
 **디렉토리:** `mariadb-10.11.14-for-air-gapped` 구조 기반
 **계정:** 일반 사용자 (sudo 권한 필수)
 
-## 1\. 구성 정보 (Topology)
+## 1. 구성 정보 (Topology)
 
 * **Cluster Name:** `my_galera_svc`
 * **DB Root User:** `root`
@@ -17,7 +17,7 @@
 
 -----
 
-## 2\. OS 및 네트워크 설정 (3대 공통)
+## 2. OS 및 네트워크 설정 (3대 공통)
 
 ### 2.1 호스트 파일 등록
 
@@ -49,7 +49,7 @@ sudo firewall-cmd --reload
 
 -----
 
-## 3\. 설치 (Offline) - 3대 공통
+## 3. 설치 (Offline) - 3대 공통
 
 `mariadb-10.11.14-for-air-gapped` 폴더가 각 서버의 홈 디렉토리(예: `/home/rocky`)에 업로드되어 있어야 합니다.
 
@@ -97,7 +97,7 @@ sudo dnf install -y ./*.rpm --disablerepo=* --skip-broken
 
 ### 3.4 서비스 등록
 
-설치가 완료되면 서비스를 등록합니다. (아직 시작하지 마세요\!)
+설치가 완료되면 서비스를 등록합니다. (아직 시작하지 마세요!)
 
 ```bash
 sudo systemctl enable mariadb
@@ -120,7 +120,7 @@ sudo mysql_install_db --user=mysql --datadir=/app/mariadb_data
 
 -----
 
-## 4\. Galera 설정 파일 작성 (3대 공통)
+## 4. Galera 설정 파일 작성 (3대 공통)
 
 `/etc/my.cnf.d/01-galera.cnf` 파일을 생성합니다.
 
@@ -128,7 +128,7 @@ sudo mysql_install_db --user=mysql --datadir=/app/mariadb_data
 sudo vi /etc/my.cnf.d/01-galera.cnf
 ```
 
-**[아래 내용 붙여넣기 - ⚠️ 서버별 IP 수정 필수\!]**
+**[아래 내용 붙여넣기 - ⚠️ 서버별 IP 수정 필수!]**
 
 ```ini
 [mariadb]
@@ -185,7 +185,7 @@ wsrep_sst_method=mariabackup
 
 -----
 
-## 5\. 클러스터 기동 (순서 준수\!)
+## 5. 클러스터 기동 (순서 준수!)
 
 ### 🚀 [Step 1] galera-cluster-1 (Bootstrap)
 
@@ -221,7 +221,7 @@ sudo mariadb -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
 
 -----
 
-## 6\. 검증 (Validation)
+## 6. 검증 (Validation)
 
 1. **Node 1에서 DB 생성:**
 
@@ -284,6 +284,5 @@ Z
 
 모든 노드가 다운되거나 클러스터가 깨진 경우, 데이터 유실 없이 복구하는 절차는 아래 별도 가이드를 참조하세요.
 
-*   [Galera Cluster 장애 복구 가이드](./galera-recovery.md)
-*   [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)
-
+* [Galera Cluster 장애 복구 가이드](./galera-recovery.md)
+* [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)

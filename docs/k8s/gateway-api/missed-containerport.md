@@ -36,7 +36,7 @@ strato-imp-svc   192.168.104.23:8080  3d
 ### 상세 메커니즘
 
 1. **Envoy 사이드카(Sidecar)**는 Pod 내의 네트워크 트래픽을 가로채서(Interception) 처리합니다.
-2. 이때 Envoy는 Deployment YAML에 명시된 
+2. 이때 Envoy는 Deployment YAML에 명시된
 **`containerPort` 목록을 보고 "아, 이 포트로 들어오는 트래픽을 앱에게 넘겨줘야 하는구나"라고 Listener(수신 규칙)를 생성**합니다.
 3. **설정이 누락되면:**
     - K8s Service는 Pod IP를 찾아서 Endpoints를 연결해 줍니다. (그래서 `get endpoints`에는 나옴)

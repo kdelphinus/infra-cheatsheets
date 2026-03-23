@@ -54,6 +54,7 @@ chmod +x scripts/install.sh
 ```
 
 **스크립트 자동 처리 항목:**
+
 - 네임스페이스 (`velero`) 생성
 - MinIO 설치 및 전용 버킷 (`velero`) 자동 생성
 - Velero 서버 배포 및 MinIO 백업 저장소 연동

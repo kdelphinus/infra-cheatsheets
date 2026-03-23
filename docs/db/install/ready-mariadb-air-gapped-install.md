@@ -74,5 +74,5 @@ dnf download --resolve --alldeps --arch=x86_64 --destdir=./rpms \
 
 ```bash
 cd ~
-tar -zcvf offline-dist-rocky9.6-k8s1.30.tar.gz offline-dist/
+tar -zcvf offline-dist-db-rocky9.6.tar.gz offline-dist-db/
 ```

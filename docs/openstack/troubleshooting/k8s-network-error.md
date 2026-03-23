@@ -1,6 +1,6 @@
 # OpenStack K8s 네트워크 통신 장애 및 Harbor 배포 실패
 
-## 1\. 개요 (Issue Summary)
+## 1. 개요 (Issue Summary)
 
 - **증상:**
 
@@ -10,7 +10,7 @@
 
 - **영향도:** 클러스터 내 모든 애플리케이션 통신 두절, 신규 솔루션(Harbor) 배포 불가.
 
-## 2\. 환경 정보 (Environment)
+## 2. 환경 정보 (Environment)
 
 - **Infra:** OpenStack Flamingo (2025.2)
 - **OS:** Ubuntu 22.04 LTS
@@ -18,12 +18,12 @@
 - **CNI:** Calico (Overlay Network)
 - **Application:** Harbor Registry
 
-## 3\. 원인 분석 (Root Cause Analysis)
+## 3. 원인 분석 (Root Cause Analysis)
 
 ### 3.1. 핵심 원인: OpenStack Port Security
 
 - **현상:** Kubernetes CNI(Calico)는 Pod마다 고유 IP 대역(예: `10.244.x.x`)을 할당함.
-- **원인:** OpenStack Neutron의 **Port Security(포트 보안)** 기능은 VM의 네트워크 인터페이스(Port)에 할당된 고정 IP(`Fixed IP`) 이외의 트래픽이 감지되면 이를 \*\*IP 스푸핑(IP Spoofing) 공격으로 간주하여 차단(Drop)\*\*함.
+- **원인:** OpenStack Neutron의 **Port Security(포트 보안)** 기능은 VM의 네트워크 인터페이스(Port)에 할당된 고정 IP(`Fixed IP`) 이외의 트래픽이 감지되면 이를 **IP 스푸핑(IP Spoofing) 공격으로 간주하여 차단(Drop)**함.
 - **결과:** Pod에서 나가는 모든 오버레이 트래픽이 OpenStack 네트워크 레벨에서 차단됨.
 
 ### 3.2. 부차적 혼란: ClusterIP의 특성
@@ -37,7 +37,7 @@
 - 초기 네트워크 단절 상태에서 설치를 시도하여 초기화 Job이 실패함.
 - Helm 차트 설치 시 네임스페이스 미지정으로 인해 PVC가 `default` 네임스페이스에 생성되어, 재설치 시에도 기존 오염된 볼륨을 참조하는 문제 발생.
 
-## 4\. 해결 과정 (Troubleshooting Steps)
+## 4. 해결 과정 (Troubleshooting Steps)
 
 ### 4.1. 네트워크 진단
 
@@ -59,7 +59,7 @@
    - `kubectl delete pvc --all -n default` (Harbor 관련)
 3. **재설치:** 네트워크 정상화 확인 후 Helm 재배포.
 
-## 5\. 최종 해결책 (Solution)
+## 5. 최종 해결책 (Solution)
 
 ### 5.1. OpenStack 네트워크 설정 변경
 
@@ -91,7 +91,7 @@ openstack port set --enable-port-security <PORT_ID>
 
 -----
 
-## 6\. 교훈 및 참고 (Lessons Learned)
+## 6. 교훈 및 참고 (Lessons Learned)
 
 1. **OpenStack + K8s:** OpenStack 위에 K8s를 올릴 때는 반드시 **Port Security** 설정과 **Allowed Address Pairs**를 사전에 계획해야 한다.
 2. **ClusterIP Ping:** Kubernetes Service IP(`ClusterIP`)는 Ping이 안 되는 것이 정상이다. 네트워크 테스트는 반드시 `curl`, `wget`, `nc`, `nslookup`을 사용해야 한다.

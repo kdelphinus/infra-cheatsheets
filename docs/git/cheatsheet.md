@@ -1,6 +1,6 @@
 # 🚀 DevOps Git Cheat Sheet (Oh-My-Zsh Edition)
 
-## 1\. 🌟 The One Pick (가장 추천하는 명령어)
+## 1. 🌟 The One Pick (가장 추천하는 명령어)
 
 팀의 커밋 히스토리를 깔끔하게 유지하는 비결입니다.
 
@@ -8,7 +8,7 @@
 | :--- | :--- | :--- |
 | **`gup`** | `git pull --rebase` | 일반 `pull`과 달리, **불필요한 Merge 커밋을 만들지 않고** 내 커밋을 최신 코드 뒤에 깔끔하게 이어 붙입니다. |
 
-## 2\. 필수 설정 & 트러블슈팅
+## 2. 필수 설정 & 트러블슈팅
 
 환경 세팅과 `.gitignore` 문제 해결용입니다.
 
@@ -17,7 +17,7 @@
 | **유저 설정** | `git config --global user.name "내이름"`<br>`git config --global user.email "이메일"` |
 | **.gitignore<br>미적용 해결** | **(캐시 삭제 후 재커밋)**<br>1. `git rm -r --cached .`<br>2. `git add .`<br>3. `git commit -m "Fix .gitignore"` |
 
-## 3\. 실전 핵심 Alias (단축키)
+## 3. 실전 핵심 Alias (단축키)
 
 자주 쓰는 순서대로 정리했습니다.
 

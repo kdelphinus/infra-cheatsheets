@@ -32,6 +32,7 @@ chmod +x scripts/setup-host-dirs.sh
 ```
 
 **주요 생성 경로:**
+
 - GitLab: `/data/gitlab` (Config, Data, Redis 등)
 - Jenkins: `/data/jenkins_home`, `/data/gradle-cache`
 
@@ -78,6 +79,7 @@ chmod +x scripts/install.sh
 ```
 
 **스크립트 주요 기능:**
+
 - 네임스페이스 (`gitlab`, `jenkins`) 생성 및 PV/PVC 적용
 - 노드 고정 (NodeSelector) 처리
 - Helm 배포 (Harbor 이미지 경로 자동 반영)
@@ -92,6 +94,7 @@ chmod +x scripts/install.sh
 - **URL**: `http://<NODE_IP>` 또는 설정 도메인
 - **계정**: `root`
 - **비밀번호 확인**:
+
   ```bash
   kubectl get secret gitlab-gitlab-initial-root-password \
     -n gitlab -o jsonpath="{.data.password}" | base64 -d && echo
@@ -102,6 +105,7 @@ chmod +x scripts/install.sh
 - **URL**: `http://<NODE_IP>:30000` (NodePort)
 - **계정**: `admin`
 - **비밀번호 확인**:
+
   ```bash
   kubectl get secret jenkins -n jenkins \
     -o jsonpath="{.data.jenkins-admin-password}" | base64 -d && echo

@@ -50,6 +50,7 @@ chmod +x scripts/install.sh
 ```
 
 **스크립트 자동 처리 항목:**
+
 - 네임스페이스 (`monitoring`) 생성 및 스토리지 설정 적용
 - Helm 배포 (Harbor 이미지 경로 자동 생성)
 - Grafana 초기 비밀번호 설정

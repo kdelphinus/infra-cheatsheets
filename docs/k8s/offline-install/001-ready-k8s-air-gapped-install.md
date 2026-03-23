@@ -102,8 +102,7 @@ dnf download --resolve --alldeps --arch=x86_64 --destdir=./k8s/rpms \
 ```bash
 # 3. Kubernetes (v1.30.x)
 dnf download --resolve --alldeps --arch=x86_64 --destdir=./k8s/rpms \
-    kubelet-1.30.* kubeadm-1.30.* kubectl-1.30.* \
-    containerd.io docker-ce-cli
+    kubelet-1.30.* kubeadm-1.30.* kubectl-1.30.*
 ```
 
 ```bash

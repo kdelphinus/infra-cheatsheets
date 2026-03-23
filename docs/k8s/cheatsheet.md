@@ -266,7 +266,7 @@ kubeadm token create --print-join-command
 
 Kubernetes의 `apt`나 `yum` 같은 패키지 매니저, Helm의 필수 명령어입니다.
 
-### 1\. 저장소(Repo) 관리
+### 1. 저장소(Repo) 관리
 
 차트(패키지)를 다운로드할 저장소를 관리합니다.
 
@@ -277,7 +277,7 @@ helm repo list                   # 등록된 저장소 목록 확인
 helm search repo <keyword>       # 차트 검색 (예: helm search repo nginx)
 ```
 
-### 2\. 설치 및 관리 (Install & Manage)
+### 2. 설치 및 관리 (Install & Manage)
 
 애플리케이션(Release)을 설치하고 업그레이드합니다.
 
@@ -299,7 +299,7 @@ helm install <release-name> <repo/chart> -f values.yaml
 helm list -A  # 모든 네임스페이스 조회
 ```
 
-### 3\. 업그레이드 및 삭제 (Upgrade & Uninstall)
+### 3. 업그레이드 및 삭제 (Upgrade & Uninstall)
 
 ```bash
 # 차트 버전 업그레이드 또는 설정 변경
@@ -309,7 +309,7 @@ helm upgrade <release-name> <repo/chart> -f new-values.yaml
 helm uninstall <release-name>
 ```
 
-### 4\. 디버깅 및 검증 (Debug & Verify)
+### 4. 디버깅 및 검증 (Debug & Verify)
 
 **Pro Tip:** `helm template`은 실제로 클러스터에 설치하지 않고, 생성될 YAML 파일만 미리 보여줍니다. (`--dry-run`과 유사)
 

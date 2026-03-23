@@ -114,7 +114,7 @@ kolla-ansible reconfigure -i multinode --tags nova
 
 ## 3. Placement 등록 검증
 
-Nova가 GPU를 감지하고 Placement에 "나 GPU 있어\!"라고 보고했는지 확인합니다.
+Nova가 GPU를 감지하고 Placement에 "나 GPU 있어!"라고 보고했는지 확인합니다.
 
 ### 3.1. 물리 서버(Compute Node) UUID 확인
 

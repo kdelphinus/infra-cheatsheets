@@ -124,12 +124,14 @@ sudo ctr -n k8s.io images list | grep kube-apiserver
 
 - **전제**: 마스터 노드 3대 및 가상 IP(VIP: `10.10.10.200`) 필요.
 - **커널 설정**: VIP 바인딩 허용
+
   ```bash
   echo "net.ipv4.ip_nonlocal_bind = 1" | sudo tee /etc/sysctl.d/haproxy.conf
   sudo sysctl --system
   ```
 
 #### 1) HAProxy 설정 (`/etc/haproxy/haproxy.cfg`)
+
 ```bash
 frontend k8s-api
     bind 10.10.10.200:6443 # VIP로 바인딩하여 API 서버와 포트 충돌 방지
@@ -143,6 +145,7 @@ backend k8s-masters
 ```
 
 #### 2) Keepalived 설정 (`/etc/keepalived/keepalived.conf`)
+
 - Master-1은 `state MASTER`, `priority 101`. 나머지는 `BACKUP`, `100/99`로 설정합니다.
 
 ### 옵션 B: Localhost LB 방식 (VIP 불가 환경)
@@ -177,17 +180,20 @@ sudo kubeadm init \
 ## 🚀 Phase 5: CNI 및 추가 작업
 
 ### 5.1 Calico CNI 설치
+
 ```bash
 kubectl apply -f ~/k8s-1.30/k8s/utils/calico.yaml
 ```
 
 ### 5.2 Helm 설치
+
 ```bash
 sudo mv ~/k8s-1.30/k8s/binaries/helm /usr/local/bin/helm
 chmod +x /usr/local/bin/helm
 ```
 
 ### 5.3 워커 노드 조인
+
 Master-1 초기화 결과로 나온 `kubeadm join` 명령어를 각 워커 노드에서 실행합니다.
 
 ---
