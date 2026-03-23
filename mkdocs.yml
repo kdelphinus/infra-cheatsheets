@@ -58,6 +58,7 @@ nav:
     - 'Gateway API':
       - 'Ingress-Nginx 설치': k8s/gateway-api/000-ingress-nginx-install.md
       - 'Envoy Gateway 설치': k8s/gateway-api/001-envoy-install.md
+      - 'Envoy 운영 전환 체크리스트': k8s/gateway-api/envoy-ops-checklist.md
       - 'HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
       - 'Envoy Gateway 네트워크 구성': k8s/gateway-api/envoy-gateway-network-config.md
       - 'ContainerPort 누락 트러블슈팅': k8s/gateway-api/missed-containerport.md
