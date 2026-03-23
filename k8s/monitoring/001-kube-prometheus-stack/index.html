@@ -3661,10 +3661,12 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>./scripts/install.sh
 </code></pre></div>
-<p><strong>스크립트 자동 처리 항목:</strong>
-- 네임스페이스 (<code>monitoring</code>) 생성 및 스토리지 설정 적용
-- Helm 배포 (Harbor 이미지 경로 자동 생성)
-- Grafana 초기 비밀번호 설정</p>
+<p><strong>스크립트 자동 처리 항목:</strong></p>
+<ul>
+<li>네임스페이스 (<code>monitoring</code>) 생성 및 스토리지 설정 적용</li>
+<li>Helm 배포 (Harbor 이미지 경로 자동 생성)</li>
+<li>Grafana 초기 비밀번호 설정</li>
+</ul>
 <hr />
 <h2 id="3-httproute-envoy-gateway">3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)</h2>
 <p>Envoy Gateway를 통해 모니터링 대시보드를 노출하려면 <code>HTTPRoute</code>를 적용합니다.

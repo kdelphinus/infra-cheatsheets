@@ -3523,10 +3523,12 @@
 <h2 id="3-havip">3. HA(VIP) 구성 시 아키텍처 주의사항</h2>
 <p>Keepalived 등을 연동하여 VIP(Virtual IP)를 구성하거나 고가용성 환경을 설계할 때 주의해야 할 핵심 사항입니다.</p>
 <h3 id="shared-nothing">Shared-Nothing 원칙 준수</h3>
-<p>Galera Cluster는 각 노드가 <strong>독립적인 로컬 스토리지</strong>를 가져야 합니다.
-- <strong>위험 요인:</strong> 기존 Active-Standby 방식처럼 동일한 SAN/iSCSI 디스크를 여러 노드에 동시 마운트하여 사용할 경우, 파일 시스템 메타데이터가 파손됩니다.
-- <strong>결과:</strong> OS가 데이터 보호를 위해 디스크를 즉시 <code>Read-only</code>로 잠그며 DB 서비스가 중단됩니다.
-- <strong>해결책:</strong> 반드시 노드별 로컬 디스크 또는 독립적인 전용 볼륨을 사용하십시오.</p>
+<p>Galera Cluster는 각 노드가 <strong>독립적인 로컬 스토리지</strong>를 가져야 합니다.</p>
+<ul>
+<li><strong>위험 요인:</strong> 기존 Active-Standby 방식처럼 동일한 SAN/iSCSI 디스크를 여러 노드에 동시 마운트하여 사용할 경우, 파일 시스템 메타데이터가 파손됩니다.</li>
+<li><strong>결과:</strong> OS가 데이터 보호를 위해 디스크를 즉시 <code>Read-only</code>로 잠그며 DB 서비스가 중단됩니다.</li>
+<li><strong>해결책:</strong> 반드시 노드별 로컬 디스크 또는 독립적인 전용 볼륨을 사용하십시오.</li>
+</ul>
 <h3 id="failover-fencing">Failover 및 펜싱(Fencing)</h3>
 <p>VIP 할당 직후 DB가 갑자기 멈춘다면, 사용 중인 HA 솔루션이 데이터 보호를 위해 노드를 격리(Fencing/STONITH)하고 있지는 않은지 로그를 확인하십시오. Galera 환경에서는 별도의 스토리지 공유 없이 네트워크 기반 동기화를 사용하므로 전통적인 클러스터 방식과 설계 방향이 다름을 인지해야 합니다.</p>
 

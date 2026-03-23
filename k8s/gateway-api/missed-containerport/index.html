@@ -3562,7 +3562,7 @@
 <h3 id="_1">상세 메커니즘</h3>
 <ol>
 <li><strong>Envoy 사이드카(Sidecar)</strong>는 Pod 내의 네트워크 트래픽을 가로채서(Interception) 처리합니다.</li>
-<li>이때 Envoy는 Deployment YAML에 명시된 
+<li>이때 Envoy는 Deployment YAML에 명시된
 <strong><code>containerPort</code> 목록을 보고 "아, 이 포트로 들어오는 트래픽을 앱에게 넘겨줘야 하는구나"라고 Listener(수신 규칙)를 생성</strong>합니다.</li>
 <li><strong>설정이 누락되면:</strong><ul>
 <li>K8s Service는 Pod IP를 찾아서 Endpoints를 연결해 줍니다. (그래서 <code>get endpoints</code>에는 나옴)</li>

@@ -3584,8 +3584,7 @@
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 3. Kubernetes (v1.30.x)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>dnf<span class="w"> </span>download<span class="w"> </span>--resolve<span class="w"> </span>--alldeps<span class="w"> </span>--arch<span class="o">=</span>x86_64<span class="w"> </span>--destdir<span class="o">=</span>./k8s/rpms<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span>kubelet-1.30.*<span class="w"> </span>kubeadm-1.30.*<span class="w"> </span>kubectl-1.30.*<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span>containerd.io<span class="w"> </span>docker-ce-cli
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span>kubelet-1.30.*<span class="w"> </span>kubeadm-1.30.*<span class="w"> </span>kubectl-1.30.*
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 4. MariaDB 10.11 &amp; Galera Cluster</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># 위에서 10.11 repo를 등록했으므로, 이 명령어가 10.11.14 버전을 받아옵니다.</span>

@@ -3657,9 +3657,11 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/setup-host-dirs.sh
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>./scripts/setup-host-dirs.sh
 </code></pre></div>
-<p><strong>주요 생성 경로:</strong>
-- GitLab: <code>/data/gitlab</code> (Config, Data, Redis 등)
-- Jenkins: <code>/data/jenkins_home</code>, <code>/data/gradle-cache</code></p>
+<p><strong>주요 생성 경로:</strong></p>
+<ul>
+<li>GitLab: <code>/data/gitlab</code> (Config, Data, Redis 등)</li>
+<li>Jenkins: <code>/data/jenkins_home</code>, <code>/data/gradle-cache</code></li>
+</ul>
 <hr />
 <h2 id="2-harbor">2단계: 이미지 Harbor 업로드</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># images/upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
@@ -3714,31 +3716,33 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>./scripts/install.sh
 </code></pre></div>
-<p><strong>스크립트 주요 기능:</strong>
-- 네임스페이스 (<code>gitlab</code>, <code>jenkins</code>) 생성 및 PV/PVC 적용
-- 노드 고정 (NodeSelector) 처리
-- Helm 배포 (Harbor 이미지 경로 자동 반영)
-- 초기 관리자 비밀번호 자동 출력</p>
+<p><strong>스크립트 주요 기능:</strong></p>
+<ul>
+<li>네임스페이스 (<code>gitlab</code>, <code>jenkins</code>) 생성 및 PV/PVC 적용</li>
+<li>노드 고정 (NodeSelector) 처리</li>
+<li>Helm 배포 (Harbor 이미지 경로 자동 반영)</li>
+<li>초기 관리자 비밀번호 자동 출력</li>
+</ul>
 <hr />
 <h2 id="5">5단계: 초기 접속 및 비밀번호 확인</h2>
 <h3 id="51-gitlab">5.1 GitLab 초기 접속</h3>
 <ul>
 <li><strong>URL</strong>: <code>http://&lt;NODE_IP&gt;</code> 또는 설정 도메인</li>
 <li><strong>계정</strong>: <code>root</code></li>
-<li><strong>비밀번호 확인</strong>:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>gitlab-gitlab-initial-root-password<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-n<span class="w"> </span>gitlab<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
-</code></pre></div></li>
+<li><strong>비밀번호 확인</strong>:</li>
 </ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>gitlab-gitlab-initial-root-password<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-n<span class="w"> </span>gitlab<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
+</code></pre></div>
 <h3 id="52-jenkins">5.2 Jenkins 초기 접속</h3>
 <ul>
 <li><strong>URL</strong>: <code>http://&lt;NODE_IP&gt;:30000</code> (NodePort)</li>
 <li><strong>계정</strong>: <code>admin</code></li>
-<li><strong>비밀번호 확인</strong>:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>jenkins<span class="w"> </span>-n<span class="w"> </span>jenkins<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.jenkins-admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
-</code></pre></div></li>
+<li><strong>비밀번호 확인</strong>:</li>
 </ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>jenkins<span class="w"> </span>-n<span class="w"> </span>jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.jenkins-admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
+</code></pre></div>
 <hr />
 <h2 id="gitlab-jenkins_1">🔗 GitLab-Jenkins 연동 가이드</h2>
 <ol>

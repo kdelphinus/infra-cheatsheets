@@ -3692,10 +3692,12 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./scripts/install.sh
 </code></pre></div>
-<p>스크립트 실행 중 아래 항목을 인터랙티브하게 입력합니다.
-- TLS 활성화 여부 (y/N)
-- TLS 사용 시 사전 생성된 Secret 이름
-- Harbor 관리자(<code>admin</code>) 비밀번호</p>
+<p>스크립트 실행 중 아래 항목을 인터랙티브하게 입력합니다.</p>
+<ul>
+<li>TLS 활성화 여부 (y/N)</li>
+<li>TLS 사용 시 사전 생성된 Secret 이름</li>
+<li>Harbor 관리자(<code>admin</code>) 비밀번호</li>
+</ul>
 <h2 id="4-tls-insecure-registry">4단계: (TLS 미사용 시) Insecure Registry 등록</h2>
 <p>TLS를 사용하지 않는 경우, 모든 노드에서 containerd에 insecure registry를 등록합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/insecurity_registry_add.sh

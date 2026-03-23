@@ -4057,7 +4057,7 @@
 </tbody>
 </table>
 <h3 id="allocation-candidates">🔍 자원 스케줄링 디버깅 (Allocation Candidates)</h3>
-<p>"내 VM이 왜 생성이 안 되지? (No Valid Host)" 에러가 날 때, 스케줄러 입장에서 **"배포 가능한 후보지"**가 있는지 미리 조회해보는 명령어입니다.</p>
+<p>"내 VM이 왜 생성이 안 되지? (No Valid Host)" 에러가 날 때, 스케줄러 입장에서 <strong>"배포 가능한 후보지"</strong>가 있는지 미리 조회해보는 명령어입니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 스펙에 맞는 후보 호스트 조회 (예: CPU 1개, 메모리 512MB)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>openstack<span class="w"> </span>allocation<span class="w"> </span>candidate<span class="w"> </span>list<span class="w"> </span>--resource<span class="w"> </span><span class="nv">VCPU</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>--resource<span class="w"> </span><span class="nv">MEMORY_MB</span><span class="o">=</span><span class="m">512</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>

@@ -3717,7 +3717,7 @@
 <h3 id="31-openstack-port-security">3.1. 핵심 원인: OpenStack Port Security</h3>
 <ul>
 <li><strong>현상:</strong> Kubernetes CNI(Calico)는 Pod마다 고유 IP 대역(예: <code>10.244.x.x</code>)을 할당함.</li>
-<li><strong>원인:</strong> OpenStack Neutron의 <strong>Port Security(포트 보안)</strong> 기능은 VM의 네트워크 인터페이스(Port)에 할당된 고정 IP(<code>Fixed IP</code>) 이외의 트래픽이 감지되면 이를 **IP 스푸핑(IP Spoofing) 공격으로 간주하여 차단(Drop)**함.</li>
+<li><strong>원인:</strong> OpenStack Neutron의 <strong>Port Security(포트 보안)</strong> 기능은 VM의 네트워크 인터페이스(Port)에 할당된 고정 IP(<code>Fixed IP</code>) 이외의 트래픽이 감지되면 이를 <strong>IP 스푸핑(IP Spoofing) 공격으로 간주하여 차단(Drop)</strong>함.</li>
 <li><strong>결과:</strong> Pod에서 나가는 모든 오버레이 트래픽이 OpenStack 네트워크 레벨에서 차단됨.</li>
 </ul>
 <h3 id="32-clusterip">3.2. 부차적 혼란: ClusterIP의 특성</h3>
