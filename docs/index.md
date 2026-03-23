@@ -26,6 +26,7 @@ hide:
   [:octicons-arrow-right-24: Cheat Sheet](k8s/cheatsheet.md)<br>
   [:octicons-arrow-right-24: 폐쇄망 설치 (v1.30)](k8s/offline-install/002-k8s-air-gapped-install.md)<br>
   [:octicons-arrow-right-24: Envoy Gateway 설치](k8s/gateway-api/001-envoy-install.md)<br>
+  [:octicons-arrow-right-24: HTTPRoute 설정](k8s/gateway-api/002-convert_ingress_to_httproute.md)<br>
   [:octicons-arrow-right-24: Prometheus & Grafana](k8s/monitoring/001-kube-prometheus-stack.md)<br>
   [:octicons-arrow-right-24: Velero 백업](k8s/backup-restore/001-velero-install.md)
 
@@ -37,7 +38,8 @@ hide:
   [:octicons-arrow-right-24: 설치 가이드](openstack/base/install.md)<br>
   [:octicons-arrow-right-24: GPU 노드 초기화](openstack/gpu/init-gpu-node.md)<br>
   [:octicons-arrow-right-24: PCI Passthrough + Placement](openstack/gpu/pci-placement.md)<br>
-  [:octicons-arrow-right-24: Golden Image 생성](openstack/utils/golden-image.md)
+  [:octicons-arrow-right-24: Golden Image 생성](openstack/utils/golden-image.md)<br>
+  [:octicons-arrow-right-24: K8s 네트워크 장애 해결](openstack/troubleshooting/k8s-network-error.md)
 
 - :material-pipe: **CI/CD**
 
@@ -47,7 +49,8 @@ hide:
   [:octicons-arrow-right-24: GitLab & Jenkins 설치](cicd/offline-install/001-gitlab_jenkins_install.md)<br>
   [:octicons-arrow-right-24: ArgoCD 설치](cicd/offline-install/002-argocd-install.md)<br>
   [:octicons-arrow-right-24: ArgoCD · Jenkins · Harbor 연동](cicd/offline-install/003-argocd-jenkins-harbor-integration.md)<br>
-  [:octicons-arrow-right-24: Nexus 설치](cicd/offline-install/004-nexus-install.md)
+  [:octicons-arrow-right-24: Nexus 설치](cicd/offline-install/004-nexus-install.md)<br>
+  [:octicons-arrow-right-24: 이미지 업데이트 재배포](cicd/operation/redeploy-with-new-image.md)
 
 - :simple-mariadb: **Database**
 
@@ -56,19 +59,14 @@ hide:
   [:octicons-arrow-right-24: Galera Cluster 설치](db/ha/galera-cluster.md)<br>
   [:octicons-arrow-right-24: Galera 장애 복구](db/ha/galera-recovery.md)<br>
   [:octicons-arrow-right-24: MariaDB 폐쇄망 설치](db/install/mariadb-air-gapped-install.md)<br>
-  [:octicons-arrow-right-24: 트러블슈팅](db/install/mariadb-troubleshooting.md)
+  [:octicons-arrow-right-24: MariaDB 트러블슈팅](db/install/mariadb-troubleshooting.md)
 
-- :simple-googlecloud: **Cloud (GCP)**
+- :simple-googlecloud: **Cloud & Ubuntu**
 
   ---
 
   [:octicons-arrow-right-24: GCP 폐쇄망 환경 구성](cloud/use_terraform_with_gcp.md)<br>
-  [:octicons-arrow-right-24: GCP SDK Cheat Sheet](cloud/gcp-cheatsheet.md)
-
-- :simple-ubuntu: **Ubuntu & WSL**
-
-  ---
-
+  [:octicons-arrow-right-24: GCP SDK Cheat Sheet](cloud/gcp-cheatsheet.md)<br>
   [:octicons-arrow-right-24: Ubuntu 초기 설정](ubuntu/init-ubuntu-env.md)<br>
   [:octicons-arrow-right-24: WSL 네트워크 설정](ubuntu/wsl/wsl-network-setting.md)
 
