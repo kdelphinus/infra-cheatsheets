@@ -1296,6 +1296,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3-lb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 별도 LB 장비 없이 단일 노드 직접 접속
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3698,6 +3709,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3-lb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 별도 LB 장비 없이 단일 노드 직접 접속
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3857,14 +3879,15 @@
 <h3 id="case-a-loadbalancer-metallb">Case A: LoadBalancer — 자동 할당 (MetalLB 환경)</h3>
 <p><code>EXTERNAL-IP</code>가 자동으로 할당되면 해당 IP로 즉시 접속 가능합니다.</p>
 <h3 id="case-b-loadbalancer">Case B: LoadBalancer — 수동 할당 (온프레미스)</h3>
-<p><code>EXTERNAL-IP</code>가 <code>&lt;pending&gt;</code>인 경우 워커 노드 IP를 수동으로 바인딩합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 서비스에 외부 IP 패치</span>
+<p><code>EXTERNAL-IP</code>가 <code>&lt;pending&gt;</code>인 경우 워커 노드 IP를 수동으로 바인딩합니다. 
+- <strong>참고</strong>: DaemonSet + <code>externalTrafficPolicy: Local</code> 구성이라면 모든 워커 노드 IP를 등록해야 트래픽이 분산됩니다. 앞단에 별도 VIP가 있다면 해당 VIP 하나만 등록해도 무방합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 서비스에 외부 IP 패치 (단일 또는 다중 IP)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>envoy-cmp-gateway<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;10.10.10.73&quot;,&quot;10.10.10.74&quot;]}}&#39;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;10.10.10.73&quot;,&quot;10.10.10.74&quot;,&quot;10.10.10.75&quot;]}}&#39;</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Gateway 리소스에 주소 패치 (상태가 False인 경우)</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;10.10.10.73&quot;}]}}&#39;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;10.10.10.73&quot;},{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;10.10.10.74&quot;}]}}&#39;</span>
 </code></pre></div>
 <h3 id="case-c-nodeport-vip">Case C: NodePort — VIP 연동</h3>
 <p>NodePort 모드 설치 시 HTTP <strong>30080</strong>, HTTPS <strong>30443</strong> 포트로 고정됩니다. 환경에 따라 아래 방식 중 하나를 선택하여 연동합니다.</p>
@@ -3873,15 +3896,11 @@
 - <strong>트래픽 흐름</strong>: <code>Client → VIP(L4) → Worker IP:30080/30443 → Envoy Pod</code></p>
 <h4 id="2-l4-keepalived-haproxy">2) L4 장비가 없는 경우 (Keepalived + HAProxy)</h4>
 <p>워커 노드에 소프트웨어 로드밸런서를 구성하여 80/443 포트를 30080/30443으로 중계합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># HAProxy 설정 예시 (/etc/haproxy/haproxy.cfg)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>frontend<span class="w"> </span>envoy-http
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nb">bind</span><span class="w"> </span>*:80
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>default_backend<span class="w"> </span>envoy-workers-http
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>backend<span class="w"> </span>envoy-workers-http
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>server<span class="w"> </span>worker1<span class="w"> </span><span class="m">10</span>.10.10.73:30080<span class="w"> </span>check
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>server<span class="w"> </span>worker2<span class="w"> </span><span class="m">10</span>.10.10.74:30080<span class="w"> </span>check
-</code></pre></div>
+<h4 id="3-lb">3) 별도 LB 장비 없이 단일 노드 직접 접속</h4>
+<p>임시 테스트 환경이거나 LB 구성이 어려운 경우 워커 노드의 IP와 고정 포트로 직접 접속합니다.
+- <strong>HTTP</strong>: <code>http://&lt;NODE_IP&gt;:30080</code>
+- <strong>HTTPS</strong>: <code>https://&lt;NODE_IP&gt;:30443</code>
+- <strong>주의</strong>: 해당 노드의 방화벽에서 30080, 30443 포트가 허용되어야 합니다.</p>
 <hr />
 <h2 id="_4">💡 운영 팁</h2>
 <ul>
@@ -3890,7 +3909,7 @@
 </ul>
 <hr />
 <h2 id="uninstall">🗑️ 삭제 (Uninstall)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./scripts/uninstall.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./scripts/uninstall.sh
 </code></pre></div>
 
 
