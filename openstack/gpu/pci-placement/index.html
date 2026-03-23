@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pci-passthrougu-placement-api" class="md-skip">
+        <a href="#pci-passthrough-placement-api" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -299,7 +299,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -702,7 +702,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -730,7 +730,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -818,7 +818,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -846,7 +846,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1015,6 +1015,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
@@ -1022,7 +1050,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1050,7 +1078,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1078,7 +1106,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1106,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1194,7 +1222,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1477,6 +1505,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
@@ -1484,7 +1540,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1512,7 +1568,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -3850,7 +3906,7 @@
   
 
 
-<h1 id="pci-passthrougu-placement-api">PCI Passthrougu + Placement API 적용</h1>
+<h1 id="pci-passthrough-placement-api">PCI Passthrough + Placement API 적용</h1>
 <h2 id="0">0. 사전 확인 사항</h2>
 <ul>
 <li>Ubuntu 24.04 + Openstack 2025.2 환경에서 진행</li>
@@ -3955,7 +4011,7 @@
 <h2 id="2-reconfigure">2. 설정 적용 (Reconfigure)</h2>
 <p>기존 오픈스택을 끄지 않고 설정만 업데이트합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 가상환경 활성화 필수</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">source</span><span class="w"> </span>~/kolla-venv/bin/activate
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">source</span><span class="w"> </span>~/venv/bin/activate
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 재설정 적용 (Nova 서비스들만 재시작됨)</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kolla-ansible<span class="w"> </span>reconfigure<span class="w"> </span>-i<span class="w"> </span>multinode<span class="w"> </span>--tags<span class="w"> </span>nova

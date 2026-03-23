@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="../000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -704,7 +704,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -732,7 +732,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -820,7 +820,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -848,7 +848,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1017,6 +1017,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
@@ -1024,7 +1052,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1052,7 +1080,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1080,7 +1108,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1108,7 +1136,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1196,7 +1224,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1489,6 +1517,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../001-gitlab_jenkins_install/" class="md-nav__link">
         
   
@@ -1496,7 +1552,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1524,7 +1580,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -1633,10 +1689,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 로드 및 푸시
+        📋 구성 명세
       
     </span>
   </a>
@@ -1644,10 +1700,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-helm" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: Helm 설치 (폴더 방식)
+        🛠️ 설치 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 Harbor 업로드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 설치 실행
       
     </span>
   </a>
@@ -1658,7 +1736,35 @@
   <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 초기 비밀번호 확인
+        3단계: 초기 비밀번호 확인 및 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 초기 비밀번호 확인 및 접속">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 접속 정보
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
@@ -3289,10 +3395,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 로드 및 푸시
+        📋 구성 명세
       
     </span>
   </a>
@@ -3300,10 +3406,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-helm" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: Helm 설치 (폴더 방식)
+        🛠️ 설치 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 Harbor 업로드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 설치 실행
       
     </span>
   </a>
@@ -3314,7 +3442,35 @@
   <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 초기 비밀번호 확인
+        3단계: 초기 비밀번호 확인 및 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 초기 비밀번호 확인 및 접속">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 접속 정보
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
@@ -3342,32 +3498,95 @@
 
 
 <h1 id="nexus-repository-ctr">🚀 Nexus Repository 오프라인 설치 가이드 (ctr 기반)</h1>
-<p>폐쇄망 환경에서 <code>ctr</code>을 사용하여 Nexus3를 설치하고 라이브러리 저장소를 구성하는 절차입니다.</p>
-<h2 id="1">1단계: 이미지 로드 및 푸시</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 이미지 로드 (ctr 사용)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>images/sonatype-nexus3-3.70.1.tar
+<p>본 문서는 폐쇄망 Kubernetes 환경에서 <strong>Nexus v3.71.0</strong>을 설치하고 사내 통합 아티팩트 저장소(Repository)를 구성하는 절차를 정의합니다.</p>
+<h2 id="_1">📋 구성 명세</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">버전</th>
+<th style="text-align: left;">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Nexus Repository</strong></td>
+<td style="text-align: left;"><strong>v3.71.0</strong></td>
+<td style="text-align: left;">바이너리 아티팩트 저장소 (Helm)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage</strong></td>
+<td style="text-align: left;">20Gi+</td>
+<td style="text-align: left;">hostPath 또는 PV 권장</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">🛠️ 설치 전제 조건</h2>
+<ul>
+<li>Kubernetes 클러스터 구성 완료</li>
+<li>Helm v3.x 설치 완료</li>
+<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li>(도메인 접속 시) Envoy Gateway 설치 완료</li>
+</ul>
+<hr />
+<h2 id="1-harbor">1단계: 이미지 Harbor 업로드</h2>
+<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 2. Harbor push — 공통 업로드 스크립트 사용</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># harbor-1.14.3/utils/upload_images_to_harbor_v3-lite.sh 내 아래 변수를 수정 후 실행합니다.</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">#   IMAGE_DIR      : &lt;이 디렉터리&gt;/images</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">#   HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">#   HARBOR_PROJECT : library</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">#   HARBOR_USER    : admin</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">#   HARBOR_PASSWORD: &lt;Harbor 관리자 비밀번호&gt;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>bash<span class="w"> </span>../harbor-1.14.3/utils/upload_images_to_harbor_v3-lite.sh
+<hr />
+<h2 id="2">2단계: 설치 실행</h2>
+<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 헬름 설치 (루트의 values.yaml 자동 반영)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>./scripts/install.sh
 </code></pre></div>
-<h2 id="2-helm">2단계: Helm 설치 (폴더 방식)</h2>
-<p><code>charts/nexus-repository-manager</code> 폴더를 사용하여 설치합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 네임스페이스 생성</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>nexus<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 헬름 설치 (폴더 지정)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>helm<span class="w"> </span>install<span class="w"> </span>nexus<span class="w"> </span>./charts/nexus-repository-manager<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>-n<span class="w"> </span>nexus<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml
+<p><strong>스크립트 자동 처리 항목:</strong>
+- 네임스페이스 (<code>nexus</code>) 생성 및 PV/PVC 적용
+- Helm 배포 (Harbor 이미지 경로 자동 생성)
+- 서비스 (NodePort: 30003) 생성</p>
+<hr />
+<h2 id="3">3단계: 초기 비밀번호 확인 및 접속</h2>
+<p>설치 완료 후 파드가 <code>Running</code> 상태가 되면 아래 명령어로 초기 <code>admin</code> 비밀번호를 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Nexus Pod 내의 데이터 경로에서 비밀번호 확인</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nexus-0<span class="w"> </span>-n<span class="w"> </span>nexus<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/nexus-data/admin.password<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
 </code></pre></div>
-<h2 id="3">3단계: 초기 비밀번호 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nexus-0<span class="w"> </span>-n<span class="w"> </span>nexus<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/nexus-data/admin.password
+<h3 id="_3">💡 접속 정보</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">주소 / 값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>접속 주소</strong></td>
+<td style="text-align: left;"><code>http://&lt;NODE_IP&gt;:30003</code> (NodePort)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>기본 계정</strong></td>
+<td style="text-align: left;"><code>admin</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>초기 비밀번호</strong></td>
+<td style="text-align: left;">위 명령어로 확인한 문자열</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div class="admonition warning">
+<p class="admonition-title">보안 권고</p>
+</div>
+<p>최초 로그인 후 마법사에 따라 비밀번호를 즉시 변경하십시오. 변경 후 <code>admin.password</code> 파일은 자동으로 삭제됩니다.</p>
+</blockquote>
+<hr />
+<h2 id="uninstall">🗑️ 삭제 (Uninstall)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./scripts/uninstall.sh
 </code></pre></div>
 
 

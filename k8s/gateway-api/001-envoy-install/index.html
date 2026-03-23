@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/">
       
       
-        <link rel="prev" href="../../backup-restore/001-velero-install/">
+        <link rel="prev" href="../000-ingress-nginx-install/">
       
       
         <link rel="next" href="../002-convert_ingress_to_httproute/">
@@ -25,7 +25,7 @@
     
     
       
-        <title>1. Gateway API 설치 - Infra Cheatsheets</title>
+        <title>Envoy Gateway 설치 - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#envoy" class="md-skip">
+        <a href="#envoy-gateway-v1363" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Gateway API 설치
+              Envoy Gateway 설치
             
           </span>
         </div>
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -712,7 +712,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -740,7 +740,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -831,7 +831,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -859,7 +859,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1033,6 +1033,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1052,7 +1080,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1070,7 +1098,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1096,10 +1124,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-standard-architecture" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 아키텍처 개요 (Standard Architecture)
+        📋 구성 명세
       
     </span>
   </a>
@@ -1107,22 +1135,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 설치
+        🏗️ 아키텍처 및 트래픽 흐름
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 설치">
+    <nav class="md-nav" aria-label="🏗️ 아키텍처 및 트래픽 흐름">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#10" class="md-nav__link">
+  <a href="#1-loadbalancer-metallb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.0 이미지 업로드
+        1. LoadBalancer 모드 (MetalLB 등 사용 시)
       
     </span>
   </a>
@@ -1130,21 +1158,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#11-tls" class="md-nav__link">
+  <a href="#2-nodeport-vip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 사전 구성(TLS 및 멀티 테넌트 설정)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 스크립트 실행
+        2. NodePort + VIP 모드 (온프레미스 표준)
       
     </span>
   </a>
@@ -1157,22 +1174,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 배포 후 상태 확인 및 네트워크 구성
+        🛠️ 설치 전제 조건
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 구성">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 Harbor 업로드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-valuesyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 설치 및 운영 설정 (values.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tls-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: TLS 사전 구성 (HTTPS 사용 시)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 설치 실행
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 배포 후 네트워크 구성 (환경별 대응)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5단계: 배포 후 네트워크 구성 (환경별 대응)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#case-a-loadbalancer" class="md-nav__link">
+  <a href="#case-a-loadbalancer-metallb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ Case A: LoadBalancer 모드 (자동 할당 완료)
+        Case A: LoadBalancer — 자동 할당 (MetalLB 환경)
       
     </span>
   </a>
@@ -1183,7 +1255,7 @@
   <a href="#case-b-loadbalancer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)
+        Case B: LoadBalancer — 수동 할당 (온프레미스)
       
     </span>
   </a>
@@ -1191,10 +1263,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-c-nodeport" class="md-nav__link">
+  <a href="#case-c-nodeport-viphaproxy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ Case C: NodePort 모드 (포트 고정)
+        Case C: NodePort — VIP(HAProxy) 연동
       
     </span>
   </a>
@@ -1207,197 +1279,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-httproute" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 라우팅(HTTPRoute) 설정 및 검증
+        💡 운영 팁
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3. 라우팅(HTTPRoute) 설정 및 검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-connection-refused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ 체크리스트 1: 백엔드 포트 (Connection Refused)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-url-rewrite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ 체크리스트 2: 경로 재작성 (URL Rewrite)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#uninstall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 운영 및 로그 확인
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="4. 운영 및 로그 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-plane" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📋 프록시(Data Plane) 로그
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#control-plane" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 컨트롤러(Control Plane) 로그
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [별첨] Gateway 연결 상태 및 라우트 검증 가이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[별첨] Gateway 연결 상태 및 라우트 검증 가이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Gateway 관점: 연결된 라우트 수 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-httproute-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. HTTPRoute 관점: 부모 Gateway 연결 확인
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. HTTPRoute 관점: 부모 Gateway 연결 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        상세 디버깅 (연결 실패 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [심화] 와일드카드 인증서 적용 가이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[심화] 와일드카드 인증서 적용 가이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-secret" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 쿠버네티스 Secret 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: Gateway 리스너 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-httproute_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: HTTPRoute 추가 (서비스별)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1424,7 +1323,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1452,7 +1351,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1480,7 +1379,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1571,7 +1470,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1854,6 +1753,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
@@ -1861,7 +1788,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1889,7 +1816,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -3571,10 +3498,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-standard-architecture" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 아키텍처 개요 (Standard Architecture)
+        📋 구성 명세
       
     </span>
   </a>
@@ -3582,22 +3509,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 설치
+        🏗️ 아키텍처 및 트래픽 흐름
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 설치">
+    <nav class="md-nav" aria-label="🏗️ 아키텍처 및 트래픽 흐름">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#10" class="md-nav__link">
+  <a href="#1-loadbalancer-metallb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.0 이미지 업로드
+        1. LoadBalancer 모드 (MetalLB 등 사용 시)
       
     </span>
   </a>
@@ -3605,21 +3532,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#11-tls" class="md-nav__link">
+  <a href="#2-nodeport-vip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 사전 구성(TLS 및 멀티 테넌트 설정)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 스크립트 실행
+        2. NodePort + VIP 모드 (온프레미스 표준)
       
     </span>
   </a>
@@ -3632,22 +3548,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 배포 후 상태 확인 및 네트워크 구성
+        🛠️ 설치 전제 조건
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 구성">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 Harbor 업로드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-valuesyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 설치 및 운영 설정 (values.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tls-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: TLS 사전 구성 (HTTPS 사용 시)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 설치 실행
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 배포 후 네트워크 구성 (환경별 대응)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5단계: 배포 후 네트워크 구성 (환경별 대응)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#case-a-loadbalancer" class="md-nav__link">
+  <a href="#case-a-loadbalancer-metallb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ Case A: LoadBalancer 모드 (자동 할당 완료)
+        Case A: LoadBalancer — 자동 할당 (MetalLB 환경)
       
     </span>
   </a>
@@ -3658,7 +3629,7 @@
   <a href="#case-b-loadbalancer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)
+        Case B: LoadBalancer — 수동 할당 (온프레미스)
       
     </span>
   </a>
@@ -3666,10 +3637,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-c-nodeport" class="md-nav__link">
+  <a href="#case-c-nodeport-viphaproxy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ Case C: NodePort 모드 (포트 고정)
+        Case C: NodePort — VIP(HAProxy) 연동
       
     </span>
   </a>
@@ -3682,197 +3653,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-httproute" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 라우팅(HTTPRoute) 설정 및 검증
+        💡 운영 팁
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3. 라우팅(HTTPRoute) 설정 및 검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-connection-refused" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ 체크리스트 1: 백엔드 포트 (Connection Refused)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-url-rewrite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ 체크리스트 2: 경로 재작성 (URL Rewrite)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#uninstall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 운영 및 로그 확인
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="4. 운영 및 로그 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-plane" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📋 프록시(Data Plane) 로그
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#control-plane" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 컨트롤러(Control Plane) 로그
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [별첨] Gateway 연결 상태 및 라우트 검증 가이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[별첨] Gateway 연결 상태 및 라우트 검증 가이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Gateway 관점: 연결된 라우트 수 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-httproute-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. HTTPRoute 관점: 부모 Gateway 연결 확인
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. HTTPRoute 관점: 부모 Gateway 연결 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        상세 디버깅 (연결 실패 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [심화] 와일드카드 인증서 적용 가이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[심화] 와일드카드 인증서 적용 가이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-secret" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 쿠버네티스 Secret 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: Gateway 리스너 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-httproute_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: HTTPRoute 추가 (서비스별)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3896,368 +3694,143 @@
   
 
 
-<h1 id="envoy">🚀 Envoy 설치</h1>
-<p>2026년 3월부터 <code>Ingress Nginx</code> 에 대한 공식 지원이 종료됩니다.
-이에 따라 Kubernetes의 <code>Gateway API</code> 와 <code>Envoy</code> 를 사용하여 합니다.</p>
-<p>이 문서는 폐쇄망을 기준으로 합니다.
-<a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko">설치 파일</a>
-의 <code>envoy-1.36.3</code> 폴더를 받아주세요.</p>
-<h2 id="0-standard-architecture">0. 아키텍처 개요 (Standard Architecture)</h2>
-<p>쿠버네티스 보안 및 네트워크 표준을 준수하는 구성입니다.</p>
+<h1 id="envoy-gateway-v1363">🚀 Envoy Gateway v1.36.3 오프라인 설치 가이드</h1>
+<p>본 문서는 <strong>Envoy Gateway</strong>를 폐쇄망 Kubernetes 환경에 설치하여 통합 L7 게이트웨이 체계를 구축하고, 온프레미스 네트워크(VIP/L4)와 연동하는 절차를 정의합니다.</p>
+<h2 id="_1">📋 구성 명세</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">사양</th>
+<th style="text-align: left;">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Envoy Gateway</strong></td>
+<td style="text-align: left;"><strong>v1.36.3</strong></td>
+<td style="text-align: left;">오픈소스 L7 게이트웨이</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Gateway API</strong></td>
+<td style="text-align: left;"><strong>v1.1.0+</strong></td>
+<td style="text-align: left;">Kubernetes 표준 게이트웨이 API</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network Mode</strong></td>
+<td style="text-align: left;"><code>hostNetwork: false</code></td>
+<td style="text-align: left;">K8s 내부망 사용 (표준)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">🏗️ 아키텍처 및 트래픽 흐름</h2>
+<h3 id="1-loadbalancer-metallb">1. LoadBalancer 모드 (MetalLB 등 사용 시)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Client → External IP (LB) → Service (80/443) → Envoy Pod → Backend Pod
+</code></pre></div>
+<h3 id="2-nodeport-vip">2. NodePort + VIP 모드 (온프레미스 표준)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Client → VIP (L4/HAProxy) → Worker Node IP:30080/30443 → Envoy Pod → Backend Pod
+</code></pre></div>
+<hr />
+<h2 id="_3">🛠️ 설치 전제 조건</h2>
 <ul>
-<li><strong>Network:</strong> <code>hostNetwork: false</code> (Pod는 K8s 내부망 사용, 노드 네트워크와 격리)</li>
-<li><strong>Service:</strong> <code>type: LoadBalancer</code> (외부 트래픽 진입점)</li>
-<li><strong>Traffic Flow:</strong>
-<code>Client</code> -&gt; <code>External IP (LB)</code> -&gt; <code>Service (80/443)</code> -&gt; <code>Envoy Pod (10080/10443)</code>
--&gt; <code>Backend Pod</code></li>
-</ul>
-<h2 id="1">1. 설치</h2>
-<h3 id="10">1.0 이미지 업로드</h3>
-<p><strong>[실행 위치: Master 1, Worker 1~3 전체]</strong></p>
-<p>전체 노드에 <code>envoy</code> 이미지들을 로드합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>./envoy-1.36.3
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>./images/upload_images.sh
-</code></pre></div>
-<h3 id="11-tls">1.1 사전 구성(TLS 및 멀티 테넌트 설정)</h3>
-<p><strong>[실행 위치: Master 1]</strong></p>
-<p>Helm 배포 전, HTTPS 인증서와 네임스페이스 격리 해제 설정을 미리 적용합니다.</p>
-<ol>
-<li>
-<p>TLS Secret 생성</p>
-<ul>
-<li>Gateway가 사용할 인증서(cert.pem, key.pem)을 이용해
-Gateway 네임스페이스와 동일한 네임스페이스에 Secret을 생성합니다.</li>
-<li>사용할 인증서는 모두 Secret으로 생성합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 네임스페이스 생성 (아직 없다면)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Secret 생성</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>strato-tls<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>--cert<span class="o">=</span>cert.pem<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>--key<span class="o">=</span>key.pem<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>--namespace<span class="w"> </span>envoy-gateway-system
-</code></pre></div>
-</li>
-<li>
-<p>Gateway 파일 수정</p>
-<ul>
-<li>추가된 <code>strato-tls</code> 외에 추가된 tls는 <code>template/main.yaml</code> 에 직접 추가해야 합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># main.yaml</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nn">...</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">gatewayClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eg-cluster-entry</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"> </span><span class="c1"># 서비스가 외부로 노출할 포트</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">allowedRoutes</span><span class="p">:</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">namespaces</span><span class="p">:</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPS</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terminate</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">      </span><span class="nt">certificateRefs</span><span class="p">:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.gateway.tls.name</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="nt">allowedRoutes</span><span class="p">:</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">      </span><span class="nt">namespaces</span><span class="p">:</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">  </span><span class="c1"># ▼▼▼ [새로 추가된 부분] ▼▼▼</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin-https</span><span class="w"> </span><span class="c1"># Listener 이름</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPS</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin.cmp.test.com&quot;</span><span class="w">  </span><span class="c1"># 해당 Listener를 적용할 도메인</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terminate</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">      </span><span class="nt">certificateRefs</span><span class="p">:</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin-tls-secret</span><span class="w">      </span><span class="c1"># 적용할 tls의 Secret 이름</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">        </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">    </span><span class="nt">allowedRoutes</span><span class="p">:</span>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">      </span><span class="nt">namespaces</span><span class="p">:</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All</span>
-</code></pre></div>
-</li>
-<li>
-<p>HTTP만 사용할 경우</p>
-<ul>
-<li>만약 HTTP만 사용한다면 <code>values.yaml</code> 과 <code>template/main.yaml</code> 에서 해당 설정을 제거해야 합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># main.yaml</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">gatewayClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eg-cluster-entry</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"> </span><span class="c1"># 서비스가 외부로 노출할 포트</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">allowedRoutes</span><span class="p">:</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">namespaces</span><span class="p">:</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># 밑에 HTTPS 관련 부분 모두 삭제</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># values.yaml</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">gateway</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cmp-gateway&quot;</span><span class="w"> </span><span class="c1"># 기본값 (스크립트에서 덮어쓸 예정)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="c1"># tls 부분 삭제</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="c1"># tls:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="c1"># name: &quot;strato-tls&quot;</span>
-</code></pre></div>
-</li>
-</ol>
-<h3 id="12">1.2 스크립트 실행</h3>
-<p><strong>[실행 위치: Master 1]</strong></p>
-<p><code>install_envoy-gateway.sh</code> 스크립트에서 아래 변수를 환경에 맞게 변경합니다.
-(기본값을 사용해도 괜찮습니다.)</p>
-<ul>
-<li><code>NAMESPACE:</code> Gateway Namespace</li>
-<li><code>CONTROLLER_CHART:</code> Controller Chart(기본값 고정)</li>
-<li><code>INFRA_CHART:</code> Infra Chart(기본값 고정)</li>
-<li><code>GW_NAME:</code> Gateway Name</li>
-<li><code>IMG_GATEWAY:</code> Gateway 이미지(기본값 고정)</li>
-<li><code>IMG_PROXY:</code> Proxy 이미지(기본값 고정)</li>
-<li><code>GW_CLASS_NAME:</code> 클러스터 레벨 리소스 이름</li>
-<li><code>GLOBAL_POLICY_FILE:</code> 전역 설정 파일 이름(기본값 고정)</li>
-</ul>
-<p>이때 <code>NAMESPACE</code> 나 <code>GW_NAME</code> 를 변경했다면, <code>HTTPRoute</code> 파일에도 변경해야 합니다.</p>
-<p>수정이 끝나면 스크립트를 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>install_envoy-gateway.sh
-</code></pre></div>
-<h2 id="2">2. 배포 후 상태 확인 및 네트워크 구성</h2>
-<p>배포가 완료되면, 설치 시 선택한 모드에 따라 아래 Case 중 본인의 환경에 맞는 내용을 확인하세요.</p>
-<h3 id="case-a-loadbalancer">✅ Case A: LoadBalancer 모드 (자동 할당 완료)</h3>
-<p>스크립트에서 [1] LoadBalancer를 선택했고, 클라우드(AWS/GKE) 환경이거나 MetalLB가 구성된 경우입니다.</p>
-<ul>
-<li>확인: kubectl get svc -n envoy-gateway-system</li>
-<li>상태: EXTERNAL-IP 필드에 IP 주소나 도메인이 표시됩니다.</li>
-<li>조치: 별도 조치 불필요. 표시된 IP로 접속하면 됩니다.</li>
-</ul>
-<h3 id="case-b-loadbalancer">⚠️ Case B: LoadBalancer 모드 (수동 할당 필요)</h3>
-<p>스크립트에서 [1] LoadBalancer를 선택했으나, IP를 할당해 줄 컨트롤러(MetalLB 등)가 없는 온프레미 환경입니다.</p>
-<ul>
-<li>확인: kubectl get svc -n envoy-gateway-system</li>
-<li>상태: EXTERNAL-IP가 <code>&lt;pending&gt;</code> 상태로 멈춰 있습니다.</li>
-<li>조치: 특정 노드의 IP를 VIP처럼 사용하도록 수동으로 IP를 바인딩해야 합니다.
-(아래 명령어의 1.1.1.213 부분을 실제 사용할 노드 IP로 변경하여 실행하세요.)</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1. 대상 서비스 이름 추출</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type==&quot;LoadBalancer&quot;)].metadata.name}&#39;</span><span class="k">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 2. External IP 수동 패치 (사용할 노드 IP로 수정 필수!)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span>--type<span class="w"> </span>merge<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;1.1.1.213&quot;]}}&#39;</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ 서비스(</span><span class="nv">$SVC_NAME</span><span class="s2">)에 외부 IP가 수동 할당되었습니다.&quot;</span>
-</code></pre></div>
-<ul>
-<li>만약 1분이 지나도 <code>Gateway</code> 가 <strong>false</strong> 상태라면 아래 명령어로 수동 바인딩합니다.</li>
-</ul>
-<p>단일 노드:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;&lt;NODE_IP&gt;&quot;}]}}&#39;</span>
-</code></pre></div>
-<p>다중 노드 (DaemonSet 구성):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="s1">    &quot;spec&quot;:{</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s1">      &quot;addresses&quot;:[</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s1">        {&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;&lt;NODE_IP_1&gt;&quot;},</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="s1">        {&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;&lt;NODE_IP_2&gt;&quot;},</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s1">        {&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;&lt;NODE_IP_3&gt;&quot;}</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s1">      ]</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="s1">    }</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="s1">  }&#39;</span>
-</code></pre></div>
-<h3 id="case-c-nodeport">⚙️ Case C: NodePort 모드 (포트 고정)</h3>
-<p>스크립트에서 [2] NodePort를 선택한 경우입니다.
-설치 스크립트에 의해 서비스 포트가 HTTP(30080), <strong>HTTPS(30443)</strong>으로 자동 고정되었습니다.</p>
-<ol>
-<li>
-<p>포트 확인</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># 출력 확인: 80:30080/TCP, 443:30443/TCP</span>
-</code></pre></div>
-</li>
-<li>
-<p>환경별 접속 가이드</p>
-<ul>
-<li>[C-1] 외부 L4 스위치(Hardware LB) 연동 시:</li>
-<li>네트워크 담당자에게 <strong>"쿠버네티스 노드들의 IP와 고정 포트(30080, 30443)"</strong>를
-  L4 장비의 멤버(Real Server)로 등록 요청합니다.</li>
-<li>사용자는 L4 장비의 VIP(80/443)로 접속합니다.</li>
-<li><strong>Service의 EXTERNAL-IP와 Gateway 주소에 VIP 대신 Worker Node IP가 표시되는 것은 정상입니다.</strong>
-    VIP는 외부 LB가 소유하며 Kubernetes는 알 수 없습니다. <code>spec.addresses</code> 패치 불필요합니다.
-    트래픽 흐름: <code>클라이언트 → VIP(외부 LB) → Worker Node IP:30080/30443 → Envoy → 백엔드</code></li>
-<li>[C-2] L4 장비가 없는 경우 (로컬/폐쇄망 직접 접속):</li>
-<li>별도의 장비 없이 PC에서 직접 접속합니다.</li>
-<li>접속 주소:<ul>
-<li>HTTP: http://<Node_IP>:30080</li>
-<li>HTTPS: https://<Node_IP>:30443</li>
-</ul>
-</li>
-<li>주의: 방화벽에서 해당 포트(30080, 30443)가 허용되어야 합니다.</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-httproute">3. 라우팅(HTTPRoute) 설정 및 검증</h2>
-<p>Gateway가 정상적으로 떴다면, 애플리케이션 연결 규칙(<code>HTTPRoute</code>)을 점검합니다.
-이 검증은 서비스에 접근하지 못할 때 진행해도 됩니다.</p>
-<h3 id="1-connection-refused">✅ 체크리스트 1: 백엔드 포트 (Connection Refused)</h3>
-<p>Envoy는 서비스(ClusterIP) 포트가 아닌 <strong>파드(Pod)의 실제 컨테이너 포트</strong>로 접속을 시도합니다.</p>
-<ul>
-<li><strong>증상:</strong> 503 Service Unavailable 또는 Connection Refused</li>
-<li><strong>확인 방법:</strong> 실제 파드가 몇 번 포트를 열고 있는지 확인합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1. 백엔드 앱의 파드 이름 확인</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 2. 파드 설정에서 &#39;containerPort&#39; 확인 (예: my-app-pod-xyz)</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>&lt;POD_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>containerPort
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># 출력 예시: </span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># - containerPort: 8080  &lt;-- 이 번호가 정답입니다.</span>
-</code></pre></div>
-<ul>
-<li><strong>해결:</strong> 위에서 확인한 <strong>실제 포트(예: 8080)</strong> 를 <code>HTTPRoute</code>의 <code>backendRefs</code> 포트로 설정해야 합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 포트를 80 -&gt; 8080으로 변경하는 예시</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>-p<span class="o">=</span><span class="s1">&#39;[{&quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/spec/rules/0/backendRefs/0/port&quot;, &quot;value&quot;: 8080}]&#39;</span>
-</code></pre></div>
-<h3 id="2-url-rewrite">✅ 체크리스트 2: 경로 재작성 (URL Rewrite)</h3>
-<p>애플리케이션이 하위 경로(Context Path)를 인식하지 못해 404가 발생할 경우 사용합니다.</p>
-<ul>
-<li><strong>상황:</strong> <code>/oauth2/login</code> 호출 시 앱이 <code>/oauth2</code>를 경로로 인식하여 오류 발생.</li>
-<li><strong>해결:</strong> <code>URLRewrite</code> 필터 적용.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">URLRewrite</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">urlRewrite</span><span class="p">:</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplacePrefixMatch</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">replacePrefixMatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
-</code></pre></div>
-<h2 id="4">4. 운영 및 로그 확인</h2>
-<p>Envoy Gateway는 동적으로 리소스를 관리하므로 파드 이름이 변경됩니다.
-<strong>Label Selector(<code>-l</code>)</strong>를 사용하여 로그를 확인하는 것이 표준입니다.</p>
-<h3 id="data-plane">📋 프록시(Data Plane) 로그</h3>
-<p>실제 트래픽 처리, 접속 오류 확인 시 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Envoy Proxy 로그 실시간 확인</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cmp-gateway
-</code></pre></div>
-<h3 id="control-plane">🧠 컨트롤러(Control Plane) 로그</h3>
-<p>Gateway 설정 변환, 배포 실패 원인 분석 시 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Gateway Controller 로그 확인</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway
-</code></pre></div>
-<h2 id="gateway">[별첨] Gateway 연결 상태 및 라우트 검증 가이드</h2>
-<p>Gateway 리소스와 HTTPRoute 리소스가 정상적으로 연결(Binding)되었는지 확인하는 방법입니다.</p>
-<h3 id="1-gateway">1. Gateway 관점: 연결된 라우트 수 확인</h3>
-<p>Gateway 리소스의 상태(Status)를 조회하여 몇 개의 라우트가 연결되었는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Gateway 상태 상세 조회</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span>yaml
-</code></pre></div>
-<p>확인 포인트 (status.listeners 섹션):</p>
-<ul>
-<li><code>attachedRoutes:</code> 연결된 HTTPRoute의 개수입니다. 이 숫자가 0이면 연결된 라우트가 없는 것입니다.</li>
-<li><code>conditions:</code> Programmed 상태가 True여야 정상 작동 중입니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">status</span><span class="p">:</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">attachedRoutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">  </span><span class="c1"># &lt;-- 현재 연결된 라우트 개수</span>
-</code></pre></div>
-<h3 id="2-httproute-gateway">2. HTTPRoute 관점: 부모 Gateway 연결 확인</h3>
-<p>개별 <code>HTTPRoute</code> 가 Gateway를 찾았는지, 거절당하지는 않았는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># 네임스페이스 내의 모든 HTTPRoute 상태 요약 확인</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>httproute<span class="w"> </span>-A
-</code></pre></div>
-<p>확인 포인트:</p>
-<ul>
-<li>PARENTS: 연결된 Gateway 이름이 표시되어야 합니다.</li>
-<li>STATUS: True 또는 Accepted 상태여야 합니다.</li>
-</ul>
-<h4 id="_1">상세 디버깅 (연결 실패 시)</h4>
-<p>만약 연결이 안 된다면 describe 명령어로 상세 원인을 파악합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>httproute<span class="w"> </span>&lt;ROUTE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
-</code></pre></div>
-<p>주요 실패 원인:</p>
-<ul>
-<li>Gateway 이름 불일치: parentRefs의 name이 실제 Gateway 이름(cmp-gateway)과 다름.</li>
-<li>Namespace 불일치: Gateway가 다른 네임스페이스의 라우트를 허용하지 않음
-(Gateway Listener 설정의 allowedRoutes 확인 필요)</li>
+<li>Kubernetes 클러스터 구성 완료</li>
+<li>Helm v3.x 설치 완료</li>
+<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
 </ul>
 <hr />
-<h2 id="_2">[심화] 와일드카드 인증서 적용 가이드</h2>
-<p><code>*.test.com</code> 와일드카드 인증서 하나로 <code>a.test.com</code>, <code>b.test.com</code> 등 모든 서브 도메인의 HTTPS 처리를 통합 관리합니다.</p>
-<h3 id="1-secret">1단계: 쿠버네티스 Secret 생성</h3>
-<p>인증서 파일(<code>.crt</code>, <code>.key</code>)을 Gateway가 위치한 네임스페이스에 Secret으로 등록합니다.</p>
-<blockquote>
-<p><strong>중요:</strong> Gateway 리소스가 있는 네임스페이스와 <strong>동일한 곳</strong>에 Secret을 만들어야 Gateway가 읽을 수 있습니다.</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>wildcard-tls-secret<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>--cert<span class="o">=</span>fullchain.pem<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>--key<span class="o">=</span>privkey.pem<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span>-n<span class="w"> </span>envoy-gateway-system
+<h2 id="1-harbor">1단계: 이미지 Harbor 업로드</h2>
+<p>컴포넌트 루트 디렉토리에서 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
-<h3 id="2-gateway">2단계: Gateway 리스너 설정</h3>
-<p><code>Gateway</code> 리소스를 수정하여 HTTPS 리스너가 하나의 Secret을 참조하도록 설정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Gateway</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cmp-gateway</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envoy-gateway-system</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="nt">gatewayClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eg-cluster-entry</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPS</span>
-<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">      </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*.test.com&quot;</span><span class="w">       </span><span class="c1"># 모든 서브도메인 허용</span>
-<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terminate</span>
-<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="w">        </span><span class="nt">certificateRefs</span><span class="p">:</span>
-<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wildcard-tls-secret</span><span class="w">  </span><span class="c1"># Secret 이름 하나만 지정</span>
-<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="w">            </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
-<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="w">      </span><span class="nt">allowedRoutes</span><span class="p">:</span>
-<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="w">        </span><span class="nt">namespaces</span><span class="p">:</span>
-<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="w">          </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">All</span>
+<hr />
+<h2 id="2-valuesyaml">2단계: 설치 및 운영 설정 (values.yaml)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">파일명</th>
+<th style="text-align: left;">용도</th>
+<th style="text-align: left;">주요 수정 항목</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>values-controller.yaml</code></strong></td>
+<td style="text-align: left;">Controller 설정</td>
+<td style="text-align: left;">이미지 경로, 리소스 제한 등</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>values-infra.yaml</code></strong></td>
+<td style="text-align: left;">Gateway 설정</td>
+<td style="text-align: left;">서비스 타입(LB/NodePort), 노드 고정 여부</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>manifests/policy-global.yaml</code></strong></td>
+<td style="text-align: left;">전역 보안 정책</td>
+<td style="text-align: left;">EnvoyPatchPolicy (헤더 노출 방지 등)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-tls-https">3단계: TLS 사전 구성 (HTTPS 사용 시)</h2>
+<p>HTTPS를 사용할 경우 Helm 배포 전 Gateway 네임스페이스에 TLS Secret을 생성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 네임스페이스 생성</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2. TLS Secret 생성 (인증서 파일 필요)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>strato-tls<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>--cert<span class="o">=</span>cert.pem<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>--key<span class="o">=</span>key.pem<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span>--namespace<span class="w"> </span>envoy-gateway-system
 </code></pre></div>
-<h3 id="3-httproute_1">3단계: HTTPRoute 추가 (서비스별)</h3>
-<p>인증서 설정 없이 HTTPRoute만 추가하면 HTTPS가 자동 적용됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPRoute</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nexus-route</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nexus</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">  </span><span class="nt">parentRefs</span><span class="p">:</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cmp-gateway</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">      </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envoy-gateway-system</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">  </span><span class="nt">hostnames</span><span class="p">:</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;nexus.test.com&quot;</span><span class="w">      </span><span class="c1"># 와일드카드 범위 내 도메인</span>
-<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
-<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span>
-<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PathPrefix</span>
-<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
-<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="w">      </span><span class="nt">backendRefs</span><span class="p">:</span>
-<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nexus-svc</span>
-<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081</span>
+<hr />
+<h2 id="4">4단계: 설치 실행</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./scripts/install.sh
 </code></pre></div>
-<h3 id="_3">검증</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># -v 옵션으로 SSL Handshake 과정 확인</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>curl<span class="w"> </span>-v<span class="w"> </span>https://nexus.test.com<span class="w"> </span>--resolve<span class="w"> </span>nexus.test.com:443:&lt;GATEWAY_IP&gt;
+<p><strong>설치 중 선택 사항:</strong>
+1. <strong>설치 모드</strong>: <code>1</code> (LoadBalancer) 또는 <code>2</code> (NodePort)
+2. <strong>노드 고정 (NodeSelector)</strong>: Envoy Proxy를 배치할 특정 노드 이름 입력 (선택)
+3. <strong>전역 정책</strong>: <code>manifests/policy-global.yaml</code> 적용 여부</p>
+<hr />
+<h2 id="5">5단계: 배포 후 네트워크 구성 (환경별 대응)</h2>
+<h3 id="case-a-loadbalancer-metallb">Case A: LoadBalancer — 자동 할당 (MetalLB 환경)</h3>
+<p><code>EXTERNAL-IP</code>가 자동으로 할당되면 해당 IP로 즉시 접속 가능합니다.</p>
+<h3 id="case-b-loadbalancer">Case B: LoadBalancer — 수동 할당 (온프레미스)</h3>
+<p><code>EXTERNAL-IP</code>가 <code>&lt;pending&gt;</code>인 경우 워커 노드 IP를 수동으로 바인딩합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 서비스에 외부 IP 패치</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>envoy-cmp-gateway<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;10.10.10.73&quot;,&quot;10.10.10.74&quot;]}}&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Gateway 리소스에 주소 패치 (상태가 False인 경우)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;10.10.10.73&quot;}]}}&#39;</span>
 </code></pre></div>
-<p>성공 기준: <code>Server certificate:</code> 항목에 <code>CN=*.test.com</code> 표시, <code>SSL certificate verify ok</code> 또는 연결 성공.</p>
-<blockquote>
-<p><strong>Q.</strong> 새 서브도메인을 추가하려면 Secret을 다시 만들어야 하나요?
-<strong>A.</strong> 아닙니다. Gateway가 이미 <code>*.test.com</code>을 처리하므로 HTTPRoute만 추가하면 됩니다.</p>
-</blockquote>
+<h3 id="case-c-nodeport-viphaproxy">Case C: NodePort — VIP(HAProxy) 연동</h3>
+<p>NodePort 모드 설치 시 HTTP <strong>30080</strong>, HTTPS <strong>30443</strong> 포트로 고정됩니다. 앞단에 HAProxy를 두어 80/443으로 변환합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># HAProxy 설정 예시 (/etc/haproxy/haproxy.cfg)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>frontend<span class="w"> </span>envoy-http
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nb">bind</span><span class="w"> </span>*:80
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>default_backend<span class="w"> </span>envoy-workers-http
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>backend<span class="w"> </span>envoy-workers-http
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>server<span class="w"> </span>worker1<span class="w"> </span><span class="m">10</span>.10.10.73:30080<span class="w"> </span>check
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>server<span class="w"> </span>worker2<span class="w"> </span><span class="m">10</span>.10.10.74:30080<span class="w"> </span>check
+</code></pre></div>
+<hr />
+<h2 id="_4">💡 운영 팁</h2>
+<ul>
+<li><strong>클라이언트 실IP 보존</strong>: <code>values-infra.yaml</code>에서 <code>externalTrafficPolicy: Local</code> 설정을 확인하십시오.</li>
+<li><strong>트러블슈팅</strong>: Gateway 상태가 <code>Ready: False</code>일 경우 <code>kubectl describe gateway cmp-gateway</code> 명령어로 이벤트 로그를 확인하십시오.</li>
+</ul>
+<hr />
+<h2 id="uninstall">🗑️ 삭제 (Uninstall)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./scripts/uninstall.sh
+</code></pre></div>
 
 
 

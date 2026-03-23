@@ -25,7 +25,7 @@
     
     
       
-        <title>1. Prometheus & Grafana 설치 - Infra Cheatsheets</title>
+        <title>Prometheus & Grafana 설치 - Infra Cheatsheets</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Prometheus & Grafana 설치
+              Prometheus & Grafana 설치
             
           </span>
         </div>
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -712,7 +712,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -740,7 +740,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -842,7 +842,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -860,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -884,6 +884,28 @@
       목차
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 구성 명세
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 설치 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#1-harbor" class="md-nav__link">
@@ -919,10 +941,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-pvc" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: 재설치 시 PVC 처리 (선택)
+        4단계: 설치 확인 및 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계: 설치 확인 및 접속">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 설치 상태 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Grafana 접속
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 운영 및 재설치 팁
       
     </span>
   </a>
@@ -930,10 +991,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#uninstall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 설치 확인 및 접속
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
@@ -963,7 +1024,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1138,6 +1199,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../gateway-api/001-envoy-install/" class="md-nav__link">
         
   
@@ -1145,7 +1234,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1173,7 +1262,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1201,7 +1290,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1229,7 +1318,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1320,7 +1409,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1603,6 +1692,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
@@ -1610,7 +1727,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1638,7 +1755,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -3320,6 +3437,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 구성 명세
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 설치 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1-harbor" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3353,10 +3492,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-pvc" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: 재설치 시 PVC 처리 (선택)
+        4단계: 설치 확인 및 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계: 설치 확인 및 접속">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 설치 상태 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Grafana 접속
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 운영 및 재설치 팁
       
     </span>
   </a>
@@ -3364,10 +3542,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#uninstall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 설치 확인 및 접속
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
@@ -3395,46 +3573,88 @@
 
 
 <h1 id="monitoring-ctr">🚀 Monitoring 오프라인 설치 가이드 (ctr 기반)</h1>
-<p>폐쇄망 환경에서 <code>ctr</code>을 사용하여 통합 모니터링(Prometheus/Grafana)을 구축하는 절차입니다.</p>
+<p>본 문서는 폐쇄망 Kubernetes 환경에서 <strong>kube-prometheus-stack</strong>을 기반으로 통합 모니터링 체계(Prometheus/Grafana)를 구축하는 절차를 정의합니다.</p>
+<h2 id="_1">📋 구성 명세</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">버전</th>
+<th style="text-align: left;">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Kube-Prometheus-Stack</strong></td>
+<td style="text-align: left;"><strong>v62.7.0</strong></td>
+<td style="text-align: left;">모니터링 통합 스택 (Helm)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Prometheus</strong></td>
+<td style="text-align: left;"><strong>v2.54.1</strong></td>
+<td style="text-align: left;">시계열 데이터 수집 및 쿼리</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Grafana</strong></td>
+<td style="text-align: left;"><strong>v11.2.0</strong></td>
+<td style="text-align: left;">데이터 시각화 및 대시보드</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Alertmanager</strong></td>
+<td style="text-align: left;"><strong>v0.27.0</strong></td>
+<td style="text-align: left;">경고 및 알림 관리</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">🛠️ 설치 전제 조건</h2>
+<ul>
+<li>Kubernetes 클러스터 구성 완료</li>
+<li>Helm v3.x 설치 완료</li>
+<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li>(도메인 접속 시) Envoy Gateway 설치 완료</li>
+</ul>
+<hr />
 <h2 id="1-harbor">1단계: 이미지 Harbor 업로드</h2>
-<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
+<p>컴포넌트 루트 디렉토리에서 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 이미지 로드 (ctr 사용)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>images/*.tar<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2. upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>./images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
+<hr />
 <h2 id="2">2단계: 설치 실행</h2>
 <p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 헬름 설치 (루트의 values.yaml 자동 반영)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>./scripts/install.sh
 </code></pre></div>
+<p><strong>스크립트 자동 처리 항목:</strong>
+- 네임스페이스 (<code>monitoring</code>) 생성 및 스토리지 설정 적용
+- Helm 배포 (Harbor 이미지 경로 자동 생성)
+- Grafana 초기 비밀번호 설정</p>
+<hr />
 <h2 id="3-httproute-envoy-gateway">3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)</h2>
-<p>Envoy Gateway를 Ingress로 사용하는 경우 HTTPRoute를 적용합니다.
-<code>manifests/httproute.yaml</code> 상단의 hostname을 실제 도메인으로 수정한 뒤 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># hostname 확인 및 수정</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># grafana.devops.internal / prometheus.devops.internal / alertmanager.devops.internal</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/httproute.yaml
+<p>Envoy Gateway를 통해 모니터링 대시보드를 노출하려면 <code>HTTPRoute</code>를 적용합니다.
+<code>manifests/httproute.yaml</code> 상단의 <code>hostname</code>을 실제 도메인으로 수정한 뒤 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 도메인 예시: grafana.devops.internal / prometheus.devops.internal</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/httproute.yaml
 </code></pre></div>
-<h2 id="4-pvc">4단계: 재설치 시 PVC 처리 (선택)</h2>
-<p>Helm은 <code>uninstall</code> 시 PVC를 삭제하지 않습니다. 데이터를 초기화하려면 수동으로 삭제해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. Helm 릴리즈 제거</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2. 데이터 초기화 필요 시 PVC/PV 삭제</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pvc<span class="w"> </span>--all<span class="w"> </span>-n<span class="w"> </span>monitoring
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># (ReclaimPolicy가 Retain인 경우 PV도 수동 삭제 필요)</span>
+<hr />
+<h2 id="4">4단계: 설치 확인 및 접속</h2>
+<h3 id="41">4.1 설치 상태 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>monitoring
 </code></pre></div>
-<h2 id="5">5단계: 설치 확인 및 접속</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Grafana 접속 (Port-forward 테스트)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/prometheus-grafana<span class="w"> </span><span class="m">3000</span>:80<span class="w"> </span>-n<span class="w"> </span>monitoring
+<h3 id="42-grafana">4.2 Grafana 접속</h3>
+<p>포트 포워딩을 통해 로컬에서 즉시 접속 테스트를 진행할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/prometheus-grafana<span class="w"> </span><span class="m">3000</span>:80<span class="w"> </span>-n<span class="w"> </span>monitoring
 </code></pre></div>
-<p>Grafana 초기 로그인 정보 (변경 시 <code>values.yaml</code>의 <code>grafana.adminUser</code> / <code>grafana.adminPassword</code> 참고):</p>
+<p><strong>초기 로그인 정보 (values.yaml 참고):</strong></p>
 <table>
 <thead>
 <tr>
@@ -3444,15 +3664,25 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">ID</td>
+<td style="text-align: left;"><strong>ID</strong></td>
 <td style="text-align: left;"><code>admin</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Password</td>
+<td style="text-align: left;"><strong>Password</strong></td>
 <td style="text-align: left;"><code>admin</code></td>
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="_3">💡 운영 및 재설치 팁</h2>
+<ul>
+<li><strong>PVC 유지</strong>: Helm <code>uninstall</code> 시 PVC는 삭제되지 않습니다. 데이터를 완전히 초기화하려면 <code>kubectl delete pvc --all -n monitoring</code> 명령어를 수동으로 실행하십시오.</li>
+<li><strong>리소스 제한</strong>: Grafana와 Prometheus의 리소스 사용량을 관찰하고, 필요 시 <code>values.yaml</code>에서 <code>resources</code>를 조정하십시오.</li>
+</ul>
+<hr />
+<h2 id="uninstall">🗑️ 삭제 (Uninstall)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./scripts/uninstall.sh
+</code></pre></div>
 
 
 

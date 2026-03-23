@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/001-gitlab_jenkins_install/">
       
       
-        <link rel="prev" href="../../../cloud/gcp-cheatsheet/">
+        <link rel="prev" href="../000-harbor-install/">
       
       
         <link rel="next" href="../002-argocd-install/">
@@ -25,7 +25,7 @@
     
     
       
-        <title>1. 폐쇄망에서 GitLab과 Jenkins 설치 - Infra Cheatsheets</title>
+        <title>1. GitLab & Jenkins 설치 - Infra Cheatsheets</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-gitlab-jenkins" class="md-skip">
+        <a href="#gitlab-jenkins" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. 폐쇄망에서 GitLab과 Jenkins 설치
+              1. GitLab & Jenkins 설치
             
           </span>
         </div>
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -704,7 +704,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -732,7 +732,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -820,7 +820,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -848,7 +848,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1017,6 +1017,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
@@ -1024,7 +1052,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1052,7 +1080,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1080,7 +1108,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1108,7 +1136,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1196,7 +1224,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1486,6 +1514,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1505,7 +1561,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1523,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1549,144 +1605,88 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#phase-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 1: 이미지 로드 (전체 노드)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-2-pv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 2: 데이터 영속성 구성 (PV 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 2: 데이터 영속성 구성 (PV 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 호스트 디렉토리 생성 (모든 워커 노드)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-pv-master" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. PV 생성 (Master 노드)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-jenkins-master-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 3: Jenkins 설치 (Master-1)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: Jenkins 설치 (Master-1)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 네임스페이스 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-jenkins-helm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Jenkins Helm 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-jenkins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Jenkins 접속 정보 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-4-gitlab-master-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 4: GitLab 설치 (Master-1)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 4: GitLab 설치 (Master-1)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-gitlab-valuesyaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 설정 파일 확인 (install-gitlab-values.yaml)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gitlab-helm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. GitLab Helm 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        오류로 인한 재배포 시
+        📋 구성 명세
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 설치 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 호스트 디렉토리 준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 이미지 Harbor 업로드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-valuesyaml-pv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 운영 설정 (values.yaml 및 PV)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gitlab-jenkins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 설치 실행 (GitLab &amp; Jenkins)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 초기 접속 및 비밀번호 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5단계: 초기 접속 및 비밀번호 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-gitlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 GitLab 초기 접속
       
     </span>
   </a>
@@ -1694,10 +1694,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-gitlab" class="md-nav__link">
+  <a href="#52-jenkins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. GitLab 접속 정보 확인
+        5.2 Jenkins 초기 접속
       
     </span>
   </a>
@@ -1710,213 +1710,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-5-pc" class="md-nav__link">
+  <a href="#gitlab-jenkins_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 5: 네트워크 및 PC 접속 설정
+        🔗 GitLab-Jenkins 연동 가이드
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 5: 네트워크 및 PC 접속 설정">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-dns-coredns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 클러스터 내부 DNS 등록 (CoreDNS)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-pc-hosts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 사용자 PC Hosts 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-gitlab-nodeport-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. GitLab 서비스 노출 (임시 NodePort, Gateway 미구성 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-6-jenkins-gitlab" class="md-nav__link">
+  <a href="#uninstall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 6: Jenkins &lt;-&gt; GitLab 연동
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 6: Jenkins &lt;-&gt; GitLab 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gitlab-access-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. GitLab: Access Token 발급
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-jenkins-credential" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Jenkins: Credential 등록
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Jenkins: Credential 등록">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-gitlab-api-token-jenkins-gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 GitLab API Token (Jenkins-GitLab 연동용)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-gitlab-checkout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 GitLab 계정 정보 (소스 Checkout용)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-harbor-registry-push" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 Harbor Registry 정보 (이미지 Push용)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-jenkins_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Jenkins: 시스템 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 7: 파이프라인 테스트 (검증)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 7: 파이프라인 테스트 (검증)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-jenkins-job" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Jenkins Job 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. GitLab 설정 변경
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-webhook-gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Webhook 등록 (GitLab)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-jenkins-kubernetes-cloud" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Jenkins Kubernetes Cloud 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-git-push-trigger" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Git 설치 및 소스 코드 Push (Trigger)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1943,7 +1754,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -3628,144 +3439,88 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#phase-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 1: 이미지 로드 (전체 노드)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-2-pv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 2: 데이터 영속성 구성 (PV 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 2: 데이터 영속성 구성 (PV 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 호스트 디렉토리 생성 (모든 워커 노드)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-pv-master" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. PV 생성 (Master 노드)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-jenkins-master-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 3: Jenkins 설치 (Master-1)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: Jenkins 설치 (Master-1)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 네임스페이스 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-jenkins-helm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Jenkins Helm 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-jenkins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Jenkins 접속 정보 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-4-gitlab-master-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 4: GitLab 설치 (Master-1)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 4: GitLab 설치 (Master-1)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-gitlab-valuesyaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 설정 파일 확인 (install-gitlab-values.yaml)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gitlab-helm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. GitLab Helm 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        오류로 인한 재배포 시
+        📋 구성 명세
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 설치 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 호스트 디렉토리 준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-harbor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 이미지 Harbor 업로드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-valuesyaml-pv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 운영 설정 (values.yaml 및 PV)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gitlab-jenkins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 설치 실행 (GitLab &amp; Jenkins)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 초기 접속 및 비밀번호 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5단계: 초기 접속 및 비밀번호 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-gitlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 GitLab 초기 접속
       
     </span>
   </a>
@@ -3773,10 +3528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-gitlab" class="md-nav__link">
+  <a href="#52-jenkins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. GitLab 접속 정보 확인
+        5.2 Jenkins 초기 접속
       
     </span>
   </a>
@@ -3789,213 +3544,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-5-pc" class="md-nav__link">
+  <a href="#gitlab-jenkins_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 5: 네트워크 및 PC 접속 설정
+        🔗 GitLab-Jenkins 연동 가이드
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 5: 네트워크 및 PC 접속 설정">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-dns-coredns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 클러스터 내부 DNS 등록 (CoreDNS)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-pc-hosts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 사용자 PC Hosts 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-gitlab-nodeport-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. GitLab 서비스 노출 (임시 NodePort, Gateway 미구성 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-6-jenkins-gitlab" class="md-nav__link">
+  <a href="#uninstall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 6: Jenkins &lt;-&gt; GitLab 연동
+        🗑️ 삭제 (Uninstall)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 6: Jenkins &lt;-&gt; GitLab 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-gitlab-access-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. GitLab: Access Token 발급
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-jenkins-credential" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Jenkins: Credential 등록
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Jenkins: Credential 등록">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-gitlab-api-token-jenkins-gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 GitLab API Token (Jenkins-GitLab 연동용)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-gitlab-checkout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 GitLab 계정 정보 (소스 Checkout용)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-harbor-registry-push" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 Harbor Registry 정보 (이미지 Push용)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-jenkins_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Jenkins: 시스템 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 7: 파이프라인 테스트 (검증)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 7: 파이프라인 테스트 (검증)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-jenkins-job" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Jenkins Job 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. GitLab 설정 변경
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-webhook-gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Webhook 등록 (GitLab)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-jenkins-kubernetes-cloud" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Jenkins Kubernetes Cloud 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-git-push-trigger" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Git 설치 및 소스 코드 Push (Trigger)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4019,483 +3585,143 @@
   
 
 
-<h1 id="1-gitlab-jenkins">1. 폐쇄망에서 GitLab 및 Jenkins 설치 및 연동</h1>
-<ol>
-<li>
-<p><strong>가이드 환경</strong></p>
-<ul>
-<li>OS: Rocky Linux 9.6</li>
-<li>K8s Version: 1.30.14</li>
-<li>Container Runtime: containerd (<code>ctr</code>)</li>
-</ul>
-</li>
-<li>
-<p><strong>전제 조건</strong></p>
-<ul>
-<li>Kubernetes 클러스터가 정상 동작 중이어야 합니다 (<code>kubectl get nodes</code> -&gt; Ready).</li>
-<li>Harbor가 설치되어 있어야 합니다.</li>
-<li>스토리지 클래스(<code>local-path</code>)가 구성되어 있어야 합니다.</li>
-<li>이 가이드는 마스터 노드의 <code>~/gitlab</code> , <code>~/jenkins</code> 경로에 준비되어 있다고 가정하고 시작합니다.</li>
-<li><a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing">설치 파일 위치</a></li>
-</ul>
-</li>
-</ol>
+<h1 id="gitlab-jenkins">🚀 GitLab &amp; Jenkins 오프라인 설치 및 연동 가이드</h1>
+<p>본 문서는 폐쇄망 Kubernetes 환경에서 <strong>GitLab v18.7</strong>과 <strong>Jenkins v2.528.3</strong>을 설치하고 CI/CD 파이프라인 구축을 위해 상호 연동하는 절차를 정의합니다.</p>
+<h2 id="_1">📋 구성 명세</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">버전</th>
+<th style="text-align: left;">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>GitLab EE</strong></td>
+<td style="text-align: left;"><strong>v18.7</strong></td>
+<td style="text-align: left;">소스 코드 관리 및 형상 관리</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Jenkins</strong></td>
+<td style="text-align: left;"><strong>v2.528.3</strong></td>
+<td style="text-align: left;">빌드 및 배포 자동화 (CI/CD)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Helm Charts</strong></td>
+<td style="text-align: left;">최신 stable</td>
+<td style="text-align: left;">각 컴포넌트 배포용 차트</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="phase-1">🚀 Phase 1: 이미지 로드 (전체 노드)</h2>
-<p>Harbor에 이미지를 업로드합니다.</p>
-<p><strong>[실행 위치: Master 1]</strong></p>
-<p>먼저 <code>upload_images_to_harbor_v2.sh</code> 설정 부분을 현재 환경에 맞게 변경합니다.</p>
+<h2 id="_2">🛠️ 설치 전제 조건</h2>
 <ul>
-<li><code>HARBOR_REGISTRY</code> : Harbor domain</li>
-<li><code>HARBOR_PROJECT</code> : Harbor Project</li>
-<li><code>HARBOR_USER</code> : ID</li>
-<li><code>HARBOR_PASSWORD</code> : Password</li>
-<li><code>USE_PLAIN_HTTP</code> : HTTP 접속 여부</li>
+<li>Kubernetes 클러스터 구성 완료</li>
+<li>Helm v3.x 설치 완료</li>
+<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li>(도메인 접속 시) Envoy Gateway 또는 Ingress-Nginx 설치 완료</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~/gitlab-18.7/images
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>upload_images_to_harbor_v2.sh
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">cd</span><span class="w"> </span>~/jenkins-2.528.3/images
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>sudo<span class="w"> </span>bash<span class="w"> </span>upload_images_to_harbor_v2.sh
-</code></pre></div>
 <hr />
-<h2 id="phase-2-pv">🚀 Phase 2: 데이터 영속성 구성 (PV 설정)</h2>
-<p><code>local-path</code> 스토리지 클래스를 사용하더라도, 프로덕션 데이터를 안전하게 보관하기 위해 <strong>호스트 경로를 고정(HostPath)</strong>하여
-PV를 생성하는 것을 권장합니다.</p>
-<p><strong>[실행 위치: Master 1]</strong></p>
-<h3 id="1">1. 호스트 디렉토리 생성 (모든 워커 노드)</h3>
-<p>데이터가 저장될 실제 폴더를 모든 워커 노드에 생성합니다.</p>
-<p>환경에 맞춰 경로를 수정해도 됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># (각 워커 노드에서 실행하거나, Ansible 등으로 일괄 실행)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/jenkins_home
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/gitlab_data
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/gitlab_pg
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/gitlab_redis
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/gitlab_data/minio
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/gitlab_data/minio
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># Gradle 캐시 디렉토리 (빌드 에이전트 Pod에서 사용)</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/gradle-cache
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/gradle-cache
+<h2 id="1">1단계: 호스트 디렉토리 준비</h2>
+<p>모든 작업은 각 컴포넌트 루트 디렉토리에서 실행합니다. PV 데이터 저장 경로를 대상 노드에 미리 생성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># GitLab 및 Jenkins 컴포넌트 루트에서 실행</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/setup-host-dirs.sh
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>./scripts/setup-host-dirs.sh
 </code></pre></div>
-<h3 id="2-pv-master">2. PV 생성 (Master 노드)</h3>
-<p>위에서 경로를 수정했다면, <code>pv-volume.yaml</code> 파일에서도 동일한 경로로 <code>sepc.hostPath.path</code> 값을 수정해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>~/jenkins
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pv-volume.yaml
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Gradle 캐시용 PV/PVC 적용 (빌드 파이프라인에서 의존성 캐시 재사용)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>gradle-cache-pv-pvc.yaml
+<p><strong>주요 생성 경로:</strong>
+- GitLab: <code>/data/gitlab</code> (Config, Data, Redis 등)
+- Jenkins: <code>/data/jenkins_home</code>, <code>/data/gradle-cache</code></p>
+<hr />
+<h2 id="2-harbor">2단계: 이미지 Harbor 업로드</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># images/upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
 <hr />
-<h2 id="phase-3-jenkins-master-1">🚀 Phase 3: Jenkins 설치 (Master-1)</h2>
-<p>우리가 빌드한 <strong>Custom Image (플러그인 포함)</strong>를 사용하여 설치합니다.</p>
-<p><strong>[실행 위치: K8s-Master-Node]</strong></p>
-<h3 id="1_1">1. 네임스페이스 생성</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>jenkins
-</code></pre></div>
-<h3 id="2-jenkins-helm">2. Jenkins Helm 배포</h3>
-<p><code>deploy-jenkins.sh</code> 파일 위에 있는 <code>REGISTRY_URL</code> 등의 변수를 환경에 맞춰 수정 후 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>deploy-jenkins.sh
-</code></pre></div>
-<h3 id="3-jenkins">3. Jenkins 접속 정보 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. Pod 상태 확인 (Running이 될 때까지 대기)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>watch<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>jenkins
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 2. 초기 관리자 계정 확인</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># 초기 ID는 admin</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># PW 확인</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>-n<span class="w"> </span>jenkins<span class="w"> </span>jenkins<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.jenkins-admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>--decode
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</code></pre></div>
+<h2 id="3-valuesyaml-pv">3단계: 운영 설정 (values.yaml 및 PV)</h2>
+<p>설치 전 컴포넌트 루트의 설정 파일들을 환경에 맞게 수정합니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">컴포넌트</th>
+<th style="text-align: left;">파일명</th>
+<th style="text-align: left;">주요 수정 항목</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>GitLab</strong></td>
+<td style="text-align: left;"><code>values.yaml</code></td>
+<td style="text-align: left;">도메인, 이미지 경로, 리소스 제한</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>manifests/gitlab-pv.yaml</code></td>
+<td style="text-align: left;">노드 이름(<code>nodeAffinity</code>), 저장 경로</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Jenkins</strong></td>
+<td style="text-align: left;"><code>values.yaml</code></td>
+<td style="text-align: left;">이미지 경로, 리소스 제한, 서비스 타입</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>manifests/pv-volume.yaml</code></td>
+<td style="text-align: left;">노드 이름(<code>nodeAffinity</code>), 저장 경로</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="phase-4-gitlab-master-1">🚀 Phase 4: GitLab 설치 (Master-1)</h2>
-<p>GitLab은 리소스를 많이 사용하므로, 불필요한 기능(NGINX, Prometheus 등)을 끄고 핵심 기능만 설치합니다.
-특히 <strong>Envoy Gateway 전환</strong>을 고려하여 Ingress 설정만 남깁니다.</p>
-<p><strong>[실행 위치: K8s-Master-Node]</strong></p>
-<h3 id="1-install-gitlab-valuesyaml">1. 설정 파일 확인 (<code>install-gitlab-values.yaml</code>)</h3>
-<p>사용하는 환경에 맞춰 <code>domain</code> , <code>image</code> , <code>ingress</code> , <code>nginx-ingress</code> 부분을 수정해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">global</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">edition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ce</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">devops.internal</span><span class="w"> </span><span class="c1"># 내부 도메인에 맞게 변경</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">https</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="nt">image</span><span class="p">:</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">harbor.example.com:8443</span><span class="w"> </span><span class="c1"># Harbor domain 맞춰 변경</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">library</span><span class="w"> </span><span class="c1"># Harbor Project 맞춰서 변경</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span><span class="c1"># [핵심] Ingress 설정</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">  </span><span class="c1"># 1. Gateway API를 사용할 때</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="nt">configureCertmanager</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">          </span><span class="c1"># TLS 비활성화 (HTTP 접속)</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">  </span><span class="c1"># 2. 이미 설치된 ingress nginx를 사용할 때</span>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">  </span><span class="c1"># ingress:</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">  </span><span class="c1">#   enabled: true           # Ingress 객체(라우팅 규칙) 생성: YES</span>
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">  </span><span class="c1">#   configureCertmanager: false</span>
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">  </span><span class="c1">#   class: &quot;none&quot;           # NGINX가 채가면 안되므로 none 설정 (나중에 Envoy가 처리)</span>
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">  </span><span class="c1">#   tls:</span>
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">  </span><span class="c1">#     enabled: false          # TLS 비활성화 (HTTP 접속)</span>
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">  </span><span class="c1"># 3. gitlab의 ingress nginx를 사용할 떄</span>
-<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">  </span><span class="c1"># ingress:</span>
-<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="w">  </span><span class="c1">#   enabled: true             # Ingress 활성화</span>
-<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w">  </span><span class="c1">#   configureCertmanager: false # 인증서 관리자 끔 (HTTP 사용)</span>
-<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">  </span><span class="c1">#   class: gitlab-nginx              # 내장 NGINX 사용</span>
-<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="w">  </span><span class="c1">#   tls:</span>
-<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">  </span><span class="c1">#     enabled: false          # TLS 비활성화 (HTTP 접속)</span>
-<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>
-<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="c1"># [핵심] NGINX 컨트롤러 비활성화 (이미지는 받았지만 설치는 안 함)</span>
-<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="c1"># 1,2. Gateway API를 사용할 때 혹은 이미 설치된 ingress nginx를 사용할 때</span>
-<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="nt">nginx-ingress</span><span class="p">:</span>
-<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>
-<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="c1"># 3. gitlab의 ingress nginx를 사용할 때</span>
-<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a><span class="c1"># nginx-ingress:</span>
-<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a><span class="c1">#   enabled: true</span>
-<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a><span class="c1">#   controller:</span>
-<a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a><span class="c1">#     ingressClassResource:</span>
-<a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a><span class="c1">#       # [핵심] IngressClass 이름 변경 (충돌 방지)</span>
-<a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a><span class="c1">#       name: gitlab-nginx</span>
-<a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a><span class="c1">#       # 컨트롤러 값도 유니크하게 변경</span>
-<a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a><span class="c1">#       controllerValue: &quot;k8s.io/gitlab-nginx&quot;</span>
-<a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a><span class="c1">#     image:</span>
-<a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a><span class="c1">#       registry: harbor.example.com:8443 # Harbor domain</span>
-<a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a><span class="c1">#       repository: library/ingress-nginx-controller # Harbor에 올라간 이미지</span>
-<a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a><span class="c1">#       tag: &quot;v1.11.8&quot;</span>
-<a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a><span class="c1">#       digest: &quot;&quot;</span>
-<a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a><span class="c1">#     service:</span>
-<a id="__codelineno-6-56" name="__codelineno-6-56" href="#__codelineno-6-56"></a><span class="c1">#       type: NodePort</span>
-<a id="__codelineno-6-57" name="__codelineno-6-57" href="#__codelineno-6-57"></a><span class="c1">#       nodePorts:</span>
-<a id="__codelineno-6-58" name="__codelineno-6-58" href="#__codelineno-6-58"></a><span class="c1">#         http: 30080</span>
-<a id="__codelineno-6-59" name="__codelineno-6-59" href="#__codelineno-6-59"></a><span class="c1">#         https: 30443</span>
-<a id="__codelineno-6-60" name="__codelineno-6-60" href="#__codelineno-6-60"></a><span class="c1">#         ssh: 30022</span>
-<a id="__codelineno-6-61" name="__codelineno-6-61" href="#__codelineno-6-61"></a><span class="nn">...</span>
+<h2 id="4-gitlab-jenkins">4단계: 설치 실행 (GitLab &amp; Jenkins)</h2>
+<p>각 컴포넌트 디렉토리에서 설치 스크립트를 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. GitLab 설치</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>~/gitlab-18.7
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>./scripts/install.sh
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># 2. Jenkins 설치</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">cd</span><span class="w"> </span>~/jenkins-2.528.3
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>./scripts/install.sh
 </code></pre></div>
-<h3 id="2-gitlab-helm">2. GitLab Helm 배포</h3>
-<p><code>install-gitlab.sh</code> 파일 위에 있는 설정 변수를 환경에 맞게 정의한 후 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./install-gitlab.sh
-</code></pre></div>
-<h3 id="_1">오류로 인한 재배포 시</h3>
-<p>오류로 인한 재배포가 필요하다면 먼저 아래 명령어로 비밀번호를 확보합니다.
-혹여나 이미 비밀번호를 날렸다면, 볼륨으로 사용한 물리적 위치(가이드에선 지정한 워커 노드의 <code>/data/gitlab_pg</code> 폴더)에서
-삭제 후 재생성 해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 비밀번호 추출 (복사해두세요!)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>gitlab-postgresql-password<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.postgresql-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
-</code></pre></div>
-<p>재생성 시, DB의 Password가 다시 무작위로 구성됩니다.
-이때 PV에 있는 비밀번호와 맞지 새로 생성된 비밀번호가 달라 <code>migration job</code> 이 정상 동작하지 못할 때가 있습니다.
-이때 아래 방법으로 비밀번호를 강제 동기화 시켜주세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 1. DB 파드 이름 확인</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>po<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>postgresql
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 2. 파드 내부 쉘 접속 (이름이 gitlab-postgresql-0 이라고 가정)</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>gitlab-postgresql-0<span class="w"> </span>--<span class="w"> </span>bash
-</code></pre></div>
-<h3 id="3-gitlab">3. GitLab 접속 정보 확인</h3>
-<p>GitLab이 완전히 구동되는 데에는 약 5~10분이 소요됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1. 상태 모니터링</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>watch<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>gitlab
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 초기 ID는 root</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># 2. 초기 root 비밀번호 확인</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>gitlab-gitlab-initial-root-password<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span>-n<span class="w"> </span>gitlab<span class="w"> </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.data.password}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>--decode<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
-</code></pre></div>
+<p><strong>스크립트 주요 기능:</strong>
+- 네임스페이스 (<code>gitlab</code>, <code>jenkins</code>) 생성 및 PV/PVC 적용
+- 노드 고정 (NodeSelector) 처리
+- Helm 배포 (Harbor 이미지 경로 자동 반영)
+- 초기 관리자 비밀번호 자동 출력</p>
 <hr />
-<h2 id="phase-5-pc">🚀 Phase 5: 네트워크 및 PC 접속 설정</h2>
-<h3 id="1-dns-coredns">1. 클러스터 내부 DNS 등록 (CoreDNS)</h3>
-<p>ArgoCD·Jenkins 등 Pod에서 <code>gitlab.devops.internal</code>로 통신하려면 클러스터 내부 DNS에 등록이 필요합니다.</p>
-<p><code>install-gitlab.sh</code>의 <code>DOMAIN</code> 변수를 설정하면 스크립트 실행 시 자동으로 처리됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">DOMAIN</span><span class="o">=</span><span class="s2">&quot;gitlab.devops.internal&quot;</span><span class="w">   </span><span class="c1"># &quot;&quot; 이면 CoreDNS 등록 건너뜀</span>
-</code></pre></div>
-<p>스크립트 실행 중 DNS 서버 등록 여부를 묻습니다.</p>
+<h2 id="5">5단계: 초기 접속 및 비밀번호 확인</h2>
+<h3 id="51-gitlab">5.1 GitLab 초기 접속</h3>
 <ul>
-<li><strong>DNS 서버에 이미 등록된 경우</strong> → CoreDNS 등록을 건너뜁니다.</li>
-<li><strong>미등록(hosts 방식)</strong> → 클러스터 내부 CoreDNS에 자동 등록합니다.</li>
+<li><strong>URL</strong>: <code>http://&lt;NODE_IP&gt;</code> 또는 설정 도메인</li>
+<li><strong>계정</strong>: <code>root</code></li>
+<li><strong>비밀번호 확인</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>gitlab-gitlab-initial-root-password<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-n<span class="w"> </span>gitlab<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
+</code></pre></div></li>
 </ul>
-<h3 id="2-pc-hosts">2. 사용자 PC Hosts 설정</h3>
-<p>사용자 PC(Windows/Mac/Linux)의 <code>hosts</code> 파일에 도메인을 등록합니다.
-스크립트 완료 시 안내 문구가 출력되며, 등록은 수동으로 해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&lt;GATEWAY_IP&gt;  gitlab.devops.internal
-</code></pre></div>
+<h3 id="52-jenkins">5.2 Jenkins 초기 접속</h3>
 <ul>
-<li>Windows: <code>C:\Windows\System32\drivers\etc\hosts</code></li>
-<li>Linux/Mac: <code>/etc/hosts</code></li>
+<li><strong>URL</strong>: <code>http://&lt;NODE_IP&gt;:30000</code> (NodePort)</li>
+<li><strong>계정</strong>: <code>admin</code></li>
+<li><strong>비밀번호 확인</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>jenkins<span class="w"> </span>-n<span class="w"> </span>jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.jenkins-admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
+</code></pre></div></li>
 </ul>
-<p>이제 브라우저에서 <code>http://gitlab.devops.internal</code> 로 접속하여 <code>root</code> 계정으로 로그인합니다.</p>
-<h3 id="3-gitlab-nodeport-gateway">3. GitLab 서비스 노출 (임시 NodePort, Gateway 미구성 시)</h3>
-<p>Envoy Gateway가 구성되지 않은 경우 NodePort로 임시 노출합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>gitlab-webservice-default<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;: {&quot;type&quot;: &quot;NodePort&quot;}}&#39;</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># 할당된 포트 확인</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>gitlab-webservice-default
-</code></pre></div>
 <hr />
-<h2 id="phase-6-jenkins-gitlab">🚀 Phase 6: Jenkins &lt;-&gt; GitLab 연동</h2>
-<p>이제 두 시스템을 연결하여 CI 파이프라인을 구성합니다.</p>
-<h3 id="1-gitlab-access-token">1. GitLab: Access Token 발급</h3>
+<h2 id="gitlab-jenkins_1">🔗 GitLab-Jenkins 연동 가이드</h2>
 <ol>
-<li>GitLab 접속 -&gt; 우측 상단 프로필 아이콘 -&gt; <strong>Preferences</strong>.</li>
-<li>좌측 메뉴 <strong>Personal Access Tokens</strong>.</li>
-<li><strong>Add new token</strong>:<ul>
-<li><strong>Name:</strong> <code>jenkins-integration</code></li>
-<li><strong>Scopes:</strong> <code>api</code> (체크)</li>
-<li><strong>Create personal access token</strong> 클릭 -&gt; <strong>토큰 값 복사</strong>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-jenkins-credential">2. Jenkins: Credential 등록</h3>
-<p>파이프라인 실행을 위해 아래 세 가지 Credential이 반드시 등록되어 있어야 합니다.</p>
-<p>Jenkins 접속 경로: <code>http://&lt;NodeIP&gt;:30000</code> → <strong>Manage Jenkins</strong> → <strong>Credentials</strong> → <strong>System</strong> → <strong>Global credentials (unrestricted)</strong></p>
-<h4 id="21-gitlab-api-token-jenkins-gitlab">2.1 GitLab API Token (Jenkins-GitLab 연동용)</h4>
-<ul>
-<li><strong>Kind:</strong> <code>GitLab API token</code></li>
-<li><strong>Scope:</strong> <code>Global</code></li>
-<li><strong>API token:</strong> (복사한 GitLab 토큰 붙여넣기)</li>
-<li><strong>ID:</strong> <code>gitlab-token-id</code></li>
-<li><strong>Description:</strong> GitLab Connection Token</li>
-</ul>
-<h4 id="22-gitlab-checkout">2.2 GitLab 계정 정보 (소스 Checkout용)</h4>
-<ul>
-<li><strong>Kind:</strong> <code>Username with password</code></li>
-<li><strong>Username:</strong> GitLab 사용자 계정 (예: <code>root</code>)</li>
-<li><strong>Password:</strong> GitLab 사용자 비밀번호 또는 Personal Access Token</li>
-<li><strong>ID:</strong> <code>&lt;GITLAB_IP&gt;:&lt;PORT&gt;</code> (파이프라인의 <code>credentialsId</code>와 일치해야 함)</li>
-<li><strong>Description:</strong> GitLab Access Credential</li>
-</ul>
-<h4 id="23-harbor-registry-push">2.3 Harbor Registry 정보 (이미지 Push용)</h4>
-<ul>
-<li><strong>Kind:</strong> <code>Username with password</code></li>
-<li><strong>Username:</strong> Harbor 사용자 계정 (예: <code>admin</code>)</li>
-<li><strong>Password:</strong> Harbor 사용자 비밀번호</li>
-<li><strong>ID:</strong> <code>0-harbor-product-Credential</code> (파이프라인의 <code>credentialsId</code>와 일치해야 함)</li>
-<li><strong>Description:</strong> Harbor Registry Push Credential</li>
-</ul>
-<h3 id="3-jenkins_1">3. Jenkins: 시스템 설정</h3>
-<ol>
-<li><strong>Manage Jenkins</strong> -&gt; <strong>System</strong>.</li>
-<li>스크롤을 내려 <strong>GitLab</strong> 섹션 이동.</li>
-<li><strong>Connection Name:</strong> <code>cmp-gitlab</code> (파이프라인에서 사용할 이름).</li>
-<li><strong>GitLab host URL:</strong></li>
-</ol>
-<blockquote>
-<p><strong>중요:</strong> Jenkins 파드 내부에서 GitLab으로 통신해야 하므로 <strong>K8s 내부 도메인</strong>을 사용합니다.
-<code>http://gitlab-webservice-default.gitlab.svc.cluster.local:8181</code></p>
-</blockquote>
-<ol>
-<li><strong>Credentials:</strong> <code>GitLab Connection Token</code> 선택.</li>
-<li><strong>Test Connection</strong> -&gt; <code>Success</code> 확인 후 <strong>Save</strong>.</li>
+<li><strong>GitLab Access Token 생성</strong>: Jenkins가 GitLab API에 접근할 수 있도록 Personal Access Token을 발급합니다.</li>
+<li><strong>Jenkins GitLab Plugin 설정</strong>: Jenkins 관리 &gt; 시스템 설정에서 GitLab 서버 정보를 등록합니다.</li>
+<li><strong>WebHook 설정</strong>: GitLab 프로젝트 설정 &gt; Webhooks에서 Jenkins 빌드 트리거 URL을 등록합니다.</li>
 </ol>
 <hr />
-<h2 id="phase-7">🚀 Phase 7: 파이프라인 테스트 (검증)</h2>
-<p>실제 코드가 커밋되었을 때 Jenkins가 빌드를 수행하는지 확인합니다.</p>
-<h3 id="1-jenkins-job">1. Jenkins Job 생성</h3>
-<ol>
-<li><strong>New Item</strong> -&gt; 이름: <code>test-pipeline</code> -&gt; <strong>Pipeline</strong> 선택.</li>
-<li><strong>Build Triggers</strong>: <code>Build when a change is pushed to GitLab</code> 체크.<ul>
-<li>Advanced -&gt; <code>Secret token</code> 을 생성하고 복사합니다.</li>
-</ul>
-</li>
-<li>
-<p><strong>Pipeline Script</strong>: 아래 <code>image:</code> 경로는 실제 Harbor 경로로 변경해야 합니다.</p>
-<p>```groovy
-pipeline {
-    agent {
-        kubernetes {
-            // yaml 병합을 통해 명시적으로 로컬 이미지를 사용하도록 지정
-            yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    app: builder
-spec:
-  containers:
-  # ---------------------------------------------------------
-  # 1. 작업용 도구 (Golden Image) - 우리가 만든 올인원 이미지 사용
-  # ---------------------------------------------------------
-  - name: shell
-    # [중요] busybox 대신 툴이 다 설치된 우리 이미지를 지정 (레지스트리 주소 포함)
-    image: 'harbor.example.com:8443/<HARBOR_PROJECT>/cmp-jenkins-full:2.528.3'
-    # 컨테이너가 죽지 않고 계속 살아있도록 유지
-    command: ['/bin/sh', '-c', 'sleep 86400']
-    tty: true
-    volumeMounts:
-      - mountPath: "/home/jenkins/agent"
-        name: "workspace-volume"
-        readOnly: false
-      - mountPath: "/var/jenkins_home/.gradle"
-        name: "gradle-cache"</p>
-<p># ---------------------------------------------------------
-  # 2. 이미지 빌드용 컨테이너 (Podman)
-  # ---------------------------------------------------------
-  - name: podman
-    image: 'harbor.example.com:8443/<HARBOR_PROJECT>/podman:v5'
-    command: ['/bin/sh', '-c', 'sleep 86400']
-    tty: true
-    securityContext:
-      privileged: true
-    volumeMounts:
-      - mountPath: "/home/jenkins/agent"
-        name: "workspace-volume"
-        readOnly: false</p>
-<p># ---------------------------------------------------------
-  # 3. Jenkins 에이전트 (필수 통신용)
-  # ---------------------------------------------------------
-  - name: jnlp
-    # Docker Hub 차단을 위해 로컬 레지스트리 명시
-    image: 'harbor.example.com:8443/<HARBOR_PROJECT>/inbound-agent:latest'
-    volumeMounts:
-      - mountPath: "/home/jenkins/agent"
-        name: "workspace-volume"
-        readOnly: false</p>
-</li>
-</ol>
-<p>volumes:
-    - name: workspace-volume
-      emptyDir: {}
-    - name: gradle-cache
-      persistentVolumeClaim:
-        claimName: gradle-cache-pvc
-    """
-            }
-        }
-        stages {
-            stage('Tool Verification') {
-                steps {
-                    // 'shell' 컨테이너(Golden Image) 내부에서 명령어 실행
-                    container('shell') {
-                        script {
-                            echo "🎉 1. OS 확인"
-                            sh 'cat /etc/os-release'</p>
-<div class="highlight"><pre><span></span><code>                        echo &quot;🎉 2. OpenTofu 버전 확인&quot;
-                        sh &#39;tofu --version&#39;
-
-                        echo &quot;🎉 3. K8s 도구 (Kubectl &amp; Helm) 확인&quot;
-                        sh &#39;kubectl version --client&#39;
-                        sh &#39;helm version&#39;
-
-                        echo &quot;🎉 4. Provider 번들링 확인&quot;
-                        sh &#39;ls -al /usr/local/share/tofu-providers&#39;
-                    }
-                }
-            }
-        }
-    }
-}
-```
+<h2 id="uninstall">🗑️ 삭제 (Uninstall)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./scripts/uninstall.sh
 </code></pre></div>
-<ol>
-<li><strong>Save</strong></li>
-</ol>
-<h3 id="2-gitlab">2. GitLab 설정 변경</h3>
-<ol>
-<li>GitLab의 우측 상단의 Profile 아이콘 -&gt; <strong>Admin</strong> 클릭</li>
-<li>LNB에서 <strong>Settings</strong> -&gt; <strong>Network</strong></li>
-<li><strong>Outbound requests</strong> -&gt; 아래 항목 체크<ul>
-<li><code>Allow requests to the local network from webhooks and integrations</code></li>
-<li><code>Allow requests to the local network from system hooks</code></li>
-</ul>
-</li>
-<li><strong>Save</strong></li>
-</ol>
-<h3 id="3-webhook-gitlab">3. Webhook 등록 (GitLab)</h3>
-<ol>
-<li>
-<p>Jenkins Job -&gt; Configuration 화면의 <strong>GitLab webhook URL</strong>을 복사합니다.</p>
-<ul>
-<li>예: <code>http://&lt;NODE_IP&gt;:30000/project/test-pipeline</code></li>
-<li>Floating IP로 되어있다면 위와 같이 project 앞부분을 내부 IP로 수정해야 합니다.</li>
-</ul>
-</li>
-<li>
-<p>GitLab 프로젝트 -&gt; <strong>Project Settings</strong> -&gt; LNB의 <strong>Webhooks</strong> -&gt; <strong>Add new webhook</strong></p>
-</li>
-<li>아래 값 설정 후, Webhook 추가<ul>
-<li><strong>URL:</strong> 위에서 수정한 내부 주소 입력.</li>
-<li><strong>Secret token:</strong> Jenkins에서 생성한 Secret token.</li>
-<li><strong>Trigger:</strong> Push events.</li>
-<li><strong>Add webhook</strong>.</li>
-</ul>
-</li>
-<li><strong>Test</strong> -&gt; <strong>Push events</strong><ul>
-<li><code>HTTP 200</code>이 뜨면 연동 성공입니다.</li>
-<li>Jenkins 대시보드에서 빌드가 수행되는지 확인하세요.</li>
-</ul>
-</li>
-</ol>
-<h3 id="4-jenkins-kubernetes-cloud">4. Jenkins Kubernetes Cloud 설정</h3>
-<p>Webhook을 통해 들어온 요청을 처리할 <strong>K8s 에이전트(Pod) 연결 정보</strong>를 설정합니다.
-이 설정이 선행되어야 Jenkins가 K8s 클러스터 내부에 에이전트를 생성할 수 있습니다.</p>
-<p><strong>경로:</strong> Manage Jenkins &gt; Clouds &gt; New cloud</p>
-<ol>
-<li>
-<p>Kubernetes 기본 설정</p>
-<ul>
-<li><strong>Name:</strong> <code>Kubernetes</code></li>
-<li><strong>Kubernetes URL:</strong> <code>https://kubernetes.default</code> (내부 API 통신용)</li>
-<li><strong>Kubernetes Namespace:</strong> <code>jenkins</code></li>
-<li><strong>Disable HTTPS certificate check:</strong> ✅ 체크 (Enable) -&gt;</li>
-<li><strong>Test Connection:</strong> <code>Credentials</code> 항목에 있는 <code>Test Connection</code> 확인</li>
-<li><strong>Jenkins URL:</strong> <code>http://jenkins.jenkins.svc.cluster.local:8080</code></li>
-<li><strong>Jenkins tunnel:</strong> <code>jenkins-agent.jenkins.svc.cluster.local:50000</code></li>
-<li><strong>주의:</strong> <code>kubectl get svc -n jenkins</code> 명령어로 50000번 포트를 가진 서비스의 정확한 이름
-(예: <code>jenkins</code> 또는 <code>cmp-jenkins</code>)을 확인하여 입력하세요.</li>
-</ul>
-</li>
-<li>
-<p>Pod Templates 설정 (Global Default)</p>
-<ul>
-<li><strong>Name:</strong> <code>kubernetes</code></li>
-<li><strong>Namespace:</strong> <code>jenkins</code></li>
-<li><strong>Labels:</strong> <code>kubernetes</code> (파이프라인이 호출할 라벨)</li>
-<li><strong>Usage:</strong> <code>Use this node as much as possible</code> 선택</li>
-</ul>
-</li>
-</ol>
-<hr />
-<h3 id="5-git-push-trigger">5. Git 설치 및 소스 코드 Push (Trigger)</h3>
-<p>모든 설정이 완료되었으므로, 실제 코드를 GitLab에 푸시하여 Jenkins 빌드를 트리거합니다.</p>
-<ol>
-<li>
-<p>Git 설치</p>
-<p>만약 Git이 설치되어 있지 않다면 폐쇄망용 git rpm을 사용해 git을 설치합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span>~/gitlab/git-2.47.3
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>git_bundle_rocky96_20260107.tar.gzgit_offline_bundle
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>rpm<span class="w"> </span>-Uvh<span class="w"> </span>--force<span class="w"> </span>--nodeps<span class="w"> </span>git_offline_bundle/*.rpm
-</code></pre></div>
-</li>
-<li>
-<p>로컬 설정</p>
-<p><code>/etc/hosts</code> 파일에 GitLab 서버의 IP와 도메인을 등록합니다.</p>
-</li>
-<li>
-<p>프로젝트 Clone</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git<span class="w"> </span>clone<span class="w"> </span>http://&lt;GitLab_도메인&gt;/&lt;그룹명&gt;/&lt;프로젝트명&gt;.git
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># 예: git clone http://gitlab.example.com/root/test-pipeline.git</span>
-</code></pre></div>
-</li>
-<li>
-<p>테스트 파일 작성 및 Push</p>
-<p>Clone 받은 폴더 안에 파일을 하나 작성합니다. 작성 후 GitLab으로 푸시합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Test Jenkins Pipeline&quot;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
-</code></pre></div>
-</li>
-<li>
-<p>결과 확인</p>
-<p><code>git push</code> 성공 직후 Jenkins 대시보드에서
-자동으로 빌드가 시작(<code>Pending</code> -&gt; <code>Running</code> -&gt; <code>Success</code>)되는지 확인합니다.</p>
-</li>
-</ol>
 
 
 

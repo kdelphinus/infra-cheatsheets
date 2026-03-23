@@ -299,7 +299,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -893,7 +893,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -921,7 +921,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -1009,7 +1009,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1206,6 +1206,34 @@
   
   
     <li class="md-nav__item">
+      <a href="k8s/gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
@@ -1213,7 +1241,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1241,7 +1269,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1269,7 +1297,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1297,7 +1325,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1385,7 +1413,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1668,6 +1696,34 @@
   
   
     <li class="md-nav__item">
+      <a href="cicd/offline-install/000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
@@ -1675,7 +1731,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1703,7 +1759,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -3565,11 +3621,11 @@
 <h3 id="kubernetes">☸️ Kubernetes</h3>
 <ul>
 <li><a href="k8s/cheatsheet/"><strong>Cheat Sheets</strong></a> : 자주 사용하는 <code>kubectl</code> 명령어 모음</li>
-<li><strong>폐쇄망 설치</strong>: <a href="k8s/offline-install/001-ready-k8s-air-gapped-install/">준비</a> · <a href="k8s/offline-install/002-k8s-air-gapped-install/">K8s 설치</a> · <a href="k8s/offline-install/003-necessary_infra_install/">기반 인프라</a> · <a href="k8s/offline-install/004-metallb-install/">MetalLB</a></li>
-<li><strong>Monitoring</strong>: <a href="k8s/monitoring/001-kube-prometheus-stack/">설치 가이드</a> · <a href="k8s/monitoring/002-operation-guide/">운영 가이드</a></li>
+<li><strong>폐쇄망 설치 (v1.30 / Rocky 9)</strong>: <a href="k8s/offline-install/001-ready-k8s-air-gapped-install/">준비</a> · <a href="k8s/offline-install/002-k8s-air-gapped-install/">K8s 설치(HA 포함)</a> · <a href="k8s/offline-install/003-necessary_infra_install/">기반 인프라</a> · <a href="k8s/offline-install/004-metallb-install/">MetalLB</a></li>
+<li><strong>Monitoring</strong>: <a href="k8s/monitoring/001-kube-prometheus-stack/">Prometheus/Grafana 설치</a> · <a href="k8s/monitoring/002-operation-guide/">운영 가이드</a></li>
 <li><strong>Backup &amp; Restore</strong>: <a href="k8s/backup-restore/001-velero-install/">Velero 설치</a></li>
-<li><strong>Gateway API</strong>: <a href="k8s/gateway-api/001-envoy-install/">Envoy 설치</a> · <a href="k8s/gateway-api/002-convert_ingress_to_httproute/">HTTPRoute 설정</a> · <a href="k8s/gateway-api/envoy-gateway-network-config/">네트워크 설정</a> · <a href="k8s/gateway-api/missed-containerport/">ContainerPort 누락 해결</a></li>
-<li><strong>Storage</strong>: <a href="k8s/use-pv-nas/">NAS PV 연결 가이드</a></li>
+<li><strong>Gateway API</strong>: <a href="k8s/gateway-api/000-ingress-nginx-install/">Ingress-Nginx</a> · <a href="k8s/gateway-api/001-envoy-install/">Envoy</a> · <a href="k8s/gateway-api/002-convert_ingress_to_httproute/">HTTPRoute 설정</a> · <a href="k8s/gateway-api/envoy-gateway-network-config/">네트워크 설정</a> · <a href="k8s/gateway-api/missed-containerport/">ContainerPort 누락 해결</a></li>
+<li><strong>Storage</strong>: <a href="k8s/use-pv-nas/">NFS Provisioner</a></li>
 </ul>
 <h3 id="cloud">☁️ Cloud</h3>
 <ul>
@@ -3578,7 +3634,7 @@
 </ul>
 <h3 id="cicd">🚀 CI/CD</h3>
 <ul>
-<li><strong>폐쇄망 설치</strong>: <a href="cicd/offline-install/001-gitlab_jenkins_install/">GitLab &amp; Jenkins</a> · <a href="cicd/offline-install/002-argocd-install/">ArgoCD</a> · <a href="cicd/offline-install/004-nexus-install/">Nexus</a> · <a href="cicd/offline-install/003-argocd-jenkins-harbor-integration/">연동 가이드</a></li>
+<li><strong>폐쇄망 설치</strong>: <a href="cicd/offline-install/000-harbor-install/">Harbor</a> · <a href="cicd/offline-install/001-gitlab_jenkins_install/">GitLab &amp; Jenkins</a> · <a href="cicd/offline-install/002-argocd-install/">ArgoCD</a> · <a href="cicd/offline-install/004-nexus-install/">Nexus</a> · <a href="cicd/offline-install/003-argocd-jenkins-harbor-integration/">연동 가이드</a></li>
 <li><strong>운영</strong>: <a href="cicd/operation/redeploy-with-new-image/">Harbor 기반 이미지 재배포</a></li>
 </ul>
 <h3 id="ubuntu-wsl">🐧 Ubuntu &amp; WSL</h3>

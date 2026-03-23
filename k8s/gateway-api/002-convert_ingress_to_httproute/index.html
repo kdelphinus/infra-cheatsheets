@@ -25,7 +25,7 @@
     
     
       
-        <title>2. Gateway API 및 HTTPRoute 사용법 - Infra Cheatsheets</title>
+        <title>HTTPRoute 사용법 - Infra Cheatsheets</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. Gateway API 및 HTTPRoute 사용법
+              HTTPRoute 사용법
             
           </span>
         </div>
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-tabs__link">
+        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -712,7 +712,7 @@
   <span class="md-ellipsis">
     
   
-    3. 폐쇄망에서 Helm, Harbor, Ingress Controller 설치
+    3. 기반 인프라 설치
   
 
     
@@ -740,7 +740,7 @@
   <span class="md-ellipsis">
     
   
-    4. MetalLB 설치 및 L2 설정
+    4. MetalLB 설치
   
 
     
@@ -831,7 +831,7 @@
   <span class="md-ellipsis">
     
   
-    1. Prometheus & Grafana 설치
+    Prometheus & Grafana 설치
   
 
     
@@ -859,7 +859,7 @@
   <span class="md-ellipsis">
     
   
-    2. 모니터링 운영 가이드
+    모니터링 운영 가이드
   
 
     
@@ -1036,6 +1036,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../000-ingress-nginx-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../001-envoy-install/" class="md-nav__link">
         
   
@@ -1043,7 +1071,7 @@
   <span class="md-ellipsis">
     
   
-    1. Gateway API 설치
+    Envoy Gateway 설치
   
 
     
@@ -1080,7 +1108,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1098,7 +1126,7 @@
   <span class="md-ellipsis">
     
   
-    2. Gateway API 및 HTTPRoute 사용법
+    HTTPRoute 사용법
   
 
     
@@ -1278,6 +1306,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ HTTPRoute 트러블슈팅
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ HTTPRoute 트러블슈팅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#503-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        503 / Connection Refused (백엔드 포트 불일치)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-not-found-url-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        404 Not Found (URL Rewrite 필요)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1301,7 +1368,7 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 네트워크 구성 방법
+    Envoy Gateway 네트워크 구성
   
 
     
@@ -1329,7 +1396,7 @@
   <span class="md-ellipsis">
     
   
-    Service Endpoint가 있는데도 Connection Refused 발생할 때
+    ContainerPort 누락 트러블슈팅
   
 
     
@@ -1420,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    NAS PV 연결 가이드
+    NFS Provisioner 설치
   
 
     
@@ -1703,6 +1770,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
@@ -1710,7 +1805,7 @@
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망에서 GitLab과 Jenkins 설치
+    1. GitLab & Jenkins 설치
   
 
     
@@ -1738,7 +1833,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 ArgoCD 설치
+    2. ArgoCD 설치
   
 
     
@@ -3574,6 +3669,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#httproute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ HTTPRoute 트러블슈팅
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ HTTPRoute 트러블슈팅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#503-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        503 / Connection Refused (백엔드 포트 불일치)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#404-not-found-url-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        404 Not Found (URL Rewrite 필요)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3941,6 +4075,23 @@ Deployment의 <code>containerPort</code> 항목은 필수로 작성되어야 합
 <li><strong>우선순위:</strong> <code>rules</code> 리스트의 순서는 상관없으나,
 <strong>가장 긴 경로(More Specific Path)</strong>가 자동으로 우선순위를 갖습니다. (예: <code>/oauth2</code>가 <code>/</code>보다 우선)</li>
 </ol>
+<hr />
+<h2 id="httproute">🛠️ HTTPRoute 트러블슈팅</h2>
+<h3 id="503-connection-refused">503 / Connection Refused (백엔드 포트 불일치)</h3>
+<p>Envoy는 Service의 ClusterIP 포트가 아닌 <strong>Pod의 실제 컨테이너 포트</strong>로 직접 연결을 시도합니다. 연결 실패 시 파드의 실제 포트를 확인하십시오.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 컨테이너 포트 확인</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>&lt;POD_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NS&gt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.spec.containers[*].ports}&#39;</span>
+</code></pre></div>
+<p>확인한 포트로 HTTPRoute의 <code>backendRefs.port</code>를 수정합니다.</p>
+<h3 id="404-not-found-url-rewrite">404 Not Found (URL Rewrite 필요)</h3>
+<p>애플리케이션이 하위 경로(Context Path)를 인식하지 못하는 경우 <code>URLRewrite</code> 필터를 적용하여 경로를 보정해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">filters</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">URLRewrite</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">urlRewrite</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="nt">path</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReplacePrefixMatch</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="nt">replacePrefixMatch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+</code></pre></div>
 
 
 
