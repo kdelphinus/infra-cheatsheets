@@ -414,3 +414,29 @@ spec:
 3. **Body Size:** `HTTPRoute`가 아닌 `EnvoyPatchPolicy`로 전역 설정해야 합니다. (Byte 단위 주의)
 4. **우선순위:** `rules` 리스트의 순서는 상관없으나,
 **가장 긴 경로(More Specific Path)**가 자동으로 우선순위를 갖습니다. (예: `/oauth2`가 `/`보다 우선)
+
+---
+
+## 🛠️ HTTPRoute 트러블슈팅
+
+### 503 / Connection Refused (백엔드 포트 불일치)
+Envoy는 Service의 ClusterIP 포트가 아닌 **Pod의 실제 컨테이너 포트**로 직접 연결을 시도합니다. 연결 실패 시 파드의 실제 포트를 확인하십시오.
+
+```bash
+# 컨테이너 포트 확인
+kubectl get pod <POD_NAME> -n <NS> -o jsonpath='{.spec.containers[*].ports}'
+```
+
+확인한 포트로 HTTPRoute의 `backendRefs.port`를 수정합니다.
+
+### 404 Not Found (URL Rewrite 필요)
+애플리케이션이 하위 경로(Context Path)를 인식하지 못하는 경우 `URLRewrite` 필터를 적용하여 경로를 보정해야 합니다.
+
+```yaml
+filters:
+  - type: URLRewrite
+    urlRewrite:
+      path:
+        type: ReplacePrefixMatch
+        replacePrefixMatch: /
+```
