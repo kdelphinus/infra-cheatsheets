@@ -1263,13 +1263,41 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-c-nodeport-viphaproxy" class="md-nav__link">
+  <a href="#case-c-nodeport-vip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case C: NodePort — VIP(HAProxy) 연동
+        Case C: NodePort — VIP 연동
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Case C: NodePort — VIP 연동">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-l4-hardware-lb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) L4 스위치(Hardware LB) 연동 시
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-l4-keepalived-haproxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) L4 장비가 없는 경우 (Keepalived + HAProxy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3637,13 +3665,41 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-c-nodeport-viphaproxy" class="md-nav__link">
+  <a href="#case-c-nodeport-vip" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case C: NodePort — VIP(HAProxy) 연동
+        Case C: NodePort — VIP 연동
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Case C: NodePort — VIP 연동">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-l4-hardware-lb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) L4 스위치(Hardware LB) 연동 시
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-l4-keepalived-haproxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) L4 장비가 없는 경우 (Keepalived + HAProxy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3810,8 +3866,13 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;10.10.10.73&quot;}]}}&#39;</span>
 </code></pre></div>
-<h3 id="case-c-nodeport-viphaproxy">Case C: NodePort — VIP(HAProxy) 연동</h3>
-<p>NodePort 모드 설치 시 HTTP <strong>30080</strong>, HTTPS <strong>30443</strong> 포트로 고정됩니다. 앞단에 HAProxy를 두어 80/443으로 변환합니다.</p>
+<h3 id="case-c-nodeport-vip">Case C: NodePort — VIP 연동</h3>
+<p>NodePort 모드 설치 시 HTTP <strong>30080</strong>, HTTPS <strong>30443</strong> 포트로 고정됩니다. 환경에 따라 아래 방식 중 하나를 선택하여 연동합니다.</p>
+<h4 id="1-l4-hardware-lb">1) L4 스위치(Hardware LB) 연동 시</h4>
+<p>네트워크 담당자에게 워커 노드 IP와 고정 포트(<strong>30080, 30443</strong>)를 L4 장비의 <strong>Real Server</strong>로 등록 요청합니다. 사용자는 L4 장비의 VIP(80/443)를 통해 접속합니다.
+- <strong>트래픽 흐름</strong>: <code>Client → VIP(L4) → Worker IP:30080/30443 → Envoy Pod</code></p>
+<h4 id="2-l4-keepalived-haproxy">2) L4 장비가 없는 경우 (Keepalived + HAProxy)</h4>
+<p>워커 노드에 소프트웨어 로드밸런서를 구성하여 80/443 포트를 30080/30443으로 중계합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># HAProxy 설정 예시 (/etc/haproxy/haproxy.cfg)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>frontend<span class="w"> </span>envoy-http
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nb">bind</span><span class="w"> </span>*:80
