@@ -23,73 +23,62 @@ hide:
 
   ---
 
-  폐쇄망 설치 · Gateway API · 모니터링 · 스토리지
-
-  [Cheat Sheet](k8s/cheatsheet.md) ·
-  [폐쇄망 설치](k8s/offline-install/002-k8s-air-gapped-install.md) ·
-  [Envoy Gateway](k8s/gateway-api/001-envoy-install.md) ·
-  [Prometheus & Grafana](k8s/monitoring/001-kube-prometheus-stack.md)
+  [:octicons-arrow-right-24: Cheat Sheet](k8s/cheatsheet.md)<br>
+  [:octicons-arrow-right-24: 폐쇄망 설치 (v1.30)](k8s/offline-install/002-k8s-air-gapped-install.md)<br>
+  [:octicons-arrow-right-24: Envoy Gateway 설치](k8s/gateway-api/001-envoy-install.md)<br>
+  [:octicons-arrow-right-24: Prometheus & Grafana](k8s/monitoring/001-kube-prometheus-stack.md)<br>
+  [:octicons-arrow-right-24: Velero 백업](k8s/backup-restore/001-velero-install.md)
 
 - :simple-openstack: **OpenStack**
 
   ---
 
-  Kolla-Ansible 기반 설치 · GPU Passthrough · 운영 가이드
-
-  [Cheat Sheet](openstack/cheatsheet.md) ·
-  [설치 가이드](openstack/base/install.md) ·
-  [GPU 노드 초기화](openstack/gpu/init-gpu-node.md) ·
-  [PCI Passthrough](openstack/gpu/pci-placement.md)
+  [:octicons-arrow-right-24: Cheat Sheet](openstack/cheatsheet.md)<br>
+  [:octicons-arrow-right-24: 설치 가이드](openstack/base/install.md)<br>
+  [:octicons-arrow-right-24: GPU 노드 초기화](openstack/gpu/init-gpu-node.md)<br>
+  [:octicons-arrow-right-24: PCI Passthrough + Placement](openstack/gpu/pci-placement.md)<br>
+  [:octicons-arrow-right-24: Golden Image 생성](openstack/utils/golden-image.md)
 
 - :material-pipe: **CI/CD**
 
   ---
 
-  Harbor · GitLab · Jenkins · ArgoCD · Nexus 폐쇄망 구축
-
-  [Harbor 설치](cicd/offline-install/000-harbor-install.md) ·
-  [GitLab & Jenkins](cicd/offline-install/001-gitlab_jenkins_install.md) ·
-  [ArgoCD](cicd/offline-install/002-argocd-install.md) ·
-  [연동 가이드](cicd/offline-install/003-argocd-jenkins-harbor-integration.md)
-
-- :simple-googlecloud: **Cloud (GCP)**
-
-  ---
-
-  Terraform으로 GCP 폐쇄망 환경 구성 및 SDK 치트시트
-
-  [GCP 폐쇄망 환경 구성](cloud/use_terraform_with_gcp.md) ·
-  [GCP SDK Cheat Sheet](cloud/gcp-cheatsheet.md)
+  [:octicons-arrow-right-24: Harbor 설치](cicd/offline-install/000-harbor-install.md)<br>
+  [:octicons-arrow-right-24: GitLab & Jenkins 설치](cicd/offline-install/001-gitlab_jenkins_install.md)<br>
+  [:octicons-arrow-right-24: ArgoCD 설치](cicd/offline-install/002-argocd-install.md)<br>
+  [:octicons-arrow-right-24: ArgoCD · Jenkins · Harbor 연동](cicd/offline-install/003-argocd-jenkins-harbor-integration.md)<br>
+  [:octicons-arrow-right-24: Nexus 설치](cicd/offline-install/004-nexus-install.md)
 
 - :simple-mariadb: **Database**
 
   ---
 
-  MariaDB Galera Cluster HA 구성 및 폐쇄망 설치
+  [:octicons-arrow-right-24: Galera Cluster 설치](db/ha/galera-cluster.md)<br>
+  [:octicons-arrow-right-24: Galera 장애 복구](db/ha/galera-recovery.md)<br>
+  [:octicons-arrow-right-24: MariaDB 폐쇄망 설치](db/install/mariadb-air-gapped-install.md)<br>
+  [:octicons-arrow-right-24: 트러블슈팅](db/install/mariadb-troubleshooting.md)
 
-  [Galera Cluster 설치](db/ha/galera-cluster.md) ·
-  [장애 복구](db/ha/galera-recovery.md) ·
-  [MariaDB 설치](db/install/mariadb-air-gapped-install.md) ·
-  [트러블슈팅](db/install/mariadb-troubleshooting.md)
+- :simple-googlecloud: **Cloud (GCP)**
+
+  ---
+
+  [:octicons-arrow-right-24: GCP 폐쇄망 환경 구성](cloud/use_terraform_with_gcp.md)<br>
+  [:octicons-arrow-right-24: GCP SDK Cheat Sheet](cloud/gcp-cheatsheet.md)
 
 - :simple-ubuntu: **Ubuntu & WSL**
 
   ---
 
-  개발 환경 초기 설정 및 WSL 네트워크 구성
-
-  [Ubuntu 초기 설정](ubuntu/init-ubuntu-env.md) ·
-  [WSL 네트워크 설정](ubuntu/wsl/wsl-network-setting.md)
+  [:octicons-arrow-right-24: Ubuntu 초기 설정](ubuntu/init-ubuntu-env.md)<br>
+  [:octicons-arrow-right-24: WSL 네트워크 설정](ubuntu/wsl/wsl-network-setting.md)
 
 - :material-bookshelf: **Reference**
 
   ---
 
-  Git · VSCode · 네트워크 팁 모음
-
-  [Git Cheat Sheet](git/cheatsheet.md) ·
-  [VSCode 단축키](ide/vscode_shortcut.md) ·
-  [도메인 IP 확인](network/tip/check-domain-ip.md) ·
-  [서브넷 & 게이트웨이 확인](network/tip/check-network-subnet.md)
+  [:octicons-arrow-right-24: Git Cheat Sheet](git/cheatsheet.md)<br>
+  [:octicons-arrow-right-24: VSCode 단축키](ide/vscode_shortcut.md)<br>
+  [:octicons-arrow-right-24: 도메인 IP 확인](network/tip/check-domain-ip.md)<br>
+  [:octicons-arrow-right-24: 서브넷 & 게이트웨이 확인](network/tip/check-network-subnet.md)
 
 </div>
