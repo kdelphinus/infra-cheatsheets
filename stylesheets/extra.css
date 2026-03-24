@@ -1,32 +1,92 @@
 /* ─── 홈 페이지 카드 가시성 개선 ─── */
 
-/* 카드 테두리 강조 (라이트 & 다크 공통) */
+/* 카드 기본 스타일 및 테두리 강조 */
 .md-typeset .grid.cards > ul > li,
 .md-typeset .grid.cards > ol > li {
   border: 1px solid var(--md-default-fg-color--lighter);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  border-radius: 0.4rem;
+  padding: 1.2rem;
+  transition: all 0.3s ease;
+  background-color: var(--md-default-bg-color);
 }
 
+/* 카드 호버 효과: 그림자 강화 및 위로 살짝 뜸 */
 .md-typeset .grid.cards > ul > li:hover,
 .md-typeset .grid.cards > ol > li:hover {
   border-color: var(--md-accent-fg-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
 }
 
-/* 다크 모드: 카드 배경 살짝 밝게, 구분선 강조 */
-[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
-[data-md-color-scheme="slate"] .md-typeset .grid.cards > ol > li {
-  background-color: var(--md-code-bg-color);
-  border-color: var(--md-default-fg-color--light);
+/* 카드 내 제목 스타일 */
+.md-typeset .grid.cards li strong {
+  font-size: 1.1rem;
+  color: var(--md-primary-fg-color);
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
-/* 다크 모드: 카드 내 일반 텍스트 가시성 */
-[data-md-color-scheme="slate"] .md-typeset .grid.cards p,
-[data-md-color-scheme="slate"] .md-typeset .grid.cards li {
+/* 카드 내 설명 텍스트 */
+.md-typeset .grid.cards li p {
+  font-size: 0.85rem;
+  color: var(--md-default-fg-color--light);
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+}
+
+/* 카드 내 구분선 제거 (또는 스타일 조정) */
+.md-typeset .grid.cards hr {
+  margin: 0.8rem 0;
+  border-bottom: 0.05rem solid var(--md-default-fg-color--lighter);
+}
+
+/* 카드 내 리스트 스타일 초기화 및 간격 조정 */
+.md-typeset .grid.cards ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-top: 0.5rem;
+}
+
+.md-typeset .grid.cards ul li {
+  border: none !important;
+  padding: 0.2rem 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  font-size: 0.9rem;
+}
+
+.md-typeset .grid.cards ul li:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.md-typeset .grid.cards ul li a {
   color: var(--md-default-fg-color);
+  transition: color 0.2s;
 }
 
-/* 홈 페이지 상단 버튼 간격 */
+.md-typeset .grid.cards ul li a:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* 다크 모드 최적화 */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
+  background-color: #2e303e; /* 좀 더 깊이감 있는 배경색 */
+  border-color: #40415a;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid.cards li strong {
+  color: var(--md-accent-fg-color);
+}
+
+/* 홈 페이지 상단 버튼 간격 및 스타일 */
 .md-typeset .md-button {
   margin: 0.2rem 0.4rem 0.2rem 0;
+  border-radius: 2rem; /* 둥근 버튼 */
+  padding: 0.4em 1.2em;
+}
+
+.md-typeset .md-button--primary {
+  background-color: var(--md-primary-fg-color);
+  border-color: var(--md-primary-fg-color);
 }
