@@ -1051,6 +1051,67 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#운영-참고-노이즈-억제-룰" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영 참고: 노이즈 억제 룰
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="운영 참고: 노이즈 억제 룰">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#제공-억제-룰-values-suppress-noiseyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        제공 억제 룰 (values-suppress-noise.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#적용-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        적용 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#억제-룰-추가-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        억제 룰 추가 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#현재-적용-여부-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        현재 적용 여부 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#운영-참고-런타임-엔진-최적화-falco-8x-기준" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3658,6 +3719,67 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#운영-참고-노이즈-억제-룰" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영 참고: 노이즈 억제 룰
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="운영 참고: 노이즈 억제 룰">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#제공-억제-룰-values-suppress-noiseyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        제공 억제 룰 (values-suppress-noise.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#적용-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        적용 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#억제-룰-추가-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        억제 룰 추가 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#현재-적용-여부-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        현재 적용 여부 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#운영-참고-런타임-엔진-최적화-falco-8x-기준" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3814,38 +3936,89 @@
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/test-scenarios.yaml
 </code></pre></div>
+<h2 id="운영-참고-노이즈-억제-룰">운영 참고: 노이즈 억제 룰</h2>
+<p>Falco는 기본 룰셋이 광범위하게 설정돼 있어, 정상 동작하는 애플리케이션도 탐지 대상이 될 수 있습니다.
+이런 <strong>알려진 노이즈</strong>는 억제 룰로 제외해 실제 위협 신호가 묻히지 않도록 관리합니다.</p>
+<h3 id="제공-억제-룰-values-suppress-noiseyaml">제공 억제 룰 (<code>values-suppress-noise.yaml</code>)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">룰</th>
+<th style="text-align: left;">대상</th>
+<th style="text-align: left;">이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Redirect STDOUT/STDIN to Network Connection in Container</code></td>
+<td style="text-align: left;"><code>gitlab-gitlab-shell-*</code></td>
+<td style="text-align: left;">SSH 세션 처리 시 정상적으로 발생하는 STDIN/STDOUT 리다이렉트</td>
+</tr>
+</tbody>
+</table>
+<h3 id="적용-방법">적용 방법</h3>
+<p><strong>방법 1: install.sh 실행 시 선택</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./scripts/install.sh
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># &quot;노이즈 억제 룰을 적용하시겠습니까?&quot; 프롬프트에서 y 입력</span>
+</code></pre></div>
+<p><strong>방법 2: helm upgrade에 직접 추가</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>falco<span class="w"> </span>./charts/falco<span class="w"> </span>-n<span class="w"> </span>falco<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-f<span class="w"> </span>values-suppress-noise.yaml
+</code></pre></div>
+<h3 id="억제-룰-추가-방법">억제 룰 추가 방법</h3>
+<p><code>values-suppress-noise.yaml</code>의 <code>customRules</code> 블록에 항목을 추가합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">customRules</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">suppress-noise.yaml</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="no"># 기존 룰에 조건 추가 (append)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="no">- rule: &lt;룰 이름&gt;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="no">condition: and not &lt;제외 조건&gt;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="no">override:</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="no">condition: append</span>
+</code></pre></div>
+<ul>
+<li><code>rule</code>: 억제할 기존 룰 이름 (정확히 일치해야 함)</li>
+<li><code>condition</code>: 기존 조건에 추가할 제외 조건</li>
+<li><code>override.condition: append</code>: 기존 룰을 덮어쓰지 않고 조건만 추가</li>
+</ul>
+<p>적용 후 Falco 파드를 재시작하지 않아도 됩니다 (ConfigMap 변경은 자동 반영).</p>
+<h3 id="현재-적용-여부-확인">현재 적용 여부 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span>-n<span class="w"> </span>falco<span class="w"> </span>falco-rules<span class="w"> </span>-o<span class="w"> </span>yaml
+</code></pre></div>
+<p>ConfigMap이 존재하고 <code>suppress-noise.yaml</code> 키가 있으면 억제 룰이 적용된 상태입니다.</p>
+<hr />
 <h2 id="운영-참고-런타임-엔진-최적화-falco-8x-기준">운영 참고: 런타임 엔진 최적화 (Falco 8.x 기준)</h2>
 <p>Falco 8.x 차트부터는 <code>containerEngine</code>이라는 통합 설정을 사용하여 여러 런타임을 관리합니다. 실 배포 환경에서 특정 런타임만 사용하도록 고정하려면 다음 형식을 권장합니다.</p>
 <p><strong>표준 K8s(containerd 전용) <code>values.yaml</code> 권장 설정:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">driver</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">modern_ebpf</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nt">collectors</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">containerEngine</span><span class="p">:</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">engines</span><span class="p">:</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">docker</span><span class="p">:</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">podman</span><span class="p">:</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">cri</span><span class="p">:</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="nt">sockets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/run/containerd/containerd.sock&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">driver</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">modern_ebpf</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nt">collectors</span><span class="p">:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">containerEngine</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nt">engines</span><span class="p">:</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="nt">docker</span><span class="p">:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="nt">podman</span><span class="p">:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">      </span><span class="nt">cri</span><span class="p">:</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="nt">sockets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/run/containerd/containerd.sock&quot;</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h2 id="트러블슈팅">트러블슈팅</h2>
 <h3 id="1-inotify-리소스-부족-wsl2-필수">1. inotify 리소스 부족 (WSL2 필수)</h3>
 <p>Falco 구동 시 <code>could not initialize inotify handler</code> 에러가 발생하면 호스트(WSL2)의 리소스를 확장해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>fs.inotify.max_user_instances<span class="o">=</span><span class="m">512</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>fs.inotify.max_user_watches<span class="o">=</span><span class="m">1048576</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>fs.inotify.max_user_instances<span class="o">=</span><span class="m">512</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>fs.inotify.max_user_watches<span class="o">=</span><span class="m">1048576</span>
 </code></pre></div>
 <h3 id="2-ebpf-드라이버-실패">2. eBPF 드라이버 실패</h3>
 <p>커널이 BTF를 지원하지 않으면 Falco 파드가 구동되지 않습니다. <code>values.yaml</code>에서 <code>driver.kind</code>를 <code>ebpf</code>로 변경하여 재설치하세요.</p>
 <h3 id="3-k3s-소켓-미인식">3. K3s 소켓 미인식</h3>
 <p>K3s 환경에서 파드가 생성되었으나 이벤트를 수집하지 못한다면, 소켓 경로를 확인하세요. 본 패키지의 <code>install.sh</code>는 이를 자동 감지하지만, 수동 설정 시에는 다음 형식을 따릅니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 설치 시 수동 주입 예시</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>falco<span class="w"> </span>./charts/falco<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--set<span class="w"> </span>collectors.containerEngine.engines.cri.sockets<span class="o">=</span><span class="s1">&#39;{/run/k3s/containerd/containerd.sock}&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 설치 시 수동 주입 예시</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>falco<span class="w"> </span>./charts/falco<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--set<span class="w"> </span>collectors.containerEngine.engines.cri.sockets<span class="o">=</span><span class="s1">&#39;{/run/k3s/containerd/containerd.sock}&#39;</span>
 </code></pre></div>
 <hr />
 <h2 id="별첨-grafana-연동">별첨: Grafana 연동</h2>
@@ -3895,25 +4068,25 @@
 <p><strong>1단계: ServiceMonitor 적용</strong></p>
 <p><code>manifests/servicemonitor-falcosidekick.yaml</code>을 적용합니다.
 Prometheus Operator가 이 리소스를 읽어 FalcoSidekick metrics 수집을 시작합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/servicemonitor-falcosidekick.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/servicemonitor-falcosidekick.yaml
 </code></pre></div>
 <blockquote>
 <p><code>release: prometheus</code> 라벨이 반드시 있어야 합니다.
 이 라벨이 없으면 Prometheus가 ServiceMonitor를 무시합니다.
 라벨 값은 Prometheus 인스턴스의 <code>serviceMonitorSelector</code>에 따라 다를 수 있으니 확인하세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].spec.serviceMonitorSelector}&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].spec.serviceMonitorSelector}&#39;</span>
 </code></pre></div>
 </blockquote>
 <p><strong>2단계: Grafana 대시보드 자동 배포 활성화</strong></p>
 <p><code>values.yaml</code>(또는 <code>values-local.yaml</code>)에 아래 설정이 포함돼 있습니다.
 <code>helm upgrade</code> 시 <code>monitoring</code> 네임스페이스에 ConfigMap이 자동으로 생성됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">falcosidekick</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">dashboards</span><span class="p">:</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="nt">configMaps</span><span class="p">:</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="nt">falcosidekick</span><span class="p">:</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">          </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">falcosidekick</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">dashboards</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">      </span><span class="nt">configMaps</span><span class="p">:</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="nt">falcosidekick</span><span class="p">:</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">          </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
 </code></pre></div>
 <blockquote>
 <p><code>namespace</code> 값은 Grafana가 배포된 네임스페이스로 맞춰야 합니다.
@@ -3921,16 +4094,16 @@ Grafana sidecar가 해당 네임스페이스의 <code>grafana_dashboard: "1"</co
 </blockquote>
 <p><strong>3단계: Grafana에서 확인</strong></p>
 <p>아래 항목을 순서대로 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># ConfigMap이 생성됐는지 확인</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>falcosidekick
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># ServiceMonitor가 등록됐는지 확인</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>servicemonitor<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>falcosidekick
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Prometheus target 확인 (UP 상태여야 함)</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># Grafana → Explore → Prometheus → Targets 또는</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/prometheus-kube-prometheus-prometheus<span class="w"> </span><span class="m">9090</span><span class="w"> </span><span class="p">&amp;</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># 브라우저: http://localhost:9090/targets → falcosidekick 검색</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># ConfigMap이 생성됐는지 확인</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>falcosidekick
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># ServiceMonitor가 등록됐는지 확인</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>servicemonitor<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>falcosidekick
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Prometheus target 확인 (UP 상태여야 함)</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1"># Grafana → Explore → Prometheus → Targets 또는</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/prometheus-kube-prometheus-prometheus<span class="w"> </span><span class="m">9090</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1"># 브라우저: http://localhost:9090/targets → falcosidekick 검색</span>
 </code></pre></div>
 <p>Grafana 대시보드 확인:</p>
 <ol>
