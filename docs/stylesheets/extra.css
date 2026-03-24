@@ -1,6 +1,6 @@
 /* ─── 홈 페이지 카드 가시성 개선 ─── */
 
-/* 카드 기본 스타일 및 테두리 강조 */
+/* 카드 기본 스타일: MkDocs Material 그리드 시스템과 호환 */
 .md-typeset .grid.cards > ul > li,
 .md-typeset .grid.cards > ol > li {
   border: 1px solid var(--md-default-fg-color--lighter);
@@ -8,10 +8,11 @@
   padding: 1.2rem;
   transition: all 0.3s ease;
   background-color: var(--md-default-bg-color);
-  display: block; /* 그리드 내부 아이템이므로 block으로 고정 */
+  /* 카드 내부 요소들이 그리드 아이템이 되지 않도록 block 설정 */
+  display: block !important;
 }
 
-/* 카드 호버 효과: 그림자 강화 및 위로 살짝 뜸 */
+/* 카드 호버 효과 */
 .md-typeset .grid.cards > ul > li:hover,
 .md-typeset .grid.cards > ol > li:hover {
   border-color: var(--md-accent-fg-color);
@@ -19,9 +20,9 @@
   transform: translateY(-4px);
 }
 
-/* 카드 내 제목 스타일 */
+/* 카드 제목 */
 .md-typeset .grid.cards li strong {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--md-primary-fg-color);
   display: inline-flex;
   align-items: center;
@@ -29,11 +30,11 @@
   margin-bottom: 0.2rem;
 }
 
-/* 카드 내 제목 아이콘 크기 조정 */
+/* 카드 제목 아이콘 */
 .md-typeset .grid.cards li strong .twemoji,
 .md-typeset .grid.cards li strong .octicons {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1.15rem;
+  height: 1.15rem;
 }
 
 /* 카드 내 설명 텍스트 */
@@ -41,38 +42,38 @@
   font-size: 0.85rem;
   color: var(--md-default-fg-color--light);
   line-height: 1.6;
-  margin-bottom: 0.6rem;
+  margin: 0.5rem 0 0.8rem 0;
 }
 
 /* 카드 내부 구분선 (HR) */
 .md-typeset .grid.cards hr {
-  margin: 0.4rem 0 0.8rem 0;
+  margin: 0.4rem 0 1rem 0;
   border-bottom: 0.05rem solid var(--md-default-fg-color--lighter);
   opacity: 0.5;
 }
 
-/* 카드와 카드 사이의 상하 간격 */
+/* 카드 레이아웃 간격 */
 .md-typeset .grid.cards > ul,
 .md-typeset .grid.cards > ol {
   gap: 1.5rem 1rem !important;
 }
 
-/* 카드 내부의 중첩된 리스트 (링크 목록) */
+/* 카드 내부 링크 목록 */
 .md-typeset .grid.cards li ul {
   list-style: none !important;
   padding-left: 0 !important;
   margin: 0.5rem 0 0 0 !important;
-  display: block !important; /* 중첩된 리스트가 그리드로 작동하지 않도록 강제 */
 }
 
 .md-typeset .grid.cards li ul li {
   border: none !important;
-  padding: 0.2rem 0 !important;
+  padding: 0.25rem 0 !important;
   margin: 0 !important;
   background: transparent !important;
   font-size: 0.85rem;
   box-shadow: none !important;
   transform: none !important;
+  display: block !important; /* 내부 리스트 항목도 수직 배치 */
 }
 
 .md-typeset .grid.cards li ul li a {
