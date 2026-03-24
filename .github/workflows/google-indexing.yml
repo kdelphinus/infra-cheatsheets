@@ -1,0 +1,46 @@
+name: Google Indexing API 제출
+
+on:
+  # 수동 트리거 — mkdocs gh-deploy 후 직접 실행
+  workflow_dispatch:
+    inputs:
+      offset:
+        description: '건너뛸 URL 수 (200개 초과 시 분할 제출용)'
+        required: false
+        default: '0'
+      limit:
+        description: '제출할 최대 URL 수 (API 일일 한도: 200)'
+        required: false
+        default: '200'
+
+  # docs/ 변경이 main 브랜치에 push될 때 자동 실행
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 의존성 설치
+        run: pip install google-auth google-auth-httplib2 httplib2 requests
+
+      - name: URL 제출
+        env:
+          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+        run: |
+          python .github/scripts/submit_indexing.py \
+            --offset ${{ github.event.inputs.offset || '0' }} \
+            --limit ${{ github.event.inputs.limit || '200' }}
