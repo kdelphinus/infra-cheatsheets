@@ -305,3 +305,5 @@ $RECYCLE.BIN/
 tmp/
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,macos,python,visualstudiocode,terraform
+.gemini/
+gha-creds-*.json
