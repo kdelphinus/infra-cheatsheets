@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/002-k8s-air-gapped-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/security/003-tetragon-security-policy/">
       
       
-        <link rel="prev" href="../001-ready-k8s-air-gapped-install/">
+        <link rel="prev" href="../002-tetragon-install/">
       
       
-        <link rel="next" href="../003-necessary_infra_install/">
+        <link rel="next" href="../../backup-restore/001-velero-install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>2. 폐쇄망에서 K8s 설치 - Infra Cheatsheets</title>
+        <title>Tetragon 보안 정책 전략 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2-폐쇄망에서-kubernetes와-helm-설치" class="md-skip">
+        <a href="#tetragon-보안-정책-전략-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. 폐쇄망에서 K8s 설치
+              Tetragon 보안 정책 전략
             
           </span>
         </div>
@@ -255,7 +255,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+        <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -593,8 +593,6 @@
                 
   
   
-    
-  
   
   
     
@@ -610,11 +608,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
@@ -635,7 +633,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -653,7 +651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -678,37 +676,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    2. 폐쇄망에서 K8s 설치
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -724,254 +695,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-0-설치-파일-배포" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📦 Phase 0: 설치 파일 배포
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-1-로컬-패키지-설치-및-os-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 1: 로컬 패키지 설치 및 OS 설정
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 1: 로컬 패키지 설치 및 OS 설정">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-패키지-설치-dnf-localinstall" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 패키지 설치 (dnf localinstall)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-os-커널-및-보안-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 OS 커널 및 보안 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-containerd-설정-harbor-연동-대비" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 Containerd 설정 (Harbor 연동 대비)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-2-이미지-로드-전체-노드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 2: 이미지 로드 (전체 노드)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-3-로드밸런서lb-구성-ha-3중화-시에만" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#옵션-a-vip-방식-keepalived--haproxy---권장" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-haproxy-설정-etchaproxyhaproxycfg" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) HAProxy 설정 (/etc/haproxy/haproxy.cfg)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-keepalived-설정-etckeepalivedkeepalivedconf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) Keepalived 설정 (/etc/keepalived/keepalived.conf)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#옵션-b-localhost-lb-방식-vip-불가-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        옵션 B: Localhost LB 방식 (VIP 불가 환경)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-4-마스터-초기화-master-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 4: 마스터 초기화 (Master-1)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 4: 마스터 초기화 (Master-1)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-ha-구성-vip-사용-초기화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🅰️ HA 구성 (VIP 사용) 초기화
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-5-cni-및-추가-작업" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 5: CNI 및 추가 작업
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 5: CNI 및 추가 작업">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-calico-cni-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 Calico CNI 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-helm-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 Helm 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#53-워커-노드-조인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 워커 노드 조인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-재설치-시-초기화-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧹 재설치 시 초기화 절차
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -984,7 +707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -1012,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../004-metallb-install/" class="md-nav__link">
+      <a href="../../offline-install/004-metallb-install/" class="md-nav__link">
         
   
   
@@ -1164,6 +887,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1179,11 +904,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
@@ -1204,7 +929,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1222,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/001-falco-install/" class="md-nav__link">
+      <a href="../001-falco-install/" class="md-nav__link">
         
   
   
@@ -1250,7 +975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/002-tetragon-install/" class="md-nav__link">
+      <a href="../002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1275,10 +1000,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../security/003-tetragon-security-policy/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tetragon 보안 정책 전략
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1294,6 +1046,315 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#개요" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        개요
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-정책-범위-설계-원칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 정책 범위 설계 원칙
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 정책 범위 설계 원칙">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-wide-vs-namespace-scoped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster-wide vs Namespace-scoped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-no-sudo-강제-정책-hard-lock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. No-Sudo 강제 정책 (Hard-Lock)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. No-Sudo 강제 정책 (Hard-Lock)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전략" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전략
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#구현--애플리케이션-네임스페이스-한정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        구현 — 애플리케이션 네임스페이스 한정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#구현--클러스터-전체-강제-self-lockout-위험" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        구현 — 클러스터 전체 강제 (Self-lockout 위험)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-immutable-infrastructure--위험-바이너리-실행-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Immutable Infrastructure — 위험 바이너리 실행 차단
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Immutable Infrastructure — 위험 바이너리 실행 차단">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#실행-차단-전략" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실행 차단 전략
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#구현--컨테이너-내-특정-바이너리-실행-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        구현 — 컨테이너 내 특정 바이너리 실행 차단
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-단계적-정책-강화-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 단계적 정책 강화 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 단계적 정책 강화 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-post-액션으로-관찰" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: Post 액션으로 관찰
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-잡히는-프로세스-분석" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 잡히는 프로세스 분석
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-필요한-예외-추가-후-sigkill-적용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 필요한 예외 추가 후 Sigkill 적용
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-self-lockout-방지-및-break-glass-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Self-lockout 방지 및 Break-glass 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Self-lockout 방지 및 Break-glass 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#사전-조치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사전 조치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break-glass--긴급-시-정책-제거" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Break-glass — 긴급 시 정책 제거
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#정책-삭제로-복구" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        정책 삭제로 복구
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-시나리오별-권장-정책-조합" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 시나리오별 권장 정책 조합
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 시나리오별 권장 정책 조합">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#시나리오-a-일반-웹-애플리케이션-클러스터" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시나리오 A: 일반 웹 애플리케이션 클러스터
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#시나리오-b-고보안-금융규정-준수-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시나리오 B: 고보안 금융/규정 준수 환경
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#시나리오-c-개발스테이징-탐지-위주" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시나리오 C: 개발/스테이징 (탐지 위주)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#참고" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3726,10 +3787,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#-phase-0-설치-파일-배포" class="md-nav__link">
+  <a href="#개요" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📦 Phase 0: 설치 파일 배포
+        개요
       
     </span>
   </a>
@@ -3737,44 +3798,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-1-로컬-패키지-설치-및-os-설정" class="md-nav__link">
+  <a href="#1-정책-범위-설계-원칙" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 1: 로컬 패키지 설치 및 OS 설정
+        1. 정책 범위 설계 원칙
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 1: 로컬 패키지 설치 및 OS 설정">
+    <nav class="md-nav" aria-label="1. 정책 범위 설계 원칙">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-패키지-설치-dnf-localinstall" class="md-nav__link">
+  <a href="#cluster-wide-vs-namespace-scoped" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 패키지 설치 (dnf localinstall)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-os-커널-및-보안-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 OS 커널 및 보안 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-containerd-설정-harbor-연동-대비" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 Containerd 설정 (Harbor 연동 대비)
+        Cluster-wide vs Namespace-scoped
       
     </span>
   </a>
@@ -3787,45 +3826,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-2-이미지-로드-전체-노드" class="md-nav__link">
+  <a href="#2-no-sudo-강제-정책-hard-lock" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 2: 이미지 로드 (전체 노드)
+        2. No-Sudo 강제 정책 (Hard-Lock)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-3-로드밸런서lb-구성-ha-3중화-시에만" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)">
+    <nav class="md-nav" aria-label="2. No-Sudo 강제 정책 (Hard-Lock)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#옵션-a-vip-방식-keepalived--haproxy---권장" class="md-nav__link">
+  <a href="#전략" class="md-nav__link">
     <span class="md-ellipsis">
       
-        옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-haproxy-설정-etchaproxyhaproxycfg" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) HAProxy 설정 (/etc/haproxy/haproxy.cfg)
+        전략
       
     </span>
   </a>
@@ -3833,26 +3849,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-keepalived-설정-etckeepalivedkeepalivedconf" class="md-nav__link">
+  <a href="#구현--애플리케이션-네임스페이스-한정" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2) Keepalived 설정 (/etc/keepalived/keepalived.conf)
+        구현 — 애플리케이션 네임스페이스 한정
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#옵션-b-localhost-lb-방식-vip-불가-환경" class="md-nav__link">
+  <a href="#구현--클러스터-전체-강제-self-lockout-위험" class="md-nav__link">
     <span class="md-ellipsis">
       
-        옵션 B: Localhost LB 방식 (VIP 불가 환경)
+        구현 — 클러스터 전체 강제 (Self-lockout 위험)
       
     </span>
   </a>
@@ -3865,22 +3876,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-4-마스터-초기화-master-1" class="md-nav__link">
+  <a href="#3-immutable-infrastructure--위험-바이너리-실행-차단" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 4: 마스터 초기화 (Master-1)
+        3. Immutable Infrastructure — 위험 바이너리 실행 차단
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 4: 마스터 초기화 (Master-1)">
+    <nav class="md-nav" aria-label="3. Immutable Infrastructure — 위험 바이너리 실행 차단">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-ha-구성-vip-사용-초기화" class="md-nav__link">
+  <a href="#실행-차단-전략" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🅰️ HA 구성 (VIP 사용) 초기화
+        실행 차단 전략
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#구현--컨테이너-내-특정-바이너리-실행-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        구현 — 컨테이너 내 특정 바이너리 실행 차단
       
     </span>
   </a>
@@ -3893,22 +3915,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-5-cni-및-추가-작업" class="md-nav__link">
+  <a href="#4-단계적-정책-강화-절차" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 5: CNI 및 추가 작업
+        4. 단계적 정책 강화 절차
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 5: CNI 및 추가 작업">
+    <nav class="md-nav" aria-label="4. 단계적 정책 강화 절차">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-calico-cni-설치" class="md-nav__link">
+  <a href="#1단계-post-액션으로-관찰" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 Calico CNI 설치
+        1단계: Post 액션으로 관찰
       
     </span>
   </a>
@@ -3916,10 +3938,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-helm-설치" class="md-nav__link">
+  <a href="#2단계-잡히는-프로세스-분석" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 Helm 설치
+        2단계: 잡히는 프로세스 분석
       
     </span>
   </a>
@@ -3927,10 +3949,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-워커-노드-조인" class="md-nav__link">
+  <a href="#3단계-필요한-예외-추가-후-sigkill-적용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 워커 노드 조인
+        3단계: 필요한 예외 추가 후 Sigkill 적용
       
     </span>
   </a>
@@ -3943,10 +3965,110 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-재설치-시-초기화-절차" class="md-nav__link">
+  <a href="#5-self-lockout-방지-및-break-glass-절차" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧹 재설치 시 초기화 절차
+        5. Self-lockout 방지 및 Break-glass 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Self-lockout 방지 및 Break-glass 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#사전-조치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사전 조치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break-glass--긴급-시-정책-제거" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Break-glass — 긴급 시 정책 제거
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#정책-삭제로-복구" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        정책 삭제로 복구
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-시나리오별-권장-정책-조합" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 시나리오별 권장 정책 조합
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 시나리오별 권장 정책 조합">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#시나리오-a-일반-웹-애플리케이션-클러스터" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시나리오 A: 일반 웹 애플리케이션 클러스터
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#시나리오-b-고보안-금융규정-준수-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시나리오 B: 고보안 금융/규정 준수 환경
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#시나리오-c-개발스테이징-탐지-위주" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시나리오 C: 개발/스테이징 (탐지 위주)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#참고" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고
       
     </span>
   </a>
@@ -3973,176 +4095,272 @@
   
 
 
-<h1 id="2-폐쇄망에서-kubernetes와-helm-설치">2. 폐쇄망에서 Kubernetes와 Helm 설치</h1>
-<p>본 문서는 폐쇄망 환경에서 <strong>kubeadm</strong>을 사용하여 Kubernetes v1.30.x 클러스터를 구축하는 절차를 정의합니다.</p>
+<h1 id="tetragon-보안-정책-전략-가이드">Tetragon 보안 정책 전략 가이드</h1>
+<h2 id="개요">개요</h2>
+<p>Tetragon의 TracingPolicy는 커널 레벨에서 동작하므로, 잘못 설계하면
+관리자 본인이 시스템에서 잠길 수 있습니다.
+이 문서는 <strong>범위(Scope) 설계 → 정책 강도 단계적 적용 → Self-lockout 방지</strong>
+순서로 운영 환경에서 안전하게 정책을 운용하는 방법을 다룹니다.</p>
+<hr />
+<h2 id="1-정책-범위-설계-원칙">1. 정책 범위 설계 원칙</h2>
+<h3 id="cluster-wide-vs-namespace-scoped">Cluster-wide vs Namespace-scoped</h3>
+<p>Tetragon은 두 가지 CRD를 제공합니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">CRD</th>
+<th style="text-align: left;">적용 범위</th>
+<th style="text-align: left;">용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>TracingPolicy</code></td>
+<td style="text-align: left;">클러스터 전체 (호스트 포함)</td>
+<td style="text-align: left;">시스템 전반 차단</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TracingPolicyNamespaced</code></td>
+<td style="text-align: left;">특정 K8s 네임스페이스의 파드만</td>
+<td style="text-align: left;">앱 레이어 차단</td>
+</tr>
+</tbody>
+</table>
+<p><strong>핵심 원칙: 호스트 프로세스(systemd, sudo, sshd 등)에 영향을 주는 정책은
+<code>TracingPolicy</code>(클러스터 전체)로 적용하고, 앱 파드에만 적용할 정책은
+<code>TracingPolicyNamespaced</code>를 사용합니다.</strong></p>
+<p><code>TracingPolicyNamespaced</code>를 사용하면 해당 네임스페이스의 파드 안에서
+발생하는 이벤트만 잡히므로, 호스트의 sudo·PAM 인증에는 전혀 영향이 없습니다.</p>
+<hr />
+<h2 id="2-no-sudo-강제-정책-hard-lock">2. No-Sudo 강제 정책 (Hard-Lock)</h2>
+<h3 id="전략">전략</h3>
+<p><code>/etc/sudoers</code>는 소프트웨어 설정이므로 취약점 악용 시 우회 가능합니다.
+Tetragon을 통해 커널 레벨에서 sudo 인증 자체를 막으면 <code>sudoers</code> 설정과
+무관하게 권한 상승이 불가능해집니다.</p>
+<h3 id="구현--애플리케이션-네임스페이스-한정">구현 — 애플리케이션 네임스페이스 한정</h3>
+<p>호스트 관리자에게 영향을 주지 않으면서 앱 파드에서의 sudo를 차단합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cilium.io/v1alpha1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TracingPolicyNamespaced</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no-sudo-in-app</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span><span class="w">        </span><span class="c1"># 이 네임스페이스의 파드에만 적용</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">kprobes</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">call</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fd_install&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">syscall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;file&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nt">selectors</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchArgs</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Equal&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="nt">values</span><span class="p">:</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/etc/shadow&quot;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">      </span><span class="nt">matchActions</span><span class="p">:</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sigkill</span>
+</code></pre></div>
 <ul>
-<li><strong>가이드 환경</strong></li>
-<li><strong>OS</strong>: Rocky Linux 9.6 (추천) / Ubuntu 22.04+</li>
-<li><strong>K8s Version</strong>: v1.30.14</li>
-<li><strong>Container Runtime</strong>: containerd v2.x</li>
-<li><a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing">설치 파일 위치 (Google Drive)</a></li>
+<li><code>TracingPolicyNamespaced</code>는 해당 네임스페이스 파드 내부 이벤트만 처리합니다.</li>
+<li>호스트의 sudo, PAM, sshd는 영향을 받지 않습니다.</li>
 </ul>
-<blockquote>
-<div class="admonition note">
-<p class="admonition-title">네트워크 전제 조건</p>
-</div>
-<p>폐쇄망 환경이라도 각 노드 간의 통신은 전면 허용되어야 하며, <code>169.254.169.254/32</code> (cloud-init 메타데이터 IP)에 대한 80포트 아웃바운드 규칙이 허용되어야 정상적인 노드 초기화가 가능합니다.</p>
-</blockquote>
+<h3 id="구현--클러스터-전체-강제-self-lockout-위험">구현 — 클러스터 전체 강제 (Self-lockout 위험)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 주의: 아래 정책 적용 시 matchBinaries 예외 없이는 관리자도 sudo 불가</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cilium.io/v1alpha1</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TracingPolicy</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hard-no-sudo</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">kprobes</span><span class="p">:</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">call</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fd_install&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">syscall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;file&quot;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">selectors</span><span class="p">:</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchArgs</span><span class="p">:</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Equal&quot;</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">        </span><span class="nt">values</span><span class="p">:</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/etc/shadow&quot;</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">      </span><span class="nt">matchActions</span><span class="p">:</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sigkill</span>
+</code></pre></div>
+<p>클러스터 전체에 적용할 때는 반드시 <strong>Break-glass 절차(5절)</strong> 를 먼저 확보하세요.</p>
 <hr />
-<h2 id="-phase-0-설치-파일-배포">📦 Phase 0: 설치 파일 배포</h2>
-<p>마스터-1 노드에 준비된 설치 파일(<code>k8s-1.30.tar.gz</code>)을 모든 워커 및 추가 마스터 노드에 배포합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 배포 대상 노드 IP 목록 (환경에 맞게 수정)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">NODES</span><span class="o">=(</span><span class="s2">&quot;10.10.10.71&quot;</span><span class="w"> </span><span class="s2">&quot;10.10.10.72&quot;</span><span class="w"> </span><span class="s2">&quot;10.10.10.73&quot;</span><span class="w"> </span><span class="s2">&quot;10.10.10.74&quot;</span><span class="o">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">for</span><span class="w"> </span>IP<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NODES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Sending to </span><span class="nv">$IP</span><span class="s2">...&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span>scp<span class="w"> </span>~/k8s-1.30.tar.gz<span class="w"> </span>rocky@<span class="nv">$IP</span>:~/
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">done</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># 모든 노드에서 압축 해제</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>~/k8s-1.30.tar.gz
-</code></pre></div>
-<hr />
-<h2 id="-phase-1-로컬-패키지-설치-및-os-설정">🚀 Phase 1: 로컬 패키지 설치 및 OS 설정</h2>
-<p>모든 노드(Master, Worker 공통)에서 수행합니다.</p>
-<h3 id="11-패키지-설치-dnf-localinstall">1.1 패키지 설치 (dnf localinstall)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># Repo 설정을 무시하고 로컬 RPM 파일을 일괄 설치합니다.</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>localinstall<span class="w"> </span>-y<span class="w"> </span>--disablerepo<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>common/rpms/*.rpm<span class="w"> </span>k8s/rpms/*.rpm
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 설치 확인</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>rpm<span class="w"> </span>-qa<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;kubelet|containerd|haproxy&quot;</span>
-</code></pre></div>
-<h3 id="12-os-커널-및-보안-설정">1.2 OS 커널 및 보안 설정</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. Swap 비활성화</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/swap/d&#39;</span><span class="w"> </span>/etc/fstab
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 2. SELinux Permissive 모드 (Rocky Linux 필수)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>setenforce<span class="w"> </span><span class="m">0</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^SELINUX=enforcing$/SELINUX=permissive/&#39;</span><span class="w"> </span>/etc/selinux/config
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># 3. 커널 모듈 로드 및 sysctl 설정</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="s">overlay</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="s">br_netfilter</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s">EOF</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>overlay
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>br_netfilter
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="s">net.bridge.bridge-nf-call-iptables  = 1</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="s">net.bridge.bridge-nf-call-ip6tables = 1</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="s">net.ipv4.ip_forward                 = 1</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s">EOF</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
-</code></pre></div>
-<h3 id="13-containerd-설정-harbor-연동-대비">1.3 Containerd 설정 (Harbor 연동 대비)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 기본 설정 생성</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>containerd<span class="w"> </span>config<span class="w"> </span>default<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 2. SystemdCgroup 활성화 (필수!)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/SystemdCgroup = false/SystemdCgroup = true/&#39;</span><span class="w"> </span>/etc/containerd/config.toml
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># 3. Pause 이미지 버전 고정 (폐쇄망 반입 이미지와 일치)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/pause:3.10.1/pause:3.9/g&#39;</span><span class="w"> </span>/etc/containerd/config.toml
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># 4. Harbor 사설 인증서 경로 설정</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|config_path = &#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;|config_path = &#39;/etc/containerd/certs.d&#39;|g&quot;</span><span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># 5. 서비스 시작</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>containerd
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>kubelet
-</code></pre></div>
-<hr />
-<h2 id="-phase-2-이미지-로드-전체-노드">🚀 Phase 2: 이미지 로드 (전체 노드)</h2>
-<p>폐쇄망이므로 <code>docker pull</code> 대신 로컬 이미지를 <code>ctr</code> 명령어로 로드합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/images
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># k8s.io 네임스페이스에 이미지 로드</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">for</span><span class="w"> </span>img<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.tar<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Loading </span><span class="nv">$img</span><span class="s2">...&quot;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$img</span><span class="s2">&quot;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">done</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># 로드 확인</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>kube-apiserver
-</code></pre></div>
-<hr />
-<h2 id="-phase-3-로드밸런서lb-구성-ha-3중화-시에만">🚀 Phase 3: 로드밸런서(LB) 구성 (HA 3중화 시에만)</h2>
-<p>마스터 3대 구성 시 API Server의 고가용성을 위해 LB를 구성합니다.</p>
-<h3 id="옵션-a-vip-방식-keepalived--haproxy---권장">옵션 A: VIP 방식 (Keepalived + HAProxy - 권장)</h3>
-<ul>
-<li><strong>전제</strong>: 마스터 노드 3대 및 가상 IP(VIP: <code>10.10.10.200</code>) 필요.</li>
-<li><strong>커널 설정</strong>: VIP 바인딩 허용</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;net.ipv4.ip_nonlocal_bind = 1&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sysctl.d/haproxy.conf
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
-</code></pre></div>
-<h4 id="1-haproxy-설정-etchaproxyhaproxycfg">1) HAProxy 설정 (<code>/etc/haproxy/haproxy.cfg</code>)</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>frontend<span class="w"> </span>k8s-api
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nb">bind</span><span class="w"> </span><span class="m">10</span>.10.10.200:6443<span class="w"> </span><span class="c1"># VIP로 바인딩하여 API 서버와 포트 충돌 방지</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>default_backend<span class="w"> </span>k8s-masters
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>backend<span class="w"> </span>k8s-masters
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span>balance<span class="w"> </span>roundrobin
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>server<span class="w"> </span>master1<span class="w"> </span><span class="m">10</span>.10.10.70:6443<span class="w"> </span>check
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>server<span class="w"> </span>master2<span class="w"> </span><span class="m">10</span>.10.10.71:6443<span class="w"> </span>check
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>server<span class="w"> </span>master3<span class="w"> </span><span class="m">10</span>.10.10.72:6443<span class="w"> </span>check
-</code></pre></div>
-<h4 id="2-keepalived-설정-etckeepalivedkeepalivedconf">2) Keepalived 설정 (<code>/etc/keepalived/keepalived.conf</code>)</h4>
-<ul>
-<li>Master-1은 <code>state MASTER</code>, <code>priority 101</code>. 나머지는 <code>BACKUP</code>, <code>100/99</code>로 설정합니다.</li>
-</ul>
-<h3 id="옵션-b-localhost-lb-방식-vip-불가-환경">옵션 B: Localhost LB 방식 (VIP 불가 환경)</h3>
-<p>VIP 사용이 어려운 경우 각 노드(마스터/워커 전체)에 HAProxy를 설치하고 <code>127.0.0.1:8443</code>을 통해 마스터로 통신하게 합니다.</p>
-<hr />
-<h2 id="-phase-4-마스터-초기화-master-1">🚀 Phase 4: 마스터 초기화 (Master-1)</h2>
-<h3 id="-ha-구성-vip-사용-초기화">🅰️ HA 구성 (VIP 사용) 초기화</h3>
-<p>RHEL/Rocky 9 계열은 SAN 검증이 엄격하므로 모든 마스터 IP를 명시해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;10.10.10.200:6443&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--upload-certs<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;10.10.10.200,10.10.10.70,10.10.10.71,10.10.10.72,127.0.0.1&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span>--pod-network-cidr<span class="o">=</span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span>--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>--kubernetes-version<span class="w"> </span>v1.30.0
+<h2 id="3-immutable-infrastructure--위험-바이너리-실행-차단">3. Immutable Infrastructure — 위험 바이너리 실행 차단</h2>
+<h3 id="실행-차단-전략">실행 차단 전략</h3>
+<p>운영 컨테이너 이미지에 <code>sudo</code>, <code>su</code>, <code>bash</code>, <code>curl</code> 같은 도구가 포함되어 있으면
+침해 시 내부에서 이 도구들이 악용됩니다.
+<code>security_bprm_check</code> kprobe로 <strong>실행(exec) 단계</strong>에서 차단합니다.</p>
+<h3 id="구현--컨테이너-내-특정-바이너리-실행-차단">구현 — 컨테이너 내 특정 바이너리 실행 차단</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cilium.io/v1alpha1</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TracingPolicyNamespaced</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">block-dangerous-binaries</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">kprobes</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">call</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;security_bprm_check&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">syscall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;linux_binprm&quot;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">selectors</span><span class="p">:</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchArgs</span><span class="p">:</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Postfix&quot;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="nt">values</span><span class="p">:</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/sudo&quot;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/su&quot;</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/curl&quot;</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/wget&quot;</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/bash&quot;</span><span class="w">     </span><span class="c1"># 필요 시 — 영향 범위 충분히 검토 후 적용</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">      </span><span class="nt">matchActions</span><span class="p">:</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sigkill</span>
 </code></pre></div>
 <blockquote>
-<div class="admonition warning">
-<p class="admonition-title">포트 충돌 방지 (중요)</p>
-</div>
-<p>HAProxy가 VIP의 6443을 점유하고 있으므로, 초기화 후 <strong>kube-apiserver의 bind-address를 실제 IP로 수정</strong>해야 합니다.
-<code>/etc/kubernetes/manifests/kube-apiserver.yaml</code> 수정:
-<code>- --bind-address=10.10.10.70</code> (각 마스터의 실제 IP)</p>
+<p><code>/bin/bash</code> 차단은 배포 스크립트·헬스체크 등 정상 동작에 영향을 줄 수 있습니다.
+먼저 <code>Post</code> 액션으로 어떤 프로세스가 잡히는지 확인 후 차단 목록을 결정하세요.</p>
 </blockquote>
 <hr />
-<h2 id="-phase-5-cni-및-추가-작업">🚀 Phase 5: CNI 및 추가 작업</h2>
-<h3 id="51-calico-cni-설치">5.1 Calico CNI 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>~/k8s-1.30/k8s/utils/calico.yaml
+<h2 id="4-단계적-정책-강화-절차">4. 단계적 정책 강화 절차</h2>
+<p>운영 환경에 즉시 Sigkill을 걸면 예상치 못한 서비스 장애가 생길 수 있습니다.
+아래 순서로 검증 후 강화합니다.</p>
+<h3 id="1단계-post-액션으로-관찰">1단계: Post 액션으로 관찰</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">matchActions</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Post</span><span class="w">    </span><span class="c1"># Sigkill 없이 Tetragon 로그에만 기록</span>
 </code></pre></div>
-<h3 id="52-helm-설치">5.2 Helm 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>~/k8s-1.30/k8s/binaries/helm<span class="w"> </span>/usr/local/bin/helm
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/helm
+<p>정책을 적용하고 충분한 시간 동안 로그를 수집합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon<span class="w"> </span>-f<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;process_kprobe&quot;</span>
 </code></pre></div>
-<h3 id="53-워커-노드-조인">5.3 워커 노드 조인</h3>
-<p>Master-1 초기화 결과로 나온 <code>kubeadm join</code> 명령어를 각 워커 노드에서 실행합니다.</p>
+<h3 id="2단계-잡히는-프로세스-분석">2단계: 잡히는 프로세스 분석</h3>
+<p>로그에서 <code>binary</code> 필드를 확인해 예상치 못한 프로세스가 있는지 점검합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="s2">import sys, json</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="s2">for line in sys.stdin:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="s2">    try:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="s2">        d = json.loads(line.strip())</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="s2">        if &#39;process_kprobe&#39; in d:</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="s2">            p = d[&#39;process_kprobe&#39;].get(&#39;process&#39;, {})</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="s2">            print(p.get(&#39;binary&#39;), p.get(&#39;arguments&#39;,&#39;&#39;)[:60])</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="s2">    except: pass</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
+</code></pre></div>
+<h3 id="3단계-필요한-예외-추가-후-sigkill-적용">3단계: 필요한 예외 추가 후 Sigkill 적용</h3>
+<p>분석 결과를 토대로 <code>matchBinaries</code> 예외를 확정하고 <code>action: Sigkill</code>로 전환합니다.</p>
 <hr />
-<h2 id="-재설치-시-초기화-절차">🧹 재설치 시 초기화 절차</h2>
-<p>설치 중 오류가 발생하여 처음부터 다시 시작해야 하는 경우 다음 명령어를 순서대로 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1. kubeadm 리셋</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>reset<span class="w"> </span>-f
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 2. 잔여 설정 및 데이터 삭제</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/etc/cni/net.d<span class="w"> </span><span class="nv">$HOME</span>/.kube<span class="w"> </span>/var/lib/etcd<span class="w"> </span>/var/lib/kubelet
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># 3. 네트워크 규칙 초기화</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-F<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-F<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>mangle<span class="w"> </span>-F<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>iptables<span class="w"> </span>-X
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1"># 4. 런타임 재시작</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+<h2 id="5-self-lockout-방지-및-break-glass-절차">5. Self-lockout 방지 및 Break-glass 절차</h2>
+<h3 id="사전-조치">사전 조치</h3>
+<ol>
+<li><strong>SSH 키 기반 접근 유지</strong> — 비밀번호 인증을 차단해도 SSH 키로는 접근 가능</li>
+<li><strong>네임스페이스 범위 사용</strong> — <code>TracingPolicyNamespaced</code>로 호스트 제외</li>
+<li><strong>정책 적용 전 dry-run</strong> — <code>Post</code> 액션으로 충분한 사전 검증</li>
+</ol>
+<h3 id="break-glass--긴급-시-정책-제거">Break-glass — 긴급 시 정책 제거</h3>
+<p>정책이 잘못 적용돼 잠긴 경우, Tetragon DaemonSet을 내리면 모든 TracingPolicy가
+즉시 비활성화됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Tetragon DaemonSet 스케일 다운 (모든 정책 즉시 해제)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>scale<span class="w"> </span>daemonset<span class="w"> </span>tetragon<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>--replicas<span class="o">=</span><span class="m">0</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 문제 해결 후 복구</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kubectl<span class="w"> </span>scale<span class="w"> </span>daemonset<span class="w"> </span>tetragon<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>--replicas<span class="o">=</span><span class="m">1</span>
 </code></pre></div>
+<blockquote>
+<p>비상 접근 시나리오: 호스트에 물리 또는 콘솔 접근 가능한 계정을 항상 확보해두세요.
+클라우드 환경이면 시리얼 콘솔, 온프레미스라면 IPMI/iDRAC 등을 통해 접근합니다.</p>
+</blockquote>
+<h3 id="정책-삭제로-복구">정책 삭제로 복구</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 특정 정책만 제거</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>tracingpolicy<span class="w"> </span>&lt;policy-name&gt;
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>tracingpolicynamespaced<span class="w"> </span>&lt;policy-name&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;
+</code></pre></div>
+<hr />
+<h2 id="6-시나리오별-권장-정책-조합">6. 시나리오별 권장 정책 조합</h2>
+<h3 id="시나리오-a-일반-웹-애플리케이션-클러스터">시나리오 A: 일반 웹 애플리케이션 클러스터</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>목표: 앱 파드에서의 권한 상승 및 외부 통신 도구 실행 차단
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>범위: production, staging 네임스페이스
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">정책</th>
+<th style="text-align: left;">CRD</th>
+<th style="text-align: left;">액션</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">/etc/shadow 읽기 차단</td>
+<td style="text-align: left;"><code>TracingPolicyNamespaced</code></td>
+<td style="text-align: left;">Sigkill</td>
+</tr>
+<tr>
+<td style="text-align: left;">curl/wget 실행 차단</td>
+<td style="text-align: left;"><code>TracingPolicyNamespaced</code></td>
+<td style="text-align: left;">Sigkill</td>
+</tr>
+<tr>
+<td style="text-align: left;">민감 경로 쓰기 차단</td>
+<td style="text-align: left;"><code>TracingPolicyNamespaced</code></td>
+<td style="text-align: left;">Sigkill</td>
+</tr>
+</tbody>
+</table>
+<p>호스트(kube-system)는 정책 대상에서 제외되므로 관리자 운영에 지장 없음.</p>
+<h3 id="시나리오-b-고보안-금융규정-준수-환경">시나리오 B: 고보안 금융/규정 준수 환경</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>목표: 어떤 수단으로도 권한 상승 불가 (커널 레벨 강제)
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>범위: 클러스터 전체
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">정책</th>
+<th style="text-align: left;">CRD</th>
+<th style="text-align: left;">액션</th>
+<th style="text-align: left;">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">/etc/shadow 읽기 차단</td>
+<td style="text-align: left;"><code>TracingPolicy</code></td>
+<td style="text-align: left;">Sigkill</td>
+<td style="text-align: left;">unix_chkpwd 등 예외 없음</td>
+</tr>
+<tr>
+<td style="text-align: left;">sudo/su 실행 차단</td>
+<td style="text-align: left;"><code>TracingPolicy</code></td>
+<td style="text-align: left;">Sigkill</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;">/etc/passwd 쓰기 차단</td>
+<td style="text-align: left;"><code>TracingPolicy</code></td>
+<td style="text-align: left;">Sigkill</td>
+<td style="text-align: left;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Break-glass: SSH 키 기반 root 접근 + 물리 콘솔 접근 경로 확보 필수.</p>
+<h3 id="시나리오-c-개발스테이징-탐지-위주">시나리오 C: 개발/스테이징 (탐지 위주)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>목표: 차단 없이 이상행위 탐지 및 가시성 확보
+</code></pre></div>
+<p>모든 정책을 <code>action: Post</code>로 적용해 로그만 수집합니다.
+임계치 초과 시 Alertmanager 알림으로 연결하고, 사고 발생 시에만 Sigkill로 전환합니다.</p>
+<hr />
+<h2 id="참고">참고</h2>
+<ul>
+<li><a href="https://tetragon.io/docs/concepts/tracing-policy/">Tetragon TracingPolicy 공식 문서</a></li>
+<li><a href="https://tetragon.io/docs/concepts/tracing-policy/namespaced/">TracingPolicyNamespaced</a></li>
+<li><a href="https://tetragon.io/docs/concepts/tracing-policy/selectors/">Selectors 레퍼런스</a></li>
+</ul>
 
 
 

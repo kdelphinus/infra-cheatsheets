@@ -14,7 +14,7 @@
         <link rel="prev" href="../001-falco-install/">
       
       
-        <link rel="next" href="../../backup-restore/001-velero-install/">
+        <link rel="next" href="../003-tetragon-security-policy/">
       
       
         
@@ -1137,6 +1137,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5단계: 차단 정책 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#시스템-바이너리-제외-matchbinaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시스템 바이너리 제외 (matchBinaries)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1204,6 +1221,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../003-tetragon-security-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tetragon 보안 정책 전략
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3738,6 +3783,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5단계: 차단 정책 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#시스템-바이너리-제외-matchbinaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시스템 바이너리 제외 (matchBinaries)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3962,46 +4024,71 @@
 </code></pre></div>
 <h2 id="5단계-차단-정책-테스트">5단계: 차단 정책 테스트</h2>
 <blockquote>
-<p><code>manifests/block-sensitive-read.yaml</code>은 <code>/etc/shadow</code> 읽기를 차단하는 <strong>테스트용 예시 정책</strong>입니다.
+<p><code>manifests/block-sensitive-read.yaml</code>은 <code>/etc/shadow</code> 읽기를 차단하는
+<strong>테스트용 예시 정책</strong>입니다.
 실 운영 시에는 위의 TracingPolicy 이해 섹션을 참고하여 환경에 맞는 정책으로 교체하세요.</p>
 </blockquote>
+<h3 id="시스템-바이너리-제외-matchbinaries">시스템 바이너리 제외 (<code>matchBinaries</code>)</h3>
+<p><code>/etc/shadow</code>는 <code>sudo</code>, <code>su</code>, <code>passwd</code> 같은 시스템 인증 바이너리도 정상적으로 읽습니다.
+이 바이너리들을 제외하지 않으면 <strong><code>sudo</code> 실행 시 즉시 Sigkill</strong>되어 시스템 운영에 지장이 생깁니다.</p>
+<p><code>manifests/block-sensitive-read.yaml</code>은 아래 바이너리를 차단 대상에서 제외합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">matchBinaries</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NotIn&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">values</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/sudo&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/sudo&quot;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/su&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/su&quot;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/passwd&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/sbin/login&quot;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/lib/systemd/systemd&quot;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/sbin/unix_chkpwd&quot;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/sbin/unix_chkpwd&quot;</span>
+</code></pre></div>
+<blockquote>
+<p><strong><code>unix_chkpwd</code> 주의:</strong> sudo 인증 시 PAM이 <code>unix_chkpwd</code>를 별도 프로세스로 띄워
+<code>/etc/shadow</code>를 읽습니다. 이 헬퍼를 제외하지 않으면 sudo 바이너리 자체는 살아도
+인증 단계에서 kill되어 sudo가 동작하지 않습니다.</p>
+</blockquote>
+<p>운영 환경에서 추가로 제외가 필요한 바이너리가 있으면 이 목록에 추가합니다.</p>
 <p>TracingPolicy 적용 후 <code>/etc/shadow</code> 읽기를 시도합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-block<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/etc/shadow
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># 예상: cat 프로세스가 Sigkill로 즉시 종료 → 터미널에 &quot;Killed&quot; 출력</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-block<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/etc/shadow
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># 예상: cat 프로세스가 Sigkill로 즉시 종료 → 터미널에 &quot;Killed&quot; 출력</span>
 </code></pre></div>
 <p><code>--rm -it</code> 없이 exit code로 확인하는 방법:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-block<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat /etc/shadow; echo exit:</span><span class="nv">$?</span><span class="s2">&quot;</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>test-block
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># 출력: Killed</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1">#       exit:0   (cat이 죽었지만 sh는 살아서 echo까지 실행됨)</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>test-block
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-block<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat /etc/shadow; echo exit:</span><span class="nv">$?</span><span class="s2">&quot;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>test-block
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># 출력: Killed</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1">#       exit:0   (cat이 죽었지만 sh는 살아서 echo까지 실행됨)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>test-block
 </code></pre></div>
 <p>Tetragon 이벤트 로그 확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon<span class="w"> </span>-f
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon<span class="w"> </span>-f
 </code></pre></div>
 <h2 id="트러블슈팅">트러블슈팅</h2>
 <h3 id="차단이-동작하지-않는-경우">차단이 동작하지 않는 경우</h3>
 <ol>
 <li>커널 함수 심볼 확인</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>grep<span class="w"> </span>-w<span class="w"> </span>fd_install<span class="w"> </span>/proc/kallsyms<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>grep<span class="w"> </span>-w<span class="w"> </span>security_file_open<span class="w"> </span>/proc/kallsyms<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>grep<span class="w"> </span>-w<span class="w"> </span>fd_install<span class="w"> </span>/proc/kallsyms<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-w<span class="w"> </span>security_file_open<span class="w"> </span>/proc/kallsyms<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
 </code></pre></div>
-<p><code>fd_install</code> 심볼이 없으면 <code>manifests/block-sensitive-read.yaml</code>의 <code>call</code> 값을 <code>security_file_open</code>으로 변경 후 재적용합니다.</p>
+<p><code>fd_install</code> 심볼이 없으면 <code>manifests/block-sensitive-read.yaml</code>의
+   <code>call</code> 값을 <code>security_file_open</code>으로 변경 후 재적용합니다.</p>
 <ol>
 <li><code>CONFIG_BPF_KPROBE_OVERRIDE</code> 확인</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>grep<span class="w"> </span>CONFIG_BPF_KPROBE_OVERRIDE<span class="w"> </span>/boot/config-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="o">||</span><span class="w"> </span>zcat<span class="w"> </span>/proc/config.gz<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>CONFIG_BPF_KPROBE_OVERRIDE
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>grep<span class="w"> </span>CONFIG_BPF_KPROBE_OVERRIDE<span class="w"> </span>/boot/config-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="o">||</span><span class="w"> </span>zcat<span class="w"> </span>/proc/config.gz<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>CONFIG_BPF_KPROBE_OVERRIDE
 </code></pre></div>
 <p><code>=y</code>가 아니면 Sigkill 차단이 불가합니다. WSL2의 경우 <code>wsl --update</code> 후 재시작하면 해결되는 경우가 있습니다.</p>
 <h3 id="tetragon-파드가-pending인-경우">Tetragon 파드가 Pending인 경우</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon
 </code></pre></div>
 <p>이미지 pull 실패라면 Harbor 업로드 및 <code>values.yaml</code> 이미지 경로를 재확인합니다.</p>
 <h2 id="삭제">삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/uninstall.sh
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>./scripts/uninstall.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/uninstall.sh
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>./scripts/uninstall.sh
 </code></pre></div>
 <hr />
 <h2 id="별첨-grafana-연동-체크리스트">별첨: Grafana 연동 체크리스트</h2>
