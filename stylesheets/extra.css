@@ -3,9 +3,9 @@
 /* 1. 그리드 컨테이너 설정 */
 .md-typeset .grid.cards > ul,
 .md-typeset .grid.cards > ol {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem !important;
+  display: block;
+  column-width: 300px;
+  column-gap: 1.5rem !important;
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -14,6 +14,9 @@
 /* 2. 개별 카드 스타일 (li) */
 .md-typeset .grid.cards > ul > li,
 .md-typeset .grid.cards > ol > li {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 1.5rem;
   border: 1px solid var(--md-default-fg-color--lighter);
   border-radius: 0.4rem;
   padding: 1.25rem;
