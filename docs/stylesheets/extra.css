@@ -8,6 +8,7 @@
   padding: 1.2rem;
   transition: all 0.3s ease;
   background-color: var(--md-default-bg-color);
+  display: block; /* 그리드 내부 아이템이므로 block으로 고정 */
 }
 
 /* 카드 호버 효과: 그림자 강화 및 위로 살짝 뜸 */
@@ -20,74 +21,74 @@
 
 /* 카드 내 제목 스타일 */
 .md-typeset .grid.cards li strong {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: var(--md-primary-fg-color);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.2rem; /* 제목 아래 여백 축소 */
+  margin-bottom: 0.2rem;
 }
 
 /* 카드 내 제목 아이콘 크기 조정 */
 .md-typeset .grid.cards li strong .twemoji,
 .md-typeset .grid.cards li strong .octicons {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 /* 카드 내 설명 텍스트 */
 .md-typeset .grid.cards li p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--md-default-fg-color--light);
-  line-height: 1.5;
-  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
 }
 
-/* 카드 내부 구분선 (HR) 여백 조정: 제목과는 붙이고 아래와는 띄움 */
+/* 카드 내부 구분선 (HR) */
 .md-typeset .grid.cards hr {
-  margin: 0.4rem 0 1.2rem 0; /* 위 0.4rem, 아래 1.2rem */
+  margin: 0.4rem 0 0.8rem 0;
   border-bottom: 0.05rem solid var(--md-default-fg-color--lighter);
   opacity: 0.5;
 }
 
-/* 카드와 카드 사이의 상하 간격 확대 (그리드 갭 조정) */
+/* 카드와 카드 사이의 상하 간격 */
 .md-typeset .grid.cards > ul,
 .md-typeset .grid.cards > ol {
-  gap: 2.5rem 1.2rem !important; /* 상하 간격 2.5rem으로 대폭 확대 */
+  gap: 1.5rem 1rem !important;
 }
 
-/* 카드 내 리스트 스타일 초기화 및 간격 조정 */
-.md-typeset .grid.cards ul {
+/* 카드 내부의 중첩된 리스트 (링크 목록) */
+.md-typeset .grid.cards li ul {
   list-style: none !important;
   padding-left: 0 !important;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0 0 !important;
+  display: block !important; /* 중첩된 리스트가 그리드로 작동하지 않도록 강제 */
 }
 
-.md-typeset .grid.cards ul li {
+.md-typeset .grid.cards li ul li {
   border: none !important;
   padding: 0.2rem 0 !important;
   margin: 0 !important;
   background: transparent !important;
-  font-size: 0.9rem;
-}
-
-.md-typeset .grid.cards ul li:hover {
+  font-size: 0.85rem;
   box-shadow: none !important;
   transform: none !important;
 }
 
-.md-typeset .grid.cards ul li a {
+.md-typeset .grid.cards li ul li a {
   color: var(--md-default-fg-color);
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
-.md-typeset .grid.cards ul li a:hover {
+.md-typeset .grid.cards li ul li a:hover {
   color: var(--md-accent-fg-color);
 }
 
 /* 다크 모드 최적화 */
 [data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
-  background-color: #2e303e; /* 좀 더 깊이감 있는 배경색 */
+  background-color: #2e303e;
   border-color: #40415a;
 }
 
@@ -95,14 +96,9 @@
   color: var(--md-accent-fg-color);
 }
 
-/* 홈 페이지 상단 버튼 간격 및 스타일 */
+/* 홈 페이지 상단 버튼 */
 .md-typeset .md-button {
   margin: 0.2rem 0.4rem 0.2rem 0;
-  border-radius: 2rem; /* 둥근 버튼 */
+  border-radius: 2rem;
   padding: 0.4em 1.2em;
-}
-
-.md-typeset .md-button--primary {
-  background-color: var(--md-primary-fg-color);
-  border-color: var(--md-primary-fg-color);
 }
