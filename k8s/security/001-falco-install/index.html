@@ -14,7 +14,7 @@
         <link rel="prev" href="../../monitoring/002-operation-guide/">
       
       
-        <link rel="next" href="../../backup-restore/001-velero-install/">
+        <link rel="next" href="../002-tetragon-install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Falco 설치 및 운영 - Infra Cheatsheets</title>
+        <title>Falco 런타임 탐지 - Infra Cheatsheets</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Falco 설치 및 운영
+              Falco 런타임 탐지
             
           </span>
         </div>
@@ -963,7 +963,7 @@
   <span class="md-ellipsis">
     
   
-    Falco 설치 및 운영
+    Falco 런타임 탐지
   
 
     
@@ -981,7 +981,7 @@
   <span class="md-ellipsis">
     
   
-    Falco 설치 및 운영
+    Falco 런타임 탐지
   
 
     
@@ -1111,10 +1111,77 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#별첨-grafana-연동" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        별첨: Grafana 연동
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="별첨: Grafana 연동">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#체크리스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#연동-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        연동 절차
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../002-tetragon-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tetragon 런타임 차단
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3651,6 +3718,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#별첨-grafana-연동" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        별첨: Grafana 연동
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="별첨: Grafana 연동">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#체크리스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#연동-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        연동 절차
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3741,6 +3847,103 @@
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>falco<span class="w"> </span>./charts/falco<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--set<span class="w"> </span>collectors.containerEngine.engines.cri.sockets<span class="o">=</span><span class="s1">&#39;{/run/k3s/containerd/containerd.sock}&#39;</span>
 </code></pre></div>
+<hr />
+<h2 id="별첨-grafana-연동">별첨: Grafana 연동</h2>
+<p>FalcoSidekick metrics를 Prometheus + Grafana 스택에 연동하는 절차입니다.</p>
+<blockquote>
+<p>대시보드 JSON은 공식 falcosecurity 차트에 기본 내장돼 있습니다 (<code>charts/falco/charts/falcosidekick/dashboards/</code>).
+<code>helm pull</code> 시 자동으로 포함된 파일이며 별도로 준비할 필요가 없습니다.</p>
+</blockquote>
+<h3 id="체크리스트">체크리스트</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">내용</th>
+<th style="text-align: left;">비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">metrics 엔드포인트</td>
+<td style="text-align: left;"><code>falco-falcosidekick:2810/metrics</code></td>
+<td style="text-align: left;">설치 시 자동 생성</td>
+</tr>
+<tr>
+<td style="text-align: left;">ServiceMonitor</td>
+<td style="text-align: left;"><code>manifests/servicemonitor-falcosidekick.yaml</code></td>
+<td style="text-align: left;">별도 apply 필요</td>
+</tr>
+<tr>
+<td style="text-align: left;">대시보드 JSON</td>
+<td style="text-align: left;">차트 내장 (<code>falcosidekick-grafana-dashboard.json</code>)</td>
+<td style="text-align: left;">존재</td>
+</tr>
+<tr>
+<td style="text-align: left;">대시보드 자동 배포</td>
+<td style="text-align: left;"><code>values.yaml</code>에 <code>grafana.dashboards.enabled: true</code> + namespace 지정</td>
+<td style="text-align: left;">values에 포함됨</td>
+</tr>
+<tr>
+<td style="text-align: left;">Grafana sidecar</td>
+<td style="text-align: left;"><code>NAMESPACE = ALL</code> 설정으로 모든 네임스페이스 자동 감지</td>
+<td style="text-align: left;">별도 설정 불필요</td>
+</tr>
+</tbody>
+</table>
+<h3 id="연동-절차">연동 절차</h3>
+<p><strong>1단계: ServiceMonitor 적용</strong></p>
+<p><code>manifests/servicemonitor-falcosidekick.yaml</code>을 적용합니다.
+Prometheus Operator가 이 리소스를 읽어 FalcoSidekick metrics 수집을 시작합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/servicemonitor-falcosidekick.yaml
+</code></pre></div>
+<blockquote>
+<p><code>release: prometheus</code> 라벨이 반드시 있어야 합니다.
+이 라벨이 없으면 Prometheus가 ServiceMonitor를 무시합니다.
+라벨 값은 Prometheus 인스턴스의 <code>serviceMonitorSelector</code>에 따라 다를 수 있으니 확인하세요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].spec.serviceMonitorSelector}&#39;</span>
+</code></pre></div>
+</blockquote>
+<p><strong>2단계: Grafana 대시보드 자동 배포 활성화</strong></p>
+<p><code>values.yaml</code>(또는 <code>values-local.yaml</code>)에 아래 설정이 포함돼 있습니다.
+<code>helm upgrade</code> 시 <code>monitoring</code> 네임스페이스에 ConfigMap이 자동으로 생성됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">falcosidekick</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">dashboards</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="nt">configMaps</span><span class="p">:</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="nt">falcosidekick</span><span class="p">:</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">          </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+</code></pre></div>
+<blockquote>
+<p><code>namespace</code> 값은 Grafana가 배포된 네임스페이스로 맞춰야 합니다.
+Grafana sidecar가 해당 네임스페이스의 <code>grafana_dashboard: "1"</code> 라벨 ConfigMap을 감지해 자동 등록합니다.</p>
+</blockquote>
+<p><strong>3단계: Grafana에서 확인</strong></p>
+<p>아래 항목을 순서대로 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># ConfigMap이 생성됐는지 확인</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>falcosidekick
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># ServiceMonitor가 등록됐는지 확인</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>servicemonitor<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>falcosidekick
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Prometheus target 확인 (UP 상태여야 함)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># Grafana → Explore → Prometheus → Targets 또는</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/prometheus-kube-prometheus-prometheus<span class="w"> </span><span class="m">9090</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># 브라우저: http://localhost:9090/targets → falcosidekick 검색</span>
+</code></pre></div>
+<p>Grafana 대시보드 확인:</p>
+<ol>
+<li>Grafana 접속</li>
+<li>Dashboards → Browse</li>
+<li><code>falcosidekick</code> 검색 → 대시보드 진입</li>
+<li>이벤트 그래프 및 우선순위별 통계 확인</li>
+</ol>
+<blockquote>
+<p>Grafana가 우리 스택이 아닌 경우, ConfigMap의 <code>grafana_dashboard: "1"</code> 라벨을 감지하는
+sidecar가 설정돼 있는지 확인하세요. sidecar가 없으면 대시보드 JSON을
+Grafana UI에서 직접 import 해야 합니다 (Import → JSON 파일 업로드).</p>
+</blockquote>
 
 
 
