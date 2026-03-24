@@ -70,7 +70,7 @@ hide:
     *   [:octicons-arrow-right-24: DB 장애 복구 및 트러블슈팅](db/ha/galera-recovery.md)
     *   [:octicons-arrow-right-24: MariaDB 폐쇄망 오프라인 설치](db/install/mariadb-air-gapped-install.md)
 
--   :material-ubuntu: **Linux & Server**
+-   :octicons-terminal-24: **Linux & Server**
 
     ---
 
@@ -80,7 +80,7 @@ hide:
     *   [:octicons-arrow-right-24: WSL 네트워크 및 환경 설정](ubuntu/wsl/wsl-network-setting.md)
     *   [:octicons-arrow-right-24: Linux 시스템 성능 최적화](ubuntu/init-ubuntu-env.md)
 
--   :material-lan: **Network**
+-   :octicons-broadcast-24: **Network**
 
     ---
 
@@ -90,7 +90,7 @@ hide:
     *   [:octicons-arrow-right-24: 서버 서브넷 및 게이트웨이 확인](network/tip/check-network-subnet.md)
     *   [:octicons-arrow-right-24: 방화벽 및 포트 통신 확인 팁](network/tip/check-network-subnet.md)
 
--   :material-git: **Git & Workflow**
+-   :octicons-git-branch-24: **Git & Workflow**
 
     ---
 
@@ -99,7 +99,7 @@ hide:
     *   [:octicons-arrow-right-24: Git Cheat Sheet & 명령어 요약](git/cheatsheet.md)
     *   [:octicons-arrow-right-24: 효율적인 브랜칭 전략 및 커밋 컨벤션](git/cheatsheet.md)
 
--   :material-laptop-code: **IDE & Productivity**
+-   :octicons-code-24: **IDE & Productivity**
 
     ---
 
