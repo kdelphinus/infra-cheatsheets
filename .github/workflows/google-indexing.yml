@@ -1,11 +1,11 @@
 name: Google Indexing API 제출
 
 on:
-  # 수동 트리거 — mkdocs gh-deploy 후 직접 실행
+  # 수동 트리거 — 전체 sitemap 제출 (최초 1회 또는 대량 업데이트 시)
   workflow_dispatch:
     inputs:
       offset:
-        description: '건너뛸 URL 수 (200개 초과 시 분할 제출용)'
+        description: '건너뛸 URL 수 (200개 초과 시 분할 제출: 0 → 200 → 400 ...)'
         required: false
         default: '0'
       limit:
@@ -13,7 +13,7 @@ on:
         required: false
         default: '200'
 
-  # docs/ 변경이 main 브랜치에 push될 때 자동 실행
+  # docs/ 변경이 main에 push될 때 — 변경된 파일의 URL만 제출
   push:
     branches:
       - main
@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: 체크아웃
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # 이전 커밋과 diff 비교를 위해 2개 필요
 
       - name: Python 설정
         uses: actions/setup-python@v5
@@ -37,10 +39,47 @@ jobs:
       - name: 의존성 설치
         run: pip install google-auth google-auth-httplib2 httplib2 requests
 
-      - name: URL 제출
+      # push 이벤트: 변경된 docs 파일만 URL로 변환해서 제출
+      - name: 변경된 URL 목록 생성 (push 이벤트)
+        if: github.event_name == 'push'
+        run: |
+          git diff --name-only HEAD~1 HEAD -- 'docs/**/*.md' \
+            | python3 -c "
+          import sys, os
+          base = 'https://kdelphinus.github.io/infra-cheatsheets'
+          urls = set()
+          for line in sys.stdin:
+              path = line.strip()
+              if not path.startswith('docs/') or not path.endswith('.md'):
+                  continue
+              rel = path[len('docs/'):-len('.md')]
+              if rel == 'index' or rel.endswith('/index'):
+                  rel = rel[:-len('/index')] if '/' in rel else ''
+              url = f'{base}/{rel}/' if rel else f'{base}/'
+              urls.add(url)
+          with open('changed_urls.txt', 'w') as f:
+              f.write('\n'.join(sorted(urls)))
+          print(f'변경된 URL {len(urls)}개:')
+          for u in sorted(urls): print(' ', u)
+          "
+
+      - name: URL 제출 (push — 변경분만)
+        if: github.event_name == 'push'
+        env:
+          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+        run: |
+          if [ ! -s changed_urls.txt ]; then
+            echo "[INFO] 제출할 URL 없음 (docs 외 파일만 변경됨)"
+            exit 0
+          fi
+          python .github/scripts/submit_indexing.py --urls changed_urls.txt
+
+      # 수동 실행: sitemap 전체 제출 (offset/limit 지원)
+      - name: URL 제출 (수동 — 전체)
+        if: github.event_name == 'workflow_dispatch'
         env:
           GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
         run: |
           python .github/scripts/submit_indexing.py \
-            --offset ${{ github.event.inputs.offset || '0' }} \
-            --limit ${{ github.event.inputs.limit || '200' }}
+            --offset ${{ github.event.inputs.offset }} \
+            --limit ${{ github.event.inputs.limit }}
