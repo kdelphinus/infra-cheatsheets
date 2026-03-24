@@ -20,24 +20,33 @@
 
 /* 카드 내 제목 스타일 */
 .md-typeset .grid.cards li strong {
-  font-size: 1.1rem;
+  font-size: 1.25rem; /* 1.1rem -> 1.25rem (더 크게) */
   color: var(--md-primary-fg-color);
-  display: inline-block;
-  margin-bottom: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+/* 카드 내 제목 아이콘 크기 조정 */
+.md-typeset .grid.cards li strong .twemoji {
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 /* 카드 내 설명 텍스트 */
 .md-typeset .grid.cards li p {
-  font-size: 0.85rem;
+  font-size: 0.8rem; /* 0.85rem -> 0.8rem (더 작게) */
   color: var(--md-default-fg-color--light);
-  line-height: 1.4;
-  margin-bottom: 0.8rem;
+  line-height: 1.5; /* 줄 간격 약간 확대 */
+  margin-bottom: 1rem;
 }
 
-/* 카드 내 구분선 제거 (또는 스타일 조정) */
+/* 카드 내 구분선 (HR) 여백 확대 */
 .md-typeset .grid.cards hr {
-  margin: 0.8rem 0;
+  margin: 1.2rem 0; /* 0.8rem -> 1.2rem (여백 확대) */
   border-bottom: 0.05rem solid var(--md-default-fg-color--lighter);
+  opacity: 0.5;
 }
 
 /* 카드 내 리스트 스타일 초기화 및 간격 조정 */
