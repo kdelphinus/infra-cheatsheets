@@ -1,14 +1,26 @@
 /* ─── 홈 페이지 카드 가시성 개선 ─── */
 
-/* 카드 기본 스타일 */
+/* 1. 그리드 컨테이너 설정 */
+.md-typeset .grid.cards > ul,
+.md-typeset .grid.cards > ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 2. 개별 카드 스타일 (li) */
 .md-typeset .grid.cards > ul > li,
 .md-typeset .grid.cards > ol > li {
   border: 1px solid var(--md-default-fg-color--lighter);
   border-radius: 0.4rem;
-  padding: 1.2rem;
-  transition: all 0.3s ease;
+  padding: 1.25rem;
   background-color: var(--md-default-bg-color);
-  display: block !important;
+  transition: all 0.3s ease;
+  display: flex !important;
+  flex-direction: column;
 }
 
 /* 카드 호버 효과 */
@@ -19,44 +31,42 @@
   transform: translateY(-4px);
 }
 
-/* 카드 제목 */
+/* 3. 카드 내부 요소 스타일 */
 .md-typeset .grid.cards li strong {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--md-primary-fg-color);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0;
+  margin-bottom: 0.2rem;
 }
 
-/* 카드 제목 아이콘 */
 .md-typeset .grid.cards li strong .twemoji,
 .md-typeset .grid.cards li strong .octicons {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
-/* 카드 내 설명 텍스트 */
 .md-typeset .grid.cards li p {
   font-size: 0.85rem;
   color: var(--md-default-fg-color--light);
   line-height: 1.6;
-  margin: 0.6rem 0 !important;
+  margin: 0.5rem 0 !important;
 }
 
-/* 카드 내부 구분선 (HTML HR) */
 .md-typeset .grid.cards li hr {
-  margin: 0.6rem 0;
+  margin: 0.5rem 0;
   border: none;
   border-bottom: 0.05rem solid var(--md-default-fg-color--lighter);
   opacity: 0.5;
 }
 
-/* 카드 내부 링크 목록 */
+/* 4. 카드 내부 리스트 (링크 목록) */
 .md-typeset .grid.cards li ul {
   list-style: none !important;
   padding-left: 0 !important;
-  margin: 0.4rem 0 0 0 !important;
+  margin: 0.5rem 0 0 0 !important;
+  display: block !important; /* 리스트가 그리드로 변하지 않도록 고정 */
 }
 
 .md-typeset .grid.cards li ul li {
@@ -65,9 +75,6 @@
   margin: 0 !important;
   background: transparent !important;
   font-size: 0.85rem;
-  box-shadow: none !important;
-  transform: none !important;
-  display: block !important;
 }
 
 .md-typeset .grid.cards li ul li a {
@@ -91,7 +98,7 @@
   color: var(--md-accent-fg-color);
 }
 
-/* 홈 페이지 상단 버튼 */
+/* 상단 버튼 */
 .md-typeset .md-button {
   margin: 0.2rem 0.4rem 0.2rem 0;
   border-radius: 2rem;
