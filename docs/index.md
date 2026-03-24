@@ -27,6 +27,7 @@ hide:
     *   [:octicons-arrow-right-24: 폐쇄망 설치 (v1.30)](k8s/offline-install/002-k8s-air-gapped-install.md)
     *   [:octicons-arrow-right-24: Envoy Gateway & HTTPRoute](k8s/gateway-api/001-envoy-install.md)
     *   [:octicons-arrow-right-24: Prometheus & Grafana 모니터링](k8s/monitoring/001-kube-prometheus-stack.md)
+    *   [:octicons-arrow-right-24: Falco 런타임 보안 설치 가이드](k8s/security/001-falco-install.md)
 
 -   :simple-openstack: **OpenStack**
 
