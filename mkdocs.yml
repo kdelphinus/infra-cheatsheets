@@ -64,7 +64,8 @@ nav:
       - 'Prometheus & Grafana 설치': k8s/monitoring/001-kube-prometheus-stack.md
       - '모니터링 운영 가이드': k8s/monitoring/002-operation-guide.md
     - 'Security':
-      - 'Falco 설치 및 운영': k8s/security/001-falco-install.md
+      - 'Falco 런타임 탐지': k8s/security/001-falco-install.md
+      - 'Tetragon 런타임 차단': k8s/security/002-tetragon-install.md
     - 'Backup & Restore':
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Gateway API':
