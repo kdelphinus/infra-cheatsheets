@@ -66,6 +66,7 @@ nav:
     - 'Security':
       - 'Falco 런타임 탐지': k8s/security/001-falco-install.md
       - 'Tetragon 런타임 차단': k8s/security/002-tetragon-install.md
+      - 'Tetragon 보안 정책 전략': k8s/security/003-tetragon-security-policy.md
     - 'Backup & Restore':
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Gateway API':

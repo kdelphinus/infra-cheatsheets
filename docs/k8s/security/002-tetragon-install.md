@@ -140,8 +140,37 @@ kubectl get tracingpolicy
 
 ## 5단계: 차단 정책 테스트
 
-> `manifests/block-sensitive-read.yaml`은 `/etc/shadow` 읽기를 차단하는 **테스트용 예시 정책**입니다.
+> `manifests/block-sensitive-read.yaml`은 `/etc/shadow` 읽기를 차단하는
+> **테스트용 예시 정책**입니다.
 > 실 운영 시에는 위의 TracingPolicy 이해 섹션을 참고하여 환경에 맞는 정책으로 교체하세요.
+
+### 시스템 바이너리 제외 (`matchBinaries`)
+
+`/etc/shadow`는 `sudo`, `su`, `passwd` 같은 시스템 인증 바이너리도 정상적으로 읽습니다.
+이 바이너리들을 제외하지 않으면 **`sudo` 실행 시 즉시 Sigkill**되어 시스템 운영에 지장이 생깁니다.
+
+`manifests/block-sensitive-read.yaml`은 아래 바이너리를 차단 대상에서 제외합니다.
+
+```yaml
+matchBinaries:
+- operator: "NotIn"
+  values:
+  - "/usr/bin/sudo"
+  - "/bin/sudo"
+  - "/usr/bin/su"
+  - "/bin/su"
+  - "/usr/bin/passwd"
+  - "/usr/sbin/login"
+  - "/usr/lib/systemd/systemd"
+  - "/sbin/unix_chkpwd"
+  - "/usr/sbin/unix_chkpwd"
+```
+
+> **`unix_chkpwd` 주의:** sudo 인증 시 PAM이 `unix_chkpwd`를 별도 프로세스로 띄워
+> `/etc/shadow`를 읽습니다. 이 헬퍼를 제외하지 않으면 sudo 바이너리 자체는 살아도
+> 인증 단계에서 kill되어 sudo가 동작하지 않습니다.
+
+운영 환경에서 추가로 제외가 필요한 바이너리가 있으면 이 목록에 추가합니다.
 
 TracingPolicy 적용 후 `/etc/shadow` 읽기를 시도합니다.
 
@@ -177,7 +206,8 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -f
    grep -w security_file_open /proc/kallsyms | head -3
    ```
 
-   `fd_install` 심볼이 없으면 `manifests/block-sensitive-read.yaml`의 `call` 값을 `security_file_open`으로 변경 후 재적용합니다.
+   `fd_install` 심볼이 없으면 `manifests/block-sensitive-read.yaml`의
+   `call` 값을 `security_file_open`으로 변경 후 재적용합니다.
 
 2. `CONFIG_BPF_KPROBE_OVERRIDE` 확인
 
