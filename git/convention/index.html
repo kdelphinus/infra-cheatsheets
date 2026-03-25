@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/security/002-tetragon-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/git/convention/">
       
       
-        <link rel="prev" href="../001-falco-install/">
+        <link rel="prev" href="../cheatsheet/">
       
       
-        <link rel="next" href="../003-tetragon-security-policy/">
+        <link rel="next" href="../../ide/vscode_shortcut/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
-        <title>Tetragon 런타임 차단 - Infra Cheatsheets</title>
+        <title>협업 컨벤션 및 브랜치 전략 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tetragon-160-오프라인-설치-가이드" class="md-skip">
+        <a href="#-git-협업-컨벤션-및-브랜치-전략" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tetragon 런타임 차단
+              협업 컨벤션 및 브랜치 전략
             
           </span>
         </div>
@@ -223,7 +223,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -240,8 +240,6 @@
   
   
   
-    
-  
   
     
     
@@ -249,13 +247,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -278,7 +274,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -305,7 +301,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -328,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -355,7 +351,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -374,11 +370,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../git/cheatsheet/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../cheatsheet/" class="md-tabs__link">
           
   
   
@@ -398,7 +396,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -425,7 +423,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -448,7 +446,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -482,7 +480,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -512,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -536,31 +534,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -578,7 +571,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -602,20 +595,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
   
   
@@ -651,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../k8s/offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -679,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../k8s/offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -707,7 +697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../k8s/offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -735,7 +725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/004-metallb-install/" class="md-nav__link">
+      <a href="../../k8s/offline-install/004-metallb-install/" class="md-nav__link">
         
   
   
@@ -777,20 +767,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   
@@ -826,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -854,7 +841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../../k8s/monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -887,31 +874,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
             
   
   
@@ -929,7 +911,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -947,7 +929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../001-falco-install/" class="md-nav__link">
+      <a href="../../k8s/security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -972,37 +954,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tetragon 런타임 차단
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../k8s/security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1018,209 +973,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#사전-요건" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        사전 요건
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 이미지 Harbor 업로드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-valuesyaml-수정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: values.yaml 수정
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tracingpolicy-이해" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TracingPolicy 이해
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="TracingPolicy 이해">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#정책-구조" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        정책 구조
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#운영-환경-정책-예시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        운영 환경 정책 예시
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3단계-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4단계-설치-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 설치 확인
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5단계-차단-정책-테스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5단계: 차단 정책 테스트
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5단계: 차단 정책 테스트">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#시스템-바이너리-제외-matchbinaries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        시스템 바이너리 제외 (matchBinaries)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#차단이-동작하지-않는-경우" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        차단이 동작하지 않는 경우
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tetragon-파드가-pending인-경우" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tetragon 파드가 Pending인 경우
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삭제
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#별첨-grafana-연동-체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        별첨: Grafana 연동 체크리스트
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1233,7 +985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../k8s/security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -1275,20 +1027,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1324,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -1366,20 +1115,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
             
   
   
@@ -1415,7 +1161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/000-ingress-nginx-install/" class="md-nav__link">
         
   
   
@@ -1443,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/001-envoy-install/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
   
@@ -1471,7 +1217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -1499,7 +1245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -1527,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -1555,7 +1301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/missed-containerport/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -1597,20 +1343,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
         
           
-          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
             
   
   
@@ -1646,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-pv-nas/" class="md-nav__link">
+      <a href="../../k8s/use-pv-nas/" class="md-nav__link">
         
   
   
@@ -1682,7 +1425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -1769,7 +1512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -1797,7 +1540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -1936,7 +1679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
         
   
   
@@ -1964,7 +1707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
   
@@ -1992,7 +1735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
         
   
   
@@ -2020,7 +1763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -2048,7 +1791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
         
   
   
@@ -2136,7 +1879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -2231,7 +1974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -2311,7 +2054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -2458,7 +2201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -2486,7 +2229,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -2574,7 +2317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../db/redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -2602,7 +2345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../db/redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -2690,7 +2433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -2718,7 +2461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -2746,7 +2489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2786,26 +2529,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   
@@ -2823,7 +2571,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2841,7 +2589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/cheatsheet/" class="md-nav__link">
+      <a href="../cheatsheet/" class="md-nav__link">
         
   
   
@@ -2866,10 +2614,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../git/convention/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    협업 컨벤션 및 브랜치 전략
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2885,6 +2660,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1--브랜치-전략-git-flow-lite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 🌿 브랜치 전략 (Git Flow Lite)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2--커밋-메시지-컨벤션" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 📝 커밋 메시지 컨벤션
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 📝 커밋 메시지 컨벤션">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#메시지-구조" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        메시지 구조
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-목록" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type 목록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#주의-사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주의 사항
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3--작업-흐름-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 🚀 작업 흐름 (Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2956,7 +2823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -3095,7 +2962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -3123,7 +2990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-network-subnet/" class="md-nav__link">
+      <a href="../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -3151,7 +3018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/port-check/" class="md-nav__link">
+      <a href="../../network/tip/port-check/" class="md-nav__link">
         
   
   
@@ -3246,7 +3113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3326,7 +3193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -3354,7 +3221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -3382,7 +3249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -3470,7 +3337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -3498,7 +3365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -3586,7 +3453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -3614,7 +3481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -3702,7 +3569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -3790,7 +3657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -3853,10 +3720,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#사전-요건" class="md-nav__link">
+  <a href="#1--브랜치-전략-git-flow-lite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        사전 요건
+        1. 🌿 브랜치 전략 (Git Flow Lite)
       
     </span>
   </a>
@@ -3864,44 +3731,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#2--커밋-메시지-컨벤션" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 Harbor 업로드
+        2. 📝 커밋 메시지 컨벤션
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-valuesyaml-수정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: values.yaml 수정
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tracingpolicy-이해" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TracingPolicy 이해
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="TracingPolicy 이해">
+    <nav class="md-nav" aria-label="2. 📝 커밋 메시지 컨벤션">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#정책-구조" class="md-nav__link">
+  <a href="#메시지-구조" class="md-nav__link">
     <span class="md-ellipsis">
       
-        정책 구조
+        메시지 구조
       
     </span>
   </a>
@@ -3909,10 +3754,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#운영-환경-정책-예시" class="md-nav__link">
+  <a href="#type-목록" class="md-nav__link">
     <span class="md-ellipsis">
       
-        운영 환경 정책 예시
+        Type 목록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#주의-사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주의 사항
       
     </span>
   </a>
@@ -3925,110 +3781,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-설치-실행" class="md-nav__link">
+  <a href="#3--작업-흐름-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4단계-설치-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 설치 확인
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5단계-차단-정책-테스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5단계: 차단 정책 테스트
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5단계: 차단 정책 테스트">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#시스템-바이너리-제외-matchbinaries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        시스템 바이너리 제외 (matchBinaries)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#차단이-동작하지-않는-경우" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        차단이 동작하지 않는 경우
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tetragon-파드가-pending인-경우" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tetragon 파드가 Pending인 경우
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삭제
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#별첨-grafana-연동-체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        별첨: Grafana 연동 체크리스트
+        3. 🚀 작업 흐름 (Workflow)
       
     </span>
   </a>
@@ -4055,256 +3811,71 @@
   
 
 
-<h1 id="tetragon-160-오프라인-설치-가이드">Tetragon 1.6.0 오프라인 설치 가이드</h1>
-<p>폐쇄망 환경에서 Tetragon을 Kubernetes 위에 설치하고 런타임 차단 정책을 적용하는 절차를 안내합니다.</p>
-<h2 id="사전-요건">사전 요건</h2>
-<ul>
-<li><code>kubectl</code> CLI 사용 가능</li>
-<li><code>helm</code> v3.14.0 이상</li>
-<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
-<li>eBPF/BTF 지원 커널 (5.10+)</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uname<span class="w"> </span>-r
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ls<span class="w"> </span>/sys/kernel/btf/vmlinux<span class="w">   </span><span class="c1"># 존재해야 함</span>
-</code></pre></div>
-<h2 id="1단계-이미지-harbor-업로드">1단계: 이미지 Harbor 업로드</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># HARBOR_PROJECT : library</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>./images/upload_images_to_harbor_v3-lite.sh
-</code></pre></div>
-<p>업로드 대상 이미지:</p>
+<h1 id="-git-협업-컨벤션-및-브랜치-전략">🤝 Git 협업 컨벤션 및 브랜치 전략</h1>
+<p>이 문서는 프로젝트의 일관성을 유지하고 효율적인 협업을 위해 준수해야 할 Git 커밋 컨벤션과 브랜치 전략을 정의합니다.</p>
+<h2 id="1--브랜치-전략-git-flow-lite">1. 🌿 브랜치 전략 (Git Flow Lite)</h2>
+<p>규모가 작은 프로젝트 특성에 맞춰 단순화된 <strong>Git Flow Lite</strong> 방식을 사용합니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">파일</th>
-<th style="text-align: left;">이미지</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>tetragon-v1.6.0.tar</code></td>
-<td style="text-align: left;"><code>quay.io/cilium/tetragon:v1.6.0</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>tetragon-operator-v1.6.0.tar</code></td>
-<td style="text-align: left;"><code>quay.io/cilium/tetragon-operator:v1.6.0</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="2단계-valuesyaml-수정">2단계: values.yaml 수정</h2>
-<p><code>values.yaml</code>의 <code>&lt;NODE_IP&gt;</code>를 실제 노드 IP로 교체합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/&lt;NODE_IP&gt;/실제IP/g&#39;</span><span class="w"> </span>values.yaml
-</code></pre></div>
-<h2 id="tracingpolicy-이해">TracingPolicy 이해</h2>
-<p>Tetragon은 <strong>기본 차단 정책이 없습니다.</strong> 차단 동작은 전적으로 <code>TracingPolicy</code> CRD를 통해 직접 정의합니다.</p>
-<h3 id="정책-구조">정책 구조</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cilium.io/v1alpha1</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TracingPolicy</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">block-sensitive-read</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">kprobes</span><span class="p">:</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">call</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fd_install&quot;</span><span class="w">       </span><span class="c1"># 후킹할 커널 함수</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">syscall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span><span class="w">              </span><span class="c1"># 파일 디스크립터 번호</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;file&quot;</span><span class="w">           </span><span class="c1"># 파일 객체 (경로 포함)</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">selectors</span><span class="p">:</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchArgs</span><span class="p">:</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Equal&quot;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="nt">values</span><span class="p">:</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/etc/shadow&quot;</span><span class="w">      </span><span class="c1"># 이 경로에 대한 접근만 차단</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">      </span><span class="nt">matchActions</span><span class="p">:</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sigkill</span><span class="w">      </span><span class="c1"># 해당 프로세스를 즉시 강제 종료</span>
-</code></pre></div>
-<p>각 필드의 의미:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">필드</th>
+<th style="text-align: left;">브랜치</th>
 <th style="text-align: left;">설명</th>
+<th style="text-align: left;">배포 대상</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>call</code></td>
-<td style="text-align: left;">후킹할 커널 함수명. <code>fd_install</code>은 파일 열기 시 호출됨</td>
+<td style="text-align: left;"><strong><code>main</code></strong></td>
+<td style="text-align: left;">제품으로 출시될 수 있는 상태의 브랜치 (안정화 버전)</td>
+<td style="text-align: left;">GitHub Pages (Prod)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>args</code></td>
-<td style="text-align: left;">커널 함수의 인자 타입 정의</td>
+<td style="text-align: left;"><strong><code>feature/</code></strong></td>
+<td style="text-align: left;">새로운 문서 추가나 기능 개선을 위한 작업 브랜치</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>matchArgs</code></td>
-<td style="text-align: left;">인자 값 기준 필터 (index 1 = file 객체의 경로)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>operator</code></td>
-<td style="text-align: left;"><code>Equal</code> 외 <code>Prefix</code>, <code>Postfix</code>, <code>Regex</code> 등 지원</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>action</code></td>
-<td style="text-align: left;"><code>Sigkill</code>(즉시 종료), <code>Sigstop</code>(일시 정지), <code>Override</code>(리턴값 조작) 등</td>
+<td style="text-align: left;"><strong><code>fix/</code></strong></td>
+<td style="text-align: left;">버그 수정이나 오타 교정 등을 위한 작업 브랜치</td>
+<td style="text-align: left;">-</td>
 </tr>
 </tbody>
 </table>
-<h3 id="운영-환경-정책-예시">운영 환경 정책 예시</h3>
-<p><code>/etc/shadow</code> 하나만 막는 건 테스트용입니다. 실 운영에서는 보호 범위를 확장합니다.</p>
-<p><strong>민감 파일 디렉토리 전체 차단:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchArgs</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Prefix&quot;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">values</span><span class="p">:</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/etc/ssl/private&quot;</span>
-</code></pre></div>
-<p><strong>특정 바이너리 실행 차단 (예: 컨테이너 내 curl):</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">kprobes</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">call</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;security_bprm_check&quot;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">syscall</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">args</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;linux_binprm&quot;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">selectors</span><span class="p">:</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matchArgs</span><span class="p">:</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Postfix&quot;</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">values</span><span class="p">:</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/curl&quot;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nt">matchActions</span><span class="p">:</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sigkill</span>
-</code></pre></div>
-<p>정책은 <code>kubectl apply -f</code>로 즉시 적용되며 재시작이 필요 없습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/block-sensitive-read.yaml
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>tracingpolicy<span class="w">   </span><span class="c1"># 적용 확인</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>tracingpolicy<span class="w"> </span>block-sensitive-read<span class="w">   </span><span class="c1"># 정책 제거</span>
-</code></pre></div>
-<h2 id="3단계-설치-실행">3단계: 설치 실행</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>./scripts/install.sh
-</code></pre></div>
-<p>스크립트가 설치 후 TracingPolicy 적용 여부를 묻습니다.
-적용할 정책 내용은 위의 TracingPolicy 이해 섹션을 참고하여 운영 환경에 맞게 수정한 뒤 진행하세요.</p>
-<h2 id="4단계-설치-확인">4단계: 설치 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>tracingpolicy
-</code></pre></div>
-<h2 id="5단계-차단-정책-테스트">5단계: 차단 정책 테스트</h2>
-<blockquote>
-<p><code>manifests/block-sensitive-read.yaml</code>은 <code>/etc/shadow</code> 읽기를 차단하는
-<strong>테스트용 예시 정책</strong>입니다.
-실 운영 시에는 위의 TracingPolicy 이해 섹션을 참고하여 환경에 맞는 정책으로 교체하세요.</p>
-</blockquote>
-<h3 id="시스템-바이너리-제외-matchbinaries">시스템 바이너리 제외 (<code>matchBinaries</code>)</h3>
-<p><code>/etc/shadow</code>는 <code>sudo</code>, <code>su</code>, <code>passwd</code> 같은 시스템 인증 바이너리도 정상적으로 읽습니다.
-이 바이너리들을 제외하지 않으면 <strong><code>sudo</code> 실행 시 즉시 Sigkill</strong>되어 시스템 운영에 지장이 생깁니다.</p>
-<p><code>manifests/block-sensitive-read.yaml</code>은 아래 바이너리를 차단 대상에서 제외합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">matchBinaries</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NotIn&quot;</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">values</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/sudo&quot;</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/sudo&quot;</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/su&quot;</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/bin/su&quot;</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/bin/passwd&quot;</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/sbin/login&quot;</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/lib/systemd/systemd&quot;</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/sbin/unix_chkpwd&quot;</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/usr/sbin/unix_chkpwd&quot;</span>
-</code></pre></div>
-<blockquote>
-<p><strong><code>unix_chkpwd</code> 주의:</strong> sudo 인증 시 PAM이 <code>unix_chkpwd</code>를 별도 프로세스로 띄워
-<code>/etc/shadow</code>를 읽습니다. 이 헬퍼를 제외하지 않으면 sudo 바이너리 자체는 살아도
-인증 단계에서 kill되어 sudo가 동작하지 않습니다.</p>
-</blockquote>
-<p>운영 환경에서 추가로 제외가 필요한 바이너리가 있으면 이 목록에 추가합니다.</p>
-<p>TracingPolicy 적용 후 <code>/etc/shadow</code> 읽기를 시도합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-block<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/etc/shadow
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># 예상: cat 프로세스가 Sigkill로 즉시 종료 → 터미널에 &quot;Killed&quot; 출력</span>
-</code></pre></div>
-<p><code>--rm -it</code> 없이 exit code로 확인하는 방법:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-block<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat /etc/shadow; echo exit:</span><span class="nv">$?</span><span class="s2">&quot;</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>test-block
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># 출력: Killed</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1">#       exit:0   (cat이 죽었지만 sh는 살아서 echo까지 실행됨)</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>test-block
-</code></pre></div>
-<p>Tetragon 이벤트 로그 확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon<span class="w"> </span>-f
-</code></pre></div>
-<h2 id="트러블슈팅">트러블슈팅</h2>
-<h3 id="차단이-동작하지-않는-경우">차단이 동작하지 않는 경우</h3>
-<ol>
-<li>커널 함수 심볼 확인</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>grep<span class="w"> </span>-w<span class="w"> </span>fd_install<span class="w"> </span>/proc/kallsyms<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-w<span class="w"> </span>security_file_open<span class="w"> </span>/proc/kallsyms<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
-</code></pre></div>
-<p><code>fd_install</code> 심볼이 없으면 <code>manifests/block-sensitive-read.yaml</code>의
-   <code>call</code> 값을 <code>security_file_open</code>으로 변경 후 재적용합니다.</p>
-<ol>
-<li><code>CONFIG_BPF_KPROBE_OVERRIDE</code> 확인</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>grep<span class="w"> </span>CONFIG_BPF_KPROBE_OVERRIDE<span class="w"> </span>/boot/config-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="o">||</span><span class="w"> </span>zcat<span class="w"> </span>/proc/config.gz<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>CONFIG_BPF_KPROBE_OVERRIDE
-</code></pre></div>
-<p><code>=y</code>가 아니면 Sigkill 차단이 불가합니다. WSL2의 경우 <code>wsl --update</code> 후 재시작하면 해결되는 경우가 있습니다.</p>
-<h3 id="tetragon-파드가-pending인-경우">Tetragon 파드가 Pending인 경우</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>tetragon
-</code></pre></div>
-<p>이미지 pull 실패라면 Harbor 업로드 및 <code>values.yaml</code> 이미지 경로를 재확인합니다.</p>
-<h2 id="삭제">삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/uninstall.sh
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>./scripts/uninstall.sh
-</code></pre></div>
+<ul>
+<li>모든 작업은 <code>feature/</code> 또는 <code>fix/</code> 브랜치에서 진행하며, 완료 후 <code>main</code> 브랜치로 Pull Request를 보냅니다.</li>
+<li><code>main</code> 브랜치에 병합될 때 GitHub Actions를 통해 문서가 자동으로 배포됩니다.</li>
+</ul>
 <hr />
-<h2 id="별첨-grafana-연동-체크리스트">별첨: Grafana 연동 체크리스트</h2>
-<p>Tetragon metrics를 Prometheus + Grafana 스택에 연동할 때 확인할 항목입니다.</p>
-<blockquote>
-<p>Tetragon 차트에는 Grafana 대시보드가 내장돼 있지 않습니다.
-ServiceMonitor로 metrics 수집 후 커뮤니티 대시보드를 import하거나 직접 작성해야 합니다.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">내용</th>
-<th style="text-align: left;">비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">metrics 엔드포인트</td>
-<td style="text-align: left;"><code>tetragon:2112/metrics</code></td>
-<td style="text-align: left;">설치 시 자동 생성</td>
-</tr>
-<tr>
-<td style="text-align: left;">operator metrics</td>
-<td style="text-align: left;"><code>tetragon-operator-metrics:2113/metrics</code></td>
-<td style="text-align: left;">설치 시 자동 생성</td>
-</tr>
-<tr>
-<td style="text-align: left;">ServiceMonitor</td>
-<td style="text-align: left;">Prometheus scrape 설정 생성 필요</td>
-<td style="text-align: left;">미생성</td>
-</tr>
-<tr>
-<td style="text-align: left;">대시보드</td>
-<td style="text-align: left;">차트 내장 없음 — 별도 준비 필요</td>
-<td style="text-align: left;">없음</td>
-</tr>
-</tbody>
-</table>
-<p><strong>연동 순서:</strong></p>
+<h2 id="2--커밋-메시지-컨벤션">2. 📝 커밋 메시지 컨벤션</h2>
+<p>커밋 메시지는 한글 작성을 원칙으로 하며, 변경 사항을 직관적으로 파악할 수 있도록 작성합니다.</p>
+<h3 id="메시지-구조">메시지 구조</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&lt;body&gt; (선택 사항)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Co-Authored-By: Gemini CLI &lt;noreply@google.com&gt;
+</code></pre></div>
+<h3 id="type-목록">Type 목록</h3>
+<ul>
+<li><strong><code>feat</code></strong>: 새로운 문서 추가 또는 신규 기능</li>
+<li><strong><code>fix</code></strong>: 문서 오타 수정 또는 버그 해결</li>
+<li><strong><code>docs</code></strong>: 문서 구조 변경 또는 <code>mkdocs.yml</code> 설정 수정</li>
+<li><strong><code>style</code></strong>: 디자인 수정 (CSS 등 시각적 요소)</li>
+<li><strong><code>refactor</code></strong>: 코드/문서 구조 개선 (기능 변화 없음)</li>
+<li><strong><code>chore</code></strong>: 빌드 업무 수정, 패키지 매니저 설정 등</li>
+</ul>
+<h3 id="주의-사항">주의 사항</h3>
+<ul>
+<li><strong>의미 단위 커밋 (Atomic Commit)</strong>: 여러 작업을 하나의 커밋으로 뭉뚱그리지 말고, 작업 단위로 나누어 커밋합니다.</li>
+<li><strong>협업 기록</strong>: 모든 커밋 하단에는 <code>Co-Authored-By: Gemini CLI &lt;noreply@google.com&gt;</code>를 포함합니다.</li>
+</ul>
+<hr />
+<h2 id="3--작업-흐름-workflow">3. 🚀 작업 흐름 (Workflow)</h2>
 <ol>
-<li>ServiceMonitor 생성으로 Prometheus scrape 활성화</li>
-<li>Prometheus에서 <code>tetragon</code> target이 UP 상태인지 확인</li>
-<li>Grafana에서 대시보드 import 또는 직접 작성</li>
+<li><strong>브랜치 생성</strong>: <code>git switch -c feature/add-new-guide</code></li>
+<li><strong>작업 및 커밋</strong>: <code>git add .</code> -&gt; <code>git commit -m "feat: 신규 가이드 문서 추가"</code></li>
+<li><strong>최신화</strong>: <code>git pull --rebase origin main</code> (Merge 커밋 방지)</li>
+<li><strong>푸시 및 PR</strong>: <code>git push origin feature/add-new-guide</code> 이후 GitHub에서 PR 생성</li>
 </ol>
 
 
@@ -4355,10 +3926,10 @@ ServiceMonitor로 metrics 수집 후 커뮤니티 대시보드를 import하거�
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
