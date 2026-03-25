@@ -105,12 +105,14 @@ nav:
       - '3. 트러블슈팅 및 운영 주의사항': db/install/mariadb-troubleshooting.md
   - Git:
     - 'Cheat Sheets': git/cheatsheet.md
+    - '협업 컨벤션 및 브랜치 전략': git/convention.md
   - IDE:
     - 'VSCode 단축키': ide/vscode_shortcut.md
   - Network:
     - Tip:
       - '도메인 실제 IP 체크': network/tip/check-domain-ip.md
       - '현재 서버가 속한 네트워크의 서브넷과 게이트웨이 확인': network/tip/check-network-subnet.md 
+      - '방화벽 및 포트 확인': network/tip/port-check.md
   - OpenStack:
     - 'Cheat Sheets': openstack/cheatsheet.md
     - Base:
