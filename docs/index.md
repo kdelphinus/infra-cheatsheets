@@ -73,6 +73,7 @@ hide:
 
     -   [:octicons-arrow-right-24: Galera Cluster 설치 및 운영](db/ha/galera-cluster.md)
     -   [:octicons-arrow-right-24: MariaDB 폐쇄망 오프라인 설치](db/install/mariadb-air-gapped-install.md)
+    -   [:octicons-arrow-right-24: Redis Stream (HA) 개요 및 설치](db/redis/001-redis-stream-overview.md)
     -   [:octicons-arrow-right-24: DB 장애 복구 및 트러블슈팅](db/ha/galera-recovery.md)
 
 -   :octicons-terminal-24: **Linux & Server**

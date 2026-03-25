@@ -95,10 +95,13 @@ nav:
     - 'Ubuntu 기본 설정': ubuntu/init-ubuntu-env.md
     - WSL:
       - 'WSL 네트워크 설정': ubuntu/wsl/wsl-network-setting.md
-  - DB:
+  - Database:
     - HA:
       - 'Galera Cluster 설치': db/ha/galera-cluster.md
       - 'Galera Cluster 장애 복구': db/ha/galera-recovery.md
+    - Redis Stream:
+      - 'Redis Stream 개요': db/redis/001-redis-stream-overview.md
+      - '설치 및 운영 가이드': db/redis/002-redis-stream-install.md
     - Install:
       - '1. 폐쇄망용 설치 파일 준비': db/install/ready-mariadb-air-gapped-install.md
       - '2. MariaDB 오프라인 설치': db/install/mariadb-air-gapped-install.md
