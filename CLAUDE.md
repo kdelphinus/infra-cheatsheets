@@ -55,6 +55,8 @@ The project uses `markdownlint` (`.markdownlint.json` at repo root). Key rules:
 ## 6. Git & Workflow Guidelines
 
 - **Atomic Commits**: 여러 개의 독립적인 작업을 수행한 경우, 하나의 거대한 커밋으로 합치지 말고 **의미 단위로 커밋을 나누어** 진행하십시오. (예: 문서 추가 커밋과 설정 변경 커밋 분리)
-- **Commit Messages**: 커밋 메시지는 가능한 한 **한글**로 작성하여 직관적으로 내용을 파악할 수 있게 하십시오. 또한, 모든 커밋 메시지 하단에는 반드시 `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`를 포함하여 협업 내역을 기록하십시오.
+- **Commit Messages**: 커밋 메시지는 가능한 한 **한글**로 작성하여 직관적으로 내용을 파악할 수 있게 하십시오. 또한, 모든 커밋 메시지 하단에는 반드시 실제 작업에 참여한 AI 도구의 Co-Authored-By 서명을 포함하십시오.
+  - Claude 단독 작업 시: `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>` 만 포함
+  - Gemini와 공동 작업 시: 두 서명 모두 포함
 - **Documentation Consistency**: 새로운 문서가 추가되거나 기존 문서 구조가 변경될 경우, 반드시 `docs/index.md` 파일의 카테고리 목록도 함께 업데이트하여 동기화를 유지하십시오.
 - **Push Policy**: 모든 커밋이 완료된 후 최종적으로 푸시를 진행하여 히스토리를 깔끔하게 유지하십시오.
