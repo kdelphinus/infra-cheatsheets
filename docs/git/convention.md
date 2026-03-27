@@ -28,6 +28,7 @@
 <body> (선택 사항)
 
 Co-Authored-By: Gemini CLI <noreply@google.com>
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 ```
 
 ### Type 목록
@@ -40,7 +41,8 @@ Co-Authored-By: Gemini CLI <noreply@google.com>
 
 ### 주의 사항
 - **의미 단위 커밋 (Atomic Commit)**: 여러 작업을 하나의 커밋으로 뭉뚱그리지 말고, 작업 단위로 나누어 커밋합니다.
-- **협업 기록**: 모든 커밋 하단에는 `Co-Authored-By: Gemini CLI <noreply@google.com>`를 포함합니다.
+- **협업 기록**: 모든 커밋 하단에는 AI 도구의 Co-Authored-By 서명을 포함합니다.
+  (예: `Co-Authored-By: Gemini CLI <noreply@google.com>`, `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`)
 
 ---
 
