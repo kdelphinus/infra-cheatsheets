@@ -52,7 +52,7 @@ ls /etc/systemd/system/setup-br-ironic.service
 
 #### Step 1: OS에서 iLO IP 설정 및 MAC 확인
 
-```Bash
+```bash
 # (Baremetal OS 터미널에서 수행)
 # 1. MAC 주소 기록
 ip link show eno1 | grep ether
@@ -128,7 +128,7 @@ sudo ipmitool user list 2
 
 아래 작업은 `iLO Advanced` 라이센스가 필요합니다. 또한 아래 iLO 포트가 연결되어야 합니다.
 
-```Bash
+```bash
 # (내 PC 또는 Controller에서 수행)
 # 1. iLO SSH 접속
 ssh Administrator@10.10.10.69
