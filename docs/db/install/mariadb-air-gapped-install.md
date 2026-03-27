@@ -53,12 +53,36 @@ sudo mysql_secure_installation
 
 `/etc/my.cnf.d/` 아래 설정 파일을 생성하여 핵심 파라미터를 구성합니다.
 
+!!! warning "lower_case_table_names 주의"
+    `lower_case_table_names=1` 은 **DB 초기화(데이터 디렉토리가 비어 있는 상태) 전**에 적용되어야 합니다.
+    이미 데이터가 있는 서버에서 이 값을 변경하면 기존 테이블에 접근할 수 없게 될 수 있습니다.
+
 ```bash
 sudo tee /etc/my.cnf.d/custom.cnf <<'EOF'
 [mysqld]
-character-set-server = utf8mb4
-collation-server     = utf8mb4_unicode_ci
-max_connections      = 200
+# ── 문자셋 ──────────────────────────────────────────────────────────────
+character-set-server    = utf8mb4
+collation-server        = utf8mb4_unicode_ci
+
+# ── 네트워크 ────────────────────────────────────────────────────────────
+# 모든 인터페이스에서 접속 허용 (특정 IP만 허용하려면 해당 IP 입력)
+bind-address            = 0.0.0.0
+
+# ── 스토리지 엔진 ────────────────────────────────────────────────────────
+default_storage_engine  = InnoDB
+
+# ── 호환성 ──────────────────────────────────────────────────────────────
+# 테이블명 대소문자 구분 안 함 (1 = 소문자로 저장)
+lower_case_table_names  = 1
+
+# SQL Mode 완화: ONLY_FULL_GROUP_BY 제거하여 레거시 쿼리 호환성 확보
+sql_mode                = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+
+# 바이너리 로그 포맷 (향후 복제 구성 또는 Galera 전환 시 필수)
+binlog_format           = ROW
+
+# ── 성능 ────────────────────────────────────────────────────────────────
+max_connections         = 200
 innodb_buffer_pool_size = 512M
 EOF
 
