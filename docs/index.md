@@ -69,7 +69,7 @@ hide:
 
 ---
 
-## :simple-openstack: Infrastructure & Cloud
+## :material-cloud: Infrastructure & Cloud
 
 프라이빗 및 퍼블릭 클라우드 인프라 구축 가이드입니다.
 
