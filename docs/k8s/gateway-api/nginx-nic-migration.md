@@ -91,7 +91,7 @@ spec:
 
 ### 3.2 API Gateway (`strato-solution-install/gateway`)
 
-#### [Option A] API Gateway Ingress (Annotation)
+#### [3.2-A] Gateway Ingress
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -147,7 +147,7 @@ spec:
 
 ### 3.3 Grafana (`strato-solution-install/helm-chart/grafana`)
 
-#### [Option A] Grafana Ingress (Annotation 방식)
+#### [3.3-A] Grafana Ingress
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -170,7 +170,7 @@ spec:
               service: { name: grafana-svc, port: { number: 3000 } }
 ```
 
-#### [Option B] Grafana VirtualServer (CRD 방식)
+#### [3.3-B] Grafana VirtualServer
 
 ```yaml
 apiVersion: k8s.nginx.org/v1
@@ -199,7 +199,7 @@ spec:
 
 > **서비스명 확인:** 프로젝트 내 Prometheus 서비스명은 `prometheus-global-svc`(포트 9090)입니다.
 
-#### [Option A] Ingress (Annotation)
+#### [Option A] Ingress (Annotation 방식)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -226,7 +226,7 @@ spec:
               service: { name: alertmanager-operated, port: { number: 9093 } }
 ```
 
-#### [Option B] Prometheus VirtualServer (Policy 활용 방식)
+#### [Option B] VirtualServer (Policy 활용 방식)
 
 ```yaml
 # 1. Policy 리소스 생성 (Basic Auth 정의)
@@ -330,9 +330,3 @@ kubectl create secret generic basic-auth \
 - [ ] **Snippet & Webhook:** `controller.enableSnippets: true` 활성화 및 설정 오류 방지용 `Validation Webhook` 구성 여부
 - [ ] **WebSocket:** `Connection/Upgrade` 헤더 처리 및 타임아웃 정책(Keep-Alive) 협의
 - [ ] **TLS 인증서:** 네임스페이스별 Secret 복제 방식 vs 공통 인증서(`defaultTLS.secret`) 사용 방식 확정
-��
-
-정
-정
-정
-정
