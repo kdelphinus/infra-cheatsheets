@@ -1307,6 +1307,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#30-mergeable-ingress-패턴-동일-host-다중-서비스" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.0 Mergeable Ingress 패턴 (동일 Host 다중 서비스)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#31-portal-frontend-strato-solution-installstrato-portal-front" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1319,10 +1330,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-a-portal-ingress" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.1-A] Portal Ingress
+        [Option A] Ingress (Annotation 방식)
       
     </span>
   </a>
@@ -1330,10 +1341,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#31-b-portal-virtualserver" class="md-nav__link">
+  <a href="#option-b-virtualserver-crd-방식" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.1-B] Portal VirtualServer
+        [Option B] VirtualServer (CRD 방식)
       
     </span>
   </a>
@@ -1358,10 +1369,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#32-a-gateway-ingress" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.2-A] Gateway Ingress
+        [Option A] Ingress (Annotation 방식)
       
     </span>
   </a>
@@ -1369,10 +1380,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-b-gateway-virtualserver" class="md-nav__link">
+  <a href="#option-b-virtualserver-crd-방식_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.2-B] Gateway VirtualServer
+        [Option B] VirtualServer (CRD 방식)
       
     </span>
   </a>
@@ -1397,10 +1408,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#33-a-grafana-ingress" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.3-A] Grafana Ingress
+        [Option A] Ingress (Annotation 방식)
       
     </span>
   </a>
@@ -1408,10 +1419,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-b-grafana-virtualserver" class="md-nav__link">
+  <a href="#option-b-virtualserver-crd-방식_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.3-B] Grafana VirtualServer
+        [Option B] VirtualServer (CRD 방식)
       
     </span>
   </a>
@@ -1436,7 +1447,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-a-ingress-annotation-방식" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option A] Ingress (Annotation 방식)
@@ -1512,6 +1523,106 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#44-tls-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 TLS 설정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 TLS 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virtualserver-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VirtualServer 방식
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ingress-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Ingress 방식
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-secret-네임스페이스-제약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS Secret 네임스페이스 제약
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-path-매칭-및-rewrite-주의사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Path 매칭 및 Rewrite 주의사항
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 Path 매칭 및 Rewrite 주의사항">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path에-regex-패턴-사용-금지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        path에 regex 패턴 사용 금지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix-제거rewrite는-location-snippets에서만-처리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefix 제거(rewrite)는 location-snippets에서만 처리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#301-리다이렉트-브라우저-캐시-주의" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        301 리다이렉트 브라우저 캐시 주의
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1552,13 +1663,69 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-설정-및-보안-config--security" class="md-nav__link">
+  <a href="#53-설정-및-보안--native-ingress-방식-현재-적용-방향" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 설정 및 보안 (Config &amp; Security)
+        5.3 설정 및 보안 — Native Ingress 방식 (현재 적용 방향)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="5.3 설정 및 보안 — Native Ingress 방식 (현재 적용 방향)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#공통" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공통
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ingress-전용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Ingress 전용
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-설정-및-보안--virtualserver-방식-crd-방식으로-전환-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 설정 및 보안 — VirtualServer 방식 (CRD 방식으로 전환 시)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 설정 및 보안 — VirtualServer 방식 (CRD 방식으로 전환 시)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virtualserver-전용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VirtualServer 전용
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4027,6 +4194,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#30-mergeable-ingress-패턴-동일-host-다중-서비스" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.0 Mergeable Ingress 패턴 (동일 Host 다중 서비스)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#31-portal-frontend-strato-solution-installstrato-portal-front" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4039,10 +4217,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-a-portal-ingress" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.1-A] Portal Ingress
+        [Option A] Ingress (Annotation 방식)
       
     </span>
   </a>
@@ -4050,10 +4228,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#31-b-portal-virtualserver" class="md-nav__link">
+  <a href="#option-b-virtualserver-crd-방식" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.1-B] Portal VirtualServer
+        [Option B] VirtualServer (CRD 방식)
       
     </span>
   </a>
@@ -4078,10 +4256,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#32-a-gateway-ingress" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.2-A] Gateway Ingress
+        [Option A] Ingress (Annotation 방식)
       
     </span>
   </a>
@@ -4089,10 +4267,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-b-gateway-virtualserver" class="md-nav__link">
+  <a href="#option-b-virtualserver-crd-방식_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.2-B] Gateway VirtualServer
+        [Option B] VirtualServer (CRD 방식)
       
     </span>
   </a>
@@ -4117,10 +4295,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#33-a-grafana-ingress" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.3-A] Grafana Ingress
+        [Option A] Ingress (Annotation 방식)
       
     </span>
   </a>
@@ -4128,10 +4306,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-b-grafana-virtualserver" class="md-nav__link">
+  <a href="#option-b-virtualserver-crd-방식_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [3.3-B] Grafana VirtualServer
+        [Option B] VirtualServer (CRD 방식)
       
     </span>
   </a>
@@ -4156,7 +4334,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-a-ingress-annotation-방식" class="md-nav__link">
+  <a href="#option-a-ingress-annotation-방식_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         [Option A] Ingress (Annotation 방식)
@@ -4232,6 +4410,106 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#44-tls-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 TLS 설정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 TLS 설정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virtualserver-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VirtualServer 방식
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ingress-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Ingress 방식
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-secret-네임스페이스-제약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS Secret 네임스페이스 제약
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-path-매칭-및-rewrite-주의사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Path 매칭 및 Rewrite 주의사항
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 Path 매칭 및 Rewrite 주의사항">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path에-regex-패턴-사용-금지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        path에 regex 패턴 사용 금지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix-제거rewrite는-location-snippets에서만-처리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefix 제거(rewrite)는 location-snippets에서만 처리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#301-리다이렉트-브라우저-캐시-주의" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        301 리다이렉트 브라우저 캐시 주의
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4272,13 +4550,69 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-설정-및-보안-config--security" class="md-nav__link">
+  <a href="#53-설정-및-보안--native-ingress-방식-현재-적용-방향" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 설정 및 보안 (Config &amp; Security)
+        5.3 설정 및 보안 — Native Ingress 방식 (현재 적용 방향)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="5.3 설정 및 보안 — Native Ingress 방식 (현재 적용 방향)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#공통" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        공통
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ingress-전용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Ingress 전용
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-설정-및-보안--virtualserver-방식-crd-방식으로-전환-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 설정 및 보안 — VirtualServer 방식 (CRD 방식으로 전환 시)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 설정 및 보안 — VirtualServer 방식 (CRD 방식으로 전환 시)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virtualserver-전용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VirtualServer 전용
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4370,31 +4704,82 @@
 <hr />
 <h2 id="3-서비스별-전환-예시-conversion-examples">3. 서비스별 전환 예시 (Conversion Examples)</h2>
 <p>프로젝트 내 주요 5개 서비스에 대해 <code>Ingress</code>(어노테이션 방식)와 <code>VirtualServer</code>(CRD 방식) 두 가지 버전의 변환 예시를 제공합니다.</p>
+<h3 id="30-mergeable-ingress-패턴-동일-host-다중-서비스">3.0 Mergeable Ingress 패턴 (동일 Host 다중 서비스)</h3>
+<p>프로젝트의 모든 서비스가 동일한 host(<code>{{ ENV_DOMAIN }}</code>)를 공유하므로 NIC의 <strong>Mergeable Ingress(Master/Minion)</strong> 패턴을 사용합니다. 단일 Ingress에 여러 서비스를 정의하는 대신, Master 1개와 서비스별 Minion으로 분리합니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">구분</th>
+<th style="text-align: left;">역할</th>
+<th style="text-align: left;">annotation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Master</strong></td>
+<td style="text-align: left;">host, TLS, 전역 설정 정의</td>
+<td style="text-align: left;"><code>nginx.org/mergeable-ingress-type: master</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Minion</strong></td>
+<td style="text-align: left;">서비스별 path 및 backend 정의</td>
+<td style="text-align: left;"><code>nginx.org/mergeable-ingress-type: minion</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>구성 규칙:</strong></p>
+<ul>
+<li>Master와 Minion은 <code>ingressClassName</code>, <code>host</code>가 동일해야 합니다.</li>
+<li>Master는 <code>spec.rules[].http.paths</code>를 정의하지 않습니다 (host 선언만).</li>
+<li>TLS 설정은 Master에만 정의합니다.</li>
+<li>Minion은 Master와 <strong>다른 네임스페이스에 있어도 동작</strong>합니다 (NIC 5.3.1 검증). 예: Master(<code>strato-product</code>) ← Minion(<code>monitoring</code>).</li>
+<li>아래 3.1~3.4의 Option A 예시는 모두 이 패턴을 전제로 합니다. <strong>3.1의 Master Ingress를 먼저 생성</strong>하고, 나머지 서비스는 Minion으로 추가합니다.</li>
+</ul>
 <h3 id="31-portal-frontend-strato-solution-installstrato-portal-front">3.1 Portal Frontend (<code>strato-solution-install/strato-portal-front</code>)</h3>
-<h4 id="31-a-portal-ingress">[3.1-A] Portal Ingress</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strato-portal-frontend-ingress</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">nginx.org/redirect-to-https</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">nginx.org/client-max-body-size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10M&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">strato-portal-frontend-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">80</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/oauth2&quot;</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">strato-auth-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">5555</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<h4 id="option-a-ingress-annotation-방식">[Option A] Ingress (Annotation 방식)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Master Ingress — host, TLS, 전역 설정</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strato-portal-frontend-ingress</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_NAMESPACE</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">nginx.org/mergeable-ingress-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">nginx.org/redirect-to-https</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">nginx.org/client-max-body-size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10M&quot;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">TLS_SECRET_NAME</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="nn">---</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c1"># Minion Ingress — Portal Frontend 및 OAuth2 경로</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strato-portal-frontend-minion</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_NAMESPACE</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="nt">nginx.org/mergeable-ingress-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minion</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/oauth2</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">strato-auth-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">5555</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">strato-portal-frontend-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">80</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
-<h4 id="31-b-portal-virtualserver">[3.1-B] Portal VirtualServer</h4>
+<h4 id="option-b-virtualserver-crd-방식">[Option B] VirtualServer (CRD 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k8s.nginx.org/v1</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VirtualServer</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4417,32 +4802,42 @@
 </code></pre></div>
 <blockquote>
 <p><strong>주의:</strong> VirtualServer <code>routes</code>는 구체적인 경로(<code>/oauth2</code>)를 루트 경로(<code>/</code>)보다 먼저 정의해야 합니다.</p>
+<p><strong>Option A vs Option B 선택 권장:</strong> Portal Frontend는 현재 Native Ingress(Option A) 형식으로 구성되어 있습니다. Native Ingress는 <code>path</code> 매칭 순서를 내부적으로 처리하므로 <code>/oauth2</code> 경로가 <code>/</code> 보다 먼저 처리된다는 보장이 없습니다. <strong><code>/oauth2</code> 경로 우선순위를 명시적으로 보장하려면 Option B(VirtualServer)로 전환하는 것을 권장합니다.</strong></p>
 </blockquote>
 <h3 id="32-api-gateway-strato-solution-installgateway">3.2 API Gateway (<code>strato-solution-install/gateway</code>)</h3>
-<h4 id="32-a-gateway-ingress">[3.2-A] Gateway Ingress</h4>
+<h4 id="option-a-ingress-annotation-방식_1">[Option A] Ingress (Annotation 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-gateway-ingress</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">nginx.org/location-snippets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="no">client_max_body_size 20M;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39; always;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Methods&#39; &#39;PUT, GET, POST, DELETE, OPTIONS, PATCH&#39; always;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Headers&#39; &#39;*&#39; always;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39; always;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/gw&quot;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">api-gateway-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">20987</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">nginx.org/mergeable-ingress-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minion</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">nginx.org/client-max-body-size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;20M&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">nginx.org/location-snippets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="no">rewrite /gw(/|$)(.*) /$2 break;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39; always;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Methods&#39; &#39;PUT, GET, POST, DELETE, OPTIONS, PATCH&#39; always;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Headers&#39; &#39;*&#39; always;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="no">add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39; always;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="no">if ($request_method = &#39;OPTIONS&#39;) {</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="no">return 204;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="no">}</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/gw&quot;</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">api-gateway-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">20987</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
-<h4 id="32-b-gateway-virtualserver">[3.2-B] Gateway VirtualServer</h4>
+<blockquote>
+<p><strong>주의 — path 형식:</strong> path는 반드시 <code>/gw</code>처럼 단순 prefix 형태로 작성해야 합니다. <code>/gw(/|$)(.*)</code>와 같은 regex 패턴을 path에 넣으면 NIC가 <code>location /gw(/|$)(.*) {</code>(prefix 매칭)으로 생성하여 실제 URL이 절대 매칭되지 않습니다. Prefix 제거(rewrite)는 <code>location-snippets</code>의 <code>rewrite</code> 지시어에서 처리합니다.</p>
+<p><strong>주의 — <code>nginx.org/rewrites</code> 혼용 금지:</strong> <code>nginx.org/rewrites: serviceName=... rewrite=/</code> 어노테이션과 <code>location-snippets</code>의 <code>rewrite</code> 지시어를 동시에 사용하면 안 됩니다. <code>nginx.org/rewrites: rewrite=/</code>는 경로 prefix만 제거하는 것이 아니라 <strong>전체 경로를 <code>/</code>로 치환</strong>하므로 <code>/gw/strato-b-svc/...</code> 같은 모든 요청이 백엔드에 <code>/</code>로 전달됩니다. <code>location-snippets</code>의 <code>rewrite</code>만 사용하십시오.</p>
+</blockquote>
+<h4 id="option-b-virtualserver-crd-방식_1">[Option B] VirtualServer (CRD 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k8s.nginx.org/v1</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VirtualServer</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4468,27 +4863,29 @@
 <a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">          </span><span class="nt">rewritePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
 </code></pre></div>
 <h3 id="33-grafana-strato-solution-installhelm-chartgrafana">3.3 Grafana (<code>strato-solution-install/helm-chart/grafana</code>)</h3>
-<h4 id="33-a-grafana-ingress">[3.3-A] Grafana Ingress</h4>
+<h4 id="option-a-ingress-annotation-방식_2">[Option A] Ingress (Annotation 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana-ingress</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">nginx.org/location-snippets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="no">sub_filter &#39;&lt;/body&gt;&#39; &#39;&lt;style&gt;...&lt;/style&gt;&lt;/body&gt;&#39;;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">      </span><span class="no">sub_filter_once on;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/grafana&quot;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">grafana-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">3000</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">nginx.org/mergeable-ingress-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minion</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">nginx.org/location-snippets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">      </span><span class="no">rewrite /grafana(/|$)(.*) /$2 break;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">      </span><span class="no">sub_filter &#39;&lt;/body&gt;&#39; &#39;&lt;style&gt;...&lt;/style&gt;&lt;/body&gt;&#39;;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">      </span><span class="no">sub_filter_once on;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/grafana&quot;</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">grafana-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">3000</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
-<h4 id="33-b-grafana-virtualserver">[3.3-B] Grafana VirtualServer</h4>
+<h4 id="option-b-virtualserver-crd-방식_2">[Option B] VirtualServer (CRD 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k8s.nginx.org/v1</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VirtualServer</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4514,29 +4911,30 @@
 <blockquote>
 <p><strong>서비스명 확인:</strong> 프로젝트 내 Prometheus 서비스명은 <code>prometheus-global-svc</code>(포트 9090)입니다.</p>
 </blockquote>
-<h4 id="option-a-ingress-annotation-방식">[Option A] Ingress (Annotation 방식)</h4>
+<h4 id="option-a-ingress-annotation-방식_3">[Option A] Ingress (Annotation 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">metadata</span><span class="p">:</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus-ingress</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">nginx.org/basic-auth-secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic-auth&quot;</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">nginx.org/basic-auth-realm</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Prometheus</span><span class="nv"> </span><span class="s">Access&quot;</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/prometheus&quot;</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">prometheus-global-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">9090</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/alertmanager&quot;</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">alertmanager-operated</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">9093</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">nginx.org/mergeable-ingress-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minion</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">nginx.org/basic-auth-secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;basic-auth&quot;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">nginx.org/basic-auth-realm</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Prometheus</span><span class="nv"> </span><span class="s">Access&quot;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/prometheus&quot;</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">prometheus-global-svc</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">9090</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/alertmanager&quot;</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">              </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">alertmanager-operated</span><span class="p p-Indicator">,</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> number</span><span class="p">:</span><span class="w"> </span><span class="nv">9093</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
 <h4 id="option-b-virtualserver-policy-활용-방식">[Option B] VirtualServer (Policy 활용 방식)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 1. Policy 리소스 생성 (Basic Auth 정의)</span>
@@ -4603,27 +5001,162 @@
 <li><strong>WebSocket 및 Keep-Alive</strong>: Community 버전과 달리 F5 NIC는 WebSocket 업그레이드 설정을 명시적으로 요구할 수 있습니다. Portal Frontend나 실시간 모니터링 대시보드에서 WebSocket을 사용하는 경우, <code>Proxy Read Timeout</code> 및 <code>Connection/Upgrade</code> 헤더 유지 설정을 반드시 검증하십시오.</li>
 <li><strong>Lua 스크립트 호환성</strong>: 기존 Ingress에 Lua 스크립트 로직이 포함된 경우, F5 NIC는 이를 지원하지 않으므로 <strong>njs(NGINX JavaScript)</strong>로 재작성하거나 NGINX 네이티브 지시어로 변환해야 합니다.</li>
 <li><strong>Snippet 보안 검증</strong>: <code>enableSnippets: true</code> 활성화 시, 잘못된 설정 주입으로 인한 전체 인그레스 컨트롤러 정지(Crash)를 방지하기 위해 <strong>Global Configuration Validation Webhook</strong>이 정상 동작하는지 확인하십시오.</li>
+<li><strong>커스텀 요청 헤더 pass-through (JWT)</strong>: Grafana는 <code>X-JWT-Assertion</code> 헤더를 통해 자체적으로 JWT 인증을 처리합니다. NIC가 업스트림으로 요청을 전달할 때 이 헤더를 제거하거나 변조하지 않는지 반드시 확인하십시오. NIC 기본 설정에서 커스텀 헤더는 통과되지만, <code>proxy-set-headers</code> 등의 설정이 있을 경우 헤더 목록에서 누락될 수 있습니다.</li>
 </ol>
+<h3 id="44-tls-설정">4.4 TLS 설정</h3>
+<p>NIC에서 TLS를 처리하는 방식은 리소스 타입에 따라 다릅니다. 현재 프로젝트는 TLS Secret(<code>nhis-tls</code>, <code>strato-tls</code>)을 정의해 두었으나 비활성화 상태(<code>tls.enabled: false</code>)이므로, 운영 전환 시 아래 설정을 활성화해야 합니다.</p>
+<h4 id="virtualserver-방식">VirtualServer 방식</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">TLS_SECRET_NAME</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="w">   </span><span class="c1"># 동일 네임스페이스에 존재하는 Secret 이름</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">upstreams</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="nt">routes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<h4 id="native-ingress-방식">Native Ingress 방식</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ENV_DOMAIN</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">TLS_SECRET_NAME</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<blockquote>
+<p><code>nginx.org/redirect-to-https: "true"</code> 어노테이션은 TLS가 활성화된 경우에만 의미가 있습니다. TLS 비활성화 상태에서는 동작하지 않습니다.</p>
+</blockquote>
+<h4 id="tls-secret-네임스페이스-제약">TLS Secret 네임스페이스 제약</h4>
+<p>F5 NIC는 <strong>VirtualServer와 동일한 네임스페이스에 위치한 Secret만 참조</strong>할 수 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">서비스</th>
+<th style="text-align: left;">네임스페이스</th>
+<th style="text-align: left;">Secret 이름</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">API Gateway</td>
+<td style="text-align: left;"><code>strato-product</code></td>
+<td style="text-align: left;"><code>nhis-tls</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Portal Frontend</td>
+<td style="text-align: left;"><code>strato-product</code></td>
+<td style="text-align: left;"><code>nhis-tls</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Monitoring (Grafana)</td>
+<td style="text-align: left;"><code>monitoring</code></td>
+<td style="text-align: left;"><code>strato-tls</code></td>
+</tr>
+</tbody>
+</table>
+<p>각 네임스페이스에 Secret이 존재하지 않으면 NIC가 TLS 설정을 적용할 수 없습니다. 인증서 배포 방식은 아래 두 가지 중 하나를 선택합니다.</p>
+<ul>
+<li>
+<p><strong>방식 A — 네임스페이스별 Secret 복제</strong>: 동일한 인증서를 각 네임스페이스에 별도로 생성
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>nhis-tls<span class="w"> </span>-n<span class="w"> </span>source-ns<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/namespace: source-ns/namespace: strato-product/&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>방식 B — NIC 전역 기본 TLS 설정</strong>: NIC <code>values.yaml</code>에 <code>controller.defaultTLS.secret</code>을 지정하면 모든 VirtualServer에 공통 인증서를 적용할 수 있습니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># NIC values.yaml</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nt">controller</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">defaultTLS</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strato-product/nhis-tls</span>
+</code></pre></div></p>
+</li>
+</ul>
+<h3 id="45-path-매칭-및-rewrite-주의사항">4.5 Path 매칭 및 Rewrite 주의사항</h3>
+<p>NIC Mergeable Ingress(master/minion)에서 경로 재작성을 구성할 때 아래 사항을 반드시 준수하십시오.</p>
+<h4 id="path에-regex-패턴-사용-금지">path에 regex 패턴 사용 금지</h4>
+<p>NIC는 <code>pathType: Prefix</code> 및 <code>pathType: ImplementationSpecific</code> 모두에서 path 값을 <strong>NGINX prefix 매칭(<code>location /path {</code>)</strong> 으로 생성합니다. path에 regex 특수문자(<code>(</code>, <code>)</code>, <code>$</code>, <code>.*</code> 등)가 포함되면 리터럴 문자열로 처리되어 실제 URL이 매칭되지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">설정</th>
+<th style="text-align: left;">생성된 location</th>
+<th style="text-align: left;">매칭 여부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>path: /gw(/|$)(.*)</code></td>
+<td style="text-align: left;"><code>location /gw(/|$)(.*) {</code></td>
+<td style="text-align: left;"><code>/gw/...</code> 매칭 안 됨 ✗</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>path: /gw</code></td>
+<td style="text-align: left;"><code>location /gw {</code></td>
+<td style="text-align: left;"><code>/gw/...</code> 정상 매칭 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><code>nginx.org/use-regex: "true"</code> 어노테이션은 minion Ingress에서 동작하지 않으므로 사용하지 마십시오.</p>
+<h4 id="prefix-제거rewrite는-location-snippets에서만-처리">Prefix 제거(rewrite)는 location-snippets에서만 처리</h4>
+<p>백엔드로 전달 시 path prefix를 제거해야 하는 서비스(<code>/gw</code> → <code>/</code>, <code>/grafana</code> → <code>/</code>)는 <code>location-snippets</code>의 <code>rewrite</code> 지시어만 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">nginx.org/location-snippets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="no">rewrite /gw(/|$)(.*) /$2 break;</span>
+</code></pre></div>
+<p><code>nginx.org/rewrites: serviceName=... rewrite=/</code> 어노테이션은 <strong>경로 전체를 <code>/</code>로 치환</strong>하므로, <code>location-snippets</code>의 <code>rewrite</code>와 동시에 사용하면 안 됩니다. 두 방식 중 <code>location-snippets</code> 방식만 사용하십시오.</p>
+<h4 id="301-리다이렉트-브라우저-캐시-주의">301 리다이렉트 브라우저 캐시 주의</h4>
+<p>NIC 설정 변경 과정에서 잘못된 301 응답이 발생한 경우, <strong>브라우저가 301을 영구적으로 캐싱</strong>하기 때문에 서버 설정을 수정한 후에도 브라우저에서 계속 이전 리다이렉트를 따릅니다. 설정 변경 후 동작이 이상할 경우 아래 방법으로 확인하십시오.</p>
+<ul>
+<li><code>curl -Lv https://{{ ENV_DOMAIN }}/path/</code> 로 서버 응답을 직접 확인</li>
+<li>브라우저 시크릿 창에서 테스트 (캐시 미사용)</li>
+<li>Chrome DevTools → Network 탭 → <strong>Disable cache</strong> 체크 후 새로고침</li>
+</ul>
 <hr />
 <h2 id="5-f5-nic-구축-팀-협의-체크리스트-quick-checklist">5. F5 NIC 구축 팀 협의 체크리스트 (Quick Checklist)</h2>
 <p>안전한 마이그레이션을 위해 인프라 및 설치 담당 팀과 확인해야 할 핵심 항목입니다.</p>
 <h3 id="51-설치-및-버전-installation--version">5.1 설치 및 버전 (Installation &amp; Version)</h3>
 <ul>
 <li>[ ] <strong>버전 호환성:</strong> 도입되는 NIC 솔루션 버전과 K8s 클러스터 버전 간의 공식 호환성 확인</li>
-<li>[ ] <strong>CRD 설치:</strong> <code>VirtualServer</code>, <code>Policy</code> 등 전용 리소스 정의가 클러스터에 배포되었는지 확인</li>
-<li>[ ] <strong>에어갭 이미지:</strong> Harbor 레지스트리에 <code>sub_filter</code>, <code>njs</code> 모듈이 포함된 정식 이미지 업로드 여부</li>
+<li>[ ] <strong>에어갭 이미지:</strong> Harbor 레지스트리에 NIC 정식 이미지 업로드 여부</li>
+<li>[ ] <strong><code>sub_filter</code> 모듈 포함 이미지 확인:</strong> Monitoring(Grafana)에서 <code>sub_filter</code> 지시어(HTML 주입)를 사용하므로, Harbor에 업로드된 NIC 이미지가 해당 모듈을 포함하는지 사전 검증 필요 (<code>nginx -V 2&gt;&amp;1 | grep sub_filter</code>)</li>
 </ul>
 <h3 id="52-권한-및-네트워크-access--network">5.2 권한 및 네트워크 (Access &amp; Network)</h3>
 <ul>
-<li>[ ] <strong>IngressClass:</strong> 컨트롤러 이름(기본 <code>nginx</code>) 및 기존 컨트롤러와의 중복 여부 확인</li>
+<li>[ ] <strong>IngressClass:</strong> 컨트롤러 이름(기본 <code>nginx</code>) 및 기존 community ingress-nginx 컨트롤러와의 중복 여부 확인</li>
 <li>[ ] <strong>RBAC 권한:</strong> NIC가 타 네임스페이스의 TLS Secret을 읽을 수 있는 권한(ClusterRole) 부여 확인</li>
 <li>[ ] <strong>네트워크 포트:</strong> NIC Pod에서 각 서비스 Pod(3000, 9090, 9093, 20987 등)로의 통신 허용 여부</li>
+<li>[ ] <strong>기존 community ingress-nginx 제거 시점:</strong> F5 NIC 전환 완료 확인 후 제거 일정 협의 (동시 운영 기간 필요 여부 포함)</li>
 </ul>
-<h3 id="53-설정-및-보안-config--security">5.3 설정 및 보안 (Config &amp; Security)</h3>
+<h3 id="53-설정-및-보안--native-ingress-방식-현재-적용-방향">5.3 설정 및 보안 — Native Ingress 방식 (현재 적용 방향)</h3>
+<blockquote>
+<p>Native Ingress(<code>networking.k8s.io/v1</code> + <code>nginx.org/</code> 어노테이션) 방식을 사용하는 경우의 확인 항목입니다.</p>
+</blockquote>
+<h4 id="공통">공통</h4>
 <ul>
-<li>[ ] <strong>Snippet &amp; Webhook:</strong> <code>controller.enableSnippets: true</code> 활성화 및 설정 오류 방지용 <code>Validation Webhook</code> 구성 여부</li>
+<li>[ ] <strong>TLS 인증서 배포 방식:</strong> 네임스페이스별 Secret 복제(<code>nhis-tls</code> → <code>strato-product</code>, <code>strato-tls</code> → <code>monitoring</code>) vs NIC 전역 <code>defaultTLS.secret</code> 사용 방식 확정 (§4.4 참조)</li>
+<li>[ ] <strong>TLS 활성화:</strong> 각 서비스 Helm values의 <code>tls.enabled: false</code> → <code>true</code> 전환 시점 및 담당 확정</li>
 <li>[ ] <strong>WebSocket:</strong> <code>Connection/Upgrade</code> 헤더 처리 및 타임아웃 정책(Keep-Alive) 협의</li>
-<li>[ ] <strong>TLS 인증서:</strong> 네임스페이스별 Secret 복제 방식 vs 공통 인증서(<code>defaultTLS.secret</code>) 사용 방식 확정</li>
+<li>[ ] <strong>JWT 헤더 pass-through 확인:</strong> Grafana의 <code>X-JWT-Assertion</code> 헤더가 NIC를 거쳐 업스트림까지 전달되는지 검증 (§4.3 참조)</li>
+</ul>
+<h4 id="native-ingress-전용">Native Ingress 전용</h4>
+<ul>
+<li>[ ] <strong><code>nginx.org/location-snippets</code> 사용 가능 여부:</strong> Gateway(CORS)와 Monitoring(sub_filter)은 <code>location-snippets</code> 어노테이션을 사용함. NIC 설치 시 <code>controller.enableSnippets: true</code> 적용 필수이며, Validation Webhook 정상 동작 여부도 함께 확인 (§4.1 참조)</li>
+<li>[ ] <strong><code>redirect-to-https</code> 동작 조건:</strong> Portal Frontend의 <code>nginx.org/redirect-to-https: "true"</code> 어노테이션은 해당 Ingress에 TLS가 활성화된 경우에만 동작. TLS 비활성화 상태에서는 무시됨 (§4.4 참조)</li>
+<li>[ ] <strong><code>/oauth2</code> 경로 우선순위:</strong> Native Ingress는 경로 매칭 순서를 명시적으로 보장하지 않음. <code>/oauth2</code>가 <code>/</code>보다 먼저 처리되는지 실제 동작으로 검증 필요. 보장이 안 될 경우 VirtualServer 전환 검토 (§3.1 참조)</li>
+<li>[ ] <strong>Basic Auth Secret 타입:</strong> Prometheus/Alertmanager용 Basic Auth Secret은 반드시 <code>nginx.org/htpasswd</code> 타입으로 재생성 필요. 기존 <code>Opaque</code> 타입은 NIC에서 인식하지 않음 (§4.2 참조)</li>
+</ul>
+<h3 id="54-설정-및-보안--virtualserver-방식-crd-방식으로-전환-시">5.4 설정 및 보안 — VirtualServer 방식 (CRD 방식으로 전환 시)</h3>
+<blockquote>
+<p><code>VirtualServer</code>(k8s.nginx.org/v1) 방식을 사용하는 경우의 확인 항목입니다. Native Ingress 방식으로 결정된 경우 이 섹션은 해당 없음.</p>
+</blockquote>
+<h4 id="virtualserver-전용">VirtualServer 전용</h4>
+<ul>
+<li>[ ] <strong>CRD 설치:</strong> <code>VirtualServer</code>, <code>VirtualServerRoute</code>, <code>Policy</code> 등 F5 NIC 전용 CRD가 클러스터에 배포되었는지 확인</li>
+<li>[ ] <strong><code>routes</code> 순서 보장:</strong> VirtualServer는 <code>routes</code> 배열 순서대로 경로가 매칭됨. <code>/oauth2</code> 등 구체적인 경로를 <code>/</code>보다 반드시 먼저 정의 (§3.1 참조)</li>
+<li>[ ] <strong><code>rewritePath</code> 동작 확인:</strong> Gateway(<code>/gw</code> → <code>/</code>), Monitoring(<code>/grafana</code> → <code>/</code>) 경로 재작성이 의도한 대로 동작하는지 검증 (§3.2, §3.3 참조)</li>
+<li>[ ] <strong>Basic Auth Policy 리소스:</strong> Prometheus/Alertmanager Basic Auth는 <code>Policy</code> 리소스(<code>basicAuth.secret</code>)로 구성. Secret 타입은 동일하게 <code>nginx.org/htpasswd</code> 필요 (§3.4, §4.2 참조)</li>
+<li>[ ] <strong>TLS 인증서 배포 방식:</strong> 네임스페이스별 Secret 복제(<code>nhis-tls</code> → <code>strato-product</code>, <code>strato-tls</code> → <code>monitoring</code>) vs NIC 전역 <code>defaultTLS.secret</code> 사용 방식 확정 (§4.4 참조)</li>
+<li>[ ] <strong>TLS 활성화:</strong> 각 서비스 Helm values의 <code>tls.enabled: false</code> → <code>true</code> 전환 시점 및 담당 확정</li>
+<li>[ ] <strong><code>location-snippets</code> in VirtualServer routes:</strong> Gateway(CORS), Monitoring(sub_filter) VirtualServer의 <code>routes[].location-snippets</code> 사용 시 <code>controller.enableSnippets: true</code> 적용 필수 (§4.1 참조)</li>
+<li>[ ] <strong>JWT 헤더 pass-through 확인:</strong> Grafana의 <code>X-JWT-Assertion</code> 헤더가 NIC를 거쳐 업스트림까지 전달되는지 검증 (§4.3 참조)</li>
 </ul>
 
 
