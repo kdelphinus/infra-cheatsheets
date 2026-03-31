@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-redis-stream-설치-및-운영-가이드" class="md-skip">
+        <a href="#redis-stream-72-공식-이미지--helm-chart-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -1171,6 +1171,34 @@
     
   
     Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX NIC 마이그레이션 가이드
   
 
     
@@ -2339,7 +2367,7 @@
   <span class="md-ellipsis">
     
   
-    Redis Stream 개요
+    Redis Stream 개발자 가이드
   
 
     
@@ -2420,33 +2448,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-전제-조건" class="md-nav__link">
+  <a href="#1-사전-준비" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 전제 조건
+        1. 사전 준비
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-이미지-준비" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 이미지 준비
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 이미지 준비">
+    <nav class="md-nav" aria-label="1. 사전 준비">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#운영-환경-harbor-레지스트리" class="md-nav__link">
+  <a href="#이미지-반입" class="md-nav__link">
     <span class="md-ellipsis">
       
-        운영 환경 (Harbor 레지스트리)
+        이미지 반입
       
     </span>
   </a>
@@ -2454,50 +2471,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#로컬-테스트-환경-ctr-import" class="md-nav__link">
+  <a href="#이미지-배포-방식-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        로컬 테스트 환경 (ctr import)
+        이미지 배포 방식 선택
       
     </span>
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-설치-진행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 설치 진행
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 설치 진행">
+    <nav class="md-nav" aria-label="이미지 배포 방식 선택">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-storage-설정-주의사항" class="md-nav__link">
+  <a href="#방식-a--harbor-레지스트리-사용-권장" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💾 Storage 설정 주의사항
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="💾 Storage 설정 주의사항">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hostpath-정적-노드-할당" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HostPath (정적 노드 할당)
+        방식 A — Harbor 레지스트리 사용 (권장)
       
     </span>
   </a>
@@ -2505,10 +2494,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nfs-공유-스토리지" class="md-nav__link">
+  <a href="#방식-b--harbor-없음-로컬-tar-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NFS (공유 스토리지)
+        방식 B — Harbor 없음 (로컬 tar import)
       
     </span>
   </a>
@@ -2526,22 +2515,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-스트림-테스트-및-검증" class="md-nav__link">
+  <a href="#2-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 스트림 테스트 및 검증
+        2. 설치
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 스트림 테스트 및 검증">
+    <nav class="md-nav" aria-label="2. 설치">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#테스트-체크-포인트-및-기대값" class="md-nav__link">
+  <a href="#hostpath-사전-작업" class="md-nav__link">
     <span class="md-ellipsis">
       
-        테스트 체크 포인트 및 기대값
+        HostPath 사전 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfs-사전-작업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NFS 사전 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pv-재사용-안내" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PV 재사용 안내
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storageclass-주의-사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StorageClass 주의 사항
       
     </span>
   </a>
@@ -2554,22 +2576,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-애플리케이션-연동-spring-boot" class="md-nav__link">
+  <a href="#3-설치-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 애플리케이션 연동 (Spring Boot)
+        3. 설치 확인
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 애플리케이션 연동 (Spring Boot)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 테스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-failover-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Failover 테스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-삭제" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 삭제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-초기화-동작-원리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 초기화 동작 원리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 초기화 동작 원리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#핵심-운영-주의사항" class="md-nav__link">
+  <a href="#초기-부팅" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 운영 주의사항
+        초기 부팅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failover-후-재시작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Failover 후 재시작
       
     </span>
   </a>
@@ -2582,10 +2659,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-삭제-uninstall" class="md-nav__link">
+  <a href="#8-주요-차이점-vs-bitnami-커스텀-빌드-방식" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 삭제 (Uninstall)
+        8. 주요 차이점 (vs Bitnami 커스텀 빌드 방식)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-관련-문서" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 관련 문서
       
     </span>
   </a>
@@ -3834,33 +3922,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-전제-조건" class="md-nav__link">
+  <a href="#1-사전-준비" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 전제 조건
+        1. 사전 준비
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-이미지-준비" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 이미지 준비
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 이미지 준비">
+    <nav class="md-nav" aria-label="1. 사전 준비">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#운영-환경-harbor-레지스트리" class="md-nav__link">
+  <a href="#이미지-반입" class="md-nav__link">
     <span class="md-ellipsis">
       
-        운영 환경 (Harbor 레지스트리)
+        이미지 반입
       
     </span>
   </a>
@@ -3868,50 +3945,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#로컬-테스트-환경-ctr-import" class="md-nav__link">
+  <a href="#이미지-배포-방식-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        로컬 테스트 환경 (ctr import)
+        이미지 배포 방식 선택
       
     </span>
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-설치-진행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 설치 진행
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 설치 진행">
+    <nav class="md-nav" aria-label="이미지 배포 방식 선택">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-storage-설정-주의사항" class="md-nav__link">
+  <a href="#방식-a--harbor-레지스트리-사용-권장" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💾 Storage 설정 주의사항
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="💾 Storage 설정 주의사항">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hostpath-정적-노드-할당" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HostPath (정적 노드 할당)
+        방식 A — Harbor 레지스트리 사용 (권장)
       
     </span>
   </a>
@@ -3919,10 +3968,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nfs-공유-스토리지" class="md-nav__link">
+  <a href="#방식-b--harbor-없음-로컬-tar-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NFS (공유 스토리지)
+        방식 B — Harbor 없음 (로컬 tar import)
       
     </span>
   </a>
@@ -3940,22 +3989,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-스트림-테스트-및-검증" class="md-nav__link">
+  <a href="#2-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 스트림 테스트 및 검증
+        2. 설치
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 스트림 테스트 및 검증">
+    <nav class="md-nav" aria-label="2. 설치">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#테스트-체크-포인트-및-기대값" class="md-nav__link">
+  <a href="#hostpath-사전-작업" class="md-nav__link">
     <span class="md-ellipsis">
       
-        테스트 체크 포인트 및 기대값
+        HostPath 사전 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfs-사전-작업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NFS 사전 작업
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pv-재사용-안내" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PV 재사용 안내
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storageclass-주의-사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StorageClass 주의 사항
       
     </span>
   </a>
@@ -3968,22 +4050,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-애플리케이션-연동-spring-boot" class="md-nav__link">
+  <a href="#3-설치-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 애플리케이션 연동 (Spring Boot)
+        3. 설치 확인
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 애플리케이션 연동 (Spring Boot)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 테스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-failover-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Failover 테스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-삭제" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 삭제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-초기화-동작-원리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 초기화 동작 원리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 초기화 동작 원리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#핵심-운영-주의사항" class="md-nav__link">
+  <a href="#초기-부팅" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 운영 주의사항
+        초기 부팅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failover-후-재시작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Failover 후 재시작
       
     </span>
   </a>
@@ -3996,10 +4133,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-삭제-uninstall" class="md-nav__link">
+  <a href="#8-주요-차이점-vs-bitnami-커스텀-빌드-방식" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 삭제 (Uninstall)
+        8. 주요 차이점 (vs Bitnami 커스텀 빌드 방식)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-관련-문서" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 관련 문서
       
     </span>
   </a>
@@ -4026,118 +4174,209 @@
   
 
 
-<h1 id="-redis-stream-설치-및-운영-가이드">🛠️ Redis Stream 설치 및 운영 가이드</h1>
-<p>본 가이드는 폐쇄망(Air-gapped) 환경에서 Redis Stream HA 클러스터를 설치하고 운영하는 과정을 설명합니다.</p>
-<h2 id="1-전제-조건">1. 전제 조건</h2>
-<ul>
-<li>Kubernetes 클러스터 접근 권한 (<code>kubectl</code> 설정 완료)</li>
-<li>Helm v3 이상</li>
-<li>Local Harbor 레지스트리 (기본 포트: 30002)</li>
-</ul>
-<h2 id="2-이미지-준비">2. 이미지 준비</h2>
-<h3 id="운영-환경-harbor-레지스트리">운영 환경 (Harbor 레지스트리)</h3>
-<p><code>images/</code> 디렉토리의 tar 파일을 Harbor에 업로드합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;&lt;NODE_IP&gt;:30002&quot;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./images/upload_images_to_harbor_v3-lite.sh
+<h1 id="redis-stream-72-공식-이미지--helm-chart-설치-가이드">Redis Stream 7.2 공식 이미지 — Helm Chart 설치 가이드</h1>
+<h2 id="1-사전-준비">1. 사전 준비</h2>
+<h3 id="이미지-반입">이미지 반입</h3>
+<p>인터넷 연결된 환경에서 스크립트로 이미지를 저장합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>bash<span class="w"> </span>scripts/save_images.sh
 </code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Sentinel 이미지 반입 필요</p>
-<p><code>bitnami/redis-sentinel:7.2.4-debian-12-r7</code> tar 파일은 외부망에서 별도 반입해야 합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 외부망에서 실행</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>bitnami/redis-sentinel:7.2.4-debian-12-r7
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>docker<span class="w"> </span>save<span class="w"> </span>bitnami/redis-sentinel:7.2.4-debian-12-r7<span class="w"> </span>-o<span class="w"> </span>redis-sentinel.tar
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># tar 파일을 images/ 디렉토리로 반입 후 업로드 스크립트 재실행</span>
-</code></pre></div></p>
-</div>
-<h3 id="로컬-테스트-환경-ctr-import">로컬 테스트 환경 (ctr import)</h3>
-<p>tar 파일을 containerd에 직접 임포트합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>images/*.tar
+<p>생성된 <code>docker.io_library_redis_7.2.tar</code> 파일을 <code>images/</code> 디렉토리에 배치합니다.</p>
+<h3 id="이미지-배포-방식-선택">이미지 배포 방식 선택</h3>
+<p>환경에 따라 두 가지 방식 중 하나를 선택합니다.</p>
+<h4 id="방식-a--harbor-레지스트리-사용-권장">방식 A — Harbor 레지스트리 사용 (권장)</h4>
+<p>Harbor가 구축되어 있다면 업로드 스크립트를 실행합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>redis-stream-7.2-official
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
-<h2 id="3-설치-진행">3. 설치 진행</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 대화형 설치 스크립트 실행</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./scripts/install.sh
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 또는 환경 지정 실행</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>./scripts/install.sh<span class="w"> </span><span class="nb">local</span><span class="w">   </span><span class="c1"># 로컬 환경 (M1+R1+S2)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>./scripts/install.sh<span class="w"> </span>prod<span class="w">    </span><span class="c1"># 운영 환경 (M1+R2+S3)</span>
-</code></pre></div>
-<h3 id="-storage-설정-주의사항">💾 Storage 설정 주의사항</h3>
-<h4 id="hostpath-정적-노드-할당">HostPath (정적 노드 할당)</h4>
-<ul>
-<li>스크립트에서 대상 노드를 선택하면 해당 노드에 데이터가 고정됩니다.</li>
-<li>노드가 다른 경우 SSH로 디렉토리를 수동 생성해야 할 수 있습니다.</li>
-</ul>
-<h4 id="nfs-공유-스토리지">NFS (공유 스토리지)</h4>
-<ul>
-<li>NFS 서버에 디렉토리를 <strong>사전에 직접 생성</strong>해야 합니다.</li>
-<li><code>sudo mkdir -p /nfs/redis-stream/{master,replica-0,replica-1}</code></li>
-<li>권한 설정: <code>sudo chmod -R 777 /nfs/redis-stream</code></li>
-</ul>
-<h2 id="4-스트림-테스트-및-검증">4. 스트림 테스트 및 검증</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./scripts/test-stream.sh<span class="w"> </span><span class="nb">local</span><span class="w">   </span><span class="c1"># 또는 prod</span>
-</code></pre></div>
-<h3 id="테스트-체크-포인트-및-기대값">테스트 체크 포인트 및 기대값</h3>
+<p>실행 시 대화형으로 다음을 입력합니다:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">단계</th>
 <th style="text-align: left;">항목</th>
-<th style="text-align: left;">기대값</th>
-<th style="text-align: left;">목적</th>
+<th style="text-align: left;">예시</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">그룹 생성</td>
-<td style="text-align: left;"><code>OK</code> 또는 준비 완료</td>
-<td style="text-align: left;">반복 실행(멱등성) 보장 확인</td>
+<td style="text-align: left;">실행 모드</td>
+<td style="text-align: left;"><code>2</code> (Harbor 업로드)</td>
 </tr>
 <tr>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">메시지 생산</td>
-<td style="text-align: left;">Redis ID (예: <code>1711...-0</code>)</td>
-<td style="text-align: left;">OOM 방지: <code>MAXLEN</code> 제한 적용 확인</td>
+<td style="text-align: left;">Harbor 레지스트리 주소</td>
+<td style="text-align: left;"><code>192.168.1.10:30002</code> 또는 <code>harbor.example.com</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">동기 복제</td>
-<td style="text-align: left;"><code>1</code> 이상 (Replica 가용 시)</td>
-<td style="text-align: left;">데이터 유실 방지: 복제본 저장 확인</td>
+<td style="text-align: left;">Harbor 프로젝트</td>
+<td style="text-align: left;"><code>library</code> 또는 <code>oss</code> 등</td>
 </tr>
 <tr>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">메시지 소비</td>
-<td style="text-align: left;">성공 메시지</td>
-<td style="text-align: left;">Consumer 그룹 읽기 기능 확인</td>
-</tr>
-<tr>
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">미처리 목록</td>
-<td style="text-align: left;">Pending 건수 &gt; 0</td>
-<td style="text-align: left;">At-Least-Once: 미완료 작업 보존 확인</td>
+<td style="text-align: left;">Harbor 비밀번호</td>
+<td style="text-align: left;">(입력)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="5-애플리케이션-연동-spring-boot">5. 애플리케이션 연동 (Spring Boot)</h2>
-<p><code>examples/spring-boot</code> 프로젝트를 참조하세요. 빌드 시 내부 Nexus/Artifactory 설정이 필요할 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">spring</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">data</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">redis</span><span class="p">:</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">sentinel</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="nt">master</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mymaster</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="nt">nodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis-stream.redis-stream.svc:26379</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${REDIS_PASSWORD}&quot;</span>
+<blockquote>
+<p><code>HARBOR_REGISTRY</code>, <code>HARBOR_PROJECT</code>, <code>HARBOR_USER</code>, <code>HARBOR_PASSWORD</code> 환경변수를
+사전에 설정하면 대화형 입력을 건너뜁니다.</p>
+</blockquote>
+<h4 id="방식-b--harbor-없음-로컬-tar-import">방식 B — Harbor 없음 (로컬 tar import)</h4>
+<p>업로드 스크립트에서 모드 <code>1</code> (로컬 이미지 로드 전용)을 선택하거나,
+<code>install.sh</code> 실행 중 이미지 소스를 <code>2</code>로 선택하면 자동으로 <code>ctr import</code>합니다.</p>
+<h2 id="2-설치">2. 설치</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./scripts/install.sh
 </code></pre></div>
-<h3 id="핵심-운영-주의사항">핵심 운영 주의사항</h3>
+<p>스크립트가 대화형으로 다음을 안내합니다:</p>
+<ol>
+<li><strong>이미지 소스 선택</strong></li>
+<li><code>1</code> — Harbor 레지스트리 사용 (레지스트리 주소, 프로젝트 입력)</li>
+<li><code>2</code> — 로컬 tar import (<code>./images/*.tar</code> → containerd <code>k8s.io</code> 네임스페이스)</li>
+<li><strong>Redis 비밀번호</strong> 입력</li>
+<li><strong>Storage Type</strong> 선택: <code>hostpath</code> 또는 <code>nfs</code></li>
+<li>(hostpath) 노드 선택 및 데이터 경로 입력</li>
+<li>(nfs) NFS 서버 IP 및 경로 입력</li>
+</ol>
+<h3 id="hostpath-사전-작업">HostPath 사전 작업</h3>
+<p>hostpath 선택 시, <strong>해당 노드에서</strong> 미리 디렉토리를 생성해야 합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 노드에서 직접 실행</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+</code></pre></div>
+<p>스크립트가 Enter 대기 프롬프트를 표시할 때 위 작업을 완료한 뒤 진행합니다.</p>
+<h3 id="nfs-사전-작업">NFS 사전 작업</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># NFS 서버에서 실행</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/nfs/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/nfs/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+</code></pre></div>
+<h3 id="pv-재사용-안내">PV 재사용 안내</h3>
+<p>기존 PV(<code>redis-official-node-{0,1,2}-pv</code>)가 이미 존재하는 경우:</p>
 <ul>
-<li><strong>MAXLEN 필수 (OOM 방지)</strong>: <code>XADD</code> 시 반드시 <code>MAXLEN</code>을 지정해야 합니다. 설정 없이 운영 시 스트림이 무한 증가하여 Redis OOM이 발생합니다.</li>
-<li><strong>리밸런싱 부재 (Zombie 회수)</strong>: Kafka와 달리 Consumer 장애 시 자동 재할당 기능이 없습니다. <code>autoClaimZombieMessages()</code> 패턴을 참고하여 앱 레벨에서 주기적으로 <code>XCLAIM</code>을 실행해야 합니다.</li>
+<li><strong>동일 경로</strong>: 재사용 여부를 Y/n으로 선택합니다.</li>
+<li><strong>다른 경로</strong>: PV 경로는 생성 후 변경 불가(Immutable)입니다. 기존 PV를 삭제하고 재생성할지 확인합니다.</li>
+<li>기존 데이터는 호스트 디렉토리에 그대로 보존됩니다.</li>
 </ul>
-<h2 id="6-삭제-uninstall">6. 삭제 (Uninstall)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./scripts/uninstall.sh
+<h3 id="storageclass-주의-사항">StorageClass 주의 사항</h3>
+<p>이 Chart는 PVC에 <code>storageClassName: ""</code>을 사용합니다.
+<code>""</code> 설정 시 <strong>storageClassName이 명시적으로 비어 있는 PV</strong>에만 바인딩됩니다.</p>
+<p>정적 HostPath PV를 사용할 경우 PV의 <code>storageClassName</code>도 <code>""</code>(생략 또는 빈 값)이어야 합니다.
+StorageClass가 있는 환경에서 동적 프로비저닝을 원한다면 <code>values.yaml</code>에서
+<code>storage.storageClassName</code>을 해당 클래스명으로 오버라이드하세요.</p>
+<h2 id="3-설치-확인">3. 설치 확인</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>redis-stream-official
 </code></pre></div>
-<p>PV는 <code>Retain</code> 정책으로 데이터 디렉토리가 보존되므로, 완전 삭제 시 수동으로 디렉토리를 제거하십시오.</p>
+<p>예상 결과:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>redis-node-0       2/2   Running   0   2m
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>redis-node-1       2/2   Running   0   2m
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>redis-node-2       2/2   Running   0   2m
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>redis-sentinel-0   1/1   Running   0   2m
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>redis-sentinel-1   1/1   Running   0   2m
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>redis-sentinel-2   1/1   Running   0   2m
+</code></pre></div>
+<p>Replication 상태 확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span>redis-cli<span class="w"> </span>-a<span class="w"> </span>&lt;password&gt;<span class="w"> </span>--no-auth-warning<span class="w"> </span>INFO<span class="w"> </span>replication
+</code></pre></div>
+<p>Sentinel 상태 확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-sentinel-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span>redis-cli<span class="w"> </span>-p<span class="w"> </span><span class="m">26379</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>SENTINEL<span class="w"> </span>masters
+</code></pre></div>
+<h2 id="4-테스트">4. 테스트</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./scripts/test-stream.sh
+</code></pre></div>
+<h2 id="5-failover-테스트">5. Failover 테스트</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Master Pod 강제 종료</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Sentinel이 새 master 선출 확인 (약 5~10초 후)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-sentinel-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>redis-cli<span class="w"> </span>-p<span class="w"> </span><span class="m">26379</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>SENTINEL<span class="w"> </span>get-master-addr-by-name<span class="w"> </span>mymaster
+</code></pre></div>
+<h2 id="6-삭제">6. 삭제</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>./scripts/uninstall.sh
+</code></pre></div>
+<p>PV는 <code>Retain</code> policy로 데이터가 보존됩니다.</p>
+<h2 id="7-초기화-동작-원리">7. 초기화 동작 원리</h2>
+<h3 id="초기-부팅">초기 부팅</h3>
+<ol>
+<li><code>redis-node-0</code> → init container 실행 → Sentinel 없음 감지 → <strong>master 모드</strong>로 시작</li>
+<li><code>redis-node-1</code>, <code>redis-node-2</code> → init container → Sentinel 없음 → <code>replicaof redis-node-0.redis-headless</code> 설정 → <strong>replica 모드</strong></li>
+<li><code>redis-sentinel-0/1/2</code> → init container → <code>redis-node-0</code>을 master로 설정 → Sentinel 시작</li>
+</ol>
+<h3 id="failover-후-재시작">Failover 후 재시작</h3>
+<ol>
+<li>Pod 재시작 시 init container가 <code>redis-sentinel-{0,1,2}</code>에 쿼리</li>
+<li>현재 master IP를 확인하여 자동으로 역할 결정</li>
+<li>원래 master 노드도 재시작 후 replica로 올바르게 설정됨</li>
+</ol>
+<blockquote>
+<p><strong>Sentinel 설정 비영속성</strong>: <code>sentinel-data</code> 볼륨은 <code>emptyDir</code>입니다.
+Sentinel Pod 재시작 시 init container가 매번 config를 재생성하므로 정상 동작합니다.
+Sentinel 설정 파일을 영속화할 필요는 없습니다.</p>
+</blockquote>
+<h2 id="8-주요-차이점-vs-bitnami-커스텀-빌드-방식">8. 주요 차이점 (vs Bitnami 커스텀 빌드 방식)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">공식 이미지 방식 (Helm)</th>
+<th style="text-align: left;">Bitnami 커스텀 빌드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">이미지 크기</td>
+<td style="text-align: left;">~130MB</td>
+<td style="text-align: left;">~400MB (bitnami rootfs 포함)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Bitnami 의존성</td>
+<td style="text-align: left;">없음</td>
+<td style="text-align: left;">bitnami rootfs 필요</td>
+</tr>
+<tr>
+<td style="text-align: left;">설정 방식</td>
+<td style="text-align: left;">init container 스크립트</td>
+<td style="text-align: left;">Bitnami 부트스트랩 스크립트</td>
+</tr>
+<tr>
+<td style="text-align: left;">Helm 필요</td>
+<td style="text-align: left;">예 (자체 개발 Chart)</td>
+<td style="text-align: left;">예 (Bitnami Chart)</td>
+</tr>
+<tr>
+<td style="text-align: left;">운영 복잡도</td>
+<td style="text-align: left;">낮음 (Helm 통합)</td>
+<td style="text-align: left;">낮음 (Helm 관리)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Failover 강건성</td>
+<td style="text-align: left;">양호 (sentinel 쿼리 기반)</td>
+<td style="text-align: left;">높음 (Bitnami 검증된 로직)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-관련-문서">9. 관련 문서</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">문서</th>
+<th style="text-align: left;">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="./DEVELOPER-GUIDE.md">DEVELOPER-GUIDE.md</a></td>
+<td style="text-align: left;">Spring Boot 연결 설정, Producer/Consumer 구현, at-least-once 보장, 폐쇄망 빌드 설정</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="./KAFKA-REPLACEMENT-GUIDE.md">KAFKA-REPLACEMENT-GUIDE.md</a></td>
+<td style="text-align: left;">Kafka → Redis Stream 마이그레이션 가이드</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="./REPORT.md">REPORT.md</a></td>
+<td style="text-align: left;">검증 및 수정 이력</td>
+</tr>
+</tbody>
+</table>
 
 
 

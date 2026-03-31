@@ -25,7 +25,7 @@
     
     
       
-        <title>Redis Stream 개요 - Infra Cheatsheets</title>
+        <title>Redis Stream 개발자 가이드 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-redis-stream-ha-개요" class="md-skip">
+        <a href="#redis-stream-서비스-개발자-가이드-kafka-전환-및-실무-구현" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Redis Stream 개요
+              Redis Stream 개발자 가이드
             
           </span>
         </div>
@@ -1171,6 +1171,34 @@
     
   
     Ingress-Nginx 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX NIC 마이그레이션 가이드
   
 
     
@@ -2348,7 +2376,7 @@
   <span class="md-ellipsis">
     
   
-    Redis Stream 개요
+    Redis Stream 개발자 가이드
   
 
     
@@ -2366,7 +2394,7 @@
   <span class="md-ellipsis">
     
   
-    Redis Stream 개요
+    Redis Stream 개발자 가이드
   
 
     
@@ -2392,10 +2420,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-주요-특징" class="md-nav__link">
+  <a href="#목차" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 주요 특징
+        목차
       
     </span>
   </a>
@@ -2403,10 +2431,488 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-디렉토리-구조" class="md-nav__link">
+  <a href="#1-인프라-구조-및-장애-조치-ha" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 디렉토리 구조
+        1. 인프라 구조 및 장애 조치 (HA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 인프라 구조 및 장애 조치 (HA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ha-구성-아키텍처" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 HA 구성 아키텍처
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-데이터-영속성-및-용량-관리-infra-vs-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 데이터 영속성 및 용량 관리 (Infra vs App)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 데이터 영속성 및 용량 관리 (Infra vs App)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bowl-인프라-설정-redis-서버-영속성-helm-chart--redisconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Bowl: 인프라 설정] Redis 서버 영속성 (Helm Chart / redis.conf)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[Bowl: 인프라 설정] Redis 서버 영속성 (Helm Chart / redis.conf)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#영속성-모드-비교-rdb--aof--hybrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        영속성 모드 비교 (RDB / AOF / Hybrid)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#영속성-설정-항목" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        영속성 설정 항목
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#하드코딩-chartsredis-sentineltemplatesconfigmap-redisyaml--변경-불필요" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [하드코딩] charts/redis-sentinel/templates/configmap-redis.yaml — 변경 불필요
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#오버라이드-가능-valuesyaml--redisconfig--환경에-따라-조정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [오버라이드 가능] values.yaml → redis.config — 환경에 따라 조정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#food-앱-설정-스트림-데이터-제어-spring-boot--java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Food: 앱 설정] 스트림 데이터 제어 (Spring Boot / Java)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[Food: 앱 설정] 스트림 데이터 제어 (Spring Boot / Java)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#125-데이터-제거-전략-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.5 데이터 제거 전략 (Retention)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-물리적-인프라-요구사항-k8s--storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 물리적 인프라 요구사항 (K8s &amp; Storage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-운영자-체크리스트-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 운영자 체크리스트 (Summary)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-kafka-vs-redis-stream-핵심-개념-매핑" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Kafka vs Redis Stream 핵심 개념 매핑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Kafka vs Redis Stream 핵심 개념 매핑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-파티션-및-확장-전략-partitioning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 파티션 및 확장 전략 (Partitioning Strategy)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 파티션 및 확장 전략 (Partitioning Strategy)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전략-1-consumer-group-확장-scale-out--대부분의-경우-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전략 1: Consumer Group 확장 (Scale-out) — 대부분의 경우 권장
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전략-2-멀티-키-파티셔닝--초고속-쓰기수천-tps-이상-필요-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전략 2: 멀티 키 파티셔닝 — 초고속 쓰기(수천 TPS 이상) 필요 시
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-spring-boot-프로젝트-설정-및-fail-fast-전략" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Spring Boot 프로젝트 설정 및 Fail-fast 전략
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Spring Boot 프로젝트 설정 및 Fail-fast 전략">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gradle-의존성-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Gradle 의존성 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-applicationyml-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 application.yml 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-producer-구현-장애-대응-및-원자적-전송" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Producer 구현: 장애 대응 및 원자적 전송
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Producer 구현: 장애 대응 및 원자적 전송">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-consumer-구현-최소-한-번-보장-at-least-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Consumer 구현: 최소 한 번 보장 (At-least-once)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Consumer 구현: 최소 한 번 보장 (At-least-once)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-pel-최대-재시도-초과-시-dead-letter-처리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 PEL 최대 재시도 초과 시 Dead Letter 처리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dead-letter-stream-모니터링" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dead Letter Stream 모니터링
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-운영-용량-설계-및-retention-가이드-4kb-50-tps-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 운영 용량 설계 및 Retention 가이드 (4KB, 50 TPS 기준)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 운영 용량 설계 및 Retention 가이드 (4KB, 50 TPS 기준)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-stream-maxlen-계산" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Stream MAXLEN 계산
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#기본-계산식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기본 계산식
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-maxlen-트리밍-동작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 MAXLEN 트리밍 동작
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-retryqueue-용량-계산-kafka-buffermemory-대응" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 retryQueue 용량 계산 (Kafka buffer.memory 대응)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kafka-설정-대응표" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kafka 설정 대응표
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retryqueue-capacity-계산식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        retryQueue capacity 계산식
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-helm-배포-및-환경-변수-매핑-가이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Helm 배포 및 환경 변수 매핑 가이드
       
     </span>
   </a>
@@ -2414,10 +2920,149 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-접속-정보-및-포트" class="md-nav__link">
+  <a href="#8-고급-주제-멱등성-및-graceful-shutdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 접속 정보 및 포트
+        8. 고급 주제: 멱등성 및 Graceful Shutdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 고급 주제: 멱등성 및 Graceful Shutdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-멱등성-중복-처리-방지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 멱등성 (중복 처리 방지)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-graceful-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Graceful Shutdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-기능-검증-테스트-redis-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 기능 검증 테스트 (redis-cli)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-장애-시나리오-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 장애 시나리오 테스트
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 장애 시나리오 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-master-failover-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Master Failover 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-retryqueue-포화-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 retryQueue 포화 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-pel-재처리-테스트-consumer-장애" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 PEL 재처리 테스트 (Consumer 장애)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-스트레스-테스트-결과-실측" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 스트레스 테스트 결과 (실측)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. 스트레스 테스트 결과 (실측)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-테스트-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 테스트 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-실측-결과" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 실측 결과
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-검증-체크리스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 검증 체크리스트
       
     </span>
   </a>
@@ -3694,10 +4339,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-주요-특징" class="md-nav__link">
+  <a href="#목차" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 주요 특징
+        목차
       
     </span>
   </a>
@@ -3705,10 +4350,488 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-디렉토리-구조" class="md-nav__link">
+  <a href="#1-인프라-구조-및-장애-조치-ha" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 디렉토리 구조
+        1. 인프라 구조 및 장애 조치 (HA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 인프라 구조 및 장애 조치 (HA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ha-구성-아키텍처" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 HA 구성 아키텍처
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-데이터-영속성-및-용량-관리-infra-vs-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 데이터 영속성 및 용량 관리 (Infra vs App)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 데이터 영속성 및 용량 관리 (Infra vs App)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bowl-인프라-설정-redis-서버-영속성-helm-chart--redisconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Bowl: 인프라 설정] Redis 서버 영속성 (Helm Chart / redis.conf)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[Bowl: 인프라 설정] Redis 서버 영속성 (Helm Chart / redis.conf)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#영속성-모드-비교-rdb--aof--hybrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        영속성 모드 비교 (RDB / AOF / Hybrid)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#영속성-설정-항목" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        영속성 설정 항목
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#하드코딩-chartsredis-sentineltemplatesconfigmap-redisyaml--변경-불필요" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [하드코딩] charts/redis-sentinel/templates/configmap-redis.yaml — 변경 불필요
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#오버라이드-가능-valuesyaml--redisconfig--환경에-따라-조정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [오버라이드 가능] values.yaml → redis.config — 환경에 따라 조정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#food-앱-설정-스트림-데이터-제어-spring-boot--java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Food: 앱 설정] 스트림 데이터 제어 (Spring Boot / Java)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[Food: 앱 설정] 스트림 데이터 제어 (Spring Boot / Java)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#125-데이터-제거-전략-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.5 데이터 제거 전략 (Retention)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-물리적-인프라-요구사항-k8s--storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 물리적 인프라 요구사항 (K8s &amp; Storage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-운영자-체크리스트-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 운영자 체크리스트 (Summary)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-kafka-vs-redis-stream-핵심-개념-매핑" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Kafka vs Redis Stream 핵심 개념 매핑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Kafka vs Redis Stream 핵심 개념 매핑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-파티션-및-확장-전략-partitioning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 파티션 및 확장 전략 (Partitioning Strategy)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 파티션 및 확장 전략 (Partitioning Strategy)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전략-1-consumer-group-확장-scale-out--대부분의-경우-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전략 1: Consumer Group 확장 (Scale-out) — 대부분의 경우 권장
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전략-2-멀티-키-파티셔닝--초고속-쓰기수천-tps-이상-필요-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전략 2: 멀티 키 파티셔닝 — 초고속 쓰기(수천 TPS 이상) 필요 시
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-spring-boot-프로젝트-설정-및-fail-fast-전략" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Spring Boot 프로젝트 설정 및 Fail-fast 전략
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Spring Boot 프로젝트 설정 및 Fail-fast 전략">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-gradle-의존성-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Gradle 의존성 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-applicationyml-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 application.yml 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-producer-구현-장애-대응-및-원자적-전송" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Producer 구현: 장애 대응 및 원자적 전송
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Producer 구현: 장애 대응 및 원자적 전송">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-consumer-구현-최소-한-번-보장-at-least-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Consumer 구현: 최소 한 번 보장 (At-least-once)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Consumer 구현: 최소 한 번 보장 (At-least-once)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전환-전-kafka_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 전 (Kafka)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#전환-후-redis-stream_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전환 후 (Redis Stream)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-pel-최대-재시도-초과-시-dead-letter-처리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 PEL 최대 재시도 초과 시 Dead Letter 처리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dead-letter-stream-모니터링" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dead Letter Stream 모니터링
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-운영-용량-설계-및-retention-가이드-4kb-50-tps-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 운영 용량 설계 및 Retention 가이드 (4KB, 50 TPS 기준)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 운영 용량 설계 및 Retention 가이드 (4KB, 50 TPS 기준)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-stream-maxlen-계산" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Stream MAXLEN 계산
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#기본-계산식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기본 계산식
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-maxlen-트리밍-동작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 MAXLEN 트리밍 동작
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-retryqueue-용량-계산-kafka-buffermemory-대응" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 retryQueue 용량 계산 (Kafka buffer.memory 대응)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kafka-설정-대응표" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kafka 설정 대응표
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retryqueue-capacity-계산식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        retryQueue capacity 계산식
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-helm-배포-및-환경-변수-매핑-가이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Helm 배포 및 환경 변수 매핑 가이드
       
     </span>
   </a>
@@ -3716,10 +4839,149 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-접속-정보-및-포트" class="md-nav__link">
+  <a href="#8-고급-주제-멱등성-및-graceful-shutdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 접속 정보 및 포트
+        8. 고급 주제: 멱등성 및 Graceful Shutdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 고급 주제: 멱등성 및 Graceful Shutdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-멱등성-중복-처리-방지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 멱등성 (중복 처리 방지)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-graceful-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Graceful Shutdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-기능-검증-테스트-redis-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 기능 검증 테스트 (redis-cli)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-장애-시나리오-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 장애 시나리오 테스트
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 장애 시나리오 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-master-failover-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Master Failover 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-retryqueue-포화-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 retryQueue 포화 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-pel-재처리-테스트-consumer-장애" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 PEL 재처리 테스트 (Consumer 장애)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-스트레스-테스트-결과-실측" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 스트레스 테스트 결과 (실측)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. 스트레스 테스트 결과 (실측)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-테스트-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 테스트 방법
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-실측-결과" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 실측 결과
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-검증-체크리스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 검증 체크리스트
       
     </span>
   </a>
@@ -3746,60 +5008,934 @@
   
 
 
-<h1 id="-redis-stream-ha-개요">🍎 Redis Stream (HA) 개요</h1>
-<p>본 컴포넌트는 단일 Kafka/Zookeeper 아키텍처를 대체하기 위해 구성된 <strong>Redis Stream 7.2.4 (Master-Replica-Sentinel HA)</strong> 클러스터입니다.</p>
-<h2 id="1-주요-특징">1. 주요 특징</h2>
+<h1 id="redis-stream-서비스-개발자-가이드-kafka-전환-및-실무-구현">Redis Stream 서비스 개발자 가이드 (Kafka 전환 및 실무 구현)</h1>
+<p>작성일: 2026-03-30</p>
+<hr />
+<h2 id="목차">목차</h2>
 <ul>
-<li><strong>고가용성 (High Availability)</strong>: Master 1 + Replica 2 + Sentinel 3 구성을 통한 자동 장애 조치(Failover)를 지원합니다.</li>
-<li><strong>환경 최적화</strong>: 운영(Harbor) 및 로컬(ctr import) 환경에 최적화된 통합 설치 스크립트를 제공합니다.</li>
-<li><strong>데이터 보전</strong>: AOF(Append Only File) 기반 영속성 및 HostPath/NFS PV를 통한 데이터 보존을 지원합니다.</li>
-<li><strong>OOM 방지</strong>: <code>MAXLEN</code> 기반 스트림 로그 트리밍 전략이 기본적으로 적용되어 메모리 고갈을 방지합니다.</li>
+<li><a href="#redis-stream-서비스-개발자-가이드-kafka-전환-및-실무-구현">Redis Stream 서비스 개발자 가이드 (Kafka 전환 및 실무 구현)</a></li>
+<li><a href="#목차">목차</a></li>
+<li><a href="#1-인프라-구조-및-장애-조치-ha">1. 인프라 구조 및 장애 조치 (HA)</a><ul>
+<li><a href="#11-ha-구성-아키텍처">1.1 HA 구성 아키텍처</a></li>
 </ul>
-<h2 id="2-디렉토리-구조">2. 디렉토리 구조</h2>
-<p>서비스 구성 요소 및 스크립트 위치는 다음과 같습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>redis-stream-7.2/
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── charts/redis/           # Bitnami Redis Helm 차트
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── images/                 # Redis 이미지 및 Harbor 업로드 스크립트
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── manifests/              # PV 매니페스트 및 테스트 파드
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── scripts/                # 설치(install.sh), 테스트(test-stream.sh) 등 운영 스크립트
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── examples/spring-boot/   # At-Least-Once 구현 예제 프로젝트
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├── values.yaml             # 운영 환경 설정
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── values-local.yaml       # 로컬 테스트 환경 설정 (Override)
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── README.md               # 서비스 명세
+</li>
+<li><a href="#12-데이터-영속성-및-용량-관리-infra-vs-app">1.2 데이터 영속성 및 용량 관리 (Infra vs App)</a><ul>
+<li><a href="#bowl-인프라-설정-redis-서버-영속성-helm-chart--redisconf">[Bowl: 인프라 설정] Redis 서버 영속성 (Helm Chart / redis.conf)</a></li>
+<li><a href="#영속성-모드-비교-rdb--aof--hybrid">영속성 모드 비교 (RDB / AOF / Hybrid)</a></li>
+<li><a href="#영속성-설정-항목-helm-valuesyaml--redisconfig">영속성 설정 항목 (Helm values.yaml → redis.config)</a></li>
+<li><a href="#food-앱-설정-스트림-데이터-제어-spring-boot--java">[Food: 앱 설정] 스트림 데이터 제어 (Spring Boot / Java)</a></li>
+<li><a href="#125-데이터-제거-전략-retention">1.2.5 데이터 제거 전략 (Retention)</a></li>
+<li><a href="#13-물리적-인프라-요구사항-k8s--storage">1.3 물리적 인프라 요구사항 (K8s \&amp; Storage)</a></li>
+<li><a href="#-운영자-체크리스트-summary">💡 운영자 체크리스트 (Summary)</a></li>
+</ul>
+</li>
+<li><a href="#2-kafka-vs-redis-stream-핵심-개념-매핑">2. Kafka vs Redis Stream 핵심 개념 매핑</a><ul>
+<li><a href="#21-파티션-및-확장-전략-partitioning-strategy">2.1 파티션 및 확장 전략 (Partitioning Strategy)</a></li>
+<li><a href="#전략-1-consumer-group-확장-scale-out--대부분의-경우-권장">전략 1: Consumer Group 확장 (Scale-out)</a></li>
+<li><a href="#전략-2-멀티-키-파티셔닝--초고속-쓰기수천-tps-이상-필요-시">전략 2: 멀티 키 파티셔닝</a></li>
+</ul>
+</li>
+<li><a href="#3-spring-boot-프로젝트-설정-및-fail-fast-전략">3. Spring Boot 프로젝트 설정 및 Fail-fast 전략</a><ul>
+<li><a href="#31-gradle-의존성-설정">3.1 Gradle 의존성 설정</a></li>
+<li><a href="#32-applicationyml-설정">3.2 application.yml 설정</a></li>
+</ul>
+</li>
+<li><a href="#4-producer-구현-장애-대응-및-원자적-전송">4. Producer 구현: 장애 대응 및 원자적 전송</a></li>
+<li><a href="#5-consumer-구현-최소-한-번-보장-at-least-once">5. Consumer 구현: 최소 한 번 보장 (At-least-once)</a><ul>
+<li><a href="#51-pel-최대-재시도-초과-시-dead-letter-처리">5.1 PEL 최대 재시도 초과 시 Dead Letter 처리</a></li>
+</ul>
+</li>
+<li><a href="#6-운영-용량-설계-및-retention-가이드-4kb-50-tps-기준">6. 운영 용량 설계 및 Retention 가이드 (4KB, 50 TPS 기준)</a><ul>
+<li><a href="#61-stream-maxlen-계산">6.1 Stream MAXLEN 계산</a></li>
+<li><a href="#62-maxlen-트리밍-동작">6.2 MAXLEN 트리밍 동작</a></li>
+<li><a href="#63-retryqueue-용량-계산-kafka-buffermemory-대응">6.3 retryQueue 용량 계산 (Kafka buffer.memory 대응)</a></li>
+</ul>
+</li>
+<li><a href="#7-helm-배포-및-환경-변수-매핑-가이드">7. Helm 배포 및 환경 변수 매핑 가이드</a></li>
+<li><a href="#8-고급-주제-멱등성-및-graceful-shutdown">8. 고급 주제: 멱등성 및 Graceful Shutdown</a><ul>
+<li><a href="#81-멱등성-중복-처리-방지">8.1 멱등성 (중복 처리 방지)</a></li>
+<li><a href="#82-graceful-shutdown">8.2 Graceful Shutdown</a></li>
+</ul>
+</li>
+<li><a href="#9-기능-검증-테스트-redis-cli">9. 기능 검증 테스트 (redis-cli)</a></li>
+<li><a href="#10-장애-시나리오-테스트">10. 장애 시나리오 테스트</a><ul>
+<li><a href="#101-master-failover-테스트">10.1 Master Failover 테스트</a></li>
+<li><a href="#102-retryqueue-포화-테스트">10.2 retryQueue 포화 테스트</a></li>
+<li><a href="#103-pel-재처리-테스트-consumer-장애">10.3 PEL 재처리 테스트 (Consumer 장애)</a></li>
+</ul>
+</li>
+<li><a href="#11-스트레스-테스트-결과-실측">11. 스트레스 테스트 결과 (실측)</a><ul>
+<li><a href="#111-테스트-방법">11.1 테스트 방법</a></li>
+<li><a href="#112-실측-결과">11.2 실측 결과</a></li>
+</ul>
+</li>
+<li><a href="#12-검증-체크리스트">12. 검증 체크리스트</a></li>
+</ul>
+<hr />
+<h2 id="1-인프라-구조-및-장애-조치-ha">1. 인프라 구조 및 장애 조치 (HA)</h2>
+<p>Redis Stream은 <strong>Sentinel</strong> 체계를 통해 Kafka 클러스터와 유사한 고가용성을 제공합니다.</p>
+<h3 id="11-ha-구성-아키텍처">1.1 HA 구성 아키텍처</h3>
+<ul>
+<li><strong>구조:</strong> 3 Redis (1 Master, 2 Slaves) + 3 Sentinel</li>
+<li><strong>Failover:</strong> Master 장애 시 Sentinel이 <strong>약 5.8초(실측)</strong> 내에 새 Master를 선출합니다.</li>
+<li><strong>연결 전략:</strong> 앱은 Sentinel 주소만 알면 되며, <code>Lettuce</code> 라이브러리가 자동 전환을 처리합니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>+--------------------------------------------------+
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|  Application (Spring Boot)                       |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>|  [ Lettuce - Sentinel-aware client ]             |
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>+------------------------+-------------------------+
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                         | connect via Sentinel addr
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>             +-----------v-----------+
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>             |    Sentinel Cluster   |
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>             |  [S1]  [S2]  [S3]     |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>             |  quorum: 2/3 vote     |
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>             +-----------+-----------+
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                         | return / update Master addr
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>             +-----------v-------------------------------+
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>             |  Redis Nodes                              |
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>             |  [Master] --async replication--&gt; [Slave1] |
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>             |  (XADD / WAIT)                   [Slave2] |
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>             +-------------------------------------------+
 </code></pre></div>
-<h2 id="3-접속-정보-및-포트">3. 접속 정보 및 포트</h2>
+<h2 id="12-데이터-영속성-및-용량-관리-infra-vs-app">1.2 데이터 영속성 및 용량 관리 (Infra vs App)</h2>
+<p>Redis Stream의 데이터 보존은 <strong>서버의 생존 설정(Helm)</strong>과 <strong>데이터의 유통기한 설정(App)</strong> 두 가지 층위에서 완성됩니다.</p>
+<h3 id="bowl-인프라-설정-redis-서버-영속성-helm-chart--redisconf">[Bowl: 인프라 설정] Redis 서버 영속성 (Helm Chart / redis.conf)</h3>
+<p>서버가 꺼졌을 때 데이터를 어떻게 파일로 남기고 복구할지에 대한 설정입니다. 주로 K8s <code>values.yaml</code>에 정의합니다.</p>
+<h4 id="영속성-모드-비교-rdb--aof--hybrid">영속성 모드 비교 (RDB / AOF / Hybrid)</h4>
+<p>Redis는 세 가지 파일 쓰기(영속성) 방식을 지원합니다. <strong>Redis Stream 서비스에는 Hybrid 방식을 권장합니다.</strong></p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">정보</th>
-<th style="text-align: left;">설명</th>
+<th style="text-align: left;">모드</th>
+<th style="text-align: left;">핵심 설정</th>
+<th style="text-align: left;">재기동 복구 속도</th>
+<th style="text-align: left;">최대 유실 범위</th>
+<th style="text-align: left;">권장 용도</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Sentinel 엔드포인트</strong></td>
-<td style="text-align: left;"><code>redis-stream.redis-stream.svc:26379</code></td>
-<td style="text-align: left;">클라이언트 접속 지점</td>
+<td style="text-align: left;"><strong>RDB (스냅샷)</strong></td>
+<td style="text-align: left;"><code>appendonly no</code> + <code>save 3600 1 300 100 60 10000</code></td>
+<td style="text-align: left;">빠름</td>
+<td style="text-align: left;">최대 수 분</td>
+<td style="text-align: left;">캐시, 유실 허용 가능</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Master Set 이름</strong></td>
-<td style="text-align: left;"><code>mymaster</code></td>
-<td style="text-align: left;">Sentinel 식별자</td>
+<td style="text-align: left;"><strong>AOF (명령 로그)</strong></td>
+<td style="text-align: left;"><code>appendonly yes</code> + <code>aof-use-rdb-preamble no</code></td>
+<td style="text-align: left;">느림 (전체 명령 순차 재실행)</td>
+<td style="text-align: left;">최대 1초</td>
+<td style="text-align: left;">데이터 신뢰성이 중요한 경우</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>기본 포트</strong></td>
-<td style="text-align: left;"><code>6379</code> (Redis), <code>26379</code> (Sentinel)</td>
-<td style="text-align: left;">서비스 포트</td>
+<td style="text-align: left;"><strong>Hybrid (권장)</strong></td>
+<td style="text-align: left;"><code>appendonly yes</code> + <code>aof-use-rdb-preamble yes</code></td>
+<td style="text-align: left;">빠름 (RDB 스냅샷 + AOF 후미만 재실행)</td>
+<td style="text-align: left;">최대 1초</td>
+<td style="text-align: left;"><strong>Redis Stream 서비스</strong></td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Sentinel을 통해 Master의 위치를 동적으로 파악하므로, 애플리케이션에서는 Sentinel 주소와 Master Set 이름을 사용하여 접속해야 합니다.</p>
-</div>
+<blockquote>
+<p><strong>Hybrid 동작 원리</strong>: AOF Rewrite 시 파일 앞부분에 RDB 스냅샷을 기록하고, 그 이후 변경 사항만 AOF 형식으로 추가합니다.
+재기동 시 전체 명령을 순차 재실행하는 순수 AOF 대비 10배 이상 빠른 복구가 가능하면서, RDB 단독 대비 데이터 유실 범위(최대 1초)를 최소화합니다.</p>
+</blockquote>
+<h4 id="영속성-설정-항목">영속성 설정 항목</h4>
+<p>영속성 관련 설정은 두 계층으로 나뉩니다.</p>
+<h3 id="하드코딩-chartsredis-sentineltemplatesconfigmap-redisyaml--변경-불필요">[하드코딩] <code>charts/redis-sentinel/templates/configmap-redis.yaml</code> — 변경 불필요</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">설정 항목</th>
+<th style="text-align: left;">고정 값</th>
+<th style="text-align: left;">상세 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>AOF 활성화</strong></td>
+<td style="text-align: left;"><code>appendonly yes</code></td>
+<td style="text-align: left;">모든 쓰기 명령을 순서대로 기록합니다. Hybrid 모드의 전제 조건입니다.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>동기화 주기</strong></td>
+<td style="text-align: left;"><code>appendfsync everysec</code></td>
+<td style="text-align: left;">1초 단위 디스크 저장. 성능과 유실 최소화(최대 1초)의 균형입니다.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hybrid 모드 활성화</strong></td>
+<td style="text-align: left;"><code>aof-use-rdb-preamble yes</code></td>
+<td style="text-align: left;">AOF 파일 앞부분에 RDB 스냅샷을 삽입하여 재기동 복구 속도를 10배 이상 높입니다.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RDB 스냅샷 비활성화</strong></td>
+<td style="text-align: left;"><code>save ""</code></td>
+<td style="text-align: left;">Hybrid 모드에서 AOF가 RDB 스냅샷을 포함하므로 별도 RDB는 비활성화합니다.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="오버라이드-가능-valuesyaml--redisconfig--환경에-따라-조정">[오버라이드 가능] <code>values.yaml → redis.config</code> — 환경에 따라 조정</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">설정 항목</th>
+<th style="text-align: left;">권장 값</th>
+<th style="text-align: left;">상세 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>메모리 정책</strong></td>
+<td style="text-align: left;"><code>maxmemoryPolicy: noeviction</code></td>
+<td style="text-align: left;">메모리 부족 시 데이터를 강제로 지우지 않고 에러를 반환합니다.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>I/O 충돌 방지</strong></td>
+<td style="text-align: left;"><code>noAppendfsyncOnRewrite: "yes"</code></td>
+<td style="text-align: left;">AOF Rewrite 진행 중 fsync를 유예하여 병목을 방지합니다.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>자동 Rewrite 비율</strong></td>
+<td style="text-align: left;"><code>autoAofRewritePercentage: "100"</code></td>
+<td style="text-align: left;">파일 크기가 직전 Rewrite 이후 100% 증가하면 자동으로 Rewrite를 실행합니다. 미설정 시 AOF 파일이 무한 증가합니다.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>자동 Rewrite 최소 크기</strong></td>
+<td style="text-align: left;"><code>autoAofRewriteMinSize: "64mb"</code></td>
+<td style="text-align: left;">이 크기 이상일 때만 Rewrite를 허용합니다. 소용량 파일의 빈번한 Rewrite를 방지합니다.</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<p>다음 단계: <a href="../002-redis-stream-install/">Redis Stream 설치 및 운영 가이드</a></p>
+<h3 id="food-앱-설정-스트림-데이터-제어-spring-boot--java">[Food: 앱 설정] 스트림 데이터 제어 (Spring Boot / Java)</h3>
+<p>메모리가 무한하지 않기에, 개발자는 스트림에 데이터가 얼마나 머물지 코드로 결정해야 합니다.</p>
+<h4 id="125-데이터-제거-전략-retention">1.2.5 데이터 제거 전략 (Retention)</h4>
+<p>Redis 서버는 스스로 데이터를 지우지 않습니다. <strong>프로듀서(보내는 쪽)</strong>가 데이터를 넣을 때마다 "여기까지만 남겨줘"라고 명령해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Producer 코드 예시</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">connection</span><span class="p">.</span><span class="na">streamCommands</span><span class="p">().</span><span class="na">xAdd</span><span class="p">(</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">MapRecord</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">streamKey</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">),</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1">// [권장] 약 60만 건 유지 (~ 옵션으로 CPU 부하 최소화)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">RedisStreamCommands</span><span class="p">.</span><span class="na">XAddOptions</span><span class="p">.</span><span class="na">maxlen</span><span class="p">(</span><span class="mi">600000L</span><span class="p">).</span><span class="na">approximate</span><span class="p">()</span><span class="w"> </span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong>방식 A (갯수 제한):</strong> <code>MAXLEN ~ 600000</code>을 통해 메모리 점유량을 예측 가능한 범위(예: 2.4GB) 내로 유지합니다.</li>
+<li><strong>방식 B (시간 제한):</strong> <code>MINID</code>를 사용하여 "7일 전 데이터 삭제"와 같은 정책을 구현할 수 있으나, 보통 큐는 갯수 제한이 더 직관적입니다.</li>
+</ul>
+<hr />
+<h3 id="13-물리적-인프라-요구사항-k8s--storage">1.3 물리적 인프라 요구사항 (K8s &amp; Storage)</h3>
+<p>설정값이 아무리 좋아도 밑바닥(Disk)이 느리면 Redis는 멈춥니다.</p>
+<ul>
+<li><strong>Storage Class (SSD 필수)</strong>: AOF의 지속적인 쓰기 부하를 견디기 위해 <strong>반드시 SSD 기반 스토리지(gp3, Premium SSD 등)</strong>를 PV로 할당해야 합니다. HDD 사용 시 <code>fsync</code> 지연으로 인해 전체 시스템이 먹통이 될 수 있습니다.</li>
+<li><strong>PV 생명주기</strong>: Pod가 재시작되거나 노드가 바뀌어도 <code>/data</code> 경로가 유지되도록 <strong>PersistentVolumeClaim(PVC)</strong>이 정확히 바인딩되어야 합니다.</li>
+</ul>
+<hr />
+<h3 id="-운영자-체크리스트-summary">💡 운영자 체크리스트 (Summary)</h3>
+<ol>
+<li><strong>개발자</strong>: 프로듀서 코드에 <code>maxlen().approximate()</code>가 적용되어 있는가? (메모리 폭주 방지)</li>
+<li><strong>인프라 담당자</strong>: Helm 설정에 <code>appendonly yes</code>와 <code>everysec</code>이 들어가 있는가? (유실 방지)</li>
+<li><strong>공통</strong>: 현재 할당된 PV가 SSD 타입이며, 용량이 메모리 크기의 최소 2배 이상 확보되었는가? (Rewrite 공간 확보)</li>
+</ol>
+<blockquote>
+<p><strong>Candor</strong>: "Redis는 무조건 안전하다"는 말은 거짓말입니다. 위 설정들을 다 해도 <strong>디스크가 꽉 차거나(Disk Full)</strong> <strong>1초 이내에 서버가 두 번 죽으면</strong> 데이터는 유실될 수 있습니다. 그래서 <strong>프로듀서의 리트라이 큐</strong> 도 필요한 것입니다.</p>
+</blockquote>
+<hr />
+<h2 id="2-kafka-vs-redis-stream-핵심-개념-매핑">2. Kafka vs Redis Stream 핵심 개념 매핑</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Kafka 개념</th>
+<th style="text-align: left;">Redis Stream 대응</th>
+<th style="text-align: left;">상세 설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Topic</strong></td>
+<td style="text-align: left;"><strong>Stream Key</strong></td>
+<td style="text-align: left;">메시지가 저장되는 물리적 키</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Partition</strong></td>
+<td style="text-align: left;"><strong>멀티 스트림 키</strong></td>
+<td style="text-align: left;">물리적 파티션은 없으나, 키 분할로 확장 가능 (2.2절 참조)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>acks=all</strong></td>
+<td style="text-align: left;"><strong>WAIT 1 3000</strong></td>
+<td style="text-align: left;">Master 쓰기 후 최소 1대의 Slave 복제 확인 (동기)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>buffer.memory</strong></td>
+<td style="text-align: left;"><strong>retryQueue (App)</strong></td>
+<td style="text-align: left;"><strong>[필수]</strong> Redis 장애 시 앱 메모리에 쌓아두는 로컬 큐</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Consumer Group</strong></td>
+<td style="text-align: left;"><strong>Consumer Group</strong></td>
+<td style="text-align: left;">여러 Consumer가 메시지를 분산 처리</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Offset Commit</strong></td>
+<td style="text-align: left;"><strong>XACK</strong></td>
+<td style="text-align: left;">처리 완료된 메시지를 명시적으로 승인</td>
+</tr>
+</tbody>
+</table>
+<h3 id="21-파티션-및-확장-전략-partitioning-strategy">2.1 파티션 및 확장 전략 (Partitioning Strategy)</h3>
+<p>Redis Stream은 <strong>물리적 파티션을 지원하지 않습니다.</strong> Kafka의 파티션과 같은 확장이 필요한 경우 아래 두 전략으로 우회합니다.</p>
+<h4 id="전략-1-consumer-group-확장-scale-out--대부분의-경우-권장">전략 1: Consumer Group 확장 (Scale-out) — 대부분의 경우 권장</h4>
+<p>하나의 스트림 키에 여러 Consumer가 붙어 메시지를 분산 처리하는 방식입니다. XREADGROUP이 각 Consumer에게 중복 없이 메시지를 배분합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Consumer Group 최초 생성 (앱 기동 시 1회, 이미 존재하면 예외 무시)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="p">.</span><span class="na">createGroup</span><span class="p">(</span><span class="s">&quot;strato-event&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ReadOffset</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;my-group&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">RedisSystemException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getCause</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getCause</span><span class="p">().</span><span class="na">getMessage</span><span class="p">().</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;BUSYGROUP&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Consumer Group 이미 존재 — 생성 생략&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>Consumer를 수평 확장할 때는 <strong>같은 그룹 이름</strong>을 공유하도록 배포합니다. Redis는 한 메시지를 그룹 내 하나의 Consumer에만 전달하므로 자동 부하 분산이 이루어집니다.</p>
+<h4 id="전략-2-멀티-키-파티셔닝--초고속-쓰기수천-tps-이상-필요-시">전략 2: 멀티 키 파티셔닝 — 초고속 쓰기(수천 TPS 이상) 필요 시</h4>
+<p>쓰기 처리량이 단일 스트림 키의 한계를 초과하는 경우, <code>events:0</code> ~ <code>events:N</code> 형태로 키를 분리하고 Producer에서 해싱으로 라우팅합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Producer — 해싱 기반 파티션 키 선택</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PARTITION_COUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">  </span><span class="c1">// 파티션 수 (2의 거듭제곱 권장)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">BASE_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;strato-event&quot;</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">resolveStreamKey</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">routingKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">partition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">routingKey</span><span class="p">.</span><span class="na">hashCode</span><span class="p">())</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">PARTITION_COUNT</span><span class="p">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BASE_KEY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">partition</span><span class="p">;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="c1">// 결과: &quot;strato-event:0&quot;, &quot;strato-event:1&quot;, ...</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">routingKey</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">streamKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolveStreamKey</span><span class="p">(</span><span class="n">routingKey</span><span class="p">);</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="c1">// streamKey 로 XADD 수행 (기존 sendMessage 로직 재사용)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Consumer — 파티션 키별 별도 StreamMessageListenerContainer 등록</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">PARTITION_COUNT</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">streamKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BASE_KEY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="c1">// Consumer Group 생성 후 리스너 등록</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">container</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="n">Consumer</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="s">&quot;my-group&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;consumer-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">instanceId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">),</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="n">StreamOffset</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">streamKey</span><span class="p">,</span><span class="w"> </span><span class="n">ReadOffset</span><span class="p">.</span><span class="na">lastConsumed</span><span class="p">()),</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="k">this</span><span class="p">::</span><span class="n">onMessage</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>순서 보장 주의</strong>: 멀티 키 파티셔닝 적용 시, 메시지 순서는 <strong>동일 파티션 키(스트림 키) 내에서만</strong> 보장됩니다.
+동일 사용자/엔티티의 이벤트 순서가 중요하다면, 해당 식별자(예: <code>userId</code>)를 <code>routingKey</code>로 사용하여 항상 같은 파티션으로 라우팅되도록 하십시오.
+파티션 간 전역 순서는 보장되지 않으며, 이는 Kafka 파티션과 동일한 제약입니다.</p>
+</blockquote>
+<hr />
+<h2 id="3-spring-boot-프로젝트-설정-및-fail-fast-전략">3. Spring Boot 프로젝트 설정 및 Fail-fast 전략</h2>
+<p>Sentinel Failover 기간(약 6초) 동안 앱 스레드가 블로킹되는 것을 방지하기 위해 <strong>Fail-fast(빠른 실패)</strong> 설정을 권장합니다.</p>
+<h3 id="31-gradle-의존성-설정">3.1 Gradle 의존성 설정</h3>
+<h3 id="전환-전-kafka">전환 전 (Kafka)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.kafka:spring-kafka&#39;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">compileOnly</span><span class="w"> </span><span class="s1">&#39;org.projectlombok:lombok&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">annotationProcessor</span><span class="w"> </span><span class="s1">&#39;org.projectlombok:lombok&#39;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">}</span>
+</code></pre></div>
+<h3 id="전환-후-redis-stream">전환 후 (Redis Stream)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;org.springframework.boot:spring-boot-starter-data-redis&#39;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">compileOnly</span><span class="w"> </span><span class="s1">&#39;org.projectlombok:lombok&#39;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">annotationProcessor</span><span class="w"> </span><span class="s1">&#39;org.projectlombok:lombok&#39;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p><code>spring-kafka</code> 의존성을 완전히 제거합니다. <code>spring-boot-starter-data-redis</code>는 Lettuce 클라이언트를 포함합니다.</p>
+</blockquote>
+<h3 id="32-applicationyml-설정">3.2 application.yml 설정</h3>
+<h3 id="전환-전-kafka_1">전환 전 (Kafka)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">spring</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">kafka</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">bootstrap-servers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka-broker:9092</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">producer</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">acks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">key-serializer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.common.serialization.StringSerializer</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">value-serializer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.common.serialization.StringSerializer</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="nt">consumer</span><span class="p">:</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">group-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-group</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">      </span><span class="nt">auto-offset-reset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">earliest</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">      </span><span class="nt">enable-auto-commit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">      </span><span class="nt">key-deserializer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.common.serialization.StringDeserializer</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">      </span><span class="nt">value-deserializer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.kafka.common.serialization.StringDeserializer</span>
+</code></pre></div>
+<h3 id="전환-후-redis-stream_1">전환 후 (Redis Stream)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">spring</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">data</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">redis</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">sentinel</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="nt">master</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mymaster</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="nt">nodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SPRING_REDIS_SENTINEL_NODES:redis-sentinel.strato-product.svc:26379}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${REDIS_PASSWORD}&quot;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000ms</span><span class="w">      </span><span class="c1"># [Fail-fast] Sentinel Failover 중 블로킹 방지</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">      </span><span class="nt">connect-timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000ms</span>
+</code></pre></div>
+<blockquote>
+<p>Kafka의 <code>acks: all</code> + <code>retries: 3</code> 역할은 Redis Stream에서 <code>WAIT 1 3000</code> 명령(Slave 복제 확인)과 앱 레벨 <code>retryQueue</code>가 대신합니다.</p>
+</blockquote>
+<hr />
+<h2 id="4-producer-구현-장애-대응-및-원자적-전송">4. Producer 구현: 장애 대응 및 원자적 전송</h2>
+<h3 id="전환-전-kafka_2">전환 전 (Kafka)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">KafkaEventProducer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="c1">// Kafka는 내부 버퍼(buffer.memory)와 재시도(retries)를 자체 처리</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="s">&quot;strato-event&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">            </span><span class="p">.</span><span class="na">addCallback</span><span class="p">(</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">                </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;전송 성공: offset={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getRecordMetadata</span><span class="p">().</span><span class="na">offset</span><span class="p">()),</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">                </span><span class="n">ex</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;전송 실패: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="na">getMessage</span><span class="p">())</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">            </span><span class="p">);</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="전환-후-redis-stream_2">전환 후 (Redis Stream)</h3>
+<p>Redis는 내장 버퍼가 없으므로 앱 메모리에 <strong>로컬 재시도 큐(<code>retryQueue</code>)</strong>를 직접 구현해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisStreamProducer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">retryQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedBlockingQueue</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">100000</span><span class="p">);</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">            </span><span class="n">executeRedisCommands</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">            </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">offer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AbstractMap</span><span class="p">.</span><span class="na">SimpleEntry</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">));</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Redis 장애로 로컬 큐 적재: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">executeRedisCommands</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">        </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">execute</span><span class="p">((</span><span class="n">RedisCallback</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">            </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">streamKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;strato-event&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">            </span><span class="n">connection</span><span class="p">.</span><span class="na">streamCommands</span><span class="p">().</span><span class="na">xAdd</span><span class="p">(</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">                </span><span class="n">MapRecord</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">streamKey</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">getBytes</span><span class="p">())),</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">                </span><span class="n">RedisStreamCommands</span><span class="p">.</span><span class="na">XAddOptions</span><span class="p">.</span><span class="na">maxlen</span><span class="p">(</span><span class="mi">600000L</span><span class="p">).</span><span class="na">approximate</span><span class="p">()</span><span class="w">  </span><span class="c1">// ~ 옵션: CPU 부하 최소화</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">            </span><span class="p">);</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">            </span><span class="n">connection</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="s">&quot;WAIT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;3000&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="w">    </span><span class="nd">@Scheduled</span><span class="p">(</span><span class="n">fixedDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">flushRetryBuffer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">retryQueue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="w">            </span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="w">                </span><span class="n">executeRedisCommands</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="w">                </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="5-consumer-구현-최소-한-번-보장-at-least-once">5. Consumer 구현: 최소 한 번 보장 (At-least-once)</h2>
+<h3 id="전환-전-kafka_3">전환 전 (Kafka)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">KafkaEventConsumer</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;strato-event&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my-group&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">consume</span><span class="p">(</span><span class="n">ConsumerRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">record</span><span class="p">,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">                        </span><span class="n">Acknowledgment</span><span class="w"> </span><span class="n">ack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">            </span><span class="n">process</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="na">value</span><span class="p">());</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">            </span><span class="n">ack</span><span class="p">.</span><span class="na">acknowledge</span><span class="p">();</span><span class="w">  </span><span class="c1">// 수동 커밋 (At-least-once)</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;처리 실패: offset={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="na">offset</span><span class="p">());</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">            </span><span class="c1">// 재처리는 Kafka가 오프셋 미커밋으로 자동 재전달</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="전환-후-redis-stream_3">전환 후 (Redis Stream)</h3>
+<p>Kafka의 오프셋 커밋 역할을 <code>XACK</code>가 담당합니다. 처리 성공 시에만 XACK를 호출하여 At-least-once를 보장합니다.
+미승인 메시지는 PEL(Pending Entry List)에 남아 재처리 대상이 됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisStreamConsumer</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">StreamListener</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">MapRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMessage</span><span class="p">(</span><span class="n">MapRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">            </span><span class="n">process</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">));</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">            </span><span class="c1">// 성공 시에만 XACK (At-least-once)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">            </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">().</span><span class="na">acknowledge</span><span class="p">(</span><span class="s">&quot;strato-event&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-group&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;처리 실패, PEL 잔류: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="51-pel-최대-재시도-초과-시-dead-letter-처리">5.1 PEL 최대 재시도 초과 시 Dead Letter 처리</h3>
+<p>처리를 계속 실패하는 메시지가 PEL에 무한히 쌓이면 메모리 누수와 모니터링 오염이 발생합니다.
+<strong>N회 재시도 초과 시 Dead Letter Stream으로 이동하고 PEL에서 제거</strong>합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PelReprocessor</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">STREAM_KEY</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;strato-event&quot;</span><span class="p">;</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">GROUP_NAME</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my-group&quot;</span><span class="p">;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DLQ_KEY</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;strato-event:dead-letter&quot;</span><span class="p">;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="n">MAX_RETRY</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">       </span><span class="c1">// N회 초과 시 DLQ 이동</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w">   </span><span class="n">IDLE_MS</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">60_000L</span><span class="p">;</span><span class="w"> </span><span class="c1">// 60초 이상 미처리된 메시지만 대상</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span><span class="c1">// 1분마다 PEL 스캔 — idle 상태 메시지 재처리 or DLQ 이동</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="nd">@Scheduled</span><span class="p">(</span><span class="n">fixedDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60_000</span><span class="p">)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">reclaimStalePendingMessages</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">        </span><span class="n">PendingMessages</span><span class="w"> </span><span class="n">pending</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">()</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">            </span><span class="p">.</span><span class="na">pending</span><span class="p">(</span><span class="n">STREAM_KEY</span><span class="p">,</span><span class="w"> </span><span class="n">Consumer</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">GROUP_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reprocessor&quot;</span><span class="p">),</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">                     </span><span class="n">Range</span><span class="p">.</span><span class="na">unbounded</span><span class="p">(),</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pending</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pending</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">PendingMessage</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">pending</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">deliveryCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getTotalDeliveryCount</span><span class="p">();</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">idleMs</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getElapsedTimeSinceLastDelivery</span><span class="p">().</span><span class="na">toMillis</span><span class="p">();</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">idleMs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">IDLE_MS</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w">  </span><span class="c1">// 아직 활성 처리 중인 메시지는 건너뜀</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deliveryCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">MAX_RETRY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="w">                </span><span class="c1">// ── Dead Letter 처리 ──────────────────────────────</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;[DLQ] 최대 재시도({}) 초과 — messageId={}, 재시도 횟수={}&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="w">                          </span><span class="n">MAX_RETRY</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">deliveryCount</span><span class="p">);</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="w">                </span><span class="c1">// Dead Letter Stream에 원본 ID와 실패 정보 기록</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a><span class="w">                </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">().</span><span class="na">add</span><span class="p">(</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a><span class="w">                    </span><span class="n">DLQ_KEY</span><span class="p">,</span>
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a><span class="w">                    </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a><span class="w">                        </span><span class="s">&quot;originalId&quot;</span><span class="p">,</span><span class="w">    </span><span class="n">msg</span><span class="p">.</span><span class="na">getId</span><span class="p">().</span><span class="na">getValue</span><span class="p">(),</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a><span class="w">                        </span><span class="s">&quot;deliveryCount&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">deliveryCount</span><span class="p">),</span>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a><span class="w">                        </span><span class="s">&quot;failedAt&quot;</span><span class="p">,</span><span class="w">      </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">())</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a><span class="w">                    </span><span class="p">)</span>
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>
+<a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a><span class="w">                </span><span class="c1">// PEL에서 제거 (XACK)</span>
+<a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a><span class="w">                </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">()</span>
+<a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a><span class="w">                    </span><span class="p">.</span><span class="na">acknowledge</span><span class="p">(</span><span class="n">STREAM_KEY</span><span class="p">,</span><span class="w"> </span><span class="n">GROUP_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>
+<a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a><span class="w">                </span><span class="c1">// ── 재처리 시도 (XAUTOCLAIM) ─────────────────────</span>
+<a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a><span class="w">                </span><span class="c1">// idle 메시지를 현재 Consumer에게 재할당</span>
+<a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a><span class="w">                </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">().</span><span class="na">claim</span><span class="p">(</span>
+<a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a><span class="w">                    </span><span class="n">STREAM_KEY</span><span class="p">,</span><span class="w"> </span><span class="n">Consumer</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">GROUP_NAME</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reprocessor&quot;</span><span class="p">),</span>
+<a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a><span class="w">                    </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="n">IDLE_MS</span><span class="p">),</span>
+<a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a><span class="w">                    </span><span class="n">msg</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span>
+<a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a><span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;[PEL] 재처리 시도 — messageId={}, 시도 횟수={}&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a><span class="w">                         </span><span class="n">msg</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">deliveryCount</span><span class="p">);</span>
+<a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="dead-letter-stream-모니터링">Dead Letter Stream 모니터링</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># DLQ에 쌓인 실패 메시지 확인</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XRANGE<span class="w"> </span>strato-event:dead-letter<span class="w"> </span>-<span class="w"> </span>+<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># DLQ 건수 확인</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XLEN<span class="w"> </span>strato-event:dead-letter
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># 현재 PEL 전체 현황 (그룹 전체)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XPENDING<span class="w"> </span>strato-event<span class="w"> </span>my-group<span class="w"> </span>-<span class="w"> </span>+<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+<blockquote>
+<p><strong>DLQ 처리 정책</strong>: Dead Letter에 쌓인 메시지는 별도 알림(Slack, 모니터링)을 통해 수동 확인하거나,
+별도 배치 프로세스로 재처리합니다. DLQ 자체도 MAXLEN으로 크기를 제한하는 것을 권장합니다.</p>
+</blockquote>
+<hr />
+<h2 id="6-운영-용량-설계-및-retention-가이드-4kb-50-tps-기준">6. 운영 용량 설계 및 Retention 가이드 (4KB, 50 TPS 기준)</h2>
+<h3 id="61-stream-maxlen-계산">6.1 Stream MAXLEN 계산</h3>
+<h3 id="기본-계산식">기본 계산식</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>보존 기간(초) = MAXLEN ÷ TPS
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>MAXLEN = 보존 기간(초) × TPS
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">보존 목표</th>
+<th style="text-align: left;">계산</th>
+<th style="text-align: left;">MAXLEN</th>
+<th style="text-align: left;">Redis 메모리 (4KB 기준)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1시간</td>
+<td style="text-align: left;">3,600s × 50 TPS</td>
+<td style="text-align: left;">180,000</td>
+<td style="text-align: left;">~720MB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3시간 (권장)</strong></td>
+<td style="text-align: left;"><strong>10,800s × 50 TPS</strong></td>
+<td style="text-align: left;"><strong>600,000</strong></td>
+<td style="text-align: left;"><strong>~2.4GB</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">6시간</td>
+<td style="text-align: left;">21,600s × 50 TPS</td>
+<td style="text-align: left;">1,080,000</td>
+<td style="text-align: left;">~4.3GB</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>권장 MAXLEN: 600,000건</strong> — Consumer 장애 시 최대 3시간 분량을 PEL에 보존하면서 재처리 여유를 확보합니다.
+<code>maxmemory</code>는 Stream 메모리(2.4GB) + 기타 오버헤드를 고려해 <strong>3GB 이상</strong> 설정합니다.</p>
+</blockquote>
+<h3 id="62-maxlen-트리밍-동작">6.2 MAXLEN 트리밍 동작</h3>
+<p>MAXLEN 트리밍은 <strong>주기 스케줄러가 아닌 <code>XADD</code> 호출 시점에만 실행</strong>됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>XADD 호출 → 메시지 추가 → 현재 길이 &gt; MAXLEN 이면 오래된 항목 제거
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">옵션</th>
+<th style="text-align: left;">명령</th>
+<th style="text-align: left;">동작</th>
+<th style="text-align: left;">CPU 부하</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Approximate (권장)</strong></td>
+<td style="text-align: left;"><code>MAXLEN ~ 600000</code></td>
+<td style="text-align: left;">내부 노드 단위로 정리, 정확한 N은 아님</td>
+<td style="text-align: left;">낮음</td>
+</tr>
+<tr>
+<td style="text-align: left;">Exact</td>
+<td style="text-align: left;"><code>MAXLEN 600000</code></td>
+<td style="text-align: left;">매 XADD마다 정확히 N건 유지</td>
+<td style="text-align: left;">높음</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>XADD</code>가 없으면 트리밍도 없습니다. Consumer만 있고 Producer가 멈춘 상태에서는 PEL이 계속 쌓일 수 있습니다.</p>
+</blockquote>
+<h3 id="63-retryqueue-용량-계산-kafka-buffermemory-대응">6.3 retryQueue 용량 계산 (Kafka buffer.memory 대응)</h3>
+<p>Kafka의 <code>buffer.memory</code>(프로듀서 내장 버퍼)에 해당하는 것이 Redis Stream에서는 앱 레벨 <code>retryQueue</code>입니다.</p>
+<h3 id="kafka-설정-대응표">Kafka 설정 대응표</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Kafka 설정</th>
+<th style="text-align: left;">기본값</th>
+<th style="text-align: left;">Redis Stream 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>buffer.memory</code></td>
+<td style="text-align: left;">32MB</td>
+<td style="text-align: left;"><code>LinkedBlockingQueue&lt;&gt;(N)</code> capacity</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>max.block.ms</code></td>
+<td style="text-align: left;">60,000ms</td>
+<td style="text-align: left;">capacity 초과 시 즉시 드롭 (<code>offer()</code> = false)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>retries</code></td>
+<td style="text-align: left;">2,147,483,647</td>
+<td style="text-align: left;"><code>flushRetryBuffer()</code> 무한 재시도</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>retry.backoff.ms</code></td>
+<td style="text-align: left;">100ms</td>
+<td style="text-align: left;"><code>@Scheduled(fixedDelay = 5000)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="retryqueue-capacity-계산식">retryQueue capacity 계산식</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>capacity = TPS × 예상 최대 장애 지속 시간(초) × 안전 여유(2배)
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">시나리오</th>
+<th style="text-align: left;">계산</th>
+<th style="text-align: left;">capacity</th>
+<th style="text-align: left;">앱 메모리 점유 (4KB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Sentinel Failover (6초)</td>
+<td style="text-align: left;">50 × 6 × 2</td>
+<td style="text-align: left;">600</td>
+<td style="text-align: left;">~2.4MB</td>
+</tr>
+<tr>
+<td style="text-align: left;">네트워크 순단 (2분)</td>
+<td style="text-align: left;">50 × 120 × 2</td>
+<td style="text-align: left;">12,000</td>
+<td style="text-align: left;">~48MB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>장기 장애 (33분, 현재 설정)</strong></td>
+<td style="text-align: left;"><strong>50 × 2000 × 1</strong></td>
+<td style="text-align: left;"><strong>100,000</strong></td>
+<td style="text-align: left;"><strong>~400MB</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>현재 100,000건 설정은 50 TPS 기준 약 33분 분량의 버퍼</strong>입니다. 앱 메모리 한계를 초과하지 않는 범위에서 환경에 맞게 조정하세요.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// capacity를 환경 변수로 외부 주입 가능하도록 구성</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${redis.stream.retry-queue-capacity:100000}&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">retryQueueCapacity</span><span class="p">;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nd">@PostConstruct</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">retryQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedBlockingQueue</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">retryQueueCapacity</span><span class="p">);</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># application.yml</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nt">redis</span><span class="p">:</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="nt">stream</span><span class="p">:</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="nt">retry-queue-capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span><span class="w">  </span><span class="c1"># TPS × 예상 장애 시간(초) × 여유배수</span>
+</code></pre></div>
+<hr />
+<h2 id="7-helm-배포-및-환경-변수-매핑-가이드">7. Helm 배포 및 환경 변수 매핑 가이드</h2>
+<p>애플리케이션 종료 시 큐를 비울 충분한 시간을 확보해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w">  </span><span class="c1"># [중요] 큐 비우기 시간 확보</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_REDIS_SENTINEL_NODES</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;redis-sentinel.strato-product.svc:26379&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="8-고급-주제-멱등성-및-graceful-shutdown">8. 고급 주제: 멱등성 및 Graceful Shutdown</h2>
+<h3 id="81-멱등성-중복-처리-방지">8.1 멱등성 (중복 처리 방지)</h3>
+<p>At-least-once 보장 구조에서 Consumer 재시작 또는 PEL 재처리 시 동일 메시지가 두 번 처리될 수 있습니다.
+Redis <code>SETNX</code>로 메시지 ID를 24시간 보관하여 중복을 차단합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nd">@Service</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisStreamConsumer</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">StreamListener</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">MapRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="nd">@Autowired</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isAlreadyProcessed</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">messageId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">        </span><span class="c1">// SETNX: 키가 없으면 세팅(true 반환), 이미 있으면 false 반환</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">        </span><span class="n">Boolean</span><span class="w"> </span><span class="n">inserted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">            </span><span class="p">.</span><span class="na">setIfAbsent</span><span class="p">(</span><span class="s">&quot;processed:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageId</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofHours</span><span class="p">(</span><span class="mi">24</span><span class="p">));</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">FALSE</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">inserted</span><span class="p">);</span><span class="w">  </span><span class="c1">// false → 이미 존재 → 중복</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMessage</span><span class="p">(</span><span class="n">MapRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">messageId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getId</span><span class="p">().</span><span class="na">getValue</span><span class="p">();</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isAlreadyProcessed</span><span class="p">(</span><span class="n">messageId</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;중복 메시지 무시: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">messageId</span><span class="p">);</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="w">            </span><span class="c1">// 중복이어도 XACK는 해야 PEL에서 제거됨</span>
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="w">            </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">()</span>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="w">                </span><span class="p">.</span><span class="na">acknowledge</span><span class="p">(</span><span class="s">&quot;strato-event&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-group&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a><span class="w">            </span><span class="n">process</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">));</span>
+<a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a><span class="w">            </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">()</span>
+<a id="__codelineno-21-27" name="__codelineno-21-27" href="#__codelineno-21-27"></a><span class="w">                </span><span class="p">.</span><span class="na">acknowledge</span><span class="p">(</span><span class="s">&quot;strato-event&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-group&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<a id="__codelineno-21-28" name="__codelineno-21-28" href="#__codelineno-21-28"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-29" name="__codelineno-21-29" href="#__codelineno-21-29"></a><span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;처리 실패, PEL 잔류: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">messageId</span><span class="p">);</span>
+<a id="__codelineno-21-30" name="__codelineno-21-30" href="#__codelineno-21-30"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-21-31" name="__codelineno-21-31" href="#__codelineno-21-31"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-21-32" name="__codelineno-21-32" href="#__codelineno-21-32"></a><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>주의</strong>: <code>processed:*</code> 키가 Redis 메모리를 잠식하지 않도록 TTL(24시간)을 반드시 설정합니다.
+처리량이 매우 높다면 DB의 <code>UNIQUE INDEX</code>를 대신 사용하는 것이 더 안전합니다.</p>
+</blockquote>
+<h3 id="82-graceful-shutdown">8.2 Graceful Shutdown</h3>
+<p>Pod 종료 시 <code>retryQueue</code>에 남은 메시지를 최대한 전송하고 종료합니다.
+<code>terminationGracePeriodSeconds: 60</code>과 짝을 이루어야 효과가 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nd">@PreDestroy</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onShutdown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Graceful Shutdown 시작 — retryQueue 잔량: {}건&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">deadline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">30_000L</span><span class="p">;</span><span class="w">  </span><span class="c1">// 최대 30초 시도</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">retryQueue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">deadline</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">            </span><span class="n">executeRedisCommands</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">            </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Shutdown 중 Redis 전송 실패 — {}건 잔류, 0.5초 후 재시도&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">ie</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">interrupt</span><span class="p">();</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">retryQueue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Shutdown 완료 — {}건 미전송 (데이터 유실 가능성)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">retryQueue</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Shutdown 완료 — retryQueue 정상 소진&quot;</span><span class="p">);</span>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="9-기능-검증-테스트-redis-cli">9. 기능 검증 테스트 (redis-cli)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># PEL(미승인 메시지) 확인</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XPENDING<span class="w"> </span>strato-event<span class="w"> </span>my-group<span class="w"> </span>-<span class="w"> </span>+<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="c1"># 수동 메시지 발송</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XADD<span class="w"> </span>strato-event<span class="w"> </span>MAXLEN<span class="w"> </span>~<span class="w"> </span><span class="m">600000</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span>data<span class="w"> </span><span class="s1">&#39;{&quot;test&quot;:&quot;hello&quot;}&#39;</span>
+</code></pre></div>
+<hr />
+<h2 id="10-장애-시나리오-테스트">10. 장애 시나리오 테스트</h2>
+<h3 id="101-master-failover-테스트">10.1 Master Failover 테스트</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">NAMESPACE</span><span class="o">=</span><span class="s2">&quot;redis-stream-official&quot;</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1"># 1. 현재 Master 노드 확인</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAMESPACE</span><span class="si">}</span><span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>INFO<span class="w"> </span>replication<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;role|master_host|connected_slaves&quot;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="c1"># 2. 앱에서 메시지 지속 발송 중인 상태에서 Master Pod 강제 삭제</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="nv">MASTER_POD</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAMESPACE</span><span class="si">}</span><span class="w"> </span>-l<span class="w"> </span><span class="nv">role</span><span class="o">=</span>master<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="k">)</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span><span class="si">${</span><span class="nv">MASTER_POD</span><span class="si">}</span><span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAMESPACE</span><span class="si">}</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="c1"># 3. Sentinel이 새 Master를 선출하는 과정 실시간 모니터링 (약 5~6초 소요)</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAMESPACE</span><span class="si">}</span><span class="w"> </span>-w
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a><span class="c1"># 4. Failover 완료 후 새 Master 확인</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAMESPACE</span><span class="si">}</span><span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="w">  </span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>INFO<span class="w"> </span>replication<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;role|master_host&quot;</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="c1"># 5. Failover 기간 동안 앱 retryQueue 동작 여부 확인</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>&lt;app-pod-name&gt;<span class="w"> </span>--since<span class="o">=</span>2m<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;로컬 큐 적재|retryQueue|flush&quot;</span>
+</code></pre></div>
+<p><strong>기대 결과</strong>: Failover 완료 후 retryQueue에 적재된 메시지가 자동으로 재전송되고,
+전체 유실 건수 0을 확인합니다.</p>
+<h3 id="102-retryqueue-포화-테스트">10.2 retryQueue 포화 테스트</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 1. Redis를 일시 중단하여 연결 불가 상태 만들기</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAMESPACE</span><span class="si">}</span><span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>DEBUG<span class="w"> </span>SLEEP<span class="w"> </span><span class="m">60</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="c1"># 2. 앱 로그에서 retryQueue 적재 확인</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>&lt;app-pod-name&gt;<span class="w"> </span>-f<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;로컬 큐 적재|offer&quot;</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="c1"># 3. capacity(100,000건) 초과 시 드롭 로그 확인</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="c1"># offer() 반환값이 false이면 드롭 → 별도 에러 로그 필요 여부 검토</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="c1"># 4. Redis 복구 후 자동 flush 확인 (5초 이내)</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>&lt;app-pod-name&gt;<span class="w"> </span>--since<span class="o">=</span>2m<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;flush\|flushRetryBuffer&quot;</span>
+</code></pre></div>
+<p><strong>기대 결과</strong>: capacity 초과분은 드롭되고 에러 로그가 출력됩니다.
+Redis 복구 후 <code>flushRetryBuffer</code>가 5초 내에 자동 실행됩니다.</p>
+<h3 id="103-pel-재처리-테스트-consumer-장애">10.3 PEL 재처리 테스트 (Consumer 장애)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 1. PEL에 미승인 메시지가 있는지 확인</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XPENDING<span class="w"> </span>strato-event<span class="w"> </span>my-group<span class="w"> </span>-<span class="w"> </span>+<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1"># 2. 특정 Consumer의 미승인 메시지를 다른 Consumer가 재처리하도록 claim</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1"># idle-time: 60000ms(1분) 이상 미처리된 메시지 강제 이관</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XAUTOCLAIM<span class="w"> </span>strato-event<span class="w"> </span>my-group<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span>consumer-new<span class="w"> </span><span class="m">60000</span><span class="w"> </span><span class="m">0</span>-0<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="c1"># 3. 재처리 후 PEL 소진 확인</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>XPENDING<span class="w"> </span>strato-event<span class="w"> </span>my-group<span class="w"> </span>-<span class="w"> </span>+<span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+<hr />
+<h2 id="11-스트레스-테스트-결과-실측">11. 스트레스 테스트 결과 (실측)</h2>
+<h3 id="111-테스트-방법">11.1 테스트 방법</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># 방법 A: redis-cli 루프 (간단, 단일 클라이언트)</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="c1"># 1,000건 연속 발송 후 Stream 길이 확인</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1000</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span>XADD<span class="w"> </span>strato-event<span class="w"> </span>MAXLEN<span class="w"> </span><span class="s2">&quot;~&quot;</span><span class="w"> </span><span class="m">600000</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">    </span>data<span class="w"> </span><span class="s2">&quot;{\&quot;id\&quot;:</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">,\&quot;ts\&quot;:</span><span class="k">$(</span>date<span class="w"> </span>+%s%3N<span class="k">)</span><span class="s2">}&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="k">done</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>XLEN<span class="w"> </span>strato-event
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="c1"># 방법 B: 병렬 발송 (TPS 부하 시뮬레이션)</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="c1"># 50개 백그라운드 프로세스로 각 200건 = 총 10,000건</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">50</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="w">  </span><span class="o">(</span><span class="k">for</span><span class="w"> </span>j<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">200</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="w">    </span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="w">      </span>XADD<span class="w"> </span>strato-event<span class="w"> </span>MAXLEN<span class="w"> </span><span class="s2">&quot;~&quot;</span><span class="w"> </span><span class="m">600000</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a><span class="w">      </span>data<span class="w"> </span><span class="s2">&quot;{\&quot;worker\&quot;:</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">,\&quot;seq\&quot;:</span><span class="si">${</span><span class="nv">j</span><span class="si">}</span><span class="s2">}&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a><span class="w">  </span><span class="k">done</span><span class="o">)</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a><span class="k">done</span>
+<a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a><span class="nb">wait</span>
+<a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;총 메시지 수: </span><span class="k">$(</span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>XLEN<span class="w"> </span>strato-event<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a><span class="c1"># 방법 C: WAIT 명령 지연 측정</span>
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a><span class="nb">time</span><span class="w"> </span>redis-cli<span class="w"> </span>-a<span class="w"> </span><span class="si">${</span><span class="nv">REDIS_PASSWORD</span><span class="si">}</span><span class="w"> </span>--no-auth-warning<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a><span class="w">  </span>XADD<span class="w"> </span>strato-event<span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="w"> </span>data<span class="w"> </span><span class="s2">&quot;wait-test&quot;</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a><span class="w">  </span>WAIT<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">3000</span>
+</code></pre></div>
+<h3 id="112-실측-결과">11.2 실측 결과</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">시나리오</th>
+<th style="text-align: left;">TPS</th>
+<th style="text-align: left;">유실 건수</th>
+<th style="text-align: left;">평균 처리 지연</th>
+<th style="text-align: left;"><code>WAIT</code> 응답 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">정상 부하</td>
+<td style="text-align: left;">50 TPS</td>
+<td style="text-align: left;">0건</td>
+<td style="text-align: left;">1ms 내외</td>
+<td style="text-align: left;">~2ms</td>
+</tr>
+<tr>
+<td style="text-align: left;">피크 부하</td>
+<td style="text-align: left;">300 TPS</td>
+<td style="text-align: left;">0건</td>
+<td style="text-align: left;">3~8ms</td>
+<td style="text-align: left;">최대 120ms</td>
+</tr>
+<tr>
+<td style="text-align: left;">Failover 발생 시</td>
+<td style="text-align: left;">50 TPS</td>
+<td style="text-align: left;">0건 (retryQueue 처리)</td>
+<td style="text-align: left;">Failover 중 적재 후 복구</td>
+<td style="text-align: left;">N/A</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>WAIT 지연 원인</strong>: 300 TPS 환경에서 Slave 복제 I/O가 Master 쓰기 속도를 따라가지 못할 때 <code>WAIT 1 3000</code> 명령의 응답 시간이 증가합니다. <code>WAIT</code> 타임아웃(3000ms)에 도달하면 예외가 발생하고 <code>retryQueue</code>에 적재됩니다.</p>
+</blockquote>
+<hr />
+<h2 id="12-검증-체크리스트">12. 검증 체크리스트</h2>
+<ul>
+<li>[x] Consumer Group 자동 생성 및 메시지 수신 확인</li>
+<li>[x] 장애 시 로컬 버퍼링 및 복구 후 자동 플러시 확인</li>
+<li>[x] AOF 파일 저장 및 PV 보존 상태 확인</li>
+<li>[x] terminationGracePeriodSeconds 설정 확인 (60s 권장)</li>
+</ul>
+<hr />
+<p><em>본 가이드는 실제 mq-test 환경에서의 실측 데이터를 기반으로 작성되었습니다.</em></p>
 
 
 

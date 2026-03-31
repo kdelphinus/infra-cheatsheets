@@ -1191,6 +1191,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX NIC 마이그레이션 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../k8s/gateway-api/001-envoy-install/" class="md-nav__link">
         
   
@@ -1773,10 +1801,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#1단계-구성-이미지-로드-ctr-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 Harbor 업로드
+        1단계: 구성 이미지 로드 (ctr import)
       
     </span>
   </a>
@@ -1799,6 +1827,17 @@
     <span class="md-ellipsis">
       
         3단계: 설치 실행
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4단계-envoy-httproute-적용-nodeport--envoy-선택-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)
       
     </span>
   </a>
@@ -1871,6 +1910,28 @@
     <span class="md-ellipsis">
       
         삭제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#보안-고려사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보안 고려사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#트러블슈팅" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        트러블슈팅
       
     </span>
   </a>
@@ -2513,7 +2574,7 @@
   <span class="md-ellipsis">
     
   
-    Redis Stream 개요
+    Redis Stream 개발자 가이드
   
 
     
@@ -3807,10 +3868,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#1단계-구성-이미지-로드-ctr-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 Harbor 업로드
+        1단계: 구성 이미지 로드 (ctr import)
       
     </span>
   </a>
@@ -3833,6 +3894,17 @@
     <span class="md-ellipsis">
       
         3단계: 설치 실행
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4단계-envoy-httproute-적용-nodeport--envoy-선택-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)
       
     </span>
   </a>
@@ -3911,6 +3983,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#보안-고려사항" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보안 고려사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#트러블슈팅" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        트러블슈팅
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3946,14 +4040,11 @@
 <li><strong>TLS 도메인 접속 시</strong>: 사전에 인증서로 Kubernetes Secret 생성 필요, <code>EXTERNAL_HOSTNAME</code> 을 도메인명으로 설정</li>
 <li><strong>저장 경로</strong>: <code>SAVE_PATH</code> (데이터 저장 경로)는 <code>NODE_NAME</code> 노드에서 디렉토리가 생성되어 있어야 함 (권한: <code>chmod 777</code>)</li>
 </ul>
-<h2 id="1단계-이미지-harbor-업로드">1단계: 이미지 Harbor 업로드</h2>
+<h2 id="1단계-구성-이미지-로드-ctr-import">1단계: 구성 이미지 로드 (ctr import)</h2>
+<p>하버가 설치되기 전이므로, 하버 구성 이미지들을 <strong>모든 Kubernetes 노드(Master, Worker)</strong>에서 직접 로컬 <code>containerd</code>에 로드해야 합니다.</p>
 <p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>./images/upload_images_to_harbor_v3-lite.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/load_images.sh
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./scripts/load_images.sh
 </code></pre></div>
 <p>이미지 로드 확인:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>harbor
@@ -3981,8 +4072,8 @@
 </tr>
 <tr>
 <td style="text-align: left;"><code>HELM_CHART_PATH</code></td>
-<td style="text-align: left;">Helm 차트 파일 경로</td>
-<td style="text-align: left;"><code>./charts/harbor-1.14.3.tgz</code></td>
+<td style="text-align: left;">Helm 차트 경로</td>
+<td style="text-align: left;"><code>./charts/harbor</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>EXTERNAL_HOSTNAME</code></td>
@@ -4010,25 +4101,33 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./scripts/install.sh
 </code></pre></div>
-<p>스크립트 실행 중 아래 항목을 인터랙티브하게 입력합니다.</p>
-<ul>
-<li>TLS 활성화 여부 (y/N)</li>
-<li>TLS 사용 시 사전 생성된 Secret 이름</li>
-<li>Harbor 관리자(<code>admin</code>) 비밀번호</li>
-</ul>
+<p>스크립트 실행 중 아래 항목을 인터랙티브하게 선택/입력합니다.</p>
+<ol>
+<li><strong>이미지 로드 방식 선택</strong>:</li>
+<li><strong><code>1</code> 로컬 tar 직접 import (권장)</strong>: 하버가 아직 설치되지 않은 경우 선택합니다. (1단계에서 <code>load_images.sh</code>를 이미 실행했다면 이미 로드되어 있으므로 금방 넘어갑니다.)</li>
+<li><strong><code>2</code> Harbor 레지스트리 사용</strong>: 하버가 이미 설치되어 있고 재설치하거나 이미지가 이미 로드된 경우 선택합니다.</li>
+<li><strong>노출 방식 선택</strong>: <code>1</code> NodePort + Envoy Gateway (기본) / <code>2</code> nginx Ingress</li>
+<li><strong>Harbor 관리자(<code>admin</code>) 비밀번호</strong>: 최소 8자 이상의 비밀번호를 입력합니다.</li>
+</ol>
+<h2 id="4단계-envoy-httproute-적용-nodeport--envoy-선택-시">4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)</h2>
+<p><code>manifests/route-harbor.yaml</code>의 <code>hostnames</code>와 <code>parentRefs.name</code>을
+실제 환경에 맞게 수정 후 적용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># hostnames: 를 실제 도메인으로 수정 후:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/route-harbor.yaml
+</code></pre></div>
 <h2 id="4단계-tls-미사용-시-insecure-registry-등록">4단계: (TLS 미사용 시) Insecure Registry 등록</h2>
-<p>TLS를 사용하지 않는 경우, 모든 노드에서 containerd에 insecure registry를 등록합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/insecurity_registry_add.sh
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./scripts/insecurity_registry_add.sh
+<p>HTTP로 Harbor를 사용하는 경우, 모든 노드에서 containerd에 등록합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/insecurity_registry_add.sh
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./scripts/insecurity_registry_add.sh
 </code></pre></div>
 <h2 id="5단계-선택-self-signed-tls-인증서-생성">5단계: (선택) Self-Signed TLS 인증서 생성</h2>
-<p>도메인 접속 시 자체 서명 인증서가 필요한 경우 생성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/create_self-signed_tls.sh
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./scripts/create_self-signed_tls.sh
+<p>nginx Ingress + TLS 사용 시 자체 서명 인증서가 필요한 경우 생성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/create_self-signed_tls.sh
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>./scripts/create_self-signed_tls.sh
 </code></pre></div>
 <h2 id="6단계-설치-확인-및-접속">6단계: 설치 확인 및 접속</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>harbor
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>harbor
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>harbor
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>harbor
 </code></pre></div>
 <h3 id="접속-정보">접속 정보</h3>
 <table>
@@ -4053,13 +4152,33 @@
 <li>기본 계정: <code>admin</code> / 설치 시 입력한 비밀번호</li>
 </ul>
 <h2 id="이미지-push-예시">이미지 Push 예시</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>login<span class="w"> </span>&lt;NODE_IP&gt;:30002<span class="w"> </span>-u<span class="w"> </span>admin
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>tag<span class="w"> </span>my-image:v1<span class="w"> </span>&lt;NODE_IP&gt;:30002/library/my-image:v1
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker<span class="w"> </span>push<span class="w"> </span>&lt;NODE_IP&gt;:30002/library/my-image:v1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>login<span class="w"> </span>&lt;NODE_IP&gt;:30002<span class="w"> </span>-u<span class="w"> </span>admin
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>docker<span class="w"> </span>tag<span class="w"> </span>my-image:v1<span class="w"> </span>&lt;NODE_IP&gt;:30002/library/my-image:v1
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>docker<span class="w"> </span>push<span class="w"> </span>&lt;NODE_IP&gt;:30002/library/my-image:v1
 </code></pre></div>
 <h2 id="삭제">삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./scripts/uninstall.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>./scripts/uninstall.sh
 </code></pre></div>
+<h2 id="보안-고려사항">보안 고려사항</h2>
+<ul>
+<li><strong>비밀번호 정책</strong>: 관리자 비밀번호는 최소 8자 이상 설정 (install.sh에서 검증)</li>
+<li><strong>TLS 권장</strong>: 운영 환경에서는 외부 TLS + 내부 TLS 모두 활성화 권장
+  (<code>internalTLS.enabled: true</code>)</li>
+<li><strong>자격 증명 관리</strong>: 스크립트에 비밀번호를 직접 기재하지 않고,
+  환경변수 또는 실행 시 프롬프트 사용</li>
+<li><strong>Insecure Registry</strong>: TLS 미사용 시
+  <code>insecurity_registry_add.sh</code>로 등록하되,
+  신뢰할 수 있는 네트워크에서만 사용</li>
+<li><strong>Trivy 스캔</strong>: 폐쇄망에서는 Trivy DB를 OCI artifact로
+  반입 후 활성화 가능 (<code>values.yaml</code> 주석 참조)</li>
+</ul>
+<h2 id="트러블슈팅">트러블슈팅</h2>
+<ul>
+<li><strong>Pod CrashLoopBackOff</strong>: PV 마운트 경로 권한(<code>chmod 777</code>) 확인, 비밀번호 불일치 여부 점검</li>
+<li><strong>이미지 Push 실패</strong>: 모든 노드에서 insecure registry 등록 여부 확인 (<code>scripts/insecurity_registry_add.sh</code>)</li>
+<li><strong>TLS 인증서 오류</strong>: Secret 이름과 <code>EXTERNAL_HOSTNAME</code> 도메인 일치 여부, 인증서 만료일 확인</li>
+<li><strong>PVC Pending</strong>: <code>NODE_NAME</code>이 실제 노드 이름과 일치하는지, nodeAffinity 설정 확인</li>
+</ul>
 
 
 
