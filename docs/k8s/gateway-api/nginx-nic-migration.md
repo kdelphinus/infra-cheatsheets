@@ -35,35 +35,72 @@
 
 프로젝트 내 주요 5개 서비스에 대해 `Ingress`(어노테이션 방식)와 `VirtualServer`(CRD 방식) 두 가지 버전의 변환 예시를 제공합니다.
 
+### 3.0 Mergeable Ingress 패턴 (동일 Host 다중 서비스)
+
+프로젝트의 모든 서비스가 동일한 host(`{{ ENV_DOMAIN }}`)를 공유하므로 NIC의 **Mergeable Ingress(Master/Minion)** 패턴을 사용합니다. 단일 Ingress에 여러 서비스를 정의하는 대신, Master 1개와 서비스별 Minion으로 분리합니다.
+
+| 구분 | 역할 | annotation |
+| :--- | :--- | :--- |
+| **Master** | host, TLS, 전역 설정 정의 | `nginx.org/mergeable-ingress-type: master` |
+| **Minion** | 서비스별 path 및 backend 정의 | `nginx.org/mergeable-ingress-type: minion` |
+
+**구성 규칙:**
+
+- Master와 Minion은 `ingressClassName`, `host`가 동일해야 합니다.
+- Master는 `spec.rules[].http.paths`를 정의하지 않습니다 (host 선언만).
+- TLS 설정은 Master에만 정의합니다.
+- Minion은 Master와 **다른 네임스페이스에 있어도 동작**합니다 (NIC 5.3.1 검증). 예: Master(`strato-product`) ← Minion(`monitoring`).
+- 아래 3.1~3.4의 Option A 예시는 모두 이 패턴을 전제로 합니다. **3.1의 Master Ingress를 먼저 생성**하고, 나머지 서비스는 Minion으로 추가합니다.
+
 ### 3.1 Portal Frontend (`strato-solution-install/strato-portal-front`)
 
-#### [3.1-A] Portal Ingress
+#### [Option A] Ingress (Annotation 방식)
 
 ```yaml
+# Master Ingress — host, TLS, 전역 설정
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: strato-portal-frontend-ingress
+  namespace: "{{ ENV_NAMESPACE }}"
   annotations:
+    nginx.org/mergeable-ingress-type: master
     nginx.org/redirect-to-https: "true"
     nginx.org/client-max-body-size: "10M"
 spec:
   ingressClassName: nginx
   rules:
     - host: "{{ ENV_DOMAIN }}"
+  tls:
+    - hosts:
+        - "{{ ENV_DOMAIN }}"
+      secretName: "{{ TLS_SECRET_NAME }}"
+---
+# Minion Ingress — Portal Frontend 및 OAuth2 경로
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: strato-portal-frontend-minion
+  namespace: "{{ ENV_NAMESPACE }}"
+  annotations:
+    nginx.org/mergeable-ingress-type: minion
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "{{ ENV_DOMAIN }}"
       http:
         paths:
-          - path: "/"
-            pathType: Prefix
-            backend:
-              service: { name: strato-portal-frontend-svc, port: { number: 80 } }
-          - path: "/oauth2"
+          - path: /oauth2
             pathType: Prefix
             backend:
               service: { name: strato-auth-svc, port: { number: 5555 } }
+          - path: /
+            pathType: Prefix
+            backend:
+              service: { name: strato-portal-frontend-svc, port: { number: 80 } }
 ```
 
-#### [3.1-B] Portal VirtualServer
+#### [Option B] VirtualServer (CRD 방식)
 
 ```yaml
 apiVersion: k8s.nginx.org/v1
@@ -89,9 +126,11 @@ spec:
 
 > **주의:** VirtualServer `routes`는 구체적인 경로(`/oauth2`)를 루트 경로(`/`)보다 먼저 정의해야 합니다.
 
+> **Option A vs Option B 선택 권장:** Portal Frontend는 현재 Native Ingress(Option A) 형식으로 구성되어 있습니다. Native Ingress는 `path` 매칭 순서를 내부적으로 처리하므로 `/oauth2` 경로가 `/` 보다 먼저 처리된다는 보장이 없습니다. **`/oauth2` 경로 우선순위를 명시적으로 보장하려면 Option B(VirtualServer)로 전환하는 것을 권장합니다.**
+
 ### 3.2 API Gateway (`strato-solution-install/gateway`)
 
-#### [3.2-A] Gateway Ingress
+#### [Option A] Ingress (Annotation 방식)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -99,12 +138,17 @@ kind: Ingress
 metadata:
   name: api-gateway-ingress
   annotations:
+    nginx.org/mergeable-ingress-type: minion
+    nginx.org/client-max-body-size: "20M"
     nginx.org/location-snippets: |
-      client_max_body_size 20M;
+      rewrite /gw(/|$)(.*) /$2 break;
       add_header 'Access-Control-Allow-Origin' '*' always;
       add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, DELETE, OPTIONS, PATCH' always;
       add_header 'Access-Control-Allow-Headers' '*' always;
       add_header 'Access-Control-Allow-Credentials' 'true' always;
+      if ($request_method = 'OPTIONS') {
+        return 204;
+      }
 spec:
   ingressClassName: nginx
   rules:
@@ -117,7 +161,11 @@ spec:
               service: { name: api-gateway-svc, port: { number: 20987 } }
 ```
 
-#### [3.2-B] Gateway VirtualServer
+> **주의 — path 형식:** path는 반드시 `/gw`처럼 단순 prefix 형태로 작성해야 합니다. `/gw(/|$)(.*)`와 같은 regex 패턴을 path에 넣으면 NIC가 `location /gw(/|$)(.*) {`(prefix 매칭)으로 생성하여 실제 URL이 절대 매칭되지 않습니다. Prefix 제거(rewrite)는 `location-snippets`의 `rewrite` 지시어에서 처리합니다.
+
+> **주의 — `nginx.org/rewrites` 혼용 금지:** `nginx.org/rewrites: serviceName=... rewrite=/` 어노테이션과 `location-snippets`의 `rewrite` 지시어를 동시에 사용하면 안 됩니다. `nginx.org/rewrites: rewrite=/`는 경로 prefix만 제거하는 것이 아니라 **전체 경로를 `/`로 치환**하므로 `/gw/strato-b-svc/...` 같은 모든 요청이 백엔드에 `/`로 전달됩니다. `location-snippets`의 `rewrite`만 사용하십시오.
+
+#### [Option B] VirtualServer (CRD 방식)
 
 ```yaml
 apiVersion: k8s.nginx.org/v1
@@ -147,7 +195,7 @@ spec:
 
 ### 3.3 Grafana (`strato-solution-install/helm-chart/grafana`)
 
-#### [3.3-A] Grafana Ingress
+#### [Option A] Ingress (Annotation 방식)
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -155,7 +203,9 @@ kind: Ingress
 metadata:
   name: grafana-ingress
   annotations:
+    nginx.org/mergeable-ingress-type: minion
     nginx.org/location-snippets: |
+      rewrite /grafana(/|$)(.*) /$2 break;
       sub_filter '</body>' '<style>...</style></body>';
       sub_filter_once on;
 spec:
@@ -170,7 +220,7 @@ spec:
               service: { name: grafana-svc, port: { number: 3000 } }
 ```
 
-#### [3.3-B] Grafana VirtualServer
+#### [Option B] VirtualServer (CRD 방식)
 
 ```yaml
 apiVersion: k8s.nginx.org/v1
@@ -208,6 +258,7 @@ metadata:
   name: prometheus-ingress
   namespace: monitoring
   annotations:
+    nginx.org/mergeable-ingress-type: minion
     nginx.org/basic-auth-secret: "basic-auth"
     nginx.org/basic-auth-realm: "Prometheus Access"
 spec:
@@ -306,6 +357,96 @@ kubectl create secret generic basic-auth \
 1. **WebSocket 및 Keep-Alive**: Community 버전과 달리 F5 NIC는 WebSocket 업그레이드 설정을 명시적으로 요구할 수 있습니다. Portal Frontend나 실시간 모니터링 대시보드에서 WebSocket을 사용하는 경우, `Proxy Read Timeout` 및 `Connection/Upgrade` 헤더 유지 설정을 반드시 검증하십시오.
 1. **Lua 스크립트 호환성**: 기존 Ingress에 Lua 스크립트 로직이 포함된 경우, F5 NIC는 이를 지원하지 않으므로 **njs(NGINX JavaScript)**로 재작성하거나 NGINX 네이티브 지시어로 변환해야 합니다.
 1. **Snippet 보안 검증**: `enableSnippets: true` 활성화 시, 잘못된 설정 주입으로 인한 전체 인그레스 컨트롤러 정지(Crash)를 방지하기 위해 **Global Configuration Validation Webhook**이 정상 동작하는지 확인하십시오.
+1. **커스텀 요청 헤더 pass-through (JWT)**: Grafana는 `X-JWT-Assertion` 헤더를 통해 자체적으로 JWT 인증을 처리합니다. NIC가 업스트림으로 요청을 전달할 때 이 헤더를 제거하거나 변조하지 않는지 반드시 확인하십시오. NIC 기본 설정에서 커스텀 헤더는 통과되지만, `proxy-set-headers` 등의 설정이 있을 경우 헤더 목록에서 누락될 수 있습니다.
+
+### 4.4 TLS 설정
+
+NIC에서 TLS를 처리하는 방식은 리소스 타입에 따라 다릅니다. 현재 프로젝트는 TLS Secret(`nhis-tls`, `strato-tls`)을 정의해 두었으나 비활성화 상태(`tls.enabled: false`)이므로, 운영 전환 시 아래 설정을 활성화해야 합니다.
+
+#### VirtualServer 방식
+
+```yaml
+spec:
+  host: "{{ ENV_DOMAIN }}"
+  tls:
+    secret: "{{ TLS_SECRET_NAME }}"   # 동일 네임스페이스에 존재하는 Secret 이름
+  upstreams: ...
+  routes: ...
+```
+
+#### Native Ingress 방식
+
+```yaml
+spec:
+  tls:
+    - hosts:
+        - "{{ ENV_DOMAIN }}"
+      secretName: "{{ TLS_SECRET_NAME }}"
+  rules: ...
+```
+
+> `nginx.org/redirect-to-https: "true"` 어노테이션은 TLS가 활성화된 경우에만 의미가 있습니다. TLS 비활성화 상태에서는 동작하지 않습니다.
+
+#### TLS Secret 네임스페이스 제약
+
+F5 NIC는 **VirtualServer와 동일한 네임스페이스에 위치한 Secret만 참조**할 수 있습니다.
+
+| 서비스 | 네임스페이스 | Secret 이름 |
+| :--- | :--- | :--- |
+| API Gateway | `strato-product` | `nhis-tls` |
+| Portal Frontend | `strato-product` | `nhis-tls` |
+| Monitoring (Grafana) | `monitoring` | `strato-tls` |
+
+각 네임스페이스에 Secret이 존재하지 않으면 NIC가 TLS 설정을 적용할 수 없습니다. 인증서 배포 방식은 아래 두 가지 중 하나를 선택합니다.
+
+- **방식 A — 네임스페이스별 Secret 복제**: 동일한 인증서를 각 네임스페이스에 별도로 생성
+  ```bash
+  kubectl get secret nhis-tls -n source-ns -o yaml \
+    | sed 's/namespace: source-ns/namespace: strato-product/' \
+    | kubectl apply -f -
+  ```
+
+- **방식 B — NIC 전역 기본 TLS 설정**: NIC `values.yaml`에 `controller.defaultTLS.secret`을 지정하면 모든 VirtualServer에 공통 인증서를 적용할 수 있습니다.
+  ```yaml
+  # NIC values.yaml
+  controller:
+    defaultTLS:
+      secret: strato-product/nhis-tls
+  ```
+
+### 4.5 Path 매칭 및 Rewrite 주의사항
+
+NIC Mergeable Ingress(master/minion)에서 경로 재작성을 구성할 때 아래 사항을 반드시 준수하십시오.
+
+#### path에 regex 패턴 사용 금지
+
+NIC는 `pathType: Prefix` 및 `pathType: ImplementationSpecific` 모두에서 path 값을 **NGINX prefix 매칭(`location /path {`)** 으로 생성합니다. path에 regex 특수문자(`(`, `)`, `$`, `.*` 등)가 포함되면 리터럴 문자열로 처리되어 실제 URL이 매칭되지 않습니다.
+
+| 설정 | 생성된 location | 매칭 여부 |
+| :--- | :--- | :--- |
+| `path: /gw(/|$)(.*)` | `location /gw(/|$)(.*) {` | `/gw/...` 매칭 안 됨 ✗ |
+| `path: /gw` | `location /gw {` | `/gw/...` 정상 매칭 ✓ |
+
+`nginx.org/use-regex: "true"` 어노테이션은 minion Ingress에서 동작하지 않으므로 사용하지 마십시오.
+
+#### Prefix 제거(rewrite)는 location-snippets에서만 처리
+
+백엔드로 전달 시 path prefix를 제거해야 하는 서비스(`/gw` → `/`, `/grafana` → `/`)는 `location-snippets`의 `rewrite` 지시어만 사용합니다.
+
+```yaml
+nginx.org/location-snippets: |
+  rewrite /gw(/|$)(.*) /$2 break;
+```
+
+`nginx.org/rewrites: serviceName=... rewrite=/` 어노테이션은 **경로 전체를 `/`로 치환**하므로, `location-snippets`의 `rewrite`와 동시에 사용하면 안 됩니다. 두 방식 중 `location-snippets` 방식만 사용하십시오.
+
+#### 301 리다이렉트 브라우저 캐시 주의
+
+NIC 설정 변경 과정에서 잘못된 301 응답이 발생한 경우, **브라우저가 301을 영구적으로 캐싱**하기 때문에 서버 설정을 수정한 후에도 브라우저에서 계속 이전 리다이렉트를 따릅니다. 설정 변경 후 동작이 이상할 경우 아래 방법으로 확인하십시오.
+
+- `curl -Lv https://{{ ENV_DOMAIN }}/path/` 로 서버 응답을 직접 확인
+- 브라우저 시크릿 창에서 테스트 (캐시 미사용)
+- Chrome DevTools → Network 탭 → **Disable cache** 체크 후 새로고침
 
 ---
 
@@ -316,17 +457,45 @@ kubectl create secret generic basic-auth \
 ### 5.1 설치 및 버전 (Installation & Version)
 
 - [ ] **버전 호환성:** 도입되는 NIC 솔루션 버전과 K8s 클러스터 버전 간의 공식 호환성 확인
-- [ ] **CRD 설치:** `VirtualServer`, `Policy` 등 전용 리소스 정의가 클러스터에 배포되었는지 확인
-- [ ] **에어갭 이미지:** Harbor 레지스트리에 `sub_filter`, `njs` 모듈이 포함된 정식 이미지 업로드 여부
+- [ ] **에어갭 이미지:** Harbor 레지스트리에 NIC 정식 이미지 업로드 여부
+- [ ] **`sub_filter` 모듈 포함 이미지 확인:** Monitoring(Grafana)에서 `sub_filter` 지시어(HTML 주입)를 사용하므로, Harbor에 업로드된 NIC 이미지가 해당 모듈을 포함하는지 사전 검증 필요 (`nginx -V 2>&1 | grep sub_filter`)
 
 ### 5.2 권한 및 네트워크 (Access & Network)
 
-- [ ] **IngressClass:** 컨트롤러 이름(기본 `nginx`) 및 기존 컨트롤러와의 중복 여부 확인
+- [ ] **IngressClass:** 컨트롤러 이름(기본 `nginx`) 및 기존 community ingress-nginx 컨트롤러와의 중복 여부 확인
 - [ ] **RBAC 권한:** NIC가 타 네임스페이스의 TLS Secret을 읽을 수 있는 권한(ClusterRole) 부여 확인
 - [ ] **네트워크 포트:** NIC Pod에서 각 서비스 Pod(3000, 9090, 9093, 20987 등)로의 통신 허용 여부
+- [ ] **기존 community ingress-nginx 제거 시점:** F5 NIC 전환 완료 확인 후 제거 일정 협의 (동시 운영 기간 필요 여부 포함)
 
-### 5.3 설정 및 보안 (Config & Security)
+### 5.3 설정 및 보안 — Native Ingress 방식 (현재 적용 방향)
 
-- [ ] **Snippet & Webhook:** `controller.enableSnippets: true` 활성화 및 설정 오류 방지용 `Validation Webhook` 구성 여부
+> Native Ingress(`networking.k8s.io/v1` + `nginx.org/` 어노테이션) 방식을 사용하는 경우의 확인 항목입니다.
+
+#### 공통
+
+- [ ] **TLS 인증서 배포 방식:** 네임스페이스별 Secret 복제(`nhis-tls` → `strato-product`, `strato-tls` → `monitoring`) vs NIC 전역 `defaultTLS.secret` 사용 방식 확정 (§4.4 참조)
+- [ ] **TLS 활성화:** 각 서비스 Helm values의 `tls.enabled: false` → `true` 전환 시점 및 담당 확정
 - [ ] **WebSocket:** `Connection/Upgrade` 헤더 처리 및 타임아웃 정책(Keep-Alive) 협의
-- [ ] **TLS 인증서:** 네임스페이스별 Secret 복제 방식 vs 공통 인증서(`defaultTLS.secret`) 사용 방식 확정
+- [ ] **JWT 헤더 pass-through 확인:** Grafana의 `X-JWT-Assertion` 헤더가 NIC를 거쳐 업스트림까지 전달되는지 검증 (§4.3 참조)
+
+#### Native Ingress 전용
+
+- [ ] **`nginx.org/location-snippets` 사용 가능 여부:** Gateway(CORS)와 Monitoring(sub_filter)은 `location-snippets` 어노테이션을 사용함. NIC 설치 시 `controller.enableSnippets: true` 적용 필수이며, Validation Webhook 정상 동작 여부도 함께 확인 (§4.1 참조)
+- [ ] **`redirect-to-https` 동작 조건:** Portal Frontend의 `nginx.org/redirect-to-https: "true"` 어노테이션은 해당 Ingress에 TLS가 활성화된 경우에만 동작. TLS 비활성화 상태에서는 무시됨 (§4.4 참조)
+- [ ] **`/oauth2` 경로 우선순위:** Native Ingress는 경로 매칭 순서를 명시적으로 보장하지 않음. `/oauth2`가 `/`보다 먼저 처리되는지 실제 동작으로 검증 필요. 보장이 안 될 경우 VirtualServer 전환 검토 (§3.1 참조)
+- [ ] **Basic Auth Secret 타입:** Prometheus/Alertmanager용 Basic Auth Secret은 반드시 `nginx.org/htpasswd` 타입으로 재생성 필요. 기존 `Opaque` 타입은 NIC에서 인식하지 않음 (§4.2 참조)
+
+### 5.4 설정 및 보안 — VirtualServer 방식 (CRD 방식으로 전환 시)
+
+> `VirtualServer`(k8s.nginx.org/v1) 방식을 사용하는 경우의 확인 항목입니다. Native Ingress 방식으로 결정된 경우 이 섹션은 해당 없음.
+
+#### VirtualServer 전용
+
+- [ ] **CRD 설치:** `VirtualServer`, `VirtualServerRoute`, `Policy` 등 F5 NIC 전용 CRD가 클러스터에 배포되었는지 확인
+- [ ] **`routes` 순서 보장:** VirtualServer는 `routes` 배열 순서대로 경로가 매칭됨. `/oauth2` 등 구체적인 경로를 `/`보다 반드시 먼저 정의 (§3.1 참조)
+- [ ] **`rewritePath` 동작 확인:** Gateway(`/gw` → `/`), Monitoring(`/grafana` → `/`) 경로 재작성이 의도한 대로 동작하는지 검증 (§3.2, §3.3 참조)
+- [ ] **Basic Auth Policy 리소스:** Prometheus/Alertmanager Basic Auth는 `Policy` 리소스(`basicAuth.secret`)로 구성. Secret 타입은 동일하게 `nginx.org/htpasswd` 필요 (§3.4, §4.2 참조)
+- [ ] **TLS 인증서 배포 방식:** 네임스페이스별 Secret 복제(`nhis-tls` → `strato-product`, `strato-tls` → `monitoring`) vs NIC 전역 `defaultTLS.secret` 사용 방식 확정 (§4.4 참조)
+- [ ] **TLS 활성화:** 각 서비스 Helm values의 `tls.enabled: false` → `true` 전환 시점 및 담당 확정
+- [ ] **`location-snippets` in VirtualServer routes:** Gateway(CORS), Monitoring(sub_filter) VirtualServer의 `routes[].location-snippets` 사용 시 `controller.enableSnippets: true` 적용 필수 (§4.1 참조)
+- [ ] **JWT 헤더 pass-through 확인:** Grafana의 `X-JWT-Assertion` 헤더가 NIC를 거쳐 업스트림까지 전달되는지 검증 (§4.3 참조)

@@ -30,6 +30,7 @@ hide:
     - [:octicons-arrow-right-24: Kubernetes Cheat Sheet](k8s/cheatsheet.md)
     - [:octicons-arrow-right-24: v1.30 폐쇄망 설치 가이드](k8s/offline-install/002-k8s-air-gapped-install.md)
     - [:octicons-arrow-right-24: Ingress NGINX 설치 및 운영](k8s/gateway-api/000-ingress-nginx-install.md)
+    - [:octicons-arrow-right-24: NGINX NIC 마이그레이션 가이드](k8s/gateway-api/nginx-nic-migration.md)
     - [:octicons-arrow-right-24: Envoy Gateway & HTTPRoute](k8s/gateway-api/001-envoy-install.md)
 
 - :material-shield-check: **K8s Ops & Security**
