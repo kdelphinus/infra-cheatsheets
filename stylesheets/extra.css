@@ -83,7 +83,14 @@
   color: var(--md-default-fg-color);
   transition: color 0.2s;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* 중앙 정렬에서 상단 정렬로 변경 */
+}
+
+/* 아이콘 위치 미세 조정 (첫 줄 텍스트와 높이 맞춤) */
+.md-typeset .grid.cards li ul li a .octicons {
+  margin-top: 0.2rem;
+  margin-right: 0.5rem;
+  flex-shrink: 0; /* 아이콘이 찌그러지지 않도록 고정 */
 }
 
 .md-typeset .grid.cards li ul li a:hover {
