@@ -1153,6 +1153,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#케이스-0-운영-중인-클러스터를-ip--fqdn으로-전환" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#케이스-a-fqdn-방식으로-초기-구성한-경우-권장-구성" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4549,6 +4560,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#케이스-0-운영-중인-클러스터를-ip--fqdn으로-전환" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#케이스-a-fqdn-방식으로-초기-구성한-경우-권장-구성" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5028,81 +5050,128 @@ Phase 4에서 선택한 LB 방식에 따라 접속 대상이 다릅니다.</p>
 <hr />
 <h2 id="-vip-변경-시-조치">🔧 VIP 변경 시 조치</h2>
 <p>운영 중 VIP 대역이 변경되거나 새로운 IP를 할당받아야 하는 경우의 절차입니다.</p>
+<h3 id="케이스-0-운영-중인-클러스터를-ip--fqdn으로-전환">케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환</h3>
+<p>이미 VIP IP로 초기 구성한 클러스터에 FQDN을 사후 적용하는 절차입니다.
+이후 VIP가 변경되면 케이스 A 절차만으로 처리할 수 있게 됩니다.</p>
+<p><strong>1단계: 모든 노드에 FQDN 등록 (마스터 + 워커)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;10.10.10.200  k8s-api.internal&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts
+</code></pre></div>
+<p><strong>2단계: API 서버 인증서에 FQDN SAN 추가 (전체 마스터 노드)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># 기존 인증서 백업</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>~/apiserver.crt.bak
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.key<span class="w"> </span>~/apiserver.key.bak
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="c1"># 삭제 후 FQDN 포함하여 재발급</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>/etc/kubernetes/pki/apiserver.key
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span>phase<span class="w"> </span>certs<span class="w"> </span>apiserver<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;k8s-api.internal:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;k8s-api.internal,10.10.10.200,10.10.10.70,10.10.10.71,10.10.10.72,127.0.0.1&quot;</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="c1"># FQDN이 SAN에 포함되었는지 확인</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a>openssl<span class="w"> </span>x509<span class="w"> </span>-in<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>-noout<span class="w"> </span>-text<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A1<span class="w"> </span><span class="s2">&quot;Subject Alternative&quot;</span>
+</code></pre></div>
+<p><strong>3단계: kube-apiserver 재시작 (전체 마스터 노드)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml<span class="w"> </span>/tmp/
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>sleep<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/kube-apiserver.yaml<span class="w"> </span>/etc/kubernetes/manifests/
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>watch<span class="w"> </span>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+</code></pre></div>
+<p><strong>4단계: kubeconfig server 주소를 FQDN으로 변경 (전체 마스터 노드)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">for</span><span class="w"> </span>conf<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">            </span>/etc/kubernetes/controller-manager.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">            </span>/etc/kubernetes/scheduler.conf<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|https://10.10.10.200:6443|https://k8s-api.internal:6443|g&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$conf</span><span class="s2">&quot;</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="k">done</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="c1"># 현재 사용자 kubeconfig 갱신</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>cp<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span>~/.kube/config
+</code></pre></div>
+<p><strong>5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|https://10.10.10.200:6443|https://k8s-api.internal:6443|g&#39;</span><span class="w"> </span>/etc/kubernetes/kubelet.conf
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
+</code></pre></div>
+<p><strong>6단계: 확인</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>kubectl<span class="w"> </span>cluster-info
+</code></pre></div>
+<p><code>Kubernetes control plane</code> 주소가 <code>https://k8s-api.internal:6443</code>으로 표시되면 완료입니다.</p>
+<hr />
 <h3 id="케이스-a-fqdn-방식으로-초기-구성한-경우-권장-구성">케이스 A: FQDN 방식으로 초기 구성한 경우 (권장 구성)</h3>
 <p>FQDN(<code>k8s-api.internal</code>)이 인증서 SAN에 포함되어 있으므로 <strong>인증서 재발급 없이</strong> 아래 순서만 따르면 됩니다.</p>
 <p><strong>1단계: 모든 노드의 <code>/etc/hosts</code> 업데이트 (마스터 + 워커)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP  k8s-api.internal/NEW_VIP  k8s-api.internal/&#39;</span><span class="w"> </span>/etc/hosts
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="c1"># 확인</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>grep<span class="w"> </span>k8s-api.internal<span class="w"> </span>/etc/hosts
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP  k8s-api.internal/NEW_VIP  k8s-api.internal/&#39;</span><span class="w"> </span>/etc/hosts
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="c1"># 확인</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>grep<span class="w"> </span>k8s-api.internal<span class="w"> </span>/etc/hosts
 </code></pre></div>
 <p><strong>2단계: Keepalived VIP 변경 (전체 마스터 노드)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP/NEW_VIP/&#39;</span><span class="w"> </span>/etc/keepalived/keepalived.conf
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keepalived
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
-<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="c1"># 새 VIP 활성화 확인 (Master-1)</span>
-<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>eth0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>NEW_VIP
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP/NEW_VIP/&#39;</span><span class="w"> </span>/etc/keepalived/keepalived.conf
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keepalived
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="c1"># 새 VIP 활성화 확인 (Master-1)</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>eth0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>NEW_VIP
 </code></pre></div>
 <p><strong>3단계: HAProxy bind IP 변경 (전체 마스터 노드)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP:6443/NEW_VIP:6443/&#39;</span><span class="w"> </span>/etc/haproxy/haproxy.cfg
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>haproxy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP:6443/NEW_VIP:6443/&#39;</span><span class="w"> </span>/etc/haproxy/haproxy.cfg
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>haproxy
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code>backend k8s-masters</code>의 <code>server</code> 항목(마스터 노드 IP)은 변경하지 않습니다.</p>
 </div>
 <p><strong>4단계: 확인</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="c1"># kubeconfig의 server 주소는 FQDN이므로 변경 불필요</span>
-<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="c1"># kubeconfig의 server 주소는 FQDN이므로 변경 불필요</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
 </code></pre></div>
 <hr />
 <h3 id="케이스-b-vip-ip를-직접-사용하여-초기-구성한-경우">케이스 B: VIP IP를 직접 사용하여 초기 구성한 경우</h3>
 <p>인증서 SAN에 기존 VIP IP가 고정되어 있으므로 <strong>인증서 재발급이 필수</strong>입니다.
 전체 마스터 노드에서 순서대로 진행합니다.</p>
 <p><strong>1단계: Keepalived / HAProxy VIP 변경 (전체 마스터 노드)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP/NEW_VIP/&#39;</span><span class="w"> </span>/etc/keepalived/keepalived.conf
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keepalived
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP:6443/NEW_VIP:6443/&#39;</span><span class="w"> </span>/etc/haproxy/haproxy.cfg
-<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>haproxy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP/NEW_VIP/&#39;</span><span class="w"> </span>/etc/keepalived/keepalived.conf
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keepalived
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/OLD_VIP:6443/NEW_VIP:6443/&#39;</span><span class="w"> </span>/etc/haproxy/haproxy.cfg
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>haproxy
 </code></pre></div>
 <p><strong>2단계: API 서버 인증서 재발급 (전체 마스터 노드)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># 기존 인증서 백업</span>
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>~/apiserver.crt.bak
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.key<span class="w"> </span>~/apiserver.key.bak
-<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
-<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="c1"># 삭제 후 새 VIP 포함하여 재발급</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>/etc/kubernetes/pki/apiserver.key
-<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span>phase<span class="w"> </span>certs<span class="w"> </span>apiserver<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;NEW_VIP:6443&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;NEW_VIP,10.10.10.70,10.10.10.71,10.10.10.72,127.0.0.1&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="c1"># 기존 인증서 백업</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>~/apiserver.crt.bak
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.key<span class="w"> </span>~/apiserver.key.bak
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="c1"># 삭제 후 새 VIP 포함하여 재발급</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>/etc/kubernetes/pki/apiserver.key
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span>phase<span class="w"> </span>certs<span class="w"> </span>apiserver<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;NEW_VIP:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;NEW_VIP,10.10.10.70,10.10.10.71,10.10.10.72,127.0.0.1&quot;</span>
 </code></pre></div>
 <p><strong>3단계: kube-apiserver 재시작 (전체 마스터 노드)</strong></p>
 <p>static pod는 manifest를 잠시 제거했다가 복원하면 자동 재시작됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml<span class="w"> </span>/tmp/
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>sleep<span class="w"> </span><span class="m">10</span>
-<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/kube-apiserver.yaml<span class="w"> </span>/etc/kubernetes/manifests/
-<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
-<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="c1"># Pod가 다시 Running 상태가 될 때까지 대기</span>
-<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>watch<span class="w"> </span>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml<span class="w"> </span>/tmp/
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>sleep<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/kube-apiserver.yaml<span class="w"> </span>/etc/kubernetes/manifests/
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="c1"># Pod가 다시 Running 상태가 될 때까지 대기</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>watch<span class="w"> </span>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system
 </code></pre></div>
 <p><strong>4단계: kubeconfig server 주소 변경 (전체 마스터 노드)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">for</span><span class="w"> </span>conf<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">            </span>/etc/kubernetes/controller-manager.conf<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="w">            </span>/etc/kubernetes/scheduler.conf<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="w">    </span>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|https://OLD_VIP:6443|https://NEW_VIP:6443|g&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$conf</span><span class="s2">&quot;</span>
-<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="k">done</span>
-<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>
-<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="c1"># 현재 사용자 kubeconfig 갱신</span>
-<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a>cp<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span>~/.kube/config
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="k">for</span><span class="w"> </span>conf<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">            </span>/etc/kubernetes/controller-manager.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="w">            </span>/etc/kubernetes/scheduler.conf<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="w">    </span>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|https://OLD_VIP:6443|https://NEW_VIP:6443|g&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$conf</span><span class="s2">&quot;</span>
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="k">done</span>
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="c1"># 현재 사용자 kubeconfig 갱신</span>
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>cp<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span>~/.kube/config
 </code></pre></div>
 <p><strong>5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|https://OLD_VIP:6443|https://NEW_VIP:6443|g&#39;</span><span class="w"> </span>/etc/kubernetes/kubelet.conf
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|https://OLD_VIP:6443|https://NEW_VIP:6443|g&#39;</span><span class="w"> </span>/etc/kubernetes/kubelet.conf
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
 </code></pre></div>
 <p><strong>6단계: 정상 동작 확인</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
-<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system
 </code></pre></div>
 
 
