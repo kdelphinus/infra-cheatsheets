@@ -131,10 +131,39 @@ sudo bash harbor_install_offline.sh
 
 ### 2. Containerd 연동 (Insecure Registry 설정)
 
-HTTP 통신이나 사설 인증서 사용 시 모든 워커 노드에서 아래 설정이 필요합니다.
+HTTP 통신이나 사설 인증서 사용 시 **모든 K8s 노드(Master + Worker)**에서 아래 설정이 필요합니다.
+
+#### 2-1. containerd config.toml에 config_path 설정
+
+`/etc/containerd/config.toml`에 `certs.d` 경로를 지정해야 합니다. **containerd v2.x에서 CRI 플러그인 키가 변경**되었으므로, 버전에 맞는 섹션에 설정해야 합니다.
 
 ```bash
-# Harbor 도메인/IP에 대한 인증 설정 (예: 10.10.10.73:30002)
+# 버전 확인
+containerd --version
+
+# 현재 사용 중인 플러그인 키 확인
+grep -n 'io.containerd' /etc/containerd/config.toml | grep -i 'cri\|registry'
+```
+
+```toml
+# containerd v1.x
+[plugins."io.containerd.grpc.v1.cri".registry]
+  config_path = "/etc/containerd/certs.d"
+
+# containerd v2.x (플러그인 키 변경됨)
+[plugins."io.containerd.cri.v1.images".registry]
+  config_path = "/etc/containerd/certs.d"
+```
+
+!!! warning "v1.x 키에 설정하면 v2.x에서 무시됨"
+    v1.x 키(`grpc.v1.cri`)로 `config_path`를 설정했는데 실제 containerd가 v2.x라면, 설정이 **무시**되어 insecure registry가 동작하지 않습니다. 반드시 `containerd --version`으로 버전을 확인하세요.
+
+#### 2-2. hosts.toml 생성
+
+Harbor 도메인/IP에 대한 인증 설정을 생성합니다.
+
+```bash
+# (예: 10.10.10.73:30002)
 sudo mkdir -p /etc/containerd/certs.d/<HARBOR_IP>:30002/
 
 cat <<EOF | sudo tee /etc/containerd/certs.d/<HARBOR_IP>:30002/hosts.toml
@@ -143,8 +172,16 @@ server = "http://<HARBOR_IP>:30002"
   capabilities = ["pull", "resolve"]
   skip_verify = true
 EOF
+```
 
+#### 2-3. containerd 재시작 및 확인
+
+```bash
 sudo systemctl restart containerd
+
+# 설정 확인
+grep "config_path" /etc/containerd/config.toml
+cat /etc/containerd/certs.d/<HARBOR_IP>:30002/hosts.toml
 ```
 
 ---
