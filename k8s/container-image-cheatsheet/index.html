@@ -1691,6 +1691,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rootless-모드-지원-스크립트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rootless 모드 지원 스크립트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#이미지-내보내기가져오기-tar" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4010,6 +4021,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rootless-모드-지원-스크립트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rootless 모드 지원 스크립트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#이미지-내보내기가져오기-tar" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4175,6 +4197,10 @@
 <p>Kubernetes에서 사용하는 이미지는 <code>k8s.io</code> 네임스페이스에 저장됩니다.
 - <strong>K8s 이미지 확인</strong>: <code>nerdctl -n k8s.io images</code>
 - <strong>K8s 컨테이너 확인</strong>: <code>nerdctl -n k8s.io ps</code></p>
+<h3 id="rootless-모드-지원-스크립트">Rootless 모드 지원 스크립트</h3>
+<p><code>nerdctl</code> 패키지에는 <code>root</code> 권한 없이 컨테이너를 운영할 수 있게 돕는 스크립트가 포함되어 있습니다.
+- <strong><code>containerd-rootless-setuptool.sh</code></strong>: Rootless 환경 설정 도구 (체크, 서비스 등록 등)
+- <strong><code>containerd-rootless.sh</code></strong>: 루트리스 환경에서 <code>containerd</code>를 실행하는 래퍼 스크립트</p>
 <h3 id="이미지-내보내기가져오기-tar">이미지 내보내기/가져오기 (Tar)</h3>
 <ul>
 <li><strong>저장</strong>: <code>nerdctl save -o image.tar &lt;image&gt;</code></li>
