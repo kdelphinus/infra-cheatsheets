@@ -407,3 +407,72 @@ sudo crictl stats <container_id>
 | **멀티 아키텍처** | 제한적 | `--multi-arch all` | `--platform` | 미지원 |
 | **Pod 조회** | 미지원 | 미지원 | 미지원 | `crictl pods` |
 | **exec / 로그** | 지원 | 미지원 | 미지원 | `exec`, `logs` |
+
+---
+
+## 아키텍처 관점에서 본 도구 선택
+
+### 왜 도구가 이렇게 많은가?
+
+과거 Docker가 이미지 빌드·실행·배포·레지스트리 연동을 혼자 담당하던 구조는 단일 장애점이자 보안 리스크였습니다.
+현대 컨테이너 생태계는 이 역할을 **OCI 표준** 위에서 전문 도구로 분리했습니다.
+
+| 역할 | 담당 도구 | 비고 |
+| :--- | :--- | :--- |
+| 컨테이너 런타임 | containerd | kubelet이 CRI를 통해 직접 호출 |
+| 런타임 진단 | ctr, crictl | containerd 내부 vs CRI(Pod) 관점 |
+| 이미지 관리·이관 | nerdctl, Skopeo | UX 중심 vs 레지스트리 중심 |
+
+이 분리 덕분에 각 레이어를 독립적으로 업그레이드하거나 교체할 수 있고, 보안 취약점의 영향 범위도 좁아집니다.
+
+### 도구별 핵심 강점
+
+**Skopeo — 이미지 이관의 핵심**
+
+데몬 없이 동작하므로 containerd나 Docker가 없는 환경에서도 실행됩니다.
+외부망에서 이미지를 tar로 추출하거나 레지스트리 간 직접 복사할 때 가장 가볍고 빠릅니다.
+Harbor 프로젝트명 변환, 인증이 필요한 레지스트리 접근 등 CI/CD 파이프라인에서도 즐겨 쓰입니다.
+
+```bash
+# 외부 레지스트리 → 로컬 tar (Harbor 인증 포함)
+skopeo copy \
+    --src-creds admin:password \
+    docker://harbor.example.com/secret-project/my-app:v1.0 \
+    docker-archive:my-app_v1.0.tar:my-app:v1.0
+```
+
+**nerdctl — containerd 환경의 Docker 대체**
+
+`docker` 명령어를 그대로 사용할 수 있어 진입 장벽이 낮습니다.
+`buildkitd`와 결합하면 폐쇄망 노드 안에서도 이미지를 직접 빌드할 수 있습니다.
+`-n k8s.io` 옵션으로 kubeadm 클러스터의 이미지 네임스페이스에도 접근합니다.
+
+**crictl — K8s 노드 상태 점검의 기준**
+
+kubelet이 CRI를 통해 보는 것과 동일한 관점으로 Pod·컨테이너 상태를 확인합니다.
+`kubectl`이 동작하지 않는 장애 상황에서 노드의 실제 상태를 파악하는 1순위 도구입니다.
+이미지 tag·push 기능은 없으므로 순수 진단 용도로만 사용합니다.
+
+**ctr — 최후의 수단**
+
+containerd에 기본 탑재되어 있어 어떤 환경에서도 사용 가능합니다.
+다른 도구가 모두 실패했을 때 런타임 내부를 직접 조작하거나, tar 이미지를 강제로 import할 때 씁니다.
+`-n k8s.io`를 명시하지 않으면 기본 네임스페이스(`default`)를 바라보므로 K8s 환경에서는 반드시 붙여야 합니다.
+
+> **Podman**은 데몬 없는 보안 컨테이너 엔진으로, rootless 운영이나 K8s YAML 생성(`podman generate kube`)이 필요한 경우 도입을 검토합니다. 위 네 도구와 용도가 겹치지 않으므로 이 문서의 범위에서는 제외했습니다.
+
+### 권장 워크플로우
+
+```text
+[외부망] 이미지 반출·정제
+  └─ Skopeo copy → tar 파일 생성 (프로젝트명 정리, 인증 처리)
+
+[내부망] 이미지 배포
+  └─ ctr import  → containerd(k8s.io)에 로드
+  └─ nerdctl push → Harbor로 업로드
+
+[운영 중] 상태 점검
+  └─ crictl pods / crictl ps  → kubelet 관점의 Pod·컨테이너 확인
+  └─ nerdctl -n k8s.io images → 이미지 목록 확인
+  └─ ctr (최후 수단)          → 런타임 직접 조작
+```
