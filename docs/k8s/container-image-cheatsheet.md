@@ -22,6 +22,11 @@ Kubernetes에서 사용하는 이미지는 `k8s.io` 네임스페이스에 저장
 - **K8s 이미지 확인**: `nerdctl -n k8s.io images`
 - **K8s 컨테이너 확인**: `nerdctl -n k8s.io ps`
 
+### Rootless 모드 지원 스크립트
+`nerdctl` 패키지에는 `root` 권한 없이 컨테이너를 운영할 수 있게 돕는 스크립트가 포함되어 있습니다.
+- **`containerd-rootless-setuptool.sh`**: Rootless 환경 설정 도구 (체크, 서비스 등록 등)
+- **`containerd-rootless.sh`**: 루트리스 환경에서 `containerd`를 실행하는 래퍼 스크립트
+
 ### 이미지 내보내기/가져오기 (Tar)
 - **저장**: `nerdctl save -o image.tar <image>`
 - **로드**: `nerdctl load -i image.tar`
