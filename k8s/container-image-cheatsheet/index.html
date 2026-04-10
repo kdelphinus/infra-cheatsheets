@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/003-necessary_infra_install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/container-image-cheatsheet/">
       
       
-        <link rel="prev" href="../002-k8s-air-gapped-install/">
+        <link rel="prev" href="../cheatsheet/">
       
       
-        <link rel="next" href="../004-metallb-install/">
+        <link rel="next" href="../../cloud/use_terraform_with_gcp/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>3. 기반 인프라 설치 - Infra Cheatsheets</title>
+        <title>Container 이미지 관리 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#3-폐쇄망에서-helm-harbor-envoyingress는-비권장-설치" class="md-skip">
+        <a href="#-컨테이너-이미지-관리-치트시트-nerdctl-skopeo-ctr" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3. 기반 인프라 설치
+              Container 이미지 관리
             
           </span>
         </div>
@@ -223,7 +223,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -255,7 +255,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+        <a href="../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
           
   
   
@@ -278,7 +278,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -305,7 +305,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -328,7 +328,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -355,7 +355,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -378,7 +378,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../git/cheatsheet/" class="md-tabs__link">
+        <a href="../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -398,7 +398,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -425,7 +425,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -448,7 +448,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -482,7 +482,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -512,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -593,8 +593,6 @@
                 
   
   
-    
-  
   
   
     
@@ -610,11 +608,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
@@ -635,7 +633,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -653,7 +651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -681,7 +679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -706,37 +704,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    3. 기반 인프라 설치
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -752,226 +723,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-1-helm-설치-master-1-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 1: Helm 설치 (Master-1 Only)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-2-envoy-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 2: Envoy 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 2: Envoy 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0-아키텍처-개요-standard-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 아키텍처 개요 (Standard Architecture)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-이미지-로드-및-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 이미지 로드 및 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-배포-후-상태-확인-및-네트워크-연동" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 배포 후 상태 확인 및 네트워크 연동
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-case-c-loadbalancer-수동-할당-metallb-미사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case C] LoadBalancer 수동 할당 (MetalLB 미사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-case-d-nodeport-연동-vipl4-사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case D] NodePort 연동 (VIP/L4 사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-운영-및-로그-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 운영 및 로그 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-3-harbor-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 3: Harbor 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0-local-path-provisioner-영구-저장소" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. Local Path Provisioner (영구 저장소)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-harbor-배포" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Harbor 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-containerd-연동-insecure-registry-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Containerd 연동 (Insecure Registry 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Containerd 연동 (Insecure Registry 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2-1-containerd-configtoml에-config_path-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-1. containerd config.toml에 config_path 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-2-hoststoml-생성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-2. hosts.toml 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-3-containerd-재시작-및-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-3. containerd 재시작 및 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-4-접속-테스트-및-이미지-관리" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 4: 접속 테스트 및 이미지 관리
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -984,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../004-metallb-install/" class="md-nav__link">
+      <a href="../offline-install/004-metallb-install/" class="md-nav__link">
         
   
   
@@ -1075,7 +826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../online-install/001-k8s-online-install/" class="md-nav__link">
+      <a href="../online-install/001-k8s-online-install/" class="md-nav__link">
         
   
   
@@ -1166,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -1194,7 +945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -1285,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/001-falco-install/" class="md-nav__link">
+      <a href="../security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -1313,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/002-tetragon-install/" class="md-nav__link">
+      <a href="../security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1341,7 +1092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -1432,7 +1183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -1523,7 +1274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/000-ingress-nginx-install/" class="md-nav__link">
+      <a href="../gateway-api/000-ingress-nginx-install/" class="md-nav__link">
         
   
   
@@ -1551,7 +1302,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+      <a href="../gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -1579,7 +1330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/001-envoy-install/" class="md-nav__link">
+      <a href="../gateway-api/001-envoy-install/" class="md-nav__link">
         
   
   
@@ -1607,7 +1358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
+      <a href="../gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -1635,7 +1386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -1663,7 +1414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -1691,7 +1442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/missed-containerport/" class="md-nav__link">
+      <a href="../gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -1782,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-pv-nas/" class="md-nav__link">
+      <a href="../use-pv-nas/" class="md-nav__link">
         
   
   
@@ -1818,7 +1569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cheatsheet/" class="md-nav__link">
+      <a href="../cheatsheet/" class="md-nav__link">
         
   
   
@@ -1843,10 +1594,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../container-image-cheatsheet/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container 이미지 관리
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1862,6 +1640,187 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-nerdctl-containerd용-docker-호환-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. nerdctl (containerd용 Docker 호환 CLI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. nerdctl (containerd용 Docker 호환 CLI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#기본-명령어-docker와-동일" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기본 명령어 (Docker와 동일)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-네임스페이스-관리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes 네임스페이스 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-내보내기가져오기-tar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 내보내기/가져오기 (Tar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-skopeo-이미지-및-레지스트리-조작-도구" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Skopeo (이미지 및 레지스트리 조작 도구)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Skopeo (이미지 및 레지스트리 조작 도구)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#이미지-정보-검사-inspect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 정보 검사 (Inspect)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-복사-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 복사 (Copy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-삭제" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 삭제
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ctr-containerd-기본-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. ctr (containerd 기본 CLI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. ctr (containerd 기본 CLI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#이미지-관리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-가져오기내보내기-importexport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 가져오기/내보내기 (Import/Export)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#컨테이너태스크-관리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        컨테이너/태스크 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#요약-비교" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요약 비교
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1933,7 +1892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -1961,7 +1920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2100,7 +2059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
         
   
   
@@ -2128,7 +2087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
   
@@ -2156,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
         
   
   
@@ -2184,7 +2143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -2212,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
         
   
   
@@ -2300,7 +2259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -2395,7 +2354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -2475,7 +2434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -2622,7 +2581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -2650,7 +2609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -2738,7 +2697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../db/redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -2766,7 +2725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../db/redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -2854,7 +2813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -2882,7 +2841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -2910,7 +2869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -3005,7 +2964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/cheatsheet/" class="md-nav__link">
+      <a href="../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3033,7 +2992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/convention/" class="md-nav__link">
+      <a href="../../git/convention/" class="md-nav__link">
         
   
   
@@ -3120,7 +3079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -3259,7 +3218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -3287,7 +3246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-network-subnet/" class="md-nav__link">
+      <a href="../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -3315,7 +3274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/port-check/" class="md-nav__link">
+      <a href="../../network/tip/port-check/" class="md-nav__link">
         
   
   
@@ -3410,7 +3369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3490,7 +3449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -3518,7 +3477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -3546,7 +3505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -3634,7 +3593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -3662,7 +3621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -3750,7 +3709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -3778,7 +3737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -3866,7 +3825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -3954,7 +3913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -4017,33 +3976,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#-phase-1-helm-설치-master-1-only" class="md-nav__link">
+  <a href="#1-nerdctl-containerd용-docker-호환-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 1: Helm 설치 (Master-1 Only)
+        1. nerdctl (containerd용 Docker 호환 CLI)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-2-envoy-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 2: Envoy 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 2: Envoy 설치">
+    <nav class="md-nav" aria-label="1. nerdctl (containerd용 Docker 호환 CLI)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#0-아키텍처-개요-standard-architecture" class="md-nav__link">
+  <a href="#기본-명령어-docker와-동일" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 아키텍처 개요 (Standard Architecture)
+        기본 명령어 (Docker와 동일)
       
     </span>
   </a>
@@ -4051,10 +3999,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-이미지-로드-및-설치-실행" class="md-nav__link">
+  <a href="#kubernetes-네임스페이스-관리" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 이미지 로드 및 설치 실행
+        Kubernetes 네임스페이스 관리
       
     </span>
   </a>
@@ -4062,49 +4010,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-배포-후-상태-확인-및-네트워크-연동" class="md-nav__link">
+  <a href="#이미지-내보내기가져오기-tar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 배포 후 상태 확인 및 네트워크 연동
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-case-c-loadbalancer-수동-할당-metallb-미사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case C] LoadBalancer 수동 할당 (MetalLB 미사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-case-d-nodeport-연동-vipl4-사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case D] NodePort 연동 (VIP/L4 사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-운영-및-로그-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 운영 및 로그 확인
+        이미지 내보내기/가져오기 (Tar)
       
     </span>
   </a>
@@ -4117,22 +4026,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-3-harbor-설치" class="md-nav__link">
+  <a href="#2-skopeo-이미지-및-레지스트리-조작-도구" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 3: Harbor 설치
+        2. Skopeo (이미지 및 레지스트리 조작 도구)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설치">
+    <nav class="md-nav" aria-label="2. Skopeo (이미지 및 레지스트리 조작 도구)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#0-local-path-provisioner-영구-저장소" class="md-nav__link">
+  <a href="#이미지-정보-검사-inspect" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Local Path Provisioner (영구 저장소)
+        이미지 정보 검사 (Inspect)
       
     </span>
   </a>
@@ -4140,10 +4049,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-harbor-배포" class="md-nav__link">
+  <a href="#이미지-복사-copy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Harbor 배포
+        이미지 복사 (Copy)
       
     </span>
   </a>
@@ -4151,52 +4060,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-containerd-연동-insecure-registry-설정" class="md-nav__link">
+  <a href="#이미지-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Containerd 연동 (Insecure Registry 설정)
+        이미지 삭제
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. Containerd 연동 (Insecure Registry 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2-1-containerd-configtoml에-config_path-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-1. containerd config.toml에 config_path 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-2-hoststoml-생성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-2. hosts.toml 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-3-containerd-재시작-및-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-3. containerd 재시작 및 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4206,10 +4076,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-4-접속-테스트-및-이미지-관리" class="md-nav__link">
+  <a href="#3-ctr-containerd-기본-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 4: 접속 테스트 및 이미지 관리
+        3. ctr (containerd 기본 CLI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. ctr (containerd 기본 CLI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#이미지-관리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-가져오기내보내기-importexport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 가져오기/내보내기 (Import/Export)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#컨테이너태스크-관리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        컨테이너/태스크 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#요약-비교" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요약 비교
       
     </span>
   </a>
@@ -4236,146 +4156,118 @@
   
 
 
-<h1 id="3-폐쇄망에서-helm-harbor-envoyingress는-비권장-설치">3. 폐쇄망에서 Helm, Harbor, Envoy(Ingress는 비권장) 설치</h1>
+<h1 id="-컨테이너-이미지-관리-치트시트-nerdctl-skopeo-ctr">🛠️ 컨테이너 이미지 관리 치트시트 (nerdctl, Skopeo, ctr)</h1>
+<p>Kubernetes 환경(특히 containerd 사용 시)에서 컨테이너 이미지를 관리하고 트러블슈팅하는 데 유용한 도구들의 핵심 명령어 정리입니다.</p>
+<hr />
+<h2 id="1-nerdctl-containerd용-docker-호환-cli">1. nerdctl (containerd용 Docker 호환 CLI)</h2>
+<p><code>nerdctl</code>은 <code>docker</code> 명령어와 거의 동일한 사용자 경험을 제공하면서 <code>containerd</code>를 직접 제어합니다.</p>
+<h3 id="기본-명령어-docker와-동일">기본 명령어 (Docker와 동일)</h3>
 <ul>
-<li><strong>가이드 환경</strong></li>
-<li><strong>OS</strong>: Rocky Linux 9.6</li>
-<li><strong>kubelet</strong>: v1.30.14</li>
-<li>폐쇄망용 K8s 설치 파일이 준비되어 있어야 합니다.</li>
-<li><a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing">설치 파일 위치 (Google Drive)</a></li>
+<li><strong>이미지 목록</strong>: <code>nerdctl images</code></li>
+<li><strong>이미지 풀</strong>: <code>nerdctl pull &lt;image&gt;</code></li>
+<li><strong>컨테이너 실행</strong>: <code>nerdctl run -d --name &lt;name&gt; &lt;image&gt;</code></li>
+<li><strong>컨테이너 목록</strong>: <code>nerdctl ps -a</code></li>
+<li><strong>이미지 빌드</strong>: <code>nerdctl build -t &lt;tag&gt; .</code></li>
+<li><strong>이미지 태그</strong>: <code>nerdctl tag &lt;src&gt; &lt;dest&gt;</code></li>
+<li><strong>로그 확인</strong>: <code>nerdctl logs -f &lt;container&gt;</code></li>
+</ul>
+<h3 id="kubernetes-네임스페이스-관리">Kubernetes 네임스페이스 관리</h3>
+<p>Kubernetes에서 사용하는 이미지는 <code>k8s.io</code> 네임스페이스에 저장됩니다.
+- <strong>K8s 이미지 확인</strong>: <code>nerdctl -n k8s.io images</code>
+- <strong>K8s 컨테이너 확인</strong>: <code>nerdctl -n k8s.io ps</code></p>
+<h3 id="이미지-내보내기가져오기-tar">이미지 내보내기/가져오기 (Tar)</h3>
+<ul>
+<li><strong>저장</strong>: <code>nerdctl save -o image.tar &lt;image&gt;</code></li>
+<li><strong>로드</strong>: <code>nerdctl load -i image.tar</code></li>
+<li><strong>K8s로 로드</strong>: <code>nerdctl -n k8s.io load -i image.tar</code></li>
 </ul>
 <hr />
-<h2 id="-phase-1-helm-설치-master-1-only">🚀 Phase 1: Helm 설치 (Master-1 Only)</h2>
-<p>Helm은 마스터 노드에서 명령어를 내리는 도구이므로, <strong>마스터 노드 1대</strong>에만 설치하면 됩니다.</p>
-<p><strong>[실행 위치: K8s-Master-Node-1]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 바이너리 폴더로 이동</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/binaries
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2. 압축 해제</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>helm-v3.14.0-linux-amd64.tar.gz
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 3. 실행 파일을 시스템 경로로 이동</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sudo<span class="w"> </span>mv<span class="w"> </span>linux-amd64/helm<span class="w"> </span>/usr/local/bin/helm
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># 4. 설치 확인</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>helm<span class="w"> </span>version
+<h2 id="2-skopeo-이미지-및-레지스트리-조작-도구">2. Skopeo (이미지 및 레지스트리 조작 도구)</h2>
+<p><code>Skopeo</code>는 컨테이너 엔진(Docker, containerd) 없이도 원격 레지스트리의 이미지를 검사하거나 복사할 수 있는 강력한 도구입니다.</p>
+<h3 id="이미지-정보-검사-inspect">이미지 정보 검사 (Inspect)</h3>
+<p>원격 레지스트리의 이미지를 다운로드하지 않고 메타데이터만 확인합니다.
+- <strong>기본</strong>: <code>skopeo inspect docker://&lt;registry&gt;/&lt;image&gt;:&lt;tag&gt;</code>
+- <strong>인증 필요 시</strong>: <code>skopeo inspect --creds &lt;user&gt;:&lt;pass&gt; docker://...</code>
+- <strong>TLS 무시</strong>: <code>skopeo inspect --tls-verify=false docker://...</code></p>
+<h3 id="이미지-복사-copy">이미지 복사 (Copy)</h3>
+<p>레지스트리 간 이미지를 복사하거나, 레지스트리 이미지를 로컬 디렉토리/tar로 저장합니다.
+- <strong>레지스트리 ↔ 레지스트리</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>skopeo<span class="w"> </span>copy<span class="w"> </span>docker://source.com/img:v1<span class="w"> </span>docker://dest.com/img:v1
 </code></pre></div>
-<hr />
-<h2 id="-phase-2-envoy-설치">🚀 Phase 2: Envoy 설치</h2>
-<p>2026년 3월부터 <code>Ingress Nginx</code>에 대한 공식 지원이 종료됨에 따라, Kubernetes 표준인 <strong>Gateway API</strong>와 <strong>Envoy</strong> 사용을 강력히 권장합니다.</p>
-<h3 id="0-아키텍처-개요-standard-architecture">0. 아키텍처 개요 (Standard Architecture)</h3>
+- <strong>레지스트리 → 로컬 Tar (docker-archive)</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>skopeo<span class="w"> </span>copy<span class="w"> </span>docker://registry.com/img:v1<span class="w"> </span>docker-archive:img-v1.tar:img:v1
+</code></pre></div>
+- <strong>로컬 Tar → 레지스트리</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>skopeo<span class="w"> </span>copy<span class="w"> </span>docker-archive:img-v1.tar:img:v1<span class="w"> </span>docker://registry.com/img:v1
+</code></pre></div></p>
+<h3 id="이미지-삭제">이미지 삭제</h3>
 <ul>
-<li><strong>Network Mode</strong>: <code>hostNetwork: false</code> (K8s 내부망 사용, 노드망과 격리)</li>
-<li><strong>Service Type</strong>: <code>LoadBalancer</code> 또는 <code>NodePort</code></li>
-<li><strong>Traffic Flow</strong>:
-  <code>Client</code> → <code>LB/VIP (80/443)</code> → <code>Envoy Pod (30080/30443)</code> → <code>Backend Pod</code></li>
+<li><strong>원격 이미지 삭제</strong>: <code>skopeo delete docker://&lt;registry&gt;/&lt;image&gt;:&lt;tag&gt;</code></li>
 </ul>
-<h3 id="1-이미지-로드-및-설치-실행">1. 이미지 로드 및 설치 실행</h3>
-<p><strong>[전체 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>./envoy-1.36.3
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>./images/upload_images.sh
-</code></pre></div>
-<p><strong>[Master-1 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>install_envoy-gateway.sh
-</code></pre></div>
-<p><strong>설치 시 주요 선택 사항:</strong></p>
-<ul>
-<li><strong>LB vs NodePort</strong>: 환경에 맞는 진입점 선택.</li>
-<li><strong>노드 고정</strong>: 성능 최적화를 위해 특정 노드에 Envoy Proxy 배치 가능.</li>
-<li><strong>전역 정책</strong>: <code>policy-global.yaml</code> 적용 시 헤더 보안 및 트래픽 정책이 자동 반영됩니다.</li>
-</ul>
-<h3 id="2-배포-후-상태-확인-및-네트워크-연동">2. 배포 후 상태 확인 및 네트워크 연동</h3>
-<h4 id="-case-c-loadbalancer-수동-할당-metallb-미사용-시">🛠️ [Case C] LoadBalancer 수동 할당 (MetalLB 미사용 시)</h4>
-<p>서비스가 <code>&lt;pending&gt;</code> 상태인 경우 워커 노드 IP를 수동으로 바인딩합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type==&quot;LoadBalancer&quot;)].metadata.name}&#39;</span><span class="k">)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 워커 노드 IP들로 패치</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;10.10.10.73&quot;,&quot;10.10.10.74&quot;]}}&#39;</span>
-</code></pre></div>
-<h4 id="-case-d-nodeport-연동-vipl4-사용-시">🛠️ [Case D] NodePort 연동 (VIP/L4 사용 시)</h4>
-<p>NodePort 설치 시 HTTP <strong>30080</strong>, HTTPS <strong>30443</strong> 포트가 고정 사용됩니다.</p>
-<ul>
-<li><strong>하드웨어 L4</strong>: 워커 노드 IP와 포트(30080, 30443)를 Real Server로 등록.</li>
-<li><strong>소프트웨어 LB (HAProxy)</strong>: 80/443 포트 트래픽을 워커 노드 포트로 중계.</li>
-<li><strong>운영 팁</strong>: <code>externalTrafficPolicy: Local</code> 설정을 통해 클라이언트 원본 IP를 보존할 수 있습니다.</li>
-</ul>
-<h3 id="3-운영-및-로그-확인">3. 운영 및 로그 확인</h3>
-<p>Envoy Gateway는 동적 관리를 위해 파드 이름이 계속 변경되므로 <strong>Label Selector(<code>-l</code>)</strong> 사용이 필수입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Envoy Proxy(트래픽 처리) 로그 확인</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cmp-gateway
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Gateway Controller(설치/배포) 로그 확인</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway
-</code></pre></div>
 <hr />
-<h2 id="-phase-3-harbor-설치">🚀 Phase 3: Harbor 설치</h2>
-<h3 id="0-local-path-provisioner-영구-저장소">0. Local Path Provisioner (영구 저장소)</h3>
-<p><strong>[Master-1 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/utils
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>local-path-storage.yaml
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 기본 스토리지 클래스로 지정 (Harbor 자동 할당용)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>storageclass<span class="w"> </span>local-path<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
+<h2 id="3-ctr-containerd-기본-cli">3. ctr (containerd 기본 CLI)</h2>
+<p><code>ctr</code>은 <code>containerd</code> 패키지에 포함된 저수준 도구로, 별도의 설치 없이 바로 사용할 수 있지만 사용법이 다소 복잡합니다.</p>
+<h3 id="이미지-관리">이미지 관리</h3>
+<ul>
+<li><strong>이미지 목록</strong>: <code>ctr images list</code></li>
+<li><strong>K8s 이미지 목록</strong>: <code>ctr -n k8s.io images list</code></li>
+<li><strong>이미지 풀</strong>: <code>ctr images pull &lt;image&gt;</code></li>
+<li><strong>이미지 태그</strong>: <code>ctr images tag &lt;src&gt; &lt;dest&gt;</code></li>
+<li><strong>이미지 삭제</strong>: <code>ctr images rm &lt;image&gt;</code></li>
+</ul>
+<h3 id="이미지-가져오기내보내기-importexport">이미지 가져오기/내보내기 (Import/Export)</h3>
+<p><code>save/load</code> 대신 <code>export/import</code> 명령어를 사용합니다.
+- <strong>가져오기 (Import)</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># K8s 네임스페이스로 이미지 로드 (가장 많이 사용)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>&lt;image&gt;.tar
 </code></pre></div>
-<h3 id="1-harbor-배포">1. Harbor 배포</h3>
-<p><strong>[Harbor를 배치할 특정 워커 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>harbor-images-upload/
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>upload_images.sh
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/harbor<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/harbor
-</code></pre></div>
-<p><strong>[Master-1 노드]</strong>
-<code>harbor_install_offline.sh</code>에서 <code>EXTERNAL_HOSTNAME</code>, <code>SAVE_PATH</code>, <code>NODE_NAME</code> 등을 수정 후 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>harbor_install_offline.sh
-</code></pre></div>
-<h3 id="2-containerd-연동-insecure-registry-설정">2. Containerd 연동 (Insecure Registry 설정)</h3>
-<p>HTTP 통신이나 사설 인증서 사용 시 <strong>모든 K8s 노드(Master + Worker)</strong>에서 아래 설정이 필요합니다.</p>
-<h4 id="2-1-containerd-configtoml에-config_path-설정">2-1. containerd config.toml에 config_path 설정</h4>
-<p><code>/etc/containerd/config.toml</code>에 <code>certs.d</code> 경로를 지정해야 합니다. <strong>containerd v2.x에서 CRI 플러그인 키가 변경</strong>되었으므로, 버전에 맞는 섹션에 설정해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 버전 확인</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>containerd<span class="w"> </span>--version
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 현재 사용 중인 플러그인 키 확인</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>grep<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;io.containerd&#39;</span><span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;cri\|registry&#39;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># containerd v1.x</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">[plugins.</span><span class="s2">&quot;io.containerd.grpc.v1.cri&quot;</span><span class="k">.registry]</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="n">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d&quot;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># containerd v2.x (플러그인 키 변경됨)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">[plugins.</span><span class="s2">&quot;io.containerd.cri.v1.images&quot;</span><span class="k">.registry]</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="n">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d&quot;</span>
-</code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">v1.x 키에 설정하면 v2.x에서 무시됨</p>
-<p>v1.x 키(<code>grpc.v1.cri</code>)로 <code>config_path</code>를 설정했는데 실제 containerd가 v2.x라면, 설정이 <strong>무시</strong>되어 insecure registry가 동작하지 않습니다. 반드시 <code>containerd --version</code>으로 버전을 확인하세요.</p>
-</div>
-<h4 id="2-2-hoststoml-생성">2-2. hosts.toml 생성</h4>
-<p>Harbor 도메인/IP에 대한 인증 설정을 생성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># (예: 10.10.10.73:30002)</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/&lt;HARBOR_IP&gt;:30002/
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/containerd/certs.d/&lt;HARBOR_IP&gt;:30002/hosts.toml</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="s">server = &quot;http://&lt;HARBOR_IP&gt;:30002&quot;</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="s">[host.&quot;http://&lt;HARBOR_IP&gt;:30002&quot;]</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;]</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="s">  skip_verify = true</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="s">EOF</span>
-</code></pre></div>
-<h4 id="2-3-containerd-재시작-및-확인">2-3. containerd 재시작 및 확인</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># 설정 확인</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>grep<span class="w"> </span><span class="s2">&quot;config_path&quot;</span><span class="w"> </span>/etc/containerd/config.toml
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>cat<span class="w"> </span>/etc/containerd/certs.d/&lt;HARBOR_IP&gt;:30002/hosts.toml
-</code></pre></div>
+- <strong>내보내기 (Export)</strong>:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>images<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&lt;image&gt;.tar<span class="w"> </span>&lt;image_name&gt;
+</code></pre></div></p>
+<h3 id="컨테이너태스크-관리">컨테이너/태스크 관리</h3>
+<ul>
+<li><strong>컨테이너 목록</strong>: <code>ctr containers list</code></li>
+<li><strong>실행 중인 태스크</strong>: <code>ctr tasks list</code></li>
+<li><strong>컨테이너 강제 종료</strong>: <code>ctr tasks kill &lt;container_id&gt;</code></li>
+</ul>
 <hr />
-<h2 id="-phase-4-접속-테스트-및-이미지-관리">🚀 Phase 4: 접속 테스트 및 이미지 관리</h2>
-<ol>
-<li><strong>PC 설정</strong>: <code>/etc/hosts</code> 파일에 Harbor 도메인과 할당된 IP를 등록합니다.</li>
-<li><strong>이미지 푸시</strong>: <code>sudo ctr -n k8s.io images push --plain-http ...</code> 명령어로 Harbor에 등록합니다.</li>
-<li><strong>이미지 풀</strong>: 워커 노드에서 정상적으로 이미지가 내려받아지는지 확인합니다.</li>
-</ol>
+<h2 id="요약-비교">요약 비교</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">기능</th>
+<th style="text-align: left;">nerdctl</th>
+<th style="text-align: left;">Skopeo</th>
+<th style="text-align: left;">ctr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>주요 목적</strong></td>
+<td style="text-align: left;">Docker 대체, 친화적 UX</td>
+<td style="text-align: left;">레지스트리 간 복사, 검사</td>
+<td style="text-align: left;">저수준 디버깅, 기본 탑재</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>K8s 연동</strong></td>
+<td style="text-align: left;"><code>-n k8s.io</code> 사용</td>
+<td style="text-align: left;">관련 없음 (레지스트리 중심)</td>
+<td style="text-align: left;"><code>-n k8s.io</code> 사용</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>이미지 빌드</strong></td>
+<td style="text-align: left;">지원 (Buildkit 연동)</td>
+<td style="text-align: left;">미지원</td>
+<td style="text-align: left;">미지원</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>로컬 Tar 로드</strong></td>
+<td style="text-align: left;"><code>load</code></td>
+<td style="text-align: left;"><code>copy</code> (docker-archive)</td>
+<td style="text-align: left;"><code>import</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -4425,10 +4317,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
