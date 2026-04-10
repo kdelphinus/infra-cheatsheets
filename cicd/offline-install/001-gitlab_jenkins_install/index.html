@@ -4103,6 +4103,9 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
+<blockquote>
+<p><strong>참고:</strong> 스크립트 실행 시 Harbor 레지스트리 주소에 포트 번호가 누락되었을 경우, 자동으로 <code>:30002</code> 포트 추가 여부를 묻는 확인 프롬프트가 표시됩니다.</p>
+</blockquote>
 <hr />
 <h2 id="3단계-운영-설정-valuesyaml-및-pv">3단계: 운영 설정 (values.yaml 및 PV)</h2>
 <p>설치 전 컴포넌트 루트의 설정 파일들을 환경에 맞게 수정합니다.</p>
@@ -4153,7 +4156,8 @@
 <p><strong>스크립트 주요 기능:</strong></p>
 <ul>
 <li>네임스페이스 (<code>gitlab</code>, <code>jenkins</code>) 생성 및 PV/PVC 적용</li>
-<li>노드 고정 (NodeSelector) 처리</li>
+<li>노드 고정 (NodeSelector) 처리 (노드 미지정 시 자동 배포 지원)</li>
+<li>기존 자원 감지 시 삭제 여부 선택 프롬프트 제공</li>
 <li>Helm 배포 (Harbor 이미지 경로 자동 반영)</li>
 <li>초기 관리자 비밀번호 자동 출력</li>
 </ul>
@@ -4183,6 +4187,7 @@
 <li><strong>GitLab Access Token 생성</strong>: Jenkins가 GitLab API에 접근할 수 있도록 Personal Access Token을 발급합니다.</li>
 <li><strong>Jenkins GitLab Plugin 설정</strong>: Jenkins 관리 &gt; 시스템 설정에서 GitLab 서버 정보를 등록합니다.</li>
 <li><strong>WebHook 설정</strong>: GitLab 프로젝트 설정 &gt; Webhooks에서 Jenkins 빌드 트리거 URL을 등록합니다.</li>
+<li><strong>OpenTofu IaC 파이프라인</strong>: <code>jenkins-2.528.3</code> 디렉토리에 제공된 <code>Jenkinsfile-opentofu</code> 템플릿을 기반으로 OpenTofu IaC 파이프라인을 구축할 수 있습니다.</li>
 </ol>
 <hr />
 <h2 id="-삭제-uninstall">🗑️ 삭제 (Uninstall)</h2>
