@@ -1901,6 +1901,89 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#4-crictl-cri-표준-디버깅-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. crictl (CRI 표준 디버깅 CLI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. crictl (CRI 표준 디버깅 CLI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#초기-설정-containerd-소켓-지정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        초기 설정 (containerd 소켓 지정)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-관리_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod-및-컨테이너-조회" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pod 및 컨테이너 조회
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#로그-및-exec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        로그 및 exec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#리소스-사용량" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        리소스 사용량
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctr-vs-crictl-차이점" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ctr vs crictl 차이점
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#요약-비교" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4314,6 +4397,89 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#4-crictl-cri-표준-디버깅-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. crictl (CRI 표준 디버깅 CLI)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. crictl (CRI 표준 디버깅 CLI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#초기-설정-containerd-소켓-지정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        초기 설정 (containerd 소켓 지정)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#이미지-관리_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이미지 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod-및-컨테이너-조회" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pod 및 컨테이너 조회
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#로그-및-exec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        로그 및 exec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#리소스-사용량" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        리소스 사용량
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctr-vs-crictl-차이점" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ctr vs crictl 차이점
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#요약-비교" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4612,6 +4778,110 @@
 <a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>tasks<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>&lt;container_id&gt;
 </code></pre></div>
 <hr />
+<h2 id="4-crictl-cri-표준-디버깅-cli">4. crictl (CRI 표준 디버깅 CLI)</h2>
+<p><code>crictl</code>은 <code>cri-tools</code> 패키지에 포함된 CRI(Container Runtime Interface) 전용 CLI입니다.
+kubeadm 설치 시 의존성으로 자동 설치되므로 <strong>별도 설치가 필요 없습니다.</strong></p>
+<p><code>ctr</code>과 달리 <strong>kubelet 관점</strong>에서 Pod·컨테이너를 조회하므로, 실행 중인 파드를 직접 확인하거나
+kubelet이 인식하는 상태를 점검할 때 적합합니다.</p>
+<h3 id="초기-설정-containerd-소켓-지정">초기 설정 (containerd 소켓 지정)</h3>
+<p>설정 없이 실행하면 여러 소켓을 순서대로 탐색합니다. containerd 환경에서 명시적으로 고정하려면 아래와 같이 설정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 설정 파일로 고정 (권장)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/crictl.yaml<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="s">runtime-endpoint: unix:///run/containerd/containerd.sock</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="s">image-endpoint: unix:///run/containerd/containerd.sock</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="s">timeout: 10</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="s">debug: false</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="s">EOF</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># 또는 명령어마다 직접 지정</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>crictl<span class="w"> </span>--runtime-endpoint<span class="w"> </span>unix:///run/containerd/containerd.sock<span class="w"> </span>images
+</code></pre></div>
+<h3 id="이미지-관리_1">이미지 관리</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 이미지 목록</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>images
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># 이미지명 필터링</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>kube-apiserver
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># 이미지 pull</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>pull<span class="w"> </span><span class="m">192</span>.168.1.10:30002/library/myapp:v1.0
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1"># 이미지 삭제</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>rmi<span class="w"> </span><span class="m">192</span>.168.1.10:30002/library/myapp:v1.0
+</code></pre></div>
+<h3 id="pod-및-컨테이너-조회">Pod 및 컨테이너 조회</h3>
+<p><code>crictl</code>의 핵심 기능입니다. <code>kubectl</code>이 접근 불가한 상황에서도 노드의 Pod 상태를 직접 확인할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># 실행 중인 Pod 목록</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>pods
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># 전체 Pod (종료 포함)</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--state<span class="w"> </span>all
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1"># 특정 네임스페이스 Pod 필터링</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="c1"># 특정 Pod 상세 정보</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>inspectp<span class="w"> </span>&lt;pod_id&gt;
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="c1"># 실행 중인 컨테이너 목록</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>ps
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="c1"># 전체 컨테이너 (종료 포함)</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>ps<span class="w"> </span>-a
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="c1"># 특정 컨테이너 상세 정보</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>inspect<span class="w"> </span>&lt;container_id&gt;
+</code></pre></div>
+<h3 id="로그-및-exec">로그 및 exec</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># 컨테이너 로그 확인</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>logs<span class="w"> </span>&lt;container_id&gt;
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># 실시간 로그 스트림</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>&lt;container_id&gt;
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># 컨테이너 내부 명령 실행</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>sudo<span class="w"> </span>crictl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>/bin/sh
+</code></pre></div>
+<h3 id="리소스-사용량">리소스 사용량</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># 컨테이너 CPU/메모리 사용량</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>stats
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># 특정 컨테이너만 확인</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>stats<span class="w"> </span>&lt;container_id&gt;
+</code></pre></div>
+<h3 id="ctr-vs-crictl-차이점">ctr vs crictl 차이점</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">구분</th>
+<th style="text-align: left;">ctr</th>
+<th style="text-align: left;">crictl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>포함 패키지</strong></td>
+<td style="text-align: left;">containerd</td>
+<td style="text-align: left;">cri-tools (kubeadm 의존성)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>관점</strong></td>
+<td style="text-align: left;">containerd 내부 (네임스페이스 직접 지정)</td>
+<td style="text-align: left;">kubelet/CRI 표준 (Pod 단위)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pod 조회</strong></td>
+<td style="text-align: left;">불가</td>
+<td style="text-align: left;"><code>crictl pods</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>주 용도</strong></td>
+<td style="text-align: left;">이미지 import/export, 저수준 디버깅</td>
+<td style="text-align: left;">Pod·컨테이너 상태 점검, exec, 로그</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="요약-비교">요약 비교</h2>
 <table>
 <thead>
@@ -4620,6 +4890,7 @@
 <th style="text-align: left;">nerdctl</th>
 <th style="text-align: left;">Skopeo</th>
 <th style="text-align: left;">ctr</th>
+<th style="text-align: left;">crictl</th>
 </tr>
 </thead>
 <tbody>
@@ -4628,16 +4899,26 @@
 <td style="text-align: left;">Docker 대체, 친화적 UX</td>
 <td style="text-align: left;">레지스트리 간 복사·검사</td>
 <td style="text-align: left;">저수준 디버깅, 기본 탑재</td>
+<td style="text-align: left;">Pod·컨테이너 상태 점검</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>별도 설치</strong></td>
+<td style="text-align: left;">필요</td>
+<td style="text-align: left;">필요</td>
+<td style="text-align: left;">불필요 (containerd 포함)</td>
+<td style="text-align: left;">불필요 (kubeadm 의존성)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>K8s 연동</strong></td>
 <td style="text-align: left;"><code>-n k8s.io</code></td>
 <td style="text-align: left;">관련 없음 (레지스트리 중심)</td>
 <td style="text-align: left;"><code>-n k8s.io</code></td>
+<td style="text-align: left;">Pod 단위 조회 지원</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>이미지 빌드</strong></td>
 <td style="text-align: left;">지원 (Buildkit 연동)</td>
+<td style="text-align: left;">미지원</td>
 <td style="text-align: left;">미지원</td>
 <td style="text-align: left;">미지원</td>
 </tr>
@@ -4646,11 +4927,13 @@
 <td style="text-align: left;"><code>load</code></td>
 <td style="text-align: left;"><code>copy docker-archive:</code></td>
 <td style="text-align: left;"><code>import</code></td>
+<td style="text-align: left;">미지원</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>태그 목록 조회</strong></td>
 <td style="text-align: left;">미지원</td>
 <td style="text-align: left;"><code>list-tags</code></td>
+<td style="text-align: left;">미지원</td>
 <td style="text-align: left;">미지원</td>
 </tr>
 <tr>
@@ -4658,18 +4941,35 @@
 <td style="text-align: left;"><code>login</code> 또는 <code>--insecure-registry</code></td>
 <td style="text-align: left;"><code>--creds user:pass</code></td>
 <td style="text-align: left;"><code>--user user:pass</code></td>
+<td style="text-align: left;">pull 시 인증 미지원</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>insecure 레지스트리</strong></td>
 <td style="text-align: left;"><code>--insecure-registry</code></td>
 <td style="text-align: left;"><code>--tls-verify=false</code></td>
 <td style="text-align: left;"><code>--plain-http</code></td>
+<td style="text-align: left;"><code>/etc/crictl.yaml</code> 설정</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>멀티 아키텍처</strong></td>
 <td style="text-align: left;">제한적</td>
 <td style="text-align: left;"><code>--multi-arch all</code></td>
 <td style="text-align: left;"><code>--platform</code></td>
+<td style="text-align: left;">미지원</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pod 조회</strong></td>
+<td style="text-align: left;">미지원</td>
+<td style="text-align: left;">미지원</td>
+<td style="text-align: left;">미지원</td>
+<td style="text-align: left;"><code>crictl pods</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>exec / 로그</strong></td>
+<td style="text-align: left;">지원</td>
+<td style="text-align: left;">미지원</td>
+<td style="text-align: left;">미지원</td>
+<td style="text-align: left;"><code>exec</code>, <code>logs</code></td>
 </tr>
 </tbody>
 </table>
