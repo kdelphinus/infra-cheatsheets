@@ -47,6 +47,8 @@ chmod +x scripts/setup-host-dirs.sh
 ./images/upload_images_to_harbor_v3-lite.sh
 ```
 
+> **참고:** 스크립트 실행 시 Harbor 레지스트리 주소에 포트 번호가 누락되었을 경우, 자동으로 `:30002` 포트 추가 여부를 묻는 확인 프롬프트가 표시됩니다.
+
 ---
 
 ## 3단계: 운영 설정 (values.yaml 및 PV)
@@ -81,7 +83,8 @@ chmod +x scripts/install.sh
 **스크립트 주요 기능:**
 
 - 네임스페이스 (`gitlab`, `jenkins`) 생성 및 PV/PVC 적용
-- 노드 고정 (NodeSelector) 처리
+- 노드 고정 (NodeSelector) 처리 (노드 미지정 시 자동 배포 지원)
+- 기존 자원 감지 시 삭제 여부 선택 프롬프트 제공
 - Helm 배포 (Harbor 이미지 경로 자동 반영)
 - 초기 관리자 비밀번호 자동 출력
 
@@ -118,6 +121,7 @@ chmod +x scripts/install.sh
 1. **GitLab Access Token 생성**: Jenkins가 GitLab API에 접근할 수 있도록 Personal Access Token을 발급합니다.
 2. **Jenkins GitLab Plugin 설정**: Jenkins 관리 > 시스템 설정에서 GitLab 서버 정보를 등록합니다.
 3. **WebHook 설정**: GitLab 프로젝트 설정 > Webhooks에서 Jenkins 빌드 트리거 URL을 등록합니다.
+4. **OpenTofu IaC 파이프라인**: `jenkins-2.528.3` 디렉토리에 제공된 `Jenkinsfile-opentofu` 템플릿을 기반으로 OpenTofu IaC 파이프라인을 구축할 수 있습니다.
 
 ---
 

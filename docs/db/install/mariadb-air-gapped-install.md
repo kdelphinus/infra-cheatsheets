@@ -125,5 +125,6 @@ mariabackup 기반 백업 설정은 `backup/README.md` 를 참조하세요.
 
 ## 참고 문서
 
+- [Galera Cluster 구성 가이드](../ha/galera-cluster.md) — Galera Cluster 3중화 구성 절차 및 가이드
 - [Galera Cluster 장애 복구 가이드](../ha/galera-recovery.md) — 전체 클러스터 다운 시 복구 절차
 - [MariaDB 트러블슈팅 가이드](./mariadb-troubleshooting.md) — Systemd/SELinux/HA 구성 관련 주요 이슈 해결

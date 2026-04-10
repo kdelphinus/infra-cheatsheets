@@ -286,3 +286,61 @@ Z
 
 * [Galera Cluster 장애 복구 가이드](./galera-recovery.md)
 * [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)
+
+-----
+
+## 부록: RHEL 9 트러블슈팅
+
+커스텀 경로(`/app/mariadb_data`) 사용 시 RHEL 9 보안 정책으로 인해 발생할 수 있는 이슈입니다.
+
+### A-1. Systemd 보안 정책 충돌 (Read-only file system)
+
+**증상:** `galera_new_cluster` 실행 시 `Errcode: 30 "Read-only file system"` 발생
+
+**원인:** RHEL 9의 `ProtectSystem=full` 정책이 시스템 경로에 대한 쓰기를 차단
+
+**해결:**
+
+```bash
+# Override 디렉토리 생성 및 설정 작성
+sudo mkdir -p /etc/systemd/system/mariadb.service.d
+
+sudo tee /etc/systemd/system/mariadb.service.d/override.conf <<'EOF'
+[Service]
+ProtectSystem=off
+ProtectHome=off
+PrivateTmp=false
+ReadWritePaths=/app/mariadb_data
+EOF
+
+# 설정 반영
+sudo systemctl daemon-reload
+sudo systemctl restart mariadb
+```
+
+### A-2. SELinux 권한 차단
+
+**증상:** 파일 시스템 권한이 올바름에도 Permission Denied 발생 또는 서비스 시작 실패
+
+**원인:** 커스텀 경로에 `mysqld_db_t` 보안 컨텍스트가 없음
+
+**해결:**
+
+```bash
+# MariaDB 데이터 컨텍스트 부여
+sudo semanage fcontext -a -t mysqld_db_t "/app/mariadb_data(/.*)?"
+
+# 실제 파일 시스템에 적용
+sudo restorecon -R -v /app/mariadb_data
+
+# 정책 확인
+ls -Zd /app/mariadb_data
+```
+
+### A-3. HA(VIP) 구성 시 주의사항 (데이터 파손 방지)
+
+Keepalived 등으로 VIP를 구성할 때 주의할 점입니다.
+
+- **Shared-Nothing 원칙 준수:** Galera Cluster는 각 노드가 독립적인 스토리지를 가져야 합니다. 동일한 SAN/iSCSI 디스크를 여러 노드에 동시 마운트하면 파일 시스템 메타데이터가 파손되어 OS가 디스크를 `Read-only`로 잠급니다.
+- **해결책:** 반드시 노드별 로컬 디스크 또는 독립적인 볼륨을 사용하세요. 클러스터 파일 시스템(GFS2 등)은 Galera 환경에서 권장되지 않습니다.
+- **Failover 점검:** VIP 할당 직후 DB가 멈춘다면, HA 솔루션이 노드를 격리(Fencing)하고 있지 않은지 확인하세요.
