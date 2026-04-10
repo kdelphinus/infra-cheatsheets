@@ -82,6 +82,7 @@ nav:
     - Storage:
       - 'NFS Provisioner 설치': k8s/use-pv-nas.md
     - 'Cheat Sheets': k8s/cheatsheet.md
+    - 'Container 이미지 관리': k8s/container-image-cheatsheet.md
   - Cloud:
     - 'Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기': cloud/use_terraform_with_gcp.md
     - 'Google Cloud SDK Cheat Sheet': cloud/gcp-cheatsheet.md
