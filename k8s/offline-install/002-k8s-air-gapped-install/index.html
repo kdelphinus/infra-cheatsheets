@@ -1015,6 +1015,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Phase 8-1: nerdctl 설치 (선택, 전체 노드)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rootless-모드-스크립트-안내" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rootless 모드 스크립트 안내
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4678,6 +4695,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Phase 8-1: nerdctl 설치 (선택, 전체 노드)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rootless-모드-스크립트-안내" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rootless 모드 스크립트 안내
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -5482,8 +5516,19 @@ Master-2, 3에도 HAProxy가 VIP:6443을 점유하고 있으므로 조인 전에
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>sudo<span class="w"> </span>mv<span class="w"> </span>nerdctl<span class="w"> </span>/usr/local/bin/nerdctl
 <a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/nerdctl
 <a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>nerdctl<span class="w"> </span>--version
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="c1"># (선택) Rootless 모드용 스크립트 배포</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c1"># sudo 없이 컨테이너를 실행해야 하는 환경에서 사용합니다.</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>sudo<span class="w"> </span>mv<span class="w"> </span>containerd-rootless*<span class="w"> </span>/usr/local/bin/
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/containerd-rootless*
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>nerdctl<span class="w"> </span>--version
 </code></pre></div>
+<h3 id="rootless-모드-스크립트-안내">Rootless 모드 스크립트 안내</h3>
+<p><code>nerdctl</code> 패키지에 포함된 아래 스크립트들은 <code>root</code> 권한 없이 컨테이너를 실행하는 <strong>Rootless 모드</strong> 설정을 돕습니다.</p>
+<ul>
+<li><strong><code>containerd-rootless-setuptool.sh</code></strong>: Rootless 환경을 구성하는 도구입니다. 필수 패키지 체크 및 <code>systemd</code> 유저 서비스를 등록합니다. (예: <code>install</code>, <code>check</code> 커맨드)</li>
+<li><strong><code>containerd-rootless.sh</code></strong>: 실제로 <code>containerd</code>를 루트리스 환경에서 실행하는 래퍼(Wrapper) 스크립트입니다. 네임스페이스 분리와 경로 매핑을 담당합니다.</li>
+</ul>
 <p>주요 사용 예시:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># containerd k8s.io 네임스페이스 이미지 목록 확인</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>nerdctl<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images
