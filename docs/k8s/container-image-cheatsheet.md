@@ -290,15 +290,120 @@ sudo ctr -n k8s.io tasks kill <container_id>
 
 ---
 
+## 4. crictl (CRI 표준 디버깅 CLI)
+
+`crictl`은 `cri-tools` 패키지에 포함된 CRI(Container Runtime Interface) 전용 CLI입니다.
+kubeadm 설치 시 의존성으로 자동 설치되므로 **별도 설치가 필요 없습니다.**
+
+`ctr`과 달리 **kubelet 관점**에서 Pod·컨테이너를 조회하므로, 실행 중인 파드를 직접 확인하거나
+kubelet이 인식하는 상태를 점검할 때 적합합니다.
+
+### 초기 설정 (containerd 소켓 지정)
+
+설정 없이 실행하면 여러 소켓을 순서대로 탐색합니다. containerd 환경에서 명시적으로 고정하려면 아래와 같이 설정합니다.
+
+```bash
+# 설정 파일로 고정 (권장)
+sudo tee /etc/crictl.yaml <<EOF
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 10
+debug: false
+EOF
+
+# 또는 명령어마다 직접 지정
+crictl --runtime-endpoint unix:///run/containerd/containerd.sock images
+```
+
+### 이미지 관리
+
+```bash
+# 이미지 목록
+sudo crictl images
+
+# 이미지명 필터링
+sudo crictl images | grep kube-apiserver
+
+# 이미지 pull
+sudo crictl pull 192.168.1.10:30002/library/myapp:v1.0
+
+# 이미지 삭제
+sudo crictl rmi 192.168.1.10:30002/library/myapp:v1.0
+```
+
+### Pod 및 컨테이너 조회
+
+`crictl`의 핵심 기능입니다. `kubectl`이 접근 불가한 상황에서도 노드의 Pod 상태를 직접 확인할 수 있습니다.
+
+```bash
+# 실행 중인 Pod 목록
+sudo crictl pods
+
+# 전체 Pod (종료 포함)
+sudo crictl pods --state all
+
+# 특정 네임스페이스 Pod 필터링
+sudo crictl pods --namespace kube-system
+
+# 특정 Pod 상세 정보
+sudo crictl inspectp <pod_id>
+
+# 실행 중인 컨테이너 목록
+sudo crictl ps
+
+# 전체 컨테이너 (종료 포함)
+sudo crictl ps -a
+
+# 특정 컨테이너 상세 정보
+sudo crictl inspect <container_id>
+```
+
+### 로그 및 exec
+
+```bash
+# 컨테이너 로그 확인
+sudo crictl logs <container_id>
+
+# 실시간 로그 스트림
+sudo crictl logs -f <container_id>
+
+# 컨테이너 내부 명령 실행
+sudo crictl exec -it <container_id> /bin/sh
+```
+
+### 리소스 사용량
+
+```bash
+# 컨테이너 CPU/메모리 사용량
+sudo crictl stats
+
+# 특정 컨테이너만 확인
+sudo crictl stats <container_id>
+```
+
+### ctr vs crictl 차이점
+
+| 구분 | ctr | crictl |
+| :--- | :--- | :--- |
+| **포함 패키지** | containerd | cri-tools (kubeadm 의존성) |
+| **관점** | containerd 내부 (네임스페이스 직접 지정) | kubelet/CRI 표준 (Pod 단위) |
+| **Pod 조회** | 불가 | `crictl pods` |
+| **주 용도** | 이미지 import/export, 저수준 디버깅 | Pod·컨테이너 상태 점검, exec, 로그 |
+
+---
+
 ## 요약 비교
 
-| 기능 | nerdctl | Skopeo | ctr |
-| :--- | :--- | :--- | :--- |
-| **주요 목적** | Docker 대체, 친화적 UX | 레지스트리 간 복사·검사 | 저수준 디버깅, 기본 탑재 |
-| **K8s 연동** | `-n k8s.io` | 관련 없음 (레지스트리 중심) | `-n k8s.io` |
-| **이미지 빌드** | 지원 (Buildkit 연동) | 미지원 | 미지원 |
-| **로컬 Tar 로드** | `load` | `copy docker-archive:` | `import` |
-| **태그 목록 조회** | 미지원 | `list-tags` | 미지원 |
-| **인증(creds) 옵션** | `login` 또는 `--insecure-registry` | `--creds user:pass` | `--user user:pass` |
-| **insecure 레지스트리** | `--insecure-registry` | `--tls-verify=false` | `--plain-http` |
-| **멀티 아키텍처** | 제한적 | `--multi-arch all` | `--platform` |
+| 기능 | nerdctl | Skopeo | ctr | crictl |
+| :--- | :--- | :--- | :--- | :--- |
+| **주요 목적** | Docker 대체, 친화적 UX | 레지스트리 간 복사·검사 | 저수준 디버깅, 기본 탑재 | Pod·컨테이너 상태 점검 |
+| **별도 설치** | 필요 | 필요 | 불필요 (containerd 포함) | 불필요 (kubeadm 의존성) |
+| **K8s 연동** | `-n k8s.io` | 관련 없음 (레지스트리 중심) | `-n k8s.io` | Pod 단위 조회 지원 |
+| **이미지 빌드** | 지원 (Buildkit 연동) | 미지원 | 미지원 | 미지원 |
+| **로컬 Tar 로드** | `load` | `copy docker-archive:` | `import` | 미지원 |
+| **태그 목록 조회** | 미지원 | `list-tags` | 미지원 | 미지원 |
+| **인증(creds) 옵션** | `login` 또는 `--insecure-registry` | `--creds user:pass` | `--user user:pass` | pull 시 인증 미지원 |
+| **insecure 레지스트리** | `--insecure-registry` | `--tls-verify=false` | `--plain-http` | `/etc/crictl.yaml` 설정 |
+| **멀티 아키텍처** | 제한적 | `--multi-arch all` | `--platform` | 미지원 |
+| **Pod 조회** | 미지원 | 미지원 | 미지원 | `crictl pods` |
+| **exec / 로그** | 지원 | 미지원 | 미지원 | `exec`, `logs` |
