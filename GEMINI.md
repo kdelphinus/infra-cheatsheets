@@ -4,7 +4,7 @@
 
 - **Name**: Infra Cheatsheets (Docs as Code)
 - **Stack**: Python 3.x, MkDocs, Material for MkDocs Theme.
-- **Goal**: DevOps 실무자를 위한 Kubernetes, OpenStack, GCP, Linux 설치 및 트러블슈팅 가이드 제공.
+- **Goal**: DevOps 및 인프라 엔지니어를 위한 전반적인 인프라 기술(Kubernetes, Cloud, Linux, Network, Storage 등) 설치, 운영 및 트러블슈팅 가이드 제공.
 
 ## 2. Core Modes (Action Roles)
 
@@ -44,3 +44,4 @@ Gemini, you must adopt one of the following modes based on the user's request:
 - **Commit Messages**: 커밋 메시지는 가능한 한 **한글**로 작성하여 직관적으로 내용을 파악할 수 있게 하십시오. 또한, 모든 커밋 메시지 하단에는 반드시 `Co-Authored-By: Gemini CLI <noreply@google.com>`를 포함하여 협업 내역을 기록하십시오.
 - **Documentation Consistency**: 새로운 문서가 추가되거나 기존 문서 구조가 변경될 경우, 반드시 `docs/index.md` 파일의 카테고리 목록도 함께 업데이트하여 동기화를 유지하십시오.
 - **Push Policy**: 모든 커밋이 완료된 후 최종적으로 푸시를 진행하여 히스토리를 깔끔하게 유지하십시오.
+깔끔하게 유지하십시오.
