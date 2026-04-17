@@ -89,7 +89,7 @@ Envoy Gateway는 동적 관리를 위해 파드 이름이 계속 변경되므로
 
 ```bash
 # Envoy Proxy(트래픽 처리) 로그 확인
-kubectl logs -n envoy-gateway-system -f -l gateway.envoyproxy.io/owning-gateway-name=cmp-gateway
+kubectl logs -n envoy-gateway-system -f -l gateway.envoyproxy.io/owning-gateway-name=cluster-gateway
 
 # Gateway Controller(설치/배포) 로그 확인
 kubectl logs -n envoy-gateway-system -f -l app.kubernetes.io/name=envoy-gateway

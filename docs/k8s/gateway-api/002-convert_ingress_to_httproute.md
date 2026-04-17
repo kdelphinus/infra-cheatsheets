@@ -6,7 +6,7 @@
 
 ## 1. 변환 전 필수 점검 사항
 
-1. **Gateway 이름:** 모든 Route는 `cmp-gateway` (Namespace: `envoy-gateway-system` )를
+1. **Gateway 이름:** 모든 Route는 `cluster-gateway` (Namespace: `envoy-gateway-system` )를
 바라봐야 합니다.
    - 위 이름은 준비된 설치 파일의 기본값입니다.
    - Gateway 이름 및 Namespace는 설정한 값에 따라 다를 수 있습니다.
@@ -179,7 +179,7 @@ metadata:
     app: grafana
 spec:
   parentRefs:
-  - name: cmp-gateway  # Gateway 이름
+  - name: cluster-gateway  # Gateway 이름
     namespace: envoy-gateway-system  # Gateway Namespace
   
   hostnames:
@@ -236,7 +236,7 @@ metadata:
     namespace: {{ .Values.common.namespace }}
     spec:
     parentRefs:
-    - name: cmp-gateway
+    - name: cluster-gateway
         namespace: envoy-gateway-system
     hostnames:
     - {{ .Values.gatewayIngress.host | quote }}
@@ -286,12 +286,12 @@ metadata:
     targetRef:
         group: gateway.networking.k8s.io
         kind: Gateway
-        name: cmp-gateway            # 대상 Gateway 이름
+        name: cluster-gateway            # 대상 Gateway 이름
     type: JSONPatch
     jsonPatches:
     - type: "type.googleapis.com/envoy.config.listener.v3.Listener"
         # [중요] 리스너 이름 규칙: <namespace>/<gateway>/<listener_name>
-        name: "envoy-gateway-system/cmp-gateway/http" 
+        name: "envoy-gateway-system/cluster-gateway/http" 
         operation:
         op: add
         # HTTP Connection Manager(HCM) 설정에 max_request_bytes 주입
@@ -327,7 +327,7 @@ metadata:
   namespace: {{ .Values.common.namespace }}
 spec:
   parentRefs:
-  - name: cmp-gateway  # Gateway 이름
+  - name: cluster-gateway  # Gateway 이름
     namespace: envoy-gateway-system  # Gateway Namespace
   hostnames:
   - {{ .Values.productIngress.host | quote }}
@@ -374,7 +374,7 @@ metadata:
     app.kubernetes.io/name: strato-portal-frontend
 spec:
   parentRefs:
-  - name: cmp-gateway
+  - name: cluster-gateway
     namespace: envoy-gateway-system
   
   hostnames:

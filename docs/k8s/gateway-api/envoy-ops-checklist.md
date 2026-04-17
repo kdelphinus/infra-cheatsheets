@@ -70,7 +70,7 @@ kubectl delete clienttrafficpolicy enable-proxy-protocol -n envoy-gateway-system
 외부에서 인식하는 게이트웨이 주소를 실제 VIP로 패치합니다.
 
 ```bash
-kubectl patch gateway cmp-gateway -n envoy-gateway-system \
+kubectl patch gateway cluster-gateway -n envoy-gateway-system \
   --type='merge' \
   -p '{"spec":{"addresses":[{"type":"IPAddress","value":"<VIP_IP>"}]}}'
 ```
@@ -79,7 +79,7 @@ kubectl patch gateway cmp-gateway -n envoy-gateway-system \
 
 ```bash
 # Gateway 주소가 VIP로 반영되었는지 확인
-kubectl get gateway cmp-gateway -n envoy-gateway-system
+kubectl get gateway cluster-gateway -n envoy-gateway-system
 
 # 실제 접속 테스트 (응답 코드 확인)
 curl -s -o /dev/null -w "%{http_code}\n" https://<DOMAIN>/
@@ -103,7 +103,7 @@ curl -s -o /dev/null -w "%{http_code}\n" https://<DOMAIN>/
 
 ```bash
 # 1. Gateway 주소를 다시 워커 노드 IP로 변경
-kubectl patch gateway cmp-gateway -n envoy-gateway-system --type='merge' \
+kubectl patch gateway cluster-gateway -n envoy-gateway-system --type='merge' \
   -p '{"spec":{"addresses":[{"type":"IPAddress","value":"<WORKER_NODE_IP>"}]}}'
 
 # 2. PP 정책을 삭제했다면 재생성 (히어독 방식)
@@ -117,7 +117,7 @@ spec:
   targetRef:
     group: gateway.networking.k8s.io
     kind: Gateway
-    name: cmp-gateway
+    name: cluster-gateway
   enableProxyProtocol: true
 EOF
 ```
