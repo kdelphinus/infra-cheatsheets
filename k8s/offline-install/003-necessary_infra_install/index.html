@@ -4302,7 +4302,7 @@
 <h3 id="3-운영-및-로그-확인">3. 운영 및 로그 확인</h3>
 <p>Envoy Gateway는 동적 관리를 위해 파드 이름이 계속 변경되므로 <strong>Label Selector(<code>-l</code>)</strong> 사용이 필수입니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Envoy Proxy(트래픽 처리) 로그 확인</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cmp-gateway
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cluster-gateway
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Gateway Controller(설치/배포) 로그 확인</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway

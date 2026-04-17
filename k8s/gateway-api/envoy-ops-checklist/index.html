@@ -4192,13 +4192,13 @@
 기본 정책을 유지합니다.</p>
 <h3 id="4단계-gateway-주소를-vip로-변경">4단계: Gateway 주소를 VIP로 변경</h3>
 <p>외부에서 인식하는 게이트웨이 주소를 실제 VIP로 패치합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cluster-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;&lt;VIP_IP&gt;&quot;}]}}&#39;</span>
 </code></pre></div>
 <h3 id="5단계-상태-및-접속-확인">5단계: 상태 및 접속 확인</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Gateway 주소가 VIP로 반영되었는지 확인</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>gateway<span class="w"> </span>cluster-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 실제 접속 테스트 (응답 코드 확인)</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>https://&lt;DOMAIN&gt;/
@@ -4235,7 +4235,7 @@
 <h2 id="-롤백-방법-rollback">🔄 롤백 방법 (Rollback)</h2>
 <p>문제가 발생하여 이전 상태(<code>externalIPs</code> 방식)로 되돌리는 방법입니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 1. Gateway 주소를 다시 워커 노드 IP로 변경</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cmp-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cluster-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;&lt;WORKER_NODE_IP&gt;&quot;}]}}&#39;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># 2. PP 정책을 삭제했다면 재생성 (히어독 방식)</span>
@@ -4249,7 +4249,7 @@
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="s">  targetRef:</span>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s">    group: gateway.networking.k8s.io</span>
 <a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s">    kind: Gateway</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s">    name: cmp-gateway</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s">    name: cluster-gateway</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="s">  enableProxyProtocol: true</span>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="s">EOF</span>
 </code></pre></div>
