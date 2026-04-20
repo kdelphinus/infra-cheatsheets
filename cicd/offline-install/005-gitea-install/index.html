@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cicd/operation/redeploy-with-new-image/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/005-gitea-install/">
       
       
-        <link rel="prev" href="../../offline-install/005-gitea-install/">
+        <link rel="prev" href="../004-nexus-install/">
       
       
-        <link rel="next" href="../../../ubuntu/init-ubuntu-env/">
+        <link rel="next" href="../../operation/redeploy-with-new-image/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Harbor 기반 이미지 업데이트 및 재배포 - Infra Cheatsheets</title>
+        <title>Gitea 설치 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#harbor-기반-이미지-업데이트-및-재배포-운영-가이드" class="md-skip">
+        <a href="#gitea-v1255-오프라인-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Harbor 기반 이미지 업데이트 및 재배포
+              Gitea 설치
             
           </span>
         </div>
@@ -305,7 +305,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -1775,6 +1775,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1790,11 +1792,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
           <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
@@ -1815,7 +1817,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1833,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../000-harbor-install/" class="md-nav__link">
         
   
   
@@ -1861,7 +1863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../001-gitlab_jenkins_install/" class="md-nav__link">
         
   
   
@@ -1889,7 +1891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/002-argocd-install/" class="md-nav__link">
+      <a href="../002-argocd-install/" class="md-nav__link">
         
   
   
@@ -1917,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../003-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -1945,7 +1947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/004-nexus-install/" class="md-nav__link">
+      <a href="../004-nexus-install/" class="md-nav__link">
         
   
   
@@ -1970,99 +1972,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../../offline-install/005-gitea-install/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Gitea 설치
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    운영
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    운영
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
     
   
   
@@ -2082,7 +1991,7 @@
   <span class="md-ellipsis">
     
   
-    Harbor 기반 이미지 업데이트 및 재배포
+    Gitea 설치
   
 
     
@@ -2100,7 +2009,7 @@
   <span class="md-ellipsis">
     
   
-    Harbor 기반 이미지 업데이트 및 재배포
+    Gitea 설치
   
 
     
@@ -2126,22 +2035,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-현재-구성-정보-확인" class="md-nav__link">
+  <a href="#구성-명세" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 현재 구성 정보 확인
+        구성 명세
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 현재 구성 정보 확인">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#사전-조건" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사전 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#아키텍처" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        아키텍처
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1단계-에셋-준비-인터넷-가능-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 에셋 준비 (인터넷 가능 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2단계-이미지-업로드-폐쇄망-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 이미지 업로드 (폐쇄망 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3단계-설치-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 설치 실행
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 설치 실행">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-1-이미지-경로-조회" class="md-nav__link">
+  <a href="#이미지-소스-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-1. 이미지 경로 조회
+        이미지 소스 선택
       
     </span>
   </a>
@@ -2149,10 +2113,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-2-harbor-gui에서-확인" class="md-nav__link">
+  <a href="#데이터베이스-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-2. Harbor GUI에서 확인
+        데이터베이스 선택
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#노드-고정-선택" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        노드 고정 (선택)
       
     </span>
   </a>
@@ -2165,22 +2140,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-신규-이미지-업로드" class="md-nav__link">
+  <a href="#4단계-설치-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 신규 이미지 업로드
+        4단계: 설치 확인
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 신규 이미지 업로드">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5단계-초기-접속" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 초기 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5단계: 초기 접속">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#방법-a-배치-업로드-스크립트" class="md-nav__link">
+  <a href="#접속-주소" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 A: 배치 업로드 스크립트
+        접속 주소
       
     </span>
   </a>
@@ -2188,10 +2174,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#방법-b-수동-업로드-containerd-기준" class="md-nav__link">
+  <a href="#관리자-계정" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 B: 수동 업로드 (Containerd 기준)
+        관리자 계정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-클라이언트-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git 클라이언트 설정
       
     </span>
   </a>
@@ -2204,10 +2201,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-pull-정책-설정-중요" class="md-nav__link">
+  <a href="#6단계-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Pull 정책 설정 (중요)
+        6단계: 삭제
       
     </span>
   </a>
@@ -2215,22 +2212,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-서비스-재배포" class="md-nav__link">
+  <a href="#운영-참고" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 서비스 재배포
+        운영 참고
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 서비스 재배포">
+    <nav class="md-nav" aria-label="운영 참고">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#case-1-새-태그-적용-버전-업그레이드" class="md-nav__link">
+  <a href="#로그-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case 1: 새 태그 적용 (버전 업그레이드)
+        로그 확인
       
     </span>
   </a>
@@ -2238,38 +2235,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-2-동일-태그-적용-이미지만-교체" class="md-nav__link">
+  <a href="#sqlite--postgresql-전환" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case 2: 동일 태그 적용 (이미지만 교체)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-배포-결과-검증-및-트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 배포 결과 검증 및 트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. 배포 결과 검증 및 트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5-1-배포-상태-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5-1. 배포 상태 확인
+        SQLite → PostgreSQL 전환
       
     </span>
   </a>
@@ -2277,49 +2246,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-2-트러블슈팅" class="md-nav__link">
+  <a href="#tls-적용-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-2. 트러블슈팅
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#부록-https-인증서-등록-harbor-https-사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [부록] HTTPS 인증서 등록 (Harbor HTTPS 사용 시)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[부록] HTTPS 인증서 등록 (Harbor HTTPS 사용 시)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ubuntu--debian-계열" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ubuntu / Debian 계열
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#centos--rhel--rocky-linux-계열" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CentOS / RHEL / Rocky Linux 계열
+        TLS 적용 (선택)
       
     </span>
   </a>
@@ -2335,6 +2265,97 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    운영
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operation/redeploy-with-new-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harbor 기반 이미지 업데이트 및 재배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -4036,22 +4057,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-현재-구성-정보-확인" class="md-nav__link">
+  <a href="#구성-명세" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 현재 구성 정보 확인
+        구성 명세
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 현재 구성 정보 확인">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#사전-조건" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사전 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#아키텍처" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        아키텍처
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1단계-에셋-준비-인터넷-가능-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 에셋 준비 (인터넷 가능 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2단계-이미지-업로드-폐쇄망-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 이미지 업로드 (폐쇄망 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3단계-설치-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 설치 실행
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 설치 실행">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-1-이미지-경로-조회" class="md-nav__link">
+  <a href="#이미지-소스-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-1. 이미지 경로 조회
+        이미지 소스 선택
       
     </span>
   </a>
@@ -4059,10 +4135,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-2-harbor-gui에서-확인" class="md-nav__link">
+  <a href="#데이터베이스-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-2. Harbor GUI에서 확인
+        데이터베이스 선택
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#노드-고정-선택" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        노드 고정 (선택)
       
     </span>
   </a>
@@ -4075,22 +4162,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-신규-이미지-업로드" class="md-nav__link">
+  <a href="#4단계-설치-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 신규 이미지 업로드
+        4단계: 설치 확인
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 신규 이미지 업로드">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5단계-초기-접속" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 초기 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5단계: 초기 접속">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#방법-a-배치-업로드-스크립트" class="md-nav__link">
+  <a href="#접속-주소" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 A: 배치 업로드 스크립트
+        접속 주소
       
     </span>
   </a>
@@ -4098,10 +4196,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#방법-b-수동-업로드-containerd-기준" class="md-nav__link">
+  <a href="#관리자-계정" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 B: 수동 업로드 (Containerd 기준)
+        관리자 계정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-클라이언트-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git 클라이언트 설정
       
     </span>
   </a>
@@ -4114,10 +4223,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-pull-정책-설정-중요" class="md-nav__link">
+  <a href="#6단계-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Pull 정책 설정 (중요)
+        6단계: 삭제
       
     </span>
   </a>
@@ -4125,22 +4234,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-서비스-재배포" class="md-nav__link">
+  <a href="#운영-참고" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 서비스 재배포
+        운영 참고
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 서비스 재배포">
+    <nav class="md-nav" aria-label="운영 참고">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#case-1-새-태그-적용-버전-업그레이드" class="md-nav__link">
+  <a href="#로그-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case 1: 새 태그 적용 (버전 업그레이드)
+        로그 확인
       
     </span>
   </a>
@@ -4148,38 +4257,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#case-2-동일-태그-적용-이미지만-교체" class="md-nav__link">
+  <a href="#sqlite--postgresql-전환" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case 2: 동일 태그 적용 (이미지만 교체)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-배포-결과-검증-및-트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 배포 결과 검증 및 트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. 배포 결과 검증 및 트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5-1-배포-상태-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5-1. 배포 상태 확인
+        SQLite → PostgreSQL 전환
       
     </span>
   </a>
@@ -4187,49 +4268,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-2-트러블슈팅" class="md-nav__link">
+  <a href="#tls-적용-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-2. 트러블슈팅
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#부록-https-인증서-등록-harbor-https-사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [부록] HTTPS 인증서 등록 (Harbor HTTPS 사용 시)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[부록] HTTPS 인증서 등록 (Harbor HTTPS 사용 시)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ubuntu--debian-계열" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ubuntu / Debian 계열
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#centos--rhel--rocky-linux-계열" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CentOS / RHEL / Rocky Linux 계열
+        TLS 적용 (선택)
       
     </span>
   </a>
@@ -4261,148 +4303,166 @@
   
 
 
-<h1 id="harbor-기반-이미지-업데이트-및-재배포-운영-가이드">Harbor 기반 이미지 업데이트 및 재배포 운영 가이드</h1>
-<p>Harbor 레지스트리에 신규 이미지를 업로드하고 쿠버네티스 서비스를 갱신하는 표준 절차입니다.</p>
-<hr />
-<h2 id="1-현재-구성-정보-확인">1. 현재 구성 정보 확인</h2>
-<p>배포 전 기존 환경 설정을 파악하여 설정 오류로 인한 장애를 방지합니다.</p>
-<h3 id="1-1-이미지-경로-조회">1-1. 이미지 경로 조회</h3>
-<p>대상 서비스의 <code>values.yaml</code>에서 이미지 경로와 태그 형식을 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>grep<span class="w"> </span><span class="s2">&quot;image:&quot;</span><span class="w"> </span>./redis/values.yaml
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 출력 예시</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># image: harbor.product.co.kr:30002/goe/redis:7.2</span>
-</code></pre></div>
-<h3 id="1-2-harbor-gui에서-확인">1-2. Harbor GUI에서 확인</h3>
-<ol>
-<li><code>Projects &gt; [프로젝트명] &gt; Repositories &gt; [이미지명]</code> — 태그가 존재하며 <strong>Push Time</strong>이 최신인지 확인</li>
-<li><strong>Pull Count</strong> 컬럼 — 클러스터에서 다운로드된 횟수 확인</li>
-<li><strong>Logs</strong> 탭 — 사용자, 시간, 노드 IP별 Pull/Push 이력 상세 확인</li>
-</ol>
-<hr />
-<h2 id="2-신규-이미지-업로드">2. 신규 이미지 업로드</h2>
-<h3 id="방법-a-배치-업로드-스크립트">방법 A: 배치 업로드 스크립트</h3>
-<p>다수의 이미지를 일괄 처리합니다.</p>
-<ol>
-<li>
-<p>업로드할 이미지(<code>.tar</code>)를 <code>./images/</code> 경로에 배치합니다.</p>
-</li>
-<li>
-<p><code>upload_images_to_harbor_v2.sh</code> 상단 설정을 수정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;&lt;HARBOR_IP&gt;:30002&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">HARBOR_PROJECT</span><span class="o">=</span><span class="s2">&quot;&lt;PROJECT&gt;&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">HARBOR_USER</span><span class="o">=</span><span class="s2">&quot;admin&quot;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">HARBOR_PASSWORD</span><span class="o">=</span><span class="s2">&quot;&lt;PASSWORD&gt;&quot;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">IMAGE_DIR</span><span class="o">=</span><span class="s2">&quot;./images&quot;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">USE_PLAIN_HTTP</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w">   </span><span class="c1"># HTTP: true, HTTPS: false</span>
-</code></pre></div>
-</li>
-<li>
-<p>스크립트를 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>upload_images_to_harbor_v2.sh
-</code></pre></div>
-</li>
-</ol>
-<h3 id="방법-b-수동-업로드-containerd-기준">방법 B: 수동 업로드 (Containerd 기준)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. 아카이브 로드</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>&lt;파일명&gt;.tar
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2. Harbor 경로에 맞는 태그 부여</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>tag<span class="w"> </span>redis:latest<span class="w"> </span>&lt;HARBOR_IP&gt;:30002/&lt;PROJECT&gt;/redis:7.2.4
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># 3. 레지스트리에 Push</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># HTTP 환경</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>push<span class="w"> </span>--plain-http<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span>-u<span class="w"> </span>admin:&lt;PASSWORD&gt;<span class="w"> </span>&lt;HARBOR_IP&gt;:30002/&lt;PROJECT&gt;/redis:7.2.4
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># HTTPS 환경 (--plain-http 제외)</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>push<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span>-u<span class="w"> </span>admin:&lt;PASSWORD&gt;<span class="w"> </span>&lt;HARBOR_IP&gt;:30002/&lt;PROJECT&gt;/redis:7.2.4
-</code></pre></div>
-<hr />
-<h2 id="3-pull-정책-설정-중요">3. Pull 정책 설정 (중요)</h2>
-<p>동일 태그를 유지하며 이미지만 교체할 경우 <code>imagePullPolicy</code> 설정이 반영 여부를 결정합니다.</p>
+<h1 id="gitea-v1255-오프라인-설치-가이드">Gitea v1.25.5 오프라인 설치 가이드</h1>
+<p>폐쇄망 Kubernetes 환경에서 Gitea Git 서버를 Helm으로 설치하는 절차를 정의합니다.</p>
+<h2 id="구성-명세">구성 명세</h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">정책</th>
-<th style="text-align: left;">동작</th>
+<th style="text-align: left;">항목</th>
+<th style="text-align: left;">버전</th>
+<th style="text-align: left;">용도</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>IfNotPresent</code></td>
-<td style="text-align: left;">노드에 해당 태그 이미지가 있으면 레지스트리를 확인하지 않음 (최신 이미지 반영 불가)</td>
+<td style="text-align: left;"><strong>Gitea</strong></td>
+<td style="text-align: left;"><strong>v1.25.5</strong></td>
+<td style="text-align: left;">Git 서버</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>Always</code></td>
-<td style="text-align: left;">기동 시마다 레지스트리 Digest를 대조하여 변경 시 강제 Pull</td>
+<td style="text-align: left;"><strong>Gitea Chart</strong></td>
+<td style="text-align: left;"><strong>v12.5.3</strong></td>
+<td style="text-align: left;">Helm 배포</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>데이터베이스</strong></td>
+<td style="text-align: left;">SQLite / PostgreSQL</td>
+<td style="text-align: left;">저장소</td>
 </tr>
 </tbody>
 </table>
-<p><strong>태그 고정 운영 시 권장 설정 (<code>values.yaml</code>):</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">image</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;HARBOR_IP&gt;:30002/&lt;PROJECT&gt;/redis</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;7.2.2&quot;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Always</span>
+<hr />
+<h2 id="사전-조건">사전 조건</h2>
+<ul>
+<li>Kubernetes 클러스터 구성 완료</li>
+<li>Helm v3.x 설치 완료</li>
+<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li>Envoy Gateway 설치 완료 (도메인 접속 사용 시)</li>
+</ul>
+<hr />
+<h2 id="아키텍처">아키텍처</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Client → NodePort :30003 → Gitea Pod (HTTP/Web UI)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Client → NodePort :30022 → Gitea Pod (SSH/Git)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Client → Envoy Gateway → gitea.devops.internal (도메인, 선택)
 </code></pre></div>
 <hr />
-<h2 id="4-서비스-재배포">4. 서비스 재배포</h2>
-<h3 id="case-1-새-태그-적용-버전-업그레이드">Case 1: 새 태그 적용 (버전 업그레이드)</h3>
-<p><code>helm upgrade</code>로 롤링 업데이트를 수행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>&lt;RELEASE_NAME&gt;<span class="w"> </span>./&lt;CHART_DIR&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
-</code></pre></div>
-<h3 id="case-2-동일-태그-적용-이미지만-교체">Case 2: 동일 태그 적용 (이미지만 교체)</h3>
-<p>Helm이 변경 사항을 인지하지 못할 수 있으므로 재설치를 권장합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>&lt;RELEASE_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>helm<span class="w"> </span>install<span class="w"> </span>&lt;RELEASE_NAME&gt;<span class="w"> </span>./&lt;CHART_DIR&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
+<h2 id="1단계-에셋-준비-인터넷-가능-환경">1단계: 에셋 준비 (인터넷 가능 환경)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Helm 차트 다운로드</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>gitea-charts<span class="w"> </span>https://dl.gitea.com/charts/
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>helm<span class="w"> </span>pull<span class="w"> </span>gitea-charts/gitea<span class="w"> </span>--version<span class="w"> </span><span class="m">12</span>.5.3<span class="w"> </span>--untar<span class="w"> </span>--untardir<span class="w"> </span>./charts/
 </code></pre></div>
 <hr />
-<h2 id="5-배포-결과-검증-및-트러블슈팅">5. 배포 결과 검증 및 트러블슈팅</h2>
-<h3 id="5-1-배포-상태-확인">5-1. 배포 상태 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span>-o<span class="w"> </span>wide
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>&lt;POD_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Image:
+<h2 id="2단계-이미지-업로드-폐쇄망-환경">2단계: 이미지 업로드 (폐쇄망 환경)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
-<h3 id="5-2-트러블슈팅">5-2. 트러블슈팅</h3>
+<hr />
+<h2 id="3단계-설치-실행">3단계: 설치 실행</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./scripts/install.sh
+</code></pre></div>
+<p>스크립트 실행 중 대화형으로 입력합니다.</p>
+<h3 id="이미지-소스-선택">이미지 소스 선택</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>이미지 소스를 선택하세요:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  1) Harbor 레지스트리 사용  ← 권장
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  2) 로컬 tar 직접 import
+</code></pre></div>
+<h3 id="데이터베이스-선택">데이터베이스 선택</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>데이터베이스를 선택하세요:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  1) SQLite  — 단일 노드, 소규모 팀 권장
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  2) PostgreSQL — 고가용성, 대규모 팀 권장
+</code></pre></div>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">증상</th>
-<th style="text-align: left;">원인 및 조치</th>
+<th style="text-align: left;">타입</th>
+<th style="text-align: left;">특징</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>ImagePullBackOff</code></td>
-<td style="text-align: left;"><code>kubectl describe pod</code> Events 섹션 확인: 401(인증 실패), 404(경로 오류), x509(인증서 미등록)</td>
+<td style="text-align: left;">SQLite</td>
+<td style="text-align: left;">별도 DB Pod 불필요. 단일 노드 환경 권장</td>
 </tr>
 <tr>
-<td style="text-align: left;">구버전 이미지가 계속 사용됨</td>
-<td style="text-align: left;"><code>pullPolicy: Always</code> 확인 후 노드 캐시 이미지 강제 삭제</td>
+<td style="text-align: left;">PostgreSQL</td>
+<td style="text-align: left;">별도 PostgreSQL Pod 배포. 데이터 영속성 강화</td>
 </tr>
 </tbody>
 </table>
-<p><strong>노드 캐시 이미지 강제 제거:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 각 워커 노드에서</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;IMAGE_NAME&gt;
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>remove<span class="w"> </span>&lt;FULL_IMAGE_NAME&gt;
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># 마스터 노드에서 파드 재생성 유도</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>&lt;POD_NAME&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;NAMESPACE&gt;
+<h3 id="노드-고정-선택">노드 고정 (선택)</h3>
+<p>특정 워커 노드에 배치할 경우 노드 이름을 입력합니다. 엔터 입력 시 자동 배치됩니다.</p>
+<hr />
+<h2 id="4단계-설치-확인">4단계: 설치 확인</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Pod 상태 확인</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>gitea
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 서비스 확인</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>gitea
 </code></pre></div>
 <hr />
-<h2 id="부록-https-인증서-등록-harbor-https-사용-시">[부록] HTTPS 인증서 등록 (Harbor HTTPS 사용 시)</h2>
-<p>Harbor가 HTTPS로 구성된 경우, 이미지를 Push/Pull하는 <strong>모든 노드</strong>에서 인증서를 등록해야 합니다.</p>
-<h3 id="ubuntu--debian-계열">Ubuntu / Debian 계열</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>harbor.crt<span class="w"> </span>/usr/local/share/ca-certificates/
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>update-ca-certificates
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+<h2 id="5단계-초기-접속">5단계: 초기 접속</h2>
+<h3 id="접속-주소">접속 주소</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">접속 방식</th>
+<th style="text-align: left;">주소</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">NodePort (HTTP)</td>
+<td style="text-align: left;"><code>http://&lt;NODE_IP&gt;:30003</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">NodePort (SSH)</td>
+<td style="text-align: left;"><code>ssh://git@&lt;NODE_IP&gt;:30022</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">도메인</td>
+<td style="text-align: left;"><code>http://gitea.devops.internal</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="관리자-계정">관리자 계정</h3>
+<p>초기 관리자 계정은 <code>values.yaml</code>의 <code>adminUser</code> 항목을 참조합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Secret 방식 사용 시 비밀번호 확인</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>gitea-admin-secret<span class="w"> </span>-n<span class="w"> </span>gitea<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.password}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
 </code></pre></div>
-<h3 id="centos--rhel--rocky-linux-계열">CentOS / RHEL / Rocky Linux 계열</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>harbor.crt<span class="w"> </span>/etc/pki/ca-trust/source/anchors/
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>update-ca-trust
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+<h3 id="git-클라이언트-설정">Git 클라이언트 설정</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># HTTP 방식</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>git<span class="w"> </span>clone<span class="w"> </span>http://&lt;NODE_IP&gt;:30003/&lt;USER&gt;/&lt;REPO&gt;.git
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># SSH 방식</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>git<span class="w"> </span>clone<span class="w"> </span>ssh://git@&lt;NODE_IP&gt;:30022/&lt;USER&gt;/&lt;REPO&gt;.git
 </code></pre></div>
+<hr />
+<h2 id="6단계-삭제">6단계: 삭제</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./scripts/uninstall.sh
+</code></pre></div>
+<p>삭제 시 PV/PVC 삭제 여부를 선택합니다. PV는 <code>Retain</code> 정책이므로 PVC 삭제 후에도 호스트 데이터는 유지됩니다.</p>
+<hr />
+<h2 id="운영-참고">운영 참고</h2>
+<h3 id="로그-확인">로그 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>gitea<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>gitea
+</code></pre></div>
+<h3 id="sqlite--postgresql-전환">SQLite → PostgreSQL 전환</h3>
+<ol>
+<li>Gitea 관리자 페이지 → <strong>사이트 관리</strong> → <strong>데이터베이스 마이그레이션</strong> 실행</li>
+<li><code>install.sh</code> 재실행 시 DB 타입 <code>2</code> (PostgreSQL) 선택</li>
+<li>마이그레이션 완료 후 기존 SQLite 파일 삭제</li>
+</ol>
+<h3 id="tls-적용-선택">TLS 적용 (선택)</h3>
+<p>Envoy Gateway에서 TLS Termination을 처리합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>gitea-tls<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--cert<span class="o">=</span>cert.pem<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--key<span class="o">=</span>key.pem<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>--namespace<span class="w"> </span>gitea
+</code></pre></div>
+<p><code>manifests/httproute-gitea.yaml</code>에 HTTPS 리스너 참조를 추가하세요.</p>
 
 
 
