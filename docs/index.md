@@ -55,6 +55,7 @@ hide:
     - [:octicons-arrow-right-24: GitLab & Jenkins 통합 설치](cicd/offline-install/001-gitlab_jenkins_install.md)
     - [:octicons-arrow-right-24: ArgoCD 설치 및 연동 가이드](cicd/offline-install/002-argocd-install.md)
     - [:octicons-arrow-right-24: Nexus Repository 설치](cicd/offline-install/004-nexus-install.md)
+    - [:octicons-arrow-right-24: Gitea 설치](cicd/offline-install/005-gitea-install.md)
 
 - :simple-mariadb: **Database Cluster (HA)**
 
