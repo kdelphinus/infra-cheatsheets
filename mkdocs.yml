@@ -88,11 +88,12 @@ nav:
     - 'Google Cloud SDK Cheat Sheet': cloud/gcp-cheatsheet.md
   - CI/CD:
     - 폐쇄망:
-      - '0. Harbor 설치': cicd/offline-install/000-harbor-install.md
-      - '1. GitLab & Jenkins 설치': cicd/offline-install/001-gitlab_jenkins_install.md
-      - '2. ArgoCD 설치': cicd/offline-install/002-argocd-install.md
-      - '3. ArgoCD — Jenkins · Harbor 연동': cicd/offline-install/003-argocd-jenkins-harbor-integration.md
-      - '4. Nexus Repository 설치': cicd/offline-install/004-nexus-install.md
+      - 'Harbor 설치': cicd/offline-install/000-harbor-install.md
+      - 'GitLab & Jenkins 설치': cicd/offline-install/001-gitlab_jenkins_install.md
+      - 'ArgoCD 설치': cicd/offline-install/002-argocd-install.md
+      - 'ArgoCD — Jenkins · Harbor 연동': cicd/offline-install/003-argocd-jenkins-harbor-integration.md
+      - 'Nexus Repository 설치': cicd/offline-install/004-nexus-install.md
+      - 'Gitea 설치': cicd/offline-install/005-gitea-install.md
     - 운영:
       - 'Harbor 기반 이미지 업데이트 및 재배포': cicd/operation/redeploy-with-new-image.md
   - Ubuntu:
