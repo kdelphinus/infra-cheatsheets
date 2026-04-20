@@ -1,13 +1,3 @@
-last_update: 2026-04-17 09:31
+last_update: 2026-04-20
 
-https://kdelphinus.github.io/infra-cheatsheets/k8s/security/001-falco-install/
-https://kdelphinus.github.io/infra-cheatsheets/k8s/security/002-tetragon-install/
-https://kdelphinus.github.io/infra-cheatsheets/k8s/security/003-tetragon-security-policy/
-https://kdelphinus.github.io/infra-cheatsheets/network/tip/port-check/
-https://kdelphinus.github.io/infra-cheatsheets/openstack/gpu/pci-placement/
-https://kdelphinus.github.io/infra-cheatsheets/openstack/tools/add-ironic/
-https://kdelphinus.github.io/infra-cheatsheets/openstack/troubleshooting/k8s-network-error/
-https://kdelphinus.github.io/infra-cheatsheets/openstack/utils/cloud-init/
-https://kdelphinus.github.io/infra-cheatsheets/openstack/utils/golden-image/
-https://kdelphinus.github.io/infra-cheatsheets/ubuntu/init-ubuntu-env/
-https://kdelphinus.github.io/infra-cheatsheets/ubuntu/wsl/wsl-network-setting/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/005-gitea-install/
