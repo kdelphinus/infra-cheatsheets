@@ -1,3 +1,21 @@
-last_update: 2026-04-20
+last_update: 2026-04-22
 
+https://kdelphinus.github.io/infra-cheatsheets/
+https://kdelphinus.github.io/infra-cheatsheets/guide/infra-standard/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/ready-offline/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/offline-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/online-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/ready-offline/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/offline-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/online-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/base-infra/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/metallb-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/network/cilium-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.37.2-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.36.3-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/backup-restore/001-velero-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/002-argocd-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/003-argocd-jenkins-harbor-integration/
 https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/005-gitea-install/
+https://kdelphinus.github.io/infra-cheatsheets/db/redis/001-redis-stream-overview/
+https://kdelphinus.github.io/infra-cheatsheets/db/redis/002-redis-stream-install/
