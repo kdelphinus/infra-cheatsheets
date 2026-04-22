@@ -16,6 +16,9 @@ hide:
 !!! note
     설치 문서는 [설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/)에 가장 먼저 업데이트됩니다.
 
+!!! info "인프라 표준 가이드"
+    본 프로젝트의 모든 컴포넌트는 수립된 표준을 준수합니다. 신규 구축 및 수정 시 [인프라 설치 및 구성 표준 가이드](guide/infra-standard.md)를 반드시 확인하십시오.
+
 ---
 
 ## :simple-kubernetes: Kubernetes Platform
@@ -31,10 +34,11 @@ hide:
     클러스터 구축 및 트래픽 제어 핵심
 
     - [:octicons-arrow-right-24: Kubernetes Cheat Sheet](k8s/cheatsheet.md)
-    - [:octicons-arrow-right-24: v1.30 폐쇄망 설치 가이드](k8s/offline-install/002-k8s-air-gapped-install.md)
-    - [:octicons-arrow-right-24: v1.30 온라인 설치 가이드](k8s/online-install/001-k8s-online-install.md)
+    - [:octicons-arrow-right-24: Ubuntu 24.04 설치 가이드](k8s/install/ubuntu/offline-install.md)
+    - [:octicons-arrow-right-24: Rocky Linux 9.6 설치 가이드](k8s/install/rocky/offline-install.md)
     - [:octicons-arrow-right-24: NGINX NIC 마이그레이션 가이드](k8s/gateway-api/nginx-nic-migration.md)
     - [:octicons-arrow-right-24: Envoy Gateway & HTTPRoute](k8s/gateway-api/001-envoy-install.md)
+    - [:octicons-arrow-right-24: Cilium (CNI) 오프라인 설치](k8s/network/cilium-install.md)
 
 - :material-shield-check: **K8s Ops & Security**
 
