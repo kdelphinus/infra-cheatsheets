@@ -1,4 +1,4 @@
-# 3. ArgoCD — Jenkins · Harbor 연동
+# ArgoCD — Jenkins · Harbor 연동 가이드
 
 본 문서는 ArgoCD를 Jenkins CI/CD 및 Harbor 레지스트리와 연동하는 방법을 설명합니다.
 전체 흐름은 **GitOps 패턴**을 따릅니다.
