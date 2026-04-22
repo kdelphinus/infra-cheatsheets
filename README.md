@@ -12,6 +12,8 @@
 
 ### 👉 [설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/)
 
+> 설치 문서는 설치 파일 GitHub에 가장 먼저 업데이트됩니다.
+
 ### 👉 [설치 파일 드라이브](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko/)
 
 ## 🛠️ Built With

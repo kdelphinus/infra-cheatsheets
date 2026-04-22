@@ -13,6 +13,9 @@ hide:
 [:fontawesome-brands-google-drive: 설치 파일 드라이브](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko/){ .md-button }
 [:fontawesome-solid-box-archive: 설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/){ .md-button }
 
+!!! note
+    설치 문서는 [설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/)에 가장 먼저 업데이트됩니다.
+
 ---
 
 ## :simple-kubernetes: Kubernetes Platform
