@@ -184,6 +184,4 @@ PV는 `Retain` policy로 데이터가 보존됩니다.
 
 | 문서 | 내용 |
 | :--- | :--- |
-| [DEVELOPER-GUIDE.md](./DEVELOPER-GUIDE.md) | Spring Boot 연결 설정, Producer/Consumer 구현, at-least-once 보장, 폐쇄망 빌드 설정 |
-| [KAFKA-REPLACEMENT-GUIDE.md](./KAFKA-REPLACEMENT-GUIDE.md) | Kafka → Redis Stream 마이그레이션 가이드 |
-| [REPORT.md](./REPORT.md) | 검증 및 수정 이력 |
+| [001-redis-stream-overview.md](./001-redis-stream-overview.md) | Kafka 전환 매핑, Spring Boot 구현 가이드, At-least-once 보장 전략 |

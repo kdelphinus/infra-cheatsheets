@@ -13,7 +13,7 @@
   - [1.2 데이터 영속성 및 용량 관리 (Infra vs App)](#12-데이터-영속성-및-용량-관리-infra-vs-app)
     - [\[Bowl: 인프라 설정\] Redis 서버 영속성 (Helm Chart / redis.conf)](#bowl-인프라-설정-redis-서버-영속성-helm-chart--redisconf)
       - [영속성 모드 비교 (RDB / AOF / Hybrid)](#영속성-모드-비교-rdb--aof--hybrid)
-      - [영속성 설정 항목 (Helm values.yaml → redis.config)](#영속성-설정-항목-helm-valuesyaml--redisconfig)
+      - [영속성 설정 항목 (Helm values.yaml → redis.config)](#영속성-설정-항목)
     - [\[Food: 앱 설정\] 스트림 데이터 제어 (Spring Boot / Java)](#food-앱-설정-스트림-데이터-제어-spring-boot--java)
       - [1.2.5 데이터 제거 전략 (Retention)](#125-데이터-제거-전략-retention)
     - [1.3 물리적 인프라 요구사항 (K8s \& Storage)](#13-물리적-인프라-요구사항-k8s--storage)
