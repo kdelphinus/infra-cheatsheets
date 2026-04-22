@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/ready-offline/">
       
       
-        <link rel="prev" href="../../../gateway-api/envoy-v1.37.2-install/">
+        <link rel="prev" href="../../ubuntu/online-install/">
       
       
         <link rel="next" href="../offline-install/">
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-kubernetes--mariadb-폐쇄망-설치용-파일-만들기" class="md-skip">
+        <a href="#폐쇄망용-설치-파일-준비-rocky-linux" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -256,7 +256,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../ubuntu/offline-install/" class="md-tabs__link">
+        <a href="../../ubuntu/ready-offline/" class="md-tabs__link">
           
   
   
@@ -740,6 +740,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../ubuntu/ready-offline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ubuntu/offline-install/" class="md-nav__link">
         
   
@@ -747,7 +775,7 @@
   <span class="md-ellipsis">
     
   
-    1. 오프라인 설치 가이드
+    2. 오프라인 설치 가이드
   
 
     
@@ -775,35 +803,7 @@
   <span class="md-ellipsis">
     
   
-    2. 온라인 설치 가이드
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    3. Envoy Gateway (v1.37.2)
+    3. 온라인 설치 가이드
   
 
     
@@ -1156,7 +1156,7 @@
   <span class="md-ellipsis">
     
   
-    기반 인프라 설치
+    Helm & 스토리지 프로비저너 설치
   
 
     
@@ -1653,14 +1653,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+      <a href="../../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    NGINX NIC 마이그레이션 가이드
+    Envoy Gateway (v1.37.2)
   
 
     
@@ -1688,7 +1688,35 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 설치
+    Envoy Gateway (v1.36.3 - Legacy)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX NIC 마이그레이션 가이드
   
 
     
@@ -4232,7 +4260,7 @@
   
 
 
-<h1 id="1-kubernetes--mariadb-폐쇄망-설치용-파일-만들기">1. Kubernetes &amp; MariaDB 폐쇄망 설치용 파일 만들기</h1>
+<h1 id="폐쇄망용-설치-파일-준비-rocky-linux">폐쇄망용 설치 파일 준비 (Rocky Linux)</h1>
 <ul>
 <li>이 문서는 Rocky 9.6 버전을 기준으로 만들어졌습니다.</li>
 <li>사용하고자 하는 환경과 동일한 서버에서 작업해야 합니다.</li>

@@ -149,6 +149,10 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/ready-offline/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/001-kube-prometheus-stack/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>

@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/ready-offline/">
       
       
-        <link rel="prev" href="../envoy-v1.37.2-install/">
+        <link rel="prev" href="../../../../guide/infra-standard/">
       
       
-        <link rel="next" href="../nginx-nic-migration/">
+        <link rel="next" href="../offline-install/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Envoy Gateway (v1.36.3 - Legacy) - Infra Cheatsheets</title>
+        <title>1. 폐쇄망용 설치 파일 준비 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#envoy-gateway-v172--proxy-v1372-오프라인-설치-가이드" class="md-skip">
+        <a href="#폐쇄망용-설치-파일-준비-ubuntu" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Envoy Gateway (v1.36.3 - Legacy)
+              1. 폐쇄망용 설치 파일 준비
             
           </span>
         </div>
@@ -225,7 +225,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+        <a href="../../../.." class="md-tabs__link">
           
   
   
@@ -256,7 +256,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../install/ubuntu/ready-offline/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -279,7 +279,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -306,7 +306,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -329,7 +329,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -356,7 +356,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -379,7 +379,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../git/cheatsheet/" class="md-tabs__link">
+        <a href="../../../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -399,7 +399,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -426,7 +426,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -449,7 +449,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -483,7 +483,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -565,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -593,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guide/infra-standard/" class="md-nav__link">
+      <a href="../../../../guide/infra-standard/" class="md-nav__link">
         
   
   
@@ -682,6 +682,8 @@
                 
   
   
+    
+  
   
   
     
@@ -697,11 +699,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
@@ -722,7 +724,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -737,10 +739,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../install/ubuntu/ready-offline/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -756,6 +785,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#-1단계-작업-환경-준비-인터넷-호스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 1단계: 작업 환경 준비 (인터넷 호스트)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-2단계-설치-파일-다운로드-downloadsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 2단계: 설치 파일 다운로드 (download.sh)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-3단계-폐쇄망용-압축-파일-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 3단계: 폐쇄망용 압축 파일 생성
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -768,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ubuntu/offline-install/" class="md-nav__link">
+      <a href="../offline-install/" class="md-nav__link">
         
   
   
@@ -796,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ubuntu/online-install/" class="md-nav__link">
+      <a href="../online-install/" class="md-nav__link">
         
   
   
@@ -887,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky/ready-offline/" class="md-nav__link">
+      <a href="../../rocky/ready-offline/" class="md-nav__link">
         
   
   
@@ -915,7 +997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky/offline-install/" class="md-nav__link">
+      <a href="../../rocky/offline-install/" class="md-nav__link">
         
   
   
@@ -943,7 +1025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky/online-install/" class="md-nav__link">
+      <a href="../../rocky/online-install/" class="md-nav__link">
         
   
   
@@ -1034,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../../offline-install/003-necessary_infra_install/" class="md-nav__link">
         
   
   
@@ -1062,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/004-metallb-install/" class="md-nav__link">
+      <a href="../../../offline-install/004-metallb-install/" class="md-nav__link">
         
   
   
@@ -1090,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/cilium-install/" class="md-nav__link">
+      <a href="../../../network/cilium-install/" class="md-nav__link">
         
   
   
@@ -1181,7 +1263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -1209,7 +1291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../../../monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -1300,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/001-falco-install/" class="md-nav__link">
+      <a href="../../../security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -1328,7 +1410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/002-tetragon-install/" class="md-nav__link">
+      <a href="../../../security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1356,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../../security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -1447,7 +1529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../../backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -1480,8 +1562,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1497,11 +1577,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
         
           
           <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
@@ -1522,7 +1602,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1540,7 +1620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.37.2-install/" class="md-nav__link">
+      <a href="../../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
@@ -1565,37 +1645,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Envoy Gateway (v1.36.3 - Legacy)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/001-envoy-install/" class="md-nav__link">
         
   
   
@@ -1611,293 +1664,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        전제 조건
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#아키텍처-개요" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        아키텍처 개요
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="아키텍처 개요">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#배포-모드-비교-및-선택" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        배포 모드 비교 및 선택
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-이미지-확보-및-로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 이미지 확보 및 로드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1단계: 이미지 확보 및 로드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#case-a-로컬-환경에-직접-로드-harbor-미사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Case A: 로컬 환경에 직접 로드 (Harbor 미사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#case-b-harbor-레지스트리-업로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Case B: Harbor 레지스트리 업로드
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-설치-및-업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: 설치 및 업그레이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2단계: 설치 및 업그레이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#방법-1-자동화-스크립트-사용-권장" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 1. 자동화 스크립트 사용 (권장)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#방법-2-수동-설치-및-업그레이드-스크립트-사용-불가-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 2. 수동 설치 및 업그레이드 (스크립트 사용 불가 시)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="방법 2. 수동 설치 및 업그레이드 (스크립트 사용 불가 시)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-crd-수동-적용-설치업그레이드-공통" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) CRD 수동 적용 (설치/업그레이드 공통)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-컨트롤-플레인-설치업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) 컨트롤 플레인 설치/업그레이드
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-데이터-플레인-인프라-설치업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) 데이터 플레인 (인프라) 설치/업그레이드
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-전역-정책-적용-선택" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) 전역 정책 적용 (선택)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3단계-배포-후-네트워크-구성-심화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 배포 후 네트워크 구성 (심화)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3단계: 배포 후 네트워크 구성 (심화)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-loadbalancer--수동-ip-할당-온프레미스daemonset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. LoadBalancer — 수동 IP 할당 (온프레미스/DaemonSet)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. LoadBalancer — 수동 IP 할당 (온프레미스/DaemonSet)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-서비스service-외부-ip-등록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) 서비스(Service) 외부 IP 등록
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-게이트웨이gateway-리소스-주소-바인딩" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) 게이트웨이(Gateway) 리소스 주소 바인딩
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-nodeport--포트-확인-및-haproxy-연동" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. NodePort — 포트 확인 및 HAProxy 연동
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-와일드카드-tls-인증서-적용" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 와일드카드 TLS 인증서 적용
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4단계-서비스-노출-httproute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 서비스 노출 (HTTPRoute)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#삭제-및-초기화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삭제 및 초기화
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1910,7 +1676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx-nic-migration/" class="md-nav__link">
+      <a href="../../../gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -1938,7 +1704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -1966,7 +1732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -1994,7 +1760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -2022,7 +1788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../missed-containerport/" class="md-nav__link">
+      <a href="../../../gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -2113,7 +1879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-pv-nas/" class="md-nav__link">
+      <a href="../../../use-pv-nas/" class="md-nav__link">
         
   
   
@@ -2149,7 +1915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cheatsheet/" class="md-nav__link">
+      <a href="../../../cheatsheet/" class="md-nav__link">
         
   
   
@@ -2177,7 +1943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../container-image-cheatsheet/" class="md-nav__link">
+      <a href="../../../container-image-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2264,7 +2030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -2292,7 +2058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2431,7 +2197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
         
   
   
@@ -2459,7 +2225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
         
   
   
@@ -2487,7 +2253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
+      <a href="../../../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
         
   
   
@@ -2515,7 +2281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../../../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -2543,7 +2309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
+      <a href="../../../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
         
   
   
@@ -2571,7 +2337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/005-gitea-install/" class="md-nav__link">
+      <a href="../../../../cicd/offline-install/005-gitea-install/" class="md-nav__link">
         
   
   
@@ -2659,7 +2425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -2754,7 +2520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -2834,7 +2600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -2981,7 +2747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -3009,7 +2775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../../../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -3097,7 +2863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -3125,7 +2891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../../../db/redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -3213,7 +2979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -3241,7 +3007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -3269,7 +3035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -3364,7 +3130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/cheatsheet/" class="md-nav__link">
+      <a href="../../../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3392,7 +3158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/convention/" class="md-nav__link">
+      <a href="../../../../git/convention/" class="md-nav__link">
         
   
   
@@ -3479,7 +3245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -3618,7 +3384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -3646,7 +3412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-network-subnet/" class="md-nav__link">
+      <a href="../../../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -3674,7 +3440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/port-check/" class="md-nav__link">
+      <a href="../../../../network/tip/port-check/" class="md-nav__link">
         
   
   
@@ -3769,7 +3535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3849,7 +3615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -3877,7 +3643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -3905,7 +3671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -3993,7 +3759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -4021,7 +3787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -4109,7 +3875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -4137,7 +3903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -4225,7 +3991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -4313,7 +4079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -4376,10 +4142,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
+  <a href="#-1단계-작업-환경-준비-인터넷-호스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        📌 1단계: 작업 환경 준비 (인터넷 호스트)
       
     </span>
   </a>
@@ -4387,244 +4153,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#아키텍처-개요" class="md-nav__link">
+  <a href="#-2단계-설치-파일-다운로드-downloadsh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        아키텍처 개요
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="아키텍처 개요">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#배포-모드-비교-및-선택" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        배포 모드 비교 및 선택
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-이미지-확보-및-로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 이미지 확보 및 로드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1단계: 이미지 확보 및 로드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#case-a-로컬-환경에-직접-로드-harbor-미사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Case A: 로컬 환경에 직접 로드 (Harbor 미사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#case-b-harbor-레지스트리-업로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Case B: Harbor 레지스트리 업로드
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-설치-및-업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: 설치 및 업그레이드
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2단계: 설치 및 업그레이드">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#방법-1-자동화-스크립트-사용-권장" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 1. 자동화 스크립트 사용 (권장)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#방법-2-수동-설치-및-업그레이드-스크립트-사용-불가-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 2. 수동 설치 및 업그레이드 (스크립트 사용 불가 시)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="방법 2. 수동 설치 및 업그레이드 (스크립트 사용 불가 시)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-crd-수동-적용-설치업그레이드-공통" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) CRD 수동 적용 (설치/업그레이드 공통)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-컨트롤-플레인-설치업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) 컨트롤 플레인 설치/업그레이드
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-데이터-플레인-인프라-설치업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) 데이터 플레인 (인프라) 설치/업그레이드
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-전역-정책-적용-선택" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) 전역 정책 적용 (선택)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3단계-배포-후-네트워크-구성-심화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 배포 후 네트워크 구성 (심화)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3단계: 배포 후 네트워크 구성 (심화)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-loadbalancer--수동-ip-할당-온프레미스daemonset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. LoadBalancer — 수동 IP 할당 (온프레미스/DaemonSet)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. LoadBalancer — 수동 IP 할당 (온프레미스/DaemonSet)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-서비스service-외부-ip-등록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) 서비스(Service) 외부 IP 등록
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-게이트웨이gateway-리소스-주소-바인딩" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) 게이트웨이(Gateway) 리소스 주소 바인딩
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-nodeport--포트-확인-및-haproxy-연동" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. NodePort — 포트 확인 및 HAProxy 연동
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-와일드카드-tls-인증서-적용" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 와일드카드 TLS 인증서 적용
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4단계-서비스-노출-httproute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 서비스 노출 (HTTPRoute)
+        📌 2단계: 설치 파일 다운로드 (download.sh)
       
     </span>
   </a>
@@ -4632,10 +4164,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#삭제-및-초기화" class="md-nav__link">
+  <a href="#-3단계-폐쇄망용-압축-파일-생성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        삭제 및 초기화
+        📌 3단계: 폐쇄망용 압축 파일 생성
       
     </span>
   </a>
@@ -4662,203 +4194,33 @@
   
 
 
-<h1 id="envoy-gateway-v172--proxy-v1372-오프라인-설치-가이드">Envoy Gateway v1.7.2 / Proxy v1.37.2 오프라인 설치 가이드</h1>
-<p>폐쇄망 환경에서 Envoy Gateway를 Kubernetes(K8s) 위에 설치하는 절차를 안내합니다.</p>
-<h2 id="전제-조건">전제 조건</h2>
-<ul>
-<li>Kubernetes 클러스터 구성 완료</li>
-<li>Helm v3.14.0 이상 설치 완료</li>
-<li><code>kubectl</code> CLI 사용 가능</li>
-<li>Harbor 레지스트리 또는 로컬 이미지 로드 환경 (Containerd <code>ctr</code> 등)</li>
-</ul>
-<h2 id="아키텍처-개요">아키텍처 개요</h2>
-<ul>
-<li><strong>Network:</strong> <code>hostNetwork: false</code> (Pod 격리 보호)</li>
-<li><strong>트래픽 진입점:</strong> <code>LoadBalancer</code> 또는 <code>NodePort</code> 서비스</li>
-<li><strong>구성 요소:</strong></li>
-<li><strong>Control Plane:</strong> Envoy Gateway v1.7.2</li>
-<li><strong>Data Plane:</strong> Envoy Proxy v1.37.2 (Distroless)</li>
-</ul>
-<h3 id="배포-모드-비교-및-선택">배포 모드 비교 및 선택</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">LoadBalancer + DaemonSet (권장)</th>
-<th style="text-align: left;">NodePort + DaemonSet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>권장 환경</strong></td>
-<td style="text-align: left;">클라우드 또는 MetalLB 환경</td>
-<td style="text-align: left;">하드웨어 L4 / HAProxy 연동 환경</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>실IP 보존</strong></td>
-<td style="text-align: left;">가능 (<code>externalTrafficPolicy: Local</code>)</td>
-<td style="text-align: left;">가능 (Proxy Protocol 필요 시 설정)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>고가용성(HA)</strong></td>
-<td style="text-align: left;">모든 워커 노드에서 트래픽 수신</td>
-<td style="text-align: left;">모든 워커 노드에서 트래픽 수신</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>운영 편의성</strong></td>
-<td style="text-align: left;">높음 (자동 IP 관리)</td>
-<td style="text-align: left;">보통 (Port 관리 및 LB 연동 필요)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="1단계-이미지-확보-및-로드">1단계: 이미지 확보 및 로드</h2>
-<h3 id="case-a-로컬-환경에-직접-로드-harbor-미사용-시">Case A: 로컬 환경에 직접 로드 (Harbor 미사용 시)</h3>
-<p>인터넷이 되는 환경에서 이미지를 Pull 한 뒤 tar로 확보하여 워커 노드로 옮깁니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 이미지 Pull 및 Export (인터넷 가능 환경)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ctr<span class="w"> </span>images<span class="w"> </span>pull<span class="w"> </span>docker.io/envoyproxy/gateway:v1.7.2
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ctr<span class="w"> </span>images<span class="w"> </span>pull<span class="w"> </span>docker.io/envoyproxy/envoy:distroless-v1.37.2
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>ctr<span class="w"> </span>images<span class="w"> </span><span class="nb">export</span><span class="w"> </span>envoy-gateway.tar<span class="w"> </span>docker.io/envoyproxy/gateway:v1.7.2
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>ctr<span class="w"> </span>images<span class="w"> </span><span class="nb">export</span><span class="w"> </span>envoy-proxy.tar<span class="w"> </span>docker.io/envoyproxy/envoy:distroless-v1.37.2
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 폐쇄망 워커 노드에서 Import (Kubernetes 네임스페이스 지정)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>envoy-gateway.tar
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>envoy-proxy.tar
+<h1 id="폐쇄망용-설치-파일-준비-ubuntu">폐쇄망용 설치 파일 준비 (Ubuntu)</h1>
+<p>이 문서는 Ubuntu 24.04 등 Ubuntu 환경의 폐쇄망 쿠버네티스 구축을 위해 인터넷이 연결된 호스트에서 설치 파일(Debian 패키지, 컨테이너 이미지, 바이너리)을 준비하는 과정을 안내합니다.</p>
+<h2 id="-1단계-작업-환경-준비-인터넷-호스트">📌 1단계: 작업 환경 준비 (인터넷 호스트)</h2>
+<p>인터넷이 가능한 Ubuntu 호스트에서 K8s 설치용 스크립트 디렉토리로 이동합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 작업 디렉토리 생성 및 이동</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/k8s-offline-prep
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-offline-prep
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># (예시) 프로젝트에서 제공하는 설치 스크립트 디렉토리 구조 확보</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># git clone https://github.com/kdelphinus/infra-cheatsheets.git (또는 관련 파일 복사)</span>
 </code></pre></div>
-<p><em>(참고: K3s를 사용하는 경우 <code>sudo k3s ctr -n k8s.io images import ...</code> 명령어를 사용하십시오.)</em></p>
-<h3 id="case-b-harbor-레지스트리-업로드">Case B: Harbor 레지스트리 업로드</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./images/upload_images_to_harbor_v3-lite.sh
+<h2 id="-2단계-설치-파일-다운로드-downloadsh">📌 2단계: 설치 파일 다운로드 (download.sh)</h2>
+<p>제공된 <code>scripts/download.sh</code> 스크립트를 실행하여 오프라인 설치에 필요한 모든 에셋을 다운로드합니다. 이 스크립트는 <code>apt-get download</code>를 통해 DEB 패키지를 캐싱하고, <code>ctr</code> 또는 <code>docker</code>를 통해 K8s 컨트롤 플레인 및 CNI(Calico/Cilium) 이미지를 <code>tar</code>로 묶어 저장합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># sudo 권한으로 다운로드 스크립트 실행</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>./scripts/download.sh
 </code></pre></div>
-<hr />
-<h2 id="2단계-설치-및-업그레이드">2단계: 설치 및 업그레이드</h2>
-<p>설치는 자동화 스크립트를 사용하거나, 수동으로 Helm 명령어를 직접 실행하여 진행할 수 있습니다.</p>
-<h3 id="방법-1-자동화-스크립트-사용-권장">방법 1. 자동화 스크립트 사용 (권장)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./scripts/install.sh
+<p><strong>스크립트 주요 동작:</strong>
+- <strong>DEB 패키지</strong>: <code>kubeadm</code>, <code>kubelet</code>, <code>kubectl</code>, <code>containerd.io</code>, <code>haproxy</code>, <code>keepalived</code> 및 필수 의존성 패키지 다운로드 (<code>k8s/debs/</code>)
+- <strong>컨테이너 이미지</strong>: API Server, etcd, CoreDNS 등 K8s 핵심 이미지 및 CNI 관련 이미지 다운로드 후 tar 저장 (<code>k8s/images/</code>)
+- <strong>바이너리</strong>: <code>helm</code>, <code>nerdctl</code> 등 필수 도구 다운로드 (<code>k8s/binaries/</code>)</p>
+<h2 id="-3단계-폐쇄망용-압축-파일-생성">📌 3단계: 폐쇄망용 압축 파일 생성</h2>
+<p>다운로드가 완료되면 해당 디렉토리 전체를 압축하여 폐쇄망 서버로 반입할 준비를 마칩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 버전 정보를 포함하여 압축 (예: k8s-ubuntu-offline.tar.gz)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>tar<span class="w"> </span>czf<span class="w"> </span>k8s-ubuntu-offline.tar.gz<span class="w"> </span>./k8s-offline-prep
 </code></pre></div>
-<p><strong>스크립트 동작 모드 설명:</strong></p>
-<ol>
-<li><strong>업그레이드</strong>: <code>install.conf</code>에 저장된 이전 설정을 유지하며 Helm Upgrade를 수행합니다. <strong>기존 HTTPRoute 등 설정이 보존됩니다.</strong></li>
-<li><strong>재설치</strong>: 기존 Helm 리소스를 삭제한 후 새로 입력받은 설정으로 설치합니다.</li>
-<li><strong>초기화</strong>: 모든 리소스와 <code>install.conf</code>를 삭제합니다.</li>
-</ol>
-<h3 id="방법-2-수동-설치-및-업그레이드-스크립트-사용-불가-시">방법 2. 수동 설치 및 업그레이드 (스크립트 사용 불가 시)</h3>
-<p>스크립트 환경에 문제가 있거나 세밀한 제어가 필요할 경우 아래 순서대로 직접 실행합니다.</p>
-<h4 id="1-crd-수동-적용-설치업그레이드-공통">1) CRD 수동 적용 (설치/업그레이드 공통)</h4>
-<p>Envoy Gateway는 Helm 배포 전에 CRD를 먼저 적용해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 디렉토리 이동</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>envoy-1.37.2/
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># CRD 적용 (어노테이션 크기 문제 방지를 위해 replace --force 권장)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>replace<span class="w"> </span>--force<span class="w"> </span>-f<span class="w"> </span>charts/gateway-1.7.2/crds/gatewayapi-crds.yaml
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>kubectl<span class="w"> </span>replace<span class="w"> </span>--force<span class="w"> </span>-f<span class="w"> </span>charts/gateway-1.7.2/crds/generated/
-</code></pre></div>
-<h4 id="2-컨트롤-플레인-설치업그레이드">2) 컨트롤 플레인 설치/업그레이드</h4>
-<p><code>values.yaml</code> 파일을 환경(이미지 경로 등)에 맞게 수정한 뒤 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>eg-gateway<span class="w"> </span>./charts/gateway-1.7.2<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--create-namespace<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml
-</code></pre></div>
-<h4 id="3-데이터-플레인-인프라-설치업그레이드">3) 데이터 플레인 (인프라) 설치/업그레이드</h4>
-<p><code>values-infra.yaml</code> 파일을 환경에 맞게 수정한 뒤 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>gateway-infra<span class="w"> </span>./charts/gateway-infra<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>-f<span class="w"> </span>./values-infra.yaml
-</code></pre></div>
-<h4 id="4-전역-정책-적용-선택">4) 전역 정책 적용 (선택)</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/policy-global-config.yaml
-</code></pre></div>
-<hr />
-<h2 id="3단계-배포-후-네트워크-구성-심화">3단계: 배포 후 네트워크 구성 (심화)</h2>
-<h3 id="1-loadbalancer--수동-ip-할당-온프레미스daemonset">1. LoadBalancer — 수동 IP 할당 (온프레미스/DaemonSet)</h3>
-<p>전체 워커 노드 IP를 <code>externalIPs</code>에 등록하여 고가용성을 확보합니다. 서비스(Service) 뿐만 아니라 게이트웨이(Gateway) 리소스에도 주소를 명시적으로 바인딩해야 정상적으로 가동(<code>Programmed: True</code>)됩니다.</p>
-<h4 id="1-서비스service-외부-ip-등록">1) 서비스(Service) 외부 IP 등록</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 서비스 이름 확인</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cluster-gateway<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="k">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 단일 노드 IP 등록 시</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span>--type<span class="w"> </span>merge<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;[Worker1 IP]&quot;]}}&#39;</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># 전체 워커 노드 IP 일괄 등록 시 (다중 노드 환경)</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span>--type<span class="w"> </span>merge<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;[Worker1 IP]&quot;,&quot;[Worker2 IP]&quot;,&quot;[Worker3 IP]&quot;]}}&#39;</span>
-</code></pre></div>
-<h4 id="2-게이트웨이gateway-리소스-주소-바인딩">2) 게이트웨이(Gateway) 리소스 주소 바인딩</h4>
-<p>서비스 패치 후에도 Gateway 상태가 <code>False</code>인 경우 아래 명령어로 주소를 직접 바인딩합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 단일 노드 IP 바인딩</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cluster-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[{&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;[Worker1 IP]&quot;}]}}&#39;</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># 다중 노드 IP 바인딩 (전체 워커 노드 등록 권장)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>gateway<span class="w"> </span>cluster-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>--type<span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;addresses&quot;:[</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s1">    {&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;[Worker1 IP]&quot;},</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s1">    {&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;[Worker2 IP]&quot;},</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="s1">    {&quot;type&quot;:&quot;IPAddress&quot;,&quot;value&quot;:&quot;[Worker3 IP]&quot;}</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="s1">  ]}}&#39;</span>
-</code></pre></div>
-<blockquote>
-<p><strong>주의</strong>: <code>[Worker1 IP]</code>, <code>[Worker2 IP]</code> 등의 부분은 실제 환경의 워커 노드 IP 주소로 변경하여 실행해야 합니다.</p>
-</blockquote>
-<h3 id="2-nodeport--포트-확인-및-haproxy-연동">2. NodePort — 포트 확인 및 HAProxy 연동</h3>
-<p><code>values-infra.yaml</code>에서 NodePort로 설정한 경우 할당된 포트(기본 30080, 30443)를 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># 출력 예: 80:30080/TCP, 443:30443/TCP</span>
-</code></pre></div>
-<p>해당 포트를 앞단의 HAProxy 또는 L4 스위치의 Real Server 포트로 지정합니다.</p>
-<h3 id="3-와일드카드-tls-인증서-적용">3. 와일드카드 TLS 인증서 적용</h3>
-<p><code>*.devops.internal</code>과 같은 통합 인증서를 적용하는 절차입니다.</p>
-<p><strong>TLS Secret 생성:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>wildcard-tls-secret<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>--cert<span class="o">=</span>cert.pem<span class="w"> </span>--key<span class="o">=</span>key.pem<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-</code></pre></div>
-<p><strong>Gateway 리스너 설정 업데이트 (<code>gateway-infra</code> 템플릿 또는 수동 패치):</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPS</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*.devops.internal&quot;</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terminate</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">        </span><span class="nt">certificateRefs</span><span class="p">:</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wildcard-tls-secret</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">            </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
-</code></pre></div>
-<hr />
-<h2 id="4단계-서비스-노출-httproute">4단계: 서비스 노출 (HTTPRoute)</h2>
-<p>신규 서비스를 Envoy를 통해 노출하려면 HTTPRoute 리소스를 생성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPRoute</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example-service</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">parentRefs</span><span class="p">:</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster-gateway</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envoy-gateway-system</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">  </span><span class="nt">hostnames</span><span class="p">:</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;app.devops.internal&quot;</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">PathPrefix</span><span class="p p-Indicator">,</span><span class="nt"> value</span><span class="p">:</span><span class="w"> </span><span class="nv">/</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">      </span><span class="nt">backendRefs</span><span class="p">:</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-svc</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</code></pre></div>
-<hr />
-<h2 id="삭제-및-초기화">삭제 및 초기화</h2>
-<p>자동화 스크립트를 사용하거나 수동으로 리소스를 제거합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 스크립트 사용</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>./scripts/uninstall.sh
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># 수동 삭제</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>gateway-infra<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>eg-gateway<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>ns<span class="w"> </span>envoy-gateway-system
-</code></pre></div>
+<p>이제 생성된 압축 파일을 USB나 망연계 솔루션을 통해 폐쇄망의 대상 노드들로 이동시킨 후, <a href="../offline-install/">오프라인 설치 가이드</a>를 따라 설치를 진행합니다.</p>
 
 
 
@@ -4908,10 +4270,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

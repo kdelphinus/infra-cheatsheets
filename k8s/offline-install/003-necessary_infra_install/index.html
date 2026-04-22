@@ -25,7 +25,7 @@
     
     
       
-        <title>기반 인프라 설치 - Infra Cheatsheets</title>
+        <title>Helm & 스토리지 프로비저너 설치 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#3-폐쇄망에서-helm-harbor-envoyingress는-비권장-설치" class="md-skip">
+        <a href="#기반-인프라-helm--스토리지-프로비저너-설치" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              기반 인프라 설치
+              Helm & 스토리지 프로비저너 설치
             
           </span>
         </div>
@@ -256,7 +256,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../install/ubuntu/offline-install/" class="md-tabs__link">
+        <a href="../../install/ubuntu/ready-offline/" class="md-tabs__link">
           
   
   
@@ -740,6 +740,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../install/ubuntu/ready-offline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../install/ubuntu/offline-install/" class="md-nav__link">
         
   
@@ -747,7 +775,7 @@
   <span class="md-ellipsis">
     
   
-    1. 오프라인 설치 가이드
+    2. 오프라인 설치 가이드
   
 
     
@@ -775,35 +803,7 @@
   <span class="md-ellipsis">
     
   
-    2. 온라인 설치 가이드
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    3. Envoy Gateway (v1.37.2)
+    3. 온라인 설치 가이드
   
 
     
@@ -1052,7 +1052,7 @@
   <span class="md-ellipsis">
     
   
-    기반 인프라 설치
+    Helm & 스토리지 프로비저너 설치
   
 
     
@@ -1070,7 +1070,7 @@
   <span class="md-ellipsis">
     
   
-    기반 인프라 설치
+    Helm & 스토리지 프로비저너 설치
   
 
     
@@ -1107,188 +1107,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-2-envoy-설치" class="md-nav__link">
+  <a href="#-phase-2-local-path-provisioner-영구-저장소-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 2: Envoy 설치
+        🚀 Phase 2: Local Path Provisioner (영구 저장소) 설치
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 2: Envoy 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0-아키텍처-개요-standard-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 아키텍처 개요 (Standard Architecture)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-이미지-로드-및-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 이미지 로드 및 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-배포-후-상태-확인-및-네트워크-연동" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 배포 후 상태 확인 및 네트워크 연동
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-case-c-loadbalancer-수동-할당-metallb-미사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case C] LoadBalancer 수동 할당 (MetalLB 미사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-case-d-nodeport-연동-vipl4-사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case D] NodePort 연동 (VIP/L4 사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-운영-및-로그-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 운영 및 로그 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-3-harbor-설치" class="md-nav__link">
+  <a href="#-참고-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 3: Harbor 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0-local-path-provisioner-영구-저장소" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. Local Path Provisioner (영구 저장소)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-harbor-배포" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Harbor 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-containerd-연동-insecure-registry-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Containerd 연동 (Insecure Registry 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Containerd 연동 (Insecure Registry 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2-1-containerd-configtoml에-config_path-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-1. containerd config.toml에 config_path 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-2-hoststoml-생성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-2. hosts.toml 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-3-containerd-재시작-및-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-3. containerd 재시작 및 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-4-접속-테스트-및-이미지-관리" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 4: 접속 테스트 및 이미지 관리
+        💡 참고 사항
       
     </span>
   </a>
@@ -1787,14 +1620,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    NGINX NIC 마이그레이션 가이드
+    Envoy Gateway (v1.37.2)
   
 
     
@@ -1822,7 +1655,35 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway 설치
+    Envoy Gateway (v1.36.3 - Legacy)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX NIC 마이그레이션 가이드
   
 
     
@@ -4292,188 +4153,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-2-envoy-설치" class="md-nav__link">
+  <a href="#-phase-2-local-path-provisioner-영구-저장소-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 2: Envoy 설치
+        🚀 Phase 2: Local Path Provisioner (영구 저장소) 설치
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 2: Envoy 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0-아키텍처-개요-standard-architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 아키텍처 개요 (Standard Architecture)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-이미지-로드-및-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 이미지 로드 및 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-배포-후-상태-확인-및-네트워크-연동" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 배포 후 상태 확인 및 네트워크 연동
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 배포 후 상태 확인 및 네트워크 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-case-c-loadbalancer-수동-할당-metallb-미사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case C] LoadBalancer 수동 할당 (MetalLB 미사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-case-d-nodeport-연동-vipl4-사용-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ [Case D] NodePort 연동 (VIP/L4 사용 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-운영-및-로그-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 운영 및 로그 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#-phase-3-harbor-설치" class="md-nav__link">
+  <a href="#-참고-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Phase 3: Harbor 설치
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Phase 3: Harbor 설치">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0-local-path-provisioner-영구-저장소" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. Local Path Provisioner (영구 저장소)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-harbor-배포" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Harbor 배포
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-containerd-연동-insecure-registry-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Containerd 연동 (Insecure Registry 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Containerd 연동 (Insecure Registry 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2-1-containerd-configtoml에-config_path-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-1. containerd config.toml에 config_path 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-2-hoststoml-생성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-2. hosts.toml 생성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-3-containerd-재시작-및-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-3. containerd 재시작 및 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-phase-4-접속-테스트-및-이미지-관리" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Phase 4: 접속 테스트 및 이미지 관리
+        💡 참고 사항
       
     </span>
   </a>
@@ -4500,20 +4194,19 @@
   
 
 
-<h1 id="3-폐쇄망에서-helm-harbor-envoyingress는-비권장-설치">3. 폐쇄망에서 Helm, Harbor, Envoy(Ingress는 비권장) 설치</h1>
+<h1 id="기반-인프라-helm--스토리지-프로비저너-설치">기반 인프라 (Helm &amp; 스토리지 프로비저너) 설치</h1>
+<p>폐쇄망 환경에서 Kubernetes 운영에 필수적인 Helm과 로컬 동적 스토리지 프로비저너를 설치하는 절차를 안내합니다.</p>
 <ul>
 <li><strong>가이드 환경</strong></li>
-<li><strong>OS</strong>: Rocky Linux 9.6</li>
-<li><strong>kubelet</strong>: v1.30.14</li>
+<li><strong>OS</strong>: Rocky Linux 9.6 / Ubuntu 24.04 (공통)</li>
 <li>폐쇄망용 K8s 설치 파일이 준비되어 있어야 합니다.</li>
-<li><a href="https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?usp=sharing">설치 파일 위치 (Google Drive)</a></li>
 </ul>
 <hr />
 <h2 id="-phase-1-helm-설치-master-1-only">🚀 Phase 1: Helm 설치 (Master-1 Only)</h2>
 <p>Helm은 마스터 노드에서 명령어를 내리는 도구이므로, <strong>마스터 노드 1대</strong>에만 설치하면 됩니다.</p>
 <p><strong>[실행 위치: K8s-Master-Node-1]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 바이너리 폴더로 이동</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/binaries
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. 바이너리 폴더로 이동 (환경에 맞는 경로 지정)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># cd ~/k8s-offline/k8s/binaries</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2. 압축 해제</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>helm-v3.14.0-linux-amd64.tar.gz
@@ -4525,121 +4218,25 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>helm<span class="w"> </span>version
 </code></pre></div>
 <hr />
-<h2 id="-phase-2-envoy-설치">🚀 Phase 2: Envoy 설치</h2>
-<p>2026년 3월부터 <code>Ingress Nginx</code>에 대한 공식 지원이 종료됨에 따라, Kubernetes 표준인 <strong>Gateway API</strong>와 <strong>Envoy</strong> 사용을 강력히 권장합니다.</p>
-<h3 id="0-아키텍처-개요-standard-architecture">0. 아키텍처 개요 (Standard Architecture)</h3>
-<ul>
-<li><strong>Network Mode</strong>: <code>hostNetwork: false</code> (K8s 내부망 사용, 노드망과 격리)</li>
-<li><strong>Service Type</strong>: <code>LoadBalancer</code> 또는 <code>NodePort</code></li>
-<li><strong>Traffic Flow</strong>:
-  <code>Client</code> → <code>LB/VIP (80/443)</code> → <code>Envoy Pod (30080/30443)</code> → <code>Backend Pod</code></li>
-</ul>
-<h3 id="1-이미지-로드-및-설치-실행">1. 이미지 로드 및 설치 실행</h3>
-<p><strong>[전체 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>./envoy-1.36.3
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>./images/upload_images.sh
-</code></pre></div>
+<h2 id="-phase-2-local-path-provisioner-영구-저장소-설치">🚀 Phase 2: Local Path Provisioner (영구 저장소) 설치</h2>
+<p>애플리케이션이 PVC를 요청할 때 노드의 로컬 디렉토리를 자동으로 할당해주는 동적 프로비저너를 설치합니다.</p>
 <p><strong>[Master-1 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>install_envoy-gateway.sh
-</code></pre></div>
-<p><strong>설치 시 주요 선택 사항:</strong></p>
-<ul>
-<li><strong>LB vs NodePort</strong>: 환경에 맞는 진입점 선택.</li>
-<li><strong>노드 고정</strong>: 성능 최적화를 위해 특정 노드에 Envoy Proxy 배치 가능.</li>
-<li><strong>전역 정책</strong>: <code>policy-global.yaml</code> 적용 시 헤더 보안 및 트래픽 정책이 자동 반영됩니다.</li>
-</ul>
-<h3 id="2-배포-후-상태-확인-및-네트워크-연동">2. 배포 후 상태 확인 및 네트워크 연동</h3>
-<h4 id="-case-c-loadbalancer-수동-할당-metallb-미사용-시">🛠️ [Case C] LoadBalancer 수동 할당 (MetalLB 미사용 시)</h4>
-<p>서비스가 <code>&lt;pending&gt;</code> 상태인 경우 워커 노드 IP를 수동으로 바인딩합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">SVC_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[?(@.spec.type==&quot;LoadBalancer&quot;)].metadata.name}&#39;</span><span class="k">)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 워커 노드 IP들로 패치</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="nv">$SVC_NAME</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;externalIPs&quot;:[&quot;10.10.10.73&quot;,&quot;10.10.10.74&quot;]}}&#39;</span>
-</code></pre></div>
-<h4 id="-case-d-nodeport-연동-vipl4-사용-시">🛠️ [Case D] NodePort 연동 (VIP/L4 사용 시)</h4>
-<p>NodePort 설치 시 HTTP <strong>30080</strong>, HTTPS <strong>30443</strong> 포트가 고정 사용됩니다.</p>
-<ul>
-<li><strong>하드웨어 L4</strong>: 워커 노드 IP와 포트(30080, 30443)를 Real Server로 등록.</li>
-<li><strong>소프트웨어 LB (HAProxy)</strong>: 80/443 포트 트래픽을 워커 노드 포트로 중계.</li>
-<li><strong>운영 팁</strong>: <code>externalTrafficPolicy: Local</code> 설정을 통해 클라이언트 원본 IP를 보존할 수 있습니다.</li>
-</ul>
-<h3 id="3-운영-및-로그-확인">3. 운영 및 로그 확인</h3>
-<p>Envoy Gateway는 동적 관리를 위해 파드 이름이 계속 변경되므로 <strong>Label Selector(<code>-l</code>)</strong> 사용이 필수입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Envoy Proxy(트래픽 처리) 로그 확인</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>gateway.envoyproxy.io/owning-gateway-name<span class="o">=</span>cluster-gateway
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Gateway Controller(설치/배포) 로그 확인</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span>-f<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>envoy-gateway
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1. 매니페스트 적용</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># cd ~/k8s-offline/k8s/utils</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>local-path-storage.yaml
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 2. 기본 스토리지 클래스로 지정 (자동 할당용)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>storageclass<span class="w"> </span>local-path<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 3. 상태 확인</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>local-path-storage
 </code></pre></div>
 <hr />
-<h2 id="-phase-3-harbor-설치">🚀 Phase 3: Harbor 설치</h2>
-<h3 id="0-local-path-provisioner-영구-저장소">0. Local Path Provisioner (영구 저장소)</h3>
-<p><strong>[Master-1 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-1.30/k8s/utils
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>local-path-storage.yaml
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 기본 스토리지 클래스로 지정 (Harbor 자동 할당용)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>storageclass<span class="w"> </span>local-path<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;true&quot;}}}&#39;</span>
-</code></pre></div>
-<h3 id="1-harbor-배포">1. Harbor 배포</h3>
-<p><strong>[Harbor를 배치할 특정 워커 노드]</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>harbor-images-upload/
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>bash<span class="w"> </span>upload_images.sh
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/harbor<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/harbor
-</code></pre></div>
-<p><strong>[Master-1 노드]</strong>
-<code>harbor_install_offline.sh</code>에서 <code>EXTERNAL_HOSTNAME</code>, <code>SAVE_PATH</code>, <code>NODE_NAME</code> 등을 수정 후 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>harbor_install_offline.sh
-</code></pre></div>
-<h3 id="2-containerd-연동-insecure-registry-설정">2. Containerd 연동 (Insecure Registry 설정)</h3>
-<p>HTTP 통신이나 사설 인증서 사용 시 <strong>모든 K8s 노드(Master + Worker)</strong>에서 아래 설정이 필요합니다.</p>
-<h4 id="2-1-containerd-configtoml에-config_path-설정">2-1. containerd config.toml에 config_path 설정</h4>
-<p><code>/etc/containerd/config.toml</code>에 <code>certs.d</code> 경로를 지정해야 합니다. <strong>containerd v2.x에서 CRI 플러그인 키가 변경</strong>되었으므로, 버전에 맞는 섹션에 설정해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 버전 확인</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>containerd<span class="w"> </span>--version
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 현재 사용 중인 플러그인 키 확인</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>grep<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;io.containerd&#39;</span><span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;cri\|registry&#39;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># containerd v1.x</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">[plugins.</span><span class="s2">&quot;io.containerd.grpc.v1.cri&quot;</span><span class="k">.registry]</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="n">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d&quot;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># containerd v2.x (플러그인 키 변경됨)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">[plugins.</span><span class="s2">&quot;io.containerd.cri.v1.images&quot;</span><span class="k">.registry]</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="n">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d&quot;</span>
-</code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">v1.x 키에 설정하면 v2.x에서 무시됨</p>
-<p>v1.x 키(<code>grpc.v1.cri</code>)로 <code>config_path</code>를 설정했는데 실제 containerd가 v2.x라면, 설정이 <strong>무시</strong>되어 insecure registry가 동작하지 않습니다. 반드시 <code>containerd --version</code>으로 버전을 확인하세요.</p>
-</div>
-<h4 id="2-2-hoststoml-생성">2-2. hosts.toml 생성</h4>
-<p>Harbor 도메인/IP에 대한 인증 설정을 생성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># (예: 10.10.10.73:30002)</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/&lt;HARBOR_IP&gt;:30002/
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/containerd/certs.d/&lt;HARBOR_IP&gt;:30002/hosts.toml</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="s">server = &quot;http://&lt;HARBOR_IP&gt;:30002&quot;</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="s">[host.&quot;http://&lt;HARBOR_IP&gt;:30002&quot;]</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;]</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="s">  skip_verify = true</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="s">EOF</span>
-</code></pre></div>
-<h4 id="2-3-containerd-재시작-및-확인">2-3. containerd 재시작 및 확인</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># 설정 확인</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>grep<span class="w"> </span><span class="s2">&quot;config_path&quot;</span><span class="w"> </span>/etc/containerd/config.toml
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>cat<span class="w"> </span>/etc/containerd/certs.d/&lt;HARBOR_IP&gt;:30002/hosts.toml
-</code></pre></div>
-<hr />
-<h2 id="-phase-4-접속-테스트-및-이미지-관리">🚀 Phase 4: 접속 테스트 및 이미지 관리</h2>
-<ol>
-<li><strong>PC 설정</strong>: <code>/etc/hosts</code> 파일에 Harbor 도메인과 할당된 IP를 등록합니다.</li>
-<li><strong>이미지 푸시</strong>: <code>sudo ctr -n k8s.io images push --plain-http ...</code> 명령어로 Harbor에 등록합니다.</li>
-<li><strong>이미지 풀</strong>: 워커 노드에서 정상적으로 이미지가 내려받아지는지 확인합니다.</li>
-</ol>
+<h2 id="-참고-사항">💡 참고 사항</h2>
+<ul>
+<li><strong>Envoy Gateway</strong>: L7 트래픽 제어를 위한 Envoy Gateway 설치는 <a href="../../gateway-api/envoy-v1.37.2-install/">Gateway API 가이드</a>를 참고하십시오.</li>
+<li><strong>Harbor</strong>: 사설 레지스트리 Harbor 설치는 <a href="../../../cicd/offline-install/000-harbor-install/">CI/CD 가이드</a>를 참고하십시오.</li>
+</ul>
 
 
 
