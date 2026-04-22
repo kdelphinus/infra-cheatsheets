@@ -80,7 +80,6 @@ nav:
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Gateway API':
       - 'Envoy Gateway (v1.37.2)': k8s/gateway-api/envoy-v1.37.2-install.md
-      - 'Envoy Gateway (v1.36.3 - Legacy)': k8s/gateway-api/001-envoy-install.md
       - 'NGINX NIC 마이그레이션 가이드': k8s/gateway-api/nginx-nic-migration.md
       - 'Envoy 운영 전환 체크리스트': k8s/gateway-api/envoy-ops-checklist.md
       - 'HTTPRoute 사용법': k8s/gateway-api/002-convert_ingress_to_httproute.md
@@ -144,3 +143,6 @@ nav:
       - 'OpenStack K8s 네트워크 통신 장애 및 Harbor 배포 실패': openstack/troubleshooting/k8s-network-error.md
     - Tools:
       - 'Ironic 추가하기': openstack/tools/add-ironic.md
+  - Archive:
+    - Kubernetes:
+      - 'Envoy Gateway (v1.36.3)': k8s/gateway-api/001-envoy-install.md
