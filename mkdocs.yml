@@ -72,7 +72,6 @@ nav:
     - 'Backup & Restore':
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Gateway API':
-      - 'Ingress-Nginx 설치': k8s/gateway-api/000-ingress-nginx-install.md
       - 'NGINX NIC 마이그레이션 가이드': k8s/gateway-api/nginx-nic-migration.md
       - 'Envoy Gateway 설치': k8s/gateway-api/001-envoy-install.md
       - 'Envoy 운영 전환 체크리스트': k8s/gateway-api/envoy-ops-checklist.md
