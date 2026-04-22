@@ -97,10 +97,6 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/000-ingress-nginx-install/</loc>
-         <lastmod>2026-04-22</lastmod>
-    </url>
-    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
