@@ -101,10 +101,6 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/001-envoy-install/</loc>
-         <lastmod>2026-04-22</lastmod>
-    </url>
-    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/002-convert_ingress_to_httproute/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
@@ -114,6 +110,10 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-ops-checklist/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.36.3-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
