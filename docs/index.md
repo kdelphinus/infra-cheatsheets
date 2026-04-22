@@ -34,7 +34,7 @@ hide:
     - [:octicons-arrow-right-24: Ubuntu 24.04 오프라인 설치](k8s/install/ubuntu/offline-install.md)
     - [:octicons-arrow-right-24: Rocky Linux 9.6 설치 파일 준비](k8s/install/rocky/ready-offline.md)
     - [:octicons-arrow-right-24: Rocky Linux 9.6 오프라인 설치](k8s/install/rocky/offline-install.md)
-    - [:octicons-arrow-right-24: Helm 및 스토리지 프로비저너 설치](k8s/offline-install/003-necessary_infra_install.md)
+    - [:octicons-arrow-right-24: Helm 및 스토리지 프로비저너 설치](k8s/install/base-infra.md)
     - [:octicons-arrow-right-24: Kubernetes Cheat Sheet](k8s/cheatsheet.md)
 
 - :material-wan: **네트워크 및 인그레스**
@@ -65,7 +65,7 @@ hide:
 
     - [:octicons-arrow-right-24: Prometheus 및 Grafana 통합 모니터링](k8s/monitoring/001-kube-prometheus-stack.md)
     - [:octicons-arrow-right-24: NFS 동적 스토리지 프로비저너](k8s/use-pv-nas.md)
-    - [:octicons-arrow-right-24: MetalLB 로드밸런서 설치](k8s/offline-install/004-metallb-install.md)
+    - [:octicons-arrow-right-24: MetalLB 로드밸런서 설치](k8s/install/metallb-install.md)
 
 </div>
 
