@@ -6,73 +6,127 @@ hide:
 
 # Infra Cheatsheets { .md-display-1 }
 
-**DevOps 실무를 위한 개인 지식 저장소**
-잊어버리기 쉬운 명령어, 설치 절차, 트러블슈팅 가이드를 체계적으로 정리해 두었습니다.
+**DevOps 및 인프라 엔지니어를 위한 지식 저장소**
+잊어버리기 쉬운 명령어, 표준화된 설치 절차, 트러블슈팅 가이드를 체계적으로 관리합니다.
 
 [:fontawesome-brands-github: GitHub](https://github.com/kdelphinus/infra-cheatsheets){ .md-button .md-button--primary }
 [:fontawesome-brands-google-drive: 설치 파일 드라이브](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko/){ .md-button }
-[:fontawesome-solid-box-archive: 설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/){ .md-button }
+[:fontawesome-solid-book: 인프라 표준 가이드](guide/infra-standard.md){ .md-button }
 
 !!! note
     설치 문서는 [설치 파일 GitHub](https://github.com/kdelphinus/air-gapped-install-file/)에 가장 먼저 업데이트됩니다.
 
-!!! info "인프라 표준 가이드"
-    본 프로젝트의 모든 컴포넌트는 수립된 표준을 준수합니다. 신규 구축 및 수정 시 [인프라 설치 및 구성 표준 가이드](guide/infra-standard.md)를 반드시 확인하십시오.
+!!! info "인프라 설치 및 구성 표준 가이드"
+    본 프로젝트의 모든 컴포넌트는 수립된 표준(`install.conf` 기반 상태 보존 등)을 준수합니다. 신규 구축 및 수정 시 [인프라 설치 및 구성 표준 가이드](guide/infra-standard.md)를 반드시 확인하십시오.
 
 ---
 
 ## :simple-kubernetes: Kubernetes Platform
 
-컨테이너 오케스트레이션 및 폐쇄망 기반 플랫폼 운영 가이드입니다.
+폐쇄망 환경의 멀티 OS 지원 및 보안 강화 플랫폼 가이드입니다.
 
 <div class="grid cards" markdown>
 
-- :simple-kubernetes: **K8s Core & Network**
+- :simple-kubernetes: **K8s Core & Install**
 
     ---
 
-    클러스터 구축 및 트래픽 제어 핵심
+    클러스터 구축 및 OS별 최적 설정
 
+    - [:octicons-arrow-right-24: Ubuntu 24.04 **설치 파일 준비**](k8s/install/ubuntu/ready-offline.md)
+    - [:octicons-arrow-right-24: Ubuntu 24.04 **오프라인 설치**](k8s/install/ubuntu/offline-install.md)
+    - [:octicons-arrow-right-24: Rocky Linux 9.6 **설치 파일 준비**](k8s/install/rocky/ready-offline.md)
+    - [:octicons-arrow-right-24: Rocky Linux 9.6 **오프라인 설치**](k8s/install/rocky/offline-install.md)
+    - [:octicons-arrow-right-24: **Helm & 스토리지 프로비저너** 설치](k8s/offline-install/003-necessary_infra_install.md)
     - [:octicons-arrow-right-24: Kubernetes Cheat Sheet](k8s/cheatsheet.md)
-    - [:octicons-arrow-right-24: Ubuntu 24.04 설치 가이드](k8s/install/ubuntu/offline-install.md)
-    - [:octicons-arrow-right-24: Rocky Linux 9.6 설치 가이드](k8s/install/rocky/offline-install.md)
-    - [:octicons-arrow-right-24: NGINX NIC 마이그레이션 가이드](k8s/gateway-api/nginx-nic-migration.md)
-    - [:octicons-arrow-right-24: Envoy Gateway & HTTPRoute](k8s/gateway-api/001-envoy-install.md)
+
+- :material-wan: **Network & Ingress**
+
+    ---
+
+    트래픽 제어 및 차세대 Gateway API
+
+    - [:octicons-arrow-right-24: Envoy Gateway & HTTPRoute](k8s/gateway-api/envoy-v1.37.2-install.md)
     - [:octicons-arrow-right-24: Cilium (CNI) 오프라인 설치](k8s/network/cilium-install.md)
+    - [:octicons-arrow-right-24: NGINX NIC 마이그레이션 가이드](k8s/gateway-api/nginx-nic-migration.md)
 
-- :material-shield-check: **K8s Ops & Security**
+- :material-shield-check: **Security & Backup**
 
     ---
 
-    클러스터 운영 최적화 및 보안 강화
+    런타임 보안 탐지 및 데이터 보호
 
-    - [:octicons-arrow-right-24: Prometheus & Grafana 모니터링](k8s/monitoring/001-kube-prometheus-stack.md)
-    - [:octicons-arrow-right-24: Velero 백업 및 복구 구성](k8s/backup-restore/001-velero-install.md)
     - [:octicons-arrow-right-24: Tetragon 런타임 보안 전략](k8s/security/003-tetragon-security-policy.md)
-    - [:octicons-arrow-right-24: NFS 동적 스토리지 프로비저너](k8s/use-pv-nas.md)
+    - [:octicons-arrow-right-24: Falco 이상행위 탐지 가이드](k8s/security/001-falco-install.md)
+    - [:octicons-arrow-right-24: Velero 백업 및 복구 구성](k8s/backup-restore/001-velero-install.md)
 
-- :material-pipe: **Platform Ecosystem (CI/CD)**
+- :material-cog: **Operations & Storage**
 
     ---
 
-    자동화된 배포 및 아티팩트 관리 가이드
+    모니터링 및 영구 저장소 관리
+
+    - [:octicons-arrow-right-24: Prometheus & Grafana 통합 모니터링](k8s/monitoring/001-kube-prometheus-stack.md)
+    - [:octicons-arrow-right-24: NFS 동적 스토리지 프로비저너](k8s/use-pv-nas.md)
+    - [:octicons-arrow-right-24: MetalLB 로드밸런서 설치](k8s/offline-install/004-metallb-install.md)
+
+</div>
+
+---
+
+## :material-pipe: Platform Ecosystem (CI/CD)
+
+자동화된 배포 및 아티팩트 관리 가이드입니다.
+
+<div class="grid cards" markdown>
+
+- :material-layers: **Registry & Repository**
+
+    ---
+
+    사설 저장소 서비스 구축
 
     - [:octicons-arrow-right-24: Harbor 레지스트리 설치](cicd/offline-install/000-harbor-install.md)
-    - [:octicons-arrow-right-24: GitLab & Jenkins 통합 설치](cicd/offline-install/001-gitlab_jenkins_install.md)
-    - [:octicons-arrow-right-24: ArgoCD 설치 및 연동 가이드](cicd/offline-install/002-argocd-install.md)
     - [:octicons-arrow-right-24: Nexus Repository 설치](cicd/offline-install/004-nexus-install.md)
-    - [:octicons-arrow-right-24: Gitea 설치](cicd/offline-install/005-gitea-install.md)
 
-- :simple-mariadb: **Database Cluster (HA)**
+- :material-sync: **CI/CD Pipelines**
 
     ---
 
-    고가용성 DB 클러스터 운영 가이드
+    지속적 통합 및 배포 플랫폼
+
+    - [:octicons-arrow-right-24: GitLab & Jenkins 통합 설치](cicd/offline-install/001-gitlab_jenkins_install.md)
+    - [:octicons-arrow-right-24: ArgoCD 설치 및 연동 가이드](cicd/offline-install/002-argocd-install.md)
+    - [:octicons-arrow-right-24: Gitea 경량 Git 서비스 설치](cicd/offline-install/005-gitea-install.md)
+
+</div>
+
+---
+
+## :simple-mariadb: Database Cluster (HA)
+
+고가용성 DB 클러스터 및 캐시 서비스 운영 가이드입니다.
+
+<div class="grid cards" markdown>
+
+- :simple-mariadb: **Relational Database**
+
+    ---
+
+    MariaDB 고가용성 클러스터
 
     - [:octicons-arrow-right-24: MariaDB Galera Cluster 설치](db/ha/galera-cluster.md)
     - [:octicons-arrow-right-24: MariaDB 폐쇄망 오프라인 설치](db/install/mariadb-air-gapped-install.md)
-    - [:octicons-arrow-right-24: Redis Stream 개발 가이드](db/redis/001-redis-stream-overview.md)
     - [:octicons-arrow-right-24: DB 장애 복구 및 트러블슈팅](db/ha/galera-recovery.md)
+
+- :simple-redis: **NoSQL & Cache**
+
+    ---
+
+    Redis 고성능 데이터 스트림
+
+    - [:octicons-arrow-right-24: Redis Stream 개발 가이드](db/redis/001-redis-stream-overview.md)
+    - [:octicons-arrow-right-24: Redis Stream 설치 및 운영](db/redis/002-redis-stream-install.md)
 
 </div>
 
