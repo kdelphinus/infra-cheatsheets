@@ -77,6 +77,10 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/guide/infra-standard/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/ide/vscode_shortcut/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
@@ -113,11 +117,35 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.37.2-install/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/missed-containerport/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/nginx-nic-migration/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/offline-install/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/online-install/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/ready-offline/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/offline-install/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/online-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
@@ -129,11 +157,7 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/001-ready-k8s-air-gapped-install/</loc>
-         <lastmod>2026-04-22</lastmod>
-    </url>
-    <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/002-k8s-air-gapped-install/</loc>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/network/cilium-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
@@ -142,10 +166,6 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/004-metallb-install/</loc>
-         <lastmod>2026-04-22</lastmod>
-    </url>
-    <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/online-install/001-k8s-online-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>

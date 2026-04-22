@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#velero-v1180-오프라인-설치-가이드-minio-통합형" class="md-skip">
+        <a href="#velero-오프라인-설치-가이드-minio-통합형" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -222,17 +222,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
   
   Home
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -255,7 +256,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-tabs__link">
+        <a href="../../install/ubuntu/offline-install/" class="md-tabs__link">
           
   
   
@@ -511,9 +512,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -527,7 +544,79 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    대시보드
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/infra-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인프라 설치 및 구성 표준 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -622,7 +711,7 @@
   <span class="md-ellipsis">
     
   
-    폐쇄망
+    Ubuntu 24.04 (v1.33.11)
   
 
     
@@ -638,7 +727,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    폐쇄망
+    Ubuntu 24.04 (v1.33.11)
   
 
           </label>
@@ -651,14 +740,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/001-ready-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../install/ubuntu/offline-install/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1. 폐쇄망용 설치 파일 준비
+    1. 오프라인 설치 가이드
   
 
     
@@ -679,14 +768,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/002-k8s-air-gapped-install/" class="md-nav__link">
+      <a href="../../install/ubuntu/online-install/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 K8s 설치
+    2. 온라인 설치 가이드
   
 
     
@@ -707,42 +796,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    3. 기반 인프라 설치
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../offline-install/004-metallb-install/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    4. MetalLB 설치
+    3. Envoy Gateway (v1.37.2)
   
 
     
@@ -797,7 +858,7 @@
   <span class="md-ellipsis">
     
   
-    온라인
+    Rocky Linux 9.6 (v1.30.0)
   
 
     
@@ -813,7 +874,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    온라인
+    Rocky Linux 9.6 (v1.30.0)
   
 
           </label>
@@ -826,14 +887,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../../online-install/001-k8s-online-install/" class="md-nav__link">
+      <a href="../../install/rocky/ready-offline/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    1. 온라인 환경에서 K8s 설치
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/rocky/offline-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 폐쇄망에서 K8s 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/rocky/online-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 온라인 환경에서 K8s 설치
   
 
     
@@ -888,7 +1005,7 @@
   <span class="md-ellipsis">
     
   
-    Monitoring
+    기반 인프라
   
 
     
@@ -901,6 +1018,153 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기반 인프라
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../offline-install/003-necessary_infra_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기반 인프라 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../offline-install/004-metallb-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MetalLB 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/cilium-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cilium (CNI) 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -997,10 +1261,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
             
   
   
@@ -1018,8 +1282,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1146,10 +1410,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
             
   
   
@@ -1167,8 +1431,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1245,10 +1509,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#구성-명세" class="md-nav__link">
+  <a href="#0단계-에셋-준비-인터넷-가능-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        구성 명세
+        0단계: 에셋 준비 (인터넷 가능 환경)
       
     </span>
   </a>
@@ -1256,44 +1520,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#사전-조건" class="md-nav__link">
+  <a href="#1단계-cli-설치-및-이미지-업로드-폐쇄망-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        사전 조건
+        1단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-에셋-준비-인터넷-가능-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 에셋 준비 (인터넷 가능 환경)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-cli-설치-및-이미지-업로드-폐쇄망-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)">
+    <nav class="md-nav" aria-label="1단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-velero-cli-설치" class="md-nav__link">
+  <a href="#11-velero-cli-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 Velero CLI 설치
+        1.1 Velero CLI 설치
       
     </span>
   </a>
@@ -1301,10 +1543,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-harbor에-이미지-업로드" class="md-nav__link">
+  <a href="#12-harbor에-이미지-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Harbor에 이미지 업로드
+        1.2 Harbor에 이미지 업로드
       
     </span>
   </a>
@@ -1317,15 +1559,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-설치-실행" class="md-nav__link">
+  <a href="#2단계-설치-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 설치 실행
+        2단계: 설치 실행
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3단계: 설치 실행">
+    <nav class="md-nav" aria-label="2단계: 설치 실행">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1356,10 +1598,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4단계-설치-확인" class="md-nav__link">
+  <a href="#3단계-설치-확인-및-웹-접속" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: 설치 확인
+        3단계: 설치 확인 및 웹 접속
       
     </span>
   </a>
@@ -1367,10 +1609,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5단계-업그레이드--재설치--초기화" class="md-nav__link">
+  <a href="#4단계-업그레이드--재설치--초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 업그레이드 / 재설치 / 초기화
+        4단계: 업그레이드 / 재설치 / 초기화
       
     </span>
   </a>
@@ -1378,22 +1620,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6단계-백업-및-복구" class="md-nav__link">
+  <a href="#5단계-백업-및-복구-테스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6단계: 백업 및 복구
+        5단계: 백업 및 복구 테스트
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6단계: 백업 및 복구">
+    <nav class="md-nav" aria-label="5단계: 백업 및 복구 테스트">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#61-백업-생성" class="md-nav__link">
+  <a href="#51-백업-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1 백업 생성
+        5.1 백업 실행
       
     </span>
   </a>
@@ -1401,10 +1643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#62-복구" class="md-nav__link">
+  <a href="#52-복구-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2 복구
+        5.2 복구 실행
       
     </span>
   </a>
@@ -1417,10 +1659,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7단계-삭제" class="md-nav__link">
+  <a href="#6단계-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7단계: 삭제
+        6단계: 삭제
       
     </span>
   </a>
@@ -1435,6 +1677,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="install.conf 참고">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installconf가-있을-때의-동작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        install.conf가 있을 때의 동작
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1478,10 +1737,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
         
           
-          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
             
   
   
@@ -1499,8 +1758,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_6">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1709,10 +1968,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
         
           
-          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="">
             
   
   
@@ -1730,8 +1989,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_7">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4011,10 +4270,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#구성-명세" class="md-nav__link">
+  <a href="#0단계-에셋-준비-인터넷-가능-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        구성 명세
+        0단계: 에셋 준비 (인터넷 가능 환경)
       
     </span>
   </a>
@@ -4022,44 +4281,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#사전-조건" class="md-nav__link">
+  <a href="#1단계-cli-설치-및-이미지-업로드-폐쇄망-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        사전 조건
+        1단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-에셋-준비-인터넷-가능-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 에셋 준비 (인터넷 가능 환경)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-cli-설치-및-이미지-업로드-폐쇄망-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)">
+    <nav class="md-nav" aria-label="1단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-velero-cli-설치" class="md-nav__link">
+  <a href="#11-velero-cli-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 Velero CLI 설치
+        1.1 Velero CLI 설치
       
     </span>
   </a>
@@ -4067,10 +4304,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-harbor에-이미지-업로드" class="md-nav__link">
+  <a href="#12-harbor에-이미지-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Harbor에 이미지 업로드
+        1.2 Harbor에 이미지 업로드
       
     </span>
   </a>
@@ -4083,15 +4320,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-설치-실행" class="md-nav__link">
+  <a href="#2단계-설치-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 설치 실행
+        2단계: 설치 실행
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3단계: 설치 실행">
+    <nav class="md-nav" aria-label="2단계: 설치 실행">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4122,10 +4359,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4단계-설치-확인" class="md-nav__link">
+  <a href="#3단계-설치-확인-및-웹-접속" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: 설치 확인
+        3단계: 설치 확인 및 웹 접속
       
     </span>
   </a>
@@ -4133,10 +4370,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5단계-업그레이드--재설치--초기화" class="md-nav__link">
+  <a href="#4단계-업그레이드--재설치--초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 업그레이드 / 재설치 / 초기화
+        4단계: 업그레이드 / 재설치 / 초기화
       
     </span>
   </a>
@@ -4144,22 +4381,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6단계-백업-및-복구" class="md-nav__link">
+  <a href="#5단계-백업-및-복구-테스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6단계: 백업 및 복구
+        5단계: 백업 및 복구 테스트
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6단계: 백업 및 복구">
+    <nav class="md-nav" aria-label="5단계: 백업 및 복구 테스트">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#61-백업-생성" class="md-nav__link">
+  <a href="#51-백업-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1 백업 생성
+        5.1 백업 실행
       
     </span>
   </a>
@@ -4167,10 +4404,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#62-복구" class="md-nav__link">
+  <a href="#52-복구-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2 복구
+        5.2 복구 실행
       
     </span>
   </a>
@@ -4183,10 +4420,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7단계-삭제" class="md-nav__link">
+  <a href="#6단계-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7단계: 삭제
+        6단계: 삭제
       
     </span>
   </a>
@@ -4201,6 +4438,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="install.conf 참고">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installconf가-있을-때의-동작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        install.conf가 있을 때의 동작
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4224,126 +4478,70 @@
   
 
 
-<h1 id="velero-v1180-오프라인-설치-가이드-minio-통합형">Velero v1.18.0 오프라인 설치 가이드 (MinIO 통합형)</h1>
-<p>폐쇄망 Kubernetes 환경에서 <strong>MinIO 전용 저장소</strong>를 포함하여 Velero 백업 체계를 구축하고, 클러스터 데이터를 보호 및 복구하는 절차를 정의합니다.</p>
-<h2 id="구성-명세">구성 명세</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">버전</th>
-<th style="text-align: left;">용도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Velero CLI</strong></td>
-<td style="text-align: left;"><strong>v1.18.0</strong></td>
-<td style="text-align: left;">백업 및 복구 명령 도구</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Velero Chart</strong></td>
-<td style="text-align: left;"><strong>v12.0.0</strong></td>
-<td style="text-align: left;">Velero 서버 (Helm)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>velero-plugin-for-aws</strong></td>
-<td style="text-align: left;"><strong>v1.14.0</strong></td>
-<td style="text-align: left;">S3 호환 스토리지 연동 플러그인</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>MinIO</strong></td>
-<td style="text-align: left;"><strong>RELEASE.2024-12-18</strong></td>
-<td style="text-align: left;">S3 호환 백업 스토리지</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>MinIO Client (mc)</strong></td>
-<td style="text-align: left;"><strong>RELEASE.2024-11-21</strong></td>
-<td style="text-align: left;">스토리지 관리 도구</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="사전-조건">사전 조건</h2>
-<ul>
-<li>Kubernetes 클러스터 구성 완료</li>
-<li>Helm v3.x 설치 완료</li>
-<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
-</ul>
-<hr />
-<h2 id="1단계-에셋-준비-인터넷-가능-환경">1단계: 에셋 준비 (인터넷 가능 환경)</h2>
+<h1 id="velero-오프라인-설치-가이드-minio-통합형">Velero 오프라인 설치 가이드 (MinIO 통합형)</h1>
+<p>이 가이드는 폐쇄망 환경에서 <strong>전용 MinIO 저장소</strong>를 포함하여 Velero 백업 체계를 구축하고, 데이터를 복구하는 절차를 설명합니다.</p>
+<h2 id="0단계-에셋-준비-인터넷-가능-환경">0단계: 에셋 준비 (인터넷 가능 환경)</h2>
+<p>폐쇄망 서버로 반입하기 전, 인터넷이 되는 환경에서 필요한 모든 파일을 다운로드합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/download_assets.sh
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./scripts/download_assets.sh
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 생성된 파일들을 폐쇄망 서버의 velero-1.18.0/ 폴더로 복사</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 생성된 파일들을 폐쇄망 서버의 velero-1.18.0/ 폴더로 복사합니다.</span>
 </code></pre></div>
-<hr />
-<h2 id="2단계-cli-설치-및-이미지-업로드-폐쇄망-환경">2단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)</h2>
-<h3 id="21-velero-cli-설치">2.1 Velero CLI 설치</h3>
+<h2 id="1단계-cli-설치-및-이미지-업로드-폐쇄망-환경">1단계: CLI 설치 및 이미지 업로드 (폐쇄망 환경)</h2>
+<h3 id="11-velero-cli-설치">1.1 Velero CLI 설치</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tar<span class="w"> </span>-xvf<span class="w"> </span>velero-v1.18.0-linux-amd64.tar.gz
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>mv<span class="w"> </span>velero-v1.18.0-linux-amd64/velero<span class="w"> </span>/usr/local/bin/
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>velero<span class="w"> </span>version<span class="w"> </span>--client-only
 </code></pre></div>
-<h3 id="22-harbor에-이미지-업로드">2.2 Harbor에 이미지 업로드</h3>
+<h3 id="12-harbor에-이미지-업로드">1.2 Harbor에 이미지 업로드</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
-<hr />
-<h2 id="3단계-설치-실행">3단계: 설치 실행</h2>
+<h2 id="2단계-설치-실행">2단계: 설치 실행</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./scripts/install.sh
 </code></pre></div>
 <p>스크립트를 실행하면 아래 항목을 대화형으로 입력합니다.</p>
 <h3 id="이미지-소스-선택">이미지 소스 선택</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>이미지 소스를 선택하세요:
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  1) Harbor 레지스트리 사용  ← 권장
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  2) 로컬 tar 직접 import
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>이미지<span class="w"> </span>소스를<span class="w"> </span>선택하세요:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="m">1</span><span class="o">)</span><span class="w"> </span>Harbor<span class="w"> </span>레지스트리<span class="w"> </span>사용<span class="w">  </span>←<span class="w"> </span>권장
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>로컬<span class="w"> </span>tar<span class="w"> </span>직접<span class="w"> </span>import
+</code></pre></div>
+<p>Harbor 선택 시 레지스트리 주소와 프로젝트명을 입력합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Harbor<span class="w"> </span>레지스트리<span class="w"> </span>주소<span class="w"> </span><span class="o">(</span>예:<span class="w"> </span><span class="m">192</span>.168.1.10:30002<span class="o">)</span>:<span class="w"> </span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Harbor<span class="w"> </span>프로젝트<span class="w"> </span><span class="o">(</span>예:<span class="w"> </span>library,<span class="w"> </span>oss<span class="o">)</span>:<span class="w"> </span>
 </code></pre></div>
 <h3 id="스토리지-타입-선택">스토리지 타입 선택</h3>
-<p>MinIO 데이터 볼륨 위치를 선택합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>MinIO 스토리지 타입을 선택하세요:
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  1) HostPath  — 로컬 노드 디렉토리 (단일 노드 환경 권장)
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  2) NAS/NFS   — 네트워크 공유 스토리지
+<p>MinIO 데이터 볼륨을 어디에 저장할지 선택합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>MinIO<span class="w"> </span>스토리지<span class="w"> </span>타입을<span class="w"> </span>선택하세요:
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="m">1</span><span class="o">)</span><span class="w"> </span>HostPath<span class="w">  </span>—<span class="w"> </span>로컬<span class="w"> </span>노드<span class="w"> </span>디렉토리<span class="w"> </span><span class="o">(</span>단일<span class="w"> </span>노드<span class="w"> </span>환경<span class="w"> </span>권장<span class="o">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>NAS/NFS<span class="w">   </span>—<span class="w"> </span>네트워크<span class="w"> </span>공유<span class="w"> </span>스토리지
 </code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">타입</th>
-<th style="text-align: left;">특징</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">HostPath</td>
-<td style="text-align: left;">노드 로컬 디렉토리 사용. 기본 경로 <code>/data/minio</code> (변경 가능)</td>
-</tr>
-<tr>
-<td style="text-align: left;">NFS</td>
-<td style="text-align: left;">NFS 서버 주소 + 공유 경로 입력. 사전에 서버에서 export 필요</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>HostPath</strong>: 노드의 로컬 디렉토리를 사용합니다. 기본 경로는 <code>/data/minio</code>이며 변경 가능합니다.</li>
+<li><strong>NFS</strong>: NFS 서버 주소와 공유 경로를 입력합니다. 사전에 NFS 서버에서 해당 경로를 export해야 합니다.</li>
+</ul>
 <p>입력한 설정은 <strong><code>install.conf</code>에 자동 저장</strong>되어 다음 업그레이드 시 재사용됩니다.</p>
-<hr />
-<h2 id="4단계-설치-확인">4단계: 설치 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Pod 및 백업 저장소 상태 확인 (Phase: Available 필수)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>velero
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>velero<span class="w"> </span>backup-location<span class="w"> </span>get
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># 자동 스케줄 확인 (매일 새벽 1시, 30일 보관)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>schedule<span class="w"> </span>-n<span class="w"> </span>velero
+<h2 id="3단계-설치-확인-및-웹-접속">3단계: 설치 확인 및 웹 접속</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Pod 및 백업 저장소 상태 확인 (Available 확인 필수)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>velero
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>velero<span class="w"> </span>backup-location<span class="w"> </span>get
 </code></pre></div>
-<p>MinIO 웹 콘솔: <code>http://minio-velero.devops.internal</code> (계정: <code>minioadmin</code> / <code>minioadmin</code>)</p>
-<hr />
-<h2 id="5단계-업그레이드--재설치--초기화">5단계: 업그레이드 / 재설치 / 초기화</h2>
-<p>설치된 상태에서 <code>install.sh</code>를 재실행하면 메뉴가 나타납니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>동작을 선택하세요:
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  1) 업그레이드   — 저장된 설정 유지, Helm upgrade --install
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  2) 재설치       — 설정 재입력, MinIO 데이터 삭제 여부 선택
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  3) 초기화(리셋) — 모든 리소스 + 데이터 + install.conf 완전 삭제 후 재설치
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  4) 취소
+<p>MinIO 웹 콘솔은 아래 주소로 접속합니다.</p>
+<ul>
+<li><strong>주소</strong>: <code>http://minio-velero.devops.internal</code></li>
+<li><strong>계정/비밀번호</strong>: <code>minioadmin</code> / <code>minioadmin</code></li>
+</ul>
+<h2 id="4단계-업그레이드--재설치--초기화">4단계: 업그레이드 / 재설치 / 초기화</h2>
+<p>이미 설치된 상태에서 <code>install.sh</code>를 다시 실행하면 아래 메뉴가 나타납니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>동작을<span class="w"> </span>선택하세요:
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="m">1</span><span class="o">)</span><span class="w"> </span>업그레이드<span class="w">   </span>—<span class="w"> </span>저장된<span class="w"> </span>설정<span class="w"> </span>유지,<span class="w"> </span>Helm<span class="w"> </span>upgrade<span class="w"> </span>--install
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>재설치<span class="w">       </span>—<span class="w"> </span>설정<span class="w"> </span>재입력,<span class="w"> </span>MinIO<span class="w"> </span>데이터<span class="w"> </span>삭제<span class="w"> </span>여부<span class="w"> </span>선택
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="m">3</span><span class="o">)</span><span class="w"> </span>초기화<span class="o">(</span>리셋<span class="o">)</span><span class="w"> </span>—<span class="w"> </span>모든<span class="w"> </span>리소스<span class="w"> </span>+<span class="w"> </span>데이터<span class="w"> </span>+<span class="w"> </span>install.conf<span class="w"> </span>완전<span class="w"> </span>삭제<span class="w"> </span>후<span class="w"> </span>종료
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="m">4</span><span class="o">)</span><span class="w"> </span>취소
 </code></pre></div>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">선택</th>
+<th style="text-align: left;">동작</th>
 <th style="text-align: left;">PVC/PV</th>
 <th style="text-align: left;">install.conf</th>
 </tr>
@@ -4351,68 +4549,69 @@
 <tbody>
 <tr>
 <td style="text-align: left;">업그레이드</td>
+<td style="text-align: left;">Deployment 이미지 갱신 + Helm upgrade</td>
 <td style="text-align: left;">유지</td>
 <td style="text-align: left;">유지</td>
 </tr>
 <tr>
 <td style="text-align: left;">재설치</td>
+<td style="text-align: left;">기존 제거 후 전체 재설치</td>
 <td style="text-align: left;">선택 삭제</td>
 <td style="text-align: left;">재작성</td>
 </tr>
 <tr>
 <td style="text-align: left;">초기화</td>
+<td style="text-align: left;">모든 리소스 제거 후 종료</td>
 <td style="text-align: left;">삭제</td>
 <td style="text-align: left;">삭제</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>업그레이드 시 PV/PVC를 변경하지 않으므로 기존 백업 데이터가 보존됩니다.</p>
+<p>업그레이드 시 PV/PVC는 변경하지 않으므로 기존 백업 데이터가 보존됩니다.</p>
 </blockquote>
-<hr />
-<h2 id="6단계-백업-및-복구">6단계: 백업 및 복구</h2>
-<h3 id="61-백업-생성">6.1 백업 생성</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 전체 클러스터 백업</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>velero<span class="w"> </span>backup<span class="w"> </span>create<span class="w"> </span>cluster-full-backup<span class="w"> </span>--include-namespaces<span class="w"> </span><span class="s1">&#39;*&#39;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 특정 네임스페이스 백업</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>velero<span class="w"> </span>backup<span class="w"> </span>create<span class="w"> </span>monitoring-backup<span class="w"> </span>--include-namespaces<span class="w"> </span>monitoring
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># 백업 목록 확인</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>velero<span class="w"> </span>backup<span class="w"> </span>get
-</code></pre></div>
-<h3 id="62-복구">6.2 복구</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 전체 복구</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>velero<span class="w"> </span>restore<span class="w"> </span>create<span class="w"> </span>--from-backup<span class="w"> </span>cluster-full-backup
+<h2 id="5단계-백업-및-복구-테스트">5단계: 백업 및 복구 테스트</h2>
+<h3 id="51-백업-실행">5.1 백업 실행</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 전체 백업</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>velero<span class="w"> </span>backup<span class="w"> </span>create<span class="w"> </span>cluster-full-backup<span class="w"> </span>--include-namespaces<span class="w"> </span><span class="s1">&#39;*&#39;</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 특정 네임스페이스만 복구</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>velero<span class="w"> </span>restore<span class="w"> </span>create<span class="w"> </span>--from-backup<span class="w"> </span>monitoring-backup<span class="w"> </span>--include-namespaces<span class="w"> </span>monitoring
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 특정 네임스페이스 백업</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>velero<span class="w"> </span>backup<span class="w"> </span>create<span class="w"> </span>monitoring-backup<span class="w"> </span>--include-namespaces<span class="w"> </span>monitoring
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 복구 상태 확인</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>velero<span class="w"> </span>restore<span class="w"> </span>get
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>velero<span class="w"> </span>restore<span class="w"> </span>describe<span class="w"> </span>&lt;복구명&gt;
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 백업 목록 확인</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>velero<span class="w"> </span>backup<span class="w"> </span>get
 </code></pre></div>
-<hr />
-<h2 id="7단계-삭제">7단계: 삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>./scripts/uninstall.sh
+<h3 id="52-복구-실행">5.2 복구 실행</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 전체 복구</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>velero<span class="w"> </span>restore<span class="w"> </span>create<span class="w"> </span>--from-backup<span class="w"> </span>cluster-full-backup
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 특정 네임스페이스만 복구</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>velero<span class="w"> </span>restore<span class="w"> </span>create<span class="w"> </span>--from-backup<span class="w"> </span>monitoring-backup<span class="w"> </span>--include-namespaces<span class="w"> </span>monitoring
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># 복구 상태 확인</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>velero<span class="w"> </span>restore<span class="w"> </span>get
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>velero<span class="w"> </span>restore<span class="w"> </span>describe<span class="w"> </span>&lt;복구명&gt;
+</code></pre></div>
+<h2 id="6단계-삭제">6단계: 삭제</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>./scripts/uninstall.sh
 </code></pre></div>
 <p>삭제 시 MinIO 백업 데이터(PVC/PV) 및 <code>install.conf</code> 보존 여부를 각각 확인합니다.</p>
 <blockquote>
 <p>실제 호스트/NFS 볼륨의 파일은 스크립트가 삭제하지 않습니다. 필요 시 수동으로 제거하세요.</p>
 </blockquote>
-<hr />
 <h2 id="installconf-참고">install.conf 참고</h2>
-<p><code>install.sh</code> 실행 시 자동 생성/갱신됩니다. 직접 편집도 가능합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">IMAGE_SOURCE</span><span class="o">=</span><span class="s2">&quot;harbor&quot;</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;192.168.1.10:30002&quot;</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nv">HARBOR_PROJECT</span><span class="o">=</span><span class="s2">&quot;oss&quot;</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nv">STORAGE_TYPE</span><span class="o">=</span><span class="s2">&quot;hostpath&quot;</span><span class="w">   </span><span class="c1"># hostpath | nfs</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nv">HOSTPATH_DIR</span><span class="o">=</span><span class="s2">&quot;/data/minio&quot;</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">NFS_SERVER</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nv">NFS_PATH</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nv">STORAGE_SIZE</span><span class="o">=</span><span class="s2">&quot;50Gi&quot;</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="nv">INSTALLED_VERSION</span><span class="o">=</span><span class="s2">&quot;v1.18.0&quot;</span>
+<p><code>install.conf</code>는 <code>install.sh</code> 실행 시 자동 생성/갱신됩니다. 직접 편집도 가능합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">IMAGE_SOURCE</span><span class="o">=</span><span class="s2">&quot;harbor&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;192.168.1.10:30002&quot;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nv">HARBOR_PROJECT</span><span class="o">=</span><span class="s2">&quot;oss&quot;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nv">STORAGE_TYPE</span><span class="o">=</span><span class="s2">&quot;hostpath&quot;</span><span class="w">         </span><span class="c1"># hostpath | nfs</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nv">HOSTPATH_DIR</span><span class="o">=</span><span class="s2">&quot;/data/minio&quot;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nv">NFS_SERVER</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nv">NFS_PATH</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="nv">STORAGE_SIZE</span><span class="o">=</span><span class="s2">&quot;50Gi&quot;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="nv">INSTALLED_VERSION</span><span class="o">=</span><span class="s2">&quot;v1.18.0&quot;</span>
 </code></pre></div>
+<h3 id="installconf가-있을-때의-동작">install.conf가 있을 때의 동작</h3>
 <table>
 <thead>
 <tr>
@@ -4422,11 +4621,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">install.conf 있음 + 미설치</td>
+<td style="text-align: left;">install.conf 있음 + 미설치 상태</td>
 <td style="text-align: left;">저장된 설정으로 <strong>프롬프트 없이 자동 설치</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;">install.conf 있음 + 설치됨</td>
+<td style="text-align: left;">install.conf 있음 + 설치된 상태</td>
 <td style="text-align: left;">업그레이드/재설치/초기화 메뉴 표시</td>
 </tr>
 <tr>
@@ -4435,7 +4634,7 @@
 </tr>
 </tbody>
 </table>
-<p>새 노드에 동일 구성을 배포할 때 <code>install.conf</code>를 미리 복사해두면 무인 설치가 가능합니다.</p>
+<p>새 노드에 동일한 구성을 배포할 때 <code>install.conf</code>를 미리 복사해두면 무인 설치가 가능합니다.</p>
 
 
 

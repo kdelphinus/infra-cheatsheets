@@ -1,0 +1,6367 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/offline-install/">
+      
+      
+        <link rel="prev" href="../../../../guide/infra-standard/">
+      
+      
+        <link rel="next" href="../online-install/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>1. 오프라인 설치 가이드 - Infra Cheatsheets</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-v13311-오프라인-설치-가이드-ubuntu-2404" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Infra Cheatsheets
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. 오프라인 설치 가이드
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Kdelphinus/infra-cheatsheets/" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Kubernetes
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+          
+  
+  
+  Cloud
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+          
+  
+  
+  CI/CD
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+          
+  
+  
+  Ubuntu
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../db/ha/galera-cluster/" class="md-tabs__link">
+          
+  
+  
+  Database
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../git/cheatsheet/" class="md-tabs__link">
+          
+  
+  
+  Git
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../ide/vscode_shortcut/" class="md-tabs__link">
+          
+  
+  
+  IDE
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../network/tip/check-domain-ip/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../openstack/cheatsheet/" class="md-tabs__link">
+          
+  
+  
+  OpenStack
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Infra Cheatsheets
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Kdelphinus/infra-cheatsheets/" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    대시보드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guide/infra-standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인프라 설치 및 구성 표준 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kubernetes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu 24.04 (v1.33.11)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubuntu 24.04 (v1.33.11)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 오프라인 설치 가이드
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 오프라인 설치 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#스크립트-사용-가이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스크립트 사용 가이드
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="스크립트 사용 가이드">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#스크립트-목록" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스크립트 목록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1--파일-수집-인터넷-호스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — 파일 수집 (인터넷 호스트)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2--wsl2-전용-systemd-활성화-최초-1회" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — WSL2 전용: systemd 활성화 (최초 1회)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3--컨트롤-플레인-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — 컨트롤 플레인 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4--워커-노드-합류" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — 워커 노드 합류
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5--언인스톨" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — 언인스톨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#설정-저장-installconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설정 저장 (install.conf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#전제-조건" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#디렉토리-구조" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        디렉토리 구조
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-설치-파일-배포-bastion--전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 0: 설치 파일 배포 (Bastion → 전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-deb-설치-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: DEB 설치 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-os-사전-설정-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: OS 사전 설정 (전체 노드)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: OS 사전 설정 (전체 노드)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wsl2-추가-항목" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WSL2 추가 항목
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-containerd-설정-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: containerd 설정 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-이미지-로드-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: 이미지 로드 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-로드밸런서-ha-3중화-시에만--단일-구성이면-phase-6으로" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: 로드밸런서 (HA 3중화 시에만 / 단일 구성이면 Phase 6으로)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 5: 로드밸런서 (HA 3중화 시에만 / 단일 구성이면 Phase 6으로)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#옵션-a-vip-방식-표준-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 A: VIP 방식 (표준, 권장)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="옵션 A: VIP 방식 (표준, 권장)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-a-1-fqdn-방식-선택-시-fqdn-등록-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-2-커널-파라미터-설정-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-2. 커널 파라미터 설정 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-3-haproxy-설정-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-3. HAProxy 설정 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-4-keepalived-설정-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-4. Keepalived 설정 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-5-서비스-시작-및-vip-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-5. 서비스 시작 및 VIP 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#옵션-b-localhost-lb-방식-vip-사용-불가-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 B: Localhost LB 방식 (VIP 사용 불가 환경)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-kubeadm-init-master-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6: kubeadm init (Master-1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 6: kubeadm init (Master-1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#옵션-a-ha3중화-구성-vip-사용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 A: HA(3중화) 구성 (VIP 사용)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#옵션-b-단일-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 B: 단일 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-1-추가-마스터-노드-조인-master-2-3--ha-구성-시에만" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6-1: 추가 마스터 노드 조인 (Master-2, 3 — HA 구성 시에만)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-7-cni-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7: CNI 설치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 7: CNI 설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#옵션-a-calico--envoy-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 A: Calico + Envoy Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#옵션-b-cilium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 B: Cilium
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-8-helm--nerdctl-설치-컨트롤-플레인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 8: helm &amp; nerdctl 설치 (컨트롤 플레인)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-9-워커-노드-조인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 9: 워커 노드 조인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-10-설치-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 10: 설치 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#재설치-시-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        재설치 시 초기화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vip-변경-시-조치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIP 변경 시 조치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VIP 변경 시 조치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#케이스-0-운영-중인-클러스터를-ip--fqdn으로-전환" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-모든-노드에-fqdn-등록-마스터--워커" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 모든 노드에 FQDN 등록 (마스터 + 워커)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-api-서버-인증서에-fqdn-san-추가-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: API 서버 인증서에 FQDN SAN 추가 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-kube-apiserver-재시작-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: kube-apiserver 재시작 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-kubeconfig-및-kubeletconf-업데이트-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: kubeconfig 및 kubelet.conf 업데이트 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5단계-워커-노드-kubeletconf-업데이트-전체-워커-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6단계-클러스터-내부-configmap-갱신-master-1에서-1회-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회 실행)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7단계-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7단계: 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#케이스-a-fqdn-방식으로-초기-구성한-경우-권장-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 A: FQDN 방식으로 초기 구성한 경우 (권장 구성)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="케이스 A: FQDN 방식으로 초기 구성한 경우 (권장 구성)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-모든-노드의-etchosts-업데이트-마스터--워커" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 모든 노드의 /etc/hosts 업데이트 (마스터 + 워커)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-keepalived-vip-변경-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: Keepalived VIP 변경 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-haproxy-bind-ip-변경-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: HAProxy bind IP 변경 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-api-서버-재시작-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: API 서버 재시작 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#케이스-b-vip-ip를-직접-사용하여-초기-구성한-경우" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 B: VIP IP를 직접 사용하여 초기 구성한 경우
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="케이스 B: VIP IP를 직접 사용하여 초기 구성한 경우">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-keepalived--haproxy-vip-변경-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: Keepalived / HAProxy VIP 변경 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-api-서버-인증서-재발급-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: API 서버 인증서 재발급 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-kube-apiserver-재시작-전체-마스터-노드_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: kube-apiserver 재시작 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-kubeconfig-및-kubeletconf-업데이트-전체-마스터-노드_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: kubeconfig 및 kubelet.conf 업데이트 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5단계-워커-노드-kubeletconf-업데이트-전체-워커-노드_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6단계-클러스터-내부-configmap-갱신-master-1에서-1회-실행_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회 실행)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7단계-정상-동작-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7단계: 정상 동작 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubuntu-2404-vs-rocky-96-주요-치환-포인트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubuntu 24.04 vs Rocky 9.6 주요 치환 포인트
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../online-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 온라인 설치 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Envoy Gateway (v1.37.2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rocky Linux 9.6 (v1.30.0)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rocky Linux 9.6 (v1.30.0)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocky/ready-offline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocky/offline-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. 폐쇄망에서 K8s 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocky/online-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 온라인 환경에서 K8s 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기반 인프라
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기반 인프라
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../offline-install/003-necessary_infra_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기반 인프라 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../offline-install/004-metallb-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MetalLB 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../network/cilium-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cilium (CNI) 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitoring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus & Grafana 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../monitoring/002-operation-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    모니터링 운영 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/001-falco-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Falco 런타임 탐지
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/002-tetragon-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tetragon 런타임 차단
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/003-tetragon-security-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tetragon 보안 정책 전략
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & Restore
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backup & Restore
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backup-restore/001-velero-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Velero 설치 및 백업 구성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gateway API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NGINX NIC 마이그레이션 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/001-envoy-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Gateway 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy 운영 전환 체크리스트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTPRoute 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Gateway 네트워크 구성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gateway-api/missed-containerport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ContainerPort 누락 트러블슈팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Storage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../use-pv-nas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFS Provisioner 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../container-image-cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container 이미지 관리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google Cloud SDK Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CI/CD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    폐쇄망
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    폐쇄망
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harbor 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/offline-install/001-gitlab_jenkins_install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitLab & Jenkins 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/offline-install/002-argocd-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArgoCD 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/offline-install/003-argocd-jenkins-harbor-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArgoCD — Jenkins · Harbor 연동
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/offline-install/004-nexus-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nexus Repository 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/offline-install/005-gitea-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gitea 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    운영
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harbor 기반 이미지 업데이트 및 재배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubuntu
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu 기본 설정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WSL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WSL 네트워크 설정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Database
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/ha/galera-cluster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/ha/galera-recovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 장애 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis Stream
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis Stream
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis Stream 개발자 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치 및 운영 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Install
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. MariaDB 오프라인 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. 트러블슈팅 및 운영 주의사항
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Git
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../git/cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../git/convention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    협업 컨벤션 및 브랜치 전략
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    IDE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ide/vscode_shortcut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode 단축키
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tip
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tip
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../network/tip/check-domain-ip/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    도메인 실제 IP 체크
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../network/tip/check-network-subnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    현재 서버가 속한 네트워크의 서브넷과 게이트웨이 확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../network/tip/port-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    방화벽 및 포트 확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenStack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    OpenStack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_2" id="__nav_10_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/base/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openstack 서비스 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/base/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/base/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API 명세
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About GPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About GPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 노드 초기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/gpu/pci-placement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PCI Placement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/utils/cloud-init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud Init 비정상 동작 시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/utils/golden-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golden Image 생성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_5" id="__nav_10_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenStack K8s 네트워크 통신 장애 및 Harbor 배포 실패
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_6" id="__nav_10_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../openstack/tools/add-ironic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ironic 추가하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#스크립트-사용-가이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스크립트 사용 가이드
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="스크립트 사용 가이드">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#스크립트-목록" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스크립트 목록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1--파일-수집-인터넷-호스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — 파일 수집 (인터넷 호스트)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2--wsl2-전용-systemd-활성화-최초-1회" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — WSL2 전용: systemd 활성화 (최초 1회)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3--컨트롤-플레인-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — 컨트롤 플레인 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4--워커-노드-합류" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — 워커 노드 합류
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5--언인스톨" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — 언인스톨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#설정-저장-installconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설정 저장 (install.conf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#전제-조건" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#디렉토리-구조" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        디렉토리 구조
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-설치-파일-배포-bastion--전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 0: 설치 파일 배포 (Bastion → 전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-deb-설치-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: DEB 설치 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-os-사전-설정-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: OS 사전 설정 (전체 노드)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: OS 사전 설정 (전체 노드)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wsl2-추가-항목" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WSL2 추가 항목
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-containerd-설정-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: containerd 설정 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-이미지-로드-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: 이미지 로드 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-로드밸런서-ha-3중화-시에만--단일-구성이면-phase-6으로" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: 로드밸런서 (HA 3중화 시에만 / 단일 구성이면 Phase 6으로)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 5: 로드밸런서 (HA 3중화 시에만 / 단일 구성이면 Phase 6으로)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#옵션-a-vip-방식-표준-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 A: VIP 방식 (표준, 권장)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="옵션 A: VIP 방식 (표준, 권장)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-a-1-fqdn-방식-선택-시-fqdn-등록-전체-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-2-커널-파라미터-설정-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-2. 커널 파라미터 설정 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-3-haproxy-설정-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-3. HAProxy 설정 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-4-keepalived-설정-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-4. Keepalived 설정 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-a-5-서비스-시작-및-vip-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-A-5. 서비스 시작 및 VIP 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#옵션-b-localhost-lb-방식-vip-사용-불가-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 B: Localhost LB 방식 (VIP 사용 불가 환경)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-kubeadm-init-master-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6: kubeadm init (Master-1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 6: kubeadm init (Master-1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#옵션-a-ha3중화-구성-vip-사용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 A: HA(3중화) 구성 (VIP 사용)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#옵션-b-단일-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 B: 단일 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-1-추가-마스터-노드-조인-master-2-3--ha-구성-시에만" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6-1: 추가 마스터 노드 조인 (Master-2, 3 — HA 구성 시에만)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-7-cni-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7: CNI 설치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 7: CNI 설치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#옵션-a-calico--envoy-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 A: Calico + Envoy Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#옵션-b-cilium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        옵션 B: Cilium
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-8-helm--nerdctl-설치-컨트롤-플레인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 8: helm &amp; nerdctl 설치 (컨트롤 플레인)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-9-워커-노드-조인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 9: 워커 노드 조인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-10-설치-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 10: 설치 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#재설치-시-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        재설치 시 초기화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vip-변경-시-조치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIP 변경 시 조치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VIP 변경 시 조치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#케이스-0-운영-중인-클러스터를-ip--fqdn으로-전환" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-모든-노드에-fqdn-등록-마스터--워커" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 모든 노드에 FQDN 등록 (마스터 + 워커)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-api-서버-인증서에-fqdn-san-추가-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: API 서버 인증서에 FQDN SAN 추가 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-kube-apiserver-재시작-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: kube-apiserver 재시작 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-kubeconfig-및-kubeletconf-업데이트-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: kubeconfig 및 kubelet.conf 업데이트 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5단계-워커-노드-kubeletconf-업데이트-전체-워커-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6단계-클러스터-내부-configmap-갱신-master-1에서-1회-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회 실행)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7단계-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7단계: 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#케이스-a-fqdn-방식으로-초기-구성한-경우-권장-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 A: FQDN 방식으로 초기 구성한 경우 (권장 구성)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="케이스 A: FQDN 방식으로 초기 구성한 경우 (권장 구성)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-모든-노드의-etchosts-업데이트-마스터--워커" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 모든 노드의 /etc/hosts 업데이트 (마스터 + 워커)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-keepalived-vip-변경-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: Keepalived VIP 변경 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-haproxy-bind-ip-변경-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: HAProxy bind IP 변경 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-api-서버-재시작-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: API 서버 재시작 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#케이스-b-vip-ip를-직접-사용하여-초기-구성한-경우" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        케이스 B: VIP IP를 직접 사용하여 초기 구성한 경우
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="케이스 B: VIP IP를 직접 사용하여 초기 구성한 경우">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-keepalived--haproxy-vip-변경-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: Keepalived / HAProxy VIP 변경 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-api-서버-인증서-재발급-전체-마스터-노드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: API 서버 인증서 재발급 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-kube-apiserver-재시작-전체-마스터-노드_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: kube-apiserver 재시작 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-kubeconfig-및-kubeletconf-업데이트-전체-마스터-노드_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: kubeconfig 및 kubelet.conf 업데이트 (전체 마스터 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5단계-워커-노드-kubeletconf-업데이트-전체-워커-노드_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6단계-클러스터-내부-configmap-갱신-master-1에서-1회-실행_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회 실행)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7단계-정상-동작-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7단계: 정상 동작 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubuntu-2404-vs-rocky-96-주요-치환-포인트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubuntu 24.04 vs Rocky 9.6 주요 치환 포인트
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="kubernetes-v13311-오프라인-설치-가이드-ubuntu-2404">Kubernetes v1.33.11 오프라인 설치 가이드 (Ubuntu 24.04)</h1>
+<p>폐쇄망 환경에서 kubeadm 기반 Kubernetes v1.33.11 클러스터를 구성하는 수동 절차입니다.
+containerd v2.2.x를 컨테이너 런타임으로, CNI는 <strong>Calico(+ Envoy Gateway)</strong> 또는 <strong>Cilium</strong> 중 선택합니다.</p>
+<blockquote>
+<p>스크립트를 이용한 빠른 설치는 아래 <strong>스크립트 사용 가이드</strong> 섹션을 먼저 참고하세요.
+수동 절차(Phase 0~10)는 내부 동작 이해 및 트러블슈팅용입니다.</p>
+<p>온라인 설치는 <code>install-guide-online.md</code>를 참고하세요.</p>
+</blockquote>
+<h2 id="스크립트-사용-가이드">스크립트 사용 가이드</h2>
+<h3 id="스크립트-목록">스크립트 목록</h3>
+<table>
+<thead>
+<tr>
+<th>스크립트</th>
+<th>실행 위치</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/download.sh</code></td>
+<td>인터넷 호스트 (root)</td>
+<td>오프라인 설치 파일 수집 → <code>k8s/</code> 채움</td>
+</tr>
+<tr>
+<td><code>scripts/wsl2_prep.sh</code></td>
+<td>WSL2 노드 (root)</td>
+<td>systemd 활성화 + iptables-legacy 전환</td>
+</tr>
+<tr>
+<td><code>scripts/install.sh</code></td>
+<td>폐쇄망 노드 (root)</td>
+<td>컨트롤 플레인 설치 (WSL2/VM 자동 감지, CNI 선택)</td>
+</tr>
+<tr>
+<td><code>scripts/install.sh --join</code></td>
+<td>폐쇄망 워커 노드 (root)</td>
+<td>워커/추가 마스터 합류</td>
+</tr>
+<tr>
+<td><code>scripts/uninstall.sh</code></td>
+<td>폐쇄망 노드 (root)</td>
+<td>클러스터 초기화</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step-1--파일-수집-인터넷-호스트">Step 1 — 파일 수집 (인터넷 호스트)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>k8s-1.33.11-ubuntu24.04
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>./scripts/download.sh
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 완료 후 tar 묶음 생성 안내가 출력됨</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>tar<span class="w"> </span>czf<span class="w"> </span>k8s-1.33.11-ubuntu24.04.tar.gz<span class="w"> </span>k8s-1.33.11-ubuntu24.04/
+</code></pre></div>
+<h3 id="step-2--wsl2-전용-systemd-활성화-최초-1회">Step 2 — WSL2 전용: systemd 활성화 (최초 1회)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>./scripts/wsl2_prep.sh
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># &quot;재기동 필요&quot; 안내가 나오면 Windows 터미널에서:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">#   wsl --shutdown</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 이후 WSL2 재진입 후 Step 3 진행</span>
+</code></pre></div>
+<h3 id="step-3--컨트롤-플레인-설치">Step 3 — 컨트롤 플레인 설치</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 폐쇄망 노드에서 압축 해제 후</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>./scripts/install.sh
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 대화형 메뉴:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">#   1) 환경 확인 (wsl2 / vm)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">#   2) CNI 선택 (calico / cilium)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1">#   3) CNI 설치 모드 (auto / manual)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">#   4) Envoy Gateway 모드 (calico 선택 시, auto / manual)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1">#   5) 컨트롤 플레인 엔드포인트 입력</span>
+</code></pre></div>
+<blockquote>
+<p>HA(3중화) 구성은 <code>kubeadm init</code> 전에 HAProxy + Keepalived를 먼저 구성해야 합니다.
+상세 절차는 <strong>Phase 5</strong> (로드밸런서 구성)를 먼저 수동으로 진행하세요.</p>
+</blockquote>
+<h3 id="step-4--워커-노드-합류">Step 4 — 워커 노드 합류</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 컨트롤 플레인에서 합류 명령 확인</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubeadm<span class="w"> </span>token<span class="w"> </span>create<span class="w"> </span>--print-join-command
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 출력 예시: kubeadm join &lt;endpoint&gt;:6443 --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 워커 노드에서 실행</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sudo<span class="w"> </span>./scripts/install.sh<span class="w"> </span>--join<span class="w"> </span>&lt;token&gt;<span class="w"> </span>&lt;hash&gt;<span class="w"> </span>&lt;endpoint&gt;
+</code></pre></div>
+<h3 id="step-5--언인스톨">Step 5 — 언인스톨</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>./scripts/uninstall.sh<span class="w">          </span><span class="c1"># 대화형 확인</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>./scripts/uninstall.sh<span class="w"> </span>--yes<span class="w">    </span><span class="c1"># 확인 생략</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>./scripts/uninstall.sh<span class="w"> </span>--purge<span class="w">  </span><span class="c1"># DEB 패키지까지 제거</span>
+</code></pre></div>
+<h3 id="설정-저장-installconf">설정 저장 (<code>install.conf</code>)</h3>
+<p><code>install.sh</code> 실행 시 선택한 설정은 <code>install.conf</code>에 자동 저장됩니다.
+재실행 시 저장된 값이 기본값으로 적용되어 동일 설정으로 빠르게 재설치 가능합니다.</p>
+<hr />
+<h2 id="전제-조건">전제 조건</h2>
+<ul>
+<li>Ubuntu 24.04 LTS (noble) 노드</li>
+<li><strong>WSL2 단일 노드</strong>: 로컬 개발/검증용</li>
+<li><strong>폐쇄망 단일 구성</strong>: 컨트롤 플레인 1대 + 워커 1대 이상</li>
+<li><strong>폐쇄망 HA 구성</strong>: 컨트롤 플레인 3대 + 워커 1대 이상 + VIP 1개</li>
+<li>모든 노드에서 아래 설치 파일 접근 가능</li>
+<li>swap 비활성화 (<code>swapoff -a</code> + <code>/etc/fstab</code> 주석)</li>
+<li>WSL2의 경우 <code>/etc/wsl.conf</code>에 <code>[boot] systemd=true</code> 적용 후 재기동 (<code>scripts/wsl2_prep.sh</code> 사용)</li>
+</ul>
+<h2 id="디렉토리-구조">디렉토리 구조</h2>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>k8s/debs/</code></td>
+<td>kubeadm, kubelet, kubectl, cri-tools, containerd.io + 시스템 유틸 DEB</td>
+</tr>
+<tr>
+<td><code>k8s/binaries/</code></td>
+<td>helm, nerdctl tarball</td>
+</tr>
+<tr>
+<td><code>k8s/images/</code></td>
+<td>kubeadm 코어 + Calico 이미지 <code>.tar</code></td>
+</tr>
+<tr>
+<td><code>k8s/utils/</code></td>
+<td><code>calico.yaml</code>, <code>local-path-storage.yaml</code> 등 매니페스트</td>
+</tr>
+<tr>
+<td><code>scripts/</code></td>
+<td><code>download.sh</code>, <code>install.sh</code>, <code>uninstall.sh</code>, <code>wsl2_prep.sh</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="phase-0-설치-파일-배포-bastion--전체-노드">Phase 0: 설치 파일 배포 (Bastion → 전체 노드)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 배포 대상 노드 IP 목록 (환경에 맞게 수정)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">NODES</span><span class="o">=(</span><span class="s2">&quot;&lt;MASTER1_IP&gt;&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;MASTER2_IP&gt;&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;MASTER3_IP&gt;&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;WORKER1_IP&gt;&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;WORKER2_IP&gt;&quot;</span><span class="o">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">for</span><span class="w"> </span>IP<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NODES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Sending to </span><span class="nv">$IP</span><span class="s2">...&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span>scp<span class="w"> </span>~/k8s-1.33.11-ubuntu24.04.tar.gz<span class="w"> </span>ubuntu@<span class="nv">$IP</span>:~/
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">done</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># 모든 노드에서 압축 해제</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>~/k8s-1.33.11-ubuntu24.04.tar.gz
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">cd</span><span class="w"> </span>k8s-1.33.11-ubuntu24.04
+</code></pre></div>
+<h2 id="phase-1-deb-설치-전체-노드">Phase 1: DEB 설치 (전체 노드)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># kubeadm/kubelet/kubectl/cri-tools/containerd.io + 필수 유틸(conntrack, socat, ebtables, ipset, jq, chrony)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>k8s/debs/*.deb
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 의존성 누락 시(인터넷 호스트에서 apt-rdepends로 full graph를 가져왔다면 없어야 함)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-f<span class="w"> </span>--no-download<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># kubelet 활성화 (kubeadm init 전에는 시작하지 않음)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>kubelet
+</code></pre></div>
+<h2 id="phase-2-os-사전-설정-전체-노드">Phase 2: OS 사전 설정 (전체 노드)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 1. 커널 모듈</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>overlay
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>br_netfilter
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s">overlay</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s">br_netfilter</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s">EOF</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># 2. sysctl</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="s">net.bridge.bridge-nf-call-iptables  = 1</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="s">net.bridge.bridge-nf-call-ip6tables = 1</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="s">net.ipv4.ip_forward                 = 1</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="s">EOF</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="c1"># 3. swap 비활성화</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/\sswap\s/s/^/#/&#39;</span><span class="w"> </span>/etc/fstab
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="c1"># 4. AppArmor 상태 확인 (Ubuntu 24.04 기본 활성)</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>sudo<span class="w"> </span>aa-status<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="c1"># containerd 관련 이슈 시: sudo aa-complain /usr/bin/containerd</span>
+</code></pre></div>
+<h3 id="wsl2-추가-항목">WSL2 추가 항목</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># iptables 백엔드를 legacy로 변경 (Cilium/kube-proxy 호환)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>update-alternatives<span class="w"> </span>--set<span class="w"> </span>iptables<span class="w"> </span>/usr/sbin/iptables-legacy
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>update-alternatives<span class="w"> </span>--set<span class="w"> </span>ip6tables<span class="w"> </span>/usr/sbin/ip6tables-legacy
+</code></pre></div>
+<h2 id="phase-3-containerd-설정-전체-노드">Phase 3: containerd 설정 (전체 노드)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>containerd<span class="w"> </span>config<span class="w"> </span>default<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># cgroup driver를 systemd로 (필수)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/SystemdCgroup = false/SystemdCgroup = true/&#39;</span><span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># pause 이미지 3.10으로 통일 (k8s 1.33 기본)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|sandbox_image = &quot;.*&quot;|sandbox_image = &quot;registry.k8s.io/pause:3.10&quot;|&#39;</span><span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># Harbor 인증서 경로 정리</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|config_path = &#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;|config_path = &#39;/etc/containerd/certs.d&#39;|g&quot;</span><span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>containerd
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>containerd<span class="w"> </span>--no-pager
+</code></pre></div>
+<h2 id="phase-4-이미지-로드-전체-노드">Phase 4: 이미지 로드 (전체 노드)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">for</span><span class="w"> </span>tar_file<span class="w"> </span><span class="k">in</span><span class="w"> </span>k8s/images/*.tar<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Loading </span><span class="nv">$tar_file</span><span class="s2">...&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tar_file</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">done</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>kube-apiserver
+</code></pre></div>
+<h2 id="phase-5-로드밸런서-ha-3중화-시에만--단일-구성이면-phase-6으로">Phase 5: 로드밸런서 (HA 3중화 시에만 / 단일 구성이면 Phase 6으로)</h2>
+<p>WSL2 / 단일 구성은 이 단계를 건너뜁니다.</p>
+<p>HA 구성을 위해 로드밸런서가 필요합니다. 환경에 따라 아래 두 가지 방식 중 하나를 선택합니다.</p>
+<blockquote>
+<p><strong>[사전 결정] VIP 주소를 인증서에 직접 설정할지, FQDN으로 추상화할지 먼저 결정하세요.</strong></p>
+<p>이 선택은 이후 <code>kubeadm init</code>의 <code>--control-plane-endpoint</code> 및 인증서 SAN에 영향을 미치므로
+<strong>설치를 시작하기 전에</strong> 결정해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>방식</th>
+<th>장점</th>
+<th>단점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FQDN</strong> (<code>k8s-api.internal</code>) ← <strong>권장</strong></td>
+<td>VIP 변경 시 <code>/etc/hosts</code>만 수정, 인증서 재발급 불필요</td>
+<td><code>/etc/hosts</code> 관리 필요</td>
+</tr>
+<tr>
+<td>IP 직접 사용</td>
+<td>설정 단순</td>
+<td>VIP 변경 시 인증서 재발급 필수</td>
+</tr>
+</tbody>
+</table>
+<p>FQDN 방식을 선택하면 <strong>5-A-1</strong>에서 바로 <code>/etc/hosts</code> 등록을 먼저 수행합니다.
+IP 직접 사용 방식이면 5-A-1을 건너뛰고 5-A-2부터 시작합니다.</p>
+</blockquote>
+<h3 id="옵션-a-vip-방식-표준-권장">옵션 A: VIP 방식 (표준, 권장)</h3>
+<p>Master 3대와 가상 IP(VIP) 환경을 가정합니다.
+VIP를 K8s API Server(6443) 앞단에 두어 마스터 노드 장애 시에도 API 통신이 끊기지 않게 합니다.</p>
+<blockquote>
+<p>Ubuntu 24.04에서는 <code>haproxy</code> / <code>keepalived</code> DEB를 <code>k8s/debs/</code>에 포함시켜 두었어야 합니다.
+<code>scripts/download.sh</code>가 <code>apt-get download haproxy keepalived</code> + 의존성을 함께 수집합니다.</p>
+</blockquote>
+<h4 id="5-a-1-fqdn-방식-선택-시-fqdn-등록-전체-노드">5-A-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)</h4>
+<p>VIP IP를 직접 사용하는 대신 내부 FQDN(<code>k8s-api.internal</code>)으로 추상화합니다.
+나중에 VIP가 변경되어도 <strong>인증서 재발급 없이</strong> DNS 서버 혹은 <code>/etc/hosts</code>만 수정하면 됩니다.</p>
+<p>내부 DNS 서버가 있다면 관리자에게 요청하여 아래 내용을 추가합니다.</p>
+<ul>
+<li>레코드 이름: k8s-api.internal</li>
+<li>IP 주소: VIP</li>
+</ul>
+<p>만약 DNS 서버가 없다면 <code>hosts</code> 파일에 등록합니다.</p>
+<p><strong>전체 노드(마스터 + 워커)에서 실행합니다.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;VIP&gt;  k8s-api.internal&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts
+</code></pre></div>
+<blockquote>
+<p>HAProxy의 <code>bind</code>는 안정성을 위해 VIP IP(<code>&lt;VIP&gt;:6443</code>)를 그대로 사용합니다.
+FQDN은 kubeconfig의 server 주소와 인증서 SAN에만 적용됩니다.</p>
+</blockquote>
+<h4 id="5-a-2-커널-파라미터-설정-전체-마스터-노드">5-A-2. 커널 파라미터 설정 (전체 마스터 노드)</h4>
+<p>VIP가 자신의 인터페이스에 없어도 바인딩할 수 있도록 설정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/sysctl.d/haproxy.conf</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s">net.ipv4.ip_nonlocal_bind = 1</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="s">EOF</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+</code></pre></div>
+<h4 id="5-a-3-haproxy-설정-전체-마스터-노드">5-A-3. HAProxy 설정 (전체 마스터 노드)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/haproxy/haproxy.cfg<span class="w"> </span>/etc/haproxy/haproxy.cfg.bak
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/haproxy/haproxy.cfg</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="s">global</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="s">    log         127.0.0.1 local2</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s">    maxconn     4000</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s">    daemon</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="s">defaults</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="s">    mode                    tcp</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="s">    log                     global</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="s">    option                  tcplog</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="s">    timeout connect         10s</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="s">    timeout client          1m</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="s">    timeout server          1m</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="s"># Kubernetes API Server LB</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="s">frontend k8s-api</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="s">    bind &lt;VIP&gt;:6443      # TODO 실제 VIP로 변경 필요</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="s">    mode tcp</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="s">    option tcplog</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="s">    default_backend k8s-masters</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="s"># TODO 실제 MASTER_IP, HOSTNAME 변경 필요</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="s">backend k8s-masters</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="s">    mode tcp</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="s">    balance roundrobin</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="s">    option tcp-check</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="s">    server &lt;MASTER1_HOSTNAME&gt; &lt;MASTER1_IP&gt;:6443 check fall 3 rise 2</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="s">    server &lt;MASTER2_HOSTNAME&gt; &lt;MASTER2_IP&gt;:6443 check fall 3 rise 2</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="s">    server &lt;MASTER3_HOSTNAME&gt; &lt;MASTER3_IP&gt;:6443 check fall 3 rise 2</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="s">EOF</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Ubuntu 24.04 AppArmor 주의</strong>: <code>/etc/apparmor.d/usr.sbin.haproxy</code> 프로파일이
+기본 활성화되어 있으며 위 설정은 기본 허용 범위 내입니다. 외부 소켓이나
+비표준 경로를 쓰는 경우 <code>sudo aa-complain /usr/sbin/haproxy</code> 로 임시 우회.</p>
+</blockquote>
+<h4 id="5-a-4-keepalived-설정-전체-마스터-노드">5-A-4. Keepalived 설정 (전체 마스터 노드)</h4>
+<p>각 마스터 노드별로 <code>state</code>, <code>priority</code>, <code>interface</code> 값을 다르게 설정합니다.</p>
+<table>
+<thead>
+<tr>
+<th>노드</th>
+<th>state</th>
+<th>priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master-1</td>
+<td><code>MASTER</code></td>
+<td><code>101</code></td>
+</tr>
+<tr>
+<td>Master-2</td>
+<td><code>BACKUP</code></td>
+<td><code>100</code></td>
+</tr>
+<tr>
+<td>Master-3</td>
+<td><code>BACKUP</code></td>
+<td><code>99</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ubuntu 24.04의 기본 네트워크 인터페이스명은 <code>eth0</code>, <code>ens*</code>, <code>enp*</code> 등 환경마다 다릅니다.
+<code>ip -br link</code> 로 확인한 후 아래 <code>interface</code> 값을 실제 인터페이스명으로 바꿉니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Master-1 기준 예시 (Master-2, 3은 state/priority 값 수정)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/keepalived/keepalived.conf</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="s">global_defs {</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="s">    router_id LVS_DEVEL</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="s">}</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="s">vrrp_script check_haproxy {</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="s">    script &quot;/usr/bin/killall -0 haproxy&quot;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="s">    interval 3</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="s">    weight -2</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="s">    fall 10</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="s">    rise 2</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="s">}</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="s">vrrp_instance VI_1 {</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="s">    state MASTER              # TODO Master-2, 3은 BACKUP</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="s">    interface eth0            # TODO 실제 네트워크 인터페이스명으로 변경 (ip -br link 로 확인)</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="s">    virtual_router_id 51</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="s">    priority 101              # TODO M1: 101, M2: 100, M3: 99</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="s">    advert_int 1</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="s">    authentication {</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="s">        auth_type PASS</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="s">        auth_pass 42          # 모든 노드 동일하게 설정</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="s">    }</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="s">    virtual_ipaddress {</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="s">        &lt;VIP&gt;          # TODO VIP 주소</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="s">    }</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="s">    track_script {</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="s">        check_haproxy</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="s">    }</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a><span class="s">}</span>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="s">EOF</span>
+</code></pre></div>
+<blockquote>
+<p><code>killall</code> 미설치 환경(Ubuntu 24.04 minimal)이라면 <code>sudo apt-get install psmisc</code> 또는
+DEB(<code>psmisc_*.deb</code>)를 <code>k8s/debs/</code>에 포함시킵니다. 대안으로 <code>pgrep -x haproxy</code> 를
+<code>script</code> 값으로 사용할 수 있습니다.</p>
+</blockquote>
+<h4 id="5-a-5-서비스-시작-및-vip-확인">5-A-5. 서비스 시작 및 VIP 확인</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>haproxy
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>keepalived
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># VIP 활성화 확인 (Master-1에서 VIP가 보여야 함)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;VIP&gt;
+</code></pre></div>
+<hr />
+<h3 id="옵션-b-localhost-lb-방식-vip-사용-불가-환경">옵션 B: Localhost LB 방식 (VIP 사용 불가 환경)</h3>
+<p>VIP를 사용할 수 없는 환경에서 각 노드에 HAProxy를 띄워 Loopback(<code>127.0.0.1:8443</code>)으로 통신합니다.
+<strong>전체 마스터 및 워커 노드에 동일하게 설정합니다.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/haproxy/haproxy.cfg<span class="w"> </span>/etc/haproxy/haproxy.cfg.bak
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/haproxy/haproxy.cfg</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="s">global</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="s">    maxconn     4000</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="s">    daemon</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="s">defaults</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="s">    mode                    tcp</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="s">    timeout connect         10s</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="s">    timeout client          1m</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="s">    timeout server          1m</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="s">frontend k8s-api-proxy</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="s">    bind 127.0.0.1:8443</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="s">    default_backend k8s-masters</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="s">backend k8s-masters</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="s">    balance roundrobin</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="s">    option tcp-check</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="s">    server &lt;MASTER1_HOSTNAME&gt; &lt;MASTER1_IP&gt;:6443 check</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="s">    server &lt;MASTER2_HOSTNAME&gt; &lt;MASTER2_IP&gt;:6443 check</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="s">    server &lt;MASTER3_HOSTNAME&gt; &lt;MASTER3_IP&gt;:6443 check</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="s">EOF</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>haproxy
+</code></pre></div>
+<h2 id="phase-6-kubeadm-init-master-1">Phase 6: kubeadm init (Master-1)</h2>
+<p>구성 유형(단일 / HA)과 CNI 선택(Calico / Cilium)에 따라 옵션을 조합합니다.</p>
+<ul>
+<li>단일 구성 → <strong>옵션 B</strong> 사용</li>
+<li>HA(3중화) 구성 → <strong>옵션 A</strong> 사용 (VIP 또는 FQDN)</li>
+<li>CNI = Cilium 인 경우 모든 옵션에 <code>--skip-phases=addon/kube-proxy</code> 와 <code>--pod-network-cidr=10.0.0.0/16</code> 를 적용합니다. (Calico는 <code>192.168.0.0/16</code> 기본값)</li>
+</ul>
+<h3 id="옵션-a-ha3중화-구성-vip-사용">옵션 A: HA(3중화) 구성 (VIP 사용)</h3>
+<p><code>--apiserver-cert-extra-sans</code>에 VIP와 전체 마스터 IP를 포함해야 엄격한 SAN 검증을 통과할 수 있습니다.</p>
+<p>FQDN을 사용하는 경우(<code>5-A-1</code> 적용 시) <code>VIP</code> 대신 <code>k8s-api.internal</code>로 대체합니다.</p>
+<blockquote>
+<p><strong>HAProxy 포트 충돌 주의</strong>
+HAProxy가 VIP:6443을 점유하고 있으면 <code>kubeadm init</code>이 같은 포트를 열려다 실패합니다.
+<code>kubeadm init</code> 전에 HAProxy를 잠시 중지하고, API 서버 bind-address 설정 후 다시 시작합니다.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># 1. HAProxy 일시 중지</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>haproxy
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># 2-a. kubeadm init — VIP IP 직접 사용 + CNI=Calico</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;&lt;VIP&gt;:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span>--upload-certs<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;&lt;VIP&gt;,&lt;MASTER1_IP&gt;,&lt;MASTER2_IP&gt;,&lt;MASTER3_IP&gt;,127.0.0.1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span>--pod-network-cidr<span class="o">=</span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">  </span>--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">  </span>--kubernetes-version<span class="w"> </span>v1.33.11
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="c1"># 2-b. kubeadm init — FQDN 사용 + CNI=Calico (권장)</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;k8s-api.internal:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="w">  </span>--upload-certs<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;k8s-api.internal,&lt;VIP&gt;,&lt;MASTER1_IP&gt;,&lt;MASTER2_IP&gt;,&lt;MASTER3_IP&gt;,127.0.0.1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="w">  </span>--pod-network-cidr<span class="o">=</span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="w">  </span>--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="w">  </span>--kubernetes-version<span class="w"> </span>v1.33.11
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="c1"># 2-c. kubeadm init — FQDN 사용 + CNI=Cilium</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="w">  </span>--skip-phases<span class="o">=</span>addon/kube-proxy<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;k8s-api.internal:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="w">  </span>--upload-certs<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;k8s-api.internal,&lt;VIP&gt;,&lt;MASTER1_IP&gt;,&lt;MASTER2_IP&gt;,&lt;MASTER3_IP&gt;,127.0.0.1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="w">  </span>--pod-network-cidr<span class="o">=</span><span class="m">10</span>.0.0.0/16<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="w">  </span>--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="w">  </span>--kubernetes-version<span class="w"> </span>v1.33.11
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="c1"># 3. API 서버 bind-address를 Master-1의 실제 IP로 수정</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="c1">#    (설정하지 않으면 API 서버가 0.0.0.0으로 바인딩되어 HAProxy와 다시 충돌)</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="c1"># spec.containers[].command 섹션에 추가:</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="c1"># - --bind-address=&lt;MASTER1_IP&gt;</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a><span class="c1"># 4. API 서버가 노드 IP로 재기동된 것을 확인 후 HAProxy 시작</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>apiserver<span class="w">   </span><span class="c1"># Running 확인</span>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>haproxy
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a><span class="c1"># 5. kubeconfig 설정</span>
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/.kube
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-i<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>sudo<span class="w"> </span>chown<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+</code></pre></div>
+<h3 id="옵션-b-단일-구성">옵션 B: 단일 구성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Calico 선택 시</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;&lt;MASTER_IP&gt;:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span>--pod-network-cidr<span class="o">=</span><span class="m">192</span>.168.0.0/16<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span>--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span>--kubernetes-version<span class="w"> </span>v1.33.11
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># Cilium 선택 시 (kube-proxy skip)</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">  </span>--skip-phases<span class="o">=</span>addon/kube-proxy<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;&lt;MASTER_IP&gt;:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">  </span>--pod-network-cidr<span class="o">=</span><span class="m">10</span>.0.0.0/16<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">  </span>--service-cidr<span class="o">=</span><span class="m">10</span>.96.0.0/12<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">  </span>--kubernetes-version<span class="w"> </span>v1.33.11
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="c1"># kubeconfig 설정</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/.kube
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-i<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>sudo<span class="w"> </span>chown<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+</code></pre></div>
+<h2 id="phase-6-1-추가-마스터-노드-조인-master-2-3--ha-구성-시에만">Phase 6-1: 추가 마스터 노드 조인 (Master-2, 3 — HA 구성 시에만)</h2>
+<p>Master-1 초기화 출력에서 <strong><code>--control-plane</code></strong> 조인 명령을 복사하여 실행합니다.
+Master-2, 3에도 HAProxy가 VIP:6443을 점유하고 있으므로 조인 전에 중지합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># 1. HAProxy 일시 중지</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>haproxy
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># 2. 컨트롤 플레인 조인</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>join<span class="w"> </span>&lt;VIP&gt;:6443<span class="w"> </span>--token<span class="w"> </span>&lt;TOKEN&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span>--discovery-token-ca-cert-hash<span class="w"> </span>sha256:&lt;HASH&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span>--control-plane<span class="w"> </span>--certificate-key<span class="w"> </span>&lt;CERT_KEY&gt;
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="c1"># 3. bind-address를 해당 노드 실제 IP로 수정</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="c1"># Master-2: - --bind-address=&lt;MASTER2_IP&gt;</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="c1"># Master-3: - --bind-address=&lt;MASTER3_IP&gt;</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="c1"># 4. API 서버 재기동 확인 후 HAProxy 시작</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>apiserver<span class="w">   </span><span class="c1"># Running 확인</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>haproxy
+</code></pre></div>
+<p>kubeconfig도 각 노드에 설정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nv">$HOME</span>/.kube
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-i<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>sudo<span class="w"> </span>chown<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="nv">$HOME</span>/.kube/config
+</code></pre></div>
+<h2 id="phase-7-cni-설치">Phase 7: CNI 설치</h2>
+<h3 id="옵션-a-calico--envoy-gateway">옵션 A: Calico + Envoy Gateway</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 1. Calico 설치</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>k8s/utils/calico.yaml
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># 2. Calico 파드가 전부 Running이 될 때까지 대기</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-w
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="c1"># 3. Envoy Gateway 설치 (L7 라우팅)</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="nb">cd</span><span class="w"> </span>../envoy-1.37.2
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>./scripts/install.sh
+</code></pre></div>
+<blockquote>
+<p>Pod CIDR을 기본(<code>192.168.0.0/16</code>)에서 변경한 경우 <code>k8s/utils/calico.yaml</code>의
+<code>CALICO_IPV4POOL_CIDR</code> 주석을 해제하고 값을 수정한 뒤 적용합니다.</p>
+</blockquote>
+<h3 id="옵션-b-cilium">옵션 B: Cilium</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Cilium은 별도 컴포넌트에서 설치 (이미지 pre-load + helm install 포함)</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">cd</span><span class="w"> </span>../cilium-1.19.3
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1"># install.conf에 K8S_SERVICE_HOST/PORT, kubeProxyReplacement=true 가 저장되어 있어야 함</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>./scripts/install.sh
+</code></pre></div>
+<p>Cilium은 Gateway API를 기본 지원하므로 Envoy Gateway를 별도로 설치하지 않습니다.</p>
+<h2 id="phase-8-helm--nerdctl-설치-컨트롤-플레인">Phase 8: helm &amp; nerdctl 설치 (컨트롤 플레인)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">cd</span><span class="w"> </span>k8s/binaries
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>tar<span class="w"> </span>-xzvf<span class="w"> </span>helm-v3.20.*-linux-amd64.tar.gz
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>linux-amd64/helm<span class="w"> </span>/usr/local/bin/helm
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>helm<span class="w"> </span>version
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="c1"># nerdctl (full)</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>tar<span class="w"> </span>-xzvf<span class="w"> </span>nerdctl-full-2.2.2-linux-amd64.tar.gz<span class="w"> </span>-C<span class="w"> </span>/tmp/nerdctl-full
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/tmp/nerdctl-full/bin/*<span class="w"> </span>/usr/local/bin/
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>nerdctl<span class="w"> </span>--version
+</code></pre></div>
+<h2 id="phase-9-워커-노드-조인">Phase 9: 워커 노드 조인</h2>
+<p>Master-1 <code>kubeadm init</code> 출력에서 워커 조인 명령을 복사하여 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>join<span class="w"> </span>&lt;CONTROL_PLANE_ENDPOINT&gt;:6443<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span>--token<span class="w"> </span>&lt;TOKEN&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span>--discovery-token-ca-cert-hash<span class="w"> </span>sha256:&lt;HASH&gt;
+</code></pre></div>
+<h2 id="phase-10-설치-확인">Phase 10: 설치 확인</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A
+</code></pre></div>
+<p>모든 노드가 <code>Ready</code>, 전 네임스페이스 파드가 <code>Running</code>이면 완료입니다.</p>
+<p>추가 확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Cilium 선택 시</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ciliumendpoints<span class="w"> </span>-A
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>cni0<span class="w">  </span><span class="c1"># 존재하지 않아야 함 (flannel 잔재 없음)</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>iptables<span class="w"> </span>-L<span class="w"> </span>-n<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>KUBE-SVC<span class="w">  </span><span class="c1"># 비어있어야 함 (kubeProxyReplacement 동작)</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="c1"># Calico 선택 시</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ippools<span class="w"> </span>-o<span class="w"> </span>yaml
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>projectcalico-system
+</code></pre></div>
+<h2 id="재설치-시-초기화">재설치 시 초기화</h2>
+<p><code>scripts/uninstall.sh</code>를 사용하는 것을 권장하며, 수동으로 할 경우:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># 1. kubeadm reset</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>reset<span class="w"> </span>-f
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># 2. CNI/kube 설정 삭제</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/etc/cni/net.d<span class="w"> </span>/var/lib/cni
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>rm<span class="w"> </span>-rf<span class="w"> </span><span class="nv">$HOME</span>/.kube
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/root/.kube<span class="w"> </span>/var/lib/etcd<span class="w"> </span>/var/lib/kubelet
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="c1"># 3. iptables 규칙 초기화</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-F<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-F<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>mangle<span class="w"> </span>-F<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>iptables<span class="w"> </span>-X
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="c1"># 4. CNI 인터페이스 제거 (있을 시)</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="k">for</span><span class="w"> </span>iface<span class="w"> </span><span class="k">in</span><span class="w"> </span>cni0<span class="w"> </span>flannel.1<span class="w"> </span>cilium_host<span class="w"> </span>cilium_net<span class="w"> </span>cilium_vxlan<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="w">    </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$iface</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span>del<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$iface</span><span class="s2">&quot;</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="k">done</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a><span class="c1"># 5. containerd 재시작</span>
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+</code></pre></div>
+<h2 id="vip-변경-시-조치">VIP 변경 시 조치</h2>
+<p>운영 중 VIP 대역이 변경되거나 새로운 IP를 할당받아야 하는 경우의 절차입니다.</p>
+<h3 id="케이스-0-운영-중인-클러스터를-ip--fqdn으로-전환">케이스 0: 운영 중인 클러스터를 IP → FQDN으로 전환</h3>
+<p>이미 VIP IP로 초기 구성한 클러스터에 FQDN을 사후 적용하는 절차입니다.
+이후 VIP가 변경되면 케이스 A 절차만으로 처리할 수 있게 됩니다.</p>
+<h4 id="1단계-모든-노드에-fqdn-등록-마스터--워커"><strong>1단계: 모든 노드에 FQDN 등록 (마스터 + 워커)</strong></h4>
+<blockquote>
+<p>DNS 서버가 운영 중이라면 DNS 서버에 등록합니다.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;OLD_VIP&gt;  k8s-api.internal&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts
+</code></pre></div>
+<h4 id="2단계-api-서버-인증서에-fqdn-san-추가-전체-마스터-노드"><strong>2단계: API 서버 인증서에 FQDN SAN 추가 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># 기존 인증서 백업</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>~/apiserver.crt.bak
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.key<span class="w"> </span>~/apiserver.key.bak
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="c1"># 삭제 후 FQDN 포함하여 재발급</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>/etc/kubernetes/pki/apiserver.key
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span>phase<span class="w"> </span>certs<span class="w"> </span>apiserver<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;k8s-api.internal:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;k8s-api.internal,&lt;OLD_VIP&gt;,&lt;MASTER1_IP&gt;,&lt;MASTER2_IP&gt;,&lt;MASTER3_IP&gt;,127.0.0.1&quot;</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="c1"># FQDN이 SAN에 포함되었는지 확인</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>openssl<span class="w"> </span>x509<span class="w"> </span>-in<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>-noout<span class="w"> </span>-text<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A1<span class="w"> </span><span class="s2">&quot;Subject Alternative&quot;</span>
+</code></pre></div>
+<h4 id="3단계-kube-apiserver-재시작-전체-마스터-노드"><strong>3단계: kube-apiserver 재시작 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml<span class="w"> </span>/tmp/
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>sleep<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/kube-apiserver.yaml<span class="w"> </span>/etc/kubernetes/manifests/
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>watch<span class="w"> </span>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+</code></pre></div>
+<h4 id="4단계-kubeconfig-및-kubeletconf-업데이트-전체-마스터-노드"><strong>4단계: kubeconfig 및 kubelet.conf 업데이트 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">for</span><span class="w"> </span>conf<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">            </span>/etc/kubernetes/controller-manager.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">            </span>/etc/kubernetes/scheduler.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">            </span>/etc/kubernetes/kubelet.conf<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">    </span>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|https://&lt;OLD_VIP&gt;:6443|https://k8s-api.internal:6443|g&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$conf</span><span class="s2">&quot;</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="k">done</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="c1"># 현재 사용자 kubeconfig 갱신</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>cp<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span>~/.kube/config
+</code></pre></div>
+<h4 id="5단계-워커-노드-kubeletconf-업데이트-전체-워커-노드"><strong>5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|https://&lt;OLD_VIP&gt;:6443|https://k8s-api.internal:6443|g&#39;</span><span class="w"> </span>/etc/kubernetes/kubelet.conf
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
+</code></pre></div>
+<h4 id="6단계-클러스터-내부-configmap-갱신-master-1에서-1회-실행"><strong>6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회 실행)</strong></h4>
+<p>로컬 파일 수정과 별개로, 클러스터 내부 etcd에 저장된 엔드포인트도 갱신해야 합니다.
+이를 누락하면 kube-proxy 파드가 재시작될 때 구 VIP로 접속을 시도하여 <code>CrashLoopBackOff</code>가 발생할 수 있습니다.</p>
+<blockquote>
+<p>CNI = Cilium 구성의 경우 kube-proxy 가 없으므로 아래 <code>kube-proxy ConfigMap</code> 단계는 생략하고,
+<code>kubeadm-config</code> 갱신만 수행합니다. Cilium 파드는 <code>K8S_SERVICE_HOST</code>/<code>K8S_SERVICE_PORT</code> 환경
+변수로 API를 찾으므로 <code>kubectl -n kube-system rollout restart ds cilium</code> 으로 재기동합니다.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1"># kube-proxy ConfigMap 갱신 (Calico 경로만)</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>configmap<span class="w"> </span>kube-proxy<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">  </span>sed<span class="w"> </span><span class="s1">&#39;s|&lt;OLD_VIP&gt;:6443|k8s-api.internal:6443|g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">  </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="c1"># kube-proxy 롤아웃</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>daemonset<span class="w"> </span>kube-proxy<span class="w"> </span>-n<span class="w"> </span>kube-system
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="c1"># (권장) kubeadm-config ConfigMap 갱신 — 추후 kubeadm upgrade 시 필요</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a>kubectl<span class="w"> </span>get<span class="w"> </span>configmap<span class="w"> </span>kubeadm-config<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="w">  </span>sed<span class="w"> </span><span class="s1">&#39;s|&lt;OLD_VIP&gt;:6443|k8s-api.internal:6443|g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="w">  </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+</code></pre></div>
+<h4 id="7단계-확인"><strong>7단계: 확인</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>kubectl<span class="w"> </span>cluster-info
+</code></pre></div>
+<p><code>Kubernetes control plane</code> 주소가 <code>https://k8s-api.internal:6443</code>으로 표시되면 완료입니다.</p>
+<hr />
+<h3 id="케이스-a-fqdn-방식으로-초기-구성한-경우-권장-구성">케이스 A: FQDN 방식으로 초기 구성한 경우 (권장 구성)</h3>
+<p>FQDN(<code>k8s-api.internal</code>)이 인증서 SAN에 포함되어 있으므로, <strong>인증서 재발급 없이</strong> 아래 순서만 따르면 됩니다.</p>
+<h4 id="1단계-모든-노드의-etchosts-업데이트-마스터--워커"><strong>1단계: 모든 노드의 <code>/etc/hosts</code> 업데이트 (마스터 + 워커)</strong></h4>
+<blockquote>
+<p>DNS 서버가 운영 중이라면 DNS 서버에 등록합니다.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># &lt;OLD_VIP&gt; → &lt;NEW_VIP&gt; 로 변경</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/&lt;OLD_VIP&gt;  k8s-api.internal/&lt;NEW_VIP&gt;  k8s-api.internal/&#39;</span><span class="w"> </span>/etc/hosts
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="c1"># 확인</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>grep<span class="w"> </span>k8s-api.internal<span class="w"> </span>/etc/hosts
+</code></pre></div>
+<h4 id="2단계-keepalived-vip-변경-전체-마스터-노드"><strong>2단계: Keepalived VIP 변경 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/&lt;OLD_VIP&gt;/&lt;NEW_VIP&gt;/&#39;</span><span class="w"> </span>/etc/keepalived/keepalived.conf
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keepalived
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="c1"># 새 VIP 활성화 확인 (Master-1)</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;NEW_VIP&gt;
+</code></pre></div>
+<h4 id="3단계-haproxy-bind-ip-변경-전체-마스터-노드"><strong>3단계: HAProxy bind IP 변경 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/&lt;OLD_VIP&gt;:6443/&lt;NEW_VIP&gt;:6443/&#39;</span><span class="w"> </span>/etc/haproxy/haproxy.cfg
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>haproxy
+</code></pre></div>
+<blockquote>
+<p><code>backend k8s-masters</code>의 <code>server</code> 항목(마스터 노드 IP)은 변경하지 않습니다.</p>
+</blockquote>
+<h4 id="4단계-api-서버-재시작-확인"><strong>4단계: API 서버 재시작 확인</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># kubeconfig의 server 주소는 FQDN이므로 변경 불필요</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+</code></pre></div>
+<hr />
+<h3 id="케이스-b-vip-ip를-직접-사용하여-초기-구성한-경우">케이스 B: VIP IP를 직접 사용하여 초기 구성한 경우</h3>
+<p>인증서 SAN에 기존 VIP IP가 고정되어 있으므로, <strong>인증서 재발급이 필수</strong>입니다.
+전체 마스터 노드에서 순서대로 진행합니다.</p>
+<h4 id="1단계-keepalived--haproxy-vip-변경-전체-마스터-노드"><strong>1단계: Keepalived / HAProxy VIP 변경 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/&lt;OLD_VIP&gt;/&lt;NEW_VIP&gt;/&#39;</span><span class="w"> </span>/etc/keepalived/keepalived.conf
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>keepalived
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/&lt;OLD_VIP&gt;:6443/&lt;NEW_VIP&gt;:6443/&#39;</span><span class="w"> </span>/etc/haproxy/haproxy.cfg
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>haproxy
+</code></pre></div>
+<h4 id="2단계-api-서버-인증서-재발급-전체-마스터-노드"><strong>2단계: API 서버 인증서 재발급 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c1"># 기존 인증서 백업</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>~/apiserver.crt.bak
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>sudo<span class="w"> </span>cp<span class="w"> </span>/etc/kubernetes/pki/apiserver.key<span class="w"> </span>~/apiserver.key.bak
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="c1"># 삭제 후 재발급 (새 VIP 포함)</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>sudo<span class="w"> </span>rm<span class="w"> </span>/etc/kubernetes/pki/apiserver.crt<span class="w"> </span>/etc/kubernetes/pki/apiserver.key
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>sudo<span class="w"> </span>kubeadm<span class="w"> </span>init<span class="w"> </span>phase<span class="w"> </span>certs<span class="w"> </span>apiserver<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="w">  </span>--control-plane-endpoint<span class="w"> </span><span class="s2">&quot;&lt;NEW_VIP&gt;:6443&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">  </span>--apiserver-cert-extra-sans<span class="o">=</span><span class="s2">&quot;&lt;NEW_VIP&gt;,&lt;MASTER1_IP&gt;,&lt;MASTER2_IP&gt;,&lt;MASTER3_IP&gt;,127.0.0.1&quot;</span>
+</code></pre></div>
+<h4 id="3단계-kube-apiserver-재시작-전체-마스터-노드_1"><strong>3단계: kube-apiserver 재시작 (전체 마스터 노드)</strong></h4>
+<p>static pod는 manifest를 잠시 제거했다가 복원하면 자동 재시작됩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/kubernetes/manifests/kube-apiserver.yaml<span class="w"> </span>/tmp/
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>sleep<span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/tmp/kube-apiserver.yaml<span class="w"> </span>/etc/kubernetes/manifests/
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="c1"># Pod가 다시 Running 상태가 될 때까지 대기</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>watch<span class="w"> </span>sudo<span class="w"> </span>crictl<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+</code></pre></div>
+<h4 id="4단계-kubeconfig-및-kubeletconf-업데이트-전체-마스터-노드_1"><strong>4단계: kubeconfig 및 kubelet.conf 업데이트 (전체 마스터 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="k">for</span><span class="w"> </span>conf<span class="w"> </span><span class="k">in</span><span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">            </span>/etc/kubernetes/controller-manager.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="w">            </span>/etc/kubernetes/scheduler.conf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="w">            </span>/etc/kubernetes/kubelet.conf<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="w">    </span>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|https://&lt;OLD_VIP&gt;:6443|https://&lt;NEW_VIP&gt;:6443|g&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$conf</span><span class="s2">&quot;</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a><span class="k">done</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
+<a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a>
+<a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a><span class="c1"># 현재 사용자 kubeconfig 갱신</span>
+<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a>cp<span class="w"> </span>/etc/kubernetes/admin.conf<span class="w"> </span>~/.kube/config
+</code></pre></div>
+<h4 id="5단계-워커-노드-kubeletconf-업데이트-전체-워커-노드_1"><strong>5단계: 워커 노드 kubelet.conf 업데이트 (전체 워커 노드)</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|https://&lt;OLD_VIP&gt;:6443|https://&lt;NEW_VIP&gt;:6443|g&#39;</span><span class="w"> </span>/etc/kubernetes/kubelet.conf
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>kubelet
+</code></pre></div>
+<h4 id="6단계-클러스터-내부-configmap-갱신-master-1에서-1회-실행_1"><strong>6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회 실행)</strong></h4>
+<blockquote>
+<p>CNI = Cilium 구성의 경우 kube-proxy 가 없으므로 아래 <code>kube-proxy ConfigMap</code> 단계는 생략하고,
+<code>kubeadm-config</code> 갱신만 수행합니다. Cilium 파드는 <code>K8S_SERVICE_HOST</code>/<code>K8S_SERVICE_PORT</code> 환경
+변수로 API를 찾으므로 <code>kubectl -n kube-system rollout restart ds cilium</code> 으로 재기동합니다.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="c1"># kube-proxy ConfigMap 갱신 (Calico 경로만)</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>configmap<span class="w"> </span>kube-proxy<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">  </span>sed<span class="w"> </span><span class="s1">&#39;s|&lt;OLD_VIP&gt;:6443|&lt;NEW_VIP&gt;:6443|g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="w">  </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="c1"># kube-proxy 롤아웃</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>daemonset<span class="w"> </span>kube-proxy<span class="w"> </span>-n<span class="w"> </span>kube-system
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="c1"># (권장) kubeadm-config ConfigMap 갱신 — 추후 kubeadm upgrade 시 필요</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>kubectl<span class="w"> </span>get<span class="w"> </span>configmap<span class="w"> </span>kubeadm-config<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="w">  </span>sed<span class="w"> </span><span class="s1">&#39;s|&lt;OLD_VIP&gt;:6443|&lt;NEW_VIP&gt;:6443|g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="w">  </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+</code></pre></div>
+<h4 id="7단계-정상-동작-확인"><strong>7단계: 정상 동작 확인</strong></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system
+</code></pre></div>
+<p>모든 노드가 <code>Ready</code> 상태이고 kube-system Pod가 <code>Running</code>이면 완료입니다.</p>
+<hr />
+<h2 id="ubuntu-2404-vs-rocky-96-주요-치환-포인트">Ubuntu 24.04 vs Rocky 9.6 주요 치환 포인트</h2>
+<p>이 가이드가 HA 절차를 직접 포함하지만, 보조 참조용으로 정리합니다.</p>
+<table>
+<thead>
+<tr>
+<th>Rocky 9.6</th>
+<th>Ubuntu 24.04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dnf install haproxy keepalived psmisc</code></td>
+<td><code>apt-get install haproxy keepalived psmisc</code> (DEB는 <code>k8s/debs/</code>)</td>
+</tr>
+<tr>
+<td><code>/etc/selinux/config</code> + <code>setenforce 0</code></td>
+<td>AppArmor (<code>aa-status</code>, 필요 시 <code>aa-complain</code>)</td>
+</tr>
+<tr>
+<td><code>ip addr show eth0 \| grep VIP</code></td>
+<td><code>ip addr show \| grep &lt;VIP&gt;</code> (인터페이스명 다를 수 있음)</td>
+</tr>
+<tr>
+<td><code>firewalld</code> 고려</td>
+<td><code>ufw</code> 고려 (폐쇄망에서는 대부분 <code>sudo ufw disable</code>)</td>
+</tr>
+<tr>
+<td>iptables backend 고정</td>
+<td>WSL2만 <code>iptables-legacy</code> 강제, VM은 기본값 충분</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
