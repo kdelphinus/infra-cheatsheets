@@ -145,4 +145,4 @@ nav:
       - 'Ironic 추가하기': openstack/tools/add-ironic.md
   - Archive:
     - Kubernetes:
-      - 'Envoy Gateway (v1.36.3)': k8s/gateway-api/001-envoy-install.md
+      - 'Envoy Gateway (v1.36.3)': k8s/gateway-api/envoy-v1.36.3-install.md
