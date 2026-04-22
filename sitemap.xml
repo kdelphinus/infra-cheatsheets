@@ -129,6 +129,14 @@
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/base-infra/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/metallb-install/</loc>
+         <lastmod>2026-04-22</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/offline-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
@@ -162,14 +170,6 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/network/cilium-install/</loc>
-         <lastmod>2026-04-22</lastmod>
-    </url>
-    <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/003-necessary_infra_install/</loc>
-         <lastmod>2026-04-22</lastmod>
-    </url>
-    <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/offline-install/004-metallb-install/</loc>
          <lastmod>2026-04-22</lastmod>
     </url>
     <url>
