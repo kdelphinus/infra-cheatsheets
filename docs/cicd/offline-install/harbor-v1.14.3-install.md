@@ -1,6 +1,6 @@
-# 🚀 Harbor v2.10.3 오프라인 설치 가이드
+# 🚀 Harbor v1.14.3 오프라인 설치 가이드
 
-폐쇄망 환경에서 Harbor v2.10.3을 Kubernetes 위에 Helm으로 설치하는 절차를 안내합니다.
+폐쇄망 환경에서 Harbor v1.14.3을 Kubernetes 위에 Helm으로 설치하는 절차를 안내합니다.
 
 ## 전제 조건
 
@@ -59,11 +59,9 @@ chmod +x scripts/install.sh
    - **`1` 로컬 tar 직접 import (권장)**: 하버가 아직 설치되지 않은 경우 선택합니다. (1단계에서 `load_images.sh`를 이미 실행했다면 이미 로드되어 있으므로 금방 넘어갑니다.)
    - **`2` Harbor 레지스트리 사용**: 하버가 이미 설치되어 있고 재설치하거나 이미지가 이미 로드된 경우 선택합니다.
 2. **노출 방식 선택**: `1` NodePort + Envoy Gateway (기본) / `2` nginx Ingress
-3. **스토리지 타입 선택**:
-   - **`1` HostPath**: 단일 노드 테스트 환경용. 특정 노드 경로에 데이터를 저장합니다.
-   - **`2` NFS (정적 할당)**: 미리 생성된 NFS 서버/경로 정보를 입력하여 정적 PV/PVC를 생성합니다.
-   - **`3` NFS (동적 할당)**: `nfs-client` 등 클러스터에 설치된 StorageClass를 통해 볼륨을 자동 할당받습니다.
-4. **Harbor 관리자(`admin`) 비밀번호**: 최소 8자 이상의 비밀번호를 입력합니다.
+3. **Harbor 관리자(`admin`) 비밀번호**: 최소 8자 이상의 비밀번호를 입력합니다.
+
+> **참고:** TLS를 사용하지 않는 환경의 경우, 설치 완료 후 완료 메시지와 함께 Insecure Registry 등록에 대한 안내가 출력됩니다.
 
 ## 4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)
 
@@ -83,7 +81,7 @@ HTTP로 Harbor를 사용하는 경우, **모든 K8s 노드(Master + Worker)**에
 
 ### 방법 1: 스크립트 사용 (권장)
 
-각 노드에서 실행합니다.
+각 노드에서 실행합니다. 스크립트 실행 시 `config_path`가 containerd 버전에 따라 v1.x/v2.x 키 위치에 자동 감지되어 등록됩니다.
 
 ```bash
 chmod +x scripts/insecurity_registry_add.sh
@@ -120,10 +118,7 @@ containerd --version
 grep -n 'io.containerd' /etc/containerd/config.toml | grep -i 'cri\|registry'
 ```
 
-- v1.x 키(`grpc.v1.cri`)에 설정했는데 실제 containerd가 v2.x라면 `config_path`가 **무시**되어 insecure registry가 동작하지 않습니다.
-- 이미 해당 섹션이 있다면 `config_path` 줄만 추가하거나 값을 수정합니다. 빈 값(`config_path = ''`)이 설정되어 있다면 위 경로로 교체하세요.
-
-#### 2. hosts.toml 생성
+#### 3. hosts.toml 생성
 
 레지스트리 주소에 맞는 디렉토리를 만들고 `hosts.toml`을 작성합니다.
 
@@ -140,15 +135,10 @@ server = "http://172.30.235.20:30002"
 EOF
 ```
 
-#### 3. containerd 재시작
+#### 4. containerd 재시작 및 설정 확인
 
 ```bash
 sudo systemctl restart containerd
-```
-
-#### 4. 설정 확인
-
-```bash
 grep "config_path" /etc/containerd/config.toml
 cat /etc/containerd/certs.d/172.30.235.20:30002/hosts.toml
 ```
@@ -162,52 +152,16 @@ chmod +x scripts/create_self-signed_tls.sh
 ./scripts/create_self-signed_tls.sh
 ```
 
-## 6단계: (선택) Harbor CA 인증서 시스템 등록 (HTTPS 사용 시)
-
-Self-Signed 또는 사설 CA를 통해 HTTPS Harbor를 구성한 경우, **모든 K8s 노드 및 클라이언트**에서 해당 인증서를 신뢰하도록 등록해야 합니다.
-
-### 1. OS 시스템 신뢰 등록 (전체 노드)
-
-```bash
-# 1. Harbor 서버에서 생성된 ca.crt 파일을 가져옵니다.
-# (임시로 /tmp/ca.crt에 있다고 가정)
-
-# 2. 신뢰할 수 있는 인증서 앵커 디렉토리로 복사 (Rocky/RHEL 계열)
-sudo cp /tmp/ca.crt /etc/pki/ca-trust/source/anchors/harbor-ca.crt
-
-# 3. 시스템 인증서 저장소 업데이트
-sudo update-ca-trust
-```
-
-### 2. containerd 전용 인증서 위치 지정 (전체 노드)
-
-OS 신뢰 등록 외에도 `containerd`가 해당 도메인에 대해 이 인증서를 명확히 참조하도록 설정해야 합니다. (4단계의 `config_path` 설정이 완료된 상태여야 합니다.)
-
-```bash
-# Harbor 도메인 변수 설정 (예: harbor.internal 또는 IP:Port)
-HARBOR_DOMAIN="<EXTERNAL_HOSTNAME>"
-
-# 인증서 디렉토리 생성 및 복사
-sudo mkdir -p /etc/containerd/certs.d/$HARBOR_DOMAIN
-sudo cp /etc/pki/ca-trust/source/anchors/harbor-ca.crt /etc/containerd/certs.d/$HARBOR_DOMAIN/ca.crt
-
-# (필요 시) containerd 재시작
-sudo systemctl restart containerd
-```
-
-> **주의**: 4단계에서 설명한 `/etc/containerd/config.toml` 내 `config_path` 설정이 `/etc/containerd/certs.d`를 바라보고 있는지 반드시 확인하세요.
-
-> **참고**: Ubuntu/Debian 계열의 경우 `/usr/local/share/ca-certificates/harbor-ca.crt`로 복사 후 `sudo update-ca-certificates` 명령어를 사용합니다.
-
 ## 7단계: (선택) Trivy 취약점 DB 수동 반입
 
 에어갭 환경에서는 Trivy가 인터넷을 통해 취약점 DB를 업데이트할 수 없습니다. 보안 스캔 기능을 사용하려면 수동으로 DB를 반입해야 합니다.
 
-1.  **외부망**에서 아래 두 파일을 다운로드합니다.
-    *   [Vulnerability DB](https://github.com/aquasecurity/trivy-db/releases/latest/download/trivy-offline-db.tgz) (파일명: `trivy-db.tar.gz`로 저장)
-    *   [Java DB](https://github.com/aquasecurity/trivy-java-db/releases/latest/download/javadb.tar.gz) (파일명: `trivy-java-db.tar.gz`로 저장)
-2.  다운로드한 두 파일을 Harbor 컴포넌트 루트(`harbor-2.10.3/`) 폴더에 넣습니다.
-3.  반입 스크립트를 실행합니다.
+1. **외부망**에서 아래 두 파일을 다운로드합니다.
+    - [Vulnerability DB](https://github.com/aquasecurity/trivy-db/releases/latest/download/trivy-offline-db.tgz) (파일명: `trivy-db.tar.gz`로 저장)
+    - [Java DB](https://github.com/aquasecurity/trivy-java-db/releases/latest/download/javadb.tar.gz) (파일명: `trivy-java-db.tar.gz`로 저장)
+2. 다운로드한 두 파일을 Harbor 컴포넌트 루트(`harbor-1.14.3/`) 폴더에 넣습니다.
+3. 반입 스크립트를 실행합니다.
+
     ```bash
     chmod +x scripts/import_trivy_db.sh
     ./scripts/import_trivy_db.sh
@@ -218,19 +172,9 @@ sudo systemctl restart containerd
 ## 이미지 Push 예시
 
 ```bash
-# 1. 이미지 import (로컬 .tar → containerd k8s.io 네임스페이스)
-sudo ctr -n k8s.io images import my-image.tar
-
-# 2. Tag (Harbor 대상 주소로 변환)
-sudo ctr -n k8s.io images tag \
-  docker.io/library/my-image:v1 \
-  <NODE_IP>:30002/library/my-image:v1
-
-# 3. Push (HTTP 사용 시 --plain-http 추가)
-sudo ctr -n k8s.io images push \
-  --plain-http \
-  --user admin:<PASSWORD> \
-  <NODE_IP>:30002/library/my-image:v1
+docker login <NODE_IP>:30002 -u admin
+docker tag my-image:v1 <NODE_IP>:30002/library/my-image:v1
+docker push <NODE_IP>:30002/library/my-image:v1
 ```
 
 ## 삭제
