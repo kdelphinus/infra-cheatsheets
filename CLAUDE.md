@@ -60,3 +60,28 @@ The project uses `markdownlint` (`.markdownlint.json` at repo root). Key rules:
   - Gemini와 공동 작업 시: 두 서명 모두 포함
 - **Documentation Consistency**: 새로운 문서가 추가되거나 기존 문서 구조가 변경될 경우, 반드시 `docs/index.md` 파일의 카테고리 목록도 함께 업데이트하여 동기화를 유지하십시오.
 - **Push Policy**: 모든 커밋이 완료된 후 최종적으로 푸시를 진행하여 히스토리를 깔끔하게 유지하십시오.
+
+## 7. Upstream: air-gapped
+
+이 레포는 `/home/mjko/air-gapped/`(폐쇄망 인프라 자산 단일 진실 공급원)의 마크다운 가이드를 정리해 발행하는 다운스트림 사이트. 가이드 본문 작성·수정 요청을 받으면 가장 먼저 air-gapped의 해당 컴포넌트 디렉터리를 확인하고 sync 미반영분이 있는지부터 살핀다.
+
+### Sync 운영 절차
+
+1. **변경 추적**: 양 레포의 `git log -1 --format="%ci" -- <file>` 비교로 분류
+    - **STALE**: air-gapped가 더 최신 → 본 레포에 반영 필요
+    - **MISSING**: air-gapped에는 있고 본 레포에 없음 → 신규 추가
+    - **SYNCED**: 본 레포가 같거나 더 최신 → 작업 불필요
+2. **스테이징**: 미반영분을 `tmp/`에 `{component}-v{version}-{filename}.md` 형태로 모은 뒤 `docs/` 적합 위치로 이동·다듬어 흡수. 작업 완료 후 `tmp/` 통째로 삭제.
+3. **콘텐츠 보존 원칙**: tmp 콘텐츠는 다듬을 수 있으나 일부만 가져오거나 누락하지 않음. infra 측에만 있던 mkdocs 내부 cross-link·admonition은 보존.
+
+### Archive 정책
+
+메이저 버전 교체 시 구버전을 같은 디렉터리에 `{component}-v{version}-install.md` 형태로 남기고 `mkdocs.yml`의 별도 `Archive:` 카테고리에 등록. 별도 archive 디렉터리는 사용하지 않음 (예: `docs/cicd/offline-install/harbor-v1.14.3-install.md`, `docs/k8s/install/rocky/online-install-v1.30.md`).
+
+### CI/CD prefix 리넘버
+
+`docs/cicd/offline-install/`는 `000-`, `001-` … 순번 prefix로 정렬. 신규 추가가 의미 순서를 깨뜨리면 기존 prefix 리넘버가 필요(`git mv`). 리넘버 후에는 `mkdocs.yml` nav와 `docs/index.md` 카드 링크도 함께 갱신.
+
+### remain_urls.txt
+
+루트의 `remain_urls.txt`는 Google Search Console 색인 등록 대기 URL 목록. 새 페이지 추가나 경로 변경(리넘버 포함) 시 이 파일도 갱신하고 `last_update` 날짜를 함께 수정.
