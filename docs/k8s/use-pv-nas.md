@@ -1,122 +1,90 @@
-# 🚀 NFS Provisioner v4.0.2 오프라인 설치 가이드
+# NFS Provisioner v4.0.18 설치 가이드
 
-본 문서는 폐쇄망 Kubernetes 환경에서 **NFS 동적 스토리지 프로비저닝(Dynamic Provisioning)**을 구성하여, 애플리케이션이 자동으로 볼륨을 할당받을 수 있도록 하는 절차를 정의합니다.
+본 문서는 **Rocky Linux 9.6 / K8s v1.33.7** 환경에서 NetApp NFS v4.1을 백엔드로 연동하는 절차를 설명합니다.
 
-## 📋 구성 명세
+---
 
-| 항목 | 버전 | 용도 |
+## 📋 사전 준비 사항
+
+### 1. (온라인인 경우) 헬름 차트 다운로드
+설치 스크립트 실행 전, 공식 차트를 아래 명령어로 확보해야 합니다.
+```bash
+cd nfs-provisioner-4.0.18/charts
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+helm pull nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --version 4.0.18 --untar
+```
+
+### 2. OS 패키지 설치 (전체 워커 노드)
+NFS 마운트를 위해 모든 노드에 관련 패키지가 설치되어 있어야 합니다.
+- **Rocky 9**: `sudo dnf install -y nfs-utils`
+- **Ubuntu 24**: `sudo apt install -y nfs-common`
+
+---
+
+## 🛠️ 단계별 설치 프로세스
+
+### Step 1: 설치 스크립트 실행
+```bash
+cd scripts/
+chmod +x install.sh
+./install.sh
+```
+
+### Step 2: 정보 입력
+- **NFS 서버 IP**: NetApp Vserver의 LIF IP 입력.
+- **NFS 공유 경로**: `/k8s/data` 등 실제 Export된 경로 입력.
+
+---
+
+## 💡 NetApp NFS v4.1 최적화 내용 (Rationale)
+
+본 패키지의 `values.yaml`에는 NetApp 벤더 권장 최적화 옵션이 기본 적용되어 있습니다.
+
+- **`vers=4.1`**: v3에서 발생하는 파일 잠금(Locking) 문제를 해결하고 고가용성을 확보합니다.
+- **`proto=tcp`**: 전송 안정성을 보장합니다.
+- **`rsize/wsize=1048576`**: 1MB 단위 대용량 입출력을 통해 성능을 극대화합니다.
+- **`hard`**: 네트워크 일시 단절 시 데이터 유실 방지를 위해 마운트를 유지합니다.
+- **`noresvport`**: 클라이언트 재접속 시 포트 제약 없이 즉시 연결하도록 설정합니다.
+
+---
+
+## 📁 다중 StorageClass 운영 (Multi-SC)
+
+기본적으로 `nfs-app` StorageClass가 생성됩니다. 추가로 백업이나 테스트용이 필요한 경우 아래 명령어를 참고하십시오.
+
+1. `manifests/additional-sc.yaml` 파일에서 원하는 이름과 설정을 확인합니다.
+2. 설치 스크립트 실행 시 자동으로 함께 적용됩니다.
+3. 수동 적용 시: `kubectl apply -f manifests/additional-sc.yaml`
+
+| SC 명칭 | 용도 | 삭제 시 데이터 정책 |
 | :--- | :--- | :--- |
-| **NFS Subdir Provisioner** | **v4.0.2** | NFS 동적 할당 컨트롤러 |
-| **StorageClass** | `nfs-client` | 기본 스토리지 클래스 명칭 |
-| **대상 OS** | Rocky Linux / Ubuntu | 클러스터 워커 노드 공통 |
+| **nfs-app** | 일반 애플리케이션 | Archive (보관) |
+| **nfs-backup** | DB 백업 등 | Retain (완전 유지) |
+| **nfs-test** | 임시 테스트 | Delete (즉시 삭제) |
 
 ---
 
-## 🛠️ 설치 전제 조건
-
-- Kubernetes 클러스터 구성 완료
-- NFS 서버로 사용할 노드 또는 외부 NAS 준비
-- Harbor 레지스트리 접근 가능 (`<NODE_IP>:30002`)
-
----
-
-## 1단계: OS 패키지 설치 (NFS 클라이언트)
-
-모든 워커 노드에서 실행하여 `mount.nfs` 기능을 활성화해야 합니다.
-
+## ✅ 설치 검증
 ```bash
-# Ubuntu의 경우
-chmod +x scripts/ubuntu/install.sh
-./scripts/ubuntu/install.sh
+# 1. StorageClass 상태 확인
+kubectl get sc
 
-# RHEL / Rocky Linux의 경우
-chmod +x scripts/rhel_rocky/install.sh
-./scripts/rhel_rocky/install.sh
-```
+# 2. 프로비저너 포드 상태 확인
+kubectl get pods -n kube-system -l app=nfs-client-provisioner
 
----
-
-## 2단계: 이미지 Harbor 업로드
-
-컴포넌트 루트 디렉토리에서 실행합니다.
-
-```bash
-# 1. 이미지 로드 (ctr 사용)
-sudo ctr -n k8s.io images import images/nfs-provisioner.tar
-
-# 2. Harbor 업로드 (upload_images_to_harbor_v3-lite.sh 사용)
-# HARBOR_REGISTRY: <NODE_IP>:30002
-./images/upload_images_to_harbor_v3-lite.sh
-```
-
----
-
-## 3단계: 매니페스트 수정 및 배포
-
-`manifests/nfs-provisioner.yaml` 파일의 설정을 사용자 환경에 맞게 수정합니다.
-
-| 항목 | 설명 | 예시 |
-| :--- | :--- | :--- |
-| **`image`** | 내부 레지스트리 이미지 주소 | `<NODE_IP>:30002/library/nfs-subdir-external-provisioner:v4.0.2` |
-| **`NFS_SERVER`** | NFS 서버 IP 주소 | `192.168.1.100` |
-| **`NFS_PATH`** | NFS 공유 디렉토리 절대 경로 | `/data/nfs-share` |
-
-수정 완료 후 배포를 실행합니다.
-
-```bash
-kubectl apply -f manifests/nfs-provisioner.yaml
-```
-
----
-
-## 4단계: 설치 확인 및 테스트
-
-### 4.1 설치 상태 확인
-
-```bash
-# 컨트롤러 파드 상태 확인
-kubectl get pods -n nfs-provisioner
-
-# StorageClass 생성 확인
-kubectl get storageclass
-```
-
-### 4.2 동적 할당 테스트 (PVC 생성)
-
-```yaml
-apiVersion: v1
+# 3. 테스트 PVC 생성 및 바인딩 확인
+kubectl apply -f - <<EOF
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: test-nfs-pvc
+  name: nfs-test-pvc
 spec:
-  storageClassName: nfs-client
+  storageClassName: nfs-app
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
-```
-
-```bash
-kubectl apply -f test-pvc.yaml
-kubectl get pvc test-nfs-pvc # Status가 Bound인지 확인
-```
-
----
-
-## 💡 운영 참고 사항
-
-- **네트워크 포트**: 노드 간 **TCP/UDP 2049(NFS)** 및 **111(RPC)** 포트가 개방되어 있어야 합니다.
-- **데이터 보존 정책**: `StorageClass`의 `archiveOnDelete: "false"` 설정은 PVC 삭제 시 실제 데이터를 삭제합니다. 데이터 보존이 필요하면 `true`로 설정하십시오.
-- **노드 고정**: NFS 서버와의 통신 지연을 줄이기 위해 프로비저너를 특정 노드에 고정 배포하는 것을 권장합니다.
-
----
-
-## 🗑️ 삭제 (Uninstall)
-
-```bash
-# OS별 스크립트 실행 (패키지 제거 및 매니페스트 삭제)
-./scripts/ubuntu/uninstall.sh
-# 또는
-./scripts/rhel_rocky/uninstall.sh
+EOF
+kubectl get pvc nfs-test-pvc
 ```
