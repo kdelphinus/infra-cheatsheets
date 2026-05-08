@@ -1,4 +1,4 @@
-last_update: 2026-04-22
+last_update: 2026-05-08
 
 https://kdelphinus.github.io/infra-cheatsheets/
 https://kdelphinus.github.io/infra-cheatsheets/guide/infra-standard/
@@ -8,14 +8,35 @@ https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu/online-install
 https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/ready-offline/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/offline-install/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/online-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/online-install-v1.30/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/git-cli-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/docker-offline-install/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/install/base-infra/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/install/metallb-install/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/network/cilium-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/operations/rocky-v1.30-cluster-reboot/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/operations/rocky-v1.33.7-cluster-reboot/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/operations/ubuntu-v1.33.11-cluster-reboot/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.37.2-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.37.2-install-online/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.36.3-install/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.36.3-install-online/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/
 https://kdelphinus.github.io/infra-cheatsheets/k8s/backup-restore/001-velero-install/
-https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/002-argocd-install/
-https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/003-argocd-jenkins-harbor-integration/
-https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/005-gitea-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/000-harbor-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/harbor-v1.14.3-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/harbor-insecure-setup/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/001-gitlab-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/002-jenkins-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/003-gitlab-omnibus-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/004-argocd-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/005-argocd-jenkins-harbor-integration/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/006-nexus-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/007-gitea-install/
+https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/008-tekton-install/
+https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-guide/
+https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-simple-guide/
+https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-reboot-guide/
 https://kdelphinus.github.io/infra-cheatsheets/db/redis/001-redis-stream-overview/
 https://kdelphinus.github.io/infra-cheatsheets/db/redis/002-redis-stream-install/
