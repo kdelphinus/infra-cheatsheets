@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/004-nexus-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/005-argocd-jenkins-harbor-integration/">
       
       
-        <link rel="prev" href="../003-argocd-jenkins-harbor-integration/">
+        <link rel="prev" href="../004-argocd-install/">
       
       
-        <link rel="next" href="../005-gitea-install/">
+        <link rel="next" href="../006-nexus-install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Nexus Repository 설치 - Infra Cheatsheets</title>
+        <title>ArgoCD — Jenkins · Harbor 연동 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-nexus-repository-오프라인-설치-가이드-ctr-기반" class="md-skip">
+        <a href="#argocd--jenkins--harbor-연동-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Nexus Repository 설치
+              ArgoCD — Jenkins · Harbor 연동
             
           </span>
         </div>
@@ -877,7 +877,7 @@
   <span class="md-ellipsis">
     
   
-    Rocky Linux 9.6 (v1.30.0)
+    Rocky Linux 9.6 (v1.33.7 online / v1.30 offline)
   
 
     
@@ -893,7 +893,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Rocky Linux 9.6 (v1.30.0)
+    Rocky Linux 9.6 (v1.33.7 online / v1.30 offline)
   
 
           </label>
@@ -941,7 +941,7 @@
   <span class="md-ellipsis">
     
   
-    2. 폐쇄망에서 K8s 설치
+    2. 폐쇄망 K8s 설치 (v1.30)
   
 
     
@@ -969,7 +969,63 @@
   <span class="md-ellipsis">
     
   
-    3. 온라인 환경에서 K8s 설치
+    3. 온라인 K8s 설치 (v1.33.7)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/install/rocky/git-cli-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git CLI 오프라인 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/install/rocky/docker-offline-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker 오프라인 설치
   
 
     
@@ -1513,7 +1569,7 @@
   <span class="md-ellipsis">
     
   
-    Gateway API
+    Operations
   
 
     
@@ -1526,6 +1582,150 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rocky 9.6 (v1.30) 클러스터 재부팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rocky 9.6 (v1.33.7) 클러스터 재부팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubuntu 24.04 (v1.33.11) 클러스터 재부팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1549,7 +1749,63 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway (v1.37.2)
+    Envoy Gateway 오프라인 설치 (v1.37.2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Gateway 온라인 설치 (v1.37.2)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy 클라이언트 IP 보존 (v1.37.2)
   
 
     
@@ -1731,10 +1987,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
         
           
-          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
             
   
   
@@ -1752,8 +2008,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_8">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2126,14 +2382,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../001-gitlab_jenkins_install/" class="md-nav__link">
+      <a href="../harbor-insecure-setup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    GitLab & Jenkins 설치
+    Harbor Insecure Registry 설정
   
 
     
@@ -2154,7 +2410,91 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-argocd-install/" class="md-nav__link">
+      <a href="../001-gitlab-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitLab 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../002-jenkins-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../003-gitlab-omnibus-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitLab Omnibus 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../004-argocd-install/" class="md-nav__link">
         
   
   
@@ -2162,34 +2502,6 @@
     
   
     ArgoCD 설치
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../003-argocd-jenkins-harbor-integration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ArgoCD — Jenkins · Harbor 연동
   
 
     
@@ -2226,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    Nexus Repository 설치
+    ArgoCD — Jenkins · Harbor 연동
   
 
     
@@ -2244,7 +2556,7 @@
   <span class="md-ellipsis">
     
   
-    Nexus Repository 설치
+    ArgoCD — Jenkins · Harbor 연동
   
 
     
@@ -2270,10 +2582,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#-구성-명세" class="md-nav__link">
+  <a href="#전체-cicd-흐름" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📋 구성 명세
+        전체 CI/CD 흐름
       
     </span>
   </a>
@@ -2281,55 +2593,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-설치-전제-조건" class="md-nav__link">
+  <a href="#-phase-1-harbor--gitlab-레포지토리를-argocd에-등록" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ 설치 전제 조건
+        🚀 Phase 1: Harbor · GitLab 레포지토리를 ArgoCD에 등록
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 이미지 Harbor 업로드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3단계-초기-비밀번호-확인-및-접속" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 초기 비밀번호 확인 및 접속
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3단계: 초기 비밀번호 확인 및 접속">
+    <nav class="md-nav" aria-label="🚀 Phase 1: Harbor · GitLab 레포지토리를 ArgoCD에 등록">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-접속-정보" class="md-nav__link">
+  <a href="#방법-a--argocd-cli-사용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 접속 정보
+        방법 A — argocd CLI 사용
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-b--secret-yaml로-등록-cli-없이" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 B — Secret YAML로 등록 (CLI 없이)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-c--웹-uigui-사용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용
       
     </span>
   </a>
@@ -2342,10 +2643,171 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-삭제-uninstall" class="md-nav__link">
+  <a href="#-phase-2-argocd-application-생성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🗑️ 삭제 (Uninstall)
+        🚀 Phase 2: ArgoCD Application 생성
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phase 2: ArgoCD Application 생성">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli로-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI로 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaml로-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML로 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-c--웹-uigui-사용-application-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용 (Application 생성)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-3-jenkins에서-argocd-sync-트리거" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 3: Jenkins에서 ArgoCD Sync 트리거
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phase 3: Jenkins에서 ArgoCD Sync 트리거">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-argocd-api-토큰-발급" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ArgoCD API 토큰 발급
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-jenkins-credential-등록" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Jenkins Credential 등록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-jenkinsfile에-stage-추가" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Jenkinsfile에 stage 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-4-harbor-imagepullsecret-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 4: Harbor imagePullSecret 설정
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-5-jenkins-전용-argocd-계정-설정-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 5: Jenkins 전용 ArgoCD 계정 설정 (권장)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phase 5: Jenkins 전용 ArgoCD 계정 설정 (권장)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jenkins-계정-추가" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. jenkins 계정 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rbac-정책-추가" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. RBAC 정책 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-jenkins-계정-토큰-발급" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. jenkins 계정 토큰 발급
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-6-연동-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 6: 연동 확인
       
     </span>
   </a>
@@ -2368,7 +2830,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../005-gitea-install/" class="md-nav__link">
+      <a href="../006-nexus-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nexus Repository 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../007-gitea-install/" class="md-nav__link">
         
   
   
@@ -2376,6 +2866,34 @@
     
   
     Gitea 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../008-tekton-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tekton Pipelines 설치
   
 
     
@@ -2817,6 +3335,90 @@
     
   
     Galera Cluster 장애 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/ha/galera-backup-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업 (간소판)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 재부팅
   
 
     
@@ -4267,7 +4869,179 @@
   <span class="md-ellipsis">
     
   
-    Envoy Gateway (v1.36.3)
+    Envoy Gateway 오프라인 설치 (v1.36.3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Gateway 온라인 설치 (v1.36.3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy 클라이언트 IP 보존 (v1.36.3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/install/rocky/online-install-v1.30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K8s Rocky 9.6 (v1.30) 온라인 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CI/CD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../harbor-v1.14.3-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harbor 오프라인 설치 (v1.14.3)
   
 
     
@@ -4323,10 +5097,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#-구성-명세" class="md-nav__link">
+  <a href="#전체-cicd-흐름" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📋 구성 명세
+        전체 CI/CD 흐름
       
     </span>
   </a>
@@ -4334,55 +5108,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-설치-전제-조건" class="md-nav__link">
+  <a href="#-phase-1-harbor--gitlab-레포지토리를-argocd에-등록" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ 설치 전제 조건
+        🚀 Phase 1: Harbor · GitLab 레포지토리를 ArgoCD에 등록
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 이미지 Harbor 업로드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2단계-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: 설치 실행
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3단계-초기-비밀번호-확인-및-접속" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 초기 비밀번호 확인 및 접속
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3단계: 초기 비밀번호 확인 및 접속">
+    <nav class="md-nav" aria-label="🚀 Phase 1: Harbor · GitLab 레포지토리를 ArgoCD에 등록">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#-접속-정보" class="md-nav__link">
+  <a href="#방법-a--argocd-cli-사용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💡 접속 정보
+        방법 A — argocd CLI 사용
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-b--secret-yaml로-등록-cli-없이" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 B — Secret YAML로 등록 (CLI 없이)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-c--웹-uigui-사용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용
       
     </span>
   </a>
@@ -4395,10 +5158,171 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-삭제-uninstall" class="md-nav__link">
+  <a href="#-phase-2-argocd-application-생성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🗑️ 삭제 (Uninstall)
+        🚀 Phase 2: ArgoCD Application 생성
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phase 2: ArgoCD Application 생성">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli로-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI로 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaml로-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML로 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-c--웹-uigui-사용-application-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 C — 웹 UI(GUI) 사용 (Application 생성)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-3-jenkins에서-argocd-sync-트리거" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 3: Jenkins에서 ArgoCD Sync 트리거
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phase 3: Jenkins에서 ArgoCD Sync 트리거">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-argocd-api-토큰-발급" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ArgoCD API 토큰 발급
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-jenkins-credential-등록" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Jenkins Credential 등록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-jenkinsfile에-stage-추가" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Jenkinsfile에 stage 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-4-harbor-imagepullsecret-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 4: Harbor imagePullSecret 설정
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-5-jenkins-전용-argocd-계정-설정-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 5: Jenkins 전용 ArgoCD 계정 설정 (권장)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Phase 5: Jenkins 전용 ArgoCD 계정 설정 (권장)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jenkins-계정-추가" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. jenkins 계정 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rbac-정책-추가" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. RBAC 정책 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-jenkins-계정-토큰-발급" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. jenkins 계정 토큰 발급
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-phase-6-연동-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Phase 6: 연동 확인
       
     </span>
   </a>
@@ -4425,99 +5349,294 @@
   
 
 
-<h1 id="-nexus-repository-오프라인-설치-가이드-ctr-기반">🚀 Nexus Repository 오프라인 설치 가이드 (ctr 기반)</h1>
-<p>본 문서는 폐쇄망 Kubernetes 환경에서 <strong>Nexus v3.71.0</strong>을 설치하고 사내 통합 아티팩트 저장소(Repository)를 구성하는 절차를 정의합니다.</p>
-<h2 id="-구성-명세">📋 구성 명세</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">버전</th>
-<th style="text-align: left;">용도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Nexus Repository</strong></td>
-<td style="text-align: left;"><strong>v3.71.0</strong></td>
-<td style="text-align: left;">바이너리 아티팩트 저장소 (Helm)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Storage</strong></td>
-<td style="text-align: left;">20Gi+</td>
-<td style="text-align: left;">hostPath 또는 PV 권장</td>
-</tr>
-</tbody>
-</table>
+<h1 id="argocd--jenkins--harbor-연동-가이드">ArgoCD — Jenkins · Harbor 연동 가이드</h1>
+<p>본 문서는 ArgoCD를 Jenkins CI/CD 및 Harbor 레지스트리와 연동하는 방법을 설명합니다.
+전체 흐름은 <strong>GitOps 패턴</strong>을 따릅니다.</p>
 <hr />
-<h2 id="-설치-전제-조건">🛠️ 설치 전제 조건</h2>
-<ul>
-<li>Kubernetes 클러스터 구성 완료</li>
-<li>Helm v3.x 설치 완료</li>
-<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
-<li>(도메인 접속 시) Envoy Gateway 설치 완료</li>
-</ul>
-<hr />
-<h2 id="1단계-이미지-harbor-업로드">1단계: 이미지 Harbor 업로드</h2>
-<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>./images/upload_images_to_harbor_v3-lite.sh
+<h2 id="전체-cicd-흐름">전체 CI/CD 흐름</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[개발자]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   │ git push
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   ▼
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>[GitLab] ──webhook──▶ [Jenkins]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                          │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                    1. 소스 빌드 (Gradle)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                    2. Podman → 이미지 빌드 &amp; Harbor Push
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                    3. GitOps 레포 manifest 이미지 태그 업데이트
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                    4. ArgoCD sync 트리거
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                          │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                          ▼
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                      [ArgoCD] ──pulls manifests──▶ [GitLab: GitOps Repo]
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                          │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                    K8s에 배포 (Harbor에서 이미지 Pull)
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                          │
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                          ▼
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                      [Kubernetes]
 </code></pre></div>
-<hr />
-<h2 id="2단계-설치-실행">2단계: 설치 실행</h2>
-<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 헬름 설치 (루트의 values.yaml 자동 반영)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>./scripts/install.sh
-</code></pre></div>
-<p><strong>스크립트 자동 처리 항목:</strong></p>
-<ul>
-<li>네임스페이스 (<code>nexus</code>) 생성 및 PV/PVC 적용</li>
-<li>Helm 배포 (Harbor 이미지 경로 자동 생성)</li>
-<li>서비스 (NodePort: 30003) 생성</li>
-</ul>
-<hr />
-<h2 id="3단계-초기-비밀번호-확인-및-접속">3단계: 초기 비밀번호 확인 및 접속</h2>
-<p>설치 완료 후 파드가 <code>Running</code> 상태가 되면 아래 명령어로 초기 <code>admin</code> 비밀번호를 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Nexus Pod 내의 데이터 경로에서 비밀번호 확인</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nexus-0<span class="w"> </span>-n<span class="w"> </span>nexus<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/nexus-data/admin.password<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
-</code></pre></div>
-<h3 id="-접속-정보">💡 접속 정보</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">주소 / 값</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>접속 주소</strong></td>
-<td style="text-align: left;"><code>http://&lt;NODE_IP&gt;:30003</code> (NodePort)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>기본 계정</strong></td>
-<td style="text-align: left;"><code>admin</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>초기 비밀번호</strong></td>
-<td style="text-align: left;">위 명령어로 확인한 문자열</td>
-</tr>
-</tbody>
-</table>
 <blockquote>
-<div class="admonition warning">
-<p class="admonition-title">보안 권고</p>
-</div>
-<p>최초 로그인 후 마법사에 따라 비밀번호를 즉시 변경하십시오. 변경 후 <code>admin.password</code> 파일은 자동으로 삭제됩니다.</p>
+<p><strong>GitOps 레포(Manifest Repo)</strong>: 소스코드 레포와 분리된 별도의 GitLab 레포지토리입니다.
+<code>deployment.yaml</code> 등 K8s 매니페스트 또는 Helm values만 관리하며, ArgoCD가 이 레포를 감시합니다.</p>
 </blockquote>
 <hr />
-<h2 id="-삭제-uninstall">🗑️ 삭제 (Uninstall)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./scripts/uninstall.sh
+<h2 id="-phase-1-harbor--gitlab-레포지토리를-argocd에-등록">🚀 Phase 1: Harbor · GitLab 레포지토리를 ArgoCD에 등록</h2>
+<p>ArgoCD가 GitLab의 GitOps 레포를 참조할 수 있도록 Credential을 등록합니다.</p>
+<h3 id="방법-a--argocd-cli-사용">방법 A — argocd CLI 사용</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ArgoCD 서버 로그인</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>argocd<span class="w"> </span>login<span class="w"> </span>&lt;NODE_IP&gt;:30001<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--username<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--password<span class="w"> </span>&lt;ARGOCD_ADMIN_PASSWORD&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>--insecure
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># GitLab 레포지토리 등록</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>argocd<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>http://&lt;GITLAB_IP&gt;:&lt;GITLAB_PORT&gt;/&lt;GROUP&gt;/&lt;GITOPS_REPO&gt;.git<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>--username<span class="w"> </span>&lt;GITLAB_USER&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span>--password<span class="w"> </span>&lt;GITLAB_TOKEN&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>--insecure-skip-server-verification
 </code></pre></div>
+<p>Harbor에 Helm 차트를 OCI 형식으로 저장한 경우 아래와 같이 등록합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>argocd<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>oci://&lt;NODE_IP&gt;:30002/&lt;HARBOR_PROJECT&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--type<span class="w"> </span>helm<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--name<span class="w"> </span>harbor-oci<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--username<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--password<span class="w"> </span>&lt;HARBOR_PASSWORD&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>--insecure-skip-server-verification
+</code></pre></div>
+<h3 id="방법-b--secret-yaml로-등록-cli-없이">방법 B — Secret YAML로 등록 (CLI 없이)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitops-repo-secret</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argocd</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">argocd.argoproj.io/secret-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">repository</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Opaque</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nt">stringData</span><span class="p">:</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;GITLAB_IP&gt;:&lt;GITLAB_PORT&gt;/&lt;GROUP&gt;/&lt;GITOPS_REPO&gt;.git</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;GITLAB_USER&gt;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;GITLAB_TOKEN&gt;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="nt">insecure</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>gitops-repo-secret.yaml
+</code></pre></div>
+<h3 id="방법-c--웹-uigui-사용">방법 C — 웹 UI(GUI) 사용</h3>
+<ol>
+<li>ArgoCD 웹 접속 (<code>https://&lt;NODE_IP&gt;:30001</code>) 및 로그인</li>
+<li>좌측 메뉴 <strong>Settings</strong> &gt; <strong>Repositories</strong> 클릭</li>
+<li>상단 <strong>+ CONNECT REPO</strong> 버튼 클릭</li>
+<li>설정 입력:</li>
+<li><strong>Choose connection method</strong>: <code>VIA HTTPS</code></li>
+<li><strong>Type</strong>: <code>git</code></li>
+<li><strong>Repository URL</strong>: <code>http://&lt;GITLAB_IP&gt;:&lt;PORT&gt;/.../&lt;GITOPS_REPO&gt;.git</code></li>
+<li><strong>Username / Password</strong>: GitLab 사용자명 및 Access Token 입력</li>
+<li><strong>TLS Skip Server Verification</strong>: 체크 (사설 인증서 사용 시)</li>
+<li><strong>CONNECT</strong> 클릭하여 <code>Successful</code> 상태 확인</li>
+</ol>
+<hr />
+<h2 id="-phase-2-argocd-application-생성">🚀 Phase 2: ArgoCD Application 생성</h2>
+<p>GitLab GitOps 레포의 매니페스트를 배포하는 Application을 생성합니다.</p>
+<h3 id="cli로-생성">CLI로 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>argocd<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>my-app<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>--repo<span class="w"> </span>http://&lt;GITLAB_IP&gt;:&lt;GITLAB_PORT&gt;/&lt;GROUP&gt;/&lt;GITOPS_REPO&gt;.git<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>--path<span class="w"> </span>k8s/overlays/prod<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>--dest-server<span class="w"> </span>https://kubernetes.default.svc<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span>--dest-namespace<span class="w"> </span>my-app<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span>--sync-policy<span class="w"> </span>automated<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>--self-heal<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span>--auto-prune
+</code></pre></div>
+<h3 id="yaml로-생성">YAML로 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Application</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argocd</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nt">source</span><span class="p">:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">repoURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;GITLAB_IP&gt;:&lt;GITLAB_PORT&gt;/&lt;GROUP&gt;/&lt;GITOPS_REPO&gt;.git</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">targetRevision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k8s/overlays/prod</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span><span class="nt">destination</span><span class="p">:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://kubernetes.default.svc</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span><span class="nt">syncPolicy</span><span class="p">:</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="nt">automated</span><span class="p">:</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span><span class="nt">prune</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">      </span><span class="nt">selfHeal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="nt">syncOptions</span><span class="p">:</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CreateNamespace=true</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>argocd-app.yaml
+</code></pre></div>
+<h3 id="방법-c--웹-uigui-사용-application-생성">방법 C — 웹 UI(GUI) 사용 (Application 생성)</h3>
+<ol>
+<li>ArgoCD 메인 화면에서 <strong>+ NEW APP</strong> 클릭</li>
+<li><strong>General</strong> 설정:</li>
+<li><strong>Application Name</strong>: <code>my-app</code></li>
+<li><strong>Project Name</strong>: <code>default</code></li>
+<li><strong>Sync Policy</strong>: <code>Automatic</code> (권장) 또는 <code>Manual</code></li>
+<li><strong>Source</strong> 설정:</li>
+<li><strong>Repository URL</strong>: 위에서 등록한 GitLab 레포지토리 선택</li>
+<li><strong>Revision</strong>: <code>main</code> (또는 배포 브랜치)</li>
+<li><strong>Path</strong>: <code>k8s/overlays/prod</code> (매니페스트 경로)</li>
+<li><strong>Destination</strong> 설정:</li>
+<li><strong>Cluster URL</strong>: <code>https://kubernetes.default.svc</code> (내부 배포 시)</li>
+<li><strong>Namespace</strong>: <code>my-app</code></li>
+<li>상단 <strong>CREATE</strong> 클릭하여 배포 상태 확인</li>
+</ol>
+<hr />
+<h2 id="-phase-3-jenkins에서-argocd-sync-트리거">🚀 Phase 3: Jenkins에서 ArgoCD Sync 트리거</h2>
+<h3 id="1-argocd-api-토큰-발급">1. ArgoCD API 토큰 발급</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>argocd<span class="w"> </span>account<span class="w"> </span>generate-token<span class="w"> </span>--account<span class="w"> </span>admin
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># 출력된 토큰 값 복사</span>
+</code></pre></div>
+<h3 id="2-jenkins-credential-등록">2. Jenkins Credential 등록</h3>
+<p>Jenkins 웹 UI에서 등록합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Jenkins 관리 &gt; Credentials &gt; (global) &gt; Add Credentials
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  Kind        : Secret text
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  Secret      : &lt;위에서 발급한 ArgoCD 토큰&gt;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  ID          : argocd-token
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  Description : ArgoCD API Token
+</code></pre></div>
+<h3 id="3-jenkinsfile에-stage-추가">3. Jenkinsfile에 stage 추가</h3>
+<p>기존 <code>stage('2. Podman Build &amp; Push')</code> 이후에 아래 stage를 추가합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;3. Update GitOps Manifest&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">steps</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="n">container</span><span class="o">(</span><span class="s1">&#39;shell&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">            </span><span class="n">script</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">                </span><span class="n">withCredentials</span><span class="o">([</span><span class="n">usernamePassword</span><span class="o">(</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">                    </span><span class="nl">credentialsId:</span><span class="w"> </span><span class="s1">&#39;&lt;GITLAB_IP&gt;:&lt;PORT&gt;&#39;</span><span class="o">,</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">                    </span><span class="nl">passwordVariable:</span><span class="w"> </span><span class="s1">&#39;GIT_PASS&#39;</span><span class="o">,</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">                    </span><span class="nl">usernameVariable:</span><span class="w"> </span><span class="s1">&#39;GIT_USER&#39;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">                </span><span class="o">)])</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">                    </span><span class="kt">def</span><span class="w"> </span><span class="n">gitopsRepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://&lt;GITLAB_IP&gt;:&lt;PORT&gt;/&lt;GROUP&gt;/&lt;GITOPS_REPO&gt;.git&quot;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">                    </span><span class="kt">def</span><span class="w"> </span><span class="n">authUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gitopsRepo</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s1">&#39;://&#39;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;://${GIT_USER}:${GIT_PASS}@&quot;</span><span class="o">)</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">                    </span><span class="kt">def</span><span class="w"> </span><span class="n">newImage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${env.REGISTRY_URL}/${env.CONTAINER_IMAGE_NAME}&quot;</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">                    </span><span class="n">sh</span><span class="w"> </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="s2">                        git clone ${authUrl} gitops-repo</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="s2">                        cd gitops-repo</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="s2">                        # deployment.yaml 의 이미지 태그 업데이트</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="s2">                        sed -i &#39;s|image: ${env.REGISTRY_URL}/.*|image: ${newImage}|g&#39; \\</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="s2">                            k8s/overlays/prod/deployment.yaml</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="s2">                        git config user.email &quot;jenkins@ci.internal&quot;</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="s2">                        git config user.name &quot;Jenkins&quot;</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="s2">                        git add -A</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="s2">                        git commit -m &quot;ci: update image to ${newImage}&quot;</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="s2">                        git push origin main</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="s2">                    &quot;&quot;&quot;</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="w">                </span><span class="o">}</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="o">}</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="n">stage</span><span class="o">(</span><span class="s1">&#39;4. ArgoCD Sync&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="w">    </span><span class="n">steps</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="w">        </span><span class="n">container</span><span class="o">(</span><span class="s1">&#39;shell&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="w">            </span><span class="n">script</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="w">                </span><span class="n">withCredentials</span><span class="o">([</span><span class="n">string</span><span class="o">(</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a><span class="w">                    </span><span class="nl">credentialsId:</span><span class="w"> </span><span class="s1">&#39;argocd-token&#39;</span><span class="o">,</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a><span class="w">                    </span><span class="nl">variable:</span><span class="w"> </span><span class="s1">&#39;ARGOCD_TOKEN&#39;</span>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a><span class="w">                </span><span class="o">)])</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a><span class="w">                    </span><span class="n">sh</span><span class="w"> </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="s2">                        curl -sk -X POST \\</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a><span class="s2">                          -H &quot;Authorization: Bearer \${ARGOCD_TOKEN}&quot; \\</span>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="s2">                          -H &quot;Content-Type: application/json&quot; \\</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a><span class="s2">                          -d &#39;{&quot;prune&quot;: true}&#39; \\</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a><span class="s2">                          https://&lt;NODE_IP&gt;:30001/api/v1/applications/my-app/sync</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a><span class="s2">                    &quot;&quot;&quot;</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="w">                </span><span class="o">}</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a><span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>참고:</strong> <code>syncPolicy.automated</code>를 설정한 경우, ArgoCD가 GitOps 레포 변경을 감지하여 자동으로 sync합니다.
+<code>stage('4. ArgoCD Sync')</code>는 즉시 sync가 필요할 때만 추가합니다.</p>
+</blockquote>
+<hr />
+<h2 id="-phase-4-harbor-imagepullsecret-설정">🚀 Phase 4: Harbor imagePullSecret 설정</h2>
+<p>ArgoCD가 배포하는 Pod이 Harbor에서 이미지를 Pull할 수 있도록 배포 대상 네임스페이스에 Secret을 생성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>docker-registry<span class="w"> </span>harbor-pull-secret<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--docker-server<span class="o">=</span>&lt;NODE_IP&gt;:30002<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--docker-username<span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>--docker-password<span class="o">=</span>&lt;HARBOR_PASSWORD&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span>-n<span class="w"> </span>my-app
+</code></pre></div>
+<p>배포 매니페스트에 참조를 추가합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">      </span><span class="nt">imagePullSecrets</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">harbor-pull-secret</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;NODE_IP&gt;:30002/&lt;HARBOR_PROJECT&gt;/my-app:1.0.0</span>
+</code></pre></div>
+<hr />
+<h2 id="-phase-5-jenkins-전용-argocd-계정-설정-권장">🚀 Phase 5: Jenkins 전용 ArgoCD 계정 설정 (권장)</h2>
+<p><code>admin</code> 계정 토큰을 Jenkins에 직접 사용하는 대신, sync 권한만 가진 전용 계정을 생성합니다.</p>
+<h3 id="1-jenkins-계정-추가">1. jenkins 계정 추가</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>edit<span class="w"> </span>configmap<span class="w"> </span>argocd-cm<span class="w"> </span>-n<span class="w"> </span>argocd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">data</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">accounts.jenkins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apiKey</span>
+</code></pre></div>
+<h3 id="2-rbac-정책-추가">2. RBAC 정책 추가</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>kubectl<span class="w"> </span>edit<span class="w"> </span>configmap<span class="w"> </span>argocd-rbac-cm<span class="w"> </span>-n<span class="w"> </span>argocd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">data</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">policy.csv</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="no">p, role:ci-sync, applications, sync, */*, allow</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="no">p, role:ci-sync, applications, get, */*, allow</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="no">g, jenkins, role:ci-sync</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">  </span><span class="nt">policy.default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">role:readonly</span>
+</code></pre></div>
+<h3 id="3-jenkins-계정-토큰-발급">3. jenkins 계정 토큰 발급</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>argocd<span class="w"> </span>account<span class="w"> </span>generate-token<span class="w"> </span>--account<span class="w"> </span>jenkins
+</code></pre></div>
+<p>발급된 토큰을 Jenkins Credential(<code>argocd-token</code>)에 등록합니다.</p>
+<hr />
+<h2 id="-phase-6-연동-확인">🚀 Phase 6: 연동 확인</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Application 상태 확인</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>argocd<span class="w"> </span>app<span class="w"> </span>get<span class="w"> </span>my-app
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Sync 히스토리 확인</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>argocd<span class="w"> </span>app<span class="w"> </span><span class="nb">history</span><span class="w"> </span>my-app
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1"># 수동 Sync 실행</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>argocd<span class="w"> </span>app<span class="w"> </span>sync<span class="w"> </span>my-app
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">확인 항목</th>
+<th style="text-align: left;">정상 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ArgoCD App Health</td>
+<td style="text-align: left;"><code>Healthy</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">ArgoCD App Sync</td>
+<td style="text-align: left;"><code>Synced</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Pod 이미지</td>
+<td style="text-align: left;">Harbor 주소(<code>&lt;NODE_IP&gt;:30002/...</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jenkins 빌드</td>
+<td style="text-align: left;"><code>SUCCESS</code> (stage 4까지)</td>
+</tr>
+</tbody>
+</table>
 
 
 
