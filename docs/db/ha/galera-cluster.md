@@ -1,293 +1,326 @@
-# 📘 [폐쇄망] MariaDB 10.11 Galera Cluster 설치 가이드
+# MariaDB 10.11 Galera Cluster 구성 가이드 (폐쇄망)
 
-**환경:** Rocky Linux 9.6 / MariaDB 10.11 (Offline)
-**디렉토리:** `mariadb-10.11.14-for-air-gapped` 구조 기반
-**계정:** 일반 사용자 (sudo 권한 필수)
+Rocky Linux 9.6 환경에서 MariaDB 10.11 Galera Cluster 3중화를 구성하는 절차입니다.
+단일 노드 설치는 [MariaDB 오프라인 설치 가이드](../install/mariadb-air-gapped-install.md)를 참조하세요.
 
-## 1. 구성 정보 (Topology)
+## 전제 조건
 
-* **Cluster Name:** `my_galera_svc`
-* **DB Root User:** `root`
+- Rocky Linux 9.6 서버 3대 (폐쇄망)
+- 각 서버에 `mariadb-10.11.14-rocky9.6/` 디렉토리가 반입되어 있을 것
+- 일반 사용자 계정 (sudo 권한 필수)
 
-| 호스트명 (Hostname) | 역할 | IP (작성 필요) | 비고 |
+## 클러스터 구성 정보
+
+| 호스트명 | 역할 | IP | 비고 |
 | :--- | :--- | :--- | :--- |
-| **galera-cluster-1** | **Primary** (Bootstrap) | `IP_1` | 최초 클러스터 시작 |
-| **galera-cluster-2** | Member | `IP_2` | |
-| **galera-cluster-3** | Member | `IP_3` | |
+| galera-cluster-1 | Primary (Bootstrap) | `IP_1` | 최초 클러스터 시작 |
+| galera-cluster-2 | Member | `IP_2` | |
+| galera-cluster-3 | Member | `IP_3` | |
 
------
+- **Cluster Name:** `my_galera_svc`
+- **SST Method:** mariabackup
 
-## 2. OS 및 네트워크 설정 (3대 공통)
+---
 
-### 2.1 호스트 파일 등록
+## Phase 1: OS 및 네트워크 설정 (3대 공통)
+
+### 1-1. 호스트 파일 등록
 
 IP 확정 후 3대 서버 모두 동일하게 수정합니다.
 
 ```bash
-# sudo vi /etc/hosts
-# [IP주소]          [호스트명]
+sudo vi /etc/hosts
+```
+
+```text
 192.168.XXX.XX   galera-cluster-1
 192.168.XXX.XX   galera-cluster-2
 192.168.XXX.XX   galera-cluster-3
 ```
 
-### 2.2 호스트네임 및 방화벽 설정
+### 1-2. 호스트네임 변경
+
+각 서버 번호에 맞게 실행합니다.
 
 ```bash
-# 1. 호스트네임 변경 (각 서버 번호에 맞게 실행)
 sudo hostnamectl set-hostname galera-cluster-1
+```
 
-# 2. SELinux Permissive 변경 (필수)
+### 1-3. SELinux Permissive 전환
+
+```bash
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+```
 
-# 3. 방화벽 포트 오픈
+### 1-4. 방화벽 포트 오픈
+
+```bash
 sudo firewall-cmd --permanent --add-port={3306,4567,4568,4444}/tcp
 sudo firewall-cmd --permanent --add-port=4567/udp
 sudo firewall-cmd --reload
 ```
 
------
+| 포트 | 프로토콜 | 용도 |
+| :--- | :--- | :--- |
+| 3306 | TCP | MySQL 클라이언트 접속 |
+| 4567 | TCP/UDP | Galera 클러스터 통신 (gcomm) |
+| 4568 | TCP | IST (Incremental State Transfer) |
+| 4444 | TCP | SST (State Snapshot Transfer) |
 
-## 3. 설치 (Offline) - 3대 공통
+---
 
-`mariadb-10.11.14-for-air-gapped` 폴더가 각 서버의 홈 디렉토리(예: `/home/rocky`)에 업로드되어 있어야 합니다.
+## Phase 2: RPM 설치 (3대 공통)
 
-### 3.1 Rocky Linux 기본 MariaDB 모듈 비활성화 (매우 중요)
+### 2-1. 기본 모듈 비활성화
 
-Rocky 9에 내장된 구버전 MariaDB와 충돌하지 않도록 모듈을 끕니다.
+Rocky 9 내장 MariaDB와의 충돌을 방지합니다.
 
 ```bash
 sudo dnf module disable mariadb -y --disablerepo=*
 ```
 
-만약 아래와 같은 오류가 났다면 충돌 위험이 없으므로 넘어가면 됩니다.
+`missing groups or modules: mariadb` 오류가 나오면 충돌 위험이 없으므로 무시합니다.
+
+### 2-2. 공통 의존성 설치
 
 ```bash
-Unable to resolve argument mariadb
-Error: Problems in request:
-missing groups or modules: mariadb
+sudo dnf localinstall -y --disablerepo='*' --skip-broken common/rpms/*.rpm
 ```
 
-### 3.2 공통 의존성 패키지 설치 (`common`)
-
-먼저 베이스가 되는 라이브러리들을 설치합니다.
+### 2-3. DB 및 Galera 패키지 설치
 
 ```bash
-# 1. common 폴더로 이동
-cd ~/mariadb-10.11.14-for-air-gapped/common/rpms
-
-# 2. 일괄 설치
-# --disablerepo=* : 인터넷 연결 시도 차단
-# --skip-broken : 중복/충돌 패키지가 있을 경우 무시하고 진행
-sudo dnf install -y ./*.rpm --disablerepo=* --skip-broken
+sudo dnf localinstall -y --disablerepo='*' --skip-broken db/rpms/*.rpm
 ```
 
-### 3.3 DB 및 Galera 패키지 설치 (`db`)
-
-실제 DB 서버와 Galera, 백업 도구를 설치합니다.
-
-```bash
-# 1. db 폴더로 이동
-cd ~/mariadb-10.11.14-for-air-gapped/db/rpms
-
-# 2. 일괄 설치
-sudo dnf install -y ./*.rpm --disablerepo=* --skip-broken
-```
-
-### 3.4 서비스 등록
-
-설치가 완료되면 서비스를 등록합니다. (아직 시작하지 마세요!)
+### 2-4. 서비스 등록 (시작하지 않음)
 
 ```bash
 sudo systemctl enable mariadb
 ```
 
-저장 경로를 변경하려면 미리 경로에 디렉토리를 생성해야 합니다.
+### 2-5. 데이터 디렉토리 구성 (경로 변경 시)
+
+기본 경로(`/var/lib/mysql`)를 사용한다면 이 단계는 건너뜁니다.
 
 ```bash
-# 1. 데이터 저장소 폴더 생성 (예: /app/mariadb_data)
+# 디렉토리 생성
 sudo mkdir -p /app/mariadb_data
 
-# 2. 소유권 변경 (mysql 계정은 RPM 설치 시 자동 생성됨)
+# 소유권 설정 (mysql 계정은 RPM 설치 시 자동 생성)
 sudo chown -R mysql:mysql /app/mariadb_data
 sudo chmod 750 /app/mariadb_data
 
-# 3. (중요) DB 초기화
-# 경로를 바꿨기 때문에 기본 생성된 데이터가 없습니다. 수동으로 시스템 테이블을 깔아줘야 합니다.
+# DB 초기화 (커스텀 경로에는 시스템 테이블이 없으므로 필수)
 sudo mysql_install_db --user=mysql --datadir=/app/mariadb_data
 ```
 
------
+---
 
-## 4. Galera 설정 파일 작성 (3대 공통)
+## Phase 3: Galera 설정 파일 작성 (3대 공통)
 
-`/etc/my.cnf.d/01-galera.cnf` 파일을 생성합니다.
+`/etc/my.cnf.d/01-galera.cnf` 파일을 생성합니다. 서버마다 `wsrep_node_address`와 `wsrep_node_name` 값을 변경해야 합니다.
 
 ```bash
 sudo vi /etc/my.cnf.d/01-galera.cnf
 ```
 
-**[아래 내용 붙여넣기 - ⚠️ 서버별 IP 수정 필수!]**
-
 ```ini
 [mariadb]
-# ----------------------------------------------
-# 1. 기본 및 호환성 설정 (Basic & Compatibility)
-# ----------------------------------------------
-datadir=/app/mariadb_data
-# 소켓 파일은 가급적 기본 위치 유지 권장 (클라이언트 접속 편의성)
-# 만약 소켓도 옮기고 싶다면 socket=/app/mariadb_data/mysql.sock 추가
-
+# --- 기본 설정 ---
+# 데이터 경로를 옮길 때만 사용
+# datadir=/app/mariadb_data
 bind-address=0.0.0.0
 default_storage_engine=InnoDB
 binlog_format=ROW
 innodb_autoinc_lock_mode=2
 
-# [튜닝] 대소문자 구분 안 함 (1 = 무시, 소문자로 저장)
-# 주의: 이 설정은 DB 초기화 전에 적용되어야 합니다.
+# --- 튜닝 ---
 lower_case_table_names=1
-
-# [튜닝] 커넥션 증설 (기본 151 -> 1000)
 max_connections=1000
-
-# [튜닝] SQL Mode 완화 (ONLY_FULL_GROUP_BY 제거)
-# 쿼리 작성 시 GROUP BY 절 제약을 완화하여 호환성 확보
 sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
 
-# ----------------------------------------------
-# 2. Galera Cluster 설정 (Provider)
-# ----------------------------------------------
+# --- Galera Provider ---
 wsrep_on=ON
-# 설치된 라이브러리 경로 (경로 확인 필수)
 wsrep_provider=/usr/lib64/galera-4/libgalera_smm.so
 
-# ----------------------------------------------
-# 3. 클러스터 공통 설정 (3대 서버 모두 동일)
-# ----------------------------------------------
+# --- 클러스터 공통 (3대 동일) ---
 wsrep_cluster_name="my_galera_svc"
-# 3대 노드의 IP를 공백 없이 콤마로 나열
 wsrep_cluster_address="gcomm://IP_1,IP_2,IP_3"
 
-# ----------------------------------------------
-# 4. 노드별 고유 설정 (⚠️ 서버마다 수정 필수!)
-# ----------------------------------------------
-# 현재 서버의 IP 주소
+# --- 노드별 고유 설정 (서버마다 수정!) ---
 wsrep_node_address="본인_서버_IP"
-# 현재 서버의 호스트명 (galera-cluster-1, 2, 3)
 wsrep_node_name="galera-cluster-X"
 
-# ----------------------------------------------
-# 5. 동기화 방식 (SST)
-# ----------------------------------------------
+# --- 동기화 ---
 wsrep_sst_method=mariabackup
 ```
 
------
+서버별 변경 요약:
 
-## 5. 클러스터 기동 (순서 준수!)
+| 서버 | wsrep_node_address | wsrep_node_name |
+| :--- | :--- | :--- |
+| 1번 | `IP_1` | `galera-cluster-1` |
+| 2번 | `IP_2` | `galera-cluster-2` |
+| 3번 | `IP_3` | `galera-cluster-3` |
 
-### 🚀 [Step 1] galera-cluster-1 (Bootstrap)
+---
 
-**반드시 1번 서버에서 가장 먼저 실행합니다.**
+## Phase 4: 클러스터 기동 (순서 준수)
+
+### 4-1. galera-cluster-1 (Bootstrap)
+
+반드시 1번 서버에서 가장 먼저 실행합니다.
 
 ```bash
-# 1. 클러스터 초기화 (New Cluster)
 sudo galera_new_cluster
 
-# 2. 클러스터 상태 확인 (Size가 1이어야 함)
+# 클러스터 사이즈 확인 (1이어야 함)
 sudo mariadb -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
 ```
 
-### 🚀 [Step 2] galera-cluster-2
+### 4-2. galera-cluster-2
 
 ```bash
-# 1. 서비스 시작 (자동으로 1번에 합류)
 sudo systemctl start mariadb
 
-# 2. 확인 (Size가 2로 늘어나야 함)
+# 클러스터 사이즈 확인 (2로 증가)
 sudo mariadb -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
 ```
 
-### 🚀 [Step 3] galera-cluster-3
+### 4-3. galera-cluster-3
 
 ```bash
-# 1. 서비스 시작
 sudo systemctl start mariadb
 
-# 2. 최종 확인 (Size가 3이어야 함)
+# 최종 확인 (3이어야 함)
 sudo mariadb -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
 ```
 
------
+---
 
-## 6. 검증 (Validation)
+## Phase 5: 검증
 
-1. **Node 1에서 DB 생성:**
+### 5-1. 복제 테스트
 
-    ```bash
-    sudo mariadb -u root -e "CREATE DATABASE galera_test_db;"
-    ```
+1번 노드에서 DB를 생성하고 3번 노드에서 확인합니다.
 
-2. **Node 3에서 확인:**
+```bash
+# Node 1
+sudo mariadb -u root -e "CREATE DATABASE galera_test_db;"
 
-    ```bash
-    sudo mariadb -u root -e "SHOW DATABASES;"
-    ```
+# Node 3
+sudo mariadb -u root -e "SHOW DATABASES;"
+```
 
-      * `galera_test_db`가 보이면 3중화 성공입니다.
+`galera_test_db`가 보이면 3중화 성공입니다.
 
-3. **K8s 노드와 연결하기**
+### 5-2. K8s 노드 연결 (필요 시)
 
-만약, 다른 노드에 있는 K8s가 접속해야 한다면 IP 허용 규칙을 추가해야 합니다.
+다른 노드의 K8s에서 접속해야 할 경우 IP 허용 규칙을 추가합니다.
 
 ```sql
--- K8s 파드들이 사용할 계정 생성
--- '20.%'는 20.으로 시작하는 모든 IP 허용
+-- 전용 계정 생성 ('20.%'는 20.x.x.x 대역 전체 허용)
 CREATE USER 'k8s_app_user'@'20.%' IDENTIFIED BY 'K8s_Passw0rd!';
 GRANT ALL PRIVILEGES ON *.* TO 'k8s_app_user'@'20.%';
 FLUSH PRIVILEGES;
 ```
 
-테스트 혹은 개발 환경이라면 편의를 위해 `root` 계정을 열어도 괜찮지만 비권장 사항입니다.
-
-```sql
--- 1. root 계정을 20.x.x.x 대역에서 접속 허용
--- IDENTIFIED BY 뒤에 '비밀번호'를 꼭 지정해야 합니다.
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'20.%' IDENTIFIED BY '설정할_비밀번호' WITH GRANT OPTION;
-
--- 2. 적용
-FLUSH PRIVILEGES;
-```
-
-적용되었는지는 임시 파드를 만들어서 확인합니다.
+K8s에서 연결 확인:
 
 ```bash
+# 임시 파드 생성
 kubectl run tmp-shell --rm -it \
   --image=docker.io/library/busybox:latest \
   --image-pull-policy=Never \
   --restart=Never -- sh
+
+# 파드 내부에서 연결 테스트
+telnet <IP_1> 3306
 ```
+
+---
+
+## Phase 6: 장애 복구 (Full Crash Recovery)
+
+모든 노드가 비정상 종료되어 서비스가 전면 중단된 경우의 복구 절차입니다.
+
+> 본 가이드는 `/app/mariadb_data` 경로를 기준으로 작성되었습니다. 실제 서버의 데이터 경로가 다를 수 있으므로 명령어 실행 전 반드시 확인하세요.
+
+### 6-1. 복구 논리
+
+- **최신 트랜잭션 판별:** 모든 노드가 다운된 경우, 가장 최신 트랜잭션(`seqno`)을 보유한 노드를 찾아 Primary로 승격시켜야 데이터 유실 및 전체 동기화(SST)를 방지할 수 있습니다.
+- **커스텀 경로 스캔:** 데이터가 커스텀 경로에 저장된 경우, `--datadir` 옵션을 반드시 명시해야 합니다.
+
+### 6-2. 복구 절차
+
+**1단계: Primary 노드 판별**
+
+3대 서버 모두에서 MariaDB 프로세스가 없는지 확인한 후 트랜잭션 번호를 추출합니다.
 
 ```bash
-telnet <IP_1> 3306
+# 잔여 프로세스 확인
+ps -ef | grep mysql
 
-# 아래처럼 Connected와 깨진 문자열이 나오면 연결된 것입니다.
-Connected to 20.0.0.140
-Z
-5.5.5-10.11.14-MariaDBI5j;$CcK+4cuF:1'nv)cmysql_native_password
+# 복구 위치(seqno) 추출
+sudo /usr/sbin/mariadbd --wsrep-recover --datadir=/app/mariadb_data
 ```
 
------
+로그 마지막의 `Recovered position: UUID:seqno` 값 중 **seqno가 가장 큰 노드**를 Primary로 선정합니다. 숫자가 같다면 `grastate.dat`의 `safe_to_bootstrap: 1`인 노드를 선택합니다.
 
-## 7. 장애 복구 (Recovery)
+**2단계: Primary 노드 부트스트랩**
 
-모든 노드가 다운되거나 클러스터가 깨진 경우, 데이터 유실 없이 복구하는 절차는 아래 별도 가이드를 참조하세요.
+```bash
+# grastate.dat에서 safe_to_bootstrap: 1로 변경
+sudo vi /app/mariadb_data/grastate.dat
 
-* [Galera Cluster 장애 복구 가이드](./galera-recovery.md)
-* [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)
+# 클러스터 초기화 (Primary 노드에서만)
+sudo galera_new_cluster
 
------
+# 검증 (Size = 1)
+sudo mariadb -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
+```
+
+**3단계: 나머지 노드 합류**
+
+나머지 노드에서 하나씩 서비스를 시작합니다.
+
+```bash
+sudo systemctl start mariadb
+
+# 최종 검증 (Size = 3)
+sudo mariadb -u root -e "SHOW STATUS LIKE 'wsrep_cluster_size';"
+```
+
+**4단계: K8s 애플리케이션 파드 정상화**
+
+DB 접속 실패로 `CrashLoopBackOff` 상태인 파드들을 재시작합니다.
+
+```bash
+kubectl rollout restart deployment --all -n [네임스페이스]
+```
+
+### 6-3. 복구 체크리스트
+
+| 완료 | 분류 | 점검 대상 및 명령어 | 기준 / 비고 |
+| :---: | :--- | :--- | :--- |
+| [ ] | **사전 조사** | `ps -ef \| grep mysql` | 3대 모두 잔여 프로세스 없음 |
+| [ ] | **상태 추출** | `--wsrep-recover --datadir=[경로]` | 3대 중 `seqno` 최고값 판별 완료 |
+| [ ] | **부트스트랩** | Primary: `sudo galera_new_cluster` | `wsrep_cluster_size` = 1 |
+| [ ] | **노드 합류** | 나머지: `sudo systemctl start mariadb` | `wsrep_cluster_size` = 3 |
+| [ ] | **파드 복구** | `kubectl rollout restart deployment` | 앱 파드 `Running` 확인 |
+
+---
+
+## 관련 문서
+
+- [Galera Cluster 장애 복구 가이드](./galera-recovery.md) — 시나리오별 상세 복구 절차
+- [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)
+- [Galera 백업 가이드](./galera-backup-guide.md)
+- [Galera 재부팅 가이드](./galera-reboot-guide.md)
+
+---
 
 ## 부록: RHEL 9 트러블슈팅
 
