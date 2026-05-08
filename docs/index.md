@@ -84,7 +84,7 @@ hide:
     사설 저장소 서비스 구축
 
     - [:octicons-arrow-right-24: Harbor 레지스트리 설치](cicd/offline-install/000-harbor-install.md)
-    - [:octicons-arrow-right-24: Nexus Repository 설치](cicd/offline-install/004-nexus-install.md)
+    - [:octicons-arrow-right-24: Nexus Repository 설치](cicd/offline-install/006-nexus-install.md)
 
 - :material-sync: **CI/CD 파이프라인**
 
@@ -92,9 +92,12 @@ hide:
 
     지속적 통합 및 배포 플랫폼
 
-    - [:octicons-arrow-right-24: GitLab 및 Jenkins 통합 설치](cicd/offline-install/001-gitlab_jenkins_install.md)
-    - [:octicons-arrow-right-24: ArgoCD 설치 및 연동 가이드](cicd/offline-install/002-argocd-install.md)
-    - [:octicons-arrow-right-24: Gitea 경량 Git 서비스 설치](cicd/offline-install/005-gitea-install.md)
+    - [:octicons-arrow-right-24: GitLab 설치](cicd/offline-install/001-gitlab-install.md)
+    - [:octicons-arrow-right-24: Jenkins 설치](cicd/offline-install/002-jenkins-install.md)
+    - [:octicons-arrow-right-24: GitLab Omnibus 설치](cicd/offline-install/003-gitlab-omnibus-install.md)
+    - [:octicons-arrow-right-24: ArgoCD 설치 및 연동 가이드](cicd/offline-install/004-argocd-install.md)
+    - [:octicons-arrow-right-24: Gitea 경량 Git 서비스 설치](cicd/offline-install/007-gitea-install.md)
+    - [:octicons-arrow-right-24: Tekton Pipelines 설치](cicd/offline-install/008-tekton-install.md)
 
 </div>
 
