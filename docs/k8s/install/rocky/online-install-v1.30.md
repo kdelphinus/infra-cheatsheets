@@ -1,54 +1,45 @@
-# Kubernetes v1.30.0 오프라인 설치 가이드 (Rocky Linux 9.6)
+# Kubernetes v1.30.0 온라인 설치 가이드 (Rocky Linux 9.6)
 
-폐쇄망 환경에서 kubeadm 기반 Kubernetes v1.30.0 클러스터를 구성하는 절차를 안내합니다.
-containerd v2.2.0을 컨테이너 런타임으로, Calico를 CNI로 사용합니다.
+인터넷이 가능한 환경에서 kubeadm 기반 Kubernetes v1.30.0 클러스터를 구성하는 절차를 안내합니다.
+containerd를 컨테이너 런타임으로, Calico를 CNI로 사용합니다.
+
+> 오프라인(폐쇄망) 환경은 `install-guide.md`를 참고하세요.
 
 ## 전제 조건
 
 - Rocky Linux 9.6 서버
   - **단일 구성**: 컨트롤 플레인 1대 + 워커 노드 1대 이상
   - **HA(3중화) 구성**: 컨트롤 플레인 3대 + 워커 노드 1대 이상 + VIP 1개
-- 모든 노드에서 아래 설치 파일 접근 가능
+- 모든 노드에서 인터넷 접근 가능
 - swap 비활성화 완료 (`swapoff -a` 및 `/etc/fstab` 주석 처리)
 
-## 디렉토리 구조
-
-| 경로 | 설명 |
-| :--- | :--- |
-| `common/rpms/` | 공통 의존성 RPM (모든 노드) |
-| `k8s/rpms/` | kubeadm, kubelet, kubectl, containerd RPM |
-| `k8s/binaries/` | helm, cri-dockerd, nerdctl 등 바이너리 |
-| `k8s/images/` | kubeadm, Calico 등 컨테이너 이미지 `.tar` |
-| `k8s/charts/` | Helm 차트 |
-| `k8s/utils/` | calico.yaml 등 매니페스트 |
-
-## Phase 0: 설치 파일 배포 (Bastion → 전체 노드)
+## Phase 1: 패키지 설치 (전체 노드)
 
 ```bash
-# 배포 대상 노드 IP 목록 (환경에 맞게 수정)
-NODES=("<MASTER1_IP>" "<MASTER2_IP>" "<MASTER3_IP>" "<WORKER1_IP>" "<WORKER2_IP>", "<WORKER3_IP>")
+# 1. containerd 설치 (Docker 공식 리포지토리)
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install -y containerd.io
 
-for IP in "${NODES[@]}"; do
-    echo "Sending to $IP..."
-    scp ~/k8s-1.30.tar.gz rocky@$IP:~/
-done
+# 2. Kubernetes 리포지토리 등록 (v1.30)
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+EOF
 
-# 모든 노드에서 압축 해제
-tar -zxvf ~/k8s-1.30.tar.gz
-```
+# 3. kubeadm, kubelet, kubectl 설치
+sudo dnf install -y --disableexcludes=kubernetes kubelet kubeadm kubectl
 
-## Phase 1: 공통 RPM 설치 (전체 노드)
-
-```bash
-# 1. 공통 의존성 RPM 설치
-sudo dnf localinstall -y --disablerepo='*' common/rpms/*.rpm
-
-# 2. kubeadm, kubelet, kubectl, containerd RPM 설치
-sudo dnf localinstall -y --disablerepo='*' k8s/rpms/*.rpm
-
-# 3. kubelet 활성화 (kubeadm init 전에는 시작하지 않아도 됨)
+# 4. kubelet 활성화 (kubeadm init 전에는 시작하지 않아도 됨)
 sudo systemctl enable kubelet
 ```
+
+> Kubernetes 리포지토리는 v1.24부터 `pkgs.k8s.io`로 이전되었습니다.
+> 버전별 리포 경로(`/v1.30/`)가 다르므로 다른 버전 설치 시 URL을 맞게 수정하세요.
 
 ## Phase 2: OS 사전 설정 (전체 노드)
 
@@ -80,9 +71,7 @@ sudo tee -a /etc/hosts <<EOF
 <MASTER1_IP> <MASTER1_HOSTNAME>
 <MASTER2_IP> <MASTER2_HOSTNAME>
 <MASTER3_IP> <MASTER3_HOSTNAME>
-<WORKER1_IP> <WORKER1_HOSTNAME>
-<WORKER2_IP> <WORKER2_HOSTNAME>
-<WORKER3_IP> <WORKER3_HOSTNAME>
+10.10.10.73 worker1
 EOF
 ```
 
@@ -96,16 +85,59 @@ sudo containerd config default | sudo tee /etc/containerd/config.toml
 # cgroup driver를 systemd로 변경 (필수)
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 
-# pause 이미지 버전 변경 (준비된 설치 파일의 pause 버전에 맞게 수정)
-sudo sed -i 's/pause:3.10.1/pause:3.9/g' /etc/containerd/config.toml
-
-# Harbor 인증서 경로 설정
+# Harbor(또는 사설 레지스트리) insecure registry 사용 시 config_path 설정
 sudo sed -i "s|config_path = '/etc/containerd/certs.d:/etc/docker/certs.d'|config_path = '/etc/containerd/certs.d'|g" /etc/containerd/config.toml
 
 # containerd 시작 및 활성화
 sudo systemctl enable --now containerd
 sudo systemctl status containerd
 ```
+
+> containerd 재시작 후에도 `SystemdCgroup = true` 가 적용되지 않으면 아래 명령으로 확인하세요.
+>
+> ```bash
+> grep SystemdCgroup /etc/containerd/config.toml
+> ```
+
+### (선택) Harbor insecure registry 등록
+
+Harbor를 HTTP(insecure)로 운영하는 경우 각 노드에 아래 설정을 추가합니다.
+
+```bash
+# Harbor 레지스트리 주소 (예: 192.168.1.10:30002)
+HARBOR_HOST="<NODE_IP>:30002"
+
+sudo mkdir -p /etc/containerd/certs.d/${HARBOR_HOST}
+sudo tee /etc/containerd/certs.d/${HARBOR_HOST}/hosts.toml <<EOF
+server = "http://${HARBOR_HOST}"
+
+[host."http://${HARBOR_HOST}"]
+  capabilities = ["pull", "resolve", "push"]
+  skip_verify = true
+EOF
+
+sudo systemctl restart containerd
+```
+
+> **containerd v1.x vs v2.x 플러그인 키 차이**
+>
+> `containerd config default`로 생성한 `config.toml`에서 `config_path`가 없을 경우
+> containerd 버전에 따라 키 이름이 다릅니다.
+>
+> ```bash
+> # containerd 버전 확인
+> containerd --version
+> ```
+>
+> ```toml
+> # containerd v1.x (io.containerd.grpc.v1.cri)
+> [plugins."io.containerd.grpc.v1.cri".registry]
+>   config_path = "/etc/containerd/certs.d"
+>
+> # containerd v2.x (io.containerd.cri.v1.images)
+> [plugins."io.containerd.cri.v1.images".registry]
+>   config_path = "/etc/containerd/certs.d"
+> ```
 
 ### (선택) containerd 데이터 경로 변경 — 소프트링크 방식
 
@@ -140,20 +172,14 @@ sudo systemctl start kubelet
 
 > `config.toml`의 `root` 값을 직접 변경하는 방법도 있지만, 소프트링크 방식은
 > 기존 경로를 그대로 유지하므로 다른 툴과의 호환성을 더 쉽게 확보할 수 있습니다.
->
-> containerd 재시작 후에도 `SystemdCgroup = true` 가 적용되지 않으면 아래 명령으로 확인하세요.
->
-> ```bash
-> grep SystemdCgroup /etc/containerd/config.toml
-> ```
 
-## Phase 4: 이미지 로드 (전체 노드)
+## Phase 4: 이미지 사전 Pull (선택, Master-1)
+
+온라인 환경에서는 `kubeadm init` 시 이미지를 자동으로 pull하므로 이 단계는 생략 가능합니다.
+네트워크가 느리거나 init 전에 이미지 준비 여부를 확인하고 싶을 때 실행합니다.
 
 ```bash
-for tar_file in k8s/images/*.tar; do
-    echo "Loading $tar_file..."
-    sudo ctr -n k8s.io images import "$tar_file"
-done
+sudo kubeadm config images pull --kubernetes-version v1.30.0
 
 # 확인
 sudo ctr -n k8s.io images list | grep kube-apiserver
@@ -202,7 +228,13 @@ echo "<VIP>  k8s-api.internal" | sudo tee -a /etc/hosts
 > HAProxy의 `bind`는 안정성을 위해 VIP IP(`<VIP>:6443`)를 그대로 사용합니다.
 > FQDN은 kubeconfig의 server 주소와 인증서 SAN에만 적용됩니다.
 
-#### 5-A-2. 커널 파라미터 설정 (전체 마스터 노드)
+#### 5-A-2. HAProxy, Keepalived 패키지 설치 (전체 마스터 노드)
+
+```bash
+sudo dnf install -y haproxy keepalived
+```
+
+#### 5-A-3. 커널 파라미터 설정 (전체 마스터 노드)
 
 VIP가 자신의 인터페이스에 없어도 바인딩할 수 있도록 설정합니다.
 
@@ -214,7 +246,7 @@ EOF
 sudo sysctl --system
 ```
 
-#### 5-A-3. HAProxy 설정 (전체 마스터 노드)
+#### 5-A-4. HAProxy 설정 (전체 마스터 노드)
 
 ```bash
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
@@ -235,12 +267,11 @@ defaults
 
 # Kubernetes API Server LB
 frontend k8s-api
-    bind <VIP>:6443      # TODO 실제 VIP로 변경 필요
+    bind <VIP>:6443      # VIP로 바인딩 (API 서버와 포트 충돌 방지)
     mode tcp
     option tcplog
     default_backend k8s-masters
 
-# TODO 실제 MASTER_IP, HOSTNAME 변경 필요
 backend k8s-masters
     mode tcp
     balance roundrobin
@@ -251,7 +282,7 @@ backend k8s-masters
 EOF
 ```
 
-#### 5-A-4. Keepalived 설정 (전체 마스터 노드)
+#### 5-A-5. Keepalived 설정 (전체 마스터 노드)
 
 각 마스터 노드별로 `state`, `priority`, `interface` 값을 다르게 설정합니다.
 
@@ -277,10 +308,10 @@ vrrp_script check_haproxy {
 }
 
 vrrp_instance VI_1 {
-    state MASTER              # TODO Master-2, 3은 BACKUP
-    interface eth0            # TODO 본인 네트워크 인터페이스명으로 변경 필수
+    state MASTER              # Master-2, 3은 BACKUP
+    interface eth0            # 본인 네트워크 인터페이스명으로 변경 필수
     virtual_router_id 51
-    priority 101              # TODO M1: 101, M2: 100, M3: 99
+    priority 101              # M1: 101, M2: 100, M3: 99
     advert_int 1
 
     authentication {
@@ -289,7 +320,7 @@ vrrp_instance VI_1 {
     }
 
     virtual_ipaddress {
-        <VIP>          # TODO VIP 주소
+        <VIP>          # VIP 주소
     }
 
     track_script {
@@ -299,14 +330,14 @@ vrrp_instance VI_1 {
 EOF
 ```
 
-#### 5-A-5. 서비스 시작 및 VIP 확인
+#### 5-A-6. 서비스 시작 및 VIP 확인
 
 ```bash
 sudo systemctl enable --now haproxy
 sudo systemctl enable --now keepalived
 
 # VIP 활성화 확인 (Master-1에서 VIP가 보여야 함)
-ip addr show eth0 | grep VIP
+ip addr show eth0 | grep <VIP>
 ```
 
 ---
@@ -317,6 +348,8 @@ VIP를 사용할 수 없는 환경에서 각 노드에 HAProxy를 띄워 Loopbac
 **전체 마스터 및 워커 노드에 동일하게 설정합니다.**
 
 ```bash
+sudo dnf install -y haproxy
+
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
 
 cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg
@@ -353,7 +386,7 @@ sudo systemctl enable --now haproxy
 
 `pod-network-cidr` 와 `service-cidr` 는 현재 기본값으로 되어있습니다. 환경에 따라 해당 네트워크 대역 사용이 불가하다면 변경해야 합니다.
 
-FQDN을 사용하는 경우(`5-A-1` 적용 시) `VIP` 대신 `k8s-api.internal`로 대체합니다.
+FQDN을 사용하는 경우(`5-A-1` 적용 시) `<VIP>` 대신 `k8s-api.internal`로 대체합니다.
 
 > **HAProxy 포트 충돌 주의**
 > HAProxy가 VIP:6443을 점유하고 있으면 `kubeadm init`이 같은 포트를 열려다 실패합니다.
@@ -397,34 +430,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-### 옵션 B: HA(3중화) — Localhost LB 방식 (Phase 5 옵션 B 에서 진행한 경우)
-
-각 노드의 HAProxy 가 `127.0.0.1:8443` 만 점유하고, 백엔드는 마스터들의 6443 으로 포워딩합니다.
-**kube-apiserver 의 6443 과 포트가 겹치지 않으므로 HAProxy 중지·재시작 단계가 불필요**하고,
-`bind-address` 수정도 필요 없습니다(기본 `0.0.0.0` 사용).
-
-> 인증서 SAN 에 반드시 `127.0.0.1` 을 포함해야 모든 노드의 kubeconfig(`https://127.0.0.1:8443`)가
-> 동일 인증서로 검증됩니다.
-
-```bash
-sudo kubeadm init \
-  --control-plane-endpoint "127.0.0.1:8443" \
-  --upload-certs \
-  --apiserver-cert-extra-sans="127.0.0.1,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>" \
-  --pod-network-cidr=192.168.0.0/16 \
-  --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.30.0
-
-# kubeconfig 설정
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-# HAProxy 백엔드 헬스체크 확인 — Master-1 만 UP 으로 보여야 정상
-ss -tlnp | grep 8443
-```
-
-### 옵션 C: 단일 구성
+### 옵션 B: 단일 구성
 
 ```bash
 sudo kubeadm init \
@@ -442,9 +448,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ## Phase 6-1: 추가 마스터 노드 조인 (Master-2, 3 — HA 구성 시에만)
 
 Master-1 초기화 출력에서 **`--control-plane`** 조인 명령을 복사하여 실행합니다.
-Phase 5 에서 선택한 LB 방식에 따라 절차가 달라집니다.
-
-### VIP 방식 (Phase 5 옵션 A)
+Master-2, 3에도 HAProxy가 VIP:6443을 점유하고 있으므로 조인 전에 중지합니다.
 
 ```bash
 # 1. HAProxy 일시 중지
@@ -463,42 +467,30 @@ sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
 # 4. API 서버 재기동 확인 후 HAProxy 시작
 sudo crictl pods --namespace kube-system | grep apiserver   # Running 확인
 sudo systemctl start haproxy
-
-# 5. kubeconfig
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-### Localhost LB 방식 (Phase 5 옵션 B)
-
-각 마스터의 HAProxy 가 `127.0.0.1:8443` 만 점유하므로 **HAProxy 중지 / bind-address 수정 단계 모두 불필요**합니다.
-Master-1 의 `kubeadm init` 출력에 표시된 join 명령은 endpoint 가 `127.0.0.1:8443` 으로 이미 지정되어 있습니다.
+kubeconfig도 각 노드에 설정합니다.
 
 ```bash
-# 1. 컨트롤 플레인 조인 (endpoint = 127.0.0.1:8443)
-sudo kubeadm join 127.0.0.1:8443 --token <TOKEN> \
-    --discovery-token-ca-cert-hash sha256:<HASH> \
-    --control-plane --certificate-key <CERT_KEY>
-
-# 2. kubeconfig
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-# 3. (선택) HAProxy 백엔드 상태 — 모든 마스터가 합류하면 3대 모두 UP
-sudo journalctl -u haproxy -n 20 --no-pager
 ```
 
 ## Phase 7: Calico CNI 설치 (Master-1)
 
-> **`--pod-network-cidr`을 기본값(`192.168.0.0/16`)에서 변경한 경우**, `calico.yaml`에서
-> `CALICO_IPV4POOL_CIDR` 항목을 찾아 주석을 해제하고 값을 수정한 뒤 적용합니다.
+Calico v3.28은 Kubernetes v1.30과 호환됩니다. 다른 버전을 사용할 경우
+[Calico 호환 매트릭스](https://docs.tigera.io/calico/latest/getting-started/kubernetes/requirements)를 확인하세요.
+
+> **`--pod-network-cidr`을 기본값(`192.168.0.0/16`)에서 변경한 경우**, 아래와 같이
+> manifest를 로컬에 받아 `CALICO_IPV4POOL_CIDR` 항목을 수정한 뒤 적용합니다.
 > `--service-cidr`는 Calico가 관리하지 않으므로 변경 불필요합니다.
 >
 > ```bash
+> curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/calico.yaml
+>
 > # 라인 번호 확인
-> grep -n 'CALICO_IPV4POOL_CIDR' k8s/utils/calico.yaml
+> grep -n 'CALICO_IPV4POOL_CIDR' calico.yaml
 > ```
 >
 > 해당 라인으로 이동해 주석(`#`)을 제거하고 값을 수정합니다.
@@ -514,7 +506,11 @@ sudo journalctl -u haproxy -n 20 --no-pager
 > ```
 
 ```bash
-kubectl apply -f k8s/utils/calico.yaml
+# 기본 CIDR(192.168.0.0/16) 그대로 사용 시 — URL에서 직접 적용
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/calico.yaml
+
+# CIDR 수정 후 로컬 파일로 적용 시
+kubectl apply -f calico.yaml
 
 # Calico Pod가 Running이 될 때까지 대기
 kubectl get pods -n kube-system -w
@@ -523,62 +519,56 @@ kubectl get pods -n kube-system -w
 ## Phase 8: Helm 설치 (컨트롤 플레인 노드)
 
 ```bash
-cd k8s/binaries
-tar -xzvf helm-v3.14.0-linux-amd64.tar.gz
-sudo mv linux-amd64/helm /usr/local/bin/helm
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
 helm version
 ```
 
+> 특정 버전을 고정하고 싶다면 스크립트 실행 전 환경변수를 설정합니다.
+>
+> ```bash
+> DESIRED_VERSION=v3.14.0 bash <(curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3)
+> ```
+
 ## Phase 8-1: nerdctl 설치 (선택, 전체 노드)
 
-컨테이너 이미지 조회·조작이 필요한 노드에 설치합니다. containerd와 직접 통신하며 `docker` CLI와 유사한 UX를 제공합니다. Rootless 모드 사용 시 `rootlesskit`, `slirp4netns` 등 여러 의존 도구가 필요하므로 **Full 패키지** 준비를 권장합니다.
+컨테이너 이미지 조회·조작이 필요한 노드에 설치합니다. containerd와 직접 통신하며 `docker` CLI와 유사한 UX를 제공합니다. Rootless 모드 사용을 위해 모든 의존성(`rootlesskit`, `slirp4netns` 등)이 포함된 **Full 패키지** 사용을 권장합니다.
 
 ```bash
-cd k8s/binaries
+# GitHub Releases에서 Full 패키지 다운로드
+NERDCTL_VERSION="2.2.2"
+curl -LO "https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz"
 
-# 1. nerdctl 및 필수 의존성 배포
-# (사전에 nerdctl-full 패키지를 압축 해제하여 bin/ 아래의 모든 파일을 준비해야 함)
-sudo cp bin/* /usr/local/bin/
+# 압축 해제 후 전체 바이너리 및 스크립트 배포
+tar -xzvf nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz
+sudo mv bin/* /usr/local/bin/
 sudo chmod +x /usr/local/bin/nerdctl /usr/local/bin/rootlesskit /usr/local/bin/slirp4netns /usr/local/bin/containerd-rootless*
 
-# 2. 설치 확인
+# 설치 확인
 nerdctl --version
 ```
-
-> **Rocky/RHEL `sudo` PATH 주의:** `nerdctl` 은 `/usr/local/bin/nerdctl` 에 설치되며,
-> Rocky/RHEL 기본 `sudo secure_path` 에는 `/usr/local/bin` 이 없어 `sudo nerdctl` 호출 시
-> "command not found" 가 발생합니다. 셋 중 하나로 해결:
->
-> - 전체 경로: `sudo /usr/local/bin/nerdctl ...`
-> - `sudo visudo` 의 `Defaults secure_path` 끝에 `:/usr/local/bin` 추가
-> - 심볼릭 링크: `sudo ln -sf /usr/local/bin/nerdctl /usr/bin/nerdctl`
 
 ### Rootless 모드 활성화 절차 (일반 사용자 계정)
 
 바이너리 설치 후, `sudo` 없이 `nerdctl`을 사용하려면 아래 절차를 **일반 사용자 계정**으로 진행해야 합니다.
 
 1. **필수 패키지 확인**: `shadow-utils` 패키지가 설치되어 있어야 합니다.
-
    ```bash
    sudo dnf install -y shadow-utils
    ```
 
 2. **사용자 환경 설정 도구 실행**: (root가 아닌 일반 계정으로 실행)
-
    ```bash
    containerd-rootless-setuptool.sh install
    ```
-
    *성공 시 `~/.config/systemd/user/containerd.service`가 등록됩니다.*
 
 3. **환경 변수 등록**: `~/.bashrc` 또는 `~/.zshrc` 하단에 아래 내용을 추가하고 적용(`source`)합니다.
-
    ```bash
    export CONTAINERD_ADDRESS="unix://$XDG_RUNTIME_DIR/containerd/containerd.sock"
    ```
 
 4. **Linger 설정 (권장)**: 로그아웃 후에도 서비스가 유지되도록 설정합니다.
-
    ```bash
    sudo loginctl enable-linger $(id -un)
    ```
@@ -598,15 +588,7 @@ sudo nerdctl -n k8s.io pull --insecure-registry <NODE_IP>:30002/library/myapp:1.
 레지스트리 간 이미지 복사, 이미지 메타데이터 검사 등에 사용합니다. 데몬 없이 동작하며 Harbor push/pull 검증에 유용합니다.
 
 ```bash
-cd k8s/rpms
-
-# skopeo 및 의존성 RPM 일괄 설치
-sudo dnf localinstall -y --disablerepo='*' \
-  skopeo-1.20.0-2.el9_7.x86_64.rpm \
-  containers-common-1-135.el9_7.x86_64.rpm \
-  device-mapper-libs-1.02.206-2.el9_7.2.x86_64.rpm \
-  gpgmepp-1.15.1-6.el9.x86_64.rpm \
-  libassuan-2.5.5-3.el9.x86_64.rpm
+sudo dnf install -y skopeo
 
 # 설치 확인
 skopeo --version
@@ -630,19 +612,10 @@ skopeo inspect --tls-verify=false docker://<NODE_IP>:30002/library/myapp:1.0.0
 ## Phase 9: 워커 노드 조인
 
 Master-1의 `kubeadm init` 출력에서 워커 조인 명령을 복사하여 실행합니다.
-Phase 5(또는 6)에서 선택한 구성 방식에 맞춰 아래 옵션을 선택하세요.
-
-위 출력의 `<ENDPOINT>` 는 Phase 5 에서 선택한 LB 방식에 따라 달라집니다:
-
-| Phase 5 옵션 | 워커가 사용할 endpoint | 사전 작업 |
-| --- | --- | --- |
-| A (HA — VIP IP) | `<VIP>:6443` | 워커 노드에는 추가 작업 불필요 |
-| A (HA — FQDN) | `k8s-api.internal:6443` | **워커 노드 `/etc/hosts` 에 FQDN 등록 필요** (Phase 5-A-1) |
-| B (HA — Localhost LB) | `127.0.0.1:8443` | **워커 노드에도 HAProxy 설치·설정 완료되어 있어야 함** (Phase 5 옵션 B) |
-| C (단일 구성) | `<MASTER_IP>:6443` | 추가 작업 불필요 |
 
 ```bash
-sudo kubeadm join <ENDPOINT> --token <TOKEN> \
+sudo kubeadm join <CONTROL_PLANE_ENDPOINT>:6443 \
+  --token <TOKEN> \
   --discovery-token-ca-cert-hash sha256:<HASH>
 ```
 
@@ -699,8 +672,6 @@ sudo systemctl restart containerd
 이후 VIP가 변경되면 케이스 A 절차만으로 처리할 수 있게 됩니다.
 
 #### **1단계: 모든 노드에 FQDN 등록 (마스터 + 워커)**
-
-> DNS 서버가 운영 중이라면 DNS 서버에 등록합니다.
 
 ```bash
 echo "<OLD_VIP>  k8s-api.internal" | sudo tee -a /etc/hosts
@@ -791,8 +762,6 @@ kubectl cluster-info
 FQDN(`k8s-api.internal`)이 인증서 SAN에 포함되어 있으므로, **인증서 재발급 없이** 아래 순서만 따르면 됩니다.
 
 #### **1단계: 모든 노드의 `/etc/hosts` 업데이트 (마스터 + 워커)**
-
-> DNS 서버가 운영 중이라면 DNS 서버에 등록합니다.
 
 ```bash
 # <OLD_VIP> → <NEW_VIP> 로 변경
