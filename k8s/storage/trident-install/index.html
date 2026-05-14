@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/storage/trident-install/">
       
       
-        <link rel="prev" href="../envoy-v1.37.2-install-online/">
+        <link rel="prev" href="../../use-pv-nas/">
       
       
-        <link rel="next" href="../nginx-nic-migration/">
+        <link rel="next" href="../../cheatsheet/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Envoy 클라이언트 IP 보존 (v1.37.2) - Infra Cheatsheets</title>
+        <title>NetApp Trident 설치 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#클라이언트-ip-보존-가이드-haproxy--proxy-protocol" class="md-skip">
+        <a href="#netapp-trident-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Envoy 클라이언트 IP 보존 (v1.37.2)
+              NetApp Trident 설치
             
           </span>
         </div>
@@ -476,7 +476,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../envoy-v1.36.3-install/" class="md-tabs__link">
+        <a href="../../gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
           
   
   
@@ -1713,8 +1713,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1730,11 +1728,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
         
           
           <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="">
@@ -1755,7 +1753,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1773,7 +1771,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.37.2-install/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
@@ -1801,7 +1799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.37.2-install-online/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
         
   
   
@@ -1826,37 +1824,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Envoy 클라이언트 IP 보존 (v1.37.2)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -1872,192 +1843,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#개요" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        개요
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#배경-externalips-방식의-한계" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        배경: externalIPs 방식의 한계
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트래픽-흐름" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트래픽 흐름
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#수정된-파일-목록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        수정된 파일 목록
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#적용-방법" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        적용 방법
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="적용 방법">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-haproxy-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. HAProxy 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-helm-upgrade-nodeport--proxy-protocol-활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Helm upgrade (NodePort + PROXY Protocol 활성화)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-nodeport-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. NodePort 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-hosts-파일-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. hosts 파일 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        검증
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#클라이언트-ip-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        클라이언트 IP 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nodeport-직접-접근-차단-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NodePort 직접 접근 차단 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clienttrafficpolicy-상태-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ClientTrafficPolicy 상태 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#주의-사항" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        주의 사항
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2070,7 +1855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx-nic-migration/" class="md-nav__link">
+      <a href="../../gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -2098,7 +1883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -2126,7 +1911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -2154,7 +1939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -2182,7 +1967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../missed-containerport/" class="md-nav__link">
+      <a href="../../gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -2215,6 +2000,8 @@
                 
   
   
+    
+  
   
   
     
@@ -2230,11 +2017,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" checked>
         
           
           <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="">
@@ -2255,7 +2042,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2298,10 +2085,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../storage/trident-install/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NetApp Trident 설치
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2317,6 +2131,154 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-전제-조건" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-자동-설치-및-관리-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 자동 설치 및 관리 (Recommended)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 자동 설치 및 관리 (Recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#스크립트-주요-기능" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스크립트 주요 기능
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-수동-설치-절차-manual-installation--upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 수동 설치 절차 (Manual Installation &amp; Upgrade)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 수동 설치 절차 (Manual Installation &amp; Upgrade)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-네임스페이스-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 네임스페이스 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-helm-차트-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Helm 차트 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-백엔드-및-스토리지-클래스-적용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 백엔드 및 스토리지 클래스 적용
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-설치-확인-및-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 설치 확인 및 테스트
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 설치 확인 및 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-서비스-상태-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 서비스 상태 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-동적-프로비저닝-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 동적 프로비저닝 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4872,7 +4834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.36.3-install/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
         
   
   
@@ -4900,7 +4862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.36.3-install-online/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
         
   
   
@@ -4928,7 +4890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
+      <a href="../../gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -5107,10 +5069,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#개요" class="md-nav__link">
+  <a href="#1-전제-조건" class="md-nav__link">
     <span class="md-ellipsis">
       
-        개요
+        1. 전제 조건
       
     </span>
   </a>
@@ -5118,88 +5080,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#배경-externalips-방식의-한계" class="md-nav__link">
+  <a href="#2-자동-설치-및-관리-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       
-        배경: externalIPs 방식의 한계
+        2. 자동 설치 및 관리 (Recommended)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트래픽-흐름" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트래픽 흐름
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#수정된-파일-목록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        수정된 파일 목록
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#적용-방법" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        적용 방법
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="적용 방법">
+    <nav class="md-nav" aria-label="2. 자동 설치 및 관리 (Recommended)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-haproxy-설정" class="md-nav__link">
+  <a href="#스크립트-주요-기능" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. HAProxy 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-helm-upgrade-nodeport--proxy-protocol-활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Helm upgrade (NodePort + PROXY Protocol 활성화)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-nodeport-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. NodePort 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-hosts-파일-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. hosts 파일 설정
+        스크립트 주요 기능
       
     </span>
   </a>
@@ -5212,22 +5108,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#검증" class="md-nav__link">
+  <a href="#3-수동-설치-절차-manual-installation--upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        검증
+        3. 수동 설치 절차 (Manual Installation &amp; Upgrade)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="검증">
+    <nav class="md-nav" aria-label="3. 수동 설치 절차 (Manual Installation &amp; Upgrade)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#클라이언트-ip-확인" class="md-nav__link">
+  <a href="#31-네임스페이스-생성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        클라이언트 IP 확인
+        3.1. 네임스페이스 생성
       
     </span>
   </a>
@@ -5235,10 +5131,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nodeport-직접-접근-차단-확인" class="md-nav__link">
+  <a href="#32-helm-차트-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NodePort 직접 접근 차단 확인
+        3.2. Helm 차트 설치
       
     </span>
   </a>
@@ -5246,10 +5142,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clienttrafficpolicy-상태-확인" class="md-nav__link">
+  <a href="#33-백엔드-및-스토리지-클래스-적용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ClientTrafficPolicy 상태 확인
+        3.3. 백엔드 및 스토리지 클래스 적용
       
     </span>
   </a>
@@ -5262,13 +5158,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#주의-사항" class="md-nav__link">
+  <a href="#4-설치-확인-및-테스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        주의 사항
+        4. 설치 확인 및 테스트
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="4. 설치 확인 및 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-서비스-상태-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 서비스 상태 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-동적-프로비저닝-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 동적 프로비저닝 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5292,88 +5216,58 @@
   
 
 
-<h1 id="클라이언트-ip-보존-가이드-haproxy--proxy-protocol">클라이언트 IP 보존 가이드 (HAProxy + PROXY Protocol)</h1>
-<h2 id="개요">개요</h2>
-<p>Envoy Gateway NodePort 앞단에 HAProxy를 두고, PROXY Protocol로 실제
-클라이언트 IP를 Envoy에 전달하는 구성입니다.</p>
-<p>로컬 k3s 환경에서 검증 완료되었습니다.</p>
-<h2 id="배경-externalips-방식의-한계">배경: externalIPs 방식의 한계</h2>
-<p>아래 조합으로는 클라이언트 IP 보존이 되지 않습니다.</p>
+<h1 id="netapp-trident-설치-가이드">NetApp Trident 설치 가이드</h1>
+<p>이 문서는 폐쇄망(Air-gapped) 환경에서 NetApp Trident 25.06.3을 설치하고 관리하는 방법을 설명합니다.</p>
+<h2 id="1-전제-조건">1. 전제 조건</h2>
 <ul>
-<li>Service type <code>LoadBalancer</code> + <code>externalIPs</code>(노드 IP 수동 패치)</li>
-<li><code>externalTrafficPolicy: Local</code> 설정</li>
+<li>Kubernetes 클러스터 (v1.20 이상 권장).</li>
+<li>Helm v3 설치 완료.</li>
+<li>(필요 시) <code>charts/</code> 디렉토리에 Trident Operator Helm 차트 준비.</li>
+<li>(필요 시) <code>images/</code> 디렉토리에 컨테이너 이미지 준비 또는 Harbor에 이미지 업로드 완료.</li>
 </ul>
-<p><code>externalIPs</code>는 kube-proxy의 <code>KUBE-EXTERNAL-IP</code> chain을 사용하며
-<code>externalTrafficPolicy: Local</code>이 적용되지 않아 SNAT가 항상 발생합니다.
-결과적으로 Envoy Pod이 받는 소스 IP가 노드 IP로 고정됩니다.</p>
-<h2 id="트래픽-흐름">트래픽 흐름</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>클라이언트
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → HAProxy (80/443, PROXY Protocol 헤더 추가)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → Envoy NodePort (30080/30443)
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  → Envoy Pod (PROXY Protocol 헤더에서 실제 클라이언트 IP 추출)
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  → Backend Pod (X-Forwarded-For에 실제 클라이언트 IP 포함)
+<h2 id="2-자동-설치-및-관리-recommended">2. 자동 설치 및 관리 (Recommended)</h2>
+<p>컴포넌트 루트 디렉토리에서 제공되는 통합 설치 스크립트를 사용하여 설치, 업그레이드 또는 초기화를 수행할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 설치 스크립트 실행</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./scripts/install.sh
 </code></pre></div>
-<p>TCP 레벨에서 SNAT가 발생해도 PROXY Protocol 헤더는 애플리케이션 레이어에
-있으므로 영향받지 않습니다.</p>
-<h2 id="수정된-파일-목록">수정된 파일 목록</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>envoy-1.37.2/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── charts/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│   └── gateway-infra/
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│       ├── values.yaml            # clientIP.proxyProtocol 항목 추가
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│       └── templates/
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│           └── main.yaml          # ClientTrafficPolicy 조건부 추가
-</code></pre></div>
-<h2 id="적용-방법">적용 방법</h2>
-<h3 id="1-haproxy-설정">1. HAProxy 설정</h3>
-<p><code>/etc/haproxy/haproxy.cfg</code>에 설정을 추가합니다.
-<code>&lt;NODE_IP&gt;</code> 부분을 실제 Kubernetes 노드 IP로 교체하세요.</p>
-<p>NodePort가 기본값(30080/30443)이 아닌 경우 포트도 함께 수정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 문법 검증</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>haproxy<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span>/etc/haproxy/haproxy.cfg
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 적용</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>haproxy
-</code></pre></div>
-<h3 id="2-helm-upgrade-nodeport--proxy-protocol-활성화">2. Helm upgrade (NodePort + PROXY Protocol 활성화)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>envoy-1.37.2/
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># values-infra.yaml에서 clientIP.proxyProtocol: true 로 수정 후 실행하거나 --set 사용</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gateway-infra<span class="w"> </span>./charts/gateway-infra<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>-f<span class="w"> </span>./values-infra.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>--set<span class="w"> </span>service.type<span class="o">=</span>NodePort<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span>--set<span class="w"> </span>clientIP.proxyProtocol<span class="o">=</span><span class="nb">true</span>
-</code></pre></div>
-<h3 id="3-nodeport-확인">3. NodePort 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># 80:30080/TCP, 443:30443/TCP 확인</span>
-</code></pre></div>
-<h3 id="4-hosts-파일-설정">4. hosts 파일 설정</h3>
-<p>DNS 서버 없이 hosts 파일을 사용하는 경우, HAProxy가 떠 있는 노드 IP를
-도메인에 매핑합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;HAProxy-노드-IP&gt;  domain.example.com
-</code></pre></div>
-<h2 id="검증">검증</h2>
-<h3 id="클라이언트-ip-확인">클라이언트 IP 확인</h3>
-<p>X-Forwarded-For 헤더에 실제 클라이언트 IP가 찍히는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Host: &lt;도메인&gt;&quot;</span><span class="w"> </span>http://&lt;HAProxy-IP&gt;/
-</code></pre></div>
-<h3 id="nodeport-직접-접근-차단-확인">NodePort 직접 접근 차단 확인</h3>
-<p><code>clientIP.proxyProtocol: true</code> 적용 후 NodePort 직접 접근은 차단됩니다.
-이것이 정상입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 차단 확인 (timeout 또는 connection reset이 정상)</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>curl<span class="w"> </span>--max-time<span class="w"> </span><span class="m">3</span><span class="w"> </span>http://&lt;노드-IP&gt;:30080/
-</code></pre></div>
-<h3 id="clienttrafficpolicy-상태-확인">ClientTrafficPolicy 상태 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>clienttrafficpolicy<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>clienttrafficpolicy<span class="w"> </span>enable-proxy-protocol<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-</code></pre></div>
-<h2 id="주의-사항">주의 사항</h2>
+<h3 id="스크립트-주요-기능">스크립트 주요 기능</h3>
 <ul>
-<li>HAProxy는 반드시 <code>mode tcp</code>를 사용합니다.</li>
-<li><code>clientIP.proxyProtocol: true</code> 적용 후 NodePort 직접 접근이 차단됩니다.</li>
-<li><code>send-proxy-v2</code>는 PROXY Protocol v2(바이너리 형식)입니다.</li>
+<li><strong>설정 보존</strong>: <code>install.conf</code>에 입력 정보를 저장하여 재설치 시 재사용 가능.</li>
+<li><strong>대화형 메뉴</strong>: 기존 설치 감지 시 업그레이드(Upgrade), 재설치(Reinstall), 초기화(Reset) 옵션 제공.</li>
+<li><strong>자동 동기화</strong>: 사용자 입력을 <code>values.yaml</code>에 반영한 후 Helm 배포 수행.</li>
 </ul>
+<h2 id="3-수동-설치-절차-manual-installation--upgrade">3. 수동 설치 절차 (Manual Installation &amp; Upgrade)</h2>
+<p>자동화 스크립트 사용이 어려운 환경에서는 아래 단계에 따라 수동으로 설치할 수 있습니다.</p>
+<h3 id="31-네임스페이스-생성">3.1. 네임스페이스 생성</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>trident
+</code></pre></div>
+<h3 id="32-helm-차트-설치">3.2. Helm 차트 설치</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># charts 디렉토리 내의 로컬 차트 경로를 지정합니다.</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>trident<span class="w"> </span>./charts/trident-operator<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--namespace<span class="w"> </span>trident<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--version<span class="w"> </span><span class="m">100</span>.2506.3<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml
+</code></pre></div>
+<h3 id="33-백엔드-및-스토리지-클래스-적용">3.3. 백엔드 및 스토리지 클래스 적용</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># NetApp ONTAP 백엔드 설정 적용</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/001_backend_setup.yaml
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># StorageClass(Delete/Retain) 적용</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/002_storage_class.yaml
+</code></pre></div>
+<h2 id="4-설치-확인-및-테스트">4. 설치 확인 및 테스트</h2>
+<h3 id="41-서비스-상태-확인">4.1. 서비스 상태 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Trident Operator 및 CSI Pod 상태 확인</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>trident
+</code></pre></div>
+<h3 id="42-동적-프로비저닝-테스트">4.2. 동적 프로비저닝 테스트</h3>
+<p>테스트용 PVC와 Pod를 생성하여 스토리지가 정상적으로 할당되는지 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 테스트 매니페스트 적용</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/003_test.yaml
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># PVC Bound 상태 및 Pod 실행 확인</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc,pod<span class="w"> </span>-n<span class="w"> </span>default
+</code></pre></div>
 
 
 
