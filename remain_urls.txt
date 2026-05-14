@@ -1,4 +1,4 @@
-last_update: 2026-05-08
+last_update: 2026-05-14
 
 https://kdelphinus.github.io/infra-cheatsheets/
 https://kdelphinus.github.io/infra-cheatsheets/guide/infra-standard/
@@ -38,5 +38,7 @@ https://kdelphinus.github.io/infra-cheatsheets/cicd/offline-install/008-tekton-i
 https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-guide/
 https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-simple-guide/
 https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-reboot-guide/
+https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-cluster-online/
+https://kdelphinus.github.io/infra-cheatsheets/k8s/storage/trident-install/
 https://kdelphinus.github.io/infra-cheatsheets/db/redis/001-redis-stream-overview/
 https://kdelphinus.github.io/infra-cheatsheets/db/redis/002-redis-stream-install/

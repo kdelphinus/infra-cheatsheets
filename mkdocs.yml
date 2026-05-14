@@ -95,6 +95,7 @@ nav:
       - 'ContainerPort 누락 트러블슈팅': k8s/gateway-api/missed-containerport.md
     - Storage:
       - 'NFS Provisioner 설치': k8s/use-pv-nas.md
+      - 'NetApp Trident 설치': k8s/storage/trident-install.md
     - 'Cheat Sheets': k8s/cheatsheet.md
     - 'Container 이미지 관리': k8s/container-image-cheatsheet.md
   - Cloud:
@@ -121,6 +122,7 @@ nav:
   - Database:
     - HA:
       - 'Galera Cluster 설치': db/ha/galera-cluster.md
+      - 'Galera Cluster 설치 (온라인)': db/ha/galera-cluster-online.md
       - 'Galera Cluster 장애 복구': db/ha/galera-recovery.md
       - 'Galera Cluster 백업': db/ha/galera-backup-guide.md
       - 'Galera Cluster 백업 (간소판)': db/ha/galera-backup-simple-guide.md
