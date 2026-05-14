@@ -6,9 +6,22 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 > 스크립트를 이용한 빠른 설치는 아래 **스크립트 사용 가이드** 섹션을 먼저 참고하세요.
 > 수동 절차(Phase 0~10)는 내부 동작 이해 및 트러블슈팅용입니다.
 >
-> 온라인 설치는 `install-guide-online.md`를 참고하세요.
+> 온라인 설치는 `online-install.md`를 참고하세요.
 
 ## 스크립트 사용 가이드
+
+### 자동 / 수동 처리 범위
+
+| 작업 | 단일 구성 | HA 구성 |
+| --- | --- | --- |
+| DEB 설치 · OS 설정 · containerd · 이미지 로드 | ✅ 자동 | ✅ 자동 |
+| kubeadm init / join | ✅ 자동 | ✅ 자동 |
+| kubeconfig 설정 | ✅ 자동 | ✅ 자동 |
+| CNI 설치 (auto 선택 시) | ✅ 자동 | ✅ 자동 |
+| HAProxy 중지/재시작 (충돌 방지) | — | ✅ 자동 (설치된 경우 감지) |
+| HAProxy · Keepalived 설치 및 설정 | — | **🔧 수동 (Phase 5)** |
+| kube-apiserver `--bind-address` 설정 | — | **🔧 수동 (각 마스터 init/join 직후)** |
+| `/etc/hosts` FQDN 등록 | — | **🔧 수동 (FQDN 방식 선택 시)** |
 
 ### 스크립트 목록
 
@@ -16,9 +29,67 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 | --- | --- | --- |
 | `scripts/download.sh` | 인터넷 호스트 (root) | 오프라인 설치 파일 수집 → `k8s/` 채움 |
 | `scripts/wsl2_prep.sh` | WSL2 노드 (root) | systemd 활성화 + iptables-legacy 전환 |
-| `scripts/install.sh` | 폐쇄망 노드 (root) | 컨트롤 플레인 설치 (WSL2/VM 자동 감지, CNI 선택) |
-| `scripts/install.sh --join` | 폐쇄망 워커 노드 (root) | 워커/추가 마스터 합류 |
-| `scripts/uninstall.sh` | 폐쇄망 노드 (root) | 클러스터 초기화 |
+| `scripts/install.sh` | Master-1 (root) | 컨트롤 플레인 설치 (CNI·Gateway 포함) |
+| `scripts/install.sh --join <token> <hash> <ep>` | Worker (root) | 워커 노드 합류 |
+| `scripts/install.sh --join <token> <hash> <ep> --control-plane <cert-key>` | Master-2, 3 (root) | 추가 마스터 합류 |
+| `scripts/uninstall.sh` | 모든 노드 (root) | 클러스터 초기화 |
+
+---
+
+### 구성 유형별 실행 순서
+
+#### 단일 구성 (WSL2 / 단일 VM)
+
+```
+[WSL2만] scripts/wsl2_prep.sh  →  wsl --shutdown 재기동
+    ↓
+[Master-1] scripts/install.sh
+    - 환경 확인 (wsl2 / vm)
+    - CNI 선택 + Pod CIDR
+    - CNI 설치 모드 (auto / manual)
+    - Service CIDR
+    - 컨트롤 플레인 엔드포인트 (노드 IP, WSL2는 자동 감지)
+    ↓
+완료 — 클러스터 Ready
+```
+
+#### HA 구성 (Master 3대 + Worker N대)
+
+```
+[전체 노드] 파일 배포 (scp + tar 해제)
+
+[전체 마스터] 🔧 수동: Phase 5 — HAProxy + Keepalived 설치/설정 + VIP 확인
+
+[전체 마스터, FQDN 방식] 🔧 수동: /etc/hosts 에 VIP → FQDN 등록
+
+[Master-1] scripts/install.sh
+    - 환경 확인 (vm)
+    - CNI 선택 + Pod CIDR
+    - CNI 설치 모드
+    - Service CIDR
+    - 컨트롤 플레인 엔드포인트: VIP 또는 FQDN 입력
+    ※ HAProxy 자동 중지 → kubeadm init → HAProxy 자동 재시작
+    ↓
+[Master-1] 🔧 수동: kube-apiserver bind-address 설정 (아래 참고)
+    ↓
+[Master-2, 3] scripts/install.sh --join <token> <hash> <endpoint> --control-plane <cert-key>
+    ※ HAProxy 자동 중지 → kubeadm join → HAProxy 자동 재시작
+    ↓
+[Master-2, 3] 🔧 수동: kube-apiserver bind-address 설정 (아래 참고)
+    ↓
+[Worker 1~N] scripts/install.sh --join <token> <hash> <endpoint>
+    ↓
+완료 — 클러스터 Ready
+```
+
+> `install.sh` 완료 시 워커/마스터 합류 명령(실제 토큰·hash 포함)이 자동 출력됩니다.
+> certificate-key는 1시간 유효입니다. 만료 시 Master-1에서 재생성:
+>
+> ```bash
+> kubeadm init phase upload-certs --upload-certs
+> ```
+
+---
 
 ### Step 1 — 파일 수집 (인터넷 호스트)
 
@@ -40,39 +111,87 @@ sudo ./scripts/wsl2_prep.sh
 # 이후 WSL2 재진입 후 Step 3 진행
 ```
 
-### Step 3 — 컨트롤 플레인 설치
+### Step 3 — 컨트롤 플레인 설치 (Master-1)
+
+**⚠️ HA(3중화) 구성이라면 `install.sh` 실행 전에 반드시 Phase 5(로드밸런서 구성)를 먼저 완료하세요.**
+HAProxy + Keepalived로 VIP를 확보한 뒤, 아래 스크립트 실행 시 엔드포인트에 VIP 또는 FQDN을 입력해야 합니다.
+단일 구성(WSL2 / 단일 컨트롤 플레인)이라면 이 주의사항은 무시하세요.
 
 ```bash
-# 폐쇄망 노드에서 압축 해제 후
 sudo ./scripts/install.sh
 # 대화형 메뉴:
 #   1) 환경 확인 (wsl2 / vm)
-#   2) CNI 선택 (calico / cilium)
+#   2) CNI 선택 (calico / cilium) + Pod CIDR
 #   3) CNI 설치 모드 (auto / manual)
-#   4) Envoy Gateway 모드 (calico 선택 시, auto / manual)
-#   5) 컨트롤 플레인 엔드포인트 입력
+#   4) Envoy Gateway 모드 (calico+auto 선택 시)
+#   5) Service CIDR
+#   6) 컨트롤 플레인 엔드포인트
+#      → 단일: 노드 IP (WSL2는 자동 감지)
+#      → HA  : VIP 또는 FQDN
 ```
 
-> HA(3중화) 구성은 `kubeadm init` 전에 HAProxy + Keepalived를 먼저 구성해야 합니다.
-> 상세 절차는 **Phase 5** (로드밸런서 구성)를 먼저 수동으로 진행하세요.
+**HA 구성이라면** 완료 후 즉시 아래를 수동으로 수행합니다.
 
-### Step 4 — 워커 노드 합류
+#### 🔧 [HA 전용] kube-apiserver bind-address 설정
+
+kube-apiserver가 기본 `0.0.0.0`으로 바인딩되면 HAProxy와 포트 충돌이 발생합니다.
+이 노드의 실제 IP로 고정하세요.
 
 ```bash
-# 컨트롤 플레인에서 합류 명령 확인
-kubeadm token create --print-join-command
-# 출력 예시: kubeadm join <endpoint>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+# 이 노드의 실제 IP 확인
+ip -4 -o addr show | grep -v '127\.' | awk '{print $4}' | cut -d/ -f1
 
-# 워커 노드에서 실행
+# kube-apiserver 매니페스트 편집
+sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+# spec.containers[].command 섹션에 추가:
+# - --bind-address=<이 노드의 실제 IP>   # 예: 192.168.10.11
+```
+
+저장 후 kubelet이 자동으로 apiserver를 재기동합니다. 약 30초 후 확인:
+
+```bash
+sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock pods \
+    --namespace kube-system | grep apiserver
+# Running 확인 후 HAProxy 정상 동작 확인
+curl -k https://<VIP>:6443/livez
+```
+
+### Step 4 — 추가 마스터 합류 (Master-2, 3 — HA 구성 시에만)
+
+`install.sh` 완료 시 출력된 명령어를 그대로 사용합니다.
+certificate-key가 만료됐다면 Master-1에서 재생성 후 사용하세요.
+
+```bash
+# Master-2, Master-3 각각에서 실행
+sudo ./scripts/install.sh --join <token> <hash> <endpoint> --control-plane <cert-key>
+```
+
+**각 노드 완료 후** 즉시 위 **Step 3의 🔧 bind-address 설정**을 동일하게 수행합니다.
+(각 노드의 실제 IP가 다르므로 노드별로 각각 실행)
+
+### Step 5 — 워커 노드 합류
+
+```bash
+# Worker 각각에서 실행
 sudo ./scripts/install.sh --join <token> <hash> <endpoint>
 ```
 
-### Step 5 — 언인스톨
+### Step 6 — 언인스톨
+
+| 명령 | 동작 |
+| --- | --- |
+| `sudo ./scripts/uninstall.sh` | 대화형 확인 후 클러스터 상태 초기화 |
+| `sudo ./scripts/uninstall.sh --yes` | 확인 생략 (install.sh 재설치 흐름에서 자동 호출) |
+| `sudo ./scripts/uninstall.sh --purge` | 클러스터 초기화 + DEB 패키지(kubeadm/kubelet/kubectl/containerd.io)까지 제거 |
+
+**초기화 후에도 `kubectl` / `kubelet` 바이너리는 남아있습니다.**
+폐쇄망 환경에서 재설치 시 DEB를 다시 가져올 수 없으므로 패키지는 기본적으로 유지합니다.
+바이너리까지 완전히 제거하려면 `--purge` 옵션을 사용하세요.
 
 ```bash
-sudo ./scripts/uninstall.sh          # 대화형 확인
+sudo ./scripts/uninstall.sh          # 클러스터만 초기화 (바이너리 유지)
 sudo ./scripts/uninstall.sh --yes    # 확인 생략
-sudo ./scripts/uninstall.sh --purge  # DEB 패키지까지 제거
+sudo ./scripts/uninstall.sh --purge  # 바이너리까지 완전 제거
 ```
 
 ### 설정 저장 (`install.conf`)
@@ -158,6 +277,14 @@ sudo sed -i '/\sswap\s/s/^/#/' /etc/fstab
 # 4. AppArmor 상태 확인 (Ubuntu 24.04 기본 활성)
 sudo aa-status | head -5
 # containerd 관련 이슈 시: sudo aa-complain /usr/bin/containerd
+
+# 5. hosts 파일 등록 (환경에 맞게 수정)
+sudo tee -a /etc/hosts <<EOF
+<MASTER1_IP> <MASTER1_HOSTNAME>
+<MASTER2_IP> <MASTER2_HOSTNAME>
+<MASTER3_IP> <MASTER3_HOSTNAME>
+<WORKER1_IP> <WORKER1_HOSTNAME>
+EOF
 ```
 
 ### WSL2 추가 항목
@@ -202,7 +329,11 @@ sudo ctr -n k8s.io images list | grep kube-apiserver
 
 WSL2 / 단일 구성은 이 단계를 건너뜁니다.
 
-HA 구성을 위해 로드밸런서가 필요합니다. 환경에 따라 아래 두 가지 방식 중 하나를 선택합니다.
+HA 구성을 위해 K8s API Server(6443) 앞단에 로드밸런서가 필요합니다. 환경에 따라 아래 세 가지 방식 중 하나를 선택합니다.
+
+- **옵션 A**: 물리 로드밸런서 (Physical LB) — 기업용 L4/L7 스위치, 클라우드 LB
+- **옵션 B**: 소프트웨어 VIP — `keepalived` + `haproxy` 기반
+- **옵션 C**: Localhost LB — VIP를 사용할 수 없는 환경
 
 > **[사전 결정] VIP 주소를 인증서에 직접 설정할지, FQDN으로 추상화할지 먼저 결정하세요.**
 >
@@ -213,19 +344,66 @@ HA 구성을 위해 로드밸런서가 필요합니다. 환경에 따라 아래 
 > | --- | --- | --- |
 > | **FQDN** (`k8s-api.internal`) ← **권장** | VIP 변경 시 `/etc/hosts`만 수정, 인증서 재발급 불필요 | `/etc/hosts` 관리 필요 |
 > | IP 직접 사용 | 설정 단순 | VIP 변경 시 인증서 재발급 필수 |
->
-> FQDN 방식을 선택하면 **5-A-1**에서 바로 `/etc/hosts` 등록을 먼저 수행합니다.
-> IP 직접 사용 방식이면 5-A-1을 건너뛰고 5-A-2부터 시작합니다.
 
-### 옵션 A: VIP 방식 (표준, 권장)
+### 옵션 A: 물리 로드밸런서 (Physical LB) 방식 (권장)
 
+기업용 L4/L7 스위치나 클라우드 제공업체의 로드밸런서를 사용하는 경우입니다.
+별도의 패키지 설치 없이 노드 OS 설정만으로 구성하므로 오프라인 환경에 가장 적합합니다.
+
+#### 5-A-1. 물리 LB 동작 모드 확인 (관리자 확인 필수)
+
+물리 LB가 트래픽을 백엔드 노드로 전달할 때의 방식을 먼저 확인해야 합니다.
+
+1. **DNAT (NAT) 방식**: LB가 패킷의 목적지 IP를 VIP에서 노드 IP로 변환하여 전달합니다. 별도의 노드 설정이 필요 없습니다.
+2. **DSR (Direct Server Return) 또는 Transparent 방식**: LB가 목적지 IP를 VIP 그대로 둔 채 MAC 주소만 바꿔서 전달합니다. 이 경우 **5-A-3 단계의 루프백 설정이 필수**입니다.
+
+#### 5-A-2. FQDN 등록 및 Hairpin NAT 방지 (전체 노드)
+
+마스터 노드들이 자기 자신을 호출할 때 외부 LB를 거쳐 나갔다 들어오는 현상(Hairpin)을 방지하기 위해 노드별로 `/etc/hosts`를 다르게 설정합니다.
+
+- **마스터 노드 (1, 2, 3)**: `k8s-api.internal`을 **자기 자신의 실제 IP**로 매핑합니다.
+
+    ```bash
+    # 예: Master-1 (39번 IP) 에서 실행 시
+    echo "192.168.1.39  k8s-api.internal" | sudo tee -a /etc/hosts
+    ```
+
+- **워커 노드 및 외부 클라이언트**: `k8s-api.internal`을 **물리 LB VIP**로 매핑합니다.
+
+    ```bash
+    echo "<물리_LB_VIP>  k8s-api.internal" | sudo tee -a /etc/hosts
+    ```
+
+#### 5-A-3. (DSR/Transparent 모드인 경우만) VIP 루프백 설정
+
+물리 LB가 목적지 IP를 VIP로 유지하여 패킷을 던질 때, 커널이 이를 "내 것"으로 인식하게 하기 위해 루프백(`lo`)에 VIP를 할당하고 ARP 응답을 끕니다.
+
+```bash
+# 전체 마스터 노드 실행
+# 1. 루프백에 VIP 할당
+sudo ip addr add <물리_LB_VIP>/32 dev lo
+
+# 2. ARP 응답 방지 (물리 LB와 IP 충돌 방지)
+cat <<EOF | sudo tee /etc/sysctl.d/k8s-dsr.conf
+net.ipv4.conf.all.arp_ignore = 1
+net.ipv4.conf.all.arp_announce = 2
+net.ipv4.conf.lo.arp_ignore = 1
+net.ipv4.conf.lo.arp_announce = 2
+EOF
+sudo sysctl --system
+```
+
+---
+
+### 옵션 B: 소프트웨어 VIP 방식 (keepalived + haproxy)
+
+별도의 물리 장비 없이 마스터 노드 3대에 `keepalived`와 `haproxy`를 설치하여 HA를 구현하는 방식입니다.
 Master 3대와 가상 IP(VIP) 환경을 가정합니다.
-VIP를 K8s API Server(6443) 앞단에 두어 마스터 노드 장애 시에도 API 통신이 끊기지 않게 합니다.
 
 > Ubuntu 24.04에서는 `haproxy` / `keepalived` DEB를 `k8s/debs/`에 포함시켜 두었어야 합니다.
 > `scripts/download.sh`가 `apt-get download haproxy keepalived` + 의존성을 함께 수집합니다.
 
-#### 5-A-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)
+#### 5-B-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)
 
 VIP IP를 직접 사용하는 대신 내부 FQDN(`k8s-api.internal`)으로 추상화합니다.
 나중에 VIP가 변경되어도 **인증서 재발급 없이** DNS 서버 혹은 `/etc/hosts`만 수정하면 됩니다.
@@ -246,7 +424,7 @@ echo "<VIP>  k8s-api.internal" | sudo tee -a /etc/hosts
 > HAProxy의 `bind`는 안정성을 위해 VIP IP(`<VIP>:6443`)를 그대로 사용합니다.
 > FQDN은 kubeconfig의 server 주소와 인증서 SAN에만 적용됩니다.
 
-#### 5-A-2. 커널 파라미터 설정 (전체 마스터 노드)
+#### 5-B-2. 커널 파라미터 설정 (전체 마스터 노드)
 
 VIP가 자신의 인터페이스에 없어도 바인딩할 수 있도록 설정합니다.
 
@@ -258,7 +436,7 @@ EOF
 sudo sysctl --system
 ```
 
-#### 5-A-3. HAProxy 설정 (전체 마스터 노드)
+#### 5-B-3. HAProxy 설정 (전체 마스터 노드)
 
 ```bash
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
@@ -299,7 +477,7 @@ EOF
 > 기본 활성화되어 있으며 위 설정은 기본 허용 범위 내입니다. 외부 소켓이나
 > 비표준 경로를 쓰는 경우 `sudo aa-complain /usr/sbin/haproxy` 로 임시 우회.
 
-#### 5-A-4. Keepalived 설정 (전체 마스터 노드)
+#### 5-B-4. Keepalived 설정 (전체 마스터 노드)
 
 각 마스터 노드별로 `state`, `priority`, `interface` 값을 다르게 설정합니다.
 
@@ -354,7 +532,7 @@ EOF
 > DEB(`psmisc_*.deb`)를 `k8s/debs/`에 포함시킵니다. 대안으로 `pgrep -x haproxy` 를
 > `script` 값으로 사용할 수 있습니다.
 
-#### 5-A-5. 서비스 시작 및 VIP 확인
+#### 5-B-5. 서비스 시작 및 VIP 확인
 
 ```bash
 sudo systemctl enable --now haproxy
@@ -366,7 +544,7 @@ ip addr show | grep <VIP>
 
 ---
 
-### 옵션 B: Localhost LB 방식 (VIP 사용 불가 환경)
+### 옵션 C: Localhost LB 방식 (VIP 사용 불가 환경)
 
 VIP를 사용할 수 없는 환경에서 각 노드에 HAProxy를 띄워 Loopback(`127.0.0.1:8443`)으로 통신합니다.
 **전체 마스터 및 워커 노드에 동일하게 설정합니다.**
@@ -404,15 +582,45 @@ sudo systemctl enable --now haproxy
 
 구성 유형(단일 / HA)과 CNI 선택(Calico / Cilium)에 따라 옵션을 조합합니다.
 
-- 단일 구성 → **옵션 B** 사용
-- HA(3중화) 구성 → **옵션 A** 사용 (VIP 또는 FQDN)
+- 단일 구성 → **옵션 D** 사용
+- HA(3중화) 구성 → **옵션 A, B, C** 중 선택
 - CNI = Cilium 인 경우 모든 옵션에 `--skip-phases=addon/kube-proxy` 와 `--pod-network-cidr=10.0.0.0/16` 를 적용합니다. (Calico는 `192.168.0.0/16` 기본값)
 
-### 옵션 A: HA(3중화) 구성 (VIP 사용)
+### 옵션 A: HA(3중화) — 물리 LB 방식 (Phase 5 옵션 A 에서 진행한 경우)
+
+물리 LB가 외부에서 6443 포트를 중계하고 있으므로, 로컬 HAProxy 중지/시작이나 `bind-address` 수정 단계가 전혀 필요 없습니다.
+
+```bash
+# kubeadm init — FQDN 사용 + CNI=Calico (권장)
+sudo kubeadm init \
+  --control-plane-endpoint "k8s-api.internal:6443" \
+  --upload-certs \
+  --apiserver-cert-extra-sans="k8s-api.internal,<물리_LB_VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
+  --pod-network-cidr=192.168.0.0/16 \
+  --service-cidr=10.96.0.0/12 \
+  --kubernetes-version v1.33.11
+
+# kubeadm init — FQDN 사용 + CNI=Cilium
+sudo kubeadm init \
+  --skip-phases=addon/kube-proxy \
+  --control-plane-endpoint "k8s-api.internal:6443" \
+  --upload-certs \
+  --apiserver-cert-extra-sans="k8s-api.internal,<물리_LB_VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
+  --pod-network-cidr=10.0.0.0/16 \
+  --service-cidr=10.96.0.0/12 \
+  --kubernetes-version v1.33.11
+
+# kubeconfig 설정
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+### 옵션 B: HA(3중화) 구성 (소프트웨어 VIP 방식 - Phase 5 옵션 B 에서 진행한 경우)
 
 `--apiserver-cert-extra-sans`에 VIP와 전체 마스터 IP를 포함해야 엄격한 SAN 검증을 통과할 수 있습니다.
 
-FQDN을 사용하는 경우(`5-A-1` 적용 시) `VIP` 대신 `k8s-api.internal`로 대체합니다.
+FQDN을 사용하는 경우(`5-B-1` 적용 시) `VIP` 대신 `k8s-api.internal`로 대체합니다.
 
 > **HAProxy 포트 충돌 주의**
 > HAProxy가 VIP:6443을 점유하고 있으면 `kubeadm init`이 같은 포트를 열려다 실패합니다.
@@ -466,7 +674,34 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-### 옵션 B: 단일 구성
+### 옵션 C: HA(3중화) — Localhost LB 방식 (Phase 5 옵션 C 에서 진행한 경우)
+
+각 노드의 HAProxy 가 `127.0.0.1:8443` 만 점유하고, 백엔드는 마스터들의 6443 으로 포워딩합니다.
+**kube-apiserver 의 6443 과 포트가 겹치지 않으므로 HAProxy 중지·재시작 단계가 불필요**하고,
+`bind-address` 수정도 필요 없습니다(기본 `0.0.0.0` 사용).
+
+> 인증서 SAN 에 반드시 `127.0.0.1` 을 포함해야 모든 노드의 kubeconfig(`https://127.0.0.1:8443`)가
+> 동일 인증서로 검증됩니다.
+
+```bash
+sudo kubeadm init \
+  --control-plane-endpoint "127.0.0.1:8443" \
+  --upload-certs \
+  --apiserver-cert-extra-sans="127.0.0.1,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>" \
+  --pod-network-cidr=192.168.0.0/16 \
+  --service-cidr=10.96.0.0/12 \
+  --kubernetes-version v1.33.11
+
+# kubeconfig 설정
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# HAProxy 백엔드 헬스체크 확인 — Master-1 만 UP 으로 보여야 정상
+ss -tlnp | grep 8443
+```
+
+### 옵션 D: 단일 구성
 
 ```bash
 # Calico 선택 시
@@ -493,7 +728,25 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ## Phase 6-1: 추가 마스터 노드 조인 (Master-2, 3 — HA 구성 시에만)
 
 Master-1 초기화 출력에서 **`--control-plane`** 조인 명령을 복사하여 실행합니다.
-Master-2, 3에도 HAProxy가 VIP:6443을 점유하고 있으므로 조인 전에 중지합니다.
+Phase 5 에서 선택한 LB 방식에 따라 절차가 달라집니다.
+
+### 물리 LB 방식 (Phase 5 옵션 A)
+
+물리 LB가 외부에서 트래픽을 중계하므로, **HAProxy 중지나 bind-address 수정 단계가 전혀 필요 없습니다.**
+
+```bash
+# 1. 컨트롤 플레인 조인 (endpoint = FQDN)
+sudo kubeadm join k8s-api.internal:6443 --token <TOKEN> \
+    --discovery-token-ca-cert-hash sha256:<HASH> \
+    --control-plane --certificate-key <CERT_KEY>
+
+# 2. kubeconfig
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+### 소프트웨어 VIP 방식 (Phase 5 옵션 B)
 
 ```bash
 # 1. HAProxy 일시 중지
@@ -512,14 +765,31 @@ sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
 # 4. API 서버 재기동 확인 후 HAProxy 시작
 sudo crictl pods --namespace kube-system | grep apiserver   # Running 확인
 sudo systemctl start haproxy
-```
 
-kubeconfig도 각 노드에 설정합니다.
-
-```bash
+# 5. kubeconfig
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+### Localhost LB 방식 (Phase 5 옵션 C)
+
+각 마스터의 HAProxy 가 `127.0.0.1:8443` 만 점유하므로 **HAProxy 중지 / bind-address 수정 단계 모두 불필요**합니다.
+Master-1 의 `kubeadm init` 출력에 표시된 join 명령은 endpoint 가 `127.0.0.1:8443` 으로 이미 지정되어 있습니다.
+
+```bash
+# 1. 컨트롤 플레인 조인 (endpoint = 127.0.0.1:8443)
+sudo kubeadm join 127.0.0.1:8443 --token <TOKEN> \
+    --discovery-token-ca-cert-hash sha256:<HASH> \
+    --control-plane --certificate-key <CERT_KEY>
+
+# 2. kubeconfig
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 3. (선택) HAProxy 백엔드 상태 — 모든 마스터가 합류하면 3대 모두 UP
+sudo journalctl -u haproxy -n 20 --no-pager
 ```
 
 ## Phase 7: CNI 설치
@@ -568,11 +838,20 @@ nerdctl --version
 
 ## Phase 9: 워커 노드 조인
 
-Master-1 `kubeadm init` 출력에서 워커 조인 명령을 복사하여 실행합니다.
+Master-1의 `kubeadm init` 출력에서 워커 조인 명령을 복사하여 실행합니다.
+Phase 5(또는 6)에서 선택한 구성 방식에 맞춰 아래 옵션을 선택하세요.
+
+위 출력의 `<ENDPOINT>` 는 Phase 5 에서 선택한 LB 방식에 따라 달라집니다:
+
+| Phase 5 옵션 | 워커가 사용할 endpoint | 사전 작업 |
+| --- | --- | --- |
+| A (HA — 물리 LB) | `k8s-api.internal:6443` | **워커 노드 `/etc/hosts` 에 FQDN 등록 필요** (Phase 5-A-2) |
+| B (HA — 소프트웨어 VIP) | `k8s-api.internal:6443` | **워커 노드 `/etc/hosts` 에 FQDN 등록 필요** (Phase 5-B-1) |
+| C (HA — Localhost LB) | `127.0.0.1:8443` | **워커 노드에도 HAProxy 설치·설정 완료되어 있어야 함** (Phase 5 옵션 C) |
+| D (단일 구성) | `<MASTER_IP>:6443` | 추가 작업 불필요 |
 
 ```bash
-sudo kubeadm join <CONTROL_PLANE_ENDPOINT>:6443 \
-  --token <TOKEN> \
+sudo kubeadm join <ENDPOINT> --token <TOKEN> \
   --discovery-token-ca-cert-hash sha256:<HASH>
 ```
 
