@@ -2120,6 +2120,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#-사전-준비-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3310,6 +3321,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../db/ha/galera-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../db/ha/galera-backup-guide/" class="md-nav__link">
         
   
@@ -3346,6 +3385,34 @@
     
   
     Galera Cluster 백업 (간소판)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/ha/galera-backup-verify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업 동작 확인
   
 
     
@@ -5052,6 +5119,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#-사전-준비-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5184,13 +5262,26 @@
 
 <h1 id="nfs-provisioner-v4018-설치-가이드">NFS Provisioner v4.0.18 설치 가이드</h1>
 <p>본 문서는 <strong>Rocky Linux 9.6 / K8s v1.33.7</strong> 환경에서 NetApp NFS v4.1을 백엔드로 연동하는 절차를 설명합니다.</p>
+<h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
+<p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
+<blockquote>
+<p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
+</code></pre></div>
+<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
 <hr />
 <h2 id="-사전-준비-사항">📋 사전 준비 사항</h2>
 <h3 id="1-온라인인-경우-헬름-차트-다운로드">1. (온라인인 경우) 헬름 차트 다운로드</h3>
 <p>설치 스크립트 실행 전, 공식 차트를 아래 명령어로 확보해야 합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>nfs-provisioner-4.0.18/charts
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>nfs-subdir-external-provisioner<span class="w"> </span>https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>helm<span class="w"> </span>pull<span class="w"> </span>nfs-subdir-external-provisioner/nfs-subdir-external-provisioner<span class="w"> </span>--version<span class="w"> </span><span class="m">4</span>.0.18<span class="w"> </span>--untar
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>nfs-provisioner-4.0.18/charts
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>nfs-subdir-external-provisioner<span class="w"> </span>https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>helm<span class="w"> </span>pull<span class="w"> </span>nfs-subdir-external-provisioner/nfs-subdir-external-provisioner<span class="w"> </span>--version<span class="w"> </span><span class="m">4</span>.0.18<span class="w"> </span>--untar
 </code></pre></div></p>
 <h3 id="2-os-패키지-설치-전체-워커-노드">2. OS 패키지 설치 (전체 워커 노드)</h3>
 <p>NFS 마운트를 위해 모든 노드에 관련 패키지가 설치되어 있어야 합니다.
@@ -5199,9 +5290,9 @@
 <hr />
 <h2 id="-단계별-설치-프로세스">🛠️ 단계별 설치 프로세스</h2>
 <h3 id="step-1-설치-스크립트-실행">Step 1: 설치 스크립트 실행</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>scripts/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>install.sh
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>./install.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>scripts/
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>install.sh
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>./install.sh
 </code></pre></div>
 <h3 id="step-2-정보-입력">Step 2: 정보 입력</h3>
 <ul>
@@ -5254,27 +5345,27 @@
 </table>
 <hr />
 <h2 id="-설치-검증">✅ 설치 검증</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. StorageClass 상태 확인</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>sc
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 2. 프로비저너 포드 상태 확인</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>nfs-client-provisioner
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># 3. 테스트 PVC 생성 및 바인딩 확인</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s">kind: PersistentVolumeClaim</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s">apiVersion: v1</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="s">metadata:</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="s">  name: nfs-test-pvc</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s">spec:</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s">  storageClassName: nfs-app</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s">  accessModes:</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="s">    - ReadWriteMany</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s">  resources:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="s">    requests:</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="s">      storage: 1Gi</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="s">EOF</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>nfs-test-pvc
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 1. StorageClass 상태 확인</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>sc
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 2. 프로비저너 포드 상태 확인</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>nfs-client-provisioner
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># 3. 테스트 PVC 생성 및 바인딩 확인</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="s">kind: PersistentVolumeClaim</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="s">apiVersion: v1</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="s">metadata:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="s">  name: nfs-test-pvc</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s">spec:</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s">  storageClassName: nfs-app</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s">  accessModes:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s">    - ReadWriteMany</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s">  resources:</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="s">    requests:</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="s">      storage: 1Gi</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="s">EOF</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>nfs-test-pvc
 </code></pre></div>
 
 

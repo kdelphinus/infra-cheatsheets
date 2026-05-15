@@ -1238,6 +1238,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#-사전-준비-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3366,6 +3377,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../db/ha/galera-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../db/ha/galera-backup-guide/" class="md-nav__link">
         
   
@@ -3402,6 +3441,34 @@
     
   
     Galera Cluster 백업 (간소판)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/ha/galera-backup-verify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업 동작 확인
   
 
     
@@ -5108,6 +5175,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#-사전-준비-사항" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5296,6 +5374,19 @@
 
 <h1 id="cilium-1193-air-gapped-설치-가이드">Cilium 1.19.3 Air-Gapped 설치 가이드</h1>
 <p>본 문서는 외부 인터넷 연결이 차단된 <strong>폐쇄망(Air-Gapped) 쿠버네티스 환경</strong>에서 Cilium 1.19.3을 성공적으로 설치하기 위한 상세 가이드를 제공합니다.</p>
+<h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
+<p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
+<blockquote>
+<p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
+</code></pre></div>
+<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
 <hr />
 <h2 id="-사전-준비-사항">📋 사전 준비 사항</h2>
 <h3 id="1-이미지-및-헬름-차트">1. 이미지 및 헬름 차트</h3>
@@ -5342,9 +5433,9 @@
 </table>
 <h3 id="step-2-설치-스크립트-실행">Step 2: 설치 스크립트 실행</h3>
 <p>대화형 스크립트를 통해 환경에 맞는 값을 입력하여 설치를 진행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>scripts/
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>install.sh
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>./install.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>scripts/
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>install.sh
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>./install.sh
 </code></pre></div>
 <h3 id="step-3-설치-옵션-선택">Step 3: 설치 옵션 선택</h3>
 <ol>
@@ -5357,7 +5448,7 @@
 <h2 id="-설치-검증-및-트러블슈팅">✅ 설치 검증 및 트러블슈팅</h2>
 <h3 id="1-포드-상태-확인">1. 포드 상태 확인</h3>
 <p>모든 Cilium 관련 포드가 <code>Running</code> 상태여야 합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;app.kubernetes.io/part-of=cilium&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;app.kubernetes.io/part-of=cilium&quot;</span>
 </code></pre></div></p>
 <h3 id="2-포트-충돌-이슈-failedscheduling">2. 포트 충돌 이슈 (FailedScheduling)</h3>
 <p>재설치 시 <code>0/1 nodes are available: 1 node(s) didn't have free ports...</code> 에러와 함께 포드가 <code>Pending</code> 상태로 머물 수 있습니다.
@@ -5392,11 +5483,11 @@
 </tbody>
 </table>
 <p><strong>수동 해결 명령어:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 특정 포트(예: 9234)를 사용하는 프로세스 강제 종료</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>fuser<span class="w"> </span>-k<span class="w"> </span>-9<span class="w"> </span><span class="m">9234</span>/tcp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 특정 포트(예: 9234)를 사용하는 프로세스 강제 종료</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>fuser<span class="w"> </span>-k<span class="w"> </span>-9<span class="w"> </span><span class="m">9234</span>/tcp
 </code></pre></div></p>
 <h3 id="3-cilium-에이전트-상태-상세-확인">3. Cilium 에이전트 상태 상세 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>ds/cilium<span class="w"> </span>--<span class="w"> </span>cilium<span class="w"> </span>status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>ds/cilium<span class="w"> </span>--<span class="w"> </span>cilium<span class="w"> </span>status
 </code></pre></div>
 <hr />
 <h2 id="-주의-및-제약-사항">⚠️ 주의 및 제약 사항</h2>

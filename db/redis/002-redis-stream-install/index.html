@@ -3126,6 +3126,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../ha/galera-restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ha/galera-backup-guide/" class="md-nav__link">
         
   
@@ -3162,6 +3190,34 @@
     
   
     Galera Cluster 백업 (간소판)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ha/galera-backup-verify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업 동작 확인
   
 
     
@@ -3361,6 +3417,17 @@
       목차
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#1-사전-준비" class="md-nav__link">
@@ -5156,6 +5223,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1-사전-준비" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5409,18 +5487,32 @@
 
 
 <h1 id="redis-stream-72-공식-이미지--helm-chart-설치-가이드">Redis Stream 7.2 공식 이미지 — Helm Chart 설치 가이드</h1>
+<h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
+<p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
+<blockquote>
+<p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
+</code></pre></div>
+<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
+<hr />
 <h2 id="1-사전-준비">1. 사전 준비</h2>
 <h3 id="이미지-반입">이미지 반입</h3>
 <p>인터넷 연결된 환경에서 스크립트로 이미지를 저장합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>bash<span class="w"> </span>scripts/save_images.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash<span class="w"> </span>scripts/save_images.sh
 </code></pre></div>
 <p>생성된 <code>docker.io_library_redis_7.2.tar</code> 파일을 <code>images/</code> 디렉토리에 배치합니다.</p>
 <h3 id="이미지-배포-방식-선택">이미지 배포 방식 선택</h3>
 <p>환경에 따라 두 가지 방식 중 하나를 선택합니다.</p>
 <h4 id="방식-a--harbor-레지스트리-사용-권장">방식 A — Harbor 레지스트리 사용 (권장)</h4>
 <p>Harbor가 구축되어 있다면 업로드 스크립트를 실행합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>redis-stream-7.2-official
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./images/upload_images_to_harbor_v3-lite.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>redis-stream-7.2-official
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
 <p>실행 시 대화형으로 다음을 입력합니다:</p>
 <table>
@@ -5457,7 +5549,7 @@
 <p>업로드 스크립트에서 모드 <code>1</code> (로컬 이미지 로드 전용)을 선택하거나,
 <code>install.sh</code> 실행 중 이미지 소스를 <code>2</code>로 선택하면 자동으로 <code>ctr import</code>합니다.</p>
 <h2 id="2-설치">2. 설치</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./scripts/install.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./scripts/install.sh
 </code></pre></div>
 <p>스크립트가 대화형으로 다음을 안내합니다:</p>
 <ol>
@@ -5471,15 +5563,15 @@
 </ol>
 <h3 id="hostpath-사전-작업">HostPath 사전 작업</h3>
 <p>hostpath 선택 시, <strong>해당 노드에서</strong> 미리 디렉토리를 생성해야 합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 노드에서 직접 실행</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 노드에서 직접 실행</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
 </code></pre></div>
 <p>스크립트가 Enter 대기 프롬프트를 표시할 때 위 작업을 완료한 뒤 진행합니다.</p>
 <h3 id="nfs-사전-작업">NFS 사전 작업</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># NFS 서버에서 실행</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/nfs/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/nfs/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># NFS 서버에서 실행</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/nfs/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/nfs/redis-official/<span class="o">{</span>node-0,node-1,node-2<span class="o">}</span>
 </code></pre></div>
 <h3 id="pv-재사용-안내">PV 재사용 안내</h3>
 <p>기존 PV(<code>redis-official-node-{0,1,2}-pv</code>)가 이미 존재하는 경우:</p>
@@ -5495,37 +5587,37 @@
 StorageClass가 있는 환경에서 동적 프로비저닝을 원한다면 <code>values.yaml</code>에서
 <code>storage.storageClassName</code>을 해당 클래스명으로 오버라이드하세요.</p>
 <h2 id="3-설치-확인">3. 설치 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>redis-stream-official
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>redis-stream-official
 </code></pre></div>
 <p>예상 결과:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>redis-node-0       2/2   Running   0   2m
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>redis-node-1       2/2   Running   0   2m
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>redis-node-2       2/2   Running   0   2m
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>redis-sentinel-0   1/1   Running   0   2m
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>redis-sentinel-1   1/1   Running   0   2m
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>redis-sentinel-2   1/1   Running   0   2m
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>redis-node-0       2/2   Running   0   2m
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>redis-node-1       2/2   Running   0   2m
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>redis-node-2       2/2   Running   0   2m
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>redis-sentinel-0   1/1   Running   0   2m
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>redis-sentinel-1   1/1   Running   0   2m
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>redis-sentinel-2   1/1   Running   0   2m
 </code></pre></div>
 <p>Replication 상태 확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span>redis-cli<span class="w"> </span>-a<span class="w"> </span>&lt;password&gt;<span class="w"> </span>--no-auth-warning<span class="w"> </span>INFO<span class="w"> </span>replication
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span>redis-cli<span class="w"> </span>-a<span class="w"> </span>&lt;password&gt;<span class="w"> </span>--no-auth-warning<span class="w"> </span>INFO<span class="w"> </span>replication
 </code></pre></div>
 <p>Sentinel 상태 확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-sentinel-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span>redis-cli<span class="w"> </span>-p<span class="w"> </span><span class="m">26379</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>SENTINEL<span class="w"> </span>masters
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-sentinel-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span>redis-cli<span class="w"> </span>-p<span class="w"> </span><span class="m">26379</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>SENTINEL<span class="w"> </span>masters
 </code></pre></div>
 <h2 id="4-테스트">4. 테스트</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./scripts/test-stream.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>./scripts/test-stream.sh
 </code></pre></div>
 <h2 id="5-failover-테스트">5. Failover 테스트</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Master Pod 강제 종료</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Sentinel이 새 master 선출 확인 (약 5~10초 후)</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-sentinel-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>redis-cli<span class="w"> </span>-p<span class="w"> </span><span class="m">26379</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>SENTINEL<span class="w"> </span>get-master-addr-by-name<span class="w"> </span>mymaster
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Master Pod 강제 종료</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>redis-node-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Sentinel이 새 master 선출 확인 (약 5~10초 후)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-sentinel-0<span class="w"> </span>-n<span class="w"> </span>redis-stream-official<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span>redis-cli<span class="w"> </span>-p<span class="w"> </span><span class="m">26379</span><span class="w"> </span>--no-auth-warning<span class="w"> </span>SENTINEL<span class="w"> </span>get-master-addr-by-name<span class="w"> </span>mymaster
 </code></pre></div>
 <h2 id="6-삭제">6. 삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>./scripts/uninstall.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>./scripts/uninstall.sh
 </code></pre></div>
 <p>PV는 <code>Retain</code> policy로 데이터가 보존됩니다.</p>
 <h2 id="7-초기화-동작-원리">7. 초기화 동작 원리</h2>
