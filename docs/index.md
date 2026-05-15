@@ -120,6 +120,8 @@ hide:
     - [:octicons-arrow-right-24: MariaDB Galera Cluster 온라인 설치](db/ha/galera-cluster-online.md)
     - [:octicons-arrow-right-24: MariaDB 폐쇄망 오프라인 설치](db/install/mariadb-air-gapped-install.md)
     - [:octicons-arrow-right-24: DB 장애 복구 및 트러블슈팅](db/ha/galera-recovery.md)
+    - [:octicons-arrow-right-24: Galera Cluster 복구 가이드](db/ha/galera-restore.md)
+    - [:octicons-arrow-right-24: Galera Cluster 백업 동작 확인](db/ha/galera-backup-verify.md)
 
 - :simple-redis: **NoSQL 및 캐시**
 
