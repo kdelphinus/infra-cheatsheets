@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-cluster-online/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/vm-template/general-guide/">
       
       
-        <link rel="prev" href="../galera-cluster/">
+        <link rel="prev" href="../../k8s/container-image-cheatsheet/">
       
       
-        <link rel="next" href="../galera-recovery/">
+        <link rel="next" href="../rocky-vagrant-guide/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Galera Cluster 설치 (온라인) - Infra Cheatsheets</title>
+        <title>1. VM 템플릿 일반 제작 가이드 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mariadb-1011-galera-cluster-구성-가이드-온라인" class="md-skip">
+        <a href="#-vmware-vm-템플릿-일반-제작-표준-가이드-v40" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Galera Cluster 설치 (온라인)
+              1. VM 템플릿 일반 제작 가이드
             
           </span>
         </div>
@@ -225,7 +225,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+        <a href="../.." class="md-tabs__link">
           
   
   
@@ -252,7 +252,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../k8s/install/ubuntu/ready-offline/" class="md-tabs__link">
+        <a href="../../k8s/install/ubuntu/ready-offline/" class="md-tabs__link">
           
   
   
@@ -271,11 +271,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../vm-template/general-guide/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -295,7 +297,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -322,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -345,7 +347,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -361,8 +363,6 @@
   
   
   
-    
-  
   
     
     
@@ -370,13 +370,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../galera-cluster/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -399,7 +397,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../git/cheatsheet/" class="md-tabs__link">
+        <a href="../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -419,7 +417,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -446,7 +444,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -469,7 +467,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -496,7 +494,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
+        <a href="../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
           
   
   
@@ -533,7 +531,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -615,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -643,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guide/infra-standard/" class="md-nav__link">
+      <a href="../../guide/infra-standard/" class="md-nav__link">
         
   
   
@@ -782,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/ubuntu/ready-offline/" class="md-nav__link">
+      <a href="../../k8s/install/ubuntu/ready-offline/" class="md-nav__link">
         
   
   
@@ -810,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/ubuntu/offline-install/" class="md-nav__link">
+      <a href="../../k8s/install/ubuntu/offline-install/" class="md-nav__link">
         
   
   
@@ -838,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/ubuntu/online-install/" class="md-nav__link">
+      <a href="../../k8s/install/ubuntu/online-install/" class="md-nav__link">
         
   
   
@@ -926,7 +924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/ready-offline/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/ready-offline/" class="md-nav__link">
         
   
   
@@ -954,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/offline-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/offline-install/" class="md-nav__link">
         
   
   
@@ -982,7 +980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/online-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/online-install/" class="md-nav__link">
         
   
   
@@ -1010,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/git-cli-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/git-cli-install/" class="md-nav__link">
         
   
   
@@ -1038,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/docker-offline-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/docker-offline-install/" class="md-nav__link">
         
   
   
@@ -1126,7 +1124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/base-infra/" class="md-nav__link">
+      <a href="../../k8s/install/base-infra/" class="md-nav__link">
         
   
   
@@ -1154,7 +1152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/metallb-install/" class="md-nav__link">
+      <a href="../../k8s/install/metallb-install/" class="md-nav__link">
         
   
   
@@ -1182,7 +1180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/network/cilium-install/" class="md-nav__link">
+      <a href="../../k8s/network/cilium-install/" class="md-nav__link">
         
   
   
@@ -1270,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -1298,7 +1296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../../k8s/monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -1386,7 +1384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/security/001-falco-install/" class="md-nav__link">
+      <a href="../../k8s/security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -1414,7 +1412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/security/002-tetragon-install/" class="md-nav__link">
+      <a href="../../k8s/security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1442,7 +1440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/security/003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../k8s/security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -1530,7 +1528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -1618,7 +1616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
+      <a href="../../k8s/operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -1646,7 +1644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
+      <a href="../../k8s/operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -1674,7 +1672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
+      <a href="../../k8s/operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -1762,7 +1760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/capi/cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/capi/cheatsheet/" class="md-nav__link">
         
   
   
@@ -1850,7 +1848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
@@ -1878,7 +1876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
         
   
   
@@ -1906,7 +1904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -1934,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -1962,7 +1960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -1990,7 +1988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -2018,7 +2016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -2046,7 +2044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -2134,7 +2132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/use-pv-nas/" class="md-nav__link">
+      <a href="../../k8s/use-pv-nas/" class="md-nav__link">
         
   
   
@@ -2162,7 +2160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/storage/trident-install/" class="md-nav__link">
+      <a href="../../k8s/storage/trident-install/" class="md-nav__link">
         
   
   
@@ -2198,7 +2196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2226,7 +2224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/container-image-cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/container-image-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2258,26 +2256,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -2295,7 +2298,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2310,10 +2313,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../vm-template/general-guide/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. VM 템플릿 일반 제작 가이드
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2329,6 +2359,226 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#-공통-핵심-전제" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 공통 핵심 전제
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-1-linux-server-템플릿-기본-생성-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐧 1. Linux Server 템플릿 기본 생성 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐧 1. Linux Server 템플릿 기본 생성 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-가상-머신-생성-및-이미지-준비" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 가상 머신 생성 및 이미지 준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-필수-서비스-상태-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 필수 서비스 상태 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-필수-구성-패키지-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 필수 구성 패키지 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-2-ubuntu-desktop-템플릿-구성-절차-2204--2404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🖥️ 2. Ubuntu Desktop 템플릿 구성 절차 (22.04 / 24.04)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🖥️ 2. Ubuntu Desktop 템플릿 구성 절차 (22.04 / 24.04)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-가상-머신-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 가상 머신 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-필수-패키지-수동-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 필수 패키지 수동 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-3-windows-server-템플릿-구성-절차-2019--2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🪟 3. Windows Server 템플릿 구성 절차 (2019 / 2022)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🪟 3. Windows Server 템플릿 구성 절차 (2019 / 2022)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-os-및-vmware-tools-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 OS 및 VMware Tools 설치
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-원격-데스크톱rdp-및-방화벽-활성화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 원격 데스크톱(RDP) 및 방화벽 활성화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-windows-update-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Windows Update 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-sysprep-일반화generalization-구성-규칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Sysprep 일반화(Generalization) 구성 규칙
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-4-필수-구성-요소-및-카탈로그-등록-요약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 4. 필수 구성 요소 및 카탈로그 등록 요약
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 4. 필수 구성 요소 및 카탈로그 등록 요약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-핵심-os-구성-매트릭스" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 핵심 OS 구성 매트릭스
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cmp-카탈로그-등록-시-os-유형-가이드라인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 CMP 카탈로그 등록 시 OS 유형 가이드라인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2341,7 +2591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vm-template/rocky-vagrant-guide/" class="md-nav__link">
+      <a href="../rocky-vagrant-guide/" class="md-nav__link">
         
   
   
@@ -2369,7 +2619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vm-template/k8s-rocky-template/" class="md-nav__link">
+      <a href="../k8s-rocky-template/" class="md-nav__link">
         
   
   
@@ -2456,7 +2706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -2484,7 +2734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2623,7 +2873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
         
   
   
@@ -2651,7 +2901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/harbor-insecure-setup/" class="md-nav__link">
+      <a href="../../cicd/offline-install/harbor-insecure-setup/" class="md-nav__link">
         
   
   
@@ -2679,7 +2929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/001-gitlab-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/001-gitlab-install/" class="md-nav__link">
         
   
   
@@ -2707,7 +2957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/002-jenkins-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/002-jenkins-install/" class="md-nav__link">
         
   
   
@@ -2735,7 +2985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/003-gitlab-omnibus-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/003-gitlab-omnibus-install/" class="md-nav__link">
         
   
   
@@ -2763,7 +3013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/004-argocd-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/004-argocd-install/" class="md-nav__link">
         
   
   
@@ -2791,7 +3041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/005-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../../cicd/offline-install/005-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -2819,7 +3069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/006-nexus-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/006-nexus-install/" class="md-nav__link">
         
   
   
@@ -2847,7 +3097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/007-gitea-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/007-gitea-install/" class="md-nav__link">
         
   
   
@@ -2875,7 +3125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/008-tekton-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/008-tekton-install/" class="md-nav__link">
         
   
   
@@ -2963,7 +3213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -3058,7 +3308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -3138,7 +3388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -3178,31 +3428,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -3220,7 +3465,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3235,31 +3480,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
             
   
   
@@ -3277,7 +3517,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3295,7 +3535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-cluster/" class="md-nav__link">
+      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -3320,37 +3560,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Galera Cluster 설치 (온라인)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../db/ha/galera-cluster-online/" class="md-nav__link">
         
   
   
@@ -3366,414 +3579,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        전제 조건
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#클러스터-구성-정보" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        클러스터 구성 정보
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-1-os-및-네트워크-설정-3대-공통" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 1: OS 및 네트워크 설정 (3대 공통)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 1: OS 및 네트워크 설정 (3대 공통)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-1-호스트-파일-등록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-1. 호스트 파일 등록
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-2-호스트네임-변경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-2. 호스트네임 변경
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-3-selinux-permissive-전환" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-3. SELinux Permissive 전환
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-4-방화벽-포트-오픈" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-4. 방화벽 포트 오픈
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-5-시간-동기화-chrony" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-5. 시간 동기화 (chrony)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-2-mariadb-공식-저장소-등록-및-설치-3대-공통" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2: MariaDB 공식 저장소 등록 및 설치 (3대 공통)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 2: MariaDB 공식 저장소 등록 및 설치 (3대 공통)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2-1-rocky-9-내장-모듈-비활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-1. Rocky 9 내장 모듈 비활성화
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-2-mariadb-공식-저장소-등록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-2. MariaDB 공식 저장소 등록
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-3-서버클라이언트galera백업-패키지-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-3. 서버·클라이언트·Galera·백업 패키지 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-4-서비스-등록-시작하지-않음" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-4. 서비스 등록 (시작하지 않음)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-5-데이터-디렉토리-구성-경로-변경-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-5. 데이터 디렉토리 구성 (경로 변경 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-galera-설정-파일-작성-3대-공통" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 3: Galera 설정 파일 작성 (3대 공통)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-4-클러스터-기동-순서-준수" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 4: 클러스터 기동 (순서 준수)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 4: 클러스터 기동 (순서 준수)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#4-1-galera-cluster-1-bootstrap" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-1. galera-cluster-1 (Bootstrap)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-2-galera-cluster-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-2. galera-cluster-2
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-3-galera-cluster-3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-3. galera-cluster-3
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-5-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 5: 검증
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 5: 검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5-1-복제-테스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5-1. 복제 테스트
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-2-k8s-노드-연결-필요-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5-2. K8s 노드 연결 (필요 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-6-장애-복구-full-crash-recovery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 6: 장애 복구 (Full Crash Recovery)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 6: 장애 복구 (Full Crash Recovery)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#6-1-복구-논리" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6-1. 복구 논리
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-2-복구-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6-2. 복구 절차
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-3-복구-체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6-3. 복구 체크리스트
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-7-cve-패치--minor-업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 7: CVE 패치 / Minor 업그레이드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#부록-rhel-9-트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        부록: RHEL 9 트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="부록: RHEL 9 트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-1-systemd-보안-정책-충돌-read-only-file-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-1. Systemd 보안 정책 충돌 (Read-only file system)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-2-selinux-권한-차단" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-2. SELinux 권한 차단
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-3-havip-구성-시-주의사항-데이터-파손-방지" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-3. HA(VIP) 구성 시 주의사항 (데이터 파손 방지)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-4-저장소-등록-후-패키지가-안-보일-때" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-4. 저장소 등록 후 패키지가 안 보일 때
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3786,7 +3591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-recovery/" class="md-nav__link">
+      <a href="../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -3814,7 +3619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-restore/" class="md-nav__link">
+      <a href="../../db/ha/galera-restore/" class="md-nav__link">
         
   
   
@@ -3842,7 +3647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-backup-guide/" class="md-nav__link">
+      <a href="../../db/ha/galera-backup-guide/" class="md-nav__link">
         
   
   
@@ -3870,7 +3675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-backup-simple-guide/" class="md-nav__link">
+      <a href="../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
         
   
   
@@ -3898,7 +3703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-backup-verify/" class="md-nav__link">
+      <a href="../../db/ha/galera-backup-verify/" class="md-nav__link">
         
   
   
@@ -3926,7 +3731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-reboot-guide/" class="md-nav__link">
+      <a href="../../db/ha/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -3968,20 +3773,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
   
   
@@ -4017,7 +3819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../db/redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -4045,7 +3847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../db/redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -4087,20 +3889,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
         
           
-          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
             
   
   
@@ -4136,7 +3935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -4164,7 +3963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -4192,7 +3991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -4287,7 +4086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/cheatsheet/" class="md-nav__link">
+      <a href="../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -4315,7 +4114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/convention/" class="md-nav__link">
+      <a href="../../git/convention/" class="md-nav__link">
         
   
   
@@ -4402,7 +4201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -4541,7 +4340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -4569,7 +4368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/check-network-subnet/" class="md-nav__link">
+      <a href="../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -4597,7 +4396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/tip/port-check/" class="md-nav__link">
+      <a href="../../network/tip/port-check/" class="md-nav__link">
         
   
   
@@ -4692,7 +4491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -4772,7 +4571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -4800,7 +4599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -4828,7 +4627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -4916,7 +4715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -4944,7 +4743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -5032,7 +4831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -5060,7 +4859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -5148,7 +4947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -5236,7 +5035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -5383,7 +5182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
         
   
   
@@ -5411,7 +5210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
         
   
   
@@ -5439,7 +5238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -5467,7 +5266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/online-install-v1.30/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/online-install-v1.30/" class="md-nav__link">
         
   
   
@@ -5555,7 +5354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/harbor-v1.14.3-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/harbor-v1.14.3-install/" class="md-nav__link">
         
   
   
@@ -5618,10 +5417,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
+  <a href="#-공통-핵심-전제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        📌 공통 핵심 전제
       
     </span>
   </a>
@@ -5629,33 +5428,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#클러스터-구성-정보" class="md-nav__link">
+  <a href="#-1-linux-server-템플릿-기본-생성-절차" class="md-nav__link">
     <span class="md-ellipsis">
       
-        클러스터 구성 정보
+        🐧 1. Linux Server 템플릿 기본 생성 절차
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-1-os-및-네트워크-설정-3대-공통" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 1: OS 및 네트워크 설정 (3대 공통)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 1: OS 및 네트워크 설정 (3대 공통)">
+    <nav class="md-nav" aria-label="🐧 1. Linux Server 템플릿 기본 생성 절차">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-1-호스트-파일-등록" class="md-nav__link">
+  <a href="#11-가상-머신-생성-및-이미지-준비" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-1. 호스트 파일 등록
+        1.1 가상 머신 생성 및 이미지 준비
       
     </span>
   </a>
@@ -5663,10 +5451,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-2-호스트네임-변경" class="md-nav__link">
+  <a href="#12-필수-서비스-상태-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-2. 호스트네임 변경
+        1.2 필수 서비스 상태 확인
       
     </span>
   </a>
@@ -5674,32 +5462,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-3-selinux-permissive-전환" class="md-nav__link">
+  <a href="#13-필수-구성-패키지-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-3. SELinux Permissive 전환
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-4-방화벽-포트-오픈" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-4. 방화벽 포트 오픈
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1-5-시간-동기화-chrony" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1-5. 시간 동기화 (chrony)
+        1.3 필수 구성 패키지 설치
       
     </span>
   </a>
@@ -5712,22 +5478,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-mariadb-공식-저장소-등록-및-설치-3대-공통" class="md-nav__link">
+  <a href="#-2-ubuntu-desktop-템플릿-구성-절차-2204--2404" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2: MariaDB 공식 저장소 등록 및 설치 (3대 공통)
+        🖥️ 2. Ubuntu Desktop 템플릿 구성 절차 (22.04 / 24.04)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Phase 2: MariaDB 공식 저장소 등록 및 설치 (3대 공통)">
+    <nav class="md-nav" aria-label="🖥️ 2. Ubuntu Desktop 템플릿 구성 절차 (22.04 / 24.04)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2-1-rocky-9-내장-모듈-비활성화" class="md-nav__link">
+  <a href="#21-가상-머신-생성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2-1. Rocky 9 내장 모듈 비활성화
+        2.1 가상 머신 생성
       
     </span>
   </a>
@@ -5735,43 +5501,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-2-mariadb-공식-저장소-등록" class="md-nav__link">
+  <a href="#22-필수-패키지-수동-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2-2. MariaDB 공식 저장소 등록
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-3-서버클라이언트galera백업-패키지-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-3. 서버·클라이언트·Galera·백업 패키지 설치
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-4-서비스-등록-시작하지-않음" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-4. 서비스 등록 (시작하지 않음)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-5-데이터-디렉토리-구성-경로-변경-시" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2-5. 데이터 디렉토리 구성 (경로 변경 시)
+        2.2 필수 패키지 수동 설치
       
     </span>
   </a>
@@ -5784,33 +5517,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-3-galera-설정-파일-작성-3대-공통" class="md-nav__link">
+  <a href="#-3-windows-server-템플릿-구성-절차-2019--2022" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 3: Galera 설정 파일 작성 (3대 공통)
+        🪟 3. Windows Server 템플릿 구성 절차 (2019 / 2022)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-4-클러스터-기동-순서-준수" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 4: 클러스터 기동 (순서 준수)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 4: 클러스터 기동 (순서 준수)">
+    <nav class="md-nav" aria-label="🪟 3. Windows Server 템플릿 구성 절차 (2019 / 2022)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#4-1-galera-cluster-1-bootstrap" class="md-nav__link">
+  <a href="#31-os-및-vmware-tools-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-1. galera-cluster-1 (Bootstrap)
+        3.1 OS 및 VMware Tools 설치
       
     </span>
   </a>
@@ -5818,10 +5540,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-2-galera-cluster-2" class="md-nav__link">
+  <a href="#32-원격-데스크톱rdp-및-방화벽-활성화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-2. galera-cluster-2
+        3.2 원격 데스크톱(RDP) 및 방화벽 활성화
       
     </span>
   </a>
@@ -5829,10 +5551,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-3-galera-cluster-3" class="md-nav__link">
+  <a href="#33-windows-update-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-3. galera-cluster-3
+        3.3 Windows Update 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-sysprep-일반화generalization-구성-규칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Sysprep 일반화(Generalization) 구성 규칙
       
     </span>
   </a>
@@ -5845,22 +5578,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-5-검증" class="md-nav__link">
+  <a href="#-4-필수-구성-요소-및-카탈로그-등록-요약" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 5: 검증
+        📋 4. 필수 구성 요소 및 카탈로그 등록 요약
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Phase 5: 검증">
+    <nav class="md-nav" aria-label="📋 4. 필수 구성 요소 및 카탈로그 등록 요약">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#5-1-복제-테스트" class="md-nav__link">
+  <a href="#41-핵심-os-구성-매트릭스" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-1. 복제 테스트
+        4.1 핵심 OS 구성 매트릭스
       
     </span>
   </a>
@@ -5868,132 +5601,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-2-k8s-노드-연결-필요-시" class="md-nav__link">
+  <a href="#42-cmp-카탈로그-등록-시-os-유형-가이드라인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-2. K8s 노드 연결 (필요 시)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-6-장애-복구-full-crash-recovery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 6: 장애 복구 (Full Crash Recovery)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Phase 6: 장애 복구 (Full Crash Recovery)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#6-1-복구-논리" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6-1. 복구 논리
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-2-복구-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6-2. 복구 절차
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-3-복구-체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6-3. 복구 체크리스트
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-7-cve-패치--minor-업그레이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 7: CVE 패치 / Minor 업그레이드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#부록-rhel-9-트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        부록: RHEL 9 트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="부록: RHEL 9 트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#a-1-systemd-보안-정책-충돌-read-only-file-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-1. Systemd 보안 정책 충돌 (Read-only file system)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-2-selinux-권한-차단" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-2. SELinux 권한 차단
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-3-havip-구성-시-주의사항-데이터-파손-방지" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-3. HA(VIP) 구성 시 주의사항 (데이터 파손 방지)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-4-저장소-등록-후-패키지가-안-보일-때" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A-4. 저장소 등록 후 패키지가 안 보일 때
+        4.2 CMP 카탈로그 등록 시 OS 유형 가이드라인
       
     </span>
   </a>
@@ -6025,455 +5636,250 @@
   
 
 
-<h1 id="mariadb-1011-galera-cluster-구성-가이드-온라인">MariaDB 10.11 Galera Cluster 구성 가이드 (온라인)</h1>
-<p>Rocky Linux 9.6 환경에서 MariaDB 10.11 Galera Cluster 3중화를 구성하는 절차입니다.
-인터넷이 가능한 환경 기준으로 MariaDB 공식 저장소(<code>yum.mariadb.org</code>)에서 RPM을 직접 받습니다.
-폐쇄망 절차는 <a href="../galera-cluster/">galera-cluster.md</a>, 단일 노드 설치는 <a href="../../install/mariadb-air-gapped-install/">../install/mariadb-air-gapped-install.md</a>
-를 참조하세요.</p>
-<h2 id="전제-조건">전제 조건</h2>
+<h1 id="-vmware-vm-템플릿-일반-제작-표준-가이드-v40">🛠️ VMware VM 템플릿 일반 제작 표준 가이드 (v4.0)</h1>
+<p>이 문서는 <strong>Linux Server</strong>, <strong>Ubuntu Desktop</strong>, <strong>Windows Server</strong> 환경의 VMware 가상 머신(VM) 템플릿을 생성하고 자동 디스크 확장 및 초기 네트워크 셋업을 완벽히 수행하기 위한 표준 운영 가이드라인이에요.</p>
+<hr />
+<h2 id="-공통-핵심-전제">📌 공통 핵심 전제</h2>
+<p>템플릿 가상 머신을 템플릿으로 변환하기 전 반드시 확보되어야 하는 핵심 요구사항이에요.</p>
 <ul>
-<li>Rocky Linux 9.6 서버 3대 (인터넷 가능)</li>
-<li>일반 사용자 계정 (sudo 권한 필수)</li>
-<li>외부 저장소(<code>yum.mariadb.org</code>) 접근 가능</li>
-<li>노드 간 4567/4568/4444/3306 포트 양방향 통신 가능</li>
+<li><strong>Linux 계열 VM</strong>:<ul>
+<li><strong>cloud-init</strong>을 활용하여 VM 부팅 시 초기 사용자 데이터 주입, 네트워크 렌더링, 루트 디스크 확장을 수행해요.</li>
+<li>네트워크 관리 서비스는 기본적으로 <strong>NetworkManager</strong>를 사용해요.</li>
+<li>cloud-init의 메타데이터 소스는 <strong>VMware datasource</strong>(<code>VMware</code>, <code>OVF</code>)를 허용하도록 설정해요.</li>
+<li>디스크 확장 시 파티션 크기 조정을 위해 <code>growpart</code> 및 <code>resizefs</code> 명령어가 내장되어 있어야 해요.</li>
 </ul>
-<h2 id="클러스터-구성-정보">클러스터 구성 정보</h2>
+</li>
+<li><strong>Windows 계열 VM</strong>:<ul>
+<li>cloud-init을 사용하지 않고, VMware의 <strong>CustomizationSysprep</strong> 메커니즘을 사용해 호스트명, 비밀번호, 네트워크를 자동 주입해요.</li>
+</ul>
+</li>
+<li><strong>공통 관리</strong>:<ul>
+<li>템플릿 변환 직전에는 OS 고유 식별자(machine-id), 네트워크 연결 정보, 로그 및 임시 파일을 깨끗이 정리(Clean)해야 해요.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="-1-linux-server-템플릿-기본-생성-절차">🐧 1. Linux Server 템플릿 기본 생성 절차</h2>
+<h3 id="11-가상-머신-생성-및-이미지-준비">1.1 가상 머신 생성 및 이미지 준비</h3>
+<ol>
+<li>vCenter 콘솔을 통해 설치하려는 OS 이미지(ISO) 또는 이미 배포 준비가 된 OVF 파일을 업로드해요.</li>
+<li>vCenter 콘솔의 <strong>OVF 템플릿 배포</strong> 기능을 사용하여 가상 머신을 생성하고, 웹 콘솔에 접속하여 기본 네트워크 및 OS 설치를 마쳐요.</li>
+</ol>
+<h3 id="12-필수-서비스-상태-확인">1.2 필수 서비스 상태 확인</h3>
+<p>최초 OS 설치 직후 아래 명령어로 관련 데몬의 활성화 여부를 점검해요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>systemctl<span class="w"> </span>status<span class="w"> </span>cloud-init
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>vmtoolsd
+</code></pre></div></p>
+<blockquote>
+<p>[!NOTE]
+만약 서비스가 없거나 비활성화되어 있더라도 아래의 필수 패키지 설치 단계에서 함께 활성화 처리를 진행하게 돼요.</p>
+</blockquote>
+<h3 id="13-필수-구성-패키지-설치">1.3 필수 구성 패키지 설치</h3>
+<p>RHEL, Rocky Linux 등 RedHat 계열 배포판의 경우 아래 패키지들을 반드시 설치해 주어야 해요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>cloud-init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>cloud-utils-growpart<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>open-vm-tools<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>NetworkManager<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>openssh-server<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>xfsprogs
+</code></pre></div></p>
+<ul>
+<li><strong>패키지별 역할 요약</strong>:<ul>
+<li><strong><code>cloud-init</code></strong>: VM 첫 부팅 시 메타데이터 수집, 사용자 계정/네트워크/디스크 자동 확장 수행.</li>
+<li><strong><code>cloud-utils-growpart</code></strong>: 디스크 크기 증가 시 루트 파티션을 확장하는 핵심 바이너리(<code>growpart</code>) 제공.</li>
+<li><strong><code>open-vm-tools</code></strong>: VMware 하이퍼바이저와 게스트 OS 간 Customization 및 통합 지원.</li>
+<li><strong><code>NetworkManager</code></strong>: cloud-init이 작성하는 네트워크 구성의 기본 렌더링 엔진.</li>
+<li><strong><code>xfsprogs</code></strong>: RHEL 계열에서 많이 사용되는 XFS 파일시스템 확장 도구(<code>xfs_growfs</code>) 제공.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>[!IMPORTANT]
+<strong><code>cloud-utils-growpart</code></strong> 패키지가 누락되면 cloud-init 설정에 아무리 growpart를 지정해도 디스크가 늘어나지 않고 <code>/var/log/cloud-init.log</code>에 <code>growpart unable to find resizer for 'auto': No resizers available</code> 에러가 남게 되니 주의해 주세요!</p>
+</blockquote>
+<p>설치 후 정상 동작 여부를 아래 명령어로 교차 검증해요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 설치 검증</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>rpm<span class="w"> </span>-q<span class="w"> </span>cloud-init<span class="w"> </span>cloud-utils-growpart<span class="w"> </span>open-vm-tools<span class="w"> </span>NetworkManager<span class="w"> </span>openssh-server<span class="w"> </span>xfsprogs
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 명령어 검증</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>growpart
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>xfs_growfs
+</code></pre></div></p>
+<hr />
+<h2 id="-2-ubuntu-desktop-템플릿-구성-절차-2204--2404">🖥️ 2. Ubuntu Desktop 템플릿 구성 절차 (22.04 / 24.04)</h2>
+<p>Ubuntu Desktop 환경은 일반 Server 버전과 달리 cloud-init과 openssh-server가 기본적으로 설치되어 있지 않아요. 따라서 CMP(클라우드 관리 플랫폼)에서 IP 주입이나 계정 생성 등이 정상 적용되게 하려면 아래 수동 조치를 명시적으로 진행해야 해요.</p>
+<h3 id="21-가상-머신-생성">2.1 가상 머신 생성</h3>
+<ul>
+<li>Ubuntu Desktop ISO 파일을 사용하여 VM을 생성하고 설치를 완료해요.</li>
+<li>OS 설치 화면에서 <strong>최소 설치 (Minimal installation)</strong> 옵션을 체크하면 불필요한 데스크톱 유틸리티 패키지를 줄이고 최적화된 용량의 템플릿을 빌드할 수 있어요.</li>
+</ul>
+<h3 id="22-필수-패키지-수동-설치">2.2 필수 패키지 수동 설치</h3>
+<p>데스크톱 환경에 인터넷을 임시로 연결한 뒤 아래 패키지들을 구성해요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>cloud-init<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>cloud-guest-utils<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>open-vm-tools<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>openssh-server<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>network-manager<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span>xfsprogs
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># ext4 파일시스템 확장을 위해 e2fsprogs가 없을 시 추가 설치</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>e2fsprogs
+</code></pre></div></p>
+<blockquote>
+<p>[!NOTE]
+Ubuntu(Debian) 계열에서는 growpart 명령어를 제공하는 패키지명이 <code>cloud-utils-growpart</code>가 아닌 <strong><code>cloud-guest-utils</code></strong> 임에 주의해 주세요.</p>
+</blockquote>
+<p>설치 완료 확인 명령어:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>dpkg<span class="w"> </span>-l<span class="w"> </span>cloud-init<span class="w"> </span>cloud-guest-utils<span class="w"> </span>open-vm-tools<span class="w"> </span>openssh-server<span class="w"> </span>network-manager<span class="w"> </span>xfsprogs<span class="w"> </span>e2fsprogs
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>growpart
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>resize2fs<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</code></pre></div></p>
+<hr />
+<h2 id="-3-windows-server-템플릿-구성-절차-2019--2022">🪟 3. Windows Server 템플릿 구성 절차 (2019 / 2022)</h2>
+<p>Windows 가상 머신은 cloud-init 메커니즘을 타지 않고, VMware 고유의 <strong>CustomizationSysprep</strong>을 활용하므로 빌드 방식이 완전히 달라요.</p>
+<h3 id="31-os-및-vmware-tools-설치">3.1 OS 및 VMware Tools 설치</h3>
+<ol>
+<li>Windows Server ISO 이미지로 가상 머신을 만들고 설치 유형은 필요에 따라 <strong>Desktop Experience</strong> 또는 <strong>Server Core</strong>를 선택해요.</li>
+<li>vCenter 콘솔에서 해당 가상 머신 우클릭 -&gt; <strong>게스트 OS</strong> -&gt; <strong>VMware Tools 설치</strong>를 선택한 후, 탐색기 <code>D:\setup64.exe</code> 또는 <code>setup.exe</code>를 실행하여 도구를 설치해요.</li>
+<li>만약 자동 마운트가 되지 않는다면, 수동으로 VMware Tools ISO 파일을 VM 내부로 복사하거나 업로드하여 <strong>Typical</strong> 유형으로 설치 완료한 뒤 재부팅해요.</li>
+<li>PowerShell에서 서비스가 원활히 구동 중인지 검증해요.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="n">VMTools</span>
+</code></pre></div></li>
+</ol>
+<h3 id="32-원격-데스크톱rdp-및-방화벽-활성화">3.2 원격 데스크톱(RDP) 및 방화벽 활성화</h3>
+<p>CMP 배포 후 원격 관리가 가능하도록 RDP를 승인하고 포트(3389) 방화벽 규칙을 개방해요. (관리자 권한 PowerShell 실행)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c"># RDP 연결 허용</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Set-ItemProperty</span> <span class="n">-Path</span> <span class="s1">&#39;HKLM:\System\CurrentControlSet\Control\Terminal Server&#39;</span> <span class="n">-Name</span> <span class="s2">&quot;fDenyTSConnections&quot;</span> <span class="n">-Value</span> <span class="n">0</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c"># 방화벽 허용 규칙 적용</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">Enable-NetFirewallRule</span> <span class="n">-DisplayGroup</span> <span class="s2">&quot;Remote Desktop&quot;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c"># 원격 제어 서비스 동작 상태 체크</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="n">TermService</span>
+</code></pre></div></p>
+<h3 id="33-windows-update-실행">3.3 Windows Update 실행</h3>
+<p>가장 최신 보안 패치를 템플릿 빌드 단계에서 미리 적용해 주어야 배포 시간이 줄어들어요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Install-Module</span> <span class="n">PSWindowsUpdate</span> <span class="n">-Force</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">Get-WindowsUpdate</span> <span class="n">-Install</span> <span class="n">-AcceptAll</span> <span class="n">-AutoReboot</span>
+</code></pre></div></p>
+<h3 id="34-sysprep-일반화generalization-구성-규칙">3.4 Sysprep 일반화(Generalization) 구성 규칙</h3>
+<p>Windows VM은 복제 시 고유 SID를 재생성하기 위해 Sysprep 일반화 단계를 만족시켜야 해요.</p>
+<blockquote>
+<p>[!CAUTION]
+템플릿 제작 단계에서 직접 Sysprep 실행 파일을 마구 구동하면 안 돼요. 템플릿 상태에서는 <strong>Sysprep 실행이 원활히 가능한 대기 상태(Rearm count 남음 등)</strong>만 확보해 두어야 하며, 최종 배포 단계에서 VMware CustomizationSpec이 스스로 Sysprep 명령을 기동하도록 설계해야 해요.</p>
+</blockquote>
+<ul>
+<li><strong>Rearm 횟수 진단</strong>: 남은 초기화 제한 횟수를 확인하기 위해 아래 명령어를 구동해요.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>slmgr /dlv
+</code></pre></div></li>
+<li><strong>IaC용 프로비저닝 차단</strong>: 클라우드 가상화 플랫폼과의 시너지를 위해 <code>Cloudbase-init</code>과 같은 별도 에이전트는 구성하지 않는 것을 원칙으로 해요.</li>
+<li><strong>Sysprep 수동 강제 스케줄러 (동작 장애 대비 대체제)</strong>:
+    만약 배포 중 정상적인 초기화가 되지 않는 돌발 상황이 우려된다면, 디렉토리 생성 후 부팅 시 1회 강제 실행되도록 CMD 스케줄러를 등록할 수도 있어요.<ol>
+<li><code>C:\sysprep</code> 폴더를 생성해요.</li>
+<li><code>C:\sysprep\run-sysprep.cmd</code> 스크립트를 작성해요.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>@echo off
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>echo Running sysprep...
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>schtasks /delete /tn &quot;ForceSysprep&quot; /f
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /reboot /unattend:C:\sysprep\sysprep.xml
+</code></pre></div></li>
+<li>PowerShell에서 시스템 시작 스케줄 작업으로 연동해요.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>schtasks /create /tn &quot;ForceSysprep&quot; /sc onstart /ru SYSTEM /tr &quot;C:\sysprep\run-sysprep.cmd&quot;
+</code></pre></div></li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2 id="-4-필수-구성-요소-및-카탈로그-등록-요약">📋 4. 필수 구성 요소 및 카탈로그 등록 요약</h2>
+<h3 id="41-핵심-os-구성-매트릭스">4.1 핵심 OS 구성 매트릭스</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">호스트명</th>
-<th style="text-align: left;">역할</th>
-<th style="text-align: left;">IP</th>
-<th style="text-align: left;">비고</th>
+<th style="text-align: left;">구성 요소</th>
+<th style="text-align: left;">Linux Server</th>
+<th style="text-align: left;">Ubuntu Desktop</th>
+<th style="text-align: left;">Windows Server</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">galera-cluster-1</td>
-<td style="text-align: left;">Primary (Bootstrap)</td>
-<td style="text-align: left;"><code>IP_1</code></td>
-<td style="text-align: left;">최초 클러스터 시작</td>
+<td style="text-align: left;"><strong>VMware Tools</strong></td>
+<td style="text-align: left;"><code>open-vm-tools</code> (필수)</td>
+<td style="text-align: left;"><code>open-vm-tools</code> (필수)</td>
+<td style="text-align: left;">VMware Tools Windows 패키지</td>
 </tr>
 <tr>
-<td style="text-align: left;">galera-cluster-2</td>
-<td style="text-align: left;">Member</td>
-<td style="text-align: left;"><code>IP_2</code></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>cloud-init</strong></td>
+<td style="text-align: left;"><strong>필수</strong></td>
+<td style="text-align: left;"><strong>필수</strong></td>
+<td style="text-align: left;">불필요</td>
 </tr>
 <tr>
-<td style="text-align: left;">galera-cluster-3</td>
-<td style="text-align: left;">Member</td>
-<td style="text-align: left;"><code>IP_3</code></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>DataSourceVMware</strong></td>
+<td style="text-align: left;"><strong>필수</strong> (<code>VMware</code>, <code>OVF</code>)</td>
+<td style="text-align: left;"><strong>필수</strong> (<code>VMware</code>, <code>OVF</code>)</td>
+<td style="text-align: left;">불필요</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>자동 디스크 확장</strong></td>
+<td style="text-align: left;"><code>growpart</code>, <code>resize_rootfs</code></td>
+<td style="text-align: left;"><code>growpart</code>, <code>resize_rootfs</code></td>
+<td style="text-align: left;">해당 없음 (Sysprep 자동 연동)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>growpart 패키지</strong></td>
+<td style="text-align: left;"><code>cloud-utils-growpart</code></td>
+<td style="text-align: left;"><code>cloud-guest-utils</code></td>
+<td style="text-align: left;">해당 없음</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>openssh-server</strong></td>
+<td style="text-align: left;"><strong>필수</strong></td>
+<td style="text-align: left;"><strong>필수</strong></td>
+<td style="text-align: left;">선택</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Node Exporter</strong></td>
+<td style="text-align: left;"><strong>필수</strong> (9100 메트릭 수집용)</td>
+<td style="text-align: left;"><strong>필수</strong> (9100 메트릭 수집용)</td>
+<td style="text-align: left;">해당 없음</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NIC 이름 고정</strong></td>
+<td style="text-align: left;">권장 (<code>eth0</code>, <code>eth1</code> 순서)</td>
+<td style="text-align: left;">권장 (<code>eth0</code>, <code>eth1</code> 순서)</td>
+<td style="text-align: left;">해당 없음</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Sysprep 상태</strong></td>
+<td style="text-align: left;">해당 없음</td>
+<td style="text-align: left;">해당 없음</td>
+<td style="text-align: left;"><strong>필수</strong> (Rearm 잔여 횟수 확보)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>네트워크 관리</strong></td>
+<td style="text-align: left;"><code>NetworkManager</code></td>
+<td style="text-align: left;"><code>NetworkManager</code></td>
+<td style="text-align: left;">Windows Network Service</td>
 </tr>
 </tbody>
 </table>
+<h3 id="42-cmp-카탈로그-등록-시-os-유형-가이드라인">4.2 CMP 카탈로그 등록 시 OS 유형 가이드라인</h3>
+<p>가상 머신 템플릿을 이미지 카탈로그 상품으로 올릴 때 <code>osGroup</code>과 <code>osVersion</code> 값을 정확하게 바인딩해 주어야 해요. 잘못 입력하면 초기화 스크립트가 잘못 렌더링되거나 오작동이 일어나요.</p>
 <ul>
-<li><strong>Cluster Name:</strong> <code>my_galera_svc</code></li>
-<li><strong>SST Method:</strong> mariabackup</li>
+<li><strong><code>osGroup</code> 값 설정 매핑</strong>:<ul>
+<li><code>ubuntu</code>, <code>centos</code>, <code>rhel</code>, <code>rocky</code> 등: cloud-init 방식을 채택하며, 네트워크 환경은 기본적으로 <code>gateway4</code> 구문을 사용해요.</li>
+<li><code>ubuntu-desktop</code>: cloud-init 기반이며 렌더러로 <code>NetworkManager</code>를 필수로 요구하고, <code>routes</code> 구문 렌더링이 강제돼요.</li>
+<li><code>windows</code>: CustomizationSysprep을 타게 되며 cloud-init 설정은 전부 우회되고 RDP 기본 허용으로 처리돼요.</li>
 </ul>
-<hr />
-<h2 id="phase-1-os-및-네트워크-설정-3대-공통">Phase 1: OS 및 네트워크 설정 (3대 공통)</h2>
-<h3 id="1-1-호스트-파일-등록">1-1. 호스트 파일 등록</h3>
-<p>IP 확정 후 3대 서버 모두 동일하게 수정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/hosts
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>192.168.XXX.XX   galera-cluster-1
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>192.168.XXX.XX   galera-cluster-2
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>192.168.XXX.XX   galera-cluster-3
-</code></pre></div>
-<h3 id="1-2-호스트네임-변경">1-2. 호스트네임 변경</h3>
-<p>각 서버 번호에 맞게 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>galera-cluster-1
-</code></pre></div>
-<h3 id="1-3-selinux-permissive-전환">1-3. SELinux Permissive 전환</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>setenforce<span class="w"> </span><span class="m">0</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^SELINUX=enforcing/SELINUX=permissive/&#39;</span><span class="w"> </span>/etc/selinux/config
-</code></pre></div>
-<h3 id="1-4-방화벽-포트-오픈">1-4. 방화벽 포트 오픈</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">={</span><span class="m">3306</span>,4567,4568,4444<span class="o">}</span>/tcp
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-port<span class="o">=</span><span class="m">4567</span>/udp
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
-</code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">포트</th>
-<th style="text-align: left;">프로토콜</th>
-<th style="text-align: left;">용도</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">3306</td>
-<td style="text-align: left;">TCP</td>
-<td style="text-align: left;">MySQL 클라이언트 접속</td>
-</tr>
-<tr>
-<td style="text-align: left;">4567</td>
-<td style="text-align: left;">TCP/UDP</td>
-<td style="text-align: left;">Galera 클러스터 통신 (gcomm)</td>
-</tr>
-<tr>
-<td style="text-align: left;">4568</td>
-<td style="text-align: left;">TCP</td>
-<td style="text-align: left;">IST (Incremental State Transfer)</td>
-</tr>
-<tr>
-<td style="text-align: left;">4444</td>
-<td style="text-align: left;">TCP</td>
-<td style="text-align: left;">SST (State Snapshot Transfer)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1-5-시간-동기화-chrony">1-5. 시간 동기화 (chrony)</h3>
-<p>Galera 는 노드 간 시계 차이에 민감하므로 NTP 동기화를 강제합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>chrony
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>chronyd
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>chronyc<span class="w"> </span>sources
-</code></pre></div>
-<hr />
-<h2 id="phase-2-mariadb-공식-저장소-등록-및-설치-3대-공통">Phase 2: MariaDB 공식 저장소 등록 및 설치 (3대 공통)</h2>
-<h3 id="2-1-rocky-9-내장-모듈-비활성화">2-1. Rocky 9 내장 모듈 비활성화</h3>
-<p>Rocky 9 기본 AppStream 의 MariaDB 10.5 와 충돌을 방지합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>module<span class="w"> </span>disable<span class="w"> </span>mariadb<span class="w"> </span>-y
-</code></pre></div>
-<p><code>missing groups or modules: mariadb</code> 메시지는 무시 가능합니다.</p>
-<h3 id="2-2-mariadb-공식-저장소-등록">2-2. MariaDB 공식 저장소 등록</h3>
-<p>10.11 LTS 라인을 등록합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39; | sudo tee /etc/yum.repos.d/mariadb.repo</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s">[mariadb]</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s">name = MariaDB 10.11</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s">baseurl = https://rpm.mariadb.org/10.11/rhel/$releasever/$basearch</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s">gpgkey = https://rpm.mariadb.org/RPM-GPG-KEY-MariaDB</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s">gpgcheck = 1</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s">enabled = 1</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s">module_hotfixes = 1</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="s">EOF</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="c1"># 캐시 갱신 및 검색 확인</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>clean<span class="w"> </span>all
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>makecache
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>dnf<span class="w"> </span>info<span class="w"> </span>MariaDB-server<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
-</code></pre></div>
-<blockquote>
-<p><code>module_hotfixes = 1</code> 은 AppStream 모듈 시스템이 비공식 RPM 을 가리지 않도록 강제하는
-옵션으로, MariaDB 공식 저장소 사용 시 필수입니다.</p>
-</blockquote>
-<h3 id="2-3-서버클라이언트galera백업-패키지-설치">2-3. 서버·클라이언트·Galera·백업 패키지 설치</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span>MariaDB-server<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span>MariaDB-client<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span>MariaDB-backup<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span>galera-4
-</code></pre></div>
-<blockquote>
-<p>MariaDB 공식 저장소의 패키지명은 대문자(<code>MariaDB-server</code>)이며, Rocky AppStream 의
-<code>mariadb-server</code> (소문자) 와 다른 패키지입니다. 동시에 설치되지 않도록 2-1 의 모듈 비활성화가
-선행되어야 합니다.</p>
-</blockquote>
-<h3 id="2-4-서비스-등록-시작하지-않음">2-4. 서비스 등록 (시작하지 않음)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mariadb
-</code></pre></div>
-<h3 id="2-5-데이터-디렉토리-구성-경로-변경-시">2-5. 데이터 디렉토리 구성 (경로 변경 시)</h3>
-<p>기본 경로(<code>/var/lib/mysql</code>)를 사용한다면 이 단계는 건너뜁니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 디렉토리 생성</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/app/mariadb_data
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># 소유권 설정 (mysql 계정은 RPM 설치 시 자동 생성)</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>mysql:mysql<span class="w"> </span>/app/mariadb_data
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/app/mariadb_data
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># DB 초기화 (커스텀 경로에는 시스템 테이블이 없으므로 필수)</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>sudo<span class="w"> </span>mariadb-install-db<span class="w"> </span>--user<span class="o">=</span>mysql<span class="w"> </span>--datadir<span class="o">=</span>/app/mariadb_data
-</code></pre></div>
-<blockquote>
-<p>10.5 부터 <code>mysql_install_db</code> 는 <code>mariadb-install-db</code> 로 rename 되었으며, 10.11 에서도
-이전 이름은 alias 로 동작합니다.</p>
-</blockquote>
-<hr />
-<h2 id="phase-3-galera-설정-파일-작성-3대-공통">Phase 3: Galera 설정 파일 작성 (3대 공통)</h2>
-<p><code>/etc/my.cnf.d/01-galera.cnf</code> 파일을 생성합니다. 서버마다 <code>wsrep_node_address</code> 와
-<code>wsrep_node_name</code> 값을 변경해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/my.cnf.d/01-galera.cnf
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">[mariadb]</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># --- 기본 설정 ---</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 데이터 경로를 옮길 때만 사용</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># datadir=/app/mariadb_data</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="na">bind-address</span><span class="o">=</span><span class="s">0.0.0.0</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="na">default_storage_engine</span><span class="o">=</span><span class="s">InnoDB</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="na">innodb_autoinc_lock_mode</span><span class="o">=</span><span class="s">2</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># --- 튜닝 ---</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="na">lower_case_table_names</span><span class="o">=</span><span class="s">1</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="na">max_connections</span><span class="o">=</span><span class="s">1000</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="na">sql_mode</span><span class="o">=</span><span class="s">&quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&quot;</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="c1"># --- Galera Provider ---</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="na">wsrep_on</span><span class="o">=</span><span class="s">ON</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="na">wsrep_provider</span><span class="o">=</span><span class="s">/usr/lib64/galera-4/libgalera_smm.so</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="c1"># --- 클러스터 공통 (3대 동일) ---</span>
-<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="na">wsrep_cluster_name</span><span class="o">=</span><span class="s">&quot;my_galera_svc&quot;</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://IP_1,IP_2,IP_3&quot;</span>
-<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>
-<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="c1"># --- 노드별 고유 설정 (서버마다 수정!) ---</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="na">wsrep_node_address</span><span class="o">=</span><span class="s">&quot;본인_서버_IP&quot;</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="na">wsrep_node_name</span><span class="o">=</span><span class="s">&quot;galera-cluster-X&quot;</span>
-<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>
-<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="c1"># --- 동기화 ---</span>
-<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">mariabackup</span>
-</code></pre></div>
-<p>서버별 변경 요약:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">서버</th>
-<th style="text-align: left;">wsrep_node_address</th>
-<th style="text-align: left;">wsrep_node_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">1번</td>
-<td style="text-align: left;"><code>IP_1</code></td>
-<td style="text-align: left;"><code>galera-cluster-1</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">2번</td>
-<td style="text-align: left;"><code>IP_2</code></td>
-<td style="text-align: left;"><code>galera-cluster-2</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">3번</td>
-<td style="text-align: left;"><code>IP_3</code></td>
-<td style="text-align: left;"><code>galera-cluster-3</code></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>SST 방식이 <code>mariabackup</code> 이므로 모든 노드에 <code>MariaDB-backup</code> 패키지가 설치되어 있어야
-합니다 (Phase 2-3 에서 설치 완료).</p>
-</blockquote>
-<hr />
-<h2 id="phase-4-클러스터-기동-순서-준수">Phase 4: 클러스터 기동 (순서 준수)</h2>
-<h3 id="4-1-galera-cluster-1-bootstrap">4-1. galera-cluster-1 (Bootstrap)</h3>
-<p>반드시 1번 서버에서 가장 먼저 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>galera_new_cluster
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># 클러스터 사이즈 확인 (1이어야 함)</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
-</code></pre></div>
-<h3 id="4-2-galera-cluster-2">4-2. galera-cluster-2</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># 클러스터 사이즈 확인 (2로 증가)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
-</code></pre></div>
-<h3 id="4-3-galera-cluster-3">4-3. galera-cluster-3</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># 최종 확인 (3이어야 함)</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
-</code></pre></div>
-<hr />
-<h2 id="phase-5-검증">Phase 5: 검증</h2>
-<h3 id="5-1-복제-테스트">5-1. 복제 테스트</h3>
-<p>1번 노드에서 DB 를 생성하고 3번 노드에서 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Node 1</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;CREATE DATABASE galera_test_db;&quot;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Node 3</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW DATABASES;&quot;</span>
-</code></pre></div>
-<p><code>galera_test_db</code> 가 보이면 3중화 성공입니다.</p>
-<h3 id="5-2-k8s-노드-연결-필요-시">5-2. K8s 노드 연결 (필요 시)</h3>
-<p>다른 노드의 K8s 에서 접속해야 할 경우 IP 허용 규칙을 추가합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">-- 전용 계정 생성 (&#39;20.%&#39;는 20.x.x.x 대역 전체 허용)</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;k8s_app_user&#39;</span><span class="o">@</span><span class="s1">&#39;20.%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;K8s_Passw0rd!&#39;</span><span class="p">;</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;k8s_app_user&#39;</span><span class="o">@</span><span class="s1">&#39;20.%&#39;</span><span class="p">;</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
-</code></pre></div>
-<p>K8s 에서 연결 확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># 임시 파드 생성</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>kubectl<span class="w"> </span>run<span class="w"> </span>tmp-shell<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span>--image<span class="o">=</span>docker.io/library/busybox:latest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>sh
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c1"># 파드 내부에서 연결 테스트</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>telnet<span class="w"> </span>&lt;IP_1&gt;<span class="w"> </span><span class="m">3306</span>
-</code></pre></div>
-<hr />
-<h2 id="phase-6-장애-복구-full-crash-recovery">Phase 6: 장애 복구 (Full Crash Recovery)</h2>
-<p>모든 노드가 비정상 종료되어 서비스가 전면 중단된 경우의 복구 절차입니다.</p>
-<blockquote>
-<p>본 가이드는 <code>/app/mariadb_data</code> 경로를 기준으로 작성되었습니다. 실제 서버의 데이터
-경로가 다를 수 있으므로 명령어 실행 전 반드시 확인하세요.</p>
-</blockquote>
-<h3 id="6-1-복구-논리">6-1. 복구 논리</h3>
-<ul>
-<li><strong>최신 트랜잭션 판별:</strong> 모든 노드가 다운된 경우, 가장 최신 트랜잭션(<code>seqno</code>)을 보유한 노드를
-  찾아 Primary 로 승격시켜야 데이터 유실 및 전체 동기화(SST)를 방지할 수 있습니다.</li>
-<li><strong>커스텀 경로 스캔:</strong> 데이터가 커스텀 경로에 저장된 경우, <code>--datadir</code> 옵션을 반드시
-  명시해야 합니다.</li>
+</li>
+<li><strong><code>osVersion</code> 및 24.04 주의사항</strong>:<ul>
+<li><strong>Ubuntu 24.04 이상</strong> 버전(Server 포함)부터는 클라우드 표준에 맞춰 기존 구식 지시어인 <code>gateway4</code>가 완전 제거되었어요. 따라서 해당 사양에서는 반드시 <code>routes</code> 구문으로 자동 번역되어 렌더링되게끔 처리돼요.</li>
 </ul>
-<h3 id="6-2-복구-절차">6-2. 복구 절차</h3>
-<p><strong>1단계: Primary 노드 판별</strong></p>
-<p>3대 서버 모두에서 MariaDB 프로세스가 없는지 확인한 후 트랜잭션 번호를 추출합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># 잔여 프로세스 확인</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mysql
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># 복구 위치(seqno) 추출</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>sudo<span class="w"> </span>/usr/sbin/mariadbd<span class="w"> </span>--wsrep-recover<span class="w"> </span>--datadir<span class="o">=</span>/app/mariadb_data
-</code></pre></div>
-<p>로그 마지막의 <code>Recovered position: UUID:seqno</code> 값 중 <strong>seqno 가 가장 큰 노드</strong>를 Primary 로
-선정합니다. 숫자가 같다면 <code>grastate.dat</code> 의 <code>safe_to_bootstrap: 1</code> 인 노드를 선택합니다.</p>
-<p><strong>2단계: Primary 노드 부트스트랩</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># grastate.dat에서 safe_to_bootstrap: 1로 변경</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/app/mariadb_data/grastate.dat
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># 클러스터 초기화 (Primary 노드에서만)</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>sudo<span class="w"> </span>galera_new_cluster
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="c1"># 검증 (Size = 1)</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
-</code></pre></div>
-<p><strong>3단계: 나머지 노드 합류</strong></p>
-<p>나머지 노드에서 하나씩 서비스를 시작합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1"># 최종 검증 (Size = 3)</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
-</code></pre></div>
-<p><strong>4단계: K8s 애플리케이션 파드 정상화</strong></p>
-<p>DB 접속 실패로 <code>CrashLoopBackOff</code> 상태인 파드들을 재시작합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deployment<span class="w"> </span>--all<span class="w"> </span>-n<span class="w"> </span><span class="o">[</span>네임스페이스<span class="o">]</span>
-</code></pre></div>
-<h3 id="6-3-복구-체크리스트">6-3. 복구 체크리스트</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">완료</th>
-<th style="text-align: left;">분류</th>
-<th style="text-align: left;">점검 대상 및 명령어</th>
-<th style="text-align: left;">기준 / 비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">[ ]</td>
-<td style="text-align: left;"><strong>사전 조사</strong></td>
-<td style="text-align: left;"><code>ps -ef \| grep mysql</code></td>
-<td style="text-align: left;">3대 모두 잔여 프로세스 없음</td>
-</tr>
-<tr>
-<td style="text-align: center;">[ ]</td>
-<td style="text-align: left;"><strong>상태 추출</strong></td>
-<td style="text-align: left;"><code>--wsrep-recover --datadir=[경로]</code></td>
-<td style="text-align: left;">3대 중 <code>seqno</code> 최고값 판별 완료</td>
-</tr>
-<tr>
-<td style="text-align: center;">[ ]</td>
-<td style="text-align: left;"><strong>부트스트랩</strong></td>
-<td style="text-align: left;">Primary: <code>sudo galera_new_cluster</code></td>
-<td style="text-align: left;"><code>wsrep_cluster_size</code> = 1</td>
-</tr>
-<tr>
-<td style="text-align: center;">[ ]</td>
-<td style="text-align: left;"><strong>노드 합류</strong></td>
-<td style="text-align: left;">나머지: <code>sudo systemctl start mariadb</code></td>
-<td style="text-align: left;"><code>wsrep_cluster_size</code> = 3</td>
-</tr>
-<tr>
-<td style="text-align: center;">[ ]</td>
-<td style="text-align: left;"><strong>파드 복구</strong></td>
-<td style="text-align: left;"><code>kubectl rollout restart deployment</code></td>
-<td style="text-align: left;">앱 파드 <code>Running</code> 확인</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="phase-7-cve-패치--minor-업그레이드">Phase 7: CVE 패치 / Minor 업그레이드</h2>
-<p>온라인 환경에서는 동일 라인(10.11.x) 내 patch 만 dnf 로 직접 적용할 수 있습니다.
-<strong>노드별 순차(rolling) 업그레이드</strong>가 원칙입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 한 노드씩 진행</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>mariadb
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span>--disablerepo<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>--enablerepo<span class="o">=</span>mariadb<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span>MariaDB-server<span class="w"> </span>MariaDB-client<span class="w"> </span>MariaDB-backup<span class="w"> </span>galera-4
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># 클러스터 재합류 확인</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;&quot;</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="c1"># Synced 출력 확인 후 다음 노드 진행</span>
-</code></pre></div>
-<blockquote>
-<p>10.11 → 10.x (다른 minor) 또는 메이저 업그레이드는 SST 호환성 검증과 함께
-별도 절차로 수행해야 하며, 본 가이드 범위 밖입니다.</p>
-</blockquote>
-<hr />
-<h2 id="부록-rhel-9-트러블슈팅">부록: RHEL 9 트러블슈팅</h2>
-<p>커스텀 경로(<code>/app/mariadb_data</code>) 사용 시 RHEL 9 보안 정책으로 인해 발생할 수 있는
-이슈입니다.</p>
-<h3 id="a-1-systemd-보안-정책-충돌-read-only-file-system">A-1. Systemd 보안 정책 충돌 (Read-only file system)</h3>
-<p><strong>증상:</strong> <code>galera_new_cluster</code> 실행 시 <code>Errcode: 30 "Read-only file system"</code> 발생</p>
-<p><strong>원인:</strong> RHEL 9 의 <code>ProtectSystem=full</code> 정책이 시스템 경로에 대한 쓰기를 차단</p>
-<p><strong>해결:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Override 디렉토리 생성 및 설정 작성</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/systemd/system/mariadb.service.d
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/systemd/system/mariadb.service.d/override.conf<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="s">[Service]</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="s">ProtectSystem=off</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="s">ProtectHome=off</span>
-<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="s">PrivateTmp=false</span>
-<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="s">ReadWritePaths=/app/mariadb_data</span>
-<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="s">EOF</span>
-<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>
-<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="c1"># 설정 반영</span>
-<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
-<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mariadb
-</code></pre></div>
-<h3 id="a-2-selinux-권한-차단">A-2. SELinux 권한 차단</h3>
-<p><strong>증상:</strong> 파일 시스템 권한이 올바름에도 Permission Denied 발생 또는 서비스 시작 실패</p>
-<p><strong>원인:</strong> 커스텀 경로에 <code>mysqld_db_t</code> 보안 컨텍스트가 없음</p>
-<p><strong>해결:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># policycoreutils-python-utils 가 없으면 먼저 설치</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>policycoreutils-python-utils
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># MariaDB 데이터 컨텍스트 부여</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>sudo<span class="w"> </span>semanage<span class="w"> </span>fcontext<span class="w"> </span>-a<span class="w"> </span>-t<span class="w"> </span>mysqld_db_t<span class="w"> </span><span class="s2">&quot;/app/mariadb_data(/.*)?&quot;</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1"># 실제 파일 시스템에 적용</span>
-<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>sudo<span class="w"> </span>restorecon<span class="w"> </span>-R<span class="w"> </span>-v<span class="w"> </span>/app/mariadb_data
-<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
-<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="c1"># 정책 확인</span>
-<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>ls<span class="w"> </span>-Zd<span class="w"> </span>/app/mariadb_data
-</code></pre></div>
-<h3 id="a-3-havip-구성-시-주의사항-데이터-파손-방지">A-3. HA(VIP) 구성 시 주의사항 (데이터 파손 방지)</h3>
-<p>Keepalived 등으로 VIP 를 구성할 때 주의할 점입니다.</p>
-<ul>
-<li><strong>Shared-Nothing 원칙 준수:</strong> Galera Cluster 는 각 노드가 독립적인 스토리지를 가져야
-  합니다. 동일한 SAN/iSCSI 디스크를 여러 노드에 동시 마운트하면 파일 시스템 메타데이터가
-  파손되어 OS 가 디스크를 <code>Read-only</code> 로 잠급니다.</li>
-<li><strong>해결책:</strong> 반드시 노드별 로컬 디스크 또는 독립적인 볼륨을 사용하세요. 클러스터 파일
-  시스템(GFS2 등)은 Galera 환경에서 권장되지 않습니다.</li>
-<li><strong>Failover 점검:</strong> VIP 할당 직후 DB 가 멈춘다면, HA 솔루션이 노드를 격리(Fencing)하고
-  있지 않은지 확인하세요.</li>
+</li>
 </ul>
-<h3 id="a-4-저장소-등록-후-패키지가-안-보일-때">A-4. 저장소 등록 후 패키지가 안 보일 때</h3>
-<p><strong>증상:</strong> <code>dnf install MariaDB-server</code> 시 <code>No match for argument</code></p>
-<p><strong>원인:</strong> AppStream 모듈 시스템이 패키지를 가리고 있음</p>
-<p><strong>해결:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 모듈 비활성화 재확인</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>module<span class="w"> </span>list<span class="w"> </span>mariadb
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>module<span class="w"> </span>reset<span class="w"> </span>mariadb<span class="w"> </span>-y
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>module<span class="w"> </span>disable<span class="w"> </span>mariadb<span class="w"> </span>-y
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="c1"># 저장소 우선순위 확인 (mariadb.repo 의 module_hotfixes=1 필수)</span>
-<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>grep<span class="w"> </span>-A1<span class="w"> </span>module_hotfixes<span class="w"> </span>/etc/yum.repos.d/mariadb.repo
-</code></pre></div>
 
 
 
@@ -6523,10 +5929,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

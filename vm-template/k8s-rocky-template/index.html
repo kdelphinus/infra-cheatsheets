@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/network/tip/check-domain-ip/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/vm-template/k8s-rocky-template/">
       
       
-        <link rel="prev" href="../../../ide/vscode_shortcut/">
+        <link rel="prev" href="../rocky-vagrant-guide/">
       
       
-        <link rel="next" href="../check-network-subnet/">
+        <link rel="next" href="../../cloud/use_terraform_with_gcp/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>도메인 실제 IP 체크 - Infra Cheatsheets</title>
+        <title>3. Rocky 9 K8s 노드 템플릿 제작 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#도메인fqdn-실제-ip-확인-방법" class="md-skip">
+        <a href="#-rocky-linux-9-기반-kubernetes-node-vm-템플릿-제작-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              도메인 실제 IP 체크
+              3. Rocky 9 K8s 노드 템플릿 제작
             
           </span>
         </div>
@@ -225,7 +225,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+        <a href="../.." class="md-tabs__link">
           
   
   
@@ -252,7 +252,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../k8s/install/ubuntu/ready-offline/" class="md-tabs__link">
+        <a href="../../k8s/install/ubuntu/ready-offline/" class="md-tabs__link">
           
   
   
@@ -271,11 +271,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../vm-template/general-guide/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../general-guide/" class="md-tabs__link">
           
   
   
@@ -295,7 +297,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -322,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -345,7 +347,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -372,7 +374,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -395,7 +397,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../git/cheatsheet/" class="md-tabs__link">
+        <a href="../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -415,7 +417,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -431,8 +433,6 @@
   
   
   
-    
-  
   
     
     
@@ -440,13 +440,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -469,7 +467,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -496,7 +494,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
+        <a href="../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
           
   
   
@@ -533,7 +531,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -615,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -643,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guide/infra-standard/" class="md-nav__link">
+      <a href="../../guide/infra-standard/" class="md-nav__link">
         
   
   
@@ -782,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/ubuntu/ready-offline/" class="md-nav__link">
+      <a href="../../k8s/install/ubuntu/ready-offline/" class="md-nav__link">
         
   
   
@@ -810,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/ubuntu/offline-install/" class="md-nav__link">
+      <a href="../../k8s/install/ubuntu/offline-install/" class="md-nav__link">
         
   
   
@@ -838,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/ubuntu/online-install/" class="md-nav__link">
+      <a href="../../k8s/install/ubuntu/online-install/" class="md-nav__link">
         
   
   
@@ -926,7 +924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/ready-offline/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/ready-offline/" class="md-nav__link">
         
   
   
@@ -954,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/offline-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/offline-install/" class="md-nav__link">
         
   
   
@@ -982,7 +980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/online-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/online-install/" class="md-nav__link">
         
   
   
@@ -1010,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/git-cli-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/git-cli-install/" class="md-nav__link">
         
   
   
@@ -1038,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/docker-offline-install/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/docker-offline-install/" class="md-nav__link">
         
   
   
@@ -1126,7 +1124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/base-infra/" class="md-nav__link">
+      <a href="../../k8s/install/base-infra/" class="md-nav__link">
         
   
   
@@ -1154,7 +1152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/metallb-install/" class="md-nav__link">
+      <a href="../../k8s/install/metallb-install/" class="md-nav__link">
         
   
   
@@ -1182,7 +1180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/network/cilium-install/" class="md-nav__link">
+      <a href="../../k8s/network/cilium-install/" class="md-nav__link">
         
   
   
@@ -1270,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -1298,7 +1296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../../k8s/monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -1386,7 +1384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/security/001-falco-install/" class="md-nav__link">
+      <a href="../../k8s/security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -1414,7 +1412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/security/002-tetragon-install/" class="md-nav__link">
+      <a href="../../k8s/security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1442,7 +1440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/security/003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../k8s/security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -1530,7 +1528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -1618,7 +1616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
+      <a href="../../k8s/operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -1646,7 +1644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
+      <a href="../../k8s/operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -1674,7 +1672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
+      <a href="../../k8s/operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -1762,7 +1760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/capi/cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/capi/cheatsheet/" class="md-nav__link">
         
   
   
@@ -1850,7 +1848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
@@ -1878,7 +1876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
         
   
   
@@ -1906,7 +1904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -1934,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -1962,7 +1960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -1990,7 +1988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -2018,7 +2016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -2046,7 +2044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/missed-containerport/" class="md-nav__link">
         
   
   
@@ -2134,7 +2132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/use-pv-nas/" class="md-nav__link">
+      <a href="../../k8s/use-pv-nas/" class="md-nav__link">
         
   
   
@@ -2162,7 +2160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/storage/trident-install/" class="md-nav__link">
+      <a href="../../k8s/storage/trident-install/" class="md-nav__link">
         
   
   
@@ -2198,7 +2196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2226,7 +2224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/container-image-cheatsheet/" class="md-nav__link">
+      <a href="../../k8s/container-image-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2258,26 +2256,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -2295,7 +2298,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2313,7 +2316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vm-template/general-guide/" class="md-nav__link">
+      <a href="../general-guide/" class="md-nav__link">
         
   
   
@@ -2341,7 +2344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vm-template/rocky-vagrant-guide/" class="md-nav__link">
+      <a href="../rocky-vagrant-guide/" class="md-nav__link">
         
   
   
@@ -2366,10 +2369,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../vm-template/k8s-rocky-template/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Rocky 9 K8s 노드 템플릿 제작
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2385,6 +2415,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#-전체-빌드-절차-요약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧭 전체 빌드 절차 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-단계별-상세-빌드-가이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ 단계별 상세 빌드 가이드
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ 단계별 상세 빌드 가이드">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1단계-cloud-init--vmware-tools-적재-및-활성화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계. cloud-init &amp; VMware Tools 적재 및 활성화
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2단계-containerd--kubernetes-패키지-리포지토리-구성-및-적재" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계. containerd &amp; Kubernetes 패키지 리포지토리 구성 및 적재
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3단계-k8s-운영용-os-보안-정책-및-네트워킹-튜닝" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계. K8s 운영용 OS 보안 정책 및 네트워킹 튜닝
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-containerd-컨테이너-런타임-세부-셋업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계. containerd 컨테이너 런타임 세부 셋업
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계. containerd 컨테이너 런타임 세부 셋업">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-데이터-디스크가-물리적으로-분리되어-마운트되어-있을-경우-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 데이터 디스크가 물리적으로 분리되어 마운트되어 있을 경우 (권장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5단계-사설-harbor-레지스트리-도메인-연동-및-비인증-통과-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계. 사설 Harbor 레지스트리 도메인 연동 및 비인증 통과 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6단계-nfs-스토리지-연동-유틸리티-탑재" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계. NFS 스토리지 연동 유틸리티 탑재
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7단계-네트워크-디바이스-명칭-고정-조치-eth0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7단계. 네트워크 디바이스 명칭 고정 조치 (eth0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8단계-폐쇄망-타겟-도메인-해석을-위한-dns-네임서버-지정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8단계. 폐쇄망 타겟 도메인 해석을 위한 DNS 네임서버 지정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9단계-시스템-초기화-및-템플릿-잠금-쉘스크립트-기동" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9단계. 시스템 초기화 및 템플릿 잠금 쉘스크립트 기동
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2456,7 +2650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -2484,7 +2678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2623,7 +2817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
         
   
   
@@ -2651,7 +2845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/harbor-insecure-setup/" class="md-nav__link">
+      <a href="../../cicd/offline-install/harbor-insecure-setup/" class="md-nav__link">
         
   
   
@@ -2679,7 +2873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/001-gitlab-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/001-gitlab-install/" class="md-nav__link">
         
   
   
@@ -2707,7 +2901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/002-jenkins-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/002-jenkins-install/" class="md-nav__link">
         
   
   
@@ -2735,7 +2929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/003-gitlab-omnibus-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/003-gitlab-omnibus-install/" class="md-nav__link">
         
   
   
@@ -2763,7 +2957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/004-argocd-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/004-argocd-install/" class="md-nav__link">
         
   
   
@@ -2791,7 +2985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/005-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../../cicd/offline-install/005-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -2819,7 +3013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/006-nexus-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/006-nexus-install/" class="md-nav__link">
         
   
   
@@ -2847,7 +3041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/007-gitea-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/007-gitea-install/" class="md-nav__link">
         
   
   
@@ -2875,7 +3069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/008-tekton-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/008-tekton-install/" class="md-nav__link">
         
   
   
@@ -2963,7 +3157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -3058,7 +3252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -3138,7 +3332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -3285,7 +3479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -3313,7 +3507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster-online/" class="md-nav__link">
+      <a href="../../db/ha/galera-cluster-online/" class="md-nav__link">
         
   
   
@@ -3341,7 +3535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -3369,7 +3563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../db/ha/galera-restore/" class="md-nav__link">
         
   
   
@@ -3397,7 +3591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-guide/" class="md-nav__link">
+      <a href="../../db/ha/galera-backup-guide/" class="md-nav__link">
         
   
   
@@ -3425,7 +3619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
+      <a href="../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
         
   
   
@@ -3453,7 +3647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../db/ha/galera-backup-verify/" class="md-nav__link">
         
   
   
@@ -3481,7 +3675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../db/ha/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -3569,7 +3763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../db/redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -3597,7 +3791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../db/redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -3685,7 +3879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -3713,7 +3907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -3741,7 +3935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -3836,7 +4030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/cheatsheet/" class="md-nav__link">
+      <a href="../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3864,7 +4058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../git/convention/" class="md-nav__link">
+      <a href="../../git/convention/" class="md-nav__link">
         
   
   
@@ -3951,7 +4145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -3983,31 +4177,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
             
   
   
@@ -4025,7 +4214,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4040,31 +4229,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_1" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_1" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_10_1" id="__nav_10_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10_1" id="__nav_10_1_label" tabindex="0">
             
   
   
@@ -4082,7 +4266,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4097,37 +4281,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    도메인 실제 IP 체크
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -4143,98 +4300,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#방법-a-nslookup-dns-서버-조회" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 A: nslookup (DNS 서버 조회)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#방법-b-ping-간단-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 B: ping (간단 확인)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-check-point-주의사항" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ Check Point (주의사항)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="✅ Check Point (주의사항)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-사내망-연결-필수" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 사내망 연결 필수
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-로드-밸런서l4l7-ip-가능성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 로드 밸런서(L4/L7) IP 가능성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-etchosts-파일-우선순위-중요-" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. /etc/hosts 파일 우선순위 (중요 ⚠️)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -4247,7 +4312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../check-network-subnet/" class="md-nav__link">
+      <a href="../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -4275,7 +4340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../port-check/" class="md-nav__link">
+      <a href="../../network/tip/port-check/" class="md-nav__link">
         
   
   
@@ -4370,7 +4435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -4450,7 +4515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -4478,7 +4543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -4506,7 +4571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -4594,7 +4659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -4622,7 +4687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -4710,7 +4775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -4738,7 +4803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -4826,7 +4891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -4914,7 +4979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -5061,7 +5126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
         
   
   
@@ -5089,7 +5154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
         
   
   
@@ -5117,7 +5182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
+      <a href="../../k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -5145,7 +5210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../k8s/install/rocky/online-install-v1.30/" class="md-nav__link">
+      <a href="../../k8s/install/rocky/online-install-v1.30/" class="md-nav__link">
         
   
   
@@ -5233,7 +5298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cicd/offline-install/harbor-v1.14.3-install/" class="md-nav__link">
+      <a href="../../cicd/offline-install/harbor-v1.14.3-install/" class="md-nav__link">
         
   
   
@@ -5296,10 +5361,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#방법-a-nslookup-dns-서버-조회" class="md-nav__link">
+  <a href="#-전체-빌드-절차-요약" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 A: nslookup (DNS 서버 조회)
+        🧭 전체 빌드 절차 요약
       
     </span>
   </a>
@@ -5307,33 +5372,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#방법-b-ping-간단-확인" class="md-nav__link">
+  <a href="#-단계별-상세-빌드-가이드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        방법 B: ping (간단 확인)
+        🛠️ 단계별 상세 빌드 가이드
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-check-point-주의사항" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ✅ Check Point (주의사항)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="✅ Check Point (주의사항)">
+    <nav class="md-nav" aria-label="🛠️ 단계별 상세 빌드 가이드">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-사내망-연결-필수" class="md-nav__link">
+  <a href="#1단계-cloud-init--vmware-tools-적재-및-활성화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 사내망 연결 필수
+        1단계. cloud-init &amp; VMware Tools 적재 및 활성화
       
     </span>
   </a>
@@ -5341,10 +5395,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-로드-밸런서l4l7-ip-가능성" class="md-nav__link">
+  <a href="#2단계-containerd--kubernetes-패키지-리포지토리-구성-및-적재" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 로드 밸런서(L4/L7) IP 가능성
+        2단계. containerd &amp; Kubernetes 패키지 리포지토리 구성 및 적재
       
     </span>
   </a>
@@ -5352,10 +5406,93 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-etchosts-파일-우선순위-중요-" class="md-nav__link">
+  <a href="#3단계-k8s-운영용-os-보안-정책-및-네트워킹-튜닝" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. /etc/hosts 파일 우선순위 (중요 ⚠️)
+        3단계. K8s 운영용 OS 보안 정책 및 네트워킹 튜닝
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4단계-containerd-컨테이너-런타임-세부-셋업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계. containerd 컨테이너 런타임 세부 셋업
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계. containerd 컨테이너 런타임 세부 셋업">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-데이터-디스크가-물리적으로-분리되어-마운트되어-있을-경우-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 데이터 디스크가 물리적으로 분리되어 마운트되어 있을 경우 (권장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5단계-사설-harbor-레지스트리-도메인-연동-및-비인증-통과-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5단계. 사설 Harbor 레지스트리 도메인 연동 및 비인증 통과 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6단계-nfs-스토리지-연동-유틸리티-탑재" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계. NFS 스토리지 연동 유틸리티 탑재
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7단계-네트워크-디바이스-명칭-고정-조치-eth0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7단계. 네트워크 디바이스 명칭 고정 조치 (eth0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8단계-폐쇄망-타겟-도메인-해석을-위한-dns-네임서버-지정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8단계. 폐쇄망 타겟 도메인 해석을 위한 DNS 네임서버 지정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9단계-시스템-초기화-및-템플릿-잠금-쉘스크립트-기동" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9단계. 시스템 초기화 및 템플릿 잠금 쉘스크립트 기동
       
     </span>
   </a>
@@ -5387,47 +5524,270 @@
   
 
 
-<h1 id="도메인fqdn-실제-ip-확인-방법">도메인(FQDN) 실제 IP 확인 방법</h1>
-<p>사내 서버 도메인(URL)이 현재 어떤 IP 주소로 연결(Resolve)되는지 확인하는 절차입니다.</p>
-<h2 id="방법-a-nslookup-dns-서버-조회">방법 A: <code>nslookup</code> (DNS 서버 조회)</h2>
-<p>DNS 서버에 등록된 <strong>공식적인 IP</strong>를 확인할 때 가장 정확한 방법입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 사용법: nslookup [도메인주소]</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>nslookup<span class="w"> </span>harbor.internal.company.com
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 출력 예시</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Address: 10.20.30.40  &lt;-- 이 부분이 실제 IP입니다.</span>
+<h1 id="-rocky-linux-9-기반-kubernetes-node-vm-템플릿-제작-가이드">☸️ Rocky Linux 9 기반 Kubernetes Node VM 템플릿 제작 가이드</h1>
+<p>이 가이드는 Rocky Linux 9 환경에서 쿠버네티스(<strong>Kubernetes v1.33.7</strong>) 노드로 즉시 투입될 수 있는 표준 가상 머신(VM) 템플릿을 제작하기 위한 상세 빌드 지침서예요. </p>
+<p>컨테이너 런타임인 <strong>containerd.io-2.1.*</strong> 환경과 하버 사설 레지스트리(<strong>Harbor</strong>) 연동용 구성, OS 커널 네트워크 최적화, 인터페이스 명칭 고정 및 배포 시 충돌 방지를 위한 청소 스크립트를 단계별로 철저히 다뤄요.</p>
+<hr />
+<h2 id="-전체-빌드-절차-요약">🧭 전체 빌드 절차 요약</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph TD
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[&quot;1. cloud-init &amp; VMware Tools 설치&quot;] --&gt; B[&quot;2. 컨테이너 런타임 &amp; K8s 패키지 적재&quot;]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C[&quot;3. 커널 파라미터 및 OS 보안 정책 튜닝&quot;]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    C --&gt; D[&quot;4. containerd Cgroup 및 샌드박스 설정&quot;]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    D --&gt; E[&quot;5. 사설 Harbor 레지스트리 연동 구성&quot;]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    E --&gt; F[&quot;6. NFS 지원 유틸리티 적재&quot;]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    F --&gt; G[&quot;7. 네트워크 인터페이스 고정 (eth0)&quot;]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    G --&gt; H[&quot;8. DNS 네임서버 하드코딩 지정&quot;]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    H --&gt; I[&quot;9. 시스템 지문/기록 완벽 초기화&quot;]
 </code></pre></div>
-<h2 id="방법-b-ping-간단-확인">방법 B: <code>ping</code> (간단 확인)</h2>
-<p>연결 상태를 확인함과 동시에, <strong>현재 내 서버가 인식하는 IP</strong>를 빠르게 볼 때 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 사용법: ping [도메인주소]</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ping<span class="w"> </span>harbor.internal.company.com
+<hr />
+<h2 id="-단계별-상세-빌드-가이드">🛠️ 단계별 상세 빌드 가이드</h2>
+<h3 id="1단계-cloud-init--vmware-tools-적재-및-활성화">1단계. cloud-init &amp; VMware Tools 적재 및 활성화</h3>
+<p>가상 하드웨어 연동 및 초기 네트워크 렌더링에 필요한 핵심 환경 변수와 패키지를 구성해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1.1 cloud-init 배포판 설치</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>cloud-init
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 출력 예시</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># PING harbor.internal.company.com (10.20.30.40) ... &lt;-- 괄호 안 숫자가 IP</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 1.2 네트워크 렌더러를 NetworkManager로 제한 지정</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;cat &gt; /etc/cloud/cloud.cfg.d/99-network-renderer.cfg &lt;&lt; EOF</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s1">system_info:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="s1">  network:</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s1">    renderers: [&#39;</span>network-manager<span class="s1">&#39;]</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s1">EOF&#39;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># 1.3 VMware 및 OVF 메타데이터 소스 연동 파일 구성</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;cat &lt;&lt;EOF &gt; /etc/cloud/cloud.cfg.d/99_vmware.cfg</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="s1">datasource_list: [ VMware, OVF, None ]</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s1">datasource:</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s1">  VMware:</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s1">    allow_raw_data: true</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s1">    allow_update_network: true</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="s1">    network_config:</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="s1">      encoding: base64</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="s1">      variable: network</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="s1">EOF&#39;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="c1"># 1.4 서비스 자동 가동 등록</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>cloud-init
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="c1"># 1.5 가상화 에이전트 open-vm-tools 기동</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>open-vm-tools
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>vmtoolsd
+</code></pre></div>
+<hr />
+<h3 id="2단계-containerd--kubernetes-패키지-리포지토리-구성-및-적재">2단계. containerd &amp; Kubernetes 패키지 리포지토리 구성 및 적재</h3>
+<p>쿠버네티스 컴포넌트(v1.33.7)와 컨테이너 엔진 패키지를 구성해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 2.1 EPEL 추가 저장소 활성화 및 최신 상태 동기화</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>epel-release
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 2.2 사전 요구 유틸리티 설치</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>socat<span class="w"> </span>conntrack-tools<span class="w"> </span>iproute-tc<span class="w"> </span>libseccomp<span class="w"> </span>curl<span class="w"> </span>tar<span class="w"> </span>jq<span class="w"> </span>chrony<span class="w"> </span>yum-utils
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># 2.3 Docker CE 리포지토리 추가 (containerd.io 패키지용)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--add-repo<span class="w"> </span>https://download.docker.com/linux/centos/docker-ce.repo
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># 2.4 Kubernetes 공식 RPM 저장소 구성 (v1.33 릴리스 트랙)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s">[kubernetes]</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s">name=Kubernetes</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s">baseurl=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="s">enabled=1</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s">gpgcheck=1</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="s">gpgkey=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/repodata/repomd.xml.key</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="s">exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="s">EOF</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># 2.5 containerd.io 및 쿠버네티스 노드 3대 패키지 설치</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="c1"># (의도치 않은 버전 업데이트 방지를 위해 DNF 기본 옵션에서 제외 처리)</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>containerd.io-2.1.*
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--disableexcludes<span class="o">=</span>kubernetes<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span>kubelet-1.33.7-*<span class="w"> </span>kubeadm-1.33.7-*<span class="w"> </span>kubectl-1.33.7-*
+</code></pre></div>
+<hr />
+<h3 id="3단계-k8s-운영용-os-보안-정책-및-네트워킹-튜닝">3단계. K8s 운영용 OS 보안 정책 및 네트워킹 튜닝</h3>
+<p>쿠버네티스 오버레이 네트워크가 정상 동작할 수 있도록 방화벽 및 스왑 볼륨 차단 등의 시스템 개량을 단행해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 3.1 SELinux 허용 모드로 즉시 하향 조절 및 부팅 설정 영구 수정</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>setenforce<span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^SELINUX=enforcing$/SELINUX=permissive/&#39;</span><span class="w"> </span>/etc/selinux/config
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 3.2 로컬 방화벽 비활성화 처리</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>firewalld
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>firewalld
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># 3.3 오버레이 네트워킹 커널 모듈 활성화</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>overlay
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>br_netfilter
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># 3.4 부팅 시 해당 모듈이 상시 자동 로드되도록 등록</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s">overlay</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s">br_netfilter</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s">EOF</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1"># 3.5 브리지 및 포워딩 세부 커널 파라미터 셋업</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="s">net.bridge.bridge-nf-call-iptables  = 1</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="s">net.bridge.bridge-nf-call-ip6tables = 1</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="s">net.ipv4.ip_forward                 = 1</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="s">EOF</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1"># 3.6 메모리 스왑 디바이스 완전 중지 및 자동 마운트 테이블에서 원천 제거</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/\sswap\s/s/^/#/&#39;</span><span class="w"> </span>/etc/fstab
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="c1"># 3.7 systemd 수준의 스왑 마스크 차단 조치</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="c1"># swapoff 이후에도 systemd swap 유닛이 살아나 클러스터 구동을 망치는 문제 방지</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>swap
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>swap
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="c1"># 위 조회 결과에서 획득된 swap 유닛 식별자를 대입하여 하드 마스킹 수행</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="c1"># 예: sudo systemctl mask dev-zram0.swap 등</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>mask<span class="w"> </span><span class="o">{</span>스왑_출력값<span class="o">}</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="c1"># 마스킹 확인 검증</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>swap
+</code></pre></div>
+<hr />
+<h3 id="4단계-containerd-컨테이너-런타임-세부-셋업">4단계. containerd 컨테이너 런타임 세부 셋업</h3>
+<p>systemd cgroup 드라이버 동기화 및 전용 스토리지 분리 구성을 진행해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 4.1 기본 설정 디렉토리 마련 및 프로토콜 기본 설정 파일 덤프</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>containerd<span class="w"> </span>config<span class="w"> </span>default<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># 4.2 SystemdCgroup 옵션을 true로 전환하여 K8s 드라이버 충돌 방지</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/SystemdCgroup = false/SystemdCgroup = true/&#39;</span><span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># 4.3 K8s 샌드박스 일시정지 이미지(Pause Image) 표준 버전 v3.10 강제 지정</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|sandbox_image = &quot;.*&quot;|sandbox_image = &quot;registry.k8s.io/pause:3.10&quot;|&#39;</span><span class="w"> </span>/etc/containerd/config.toml
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># 4.4 컨테이너 레지스트리 보안 호스트 인증 경로 매핑 설정</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|config_path = &#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;|config_path = &#39;/etc/containerd/certs.d&#39;|g&quot;</span><span class="w"> </span>/etc/containerd/config.toml
+</code></pre></div>
+<h4 id="-데이터-디스크가-물리적으로-분리되어-마운트되어-있을-경우-권장">💡 데이터 디스크가 물리적으로 분리되어 마운트되어 있을 경우 (권장)</h4>
+<blockquote>
+<p>컨테이너 빌드 및 적재 시 루트 파티션(<code>/</code>)의 가득 참(DiskPressure) 이슈를 피하기 위해 전용 볼륨으로 디렉토리를 심볼릭 링크 처리해요.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. 데이터 파티션 내부로 타겟 디렉토리 적재 공간 확보</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/data001/containerd_data
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 2. 기본 경로를 해당 마운트 볼륨으로 연계 링크 구성</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/data001/containerd_data<span class="w"> </span>/var/lib/containerd
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># 3. 링크 구성 상태 육안 검사</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>ls<span class="w"> </span>-ld<span class="w"> </span>/var/lib/containerd
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># 정상 매핑 결과 예시: lrwxrwxrwx ... /var/lib/containerd -&gt; /data001/containerd_data</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 4.5 containerd 엔진 활성화 기동</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>containerd
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># 4.6 엔진 런타임 및 소켓 가동 상태 자가 점검</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>version
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>--runtime-endpoint<span class="o">=</span>unix:///run/containerd/containerd.sock<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># 4.7 노드 매니저인 kubelet 프로세스 활성화</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>kubelet
+</code></pre></div>
+<hr />
+<h3 id="5단계-사설-harbor-레지스트리-도메인-연동-및-비인증-통과-구성">5단계. 사설 Harbor 레지스트리 도메인 연동 및 비인증 통과 구성</h3>
+<p>폐쇄망 및 사설 인프라 내 구축된 Harbor 레지스트리와 통신할 수 있도록 hosts 구성을 드롭인 설정해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 5.1 사설 하버 인프라 레지스트리 IP 및 포트 정보 등록</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">HARBOR_HOST</span><span class="o">=</span><span class="s2">&quot;10.185.40.43:30002&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 5.2 전용 도메인 인증 정보 저장 홀더 개설</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/<span class="si">${</span><span class="nv">HARBOR_HOST</span><span class="si">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># 5.3 비인증(insecure-skip-verify) 포함 전용 통신 hosts 구성 덤프</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/certs.d/<span class="si">${</span><span class="nv">HARBOR_HOST</span><span class="si">}</span>/hosts.toml<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="s">server = &quot;http://${HARBOR_HOST}&quot;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="s">[host.&quot;http://${HARBOR_HOST}&quot;]</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;, &quot;push&quot;]</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="s">  skip_verify = true</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="s">EOF</span>
 </code></pre></div>
 <blockquote>
-<p><strong>참고:</strong> 방화벽으로 인해 Ping 응답이 없더라도(Request timeout), 첫 줄에 IP가 떴다면 도메인 해석은 성공한 것입니다.</p>
-</blockquote>
-<hr />
-<h2 id="-check-point-주의사항">✅ Check Point (주의사항)</h2>
-<h3 id="1-사내망-연결-필수">1. 사내망 연결 필수</h3>
-<ul>
-<li><code>internal</code> 등이 포함된 사내 도메인은 <strong>사내망(VPN 등)</strong>에 연결된 상태에서만 조회가 가능합니다.</li>
-</ul>
-<h3 id="2-로드-밸런서l4l7-ip-가능성">2. 로드 밸런서(L4/L7) IP 가능성</h3>
-<ul>
-<li>조회된 IP가 실제 서버의 물리 IP가 아니라, 앞단에 있는 <strong>부하 분산 장비(VIP)</strong>일 수 있습니다.</li>
-<li><strong>방화벽 신청 시:</strong> 보통 이 조회된 IP(VIP)를 목적지로 적어내면 됩니다.</li>
-</ul>
-<h3 id="3-etchosts-파일-우선순위-중요-">3. <code>/etc/hosts</code> 파일 우선순위 (중요 ⚠️)</h3>
-<ul>
-<li>리눅스는 DNS 서버보다 <strong>내부 설정 파일(<code>/etc/hosts</code>)을 먼저 참조</strong>합니다.</li>
-<li>만약 <code>nslookup</code> 결과와 <code>ping</code> 결과의 IP가 다르다면,
-<code>/etc/hosts</code> 파일에 예전 IP가 하드코딩(강제 고정)되어 있는지 확인해야 합니다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 로컬 강제 설정 확인</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cat<span class="w"> </span>/etc/hosts<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>harbor.internal.company.com
+<p>[!IMPORTANT]
+구성이 완료되면 반드시 <code>/etc/containerd/config.toml</code> 내부에 아래와 같이 인증 디렉토리 매핑 경로가 잘 수록되어 있는지 눈으로 확인해 주어야 해요.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">[plugins.</span><span class="s2">&quot;io.containerd.cri.v1.images&quot;</span><span class="k">.registry]</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">   </span><span class="n">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/etc/containerd/certs.d&#39;</span>
 </code></pre></div>
+또한 4.3단계에서 조정한 <code>registry.k8s.io/pause:3.10</code> 부분도 폐쇄망 환경 사양에 맞춘다면 수동으로 위의 Harbor 내부 미러링 경로(<code>10.185.40.43:30002/k8s.io/pause:3.10</code> 등)로 대체 구성해 주는 조치도 유용해요.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># containerd 런타임 재기동하여 Harbor 구성 반영</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+</code></pre></div>
+<hr />
+<h3 id="6단계-nfs-스토리지-연동-유틸리티-탑재">6단계. NFS 스토리지 연동 유틸리티 탑재</h3>
+<p>K8s 영구 볼륨 동적 매핑(NFS CSI Provisioner 등)이 커널 수준에서 바운딩될 수 있도록 NFS 유틸 패키지를 사전 적재해 주어요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nfs-utils
+</code></pre></div>
+<hr />
+<h3 id="7단계-네트워크-디바이스-명칭-고정-조치-eth0">7단계. 네트워크 디바이스 명칭 고정 조치 (<code>eth0</code>)</h3>
+<p>인터페이스 카드 지문이 뒤틀리는 사태를 조율하기 위해 디바이스명을 <code>eth0</code>, <code>eth1</code> 등으로 못 박아 둬요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 7.1 grub 커널 옵션 파일 개방</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/default/grub
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># -&gt; GRUB_CMDLINE_LINUX 파라미터가 담긴 해당 우측 따옴표 닫기 바로 직전에 </span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># net.ifnames=0 biosdevname=0 구문을 공백 한 칸 띄우고 수동 주입해요. </span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1"># (기존 값이 있다면 지우지 말고 덧붙임 방식 준수)</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># 7.2 커널 유틸을 통하여 런타임 갱신 기동</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>grubby<span class="w"> </span>--update-kernel<span class="o">=</span>ALL<span class="w"> </span>--args<span class="o">=</span><span class="s2">&quot;net.ifnames=0 biosdevname=0&quot;</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1"># 7.3 UEFI 사양 디바이스 Grub 갱신 빌드</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>sudo<span class="w"> </span>grub2-mkconfig<span class="w"> </span>-o<span class="w"> </span>/boot/efi/EFI/rocky/grub.cfg
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="c1"># 7.4 서버 재부팅 조치하여 검증 실행</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>reboot
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="c1"># 재구동 후 바인딩 결과 조사</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>ip<span class="w"> </span>addr<span class="w"> </span>show
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="c1"># (이름이 eth0 등으로 깔끔하게 변환되었는지 검사)</span>
+</code></pre></div>
+<hr />
+<h3 id="8단계-폐쇄망-타겟-도메인-해석을-위한-dns-네임서버-지정">8단계. 폐쇄망 타겟 도메인 해석을 위한 DNS 네임서버 지정</h3>
+<p>OS가 인터넷 및 내부 사설망 DNS 질의에 한 치의 오류도 없도록 2개의 고정 네임서버 지문을 하드 코딩해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vi<span class="w"> </span>/etc/resolv.conf
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 아래 도메인 확인 정보 추가</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>nameserver<span class="w"> </span><span class="m">156</span>.147.1.1
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>nameserver<span class="w"> </span><span class="m">165</span>.243.17.15
+</code></pre></div>
+<hr />
+<h3 id="9단계-시스템-초기화-및-템플릿-잠금-쉘스크립트-기동">9단계. 시스템 초기화 및 템플릿 잠금 쉘스크립트 기동</h3>
+<p>VM이 신규 프로비저닝될 때 IP 중복 충돌, cloud-init 오동작 및 로컬 캐시 찌꺼기가 남지 않게 깔끔히 지우고 서버를 셧다운해요.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 9.1 NetworkManager 유동 IP 연결 지문 말소</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/NetworkManager/system-connections/*.nmconnection
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># 9.2 기존 충돌 방지를 위한 netplan 경로 디렉토리 초기화</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/netplan/*
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>NetworkManager
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># 9.3 cloud-init 히스토리 로그 및 잔재 캐시 완전 청소</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>sudo<span class="w"> </span>cloud-init<span class="w"> </span>clean<span class="w"> </span>--logs
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/cloud/*
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="c1"># 9.4 고유 장치 machine-id 지문 리셋</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>sudo<span class="w"> </span>truncate<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>/etc/machine-id
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/dbus/machine-id
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="c1"># 9.5 중복 네트워크 디바이스 설정 추가 삭제</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/NetworkManager/system-connections/*.nmconnection
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="c1"># 9.6 저널로그 캐시 공간 제로화</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>--vacuum-time<span class="o">=</span><span class="m">0</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="c1"># 9.7 임시 디렉토리 클리어</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/*
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="c1"># 9.8 쉘 명령어 실행 히스토리 파일 원천 포맷</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="nb">history</span><span class="w"> </span>-c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">history</span><span class="w"> </span>-w
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="c1"># 9.9 시스템 전원 오프</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>sudo<span class="w"> </span>poweroff
+</code></pre></div>
+<p>가상 머신의 전원이 나간 후, vCenter에서 해당 가상 머신을 <strong>템플릿으로 변환</strong> 처리하면 노드 전용 이미지 배포 준비가 완전히 완료돼요!</p>
 
 
 
@@ -5477,10 +5837,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
