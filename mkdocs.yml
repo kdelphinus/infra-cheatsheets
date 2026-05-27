@@ -84,6 +84,8 @@ nav:
       - 'Rocky 9.6 (v1.30) 클러스터 재부팅': k8s/operations/rocky-v1.30-cluster-reboot.md
       - 'Rocky 9.6 (v1.33.7) 클러스터 재부팅': k8s/operations/rocky-v1.33.7-cluster-reboot.md
       - 'Ubuntu 24.04 (v1.33.11) 클러스터 재부팅': k8s/operations/ubuntu-v1.33.11-cluster-reboot.md
+    - 'Cluster API':
+      - 'Cluster API & 리소스 치트시트': k8s/capi/cheatsheet.md
     - 'Gateway API':
       - 'Envoy Gateway 오프라인 설치 (v1.37.2)': k8s/gateway-api/envoy-v1.37.2-install.md
       - 'Envoy Gateway 온라인 설치 (v1.37.2)': k8s/gateway-api/envoy-v1.37.2-install-online.md
@@ -98,6 +100,10 @@ nav:
       - 'NetApp Trident 설치': k8s/storage/trident-install.md
     - 'Cheat Sheets': k8s/cheatsheet.md
     - 'Container 이미지 관리': k8s/container-image-cheatsheet.md
+  - VM Template:
+      - '1. VM 템플릿 일반 제작 가이드': vm-template/general-guide.md
+      - '2. Rocky 9.6 Vagrant 기반 빌드': vm-template/rocky-vagrant-guide.md
+      - '3. Rocky 9 K8s 노드 템플릿 제작': vm-template/k8s-rocky-template.md
   - Cloud:
     - 'Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기': cloud/use_terraform_with_gcp.md
     - 'Google Cloud SDK Cheat Sheet': cloud/gcp-cheatsheet.md

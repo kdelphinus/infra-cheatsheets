@@ -36,6 +36,7 @@ hide:
     - [:octicons-arrow-right-24: Rocky Linux 9.6 오프라인 설치](k8s/install/rocky/offline-install.md)
     - [:octicons-arrow-right-24: Helm 및 스토리지 프로비저너 설치](k8s/install/base-infra.md)
     - [:octicons-arrow-right-24: Kubernetes Cheat Sheet](k8s/cheatsheet.md)
+    - [:octicons-arrow-right-24: Cluster API & 리소스 치트시트](k8s/capi/cheatsheet.md)
 
 - :material-wan: **네트워크 및 인그레스**
 
@@ -161,6 +162,16 @@ hide:
 
     - [:octicons-arrow-right-24: Google Cloud SDK Cheat Sheet](cloud/gcp-cheatsheet.md)
     - [:octicons-arrow-right-24: Terraform 기반 GCP 환경 구성](cloud/use_terraform_with_gcp.md)
+
+- :material-server: **VMware VM 템플릿**
+
+    ---
+
+    VMware 최적화 템플릿 빌드 및 리소스 관리
+
+    - [:octicons-arrow-right-24: VM 템플릿 일반 제작 표준 가이드](vm-template/general-guide.md)
+    - [:octicons-arrow-right-24: Rocky 9.6 Vagrant 기반 템플릿 빌드](vm-template/rocky-vagrant-guide.md)
+    - [:octicons-arrow-right-24: Rocky 9 K8s 노드 템플릿 제작 실무](vm-template/k8s-rocky-template.md)
 
 </div>
 
