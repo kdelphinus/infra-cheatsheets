@@ -76,9 +76,12 @@ kubectl get deploy,sts -A -o json \
 ### 2.3 영구 설정 사전 검증
 
 ```bash
-# 1. swap
-sudo swapon --show
-grep -v '^#' /etc/fstab | grep -i swap
+# 1. swap 영구 비활성 확인
+sudo swapon --show          # 출력 없어야 정상
+grep -v '^#' /etc/fstab | grep -E '\sswap\s'   # 출력 없어야 정상 (단순 주석 및 정밀 필드 체크)
+systemctl list-units --type=swap --all --no-legend --no-pager   # 활성 swap systemd 유닛이 masked 상태여야 함
+systemctl list-unit-files --type=swap --no-legend --no-pager   # masked 상태인지 확인
+systemctl is-active zram-generator 2>/dev/null                 # inactive 또는 서비스 비활성화 상태여야 함
 
 # 2. 커널 모듈
 cat /etc/modules-load.d/k8s.conf 2>/dev/null
@@ -249,8 +252,26 @@ kubectl --request-timeout=5s get --raw='/healthz'
 sudo journalctl -u kubelet -n 200 --no-pager
 
 # (a) swap 다시 켜짐
-sudo swapon --show
+sudo swapon --show          # 켜져 있으면
 sudo swapoff -a
+# fstab 주석 상태 재점검 및 systemd swap 유닛, zram 비활성화 재실행:
+# 1) fstab 주석 처리
+sudo sed -i.bak -E '/^[[:space:]]*[^#[:space:]]+[[:space:]]+[^#[:space:]]+[[:space:]]+swap[[:space:]]+/ s/^/#/' /etc/fstab
+# 2) systemd .swap 유닛 마스킹
+for unit in $(sudo systemctl list-units --type=swap --all --no-legend --no-pager | grep -oE '\S+\.swap'); do
+    if [ -n "$unit" ]; then
+        sudo systemctl mask "$unit"
+    fi
+done
+for unit_file in $(sudo systemctl list-unit-files --type=swap --no-legend --no-pager | grep -oE '\S+\.swap'); do
+    if [ -n "$unit_file" ]; then
+        sudo systemctl mask "$unit_file"
+    fi
+done
+# 3) zram 비활성화
+sudo systemctl disable --now zram-generator 2>/dev/null || true
+sudo systemctl disable --now zram-config 2>/dev/null || true
+sudo systemctl daemon-reload
 
 # (b) containerd / cgroup driver 불일치
 systemctl status containerd

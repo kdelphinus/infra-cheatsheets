@@ -270,15 +270,65 @@ net.ipv4.ip_forward                 = 1
 EOF
 sudo sysctl --system
 
-# 3. swap 비활성화
+# 3. swap 비활성화 (영구 박멸)
 sudo swapoff -a
-sudo sed -i '/\sswap\s/s/^/#/' /etc/fstab
 
-# 4. AppArmor 상태 확인 (Ubuntu 24.04 기본 활성)
+# /etc/fstab 내 3번째 필드가 swap인 라인을 안전하게 주석 처리 (.bak 백업 생성)
+if [ -f /etc/fstab ]; then
+    sudo sed -i.bak -E '/^[[:space:]]*[^#[:space:]]+[[:space:]]+[^#[:space:]]+[[:space:]]+swap[[:space:]]+/ s/^/#/' /etc/fstab
+fi
+
+# systemd swap 유닛 목록 및 파일 검색 후 마스킹 (부팅 시 부활 방지)
+# 1) systemctl list-units에 잡히는 swap 장치들 마스킹
+for unit in $(sudo systemctl list-units --type=swap --all --no-legend --no-pager | grep -oE '\S+\.swap'); do
+    if [ -n "$unit" ]; then
+        sudo systemctl mask "$unit"
+    fi
+done
+
+# 2) systemctl list-unit-files에 잡히는 swap 파일들 마스킹
+for unit_file in $(sudo systemctl list-unit-files --type=swap --no-legend --no-pager | grep -oE '\S+\.swap'); do
+    if [ -n "$unit_file" ]; then
+        if [ "$(sudo systemctl is-enabled "$unit_file" 2>/dev/null)" != "masked" ]; then
+            sudo systemctl mask "$unit_file"
+        fi
+    fi
+done
+
+# zram (Compressed swap) 비활성화 (사용 중일 경우)
+if sudo systemctl is-active zram-generator >/dev/null 2>&1 || sudo systemctl list-unit-files | grep -q zram; then
+    sudo systemctl disable --now zram-generator 2>/dev/null || true
+    sudo systemctl disable --now zram-config 2>/dev/null || true
+fi
+
+sudo systemctl daemon-reload
+
+# 4. 파일 디스크립터(FD) 및 시스템 Limits 상향 (정석 설정)
+# K8s 노드의 안정성과 대규모 Pod 구동 시 'Too many open files' 방지를 위해 필수적으로 설정합니다.
+
+# 1) sysctl Limits 설정
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-limits.conf
+fs.file-max = 2097152
+fs.inotify.max_user_watches = 524288
+fs.inotify.max_user_instances = 8192
+EOF
+sudo sysctl --system
+
+# 2) security limits 설정
+cat <<EOF | sudo tee /etc/security/limits.d/99-kubernetes-limits.conf
+* soft nofile 1048576
+* hard nofile 1048576
+* soft nproc 1048576
+* hard nproc 1048576
+root soft nofile 1048576
+root hard nofile 1048576
+EOF
+
+# 5. AppArmor 상태 확인 (Ubuntu 24.04 기본 활성)
 sudo aa-status | head -5
 # containerd 관련 이슈 시: sudo aa-complain /usr/bin/containerd
 
-# 5. hosts 파일 등록 (환경에 맞게 수정)
+# 6. hosts 파일 등록 (환경에 맞게 수정)
 sudo tee -a /etc/hosts <<EOF
 <MASTER1_IP> <MASTER1_HOSTNAME>
 <MASTER2_IP> <MASTER2_HOSTNAME>
@@ -309,6 +359,17 @@ sudo sed -i 's|sandbox_image = ".*"|sandbox_image = "registry.k8s.io/pause:3.10"
 
 # Harbor 인증서 경로 정리
 sudo sed -i "s|config_path = '/etc/containerd/certs.d:/etc/docker/certs.d'|config_path = '/etc/containerd/certs.d'|g" /etc/containerd/config.toml
+
+# 5. containerd 서비스 Limits 설정 (systemd override)
+sudo mkdir -p /etc/systemd/system/containerd.service.d
+cat <<EOF | sudo tee /etc/systemd/system/containerd.service.d/limits.conf
+[Service]
+LimitNOFILE=1048576
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
+EOF
+sudo systemctl daemon-reload
 
 sudo systemctl enable --now containerd
 sudo systemctl status containerd --no-pager
