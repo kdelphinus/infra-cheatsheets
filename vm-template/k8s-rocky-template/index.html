@@ -5691,8 +5691,8 @@
 <hr />
 <h3 id="5단계-사설-harbor-레지스트리-도메인-연동-및-비인증-통과-구성">5단계. 사설 Harbor 레지스트리 도메인 연동 및 비인증 통과 구성</h3>
 <p>폐쇄망 및 사설 인프라 내 구축된 Harbor 레지스트리와 통신할 수 있도록 hosts 구성을 드롭인 설정해요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 5.1 사설 하버 인프라 레지스트리 IP 및 포트 정보 등록</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">HARBOR_HOST</span><span class="o">=</span><span class="s2">&quot;10.185.40.43:30002&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 5.1 사설 하버 인프라 레지스트리 IP 및 포트 정보 등록 (실제 IP와 포트로 대체)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">HARBOR_HOST</span><span class="o">=</span><span class="s2">&quot;&lt;HARBOR_IP&gt;:&lt;PORT&gt;&quot;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 5.2 전용 도메인 인증 정보 저장 홀더 개설</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/<span class="si">${</span><span class="nv">HARBOR_HOST</span><span class="si">}</span>
@@ -5712,7 +5712,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">[plugins.</span><span class="s2">&quot;io.containerd.cri.v1.images&quot;</span><span class="k">.registry]</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">   </span><span class="n">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/etc/containerd/certs.d&#39;</span>
 </code></pre></div>
-또한 4.3단계에서 조정한 <code>registry.k8s.io/pause:3.10</code> 부분도 폐쇄망 환경 사양에 맞춘다면 수동으로 위의 Harbor 내부 미러링 경로(<code>10.185.40.43:30002/k8s.io/pause:3.10</code> 등)로 대체 구성해 주는 조치도 유용해요.</p>
+또한 4.3단계에서 조정한 <code>registry.k8s.io/pause:3.10</code> 부분도 폐쇄망 환경 사양에 맞춘다면 수동으로 위의 Harbor 내부 미러링 경로(<code>&lt;HARBOR_IP&gt;:&lt;PORT&gt;/k8s.io/pause:3.10</code> 등)로 대체 구성해 주는 조치도 유용해요.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># containerd 런타임 재기동하여 Harbor 구성 반영</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
@@ -5750,9 +5750,9 @@
 <p>OS가 인터넷 및 내부 사설망 DNS 질의에 한 치의 오류도 없도록 2개의 고정 네임서버 지문을 하드 코딩해요.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>vi<span class="w"> </span>/etc/resolv.conf
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 아래 도메인 확인 정보 추가</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>nameserver<span class="w"> </span><span class="m">156</span>.147.1.1
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>nameserver<span class="w"> </span><span class="m">165</span>.243.17.15
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 아래 도메인 확인 정보 추가 (실제 사내 DNS 주소로 대체)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>nameserver<span class="w"> </span>&lt;DNS_IP_1&gt;
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>nameserver<span class="w"> </span>&lt;DNS_IP_2&gt;
 </code></pre></div>
 <hr />
 <h3 id="9단계-시스템-초기화-및-템플릿-잠금-쉘스크립트-기동">9단계. 시스템 초기화 및 템플릿 잠금 쉘스크립트 기동</h3>
