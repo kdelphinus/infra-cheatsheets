@@ -172,6 +172,7 @@ hide:
     - [:octicons-arrow-right-24: VM 템플릿 일반 제작 표준 가이드](vm-template/general-guide.md)
     - [:octicons-arrow-right-24: Rocky 9.6 Vagrant 기반 템플릿 빌드](vm-template/rocky-vagrant-guide.md)
     - [:octicons-arrow-right-24: Rocky 9 K8s 노드 템플릿 제작 실무](vm-template/k8s-rocky-template.md)
+    - [:octicons-arrow-right-24: Rocky 9 K8s 노드 템플릿 업그레이드](vm-template/k8s-rocky-template-upgrade.md)
 
 </div>
 
