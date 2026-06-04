@@ -104,6 +104,7 @@ nav:
       - '1. VM 템플릿 일반 제작 가이드': vm-template/general-guide.md
       - '2. Rocky 9.6 Vagrant 기반 빌드': vm-template/rocky-vagrant-guide.md
       - '3. Rocky 9 K8s 노드 템플릿 제작': vm-template/k8s-rocky-template.md
+      - '4. Rocky 9 K8s 템플릿 업그레이드': vm-template/k8s-rocky-template-upgrade.md
   - Cloud:
     - 'Terraform을 사용하여 GCP에 폐쇄망 환경 구성하기': cloud/use_terraform_with_gcp.md
     - 'Google Cloud SDK Cheat Sheet': cloud/gcp-cheatsheet.md
