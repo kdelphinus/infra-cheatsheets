@@ -49,6 +49,14 @@
          <lastmod>2026-06-08</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/cicd/operation/gitlab-restore-guide-16.11.2/</loc>
+         <lastmod>2026-06-08</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/cicd/operation/gitlab-upgrade-guide-18.11.4/</loc>
+         <lastmod>2026-06-08</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/cicd/operation/redeploy-with-new-image/</loc>
          <lastmod>2026-06-08</lastmod>
     </url>
