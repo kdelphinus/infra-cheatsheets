@@ -22,7 +22,6 @@ theme:
         name: Switch to light mode
   features:
     - navigation.tabs        # 상단 탭 메뉴
-    - navigation.sections    # 사이드바 섹션 구분
     - search.highlight       # 검색어 하이라이팅
     - content.code.copy      # 코드 복사 버튼 (필수!)
 
