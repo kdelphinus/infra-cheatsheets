@@ -56,16 +56,17 @@ nav:
       - '대시보드': index.md
       - '인프라 설치 및 구성 표준 가이드': guide/infra-standard.md
   - Kubernetes:
-    - Ubuntu 24.04 (v1.33.11):
-      - '1. 폐쇄망용 설치 파일 준비': k8s/install/ubuntu/ready-offline.md
-      - '2. 오프라인 설치 가이드': k8s/install/ubuntu/offline-install.md
-      - '3. 온라인 설치 가이드': k8s/install/ubuntu/online-install.md
-    - Rocky Linux 9.6 (v1.33.7 online / v1.30 offline):
-      - '1. 폐쇄망용 설치 파일 준비': k8s/install/rocky/ready-offline.md
-      - '2. 폐쇄망 K8s 설치 (v1.30)': k8s/install/rocky/offline-install.md
-      - '3. 온라인 K8s 설치 (v1.33.7)': k8s/install/rocky/online-install.md
-      - 'Git CLI 오프라인 설치': k8s/install/rocky/git-cli-install.md
-      - 'Docker 오프라인 설치': k8s/install/rocky/docker-offline-install.md
+    - '설치 및 구성':
+      - Ubuntu 24.04 (v1.33.11):
+        - '1. 폐쇄망용 설치 파일 준비': k8s/install/ubuntu/ready-offline.md
+        - '2. 오프라인 설치 가이드': k8s/install/ubuntu/offline-install.md
+        - '3. 온라인 설치 가이드': k8s/install/ubuntu/online-install.md
+      - Rocky Linux 9.6 (v1.33.7 online / v1.30 offline):
+        - '1. 폐쇄망용 설치 파일 준비': k8s/install/rocky/ready-offline.md
+        - '2. 폐쇄망 K8s 설치 (v1.30)': k8s/install/rocky/offline-install.md
+        - '3. 온라인 K8s 설치 (v1.33.7)': k8s/install/rocky/online-install.md
+        - 'Git CLI 오프라인 설치': k8s/install/rocky/git-cli-install.md
+        - 'Docker 오프라인 설치': k8s/install/rocky/docker-offline-install.md
     - '기반 인프라':
       - 'Helm & 스토리지 프로비저너 설치': k8s/install/base-infra.md
       - 'MetalLB 설치': k8s/install/metallb-install.md
@@ -96,8 +97,9 @@ nav:
     - Storage:
       - 'NFS Provisioner 설치': k8s/use-pv-nas.md
       - 'NetApp Trident 설치': k8s/storage/trident-install.md
-    - 'Cheat Sheets': k8s/cheatsheet.md
-    - 'Container 이미지 관리': k8s/container-image-cheatsheet.md
+    - 'Cheat Sheets':
+      - 'Kubernetes 치트시트': k8s/cheatsheet.md
+      - 'Container 이미지 관리': k8s/container-image-cheatsheet.md
     - 'Troubleshooting':
       - 'Calico CNI 라우팅 장애 해결': k8s/troubleshooting/calico-routing-troubleshooting.md
       - 'ContainerPort 누락 장애 해결': k8s/troubleshooting/missed-containerport.md
