@@ -8,7 +8,7 @@
 
 구형 클러스터의 데이터를 신형 클러스터로 이전할 때, 기존 PV(NFS 스토리지 등)를 신형에 직접 그대로 마운트하여 업그레이드하는 방식은 데이터가 깨졌을 때 복구(롤백)가 불가능하므로 **결코 권장되지 않습니다.** 아래의 두 가지 전략 중 상황에 맞는 아키텍처를 선택하여 수행하십시오.
 
-### 1안. [가장 추천] 백업 & 복원(Restore) 기반 격리 이관 방식 (안전성 100%)
+### 1안. [권장] 백업 & 복원(Restore) 기반 격리 이관 방식 (안전성 100%)
 구형 클러스터와 원본 스토리지는 그대로 보존한 채, 신형 클러스터에 완전히 독립된 새로운 PV/PVC를 생성하여 데이터를 마이그레이션하는 표준 방식입니다.
 
 * **이관 프로세스**:
@@ -73,8 +73,6 @@ tar -cvpf gitlab-nfs-raw-backup.tar /data/gitlab-omnibus/data-dir
    * DB 덮어쓰기 도중 충돌을 막기 위해 Puma(웹서버)와 Sidekiq(배치/큐 처리) 프로세스를 일시 정지합니다:
      ```bash
      kubectl exec -it deploy/gitlab-omnibus -n gitlab-omnibus -- gitlab-ctl stop puma
-     ```
-     ```bash
      kubectl exec -it deploy/gitlab-omnibus -n gitlab-omnibus -- gitlab-ctl stop sidekiq
      ```
 4. **복원 명령어 트리거**:
@@ -86,8 +84,6 @@ tar -cvpf gitlab-nfs-raw-backup.tar /data/gitlab-omnibus/data-dir
    * 복원이 정상 완료되면 DB 스키마 갱신을 적용하고 중지한 프로세스들을 재기동합니다.
      ```bash
      kubectl exec -it deploy/gitlab-omnibus -n gitlab-omnibus -- gitlab-ctl reconfigure
-     ```
-     ```bash
      kubectl exec -it deploy/gitlab-omnibus -n gitlab-omnibus -- gitlab-ctl restart
      ```
 6. **복원 상태 검증**:
@@ -109,6 +105,16 @@ tar -cvpf gitlab-nfs-raw-backup.tar /data/gitlab-omnibus/data-dir
 * **참조 공식 링크**:
   * [GitLab Upgrade Path Tool (16.11.10 -> 18.11.4)](https://gitlab-com.gitlab.io/support/toolbox/upgrade-path/?current=16.11.10&target=18.11.4)
   * [GitLab 공식 Upgrade Paths 가이드](https://docs.gitlab.com/update/upgrade_paths/#upgrade-path-tool)
+
+---
+
+### ⚠️ 중요: K8s 프로브 IP 화이트리스트 사전 등록 (kube-probe 404 차단)
+* GitLab은 기본 보안 정책으로 모니터링 경로(`/-/readiness`, `/-/liveness`)를 호출하는 IP를 엄격히 필터링합니다.
+* 쿠버네티스의 프로브(kube-probe) 요청 IP 대역이 기본 대역(`127.0.0.0/8`, `10.0.0.0/8` 등) 외에 위치하는 경우(예: CNI 마스커레이딩 대역 `1.x.x.x` 등), **반드시 배포 전에 `charts/gitlab-omnibus/templates/configmap.yaml` 파일 내 `monitoring_whitelist` 설정 배열에 해당 대역을 미리 수동 추가**해야 합니다. 
+* 그렇지 않으면 헬스체크 프로브가 `404 Not Found`로 차단당해 파드가 평생 `Ready` 상태로 들어가지 못하는 원인이 됩니다.
+  ```ruby
+  gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', '1.0.0.0/8']
+  ```
 
 ---
 
@@ -169,9 +175,20 @@ helm upgrade gitlab-omnibus ./charts/gitlab-omnibus -n gitlab-omnibus --set imag
 
 ## 6. 버전 이동 간 상태 검증 및 문제 해결 (Troubleshooting)
 
-각각의 `helm upgrade` 단계가 완료된 후, 다음 단계의 업그레이드 커맨드를 입력하기 전에 반드시 백그라운드 스키마 데이터 변환이 완전히 종료되었는지 확인하고 넘어가야 합니다.
+### 6.1. K8s kube-probe 404 Not Found (Readiness/Liveness 실패) 문제
+* **현상**: 파드가 `Running` 상태임에도 불구하고 `Ready` 상태로 전환되지 않으며, 로그 상에 `GET /-/readiness HTTP/1.1" 404` 에러가 관측되는 경우.
+* **원인**: GitLab은 외부 보안 정찰 및 DoS 공격 방지를 위해 모니터링 엔드포인트(`/-/readiness`, `/-/liveness`)에 접근할 수 있는 IP 화이트리스트(`monitoring_whitelist`)를 운영합니다. K8s 클러스터 내부의 프로브 소스 IP(예: CNI 마스커레이딩 IP 대역)가 configmap.yaml에 설정된 기본 대역을 벗어날 경우, GitLab Rails 애플리케이션(`HealthController`)이 요청을 차단하여 404 Not Found를 응답하고 프로브가 최종 실패하게 됩니다.
+* **조치 방법**:
+  `charts/gitlab-omnibus/templates/configmap.yaml` 파일 내의 `monitoring_whitelist` 리스트에 프로브가 시도되는 네트워크 대역(예: `'1.0.0.0/8'`) 혹은 사내 에어갭 보안 정책에 맞춰 모든 대역(`'0.0.0.0/0'`)을 추가한 뒤 Helm 업그레이드를 재수행하십시오:
+  ```ruby
+  gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', '1.0.0.0/8']
+  ```
 
-### 6.1. 미완료 백그라운드 마이그레이션 확인 SQL
+---
+
+각개의 `helm upgrade` 단계가 완료된 후, 다음 단계의 업그레이드 커맨드를 입력하기 전에 반드시 백그라운드 스키마 데이터 변환이 완전히 종료되었는지 확인하고 넘어가야 합니다.
+
+### 6.2. 미완료 백그라운드 마이그레이션 확인 SQL
 파드가 기동 완료(`Running` 상태 진입)되면 내부 DB에 접근해 다음 질의를 날립니다.
 ```bash
 sudo gitlab-psql -c "
@@ -182,7 +199,7 @@ WHERE status NOT IN (3, 6);
 ```
 * **성공 판정**: 조회 결과가 **0 rows**여야 합니다. 0 rows가 출력되기 전에 버전을 올리면 스키마가 충돌하여 데이터베이스가 오염됩니다.
 
-### 6.2. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거
+### 6.3. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거
 특정 백작업이 멈춰있어 진행이 안 될 경우, 컨테이너 내에서 아래의 Rails Runner 명령어로 즉시 강제 마무리를 트리거합니다.
 ```bash
 sudo gitlab-rails runner -e production '
