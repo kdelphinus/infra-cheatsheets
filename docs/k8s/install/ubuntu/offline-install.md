@@ -370,6 +370,17 @@ root soft nofile 1048576
 root hard nofile 1048576
 EOF
 
+# 3) kubelet 서비스 Limits 설정 (systemd override)
+sudo mkdir -p /etc/systemd/system/kubelet.service.d
+cat <<EOF | sudo tee /etc/systemd/system/kubelet.service.d/limits.conf
+[Service]
+LimitNOFILE=1048576
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
+EOF
+sudo systemctl daemon-reload
+
 # 5. AppArmor 상태 확인 (Ubuntu 24.04 기본 활성)
 sudo aa-status | head -5
 # containerd 관련 이슈 시: sudo aa-complain /usr/bin/containerd
@@ -420,6 +431,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now containerd
 sudo systemctl status containerd --no-pager
 ```
+
+> `/etc/security/limits.d`는 주로 로그인 세션에 적용됩니다. `kubelet`과
+> `containerd`처럼 systemd가 직접 띄우는 서비스는 위 systemd override까지
+> 적용해야 FD/프로세스 limits가 일관되게 반영됩니다.
 
 ## Phase 4: 이미지 로드 (전체 노드)
 
