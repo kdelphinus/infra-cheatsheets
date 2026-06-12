@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/security/001-falco-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/network/calico-routing-troubleshooting/">
       
       
-        <link rel="prev" href="../../monitoring/002-operation-guide/">
+        <link rel="prev" href="../cilium-install/">
       
       
-        <link rel="next" href="../002-tetragon-install/">
+        <link rel="next" href="../../monitoring/001-kube-prometheus-stack/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Falco 런타임 탐지 - Infra Cheatsheets</title>
+        <title>Calico CNI 라우팅 장애 해결 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#falco-801-폐쇄망-설치-가이드" class="md-skip">
+        <a href="#폐쇄망-환경-calico-cni-default-gateway-및-서비스-라우팅-장애-해결-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Falco 런타임 탐지
+              Calico CNI 라우팅 장애 해결
             
           </span>
         </div>
@@ -1082,6 +1082,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1097,11 +1099,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
@@ -1122,7 +1124,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1196,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/cilium-install/" class="md-nav__link">
+      <a href="../cilium-install/" class="md-nav__link">
         
   
   
@@ -1221,10 +1223,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../network/calico-routing-troubleshooting/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calico CNI 라우팅 장애 해결
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1240,6 +1269,221 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#장애-유형-1-신규-pod의-default-gateway-arp-해결-실패-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-증상-symptom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 증상 (Symptom)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-원인-분석-root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 원인 분석 (Root Cause)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#장애-유형-2-pod-sandbox-생성-실패-및-api-server-연결-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-증상-symptom_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 증상 (Symptom)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-원인-분석-root-cause_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 원인 분석 (Root Cause)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#사전-준비-환경-변수-및-설정-값-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [사전 준비] 환경 변수 및 설정 값 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[사전 준비] 환경 변수 및 설정 값 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-활성화된-물리-네트워크-인터페이스-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 활성화된 물리 네트워크 인터페이스 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-kubernetes-service-cidr-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Kubernetes Service CIDR 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#영구-해결-방안-os별-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        영구 해결 방안 (OS별 설정)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="영구 해결 방안 (OS별 설정)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#방법-a-rocky-linux-9x-networkmanager-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 A. Rocky Linux 9.x (NetworkManager 기준)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-b-ubuntu-2404-netplan-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 B. Ubuntu 24.04 (Netplan 기준)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#최종-상태-확인-및-검증-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        최종 상태 확인 및 검증 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="최종 상태 확인 및 검증 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-호스트-라우팅-테이블-조회" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 호스트 라우팅 테이블 조회
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-신규-pod-기동-및-연동-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 신규 Pod 기동 및 연동 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1376,8 +1620,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1393,11 +1635,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
@@ -1418,7 +1660,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1433,37 +1675,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Falco 런타임 탐지
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -1479,298 +1694,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#개요" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        개요
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 오프라인 설치 자산 준비 (인터넷 환경)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-2-이미지-업로드-폐쇄망-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2: 이미지 업로드 (폐쇄망 환경)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-설치-및-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 3: 설치 및 검증
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#운영-참고-노이즈-억제-룰" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        운영 참고: 노이즈 억제 룰
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="운영 참고: 노이즈 억제 룰">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#제공-억제-룰-values-suppress-noiseyaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        제공 억제 룰 (values-suppress-noise.yaml)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#적용-방법" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        적용 방법
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="적용 방법">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#방법-1-installsh-실행-시-선택" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 1: install.sh 실행 시 선택
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#방법-2-helm-upgrade에-직접-추가" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 2: helm upgrade에 직접 추가
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#억제-룰-추가-방법" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        억제 룰 추가 방법
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#현재-적용-여부-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        현재 적용 여부 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#운영-참고-런타임-엔진-최적화-falco-8x-기준" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        운영 참고: 런타임 엔진 최적화 (Falco 8.x 기준)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-inotify-리소스-부족-wsl2-필수" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. inotify 리소스 부족 (WSL2 필수)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-ebpf-드라이버-실패" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. eBPF 드라이버 실패
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-k3s-소켓-미인식" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. K3s 소켓 미인식
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#별첨-grafana-연동" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        별첨: Grafana 연동
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="별첨: Grafana 연동">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        체크리스트
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#연동-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        연동 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="연동 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1단계-servicemonitor-적용" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: ServiceMonitor 적용
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2단계-grafana-대시보드-자동-배포-활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: Grafana 대시보드 자동 배포 활성화
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3단계-grafana에서-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: Grafana에서 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1783,7 +1706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-tetragon-install/" class="md-nav__link">
+      <a href="../../security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -1811,7 +1734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -5635,66 +5558,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#개요" class="md-nav__link">
+  <a href="#장애-유형-1-신규-pod의-default-gateway-arp-해결-실패-failed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        개요
+        [장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. 오프라인 설치 자산 준비 (인터넷 환경)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-2-이미지-업로드-폐쇄망-환경" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2: 이미지 업로드 (폐쇄망 환경)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-설치-및-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 3: 설치 및 검증
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#운영-참고-노이즈-억제-룰" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        운영 참고: 노이즈 억제 룰
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="운영 참고: 노이즈 억제 룰">
+    <nav class="md-nav" aria-label="[장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#제공-억제-룰-values-suppress-noiseyaml" class="md-nav__link">
+  <a href="#1-증상-symptom" class="md-nav__link">
     <span class="md-ellipsis">
       
-        제공 억제 룰 (values-suppress-noise.yaml)
+        1. 증상 (Symptom)
       
     </span>
   </a>
@@ -5702,60 +5581,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#적용-방법" class="md-nav__link">
+  <a href="#2-원인-분석-root-cause" class="md-nav__link">
     <span class="md-ellipsis">
       
-        적용 방법
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="적용 방법">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#방법-1-installsh-실행-시-선택" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 1: install.sh 실행 시 선택
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#방법-2-helm-upgrade에-직접-추가" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 2: helm upgrade에 직접 추가
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#억제-룰-추가-방법" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        억제 룰 추가 방법
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#현재-적용-여부-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        현재 적용 여부 확인
+        2. 원인 분석 (Root Cause)
       
     </span>
   </a>
@@ -5768,33 +5597,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#운영-참고-런타임-엔진-최적화-falco-8x-기준" class="md-nav__link">
+  <a href="#장애-유형-2-pod-sandbox-생성-실패-및-api-server-연결-차단" class="md-nav__link">
     <span class="md-ellipsis">
       
-        운영 참고: 런타임 엔진 최적화 (Falco 8.x 기준)
+        [장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="트러블슈팅">
+    <nav class="md-nav" aria-label="[장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-inotify-리소스-부족-wsl2-필수" class="md-nav__link">
+  <a href="#1-증상-symptom_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. inotify 리소스 부족 (WSL2 필수)
+        1. 증상 (Symptom)
       
     </span>
   </a>
@@ -5802,21 +5620,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-ebpf-드라이버-실패" class="md-nav__link">
+  <a href="#2-원인-분석-root-cause_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. eBPF 드라이버 실패
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-k3s-소켓-미인식" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. K3s 소켓 미인식
+        2. 원인 분석 (Root Cause)
       
     </span>
   </a>
@@ -5829,22 +5636,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#별첨-grafana-연동" class="md-nav__link">
+  <a href="#사전-준비-환경-변수-및-설정-값-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        별첨: Grafana 연동
+        [사전 준비] 환경 변수 및 설정 값 확인
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="별첨: Grafana 연동">
+    <nav class="md-nav" aria-label="[사전 준비] 환경 변수 및 설정 값 확인">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#체크리스트" class="md-nav__link">
+  <a href="#1-활성화된-물리-네트워크-인터페이스-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        체크리스트
+        1. 활성화된 물리 네트워크 인터페이스 확인
       
     </span>
   </a>
@@ -5852,33 +5659,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#연동-절차" class="md-nav__link">
+  <a href="#2-kubernetes-service-cidr-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        연동 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="연동 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1단계-servicemonitor-적용" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: ServiceMonitor 적용
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2단계-grafana-대시보드-자동-배포-활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: Grafana 대시보드 자동 배포 활성화
+        2. Kubernetes Service CIDR 확인
       
     </span>
   </a>
@@ -5889,12 +5673,74 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3단계-grafana에서-확인" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#영구-해결-방안-os별-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: Grafana에서 확인
+        영구 해결 방안 (OS별 설정)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="영구 해결 방안 (OS별 설정)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#방법-a-rocky-linux-9x-networkmanager-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 A. Rocky Linux 9.x (NetworkManager 기준)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-b-ubuntu-2404-netplan-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 B. Ubuntu 24.04 (Netplan 기준)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#최종-상태-확인-및-검증-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        최종 상태 확인 및 검증 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="최종 상태 확인 및 검증 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-호스트-라우팅-테이블-조회" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 호스트 라우팅 테이블 조회
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-신규-pod-기동-및-연동-테스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 신규 Pod 기동 및 연동 테스트
       
     </span>
   </a>
@@ -5926,237 +5772,124 @@
   
 
 
-<h1 id="falco-801-폐쇄망-설치-가이드">Falco 8.0.1 폐쇄망 설치 가이드</h1>
-<h2 id="개요">개요</h2>
-<p>eBPF 기반 런타임 보안 도구 Falco를 폐쇄망 환경의 K8s(WSL2/K3s 포함)에 배포합니다.</p>
-<h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
-<p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
-<blockquote>
-<p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
-</code></pre></div>
-<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
+<h1 id="폐쇄망-환경-calico-cni-default-gateway-및-서비스-라우팅-장애-해결-가이드">폐쇄망 환경 Calico CNI Default Gateway 및 서비스 라우팅 장애 해결 가이드</h1>
+<p>이 가이드는 베어메탈 또는 가상화 서버의 네트워크 카드 증설, IP 대역 변경 및 <strong>기본 게이트웨이(Default Route)가 없는 폐쇄망 환경</strong>으로 이전 시 발생하는 Calico CNI의 핵심 통신 장애에 대한 진단법과 영구 해결 방안을 다룹니다.</p>
 <hr />
-<h2 id="phase-2-이미지-업로드-폐쇄망-환경">Phase 2: 이미지 업로드 (폐쇄망 환경)</h2>
-<ol>
-<li>로컬 Harbor 레지스트리에 로그인합니다.</li>
-<li><code>images/upload_images_to_harbor_v3-lite.sh</code>를 실행하여 이미지를 푸시합니다.</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>images
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./upload_images_to_harbor_v3-lite.sh
-</code></pre></div>
-<h2 id="phase-3-설치-및-검증">Phase 3: 설치 및 검증</h2>
-<ol>
-<li><code>values.yaml</code>의 <code>image.registry</code> 주소가 로컬 Harbor IP로 되어 있는지 확인합니다.</li>
-<li>설치 스크립트를 실행합니다.</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./scripts/install.sh
-</code></pre></div>
-<ol>
-<li>Falco 로그를 확인하여 이상행위 탐지 여부를 테스트합니다.</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>falco<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>falco<span class="w"> </span>-f
-</code></pre></div>
-<ol>
-<li>준비된 테스트 시나리오를 실행하여 탐지 알림을 확인합니다.</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/test-scenarios.yaml
-</code></pre></div>
-<h2 id="운영-참고-노이즈-억제-룰">운영 참고: 노이즈 억제 룰</h2>
-<p>Falco는 기본 룰셋이 광범위하게 설정돼 있어, 정상 동작하는 애플리케이션도 탐지 대상이 될 수 있습니다.
-이런 <strong>알려진 노이즈</strong>는 억제 룰로 제외해 실제 위협 신호가 묻히지 않도록 관리합니다.</p>
-<h3 id="제공-억제-룰-values-suppress-noiseyaml">제공 억제 룰 (<code>values-suppress-noise.yaml</code>)</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">룰</th>
-<th style="text-align: left;">대상</th>
-<th style="text-align: left;">이유</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>Redirect STDOUT/STDIN...</code></td>
-<td style="text-align: left;"><code>gitlab-shell-*</code></td>
-<td style="text-align: left;">SSH 세션 정상 STDIN/STDOUT 리다이렉트</td>
-</tr>
-</tbody>
-</table>
-<h3 id="적용-방법">적용 방법</h3>
-<h4 id="방법-1-installsh-실행-시-선택">방법 1: install.sh 실행 시 선택</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./scripts/install.sh
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># &quot;노이즈 억제 룰을 적용하시겠습니까?&quot; 프롬프트에서 y 입력</span>
-</code></pre></div>
-<h4 id="방법-2-helm-upgrade에-직접-추가">방법 2: helm upgrade에 직접 추가</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>falco<span class="w"> </span>./charts/falco<span class="w"> </span>-n<span class="w"> </span>falco<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-f<span class="w"> </span>values-suppress-noise.yaml
-</code></pre></div>
-<h3 id="억제-룰-추가-방법">억제 룰 추가 방법</h3>
-<p><code>values-suppress-noise.yaml</code>의 <code>customRules</code> 블록에 항목을 추가합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">customRules</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">suppress-noise.yaml</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="no"># 기존 룰에 조건 추가 (append)</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="no">- rule: &lt;룰 이름&gt;</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="no">condition: and not &lt;제외 조건&gt;</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="no">override:</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="no">condition: append</span>
-</code></pre></div>
+<h2 id="장애-유형-1-신규-pod의-default-gateway-arp-해결-실패-failed">[장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (<code>FAILED</code>)</h2>
+<h3 id="1-증상-symptom">1. 증상 (Symptom)</h3>
 <ul>
-<li><code>rule</code>: 억제할 기존 룰 이름 (정확히 일치해야 함)</li>
-<li><code>condition</code>: 기존 조건에 추가할 제외 조건</li>
-<li><code>override.condition: append</code>: 기존 룰을 덮어쓰지 않고 조건만 추가</li>
+<li>신규 생성된 Pod 내부에서 외부/인터넷/클러스터 서비스 통신이 작동하지 않습니다.</li>
+<li>Pod 내부에서 <code>ip neigh</code> 실행 시 Calico 가상 게이트웨이 주소가 실패 상태(<code>FAILED</code>)로 출력됩니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>169.254.1.1 dev eth0 FAILED
+</code></pre></div></li>
+<li><strong>임시 조치</strong>: Pod 내부에 static ARP를 강제로 밀어 넣으면 순간적으로 통신이 재개됩니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip<span class="w"> </span>neigh<span class="w"> </span>replace<span class="w"> </span><span class="m">169</span>.254.1.1<span class="w"> </span>lladdr<span class="w"> </span>ee:ee:ee:ee:ee:ee<span class="w"> </span>dev<span class="w"> </span>eth0
+</code></pre></div></li>
 </ul>
-<p>적용 후 Falco 파드를 재시작하지 않아도 됩니다 (ConfigMap 변경은 자동 반영).</p>
-<h3 id="현재-적용-여부-확인">현재 적용 여부 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span>-n<span class="w"> </span>falco<span class="w"> </span>falco-rules<span class="w"> </span>-o<span class="w"> </span>yaml
-</code></pre></div>
-<p>ConfigMap이 존재하고 <code>suppress-noise.yaml</code> 키가 있으면 억제 룰이 적용된 상태입니다.</p>
+<h3 id="2-원인-분석-root-cause">2. 원인 분석 (Root Cause)</h3>
+<ul>
+<li>Calico CNI는 Pod 내부 게이트웨이로 가상 IP인 <code>169.254.1.1</code>을 세팅하고, 호스트 측의 가상 veth 카드인 <code>cali*</code> 인터페이스에 <strong>Proxy ARP</strong>(<code>proxy_arp=1</code>)를 활성화합니다.</li>
+<li>Pod가 게이트웨이의 MAC 주소를 묻는 ARP Request를 보낼 때, 호스트 커널은 <strong>"요청된 IP(169.254.1.1)로 향하는 라우팅 경로가 존재하고, 그 경로의 출력 인터페이스가 ARP 요청을 받은 가상 카드(cali*)와 다를 때"</strong>에만 응답을 보냅니다.</li>
+<li>그러나 네트워크 환경을 이전하면서 호스트에 <strong>Default Route(0.0.0.0/0)가 사라진 경우</strong>, 호스트가 <code>169.254.1.1</code>로 가기 위한 경로를 라우팅 테이블에서 찾지 못하므로 Pod의 ARP 요청에 응답하지 않아 발생한 현상입니다.</li>
+</ul>
 <hr />
-<h2 id="운영-참고-런타임-엔진-최적화-falco-8x-기준">운영 참고: 런타임 엔진 최적화 (Falco 8.x 기준)</h2>
-<p>Falco 8.x 차트부터는 <code>containerEngine</code>이라는 통합 설정을 사용하여
-여러 런타임을 관리합니다. 실 배포 환경에서 특정 런타임만 사용하도록
-고정하려면 다음 형식을 권장합니다.</p>
-<p><strong>표준 K8s(containerd 전용) <code>values.yaml</code> 권장 설정:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">driver</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">modern_ebpf</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nt">collectors</span><span class="p">:</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">containerEngine</span><span class="p">:</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nt">engines</span><span class="p">:</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="nt">docker</span><span class="p">:</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="nt">podman</span><span class="p">:</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">      </span><span class="nt">cri</span><span class="p">:</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="nt">sockets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/run/containerd/containerd.sock&quot;</span><span class="p p-Indicator">]</span>
+<h2 id="장애-유형-2-pod-sandbox-생성-실패-및-api-server-연결-차단">[장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단</h2>
+<h3 id="1-증상-symptom_1">1. 증상 (Symptom)</h3>
+<ul>
+<li>신규 Pod를 생성하면 <code>ContainerCreating</code> 상태로 멈추며, <code>kubectl describe pod</code>에서 CNI 네트워킹 오류가 다량 발생합니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox ...:
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>plugin type=&quot;calico&quot; failed (add): error getting ClusterInformation:
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Get &quot;https://10.96.0.1:443/apis/crd.projectcalico.org/v1/clusterinformations/default&quot;:
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>dial tcp 10.96.0.1:443: connect: network is unreachable
+</code></pre></div></li>
+</ul>
+<h3 id="2-원인-분석-root-cause_1">2. 원인 분석 (Root Cause)</h3>
+<ul>
+<li>Pod가 기동될 때 호스트 상에서 동작하는 Calico CNI 바이너리가 쿠버네티스 서비스 IP(기본값 <code>10.96.0.1:443</code>)를 통해 API 서버에 연결을 맺고 클러스터 정보를 갱신해야 합니다.</li>
+<li>하지만 호스트의 기본 게이트웨이(Default Route)가 유실되었기 때문에, 호스트 커널은 Service CIDR 대역에 대한 경로를 찾지 못하고 <code>network is unreachable</code> 에러를 반환합니다.</li>
+<li>특히 <strong><code>nmcli connection up</code></strong> 또는 <strong><code>netplan apply</code></strong> 등을 수행하여 네트워크 어댑터를 갱신하면, 이전에 임시로 추가해 둔 런타임 라우팅 규칙(<code>ip route add 10.96.0.0/12 ...</code>)들이 <strong>전부 삭제(초기화)</strong>되어 장애가 재발합니다.</li>
+</ul>
+<hr />
+<h2 id="사전-준비-환경-변수-및-설정-값-확인">[사전 준비] 환경 변수 및 설정 값 확인</h2>
+<p>영구 설정을 추가하기 전에 사용 중인 호스트의 물리 인터페이스 이름과 Kubernetes Service CIDR를 확인해야 합니다.</p>
+<h3 id="1-활성화된-물리-네트워크-인터페이스-확인">1. 활성화된 물리 네트워크 인터페이스 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Rocky Linux / NetworkManager 사용 환경</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nmcli<span class="w"> </span>connection<span class="w"> </span>show<span class="w"> </span>--active
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Ubuntu / ip link 사용 환경</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>ip<span class="w"> </span>-o<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="s1">&#39;: &#39;</span><span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^(eth|en|bond)&quot;</span>
 </code></pre></div>
-<h2 id="트러블슈팅">트러블슈팅</h2>
-<h3 id="1-inotify-리소스-부족-wsl2-필수">1. inotify 리소스 부족 (WSL2 필수)</h3>
-<p>Falco 구동 시 <code>could not initialize inotify handler</code> 에러가 발생하면
-호스트(WSL2)의 리소스를 확장해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>fs.inotify.max_user_instances<span class="o">=</span><span class="m">512</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>fs.inotify.max_user_watches<span class="o">=</span><span class="m">1048576</span>
+<blockquote>
+<p>[!NOTE]
+이 가이드에서는 물리 네트워크 인터페이스 이름을 <strong><code>eth0</code></strong> (NetworkManager 연결 프로필 이름은 <strong><code>"System eth0"</code></strong>) 기준으로 설명합니다. 실제 환경에 맞는 이름으로 변경하여 적용하십시오.</p>
+</blockquote>
+<h3 id="2-kubernetes-service-cidr-확인">2. Kubernetes Service CIDR 확인</h3>
+<p>클러스터에 설정된 실제 Service IP 대역을 조회합니다.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>cluster-info<span class="w"> </span>dump<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span>service-cluster-ip-range
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># 또는 API Server Pod 설정 파일 확인</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">component</span><span class="o">=</span>kube-apiserver<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].spec.containers[0].command}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>service-cluster-ip-range
+</code></pre></div></p>
+<blockquote>
+<p>[!NOTE]
+이 가이드에서는 Service CIDR를 기본값인 <strong><code>10.96.0.0/12</code></strong> 기준으로 설명합니다.</p>
+</blockquote>
+<hr />
+<h2 id="영구-해결-방안-os별-설정">영구 해결 방안 (OS별 설정)</h2>
+<p>호스트가 <code>169.254.1.1</code> 및 <code>Service CIDR</code>에 대해 통신할 수 있도록 라우팅 테이블에 명시적인 링크-로컬(Link-local) 라우트를 영구적으로 등록합니다.</p>
+<h3 id="방법-a-rocky-linux-9x-networkmanager-기준">방법 A. Rocky Linux 9.x (NetworkManager 기준)</h3>
+<p>NetworkManager의 연결 설정에 ipv4.routes를 추가하여 프로필 활성화 시 자동으로 라우팅이 추가되도록 구성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. 169.254.1.1/32 및 Service CIDR 대역(10.96.0.0/12) 라우트 영구 추가</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># (연결 프로필 이름이 &quot;System eth0&quot;인 경우)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span><span class="s2">&quot;System eth0&quot;</span><span class="w"> </span>+ipv4.routes<span class="w"> </span><span class="s2">&quot;169.254.1.1/32, 10.96.0.0/12&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># 2. 네트워크 프로필 재활성화하여 설정 즉시 적용</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>up<span class="w"> </span><span class="s2">&quot;System eth0&quot;</span>
 </code></pre></div>
-<h3 id="2-ebpf-드라이버-실패">2. eBPF 드라이버 실패</h3>
-<p>커널이 BTF를 지원하지 않으면 Falco 파드가 구동되지 않습니다.
-<code>values.yaml</code>에서 <code>driver.kind</code>를 <code>ebpf</code>로 변경하여 재설치하세요.</p>
-<h3 id="3-k3s-소켓-미인식">3. K3s 소켓 미인식</h3>
-<p>K3s 환경에서 파드가 생성되었으나 이벤트를 수집하지 못한다면,
-소켓 경로를 확인하세요. 본 패키지의 <code>install.sh</code>는 이를 자동 감지하지만,
-수동 설정 시에는 다음 형식을 따릅니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 설치 시 수동 주입 예시</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>falco<span class="w"> </span>./charts/falco<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--set<span class="w"> </span>collectors.containerEngine.engines.cri.sockets<span class="o">=</span><span class="s1">&#39;{/run/k3s/containerd/containerd.sock}&#39;</span>
+<h3 id="방법-b-ubuntu-2404-netplan-기준">방법 B. Ubuntu 24.04 (Netplan 기준)</h3>
+<p>Ubuntu는 Netplan을 사용하여 네트워크를 구성하므로 설정 YAML 파일을 수정합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1. Netplan 설정 파일 열기 (배포판마다 파일명이 다를 수 있음)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/netplan/01-netcfg.yaml
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">network</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networkd</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">eth0</span><span class="p">:</span><span class="w"> </span><span class="c1"># 실제 사용하는 물리 네트워크 인터페이스명 입력</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="c1"># 기존 IP 및 네임서버 설정 유지</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">routes</span><span class="p">:</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">169.254.1.1/32</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">          </span><span class="nt">scope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.96.0.0/12</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">          </span><span class="nt">scope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 2. 변경된 설정 테스트 및 적용</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>try
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
 </code></pre></div>
 <hr />
-<h2 id="별첨-grafana-연동">별첨: Grafana 연동</h2>
-<p>FalcoSidekick metrics를 Prometheus + Grafana 스택에 연동하는 절차입니다.</p>
-<blockquote>
-<p>대시보드 JSON은 공식 falcosecurity 차트에 기본 내장돼 있습니다
-(<code>charts/falco/charts/falcosidekick/dashboards/</code>).
-<code>helm pull</code> 시 자동으로 포함된 파일이며 별도로 준비할 필요가 없습니다.</p>
-</blockquote>
-<h3 id="체크리스트">체크리스트</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">내용</th>
-<th style="text-align: left;">비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">metrics 엔드포인트</td>
-<td style="text-align: left;"><code>falco-falcosidekick:2810/metrics</code></td>
-<td style="text-align: left;">설치 시 자동 생성</td>
-</tr>
-<tr>
-<td style="text-align: left;">ServiceMonitor</td>
-<td style="text-align: left;"><code>manifests/servicemonitor-falcosidekick.yaml</code></td>
-<td style="text-align: left;">별도 apply 필요</td>
-</tr>
-<tr>
-<td style="text-align: left;">대시보드 JSON</td>
-<td style="text-align: left;">차트 내장 (<code>falcosidekick-grafana-dashboard.json</code>)</td>
-<td style="text-align: left;">존재</td>
-</tr>
-<tr>
-<td style="text-align: left;">대시보드 자동 배포</td>
-<td style="text-align: left;"><code>values.yaml</code>에 <code>grafana.dashboards.enabled: true</code> + namespace 지정</td>
-<td style="text-align: left;">values에 포함됨</td>
-</tr>
-<tr>
-<td style="text-align: left;">Grafana sidecar</td>
-<td style="text-align: left;"><code>NAMESPACE = ALL</code> 설정으로 모든 네임스페이스 자동 감지</td>
-<td style="text-align: left;">별도 설정 불필요</td>
-</tr>
-</tbody>
-</table>
-<h3 id="연동-절차">연동 절차</h3>
-<h4 id="1단계-servicemonitor-적용">1단계: ServiceMonitor 적용</h4>
-<p><code>manifests/servicemonitor-falcosidekick.yaml</code>을 적용합니다.
-Prometheus Operator가 이 리소스를 읽어 FalcoSidekick metrics 수집을 시작합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/servicemonitor-falcosidekick.yaml
+<h2 id="최종-상태-확인-및-검증-절차">최종 상태 확인 및 검증 절차</h2>
+<p>모든 마스터 및 워커 노드에 설정을 반영한 후 아래 단계에 따라 최종 상태를 점검합니다.</p>
+<h3 id="1-호스트-라우팅-테이블-조회">1. 호스트 라우팅 테이블 조회</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;169.254|10.96&quot;</span>
 </code></pre></div>
-<blockquote>
-<p><code>release: prometheus</code> 라벨이 반드시 있어야 합니다.
-이 라벨이 없으면 Prometheus가 ServiceMonitor를 무시합니다.
-라벨 값은 Prometheus 인스턴스의 <code>serviceMonitorSelector</code>에 따라 다를 수 있으니 확인하세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].spec.serviceMonitorSelector}&#39;</span>
+* <strong>정상 출력 예시</strong> (<code>proto static</code> 및 물리 인터페이스 매핑 확인):
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>10.96.0.0/12 dev eth0 proto static scope link metric 100
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>169.254.1.1 dev eth0 proto static scope link metric 100
+</code></pre></div></p>
+<h3 id="2-신규-pod-기동-및-연동-테스트">2. 신규 Pod 기동 및 연동 테스트</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 1. 테스트용 Pod 삭제 및 재생성</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>net-test<span class="w"> </span>--ignore-not-found
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>kubectl<span class="w"> </span>run<span class="w"> </span>net-test<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>sleep<span class="w"> </span><span class="m">3600</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># 2. Pod가 Running 상태가 될 때까지 대기 후 ARP 상태 검증</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>net-test<span class="w"> </span>--<span class="w"> </span>ip<span class="w"> </span>neigh
 </code></pre></div>
-</blockquote>
-<h4 id="2단계-grafana-대시보드-자동-배포-활성화">2단계: Grafana 대시보드 자동 배포 활성화</h4>
-<p><code>values.yaml</code>(또는 <code>values-local.yaml</code>)에 아래 설정이 포함돼 있습니다.
-<code>helm upgrade</code> 시 <code>monitoring</code> 네임스페이스에 ConfigMap이 자동으로 생성됩니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">falcosidekick</span><span class="p">:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">dashboards</span><span class="p">:</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">      </span><span class="nt">configMaps</span><span class="p">:</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="nt">falcosidekick</span><span class="p">:</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">          </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+* <strong>정상 결과</strong>: <code>169.254.1.1</code>에 대한 상태가 <code>FAILED</code>가 아니라, MAC 주소가 자동으로 매핑된 <strong><code>REACHABLE</code></strong> 또는 <strong><code>STALE</code></strong> 상태여야 합니다.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 3. Pod 내부에서 API Server 서비스 포트(443) 통신 및 DNS 질의 테스트</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>net-test<span class="w"> </span>--<span class="w"> </span>nc<span class="w"> </span>-vz<span class="w"> </span>-w<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">10</span>.96.0.1<span class="w"> </span><span class="m">443</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>net-test<span class="w"> </span>--<span class="w"> </span>nslookup<span class="w"> </span>kubernetes.default.svc.cluster.local
 </code></pre></div>
-<blockquote>
-<p><code>namespace</code> 값은 Grafana가 배포된 네임스페이스로 맞춰야 합니다.
-Grafana sidecar가 해당 네임스페이스의 <code>grafana_dashboard: "1"</code>
-라벨 ConfigMap을 감지해 자동 등록합니다.</p>
-</blockquote>
-<h3 id="3단계-grafana에서-확인">3단계: Grafana에서 확인</h3>
-<p>아래 항목을 순서대로 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># ConfigMap이 생성됐는지 확인</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>falcosidekick
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># ServiceMonitor가 등록됐는지 확인</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>servicemonitor<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>falcosidekick
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Prometheus target 확인 (UP 상태여야 함)</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1"># Grafana → Explore → Prometheus → Targets 또는</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/prometheus-kube-prometheus-prometheus<span class="w"> </span><span class="m">9090</span><span class="w"> </span><span class="p">&amp;</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1"># 브라우저: http://localhost:9090/targets → falcosidekick 검색</span>
-</code></pre></div>
-<p>Grafana 대시보드 확인:</p>
-<ol>
-<li>Grafana 접속</li>
-<li>Dashboards → Browse</li>
-<li><code>falcosidekick</code> 검색 → 대시보드 진입</li>
-<li>이벤트 그래프 및 우선순위별 통계 확인</li>
-</ol>
-<blockquote>
-<p>Grafana가 우리 스택이 아닌 경우, ConfigMap의 <code>grafana_dashboard: "1"</code> 라벨을 감지하는
-sidecar가 설정돼 있는지 확인하세요. sidecar가 없으면 대시보드 JSON을
-Grafana UI에서 직접 import 해야 합니다 (Import → JSON 파일 업로드).</p>
-</blockquote>
+* <strong>정상 결과</strong>: 타임아웃 오류 없이 포트 오픈 성공 및 DNS 확인이 정상적으로 수행되어야 합니다.</p>
 
 
 
