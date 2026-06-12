@@ -71,6 +71,7 @@ nav:
       - 'Helm & 스토리지 프로비저너 설치': k8s/install/base-infra.md
       - 'MetalLB 설치': k8s/install/metallb-install.md
       - 'Cilium (CNI) 설치': k8s/network/cilium-install.md
+      - 'Calico CNI 라우팅 장애 해결': k8s/network/calico-routing-troubleshooting.md
     - 'Monitoring':
       - 'Prometheus & Grafana 설치': k8s/monitoring/001-kube-prometheus-stack.md
       - '모니터링 운영 가이드': k8s/monitoring/002-operation-guide.md

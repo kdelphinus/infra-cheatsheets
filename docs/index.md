@@ -46,6 +46,7 @@ hide:
 
     - [:octicons-arrow-right-24: Envoy Gateway 및 HTTPRoute 설치](k8s/gateway-api/envoy-v1.37.2-install.md)
     - [:octicons-arrow-right-24: Cilium (CNI) 오프라인 설치](k8s/network/cilium-install.md)
+    - [:octicons-arrow-right-24: Calico CNI 라우팅 장애 해결](k8s/network/calico-routing-troubleshooting.md)
     - [:octicons-arrow-right-24: NGINX NIC 마이그레이션 가이드](k8s/gateway-api/nginx-nic-migration.md)
 
 - :material-shield-check: **보안 및 백업**
