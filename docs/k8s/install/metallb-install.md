@@ -1,8 +1,7 @@
-# MetalLB v0.14.8 오프라인 설치 가이드
+# MetalLB v0.16.1 오프라인 설치 가이드
 
 폐쇄망 환경에서 MetalLB(L2 모드)를 설치하여 Bare-metal K8s 클러스터에 LoadBalancer 타입
-서비스를 제공하는 절차입니다. 모든 명령은 **컴포넌트 루트 디렉토리**(`metallb-0.14.8/`)에서 실행합니다.
-
+서비스를 제공하는 절차입니다. 모든 명령은 **컴포넌트 루트 디렉토리**(`metallb-0.16.1/`)에서 실행합니다.
 
 ## 0. 오프라인 설치 자산 준비 (인터넷 환경)
 
@@ -21,7 +20,7 @@ sudo ./download_assets_offline.sh
 
 스크립트 실행이 완료되면 `charts/` 디렉토리에 `.tgz` 차트 파일이, `images/` 디렉토리에 `.tar` 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
----
+
 
 ## 전제 조건
 
@@ -54,10 +53,10 @@ sudo ./download_assets_offline.sh
          ▲
          │ spec 제공 (user input)
          ▼
-┌──────────────────────────────────────────────────────┐
-│  IPAddressPool  :  172.30.235.200-172.30.235.220     │
-│  L2Advertisement: 위 풀을 L2(ARP)로 광고             │
-└──────────────────────────────────────────────────────┘
+ ┌──────────────────────────────────────────────────────┐
+ │  IPAddressPool  :  172.30.235.200-172.30.235.220     │
+ │  L2Advertisement: 위 풀을 L2(ARP)로 광고             │
+ └──────────────────────────────────────────────────────┘
 ```
 
 ## 0단계: IP 대역 산출
@@ -104,8 +103,8 @@ kubectl get svc kubernetes -o jsonpath='{.spec.clusterIP}'
 수동으로 할 경우:
 
 ```bash
-sudo ctr -n k8s.io images import ./images/quay.io-metallb-controller-v0.14.8.tar
-sudo ctr -n k8s.io images import ./images/quay.io-metallb-speaker-v0.14.8.tar
+sudo ctr -n k8s.io images import ./images/quay.io-metallb-controller-v0.16.1.tar
+sudo ctr -n k8s.io images import ./images/quay.io-metallb-speaker-v0.16.1.tar
 ```
 
 ### 방법 B — Harbor 레지스트리 사용 (멀티 노드 환경 권장)
@@ -196,19 +195,20 @@ kubectl delete svc metallb-test -n kube-system
 
 ## 4단계: 삭제 및 초기화
 
-### 자동화
+### 자동화 (스크립트 사용)
 
 ```bash
-sudo ./scripts/install.sh
-# → 메뉴에서 "3) 초기화" 선택
+chmod +x ./scripts/uninstall.sh
+sudo ./scripts/uninstall.sh
 ```
 
-### 수동
+### 수동 삭제
 
 ```bash
 helm uninstall metallb -n metallb-system
-# CR finalizer 가 남아 ns 삭제가 지연되는 경우
-for KIND in ipaddresspool l2advertisement bgpadvertisement bgppeer; do
+
+# CR finalizer가 남아 네임스페이스 삭제가 지연되는 경우 실행
+for KIND in ipaddresspool l2advertisement bgpadvertisement bgppeer community bfdprofile; do
   kubectl get $KIND -n metallb-system -o name 2>/dev/null \
     | xargs -r -I {} kubectl patch {} -n metallb-system \
         -p '{"metadata":{"finalizers":[]}}' --type=merge
