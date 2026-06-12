@@ -201,7 +201,15 @@
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/k8s-offline-builder-guide/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/metallb-install/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/install/reproducibility-check-ubuntu/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
