@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/network/calico-routing-troubleshooting/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/missed-containerport/">
       
       
-        <link rel="prev" href="../cilium-install/">
+        <link rel="prev" href="../calico-routing-troubleshooting/">
       
       
-        <link rel="next" href="../../monitoring/001-kube-prometheus-stack/">
+        <link rel="next" href="../cilium-troubleshooting/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Calico CNI 라우팅 장애 해결 - Infra Cheatsheets</title>
+        <title>ContainerPort 누락 장애 해결 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#폐쇄망-환경-calico-cni-default-gateway-및-서비스-라우팅-장애-해결-가이드" class="md-skip">
+        <a href="#-troubleshooting-envoy-환경에서-service-endpoint가-있는데도-connection-refused-발생하는-현상" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Calico CNI 라우팅 장애 해결
+              ContainerPort 누락 장애 해결
             
           </span>
         </div>
@@ -1082,8 +1082,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1099,11 +1097,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
@@ -1124,7 +1122,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1198,7 +1196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cilium-install/" class="md-nav__link">
+      <a href="../../network/cilium-install/" class="md-nav__link">
         
   
   
@@ -1214,276 +1212,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Calico CNI 라우팅 장애 해결
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Calico CNI 라우팅 장애 해결
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#장애-유형-1-신규-pod의-default-gateway-arp-해결-실패-failed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-증상-symptom" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 증상 (Symptom)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-원인-분석-root-cause" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 원인 분석 (Root Cause)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#장애-유형-2-pod-sandbox-생성-실패-및-api-server-연결-차단" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-증상-symptom_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 증상 (Symptom)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-원인-분석-root-cause_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 원인 분석 (Root Cause)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#사전-준비-환경-변수-및-설정-값-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        [사전 준비] 환경 변수 및 설정 값 확인
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="[사전 준비] 환경 변수 및 설정 값 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-활성화된-물리-네트워크-인터페이스-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 활성화된 물리 네트워크 인터페이스 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-kubernetes-service-cidr-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Kubernetes Service CIDR 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#영구-해결-방안-os별-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        영구 해결 방안 (OS별 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="영구 해결 방안 (OS별 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#방법-a-rocky-linux-9x-networkmanager-기준" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 A. Rocky Linux 9.x (NetworkManager 기준)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#방법-b-ubuntu-2404-netplan-기준" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 B. Ubuntu 24.04 (Netplan 기준)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#최종-상태-확인-및-검증-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        최종 상태 확인 및 검증 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="최종 상태 확인 및 검증 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-호스트-라우팅-테이블-조회" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 호스트 라우팅 테이블 조회
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-신규-pod-기동-및-연동-테스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 신규 Pod 기동 및 연동 테스트
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2343,34 +2071,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../gateway-api/missed-containerport/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ContainerPort 누락 트러블슈팅
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -2549,6 +2249,369 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calico-routing-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calico CNI 라우팅 장애 해결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ContainerPort 누락 장애 해결
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ContainerPort 누락 장애 해결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-개요-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 개요 (Summary)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-증상-symptom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 증상 (Symptom)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-원인-분석-root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 원인 분석 (Root Cause)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 원인 분석 (Root Cause)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#일반-k8s-vs-envoy-환경의-차이" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        일반 K8s vs Envoy 환경의 차이
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#상세-메커니즘" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상세 메커니즘
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-해결-방법-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 해결 방법 (Solution)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-결론-및-교훈-takeaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 결론 및 교훈 (Takeaway)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cilium-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cilium CNI 설치 트러블슈팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../falco-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Falco 런타임 탐지 트러블슈팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tetragon-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tetragon 런타임 차단 트러블슈팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../httproute-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTPRoute 라우팅 트러블슈팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -5558,22 +5621,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#장애-유형-1-신규-pod의-default-gateway-arp-해결-실패-failed" class="md-nav__link">
+  <a href="#1-개요-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)
+        1. 개요 (Summary)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (FAILED)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-증상-symptom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 증상 (Symptom)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-원인-분석-root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 원인 분석 (Root Cause)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 원인 분석 (Root Cause)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-증상-symptom" class="md-nav__link">
+  <a href="#일반-k8s-vs-envoy-환경의-차이" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 증상 (Symptom)
+        일반 K8s vs Envoy 환경의 차이
       
     </span>
   </a>
@@ -5581,10 +5666,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-원인-분석-root-cause" class="md-nav__link">
+  <a href="#상세-메커니즘" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 원인 분석 (Root Cause)
+        상세 메커니즘
       
     </span>
   </a>
@@ -5597,158 +5682,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#장애-유형-2-pod-sandbox-생성-실패-및-api-server-연결-차단" class="md-nav__link">
+  <a href="#4-해결-방법-solution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단
+        4. 해결 방법 (Solution)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="[장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-증상-symptom_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 증상 (Symptom)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-원인-분석-root-cause_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 원인 분석 (Root Cause)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#사전-준비-환경-변수-및-설정-값-확인" class="md-nav__link">
+  <a href="#5-결론-및-교훈-takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [사전 준비] 환경 변수 및 설정 값 확인
+        5. 결론 및 교훈 (Takeaway)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="[사전 준비] 환경 변수 및 설정 값 확인">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-활성화된-물리-네트워크-인터페이스-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 활성화된 물리 네트워크 인터페이스 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-kubernetes-service-cidr-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Kubernetes Service CIDR 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#영구-해결-방안-os별-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        영구 해결 방안 (OS별 설정)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="영구 해결 방안 (OS별 설정)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#방법-a-rocky-linux-9x-networkmanager-기준" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 A. Rocky Linux 9.x (NetworkManager 기준)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#방법-b-ubuntu-2404-netplan-기준" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        방법 B. Ubuntu 24.04 (Netplan 기준)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#최종-상태-확인-및-검증-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        최종 상태 확인 및 검증 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="최종 상태 확인 및 검증 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-호스트-라우팅-테이블-조회" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 호스트 라우팅 테이블 조회
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-신규-pod-기동-및-연동-테스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 신규 Pod 기동 및 연동 테스트
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -5772,124 +5723,69 @@
   
 
 
-<h1 id="폐쇄망-환경-calico-cni-default-gateway-및-서비스-라우팅-장애-해결-가이드">폐쇄망 환경 Calico CNI Default Gateway 및 서비스 라우팅 장애 해결 가이드</h1>
-<p>이 가이드는 베어메탈 또는 가상화 서버의 네트워크 카드 증설, IP 대역 변경 및 <strong>기본 게이트웨이(Default Route)가 없는 폐쇄망 환경</strong>으로 이전 시 발생하는 Calico CNI의 핵심 통신 장애에 대한 진단법과 영구 해결 방안을 다룹니다.</p>
-<hr />
-<h2 id="장애-유형-1-신규-pod의-default-gateway-arp-해결-실패-failed">[장애 유형 1] 신규 Pod의 Default Gateway ARP 해결 실패 (<code>FAILED</code>)</h2>
-<h3 id="1-증상-symptom">1. 증상 (Symptom)</h3>
+<h1 id="-troubleshooting-envoy-환경에서-service-endpoint가-있는데도-connection-refused-발생하는-현상">📝 [Troubleshooting] Envoy 환경에서 Service Endpoint가 있는데도 Connection Refused 발생하는 현상</h1>
+<h2 id="1-개요-summary">1. 개요 (Summary)</h2>
 <ul>
-<li>신규 생성된 Pod 내부에서 외부/인터넷/클러스터 서비스 통신이 작동하지 않습니다.</li>
-<li>Pod 내부에서 <code>ip neigh</code> 실행 시 Calico 가상 게이트웨이 주소가 실패 상태(<code>FAILED</code>)로 출력됩니다.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>169.254.1.1 dev eth0 FAILED
-</code></pre></div></li>
-<li><strong>임시 조치</strong>: Pod 내부에 static ARP를 강제로 밀어 넣으면 순간적으로 통신이 재개됩니다.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip<span class="w"> </span>neigh<span class="w"> </span>replace<span class="w"> </span><span class="m">169</span>.254.1.1<span class="w"> </span>lladdr<span class="w"> </span>ee:ee:ee:ee:ee:ee<span class="w"> </span>dev<span class="w"> </span>eth0
-</code></pre></div></li>
+<li><strong>현상:</strong> 마이크로서비스 호출 시 <code>500 Server Error</code> 및 <code>Connection refused</code> 발생.</li>
+<li><strong>특이사항:</strong> <code>kubectl get endpoints</code> 조회 시 <strong>Pod IP와 Port가 정상적으로 잡혀있음에도 통신 불가.</strong></li>
+<li><strong>원인:</strong> Deployment YAML에 <strong><code>containerPort</code> 선언이 누락</strong>됨.</li>
+<li><strong>환경:</strong> Kubernetes + <strong>Envoy (Istio 등 Service Mesh)</strong></li>
 </ul>
-<h3 id="2-원인-분석-root-cause">2. 원인 분석 (Root Cause)</h3>
-<ul>
-<li>Calico CNI는 Pod 내부 게이트웨이로 가상 IP인 <code>169.254.1.1</code>을 세팅하고, 호스트 측의 가상 veth 카드인 <code>cali*</code> 인터페이스에 <strong>Proxy ARP</strong>(<code>proxy_arp=1</code>)를 활성화합니다.</li>
-<li>Pod가 게이트웨이의 MAC 주소를 묻는 ARP Request를 보낼 때, 호스트 커널은 <strong>"요청된 IP(169.254.1.1)로 향하는 라우팅 경로가 존재하고, 그 경로의 출력 인터페이스가 ARP 요청을 받은 가상 카드(cali*)와 다를 때"</strong>에만 응답을 보냅니다.</li>
-<li>그러나 네트워크 환경을 이전하면서 호스트에 <strong>Default Route(0.0.0.0/0)가 사라진 경우</strong>, 호스트가 <code>169.254.1.1</code>로 가기 위한 경로를 라우팅 테이블에서 찾지 못하므로 Pod의 ARP 요청에 응답하지 않아 발생한 현상입니다.</li>
-</ul>
-<hr />
-<h2 id="장애-유형-2-pod-sandbox-생성-실패-및-api-server-연결-차단">[장애 유형 2] Pod Sandbox 생성 실패 및 API Server 연결 차단</h2>
-<h3 id="1-증상-symptom_1">1. 증상 (Symptom)</h3>
-<ul>
-<li>신규 Pod를 생성하면 <code>ContainerCreating</code> 상태로 멈추며, <code>kubectl describe pod</code>에서 CNI 네트워킹 오류가 다량 발생합니다.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox ...:
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>plugin type=&quot;calico&quot; failed (add): error getting ClusterInformation:
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Get &quot;https://10.96.0.1:443/apis/crd.projectcalico.org/v1/clusterinformations/default&quot;:
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>dial tcp 10.96.0.1:443: connect: network is unreachable
-</code></pre></div></li>
-</ul>
-<h3 id="2-원인-분석-root-cause_1">2. 원인 분석 (Root Cause)</h3>
-<ul>
-<li>Pod가 기동될 때 호스트 상에서 동작하는 Calico CNI 바이너리가 쿠버네티스 서비스 IP(기본값 <code>10.96.0.1:443</code>)를 통해 API 서버에 연결을 맺고 클러스터 정보를 갱신해야 합니다.</li>
-<li>하지만 호스트의 기본 게이트웨이(Default Route)가 유실되었기 때문에, 호스트 커널은 Service CIDR 대역에 대한 경로를 찾지 못하고 <code>network is unreachable</code> 에러를 반환합니다.</li>
-<li>특히 <strong><code>nmcli connection up</code></strong> 또는 <strong><code>netplan apply</code></strong> 등을 수행하여 네트워크 어댑터를 갱신하면, 이전에 임시로 추가해 둔 런타임 라우팅 규칙(<code>ip route add 10.96.0.0/12 ...</code>)들이 <strong>전부 삭제(초기화)</strong>되어 장애가 재발합니다.</li>
-</ul>
-<hr />
-<h2 id="사전-준비-환경-변수-및-설정-값-확인">[사전 준비] 환경 변수 및 설정 값 확인</h2>
-<p>영구 설정을 추가하기 전에 사용 중인 호스트의 물리 인터페이스 이름과 Kubernetes Service CIDR를 확인해야 합니다.</p>
-<h3 id="1-활성화된-물리-네트워크-인터페이스-확인">1. 활성화된 물리 네트워크 인터페이스 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Rocky Linux / NetworkManager 사용 환경</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nmcli<span class="w"> </span>connection<span class="w"> </span>show<span class="w"> </span>--active
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Ubuntu / ip link 사용 환경</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>ip<span class="w"> </span>-o<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="s1">&#39;: &#39;</span><span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^(eth|en|bond)&quot;</span>
+<h2 id="2-증상-symptom">2. 증상 (Symptom)</h2>
+<p>Caller(호출하는 쪽) 서비스 로그에서 아래와 같은 오류가 발생하며 통신 실패.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>io.netty.channel.AbstractChannel<span class="nv">$AnnotatedConnectException</span>:<span class="w"> </span>finishConnect<span class="o">(</span>..<span class="o">)</span><span class="w"> </span>failed:<span class="w"> </span>Connection<span class="w"> </span>refused:<span class="w"> </span>&lt;SERVICE_DOMAIN&gt;/&lt;POD_IP&gt;:8080
 </code></pre></div>
+<p>하지만, K8s 리소스 상태를 확인해 보면 <strong>네트워크 연결 정보(Endpoints)는 정상</strong>으로 보임 (이것 때문에 혼란 발생).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Service Endpoints 정상 (IP가 잡혀있음!)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>endpoints<span class="w"> </span>strato-imp-svc<span class="w"> </span>-n<span class="w"> </span>strato-product
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>NAME<span class="w">             </span>ENDPOINTS<span class="w">            </span>AGE
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>strato-imp-svc<span class="w">   </span><span class="m">192</span>.168.104.23:8080<span class="w">  </span>3d
+</code></pre></div>
+<h2 id="3-원인-분석-root-cause">3. 원인 분석 (Root Cause)</h2>
+<h3 id="일반-k8s-vs-envoy-환경의-차이">일반 K8s vs Envoy 환경의 차이</h3>
+<ul>
+<li><strong>일반 K8s:</strong> <code>containerPort</code>는 단순 정보 제공용(Informational)에 가깝습니다.
+실제 프로세스가 포트를 열고 있으면, YAML에 안 적어도 통신이 되는 경우가 많습니다.</li>
+<li><strong>Envoy (Service Mesh) 환경:</strong> <code>containerPort</code> 선언이 <strong>필수(Mandatory)</strong>입니다.</li>
+</ul>
+<h3 id="상세-메커니즘">상세 메커니즘</h3>
+<ol>
+<li><strong>Envoy 사이드카(Sidecar)</strong>는 Pod 내의 네트워크 트래픽을 가로채서(Interception) 처리합니다.</li>
+<li>이때 Envoy는 Deployment YAML에 명시된
+<strong><code>containerPort</code> 목록을 보고 "아, 이 포트로 들어오는 트래픽을 앱에게 넘겨줘야 하는구나"라고 Listener(수신 규칙)를 생성</strong>합니다.</li>
+<li><strong>설정이 누락되면:</strong><ul>
+<li>K8s Service는 Pod IP를 찾아서 Endpoints를 연결해 줍니다. (그래서 <code>get endpoints</code>에는 나옴)</li>
+<li>하지만 트래픽이 Pod 내부의 Envoy에 도착했을 때, <strong>Envoy가 해당 포트를 처리할 규칙이 없어서 트래픽을 차단(Refuse)</strong>합니다.</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-해결-방법-solution">4. 해결 방법 (Solution)</h2>
+<p>Deployment Manifest(YAML)에 <code>containerPort</code>를 명시적으로 추가해야 합니다.</p>
+<p>❌ 수정 전 (AS-IS): 포트 정보 없음</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-image:v1</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="c1"># ports 섹션 누락됨</span>
+</code></pre></div>
+<p>✅ 수정 후 (TO-BE): 포트 정보 추가</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-app</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-image:v1</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">              </span><span class="c1"># &lt;--- 반드시 추가</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span><span class="w">        </span><span class="c1"># (선택사항)</span>
+</code></pre></div>
+<h2 id="5-결론-및-교훈-takeaway">5. 결론 및 교훈 (Takeaway)</h2>
 <blockquote>
-<p>[!NOTE]
-이 가이드에서는 물리 네트워크 인터페이스 이름을 <strong><code>eth0</code></strong> (NetworkManager 연결 프로필 이름은 <strong><code>"System eth0"</code></strong>) 기준으로 설명합니다. 실제 환경에 맞는 이름으로 변경하여 적용하십시오.</p>
+<p><strong>"Service Mesh(Envoy) 환경에서는 Endpoints가 보인다고 안심하지 말 것."</strong></p>
 </blockquote>
-<h3 id="2-kubernetes-service-cidr-확인">2. Kubernetes Service CIDR 확인</h3>
-<p>클러스터에 설정된 실제 Service IP 대역을 조회합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>cluster-info<span class="w"> </span>dump<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span>service-cluster-ip-range
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># 또는 API Server Pod 설정 파일 확인</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span><span class="nv">component</span><span class="o">=</span>kube-apiserver<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].spec.containers[0].command}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>service-cluster-ip-range
-</code></pre></div></p>
-<blockquote>
-<p>[!NOTE]
-이 가이드에서는 Service CIDR를 기본값인 <strong><code>10.96.0.0/12</code></strong> 기준으로 설명합니다.</p>
-</blockquote>
-<hr />
-<h2 id="영구-해결-방안-os별-설정">영구 해결 방안 (OS별 설정)</h2>
-<p>호스트가 <code>169.254.1.1</code> 및 <code>Service CIDR</code>에 대해 통신할 수 있도록 라우팅 테이블에 명시적인 링크-로컬(Link-local) 라우트를 영구적으로 등록합니다.</p>
-<h3 id="방법-a-rocky-linux-9x-networkmanager-기준">방법 A. Rocky Linux 9.x (NetworkManager 기준)</h3>
-<p>NetworkManager의 연결 설정에 ipv4.routes를 추가하여 프로필 활성화 시 자동으로 라우팅이 추가되도록 구성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. 169.254.1.1/32 및 Service CIDR 대역(10.96.0.0/12) 라우트 영구 추가</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># (연결 프로필 이름이 &quot;System eth0&quot;인 경우)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>modify<span class="w"> </span><span class="s2">&quot;System eth0&quot;</span><span class="w"> </span>+ipv4.routes<span class="w"> </span><span class="s2">&quot;169.254.1.1/32, 10.96.0.0/12&quot;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># 2. 네트워크 프로필 재활성화하여 설정 즉시 적용</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sudo<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>up<span class="w"> </span><span class="s2">&quot;System eth0&quot;</span>
-</code></pre></div>
-<h3 id="방법-b-ubuntu-2404-netplan-기준">방법 B. Ubuntu 24.04 (Netplan 기준)</h3>
-<p>Ubuntu는 Netplan을 사용하여 네트워크를 구성하므로 설정 YAML 파일을 수정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1. Netplan 설정 파일 열기 (배포판마다 파일명이 다를 수 있음)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/netplan/01-netcfg.yaml
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">network</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">renderer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networkd</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">eth0</span><span class="p">:</span><span class="w"> </span><span class="c1"># 실제 사용하는 물리 네트워크 인터페이스명 입력</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="c1"># 기존 IP 및 네임서버 설정 유지</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">routes</span><span class="p">:</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">169.254.1.1/32</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">          </span><span class="nt">scope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.96.0.0/12</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">          </span><span class="nt">scope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">link</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 2. 변경된 설정 테스트 및 적용</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>try
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
-</code></pre></div>
-<hr />
-<h2 id="최종-상태-확인-및-검증-절차">최종 상태 확인 및 검증 절차</h2>
-<p>모든 마스터 및 워커 노드에 설정을 반영한 후 아래 단계에 따라 최종 상태를 점검합니다.</p>
-<h3 id="1-호스트-라우팅-테이블-조회">1. 호스트 라우팅 테이블 조회</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;169.254|10.96&quot;</span>
-</code></pre></div>
-* <strong>정상 출력 예시</strong> (<code>proto static</code> 및 물리 인터페이스 매핑 확인):
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>10.96.0.0/12 dev eth0 proto static scope link metric 100
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>169.254.1.1 dev eth0 proto static scope link metric 100
-</code></pre></div></p>
-<h3 id="2-신규-pod-기동-및-연동-테스트">2. 신규 Pod 기동 및 연동 테스트</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 1. 테스트용 Pod 삭제 및 재생성</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>net-test<span class="w"> </span>--ignore-not-found
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>kubectl<span class="w"> </span>run<span class="w"> </span>net-test<span class="w"> </span>--image<span class="o">=</span>busybox<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--<span class="w"> </span>sleep<span class="w"> </span><span class="m">3600</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># 2. Pod가 Running 상태가 될 때까지 대기 후 ARP 상태 검증</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>net-test<span class="w"> </span>--<span class="w"> </span>ip<span class="w"> </span>neigh
-</code></pre></div>
-* <strong>정상 결과</strong>: <code>169.254.1.1</code>에 대한 상태가 <code>FAILED</code>가 아니라, MAC 주소가 자동으로 매핑된 <strong><code>REACHABLE</code></strong> 또는 <strong><code>STALE</code></strong> 상태여야 합니다.</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 3. Pod 내부에서 API Server 서비스 포트(443) 통신 및 DNS 질의 테스트</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>net-test<span class="w"> </span>--<span class="w"> </span>nc<span class="w"> </span>-vz<span class="w"> </span>-w<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">10</span>.96.0.1<span class="w"> </span><span class="m">443</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>net-test<span class="w"> </span>--<span class="w"> </span>nslookup<span class="w"> </span>kubernetes.default.svc.cluster.local
-</code></pre></div>
-* <strong>정상 결과</strong>: 타임아웃 오류 없이 포트 오픈 성공 및 DNS 확인이 정상적으로 수행되어야 합니다.</p>
+<ul>
+<li><code>kubectl get endpoints</code>는 K8s 컨트롤러가 "IP를 찾았다"는 뜻일 뿐, "통신이 된다"는 보장은 아닙니다.</li>
+<li>사이드카 패턴을 사용할 때는 <strong>반드시 애플리케이션이 사용하는 포트를 YAML에 명시</strong>해야 Envoy가 길을 열어줍니다.</li>
+</ul>
 
 
 

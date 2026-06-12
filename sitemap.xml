@@ -193,10 +193,6 @@
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/missed-containerport/</loc>
-         <lastmod>2026-06-12</lastmod>
-    </url>
-    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/nginx-nic-migration/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
@@ -253,10 +249,6 @@
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/network/calico-routing-troubleshooting/</loc>
-         <lastmod>2026-06-12</lastmod>
-    </url>
-    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/network/cilium-install/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
@@ -286,6 +278,30 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/storage/trident-install/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/calico-routing-troubleshooting/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/cilium-troubleshooting/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/falco-troubleshooting/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/httproute-troubleshooting/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/missed-containerport/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/troubleshooting/tetragon-troubleshooting/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
