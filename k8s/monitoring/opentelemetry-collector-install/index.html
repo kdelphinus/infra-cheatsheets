@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/operations/rocky-v1.30-cluster-reboot/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/opentelemetry-collector-install/">
       
       
-        <link rel="prev" href="../../backup-restore/001-velero-install/">
+        <link rel="prev" href="../002-operation-guide/">
       
       
-        <link rel="next" href="../rocky-v1.33.7-cluster-reboot/">
+        <link rel="next" href="../opentelemetry-operator-install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Rocky 9.6 (v1.30) 클러스터 재부팅 - Infra Cheatsheets</title>
+        <title>OpenTelemetry Collector 설치 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#kubernetes-v130-rocky-linux-96-재부팅-운영-가이드" class="md-skip">
+        <a href="#opentelemetry-collector-v01580--v01530-오프라인-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Rocky 9.6 (v1.30) 클러스터 재부팅
+              OpenTelemetry Collector 설치
             
           </span>
         </div>
@@ -1648,6 +1648,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1658,11 +1660,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -1683,7 +1685,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1701,7 +1703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -1729,7 +1731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../002-operation-guide/" class="md-nav__link">
         
   
   
@@ -1754,10 +1756,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1773,6 +1802,204 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#전제-조건" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전제 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1단계-이미지-확보-및-로드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 확보 및 로드
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1단계: 이미지 확보 및 로드">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-a-로컬-환경에-직접-로드-harbor-미사용-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case A: 로컬 환경에 직접 로드 (Harbor 미사용 시)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-b-harbor-레지스트리-업로드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Case B: Harbor 레지스트리 업로드
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2단계-설치-및-업그레이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 설치 및 업그레이드
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2단계: 설치 및 업그레이드">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#방법-1-자동화-스크립트-사용-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 1. 자동화 스크립트 사용 (권장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-2-수동-설치-및-업그레이드-manual-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 2. 수동 설치 및 업그레이드 (Manual Fallback)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="방법 2. 수동 설치 및 업그레이드 (Manual Fallback)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-valuesyaml-환경-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) values.yaml 환경 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-helm-릴리스-배포-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Helm 릴리스 배포 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3단계-애플리케이션-연동-및-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 애플리케이션 연동 및 검증
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#삭제-및-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        삭제 및 초기화
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="삭제 및 초기화">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#방법-1-스크립트-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 1. 스크립트 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-2-수동-삭제" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        방법 2. 수동 삭제
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1785,7 +2012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
+      <a href="../opentelemetry-operator-install/" class="md-nav__link">
         
   
   
@@ -2046,8 +2273,6 @@
                 
   
   
-    
-  
   
   
     
@@ -2058,11 +2283,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
         
           
           <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
@@ -2083,7 +2308,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2098,37 +2323,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Rocky 9.6 (v1.30) 클러스터 재부팅
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2144,409 +2342,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#목차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        목차
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-개요" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 개요
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. 개요">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-적용-범위" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 적용 범위
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-핵심-원칙" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 핵심 원칙
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-재부팅-전-점검" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 재부팅 전 점검
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. 재부팅 전 점검">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-클러스터-상태-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 클러스터 상태 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-pdb--워크로드-영향-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 PDB / 워크로드 영향 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-영구-설정-사전-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 영구 설정 사전 검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-nfs--외부-스토리지-의존성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 NFS / 외부 스토리지 의존성
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-재부팅-순서" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 재부팅 순서
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. 재부팅 순서">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-단일-구성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 단일 구성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-ha-구성-master-3--worker-n" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 HA 구성 (Master 3 + Worker N)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.2 HA 구성 (Master 3 + Worker N)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#321-worker-노드-한-번에-1대씩" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2.1 Worker 노드 (한 번에 1대씩)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#322-master-노드-반드시-한-번에-1대씩-vip-보유-노드는-마지막" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2.2 Master 노드 (반드시 한 번에 1대씩, VIP 보유 노드는 마지막)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-전체-클러스터-정전콜드-부팅-복구" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 전체 클러스터 정전/콜드 부팅 복구
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-재부팅-후-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 재부팅 후 검증
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 재부팅 후 검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-노드--시스템-서비스" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 노드 / 시스템 서비스
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-시스템-pod-정상화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2 시스템 Pod 정상화
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43-워크로드--ingress--storage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 워크로드 / Ingress / Storage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-ha-vip-페일오버-동작" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4 (HA) VIP 페일오버 동작
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. 트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-노드가-notready" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 노드가 NotReady
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-시스템-pod-coredns--cni-가-running-안-됨" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 시스템 Pod (CoreDNS / CNI) 가 Running 안 됨
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#53-etcd-quorum-손상" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 etcd quorum 손상
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#54-vip-split-brain-두-노드-동시-보유" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 VIP Split-Brain (두 노드 동시 보유)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#55-nfs-pv-마운트-실패" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.5 NFS PV 마운트 실패
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#56-firewalld--iptables-규칙-충돌" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.6 firewalld / iptables 규칙 충돌
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. 체크리스트
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. 체크리스트">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#61-재부팅-전" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 재부팅 전
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62-재부팅-중-노드별" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 재부팅 중 (노드별)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#63-재부팅-후-전체" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3 재부팅 후 (전체)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2559,7 +2354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
+      <a href="../../operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2587,7 +2382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
+      <a href="../../operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -5998,10 +5793,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#목차" class="md-nav__link">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        목차
+        0. 오프라인 설치 자산 준비 (인터넷 환경)
       
     </span>
   </a>
@@ -6009,22 +5804,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-개요" class="md-nav__link">
+  <a href="#전제-조건" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 개요
+        전제 조건
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 개요">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1단계-이미지-확보-및-로드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 이미지 확보 및 로드
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1단계: 이미지 확보 및 로드">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-적용-범위" class="md-nav__link">
+  <a href="#case-a-로컬-환경에-직접-로드-harbor-미사용-시" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 적용 범위
+        Case A: 로컬 환경에 직접 로드 (Harbor 미사용 시)
       
     </span>
   </a>
@@ -6032,10 +5838,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-핵심-원칙" class="md-nav__link">
+  <a href="#case-b-harbor-레지스트리-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 핵심 원칙
+        Case B: Harbor 레지스트리 업로드
       
     </span>
   </a>
@@ -6048,22 +5854,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-재부팅-전-점검" class="md-nav__link">
+  <a href="#2단계-설치-및-업그레이드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 재부팅 전 점검
+        2단계: 설치 및 업그레이드
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 재부팅 전 점검">
+    <nav class="md-nav" aria-label="2단계: 설치 및 업그레이드">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-클러스터-상태-확인" class="md-nav__link">
+  <a href="#방법-1-자동화-스크립트-사용-권장" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 클러스터 상태 확인
+        방법 1. 자동화 스크립트 사용 (권장)
       
     </span>
   </a>
@@ -6071,10 +5877,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-pdb--워크로드-영향-확인" class="md-nav__link">
+  <a href="#방법-2-수동-설치-및-업그레이드-manual-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 PDB / 워크로드 영향 확인
+        방법 2. 수동 설치 및 업그레이드 (Manual Fallback)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="방법 2. 수동 설치 및 업그레이드 (Manual Fallback)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-valuesyaml-환경-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) values.yaml 환경 설정
       
     </span>
   </a>
@@ -6082,24 +5900,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-영구-설정-사전-검증" class="md-nav__link">
+  <a href="#2-helm-릴리스-배포-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 영구 설정 사전 검증
+        2) Helm 릴리스 배포 실행
       
     </span>
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#24-nfs--외부-스토리지-의존성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 NFS / 외부 스토리지 의존성
-      
-    </span>
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -6109,100 +5921,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-재부팅-순서" class="md-nav__link">
+  <a href="#3단계-애플리케이션-연동-및-검증" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 재부팅 순서
+        3단계: 애플리케이션 연동 및 검증
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="3. 재부팅 순서">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-단일-구성" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 단일 구성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-ha-구성-master-3--worker-n" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 HA 구성 (Master 3 + Worker N)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.2 HA 구성 (Master 3 + Worker N)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#321-worker-노드-한-번에-1대씩" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2.1 Worker 노드 (한 번에 1대씩)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#322-master-노드-반드시-한-번에-1대씩-vip-보유-노드는-마지막" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2.2 Master 노드 (반드시 한 번에 1대씩, VIP 보유 노드는 마지막)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-전체-클러스터-정전콜드-부팅-복구" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 전체 클러스터 정전/콜드 부팅 복구
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-재부팅-후-검증" class="md-nav__link">
+  <a href="#삭제-및-초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 재부팅 후 검증
+        삭제 및 초기화
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 재부팅 후 검증">
+    <nav class="md-nav" aria-label="삭제 및 초기화">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-노드--시스템-서비스" class="md-nav__link">
+  <a href="#방법-1-스크립트-실행" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 노드 / 시스템 서비스
+        방법 1. 스크립트 실행
       
     </span>
   </a>
@@ -6210,165 +5955,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-시스템-pod-정상화" class="md-nav__link">
+  <a href="#방법-2-수동-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 시스템 Pod 정상화
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43-워크로드--ingress--storage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 워크로드 / Ingress / Storage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-ha-vip-페일오버-동작" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4 (HA) VIP 페일오버 동작
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-트러블슈팅" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 트러블슈팅
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. 트러블슈팅">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-노드가-notready" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 노드가 NotReady
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-시스템-pod-coredns--cni-가-running-안-됨" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 시스템 Pod (CoreDNS / CNI) 가 Running 안 됨
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#53-etcd-quorum-손상" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 etcd quorum 손상
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#54-vip-split-brain-두-노드-동시-보유" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 VIP Split-Brain (두 노드 동시 보유)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#55-nfs-pv-마운트-실패" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.5 NFS PV 마운트 실패
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#56-firewalld--iptables-규칙-충돌" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.6 firewalld / iptables 규칙 충돌
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-체크리스트" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. 체크리스트
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. 체크리스트">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#61-재부팅-전" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 재부팅 전
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62-재부팅-중-노드별" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 재부팅 중 (노드별)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#63-재부팅-후-전체" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3 재부팅 후 (전체)
+        방법 2. 수동 삭제
       
     </span>
   </a>
@@ -6400,355 +5990,110 @@
   
 
 
-<h1 id="kubernetes-v130-rocky-linux-96-재부팅-운영-가이드">Kubernetes v1.30 (Rocky Linux 9.6) 재부팅 운영 가이드</h1>
+<h1 id="opentelemetry-collector-v01580--v01530-오프라인-설치-가이드">OpenTelemetry Collector v0.158.0 / v0.153.0 오프라인 설치 가이드</h1>
+<p>폐쇄망 환경에서 OpenTelemetry Collector를 Kubernetes(K8s) 위에 설치하는 절차를 안내합니다.</p>
+<h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
+<p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
 <blockquote>
-<p><strong>대상 환경</strong>: Rocky Linux 9.6 + Kubernetes v1.30 (kubeadm) + containerd
-<strong>작성일</strong>: 2026-05-08
-<strong>참고 가이드</strong>: <a href="../../install/rocky/offline-install/">install-guide.md</a>, <a href="../../install/rocky/online-install-v1.30/">install-guide-online.md</a></p>
+<p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
 </blockquote>
-<p>본 문서는 설치 가이드 기준으로 구축된 클러스터에서 <strong>계획 재부팅 / 비계획 재부팅</strong> 시 따라야 할 운영 절차입니다.
-설치 단계에서 swap 영구 비활성, <code>systemctl enable kubelet/containerd/haproxy/keepalived</code>,
-필수 커널 모듈 영구 로드(<code>/etc/modules-load.d/</code>)는 이미 적용되어 있다고 가정합니다.</p>
-<hr />
-<h2 id="목차">목차</h2>
-<ol>
-<li><a href="#1-개요">개요</a></li>
-<li><a href="#2-재부팅-전-점검">재부팅 전 점검</a></li>
-<li><a href="#3-재부팅-순서">재부팅 순서</a></li>
-<li><a href="#4-재부팅-후-검증">재부팅 후 검증</a></li>
-<li><a href="#5-트러블슈팅">트러블슈팅</a></li>
-<li><a href="#6-체크리스트">체크리스트</a></li>
-</ol>
-<hr />
-<h2 id="1-개요">1. 개요</h2>
-<h3 id="11-적용-범위">1.1 적용 범위</h3>
-<ul>
-<li>단일 구성 (Master 1 + Worker N)</li>
-<li>HA 구성 (Master 3 + Worker N + VIP, HAProxy + Keepalived)</li>
-</ul>
-<h3 id="12-핵심-원칙">1.2 핵심 원칙</h3>
-<table>
-<thead>
-<tr>
-<th>원칙</th>
-<th>이유</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>HA 환경에서 마스터는 한 번에 1대씩</strong></td>
-<td>etcd quorum (3대 중 2대 이상 정상) 유지</td>
-</tr>
-<tr>
-<td><strong>워커는 <code>kubectl drain</code> 후 재부팅</strong></td>
-<td>Pod evict 누락 시 PDB 위반 / 서비스 단절</td>
-</tr>
-<tr>
-<td><strong>재부팅 후 노드 Ready + 시스템 Pod Running 까지 대기</strong></td>
-<td>다음 노드 진행 전 동기화 보장</td>
-</tr>
-<tr>
-<td><strong>VIP 페일오버 검증</strong></td>
-<td>Keepalived MASTER 전환 / API 단절 방지</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="2-재부팅-전-점검">2. 재부팅 전 점검</h2>
-<h3 id="21-클러스터-상태-확인">2.1 클러스터 상태 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 모든 노드 Ready 확인</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 시스템 Pod 정상 여부</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-vE<span class="w"> </span><span class="s1">&#39;Running|Completed&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># etcd 멤버십 (HA, Master-1 에서)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sudo<span class="w"> </span><span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span><span class="w"> </span>etcdctl<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span>--endpoints<span class="o">=</span>https://127.0.0.1:2379<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span>--cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span>--cert<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span>--key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span>member<span class="w"> </span>list<span class="w"> </span>-w<span class="w"> </span>table
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># (HA) VIP 현재 보유 노드 확인</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>ip<span class="w"> </span>-br<span class="w"> </span>addr<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;VIP&gt;
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>keepalived<span class="w"> </span>--no-pager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;STATE|Active&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
 </code></pre></div>
-<p>✅ <strong>통과 기준</strong>: 모든 노드 <code>Ready</code>, <code>kube-system</code> Pod 모두 <code>Running</code>, etcd 3개 멤버 모두 <code>started</code>.
-하나라도 비정상이면 <strong>재부팅 보류</strong>하고 원인 해소 후 진행.</p>
-<h3 id="22-pdb--워크로드-영향-확인">2.2 PDB / 워크로드 영향 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pdb<span class="w"> </span>-A
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># 단일 replica 인 중요 워크로드 식별</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deploy,sts<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>json<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.items[] | select(.spec.replicas==1) | &quot;\(.kind)/\(.metadata.namespace)/\(.metadata.name)&quot;&#39;</span>
+<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>opentelemetry-collector-0.158.0.tgz</code> 파일이, <code>images/</code> 디렉토리에 <code>otel-opentelemetry-collector-contrib-0.153.0.tar</code> 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
+<hr />
+<h2 id="전제-조건">전제 조건</h2>
+<ul>
+<li>Kubernetes 클러스터 구성 완료 (v1.24 이상)</li>
+<li>Helm v3 이상 설치 완료</li>
+<li><code>kubectl</code> CLI 사용 가능</li>
+<li>Harbor 레지스트리 또는 로컬 이미지 로드 환경 (Containerd <code>ctr</code> 등)</li>
+</ul>
+<hr />
+<h2 id="1단계-이미지-확보-및-로드">1단계: 이미지 확보 및 로드</h2>
+<h3 id="case-a-로컬-환경에-직접-로드-harbor-미사용-시">Case A: 로컬 환경에 직접 로드 (Harbor 미사용 시)</h3>
+<p>오프라인 워커 노드 장비로 아카이빙 된 tar 파일을 가져온 후, containerd(k8s.io) 네임스페이스 또는 도커 데몬에 이미지를 직접 로드합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># containerd를 사용하는 경우 (Kubernetes 기본)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>images/otel-opentelemetry-collector-contrib-0.153.0.tar
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Docker 데몬을 사용하는 경우</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>images/otel-opentelemetry-collector-contrib-0.153.0.tar
 </code></pre></div>
-<h3 id="23-영구-설정-사전-검증">2.3 영구 설정 사전 검증</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. swap 영구 비활성 확인</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>swapon<span class="w"> </span>--show<span class="w">          </span><span class="c1"># 출력 없어야 정상</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;^#&#39;</span><span class="w"> </span>/etc/fstab<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;\sswap\s&#39;</span><span class="w">   </span><span class="c1"># 출력 없어야 정상 (단순 주석 및 정밀 필드 체크)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>swap<span class="w"> </span>--all<span class="w"> </span>--no-legend<span class="w"> </span>--no-pager<span class="w">   </span><span class="c1"># 활성 swap systemd 유닛이 masked 상태여야 함</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>swap<span class="w"> </span>--no-legend<span class="w"> </span>--no-pager<span class="w">   </span><span class="c1"># masked 상태인지 확인</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>zram-generator<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w">                 </span><span class="c1"># inactive 또는 서비스 비활성화 상태여야 함</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># 2. 필수 커널 모듈 영구 로드</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>cat<span class="w"> </span>/etc/modules-load.d/k8s.conf<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># 기대: br_netfilter, overlay</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># 3. sysctl 영구 적용</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>ls<span class="w"> </span>/etc/sysctl.d/k8s.conf<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>net.bridge.bridge-nf-call-iptables<span class="w"> </span>net.ipv4.ip_forward
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># 4. 자동 시작 서비스</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>kubelet<span class="w"> </span>containerd
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># HA 마스터: 추가로</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>haproxy<span class="w"> </span>keepalived
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1"># 5. SELinux 모드 (Rocky 9 — k8s 권장: permissive)</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>getenforce
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="c1"># Enforcing 이면 /etc/selinux/config 가 permissive 인지 확인</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>sudo<span class="w"> </span>grep<span class="w"> </span>^SELINUX<span class="o">=</span><span class="w"> </span>/etc/selinux/config
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="c1"># 6. firewalld 정책 (사용 중이라면)</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>firewalld
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--list-all<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</code></pre></div>
-<h3 id="24-nfs--외부-스토리지-의존성">2.4 NFS / 외부 스토리지 의존성</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nfs
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>df<span class="w"> </span>-hT<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;nfs|cifs&#39;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>rpm<span class="w"> </span>-q<span class="w"> </span>nfs-utils
+<h3 id="case-b-harbor-레지스트리-업로드">Case B: Harbor 레지스트리 업로드</h3>
+<p>Harbor 레지스트리를 이용하는 환경인 경우, 동봉된 마이그레이션 스크립트를 실행하여 Harbor에 일괄 로드 및 태깅 후 자동 푸시(Push)할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
 <hr />
-<h2 id="3-재부팅-순서">3. 재부팅 순서</h2>
-<h3 id="31-단일-구성">3.1 단일 구성</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Worker N → … → Worker 1 → Master 1
+<h2 id="2단계-설치-및-업그레이드">2단계: 설치 및 업그레이드</h2>
+<p>설치는 자동화 스크립트를 사용하거나, 수동으로 Helm 명령어를 직접 실행하여 진행할 수 있습니다.</p>
+<h3 id="방법-1-자동화-스크립트-사용-권장">방법 1. 자동화 스크립트 사용 (권장)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./scripts/install.sh
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># (워커) drain</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>drain<span class="w"> </span>&lt;node&gt;<span class="w"> </span>--ignore-daemonsets<span class="w"> </span>--delete-emptydir-data<span class="w"> </span>--timeout<span class="o">=</span>10m
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 재부팅</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># 복귀 후</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>kubectl<span class="w"> </span>uncordon<span class="w"> </span>&lt;node&gt;
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Ready<span class="w"> </span>node/&lt;node&gt;<span class="w"> </span>--timeout<span class="o">=</span>10m
+<p><strong>스크립트 동작 및 기능 설명:</strong>
+1. <strong>상태 관리</strong>: 입력된 설정 값(Harbor 설정, 네임스페이스, 배포 방식 등)은 <code>install.conf</code>에 자동 기록 및 유지됩니다.
+2. <strong>업그레이드</strong>: 기존 릴리스를 감지하면, 기존 설정을 그대로 보존하면서 Helm Upgrade를 안전하게 수행합니다.
+3. <strong>재설치</strong>: 기존 설치 내역을 삭제하고 초기 세팅값부터 다시 입력받아 기동합니다.
+4. <strong>초기화</strong>: 자원 뿐만 아니라 <code>install.conf</code> 상태 파일까지 일괄 완전 삭제합니다.</p>
+<hr />
+<h3 id="방법-2-수동-설치-및-업그레이드-manual-fallback">방법 2. 수동 설치 및 업그레이드 (Manual Fallback)</h3>
+<p>자동화 스크립트 실행이 불가능하거나 디버깅 등의 특수한 제어가 필요한 환경에서는 아래 수동 절차를 따라 배포합니다.</p>
+<h4 id="1-valuesyaml-환경-설정">1) <code>values.yaml</code> 환경 설정</h4>
+<p><code>opentelemetry-collector-0.158.0/values.yaml</code> 파일을 텍스트 에디터로 엽니다. 오프라인 이미지 소스에 맞춰 수정합니다.</p>
+<ul>
+<li><strong>Harbor 레지스트리 주소를 사용하는 경우:</strong>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">image</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[Harbor</span><span class="nv"> </span><span class="s">주소]/[Harbor</span><span class="nv"> </span><span class="s">프로젝트]/opentelemetry-collector-contrib&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.153.0&quot;</span>
+</code></pre></div></li>
+<li><strong>로컬 이미지를 노드에 직접 임포트하여 사용하는 경우:</strong>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">image</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;otel/opentelemetry-collector-contrib&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.153.0&quot;</span>
+</code></pre></div></li>
+</ul>
+<p>기타 배포 형태(<code>mode: daemonset</code> 또는 <code>deployment</code>), 그리고 타겟 서비스 노출 방식(<code>service.type: ClusterIP</code> 등)을 기호에 맞춰 재조정합니다.</p>
+<h4 id="2-helm-릴리스-배포-실행">2) Helm 릴리스 배포 실행</h4>
+<p>타겟 네임스페이스(예: <code>monitoring</code>)를 지정하여 Helm 업그레이드 설치를 수행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 컴포넌트 루트 디렉토리에서 실행</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>otel-collector<span class="w"> </span>./charts/opentelemetry-collector-0.158.0.tgz<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--create-namespace<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml
 </code></pre></div>
-<p><strong>Master 단독 재부팅 시</strong>: API 서버가 일시적으로 끊어집니다 (~1–3분). 점검 시간으로 공지하세요.</p>
-<h3 id="32-ha-구성-master-3--worker-n">3.2 HA 구성 (Master 3 + Worker N)</h3>
-<h4 id="321-worker-노드-한-번에-1대씩">3.2.1 Worker 노드 (한 번에 1대씩)</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>drain<span class="w"> </span>&lt;worker-N&gt;<span class="w"> </span>--ignore-daemonsets<span class="w"> </span>--delete-emptydir-data<span class="w"> </span>--timeout<span class="o">=</span>10m
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ssh<span class="w"> </span>&lt;worker-N&gt;<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Ready<span class="w"> </span>node/&lt;worker-N&gt;<span class="w"> </span>--timeout<span class="o">=</span>10m
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>kubectl<span class="w"> </span>uncordon<span class="w"> </span>&lt;worker-N&gt;
+<p><em>참고: 압축이 해제된 디렉토리를 원천으로 설정하려면 다음과 같이 수행합니다.</em>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>otel-collector<span class="w"> </span>./charts/opentelemetry-collector<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--create-namespace<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml
+</code></pre></div></p>
+<hr />
+<h2 id="3단계-애플리케이션-연동-및-검증">3단계: 애플리케이션 연동 및 검증</h2>
+<p>애플리케이션(Java, Spring, Go, Python 등)에서 수집기로 OTLP 데이터를 송신할 때, 기본 노출 주소는 다음과 같이 세팅됩니다.</p>
+<ul>
+<li><strong>K8s 클러스터 내부에서의 수송 수신지 주소:</strong></li>
+<li><strong>gRPC Endpoint</strong>: <code>otel-collector-opentelemetry-collector.monitoring.svc.cluster.local:4317</code></li>
+<li><strong>HTTP Endpoint</strong>: <code>otel-collector-opentelemetry-collector.monitoring.svc.cluster.local:4318</code></li>
+</ul>
+<hr />
+<h2 id="삭제-및-초기화">삭제 및 초기화</h2>
+<h3 id="방법-1-스크립트-실행">방법 1. 스크립트 실행</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/uninstall.sh
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>./scripts/uninstall.sh
 </code></pre></div>
-<h4 id="322-master-노드-반드시-한-번에-1대씩-vip-보유-노드는-마지막">3.2.2 Master 노드 (반드시 한 번에 1대씩, VIP 보유 노드는 마지막)</h4>
-<p><strong>1) VIP 비보유 마스터부터</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># VIP 보유 노드 식별</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">for</span><span class="w"> </span>n<span class="w"> </span><span class="k">in</span><span class="w"> </span>master-1<span class="w"> </span>master-2<span class="w"> </span>master-3<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>ssh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;ip -br addr | grep &lt;VIP&gt; &amp;&amp; echo &#39;  ↑ VIP holder: </span><span class="nv">$n</span><span class="s2">&#39;&quot;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">done</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nv">NODE</span><span class="o">=</span>master-2
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>kubectl<span class="w"> </span>drain<span class="w"> </span><span class="nv">$NODE</span><span class="w"> </span>--ignore-daemonsets<span class="w"> </span>--delete-emptydir-data<span class="w"> </span>--timeout<span class="o">=</span>10m
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>ssh<span class="w"> </span><span class="nv">$NODE</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Ready<span class="w"> </span>node/<span class="nv">$NODE</span><span class="w"> </span>--timeout<span class="o">=</span>10m
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-o<span class="w"> </span>wide<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;etcd-</span><span class="nv">$NODE</span><span class="s2">|kube-apiserver-</span><span class="nv">$NODE</span><span class="s2">&quot;</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>kubectl<span class="w"> </span>uncordon<span class="w"> </span><span class="nv">$NODE</span>
-</code></pre></div>
-<p><strong>2) etcd quorum 회복 확인 (다음 마스터 재부팅 전 필수)</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span><span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span><span class="w"> </span>etcdctl<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>--endpoints<span class="o">=</span>https://127.0.0.1:2379<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>--cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>--cert<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>--key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span>endpoint<span class="w"> </span>status<span class="w"> </span>--cluster<span class="w"> </span>-w<span class="w"> </span>table
-</code></pre></div>
-<p>3개 멤버 모두 응답 후 다음 단계로.</p>
-<p><strong>3) VIP 보유 마스터 마지막</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 다른 마스터에서 VIP 페일오버 모니터링</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>watch<span class="w"> </span>-n1<span class="w"> </span><span class="s1">&#39;ip -br addr | grep &lt;VIP&gt;; date&#39;</span>
+<h3 id="방법-2-수동-삭제">방법 2. 수동 삭제</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 헬름 릴리스 제거</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>otel-collector<span class="w"> </span>-n<span class="w"> </span>monitoring
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># VIP 보유 노드 재부팅</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>ssh<span class="w"> </span>&lt;vip-master&gt;<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reboot
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 복귀 후 keepalived 상태 (선점 비활성 권장)</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>ssh<span class="w"> </span>&lt;vip-master&gt;<span class="w"> </span>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>keepalived<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;STATE|MASTER|BACKUP&#39;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># finalizer 교정 및 자원 수동 제거 (Terminating 교착 상태 방지)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">for</span><span class="w"> </span>KIND<span class="w"> </span><span class="k">in</span><span class="w"> </span>daemonset<span class="w"> </span>deployment<span class="w"> </span>service<span class="w"> </span>configmap<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span>kubectl<span class="w"> </span>get<span class="w"> </span><span class="nv">$KIND</span><span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span>name<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>otel-collector<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span>xargs<span class="w"> </span>-r<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>kubectl<span class="w"> </span>patch<span class="w"> </span><span class="o">{}</span><span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;</span><span class="w"> </span>--type<span class="o">=</span>merge<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="k">done</span>
 </code></pre></div>
-<h3 id="33-전체-클러스터-정전콜드-부팅-복구">3.3 전체 클러스터 정전/콜드 부팅 복구</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>1. 모든 노드 부팅 → systemd 가 containerd / kubelet 자동 시작
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>2. (HA) Keepalived 가 VIP 결정
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>3. etcd quorum 형성 → kube-apiserver 정상화
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>4. 노드 Ready → 시스템 Pod 순차 Running
-</code></pre></div>
-<p>quorum 형성까지 1–5분. 그 이상이면 <strong>5. 트러블슈팅</strong> 참조.</p>
-<hr />
-<h2 id="4-재부팅-후-검증">4. 재부팅 후 검증</h2>
-<h3 id="41-노드--시스템-서비스">4.1 노드 / 시스템 서비스</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>containerd<span class="w"> </span>kubelet
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># HA 마스터</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>haproxy<span class="w"> </span>keepalived
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># 커널 / 네트워크</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>sudo<span class="w"> </span>swapon<span class="w"> </span>--show
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;br_netfilter|overlay&#39;</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>net.bridge.bridge-nf-call-iptables<span class="w"> </span>net.ipv4.ip_forward
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># SELinux</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>getenforce
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="c1"># 노드 상태</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>&lt;node&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A5<span class="w"> </span>Conditions
-</code></pre></div>
-<h3 id="42-시스템-pod-정상화">4.2 시스템 Pod 정상화</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-o<span class="w"> </span>wide
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># Calico</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>calico-node<span class="w"> </span>-o<span class="w"> </span>wide
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># Cilium (사용 시)</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>cilium<span class="w"> </span>-o<span class="w"> </span>wide
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1"># Ingress / Gateway 등 핵심 컴포넌트</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-vE<span class="w"> </span><span class="s1">&#39;Running|Completed&#39;</span>
-</code></pre></div>
-<h3 id="43-워크로드--ingress--storage">4.3 워크로드 / Ingress / Storage</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-A<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;NodePort|LoadBalancer&#39;</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>curl<span class="w"> </span>-kI<span class="w"> </span>https://&lt;node-ip&gt;:30002/<span class="w">   </span><span class="c1"># Harbor 등</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pv,pvc<span class="w"> </span>-A<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-vE<span class="w"> </span><span class="s1">&#39;Bound|Available&#39;</span>
-</code></pre></div>
-<h3 id="44-ha-vip-페일오버-동작">4.4 (HA) VIP 페일오버 동작</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">for</span><span class="w"> </span>n<span class="w"> </span><span class="k">in</span><span class="w"> </span>master-1<span class="w"> </span>master-2<span class="w"> </span>master-3<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>ssh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;echo &#39;=== &#39;</span><span class="nv">$n</span><span class="s2">&#39; ===&#39;; ip -br addr | grep &lt;VIP&gt;&quot;</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">done</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>kubectl<span class="w"> </span>--request-timeout<span class="o">=</span>5s<span class="w"> </span>get<span class="w"> </span>--raw<span class="o">=</span><span class="s1">&#39;/healthz&#39;</span>
-</code></pre></div>
-<hr />
-<h2 id="5-트러블슈팅">5. 트러블슈팅</h2>
-<h3 id="51-노드가-notready">5.1 노드가 NotReady</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>kubelet<span class="w"> </span>-n<span class="w"> </span><span class="m">200</span><span class="w"> </span>--no-pager
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># (a) swap 이 다시 켜짐</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>sudo<span class="w"> </span>swapon<span class="w"> </span>--show<span class="w">          </span><span class="c1"># 켜져 있으면</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># fstab 주석 상태 재점검 및 systemd swap 유닛, zram 비활성화 재실행:</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># 1) fstab 주석 처리</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i.bak<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;/^[[:space:]]*[^#[:space:]]+[[:space:]]+[^#[:space:]]+[[:space:]]+swap[[:space:]]+/ s/^/#/&#39;</span><span class="w"> </span>/etc/fstab
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="c1"># 2) systemd .swap 유닛 마스킹</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="k">for</span><span class="w"> </span>unit<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-units<span class="w"> </span>--type<span class="o">=</span>swap<span class="w"> </span>--all<span class="w"> </span>--no-legend<span class="w"> </span>--no-pager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oE<span class="w"> </span><span class="s1">&#39;\S+\.swap&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$unit</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">        </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>mask<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$unit</span><span class="s2">&quot;</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">    </span><span class="k">fi</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="k">done</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="k">for</span><span class="w"> </span>unit_file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span>--type<span class="o">=</span>swap<span class="w"> </span>--no-legend<span class="w"> </span>--no-pager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oE<span class="w"> </span><span class="s1">&#39;\S+\.swap&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$unit_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">        </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>mask<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$unit_file</span><span class="s2">&quot;</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="w">    </span><span class="k">fi</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="k">done</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="c1"># 3) zram 비활성화</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>--now<span class="w"> </span>zram-generator<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>--now<span class="w"> </span>zram-config<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
-<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>
-<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="c1"># (b) containerd / cgroup driver 불일치</span>
-<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>systemctl<span class="w"> </span>status<span class="w"> </span>containerd
-<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>SystemdCgroup<span class="w"> </span>/etc/containerd/config.toml
-<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>cgroupDriver<span class="w"> </span>/var/lib/kubelet/config.yaml
-<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>
-<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a><span class="c1"># (c) SELinux 차단 로그</span>
-<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>sudo<span class="w"> </span>ausearch<span class="w"> </span>-m<span class="w"> </span>AVC<span class="w"> </span>-ts<span class="w"> </span>recent<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-20
-<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a><span class="c1"># 임시 완화 (운영 적용 전 정책 검토 필요)</span>
-<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>sudo<span class="w"> </span>setenforce<span class="w"> </span><span class="m">0</span>
-</code></pre></div>
-<h3 id="52-시스템-pod-coredns--cni-가-running-안-됨">5.2 시스템 Pod (CoreDNS / CNI) 가 Running 안 됨</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;br_netfilter|overlay&#39;</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>modprobe<span class="w"> </span>br_netfilter<span class="w"> </span>overlay
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>ds/calico-node<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>ds/cilium<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</code></pre></div>
-<h3 id="53-etcd-quorum-손상">5.3 etcd quorum 손상</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>etcd
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>crictl<span class="w"> </span>logs<span class="w"> </span>&lt;etcd-container-id&gt;<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-50
-</code></pre></div>
-<p>복구 방향:</p>
-<ul>
-<li>다운된 마스터를 <strong>재부팅으로 복구</strong>하는 것이 1순위</li>
-<li>영구 손상 시 <a href="../../install/rocky/offline-install/">install-guide.md</a> 의 etcd 복원 / 마스터 재합류 절차 참조</li>
-</ul>
-<h3 id="54-vip-split-brain-두-노드-동시-보유">5.4 VIP Split-Brain (두 노드 동시 보유)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">for</span><span class="w"> </span>n<span class="w"> </span><span class="k">in</span><span class="w"> </span>master-1<span class="w"> </span>master-2<span class="w"> </span>master-3<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span>ssh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;ip -br addr | grep &lt;VIP&gt;; sudo systemctl status keepalived --no-pager | grep -E &quot;Active|STATE&quot;&#39;</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">done</span>
-</code></pre></div>
-<p>원인: VRRP 멀티캐스트 차단(firewalld) 또는 priority 동일.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># firewalld 가 VRRP(IP protocol 112) 를 막고 있는지</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--list-all
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1"># 필요 시 (해당 인터페이스 zone 에서)</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--add-rich-rule<span class="o">=</span><span class="s1">&#39;rule protocol value=&quot;vrrp&quot; accept&#39;</span><span class="w"> </span>--permanent
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--reload
-</code></pre></div>
-<h3 id="55-nfs-pv-마운트-실패">5.5 NFS PV 마운트 실패</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># 노드에서 직접 마운트 테스트</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>nfs<span class="w"> </span>&lt;nfs-server&gt;:/&lt;export&gt;<span class="w"> </span>/mnt/test
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/test
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="c1"># 패키지 / 서비스</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>rpm<span class="w"> </span>-q<span class="w"> </span>nfs-utils
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>rpc-statd<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="c1"># firewalld</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>sudo<span class="w"> </span>firewall-cmd<span class="w"> </span>--list-all<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;nfs|2049|111&#39;</span>
-</code></pre></div>
-<h3 id="56-firewalld--iptables-규칙-충돌">5.6 firewalld / iptables 규칙 충돌</h3>
-<p>K8s 가 자체 iptables/nftables 규칙을 생성하므로, firewalld 가 재부팅 후 규칙을 덮어쓸 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>KUBE-IPTABLES-HINT<span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>sudo<span class="w"> </span>nft<span class="w"> </span>list<span class="w"> </span>ruleset<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-50
-</code></pre></div>
-<p>설치 가이드에서 firewalld 비활성을 권장한 환경이라면 재부팅 후에도 비활성인지 재확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>firewalld
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>firewalld
-</code></pre></div>
-<hr />
-<h2 id="6-체크리스트">6. 체크리스트</h2>
-<h3 id="61-재부팅-전">6.1 재부팅 전</h3>
-<ul>
-<li>[ ] 모든 노드 <code>Ready</code>, 시스템 Pod 모두 <code>Running</code></li>
-<li>[ ] etcd 3 멤버 정상 (HA)</li>
-<li>[ ] PDB 와 단일 replica 워크로드 영향 평가</li>
-<li>[ ] swap / 모듈 / sysctl / SELinux / enabled 서비스 영구 설정 확인</li>
-<li>[ ] (HA) VIP 보유 노드 식별 → 마지막에 재부팅 예정으로 표시</li>
-</ul>
-<h3 id="62-재부팅-중-노드별">6.2 재부팅 중 (노드별)</h3>
-<ul>
-<li>[ ] (워커) drain 완료 후 재부팅</li>
-<li>[ ] 부팅 후 <code>containerd</code>, <code>kubelet</code> active</li>
-<li>[ ] 노드 <code>Ready</code>, 해당 노드의 시스템 Pod <code>Running</code></li>
-<li>[ ] (마스터) etcd 멤버 healthy</li>
-<li>[ ] (필요 시) <code>kubectl uncordon</code></li>
-</ul>
-<h3 id="63-재부팅-후-전체">6.3 재부팅 후 (전체)</h3>
-<ul>
-<li>[ ] <code>kubectl get nodes</code> 모두 Ready</li>
-<li>[ ] <code>kubectl get pods -A</code> 비정상 Pod 없음</li>
-<li>[ ] (HA) VIP 단일 노드 보유, API healthz OK</li>
-<li>[ ] PV/PVC <code>Bound</code>, NFS 마운트 정상</li>
-<li>[ ] 핵심 서비스 응답 확인 (Harbor, Ingress, Gateway)</li>
-<li>[ ] 정전 / 비계획 재부팅이었다면 모니터링 알람·로그 확인</li>
-</ul>
-<hr />
-<blockquote>
-<p><strong>운영 팁</strong>:</p>
-<ul>
-<li>점검 창은 <strong>15–20분 / 노드</strong> 로 잡는 것이 안전합니다.</li>
-<li>HA 마스터 3대 순차 재부팅 + 검증 시 총 60–90분 예상.</li>
-<li>사전에 <a href="../../install/rocky/offline-install/">install-guide.md</a> 의 검증 명령을 한 번 더 훑어두면 좋습니다.</li>
-</ul>
-</blockquote>
 
 
 

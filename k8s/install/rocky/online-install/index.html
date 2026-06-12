@@ -2572,6 +2572,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4564,7 +4620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4648,7 +4704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4676,7 +4732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -7288,13 +7344,24 @@ Phase 3 (containerd 설정 완료) 이후로 미룹니다.</p>
 <a id="__codelineno-4-77" name="__codelineno-4-77" href="#__codelineno-4-77"></a><span class="s">root hard nofile 1048576</span>
 <a id="__codelineno-4-78" name="__codelineno-4-78" href="#__codelineno-4-78"></a><span class="s">EOF</span>
 <a id="__codelineno-4-79" name="__codelineno-4-79" href="#__codelineno-4-79"></a>
-<a id="__codelineno-4-80" name="__codelineno-4-80" href="#__codelineno-4-80"></a><span class="c1"># 7. hosts 파일 등록 (환경에 맞게 수정)</span>
-<a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-<a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a><span class="s">&lt;MASTER1_IP&gt; &lt;MASTER1_HOSTNAME&gt;</span>
-<a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a><span class="s">&lt;MASTER2_IP&gt; &lt;MASTER2_HOSTNAME&gt;</span>
-<a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a><span class="s">&lt;MASTER3_IP&gt; &lt;MASTER3_HOSTNAME&gt;</span>
-<a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a><span class="s">&lt;WORKER1_IP&gt; &lt;WORKER1_HOSTNAME&gt;</span>
-<a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a><span class="s">EOF</span>
+<a id="__codelineno-4-80" name="__codelineno-4-80" href="#__codelineno-4-80"></a><span class="c1"># 3) kubelet 서비스 Limits 설정 (systemd override)</span>
+<a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/systemd/system/kubelet.service.d
+<a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/systemd/system/kubelet.service.d/limits.conf</span>
+<a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a><span class="s">[Service]</span>
+<a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a><span class="s">LimitNOFILE=1048576</span>
+<a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a><span class="s">LimitNPROC=infinity</span>
+<a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a><span class="s">LimitCORE=infinity</span>
+<a id="__codelineno-4-87" name="__codelineno-4-87" href="#__codelineno-4-87"></a><span class="s">TasksMax=infinity</span>
+<a id="__codelineno-4-88" name="__codelineno-4-88" href="#__codelineno-4-88"></a><span class="s">EOF</span>
+<a id="__codelineno-4-89" name="__codelineno-4-89" href="#__codelineno-4-89"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-4-90" name="__codelineno-4-90" href="#__codelineno-4-90"></a>
+<a id="__codelineno-4-91" name="__codelineno-4-91" href="#__codelineno-4-91"></a><span class="c1"># 7. hosts 파일 등록 (환경에 맞게 수정)</span>
+<a id="__codelineno-4-92" name="__codelineno-4-92" href="#__codelineno-4-92"></a>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-4-93" name="__codelineno-4-93" href="#__codelineno-4-93"></a><span class="s">&lt;MASTER1_IP&gt; &lt;MASTER1_HOSTNAME&gt;</span>
+<a id="__codelineno-4-94" name="__codelineno-4-94" href="#__codelineno-4-94"></a><span class="s">&lt;MASTER2_IP&gt; &lt;MASTER2_HOSTNAME&gt;</span>
+<a id="__codelineno-4-95" name="__codelineno-4-95" href="#__codelineno-4-95"></a><span class="s">&lt;MASTER3_IP&gt; &lt;MASTER3_HOSTNAME&gt;</span>
+<a id="__codelineno-4-96" name="__codelineno-4-96" href="#__codelineno-4-96"></a><span class="s">&lt;WORKER1_IP&gt; &lt;WORKER1_HOSTNAME&gt;</span>
+<a id="__codelineno-4-97" name="__codelineno-4-97" href="#__codelineno-4-97"></a><span class="s">EOF</span>
 </code></pre></div>
 <h2 id="phase-3-containerd-설정-및-kubelet-기동-전체-노드">Phase 3: containerd 설정 및 kubelet 기동 (전체 노드)</h2>
 <p><code>containerd.io</code> (dnf) 설치 시 바이너리는 <code>/usr/bin/containerd</code>, <code>/usr/bin/ctr</code> 에 위치하며
@@ -7335,6 +7402,9 @@ Phase 3 (containerd 설정 완료) 이후로 미룹니다.</p>
 <a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>kubelet
 </code></pre></div>
 <blockquote>
+<p><code>/etc/security/limits.d</code>는 주로 로그인 세션에 적용됩니다. <code>kubelet</code>과
+<code>containerd</code>처럼 systemd가 직접 띄우는 서비스는 위 systemd override까지
+적용해야 FD/프로세스 limits가 일관되게 반영됩니다.</p>
 <p><code>crictl</code> 은 <code>cri-tools</code> 패키지(Phase 1 에서 kubeadm 의존성으로 설치됨)에 포함되어 <code>/usr/bin/crictl</code> 에
 있습니다. <code>/etc/crictl.yaml</code> 이 없으면 매 호출마다 경고가 뜨므로 아래로 생성:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/crictl.yaml</span>

@@ -1743,6 +1743,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3387,13 +3443,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-1단계-k8s-자원-배포-및-gitlab-16112-기동" class="md-nav__link">
+  <a href="#2-배포-절차-설치-방법-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 1단계: K8s 자원 배포 및 GitLab 16.11.2 기동
+        2. 배포 절차 (설치 방법 선택)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. 배포 절차 (설치 방법 선택)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#방법-a-자동화-스크립트-이용-배포-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [방법 A] 자동화 스크립트 이용 배포 (권장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-b-수동-명령어-이용-배포-manual-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [방법 B] 수동 명령어 이용 배포 (Manual Fallback)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3441,6 +3525,17 @@
     <span class="md-ellipsis">
       
         4. 복원 상태 자가 검증
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-트러블슈팅-k8s-프로브readiness-404-에러" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 트러블슈팅: K8s 프로브(Readiness) 404 에러
       
     </span>
   </a>
@@ -3861,7 +3956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -3945,7 +4040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -3973,7 +4068,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -5640,13 +5735,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-1단계-k8s-자원-배포-및-gitlab-16112-기동" class="md-nav__link">
+  <a href="#2-배포-절차-설치-방법-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 1단계: K8s 자원 배포 및 GitLab 16.11.2 기동
+        2. 배포 절차 (설치 방법 선택)
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. 배포 절차 (설치 방법 선택)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#방법-a-자동화-스크립트-이용-배포-권장" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [방법 A] 자동화 스크립트 이용 배포 (권장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#방법-b-수동-명령어-이용-배포-manual-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [방법 B] 수동 명령어 이용 배포 (Manual Fallback)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -5700,6 +5823,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-트러블슈팅-k8s-프로브readiness-404-에러" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 트러블슈팅: K8s 프로브(Readiness) 404 에러
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5731,24 +5865,45 @@
 <li><strong>네임스페이스 및 퍼시스턴트 볼륨(PV/PVC)</strong>:</li>
 <li>복원될 용량에 맞춰 충분한 크기의 스토리지 공간을 갖춘 PV를 사전에 프로비저닝해야 합니다. (기본 <code>values.yaml</code> 기준: data 50Gi, config 1Gi)</li>
 </ol>
+<h2 id="2-배포-절차-설치-방법-선택">2. 배포 절차 (설치 방법 선택)</h2>
+<p>설치 환경 및 운영 편의에 맞춰 <strong>[방법 A] 자동화 스크립트 배포</strong> 혹은 <strong>[방법 B] 수동 명령어 배포</strong> 중 하나를 선택하여 기동할 수 있습니다.</p>
+<h3 id="방법-a-자동화-스크립트-이용-배포-권장">[방법 A] 자동화 스크립트 이용 배포 (권장)</h3>
+<ul>
+<li><strong>특징</strong>: 입력 설정을 <code>install.conf</code>에 영구 보존하며, 기존 배포 상태를 감지하여 업그레이드/재설치/초기화 분기 처리를 자동 제공합니다.</li>
+<li><strong>설치 명령</strong>:
+  컴포넌트 루트 디렉토리에서 다음 스크립트를 실행하고 대화형 프롬프트에 따라 값을 입력하십시오:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./scripts/install.sh
+</code></pre></div></li>
+<li><strong>동작 세부</strong>:</li>
+<li><strong>대화형 환경 입력</strong>: 이미지 소스(Harbor / Local load / Online), 스토리지 경로(NFS / HostPath / Dynamic), 외부 도메인 등을 수집합니다.</li>
+<li><strong>Values 자동 동기화</strong>: 수집된 환경 변수는 <code>sed</code> 명령어를 통해 <code>values.yaml</code> 및 <code>configmap.yaml</code> 화이트리스트에 자동으로 동기화 매핑되어 반영됩니다.</li>
+</ul>
 <hr />
-<h2 id="2-1단계-k8s-자원-배포-및-gitlab-16112-기동">2. 1단계: K8s 자원 배포 및 GitLab 16.11.2 기동</h2>
-<ol>
+<h3 id="방법-b-수동-명령어-이용-배포-manual-fallback">[방법 B] 수동 명령어 이용 배포 (Manual Fallback)</h3>
+<ul>
+<li><strong>특징</strong>: 자동화 스크립트 없이 매니페스트 설정을 직접 튜닝하여 단계별 수동 명령으로 배포를 통제합니다.</li>
+<li><strong>수동 배포 단계</strong>:</li>
 <li><strong>설치 네임스페이스 생성</strong>:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>gitlab-omnibus
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>gitlab-omnibus
 </code></pre></div></li>
-<li><strong>PV 매니페스트 배포</strong>:</li>
-<li><code>manifests/gitlab-omnibus-pv.yaml</code> 내의 스토리지 저장 경로를 검증용 HostPath 혹은 NFS 디렉토리로 수정한 후 적용합니다:
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/gitlab-omnibus-pv.yaml
+<li><strong>[필수] 프로브 IP 화이트리스트 사전 수정</strong>:
+     K8s 프로브(kube-probe) 요청 IP 대역이 기본 사설 대역 외에 위치하는 경우(예: CNI 마스커레이딩 대역 <code>1.x.x.x</code> 등), <strong>배포 전에 <code>charts/gitlab-omnibus/templates/configmap.yaml</code> 파일 내 <code>monitoring_whitelist</code> 설정 배열에 해당 대역을 미리 수동 추가</strong>해야 합니다 (미조치 시 404 에러로 파드가 정상 동작하지 않습니다).
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;monitoring_whitelist&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;127.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;172.16.0.0/12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;192.168.0.0/16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1.0.0.0/8&#39;</span><span class="o">]</span>
 </code></pre></div></li>
-<li><strong>Values 설정 및 Helm 배포</strong>:</li>
-<li><code>values.yaml</code> 내의 <code>externalUrl</code> 주소를 테스트 도메인 또는 테스트 NodePort 주소(예: <code>http://&lt;TEST_NODE_IP&gt;:32135</code>)로 수정합니다.</li>
+<li><strong>PV 매니페스트 배포</strong>:
+     <code>manifests/gitlab-omnibus-pv.yaml</code> 내의 스토리지 저장 경로를 검증용 HostPath 혹은 NFS 디렉토리로 수정한 후 적용합니다:
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/gitlab-omnibus-pv.yaml
+</code></pre></div></li>
+<li><strong>Values 설정 및 Helm 배포</strong>:<ul>
+<li><code>values.yaml</code> 내의 <code>externalUrl</code> 주소를 테스트 NodePort 주소(예: <code>http://&lt;NODE_IP&gt;:32135</code>)로 수정합니다.</li>
 <li>아래 명령을 실행하여 16.11.2 파드를 띄웁니다:
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml
 </code></pre></div></li>
-</ol>
+</ul>
+</li>
+</ul>
 <hr />
 <h2 id="3-2단계-운영-백업-데이터-이전-및-복원-실행">3. 2단계: 운영 백업 데이터 이전 및 복원 실행</h2>
 <h3 id="31-백업-자산-컨테이너-내부로-업로드">3.1. 백업 자산 컨테이너 내부로 업로드</h3>
@@ -5757,10 +5912,10 @@
 <li>복원 시 데이터베이스를 올바르게 복호화하려면 운영 환경의 <code>gitlab-secrets.json</code> 파일이 필요합니다.</li>
 <li>
 <p>아래 명령어로 파일을 컨테이너 내부의 설정 경로로 업로드합니다:
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># secrets.json 업로드</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>gitlab-secrets.json<span class="w"> </span>gitlab-omnibus-nfs-config:/etc/gitlab/gitlab-secrets.json<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># gitlab.rb 업로드</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>gitlab-rb-backup<span class="w"> </span>/etc/gitlab/gitlab.rb
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># secrets.json 업로드</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>gitlab-secrets.json<span class="w"> </span>gitlab-omnibus-nfs-config:/etc/gitlab/gitlab-secrets.json<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># gitlab.rb 업로드</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>gitlab-rb-backup<span class="w"> </span>/etc/gitlab/gitlab.rb
 </code></pre></div>
      <em>(실제 영구 볼륨 스토리지의 config PV 경로인 <code>/data/gitlab_omnibus/config</code> 등에 파일들을 직접 복사해 두는 방안이 훨씬 더 간단하고 안정적입니다.)</em></p>
 </li>
@@ -5768,25 +5923,24 @@
 <p><strong>애플리케이션 백업 tar 파일 복사</strong>:</p>
 </li>
 <li>운영 백업 tar 파일을 GitLab 데이터 영구 스토리지 볼륨 내부의 백업 디렉토리(기본값: <code>/var/opt/gitlab/backups/</code>)로 복사합니다:
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 컨테이너 내 백업 볼륨 경로로 복사</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>&lt;BACKUP_FILE&gt;.tar<span class="w"> </span>gitlab-omnibus-pod-name:/var/opt/gitlab/backups/<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 컨테이너 내 백업 볼륨 경로로 복사</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>&lt;BACKUP_FILE&gt;.tar<span class="w"> </span>gitlab-omnibus-pod-name:/var/opt/gitlab/backups/<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus
 </code></pre></div></li>
 <li><strong>소유권 변경</strong>: 복사 완료 후 파일의 소유자가 <code>git:git</code>인지 확인하고 변경해 주어야 GitLab 복원 도구가 정상 접근할 수 있습니다.
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>chown<span class="w"> </span>git:git<span class="w"> </span>/var/opt/gitlab/backups/&lt;BACKUP_FILE&gt;.tar
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>chown<span class="w"> </span>git:git<span class="w"> </span>/var/opt/gitlab/backups/&lt;BACKUP_FILE&gt;.tar
 </code></pre></div></li>
 </ol>
 <h3 id="32-복원-실행">3.2. 복원 실행</h3>
 <ol>
 <li><strong>웹서비스 및 백그라운드 큐 처리 프로세스 정지</strong>:</li>
 <li>복원 중 DB 정합성이 흔들리지 않도록 Puma 웹서버와 Sidekiq을 정지시킵니다.
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>puma
-</code></pre></div>
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>sidekiq
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>puma
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>sidekiq
 </code></pre></div></li>
 <li><strong>복원 명령어 트리거</strong>:</li>
 <li>
 <p>백업 파일명 중 타임스탬프 부분(예: <code>1716123456_2026_06_08_16.11.2_gitlab_backup.tar</code> 이라면 <code>1716123456_2026_06_08_16.11.2</code>)을 TIMESTAMP 인자로 설정해 복원을 돌립니다.
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-backup<span class="w"> </span>restore<span class="w"> </span><span class="nv">BACKUP</span><span class="o">=</span>&lt;TIMESTAMP&gt;
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-backup<span class="w"> </span>restore<span class="w"> </span><span class="nv">BACKUP</span><span class="o">=</span>&lt;TIMESTAMP&gt;
 </code></pre></div>
      <em>(복원 프로세스 중 Authorized keys 파일과 데이터베이스 테이블 덮어쓰기 여부를 물으면 <code>yes</code>를 입력하여 승인합니다.)</em></p>
 </li>
@@ -5794,9 +5948,8 @@
 <p><strong>환경 재설정 및 기동</strong>:</p>
 </li>
 <li>복원이 정상 완료되면 중지한 프로세스들을 켜주고 GitLab 설정을 리프레시합니다.
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>reconfigure
-</code></pre></div>
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>restart
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>reconfigure
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>restart
 </code></pre></div></li>
 </ol>
 <hr />
@@ -5805,6 +5958,16 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-rake<span class="w"> </span>gitlab:check<span class="w"> </span><span class="nv">SANITIZE</span><span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 체크 결과 모든 검사 결과가 <code>green/yes</code>로 나타나면 테스트 환경에 성공적으로 운영 데이터가 복구된 것입니다. 이 시점부터 목표 버전인 <code>18.11.4</code>를 향한 <strong>순차 마이그레이션 실습</strong>을 시작할 수 있습니다. (상세 단계는 <a href="../gitlab-upgrade-guide-18.11.4/">GitLab Omnibus 업그레이드 가이드</a> 참조)</p>
+<hr />
+<h2 id="5-트러블슈팅-k8s-프로브readiness-404-에러">5. 트러블슈팅: K8s 프로브(Readiness) 404 에러</h2>
+<ul>
+<li><strong>현상</strong>: 파드가 <code>Running</code> 상태이나 <code>Ready</code>로 전환되지 않으며, <code>GET /-/readiness HTTP/1.1" 404</code> 로그가 반복될 때.</li>
+<li><strong>원인</strong>: GitLab은 외부 접근 및 서비스 거부(DoS) 방지를 위해 모니터링 엔드포인트(<code>/-/readiness</code>)의 IP 화이트리스트(<code>monitoring_whitelist</code>)를 운영합니다. K8s의 프로브 소스 IP(예: CNI 마스커레이딩 대역 등)가 기본 사설 대역을 벗어나면 GitLab Rails가 요청을 차단하여 404 Not Found를 응답합니다.</li>
+<li><strong>해결 방법</strong>:
+  <code>charts/gitlab-omnibus/templates/configmap.yaml</code> 파일 내의 <code>monitoring_whitelist</code> 리스트에 프로브가 시도되는 네트워크 대역(예: <code>'1.0.0.0/8'</code>) 혹은 사내 에어갭 보안 정책에 맞춰 모든 대역(<code>'0.0.0.0/0'</code>)을 추가한 뒤 Helm 업그레이드를 재수행하십시오:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;monitoring_whitelist&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;127.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;172.16.0.0/12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;192.168.0.0/16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1.0.0.0/8&#39;</span><span class="o">]</span>
+</code></pre></div></li>
+</ul>
 
 
 

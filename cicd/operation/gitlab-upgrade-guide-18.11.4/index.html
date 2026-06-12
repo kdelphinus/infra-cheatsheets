@@ -1743,6 +1743,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3416,10 +3472,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1안-가장-추천-백업--복원restore-기반-격리-이관-방식-안전성-100" class="md-nav__link">
+  <a href="#1안-권장-백업--복원restore-기반-격리-이관-방식-안전성-100" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1안. [가장 추천] 백업 &amp; 복원(Restore) 기반 격리 이관 방식 (안전성 100%)
+        1안. [권장] 백업 &amp; 복원(Restore) 기반 격리 이관 방식 (안전성 100%)
       
     </span>
   </a>
@@ -3527,6 +3583,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-중요-k8s-프로브-ip-화이트리스트-사전-등록-kube-probe-404-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 중요: K8s 프로브 IP 화이트리스트 사전 등록 (kube-probe 404 차단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-중요-postgresql-업그레이드-대비-스토리지-여유-공간-확보-50-룰" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3577,10 +3644,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#61-미완료-백그라운드-마이그레이션-확인-sql" class="md-nav__link">
+  <a href="#61-k8s-kube-probe-404-not-found-readinessliveness-실패-문제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1. 미완료 백그라운드 마이그레이션 확인 SQL
+        6.1. K8s kube-probe 404 Not Found (Readiness/Liveness 실패) 문제
       
     </span>
   </a>
@@ -3588,10 +3655,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#62-마이그레이션이-실패failed-혹은-대기-상태에-머물-때-강제-트리거" class="md-nav__link">
+  <a href="#62-미완료-백그라운드-마이그레이션-확인-sql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거
+        6.2. 미완료 백그라운드 마이그레이션 확인 SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-마이그레이션이-실패failed-혹은-대기-상태에-머물-때-강제-트리거" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거
       
     </span>
   </a>
@@ -4000,7 +4078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4084,7 +4162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4112,7 +4190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -5780,10 +5858,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1안-가장-추천-백업--복원restore-기반-격리-이관-방식-안전성-100" class="md-nav__link">
+  <a href="#1안-권장-백업--복원restore-기반-격리-이관-방식-안전성-100" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1안. [가장 추천] 백업 &amp; 복원(Restore) 기반 격리 이관 방식 (안전성 100%)
+        1안. [권장] 백업 &amp; 복원(Restore) 기반 격리 이관 방식 (안전성 100%)
       
     </span>
   </a>
@@ -5891,6 +5969,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#-중요-k8s-프로브-ip-화이트리스트-사전-등록-kube-probe-404-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 중요: K8s 프로브 IP 화이트리스트 사전 등록 (kube-probe 404 차단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-중요-postgresql-업그레이드-대비-스토리지-여유-공간-확보-50-룰" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5941,10 +6030,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#61-미완료-백그라운드-마이그레이션-확인-sql" class="md-nav__link">
+  <a href="#61-k8s-kube-probe-404-not-found-readinessliveness-실패-문제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1. 미완료 백그라운드 마이그레이션 확인 SQL
+        6.1. K8s kube-probe 404 Not Found (Readiness/Liveness 실패) 문제
       
     </span>
   </a>
@@ -5952,10 +6041,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#62-마이그레이션이-실패failed-혹은-대기-상태에-머물-때-강제-트리거" class="md-nav__link">
+  <a href="#62-미완료-백그라운드-마이그레이션-확인-sql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거
+        6.2. 미완료 백그라운드 마이그레이션 확인 SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-마이그레이션이-실패failed-혹은-대기-상태에-머물-때-강제-트리거" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거
       
     </span>
   </a>
@@ -6003,7 +6103,7 @@
 <hr />
 <h2 id="1-크로스-클러스터-이관migration-전략-설계">1. 크로스 클러스터 이관(Migration) 전략 설계</h2>
 <p>구형 클러스터의 데이터를 신형 클러스터로 이전할 때, 기존 PV(NFS 스토리지 등)를 신형에 직접 그대로 마운트하여 업그레이드하는 방식은 데이터가 깨졌을 때 복구(롤백)가 불가능하므로 <strong>결코 권장되지 않습니다.</strong> 아래의 두 가지 전략 중 상황에 맞는 아키텍처를 선택하여 수행하십시오.</p>
-<h3 id="1안-가장-추천-백업--복원restore-기반-격리-이관-방식-안전성-100">1안. [가장 추천] 백업 &amp; 복원(Restore) 기반 격리 이관 방식 (안전성 100%)</h3>
+<h3 id="1안-권장-백업--복원restore-기반-격리-이관-방식-안전성-100">1안. [권장] 백업 &amp; 복원(Restore) 기반 격리 이관 방식 (안전성 100%)</h3>
 <p>구형 클러스터와 원본 스토리지는 그대로 보존한 채, 신형 클러스터에 완전히 독립된 새로운 PV/PVC를 생성하여 데이터를 마이그레이션하는 표준 방식입니다.</p>
 <ul>
 <li><strong>이관 프로세스</strong>:</li>
@@ -6056,33 +6156,40 @@
 <li><strong>서비스 백그라운드 프로세스 중지</strong>:</li>
 <li>DB 덮어쓰기 도중 충돌을 막기 위해 Puma(웹서버)와 Sidekiq(배치/큐 처리) 프로세스를 일시 정지합니다:
      <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>puma
-</code></pre></div>
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>sidekiq
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>stop<span class="w"> </span>sidekiq
 </code></pre></div></li>
 <li><strong>복원 명령어 트리거</strong>:</li>
 <li>백업 파일의 타임스탬프 명세를 인자로 주입하여 복원을 실행합니다 (질의창이 나타나면 <code>yes</code>를 입력):
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-backup<span class="w"> </span>restore<span class="w"> </span><span class="nv">BACKUP</span><span class="o">=[</span>타임스탬프<span class="o">]</span>_2026_06_08_16.11.2
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-backup<span class="w"> </span>restore<span class="w"> </span><span class="nv">BACKUP</span><span class="o">=[</span>타임스탬프<span class="o">]</span>_2026_06_08_16.11.2
 </code></pre></div></li>
 <li><strong>환경 재설정 및 재기동</strong>:</li>
 <li>복원이 정상 완료되면 DB 스키마 갱신을 적용하고 중지한 프로세스들을 재기동합니다.
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>reconfigure
-</code></pre></div>
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>restart
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>reconfigure
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-ctl<span class="w"> </span>restart
 </code></pre></div></li>
 <li><strong>복원 상태 검증</strong>:</li>
 <li>Rake 자가 정합성 체크 툴을 돌려 정상 판정이 나오는지 검토합니다:
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-rake<span class="w"> </span>gitlab:check<span class="w"> </span><span class="nv">SANITIZE</span><span class="o">=</span><span class="nb">true</span>
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>deploy/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--<span class="w"> </span>gitlab-rake<span class="w"> </span>gitlab:check<span class="w"> </span><span class="nv">SANITIZE</span><span class="o">=</span><span class="nb">true</span>
 </code></pre></div></li>
 </ol>
 <hr />
 <h2 id="4-공식-필수-업그레이드-경로-및-k8s-최적화-required-stops">4. 공식 필수 업그레이드 경로 및 K8s 최적화 (Required Stops)</h2>
 <p>신형 클러스터 상에서 데이터 복원이 완벽하게 완료된 후, LTS 최종 버전인 <code>18.11.4</code>를 향해 아래 명시된 <strong>마이그레이션 필수 정지점(Upgrade Stops)</strong> 순서로 <code>helm upgrade</code> 이미지 태그를 변경해가며 업그레이드를 수행합니다.</p>
 <h3 id="업그레이드-경로-요약">업그레이드 경로 요약</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[16.11.2] (복구 검증 완료) -&gt; [16.11.10] -&gt; [17.1.8] -&gt; [17.3.7] -&gt; [17.5.5] -&gt; [17.8.7] -&gt; [17.11.7] -&gt; [18.2.8] -&gt; [18.5.7] -&gt; [18.8.10] -&gt; [18.11.4]
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[16.11.2] (복구 검증 완료) -&gt; [16.11.10] -&gt; [17.1.8] -&gt; [17.3.7] -&gt; [17.5.5] -&gt; [17.8.7] -&gt; [17.11.7] -&gt; [18.2.8] -&gt; [18.5.7] -&gt; [18.8.10] -&gt; [18.11.4]
 </code></pre></div>
 * <strong>참조 공식 링크</strong>:
   * <a href="https://gitlab-com.gitlab.io/support/toolbox/upgrade-path/?current=16.11.10&amp;target=18.11.4">GitLab Upgrade Path Tool (16.11.10 -&gt; 18.11.4)</a>
   * <a href="https://docs.gitlab.com/update/upgrade_paths/#upgrade-path-tool">GitLab 공식 Upgrade Paths 가이드</a></p>
+<hr />
+<h3 id="-중요-k8s-프로브-ip-화이트리스트-사전-등록-kube-probe-404-차단">⚠️ 중요: K8s 프로브 IP 화이트리스트 사전 등록 (kube-probe 404 차단)</h3>
+<ul>
+<li>GitLab은 기본 보안 정책으로 모니터링 경로(<code>/-/readiness</code>, <code>/-/liveness</code>)를 호출하는 IP를 엄격히 필터링합니다.</li>
+<li>쿠버네티스의 프로브(kube-probe) 요청 IP 대역이 기본 대역(<code>127.0.0.0/8</code>, <code>10.0.0.0/8</code> 등) 외에 위치하는 경우(예: CNI 마스커레이딩 대역 <code>1.x.x.x</code> 등), <strong>반드시 배포 전에 <code>charts/gitlab-omnibus/templates/configmap.yaml</code> 파일 내 <code>monitoring_whitelist</code> 설정 배열에 해당 대역을 미리 수동 추가</strong>해야 합니다. </li>
+<li>그렇지 않으면 헬스체크 프로브가 <code>404 Not Found</code>로 차단당해 파드가 평생 <code>Ready</code> 상태로 들어가지 못하는 원인이 됩니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;monitoring_whitelist&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;127.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;172.16.0.0/12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;192.168.0.0/16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1.0.0.0/8&#39;</span><span class="o">]</span>
+</code></pre></div></li>
+</ul>
 <hr />
 <h3 id="-중요-postgresql-업그레이드-대비-스토리지-여유-공간-확보-50-룰">⚠️ 중요: PostgreSQL 업그레이드 대비 스토리지 여유 공간 확보 (50% 룰)</h3>
 <ul>
@@ -6100,41 +6207,51 @@
 <li><code>deployment.yaml</code>의 컨테이너 <code>command</code> 스펙에 <code>["sleep", "36000"]</code>을 임시 주입하여 자동 기동을 우회하고 백그라운드 슬립 상태로 파드를 띄웁니다.</li>
 <li><code>kubectl exec -it [파드명] -n [네임스페이스] -- bash</code>로 직접 컨테이너 내부에 접속합니다.</li>
 <li>컨테이너 내부에서 아래 명령을 차례대로 내려 수동으로 완료를 확인합니다:
-     <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>gitlab-ctl<span class="w"> </span>reconfigure
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>gitlab-ctl<span class="w"> </span>pg-upgrade<span class="w">  </span><span class="c1"># DB 엔진 메이저 변환 완료 확인</span>
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>gitlab-ctl<span class="w"> </span>reconfigure
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>gitlab-ctl<span class="w"> </span>pg-upgrade<span class="w">  </span><span class="c1"># DB 엔진 메이저 변환 완료 확인</span>
 </code></pre></div></li>
 <li>변환 완료 후 <code>deployment.yaml</code>의 <code>command</code> 설정을 원상 복구하여 헬름 배포를 원상 복구시킵니다.</li>
 </ul>
 <hr />
 <h2 id="5-순차-업그레이드-시뮬레이션-실행-helm">5. 순차 업그레이드 시뮬레이션 실행 (Helm)</h2>
 <p><code>gitlab-omnibus-18.11.4</code> 컴포넌트 내의 차트를 사용하되, 이미지 태그(<code>image.tag</code>)를 명령어로 오버라이드하여 필수 정지점 순서대로 차례대로 헬름 업그레이드를 수행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 1. 16.11.10 최종 패치 적용</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">16</span>.11.10-ee.0
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># (기동 완료 및 DB Background Migration 확인 필수)</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># 2. 17.1.8 업그레이드 (PostgreSQL 14 상태 보장 확인)</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1"># [주의] 이 단계 기동 전 deployment.yaml의 startupProbe 임계치 조정 권장</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.1.8-ee.0
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># 3. 17.3.7 -&gt; 17.5.5 -&gt; 17.8.7 -&gt; 17.11.7 순차 적용</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.3.7-ee.0
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.5.5-ee.0
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.8.7-ee.0
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.11.7-ee.0
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="c1"># 4. 18.2.8 업그레이드 (PostgreSQL 16 상태 보장 확인)</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="c1"># [주의] 이 단계 기동 전 deployment.yaml의 startupProbe 임계치 조정 권장</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.2.8-ee.0
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
-<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="c1"># 5. 18.5.7 -&gt; 18.8.10 -&gt; 18.11.4 최종 버전 순차 적용</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.5.7-ee.0
-<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.8.10-ee.0
-<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.11.4-ee.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 1. 16.11.10 최종 패치 적용</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">16</span>.11.10-ee.0
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># (기동 완료 및 DB Background Migration 확인 필수)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># 2. 17.1.8 업그레이드 (PostgreSQL 14 상태 보장 확인)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># [주의] 이 단계 기동 전 deployment.yaml의 startupProbe 임계치 조정 권장</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.1.8-ee.0
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># 3. 17.3.7 -&gt; 17.5.5 -&gt; 17.8.7 -&gt; 17.11.7 순차 적용</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.3.7-ee.0
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.5.5-ee.0
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.8.7-ee.0
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">17</span>.11.7-ee.0
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="c1"># 4. 18.2.8 업그레이드 (PostgreSQL 16 상태 보장 확인)</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="c1"># [주의] 이 단계 기동 전 deployment.yaml의 startupProbe 임계치 조정 권장</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.2.8-ee.0
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="c1"># 5. 18.5.7 -&gt; 18.8.10 -&gt; 18.11.4 최종 버전 순차 적용</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.5.7-ee.0
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.8.10-ee.0
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab-omnibus<span class="w"> </span>./charts/gitlab-omnibus<span class="w"> </span>-n<span class="w"> </span>gitlab-omnibus<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span><span class="m">18</span>.11.4-ee.0
 </code></pre></div>
 <hr />
 <h2 id="6-버전-이동-간-상태-검증-및-문제-해결-troubleshooting">6. 버전 이동 간 상태 검증 및 문제 해결 (Troubleshooting)</h2>
-<p>각각의 <code>helm upgrade</code> 단계가 완료된 후, 다음 단계의 업그레이드 커맨드를 입력하기 전에 반드시 백그라운드 스키마 데이터 변환이 완전히 종료되었는지 확인하고 넘어가야 합니다.</p>
-<h3 id="61-미완료-백그라운드-마이그레이션-확인-sql">6.1. 미완료 백그라운드 마이그레이션 확인 SQL</h3>
+<h3 id="61-k8s-kube-probe-404-not-found-readinessliveness-실패-문제">6.1. K8s kube-probe 404 Not Found (Readiness/Liveness 실패) 문제</h3>
+<ul>
+<li><strong>현상</strong>: 파드가 <code>Running</code> 상태임에도 불구하고 <code>Ready</code> 상태로 전환되지 않으며, 로그 상에 <code>GET /-/readiness HTTP/1.1" 404</code> 에러가 관측되는 경우.</li>
+<li><strong>원인</strong>: GitLab은 외부 보안 정찰 및 DoS 공격 방지를 위해 모니터링 엔드포인트(<code>/-/readiness</code>, <code>/-/liveness</code>)에 접근할 수 있는 IP 화이트리스트(<code>monitoring_whitelist</code>)를 운영합니다. K8s 클러스터 내부의 프로브 소스 IP(예: CNI 마스커레이딩 IP 대역)가 configmap.yaml에 설정된 기본 대역을 벗어날 경우, GitLab Rails 애플리케이션(<code>HealthController</code>)이 요청을 차단하여 404 Not Found를 응답하고 프로브가 최종 실패하게 됩니다.</li>
+<li><strong>조치 방법</strong>:
+  <code>charts/gitlab-omnibus/templates/configmap.yaml</code> 파일 내의 <code>monitoring_whitelist</code> 리스트에 프로브가 시도되는 네트워크 대역(예: <code>'1.0.0.0/8'</code>) 혹은 사내 에어갭 보안 정책에 맞춰 모든 대역(<code>'0.0.0.0/0'</code>)을 추가한 뒤 Helm 업그레이드를 재수행하십시오:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;monitoring_whitelist&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;127.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;10.0.0.0/8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;172.16.0.0/12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;192.168.0.0/16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1.0.0.0/8&#39;</span><span class="o">]</span>
+</code></pre></div></li>
+</ul>
+<hr />
+<p>각개의 <code>helm upgrade</code> 단계가 완료된 후, 다음 단계의 업그레이드 커맨드를 입력하기 전에 반드시 백그라운드 스키마 데이터 변환이 완전히 종료되었는지 확인하고 넘어가야 합니다.</p>
+<h3 id="62-미완료-백그라운드-마이그레이션-확인-sql">6.2. 미완료 백그라운드 마이그레이션 확인 SQL</h3>
 <p>파드가 기동 완료(<code>Running</code> 상태 진입)되면 내부 DB에 접근해 다음 질의를 날립니다.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>gitlab-psql<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s2">SELECT job_class_name, table_name, column_name, job_arguments, status </span>
@@ -6143,7 +6260,7 @@
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="s2">&quot;</span>
 </code></pre></div>
 * <strong>성공 판정</strong>: 조회 결과가 <strong>0 rows</strong>여야 합니다. 0 rows가 출력되기 전에 버전을 올리면 스키마가 충돌하여 데이터베이스가 오염됩니다.</p>
-<h3 id="62-마이그레이션이-실패failed-혹은-대기-상태에-머물-때-강제-트리거">6.2. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거</h3>
+<h3 id="63-마이그레이션이-실패failed-혹은-대기-상태에-머물-때-강제-트리거">6.3. 마이그레이션이 실패(failed) 혹은 대기 상태에 머물 때 강제 트리거</h3>
 <p>특정 백작업이 멈춰있어 진행이 안 될 경우, 컨테이너 내에서 아래의 Rails Runner 명령어로 즉시 강제 마무리를 트리거합니다.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>gitlab-rails<span class="w"> </span>runner<span class="w"> </span>-e<span class="w"> </span>production<span class="w"> </span><span class="s1">&#39;</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="s1">Gitlab::Database::BackgroundMigration::BatchedMigration.queued.each do |m|</span>

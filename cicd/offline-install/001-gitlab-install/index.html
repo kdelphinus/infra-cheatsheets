@@ -1743,6 +1743,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3983,7 +4039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4067,7 +4123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4095,7 +4151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -6267,10 +6323,10 @@
 </blockquote>
 <h2 id="업그레이드">업그레이드</h2>
 <h3 id="스크립트로-업그레이드-권장">스크립트로 업그레이드 (권장)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./scripts/upgrade.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./scripts/install.sh
 </code></pre></div>
-<p>이전 설치 시 저장된 <code>gitlab-components-state.sh</code>를 읽어 선택한 컴포넌트 상태를 자동으로 복원합니다.
-유지 여부를 확인한 뒤, 변경이 필요하면 해당 항목만 다시 선택할 수 있습니다.</p>
+<p>기존 Helm 릴리스 또는 네임스페이스가 감지되면 <code>install.sh</code>가 업그레이드/재설치/초기화 메뉴를 표시합니다.
+<code>1) 업그레이드</code>를 선택하면 저장된 <code>install.conf</code> 및 선택 컴포넌트 설정을 재사용해 <code>helm upgrade --install</code>을 수행합니다.</p>
 <h3 id="직접-helm-명령어로-업그레이드">직접 Helm 명령어로 업그레이드</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># gitlab-components.yaml 이 이미 있으면 그대로 재사용</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gitlab<span class="w"> </span>./charts/gitlab<span class="w"> </span><span class="se">\</span>

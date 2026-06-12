@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#metallb-v0148-오프라인-설치-가이드" class="md-skip">
+        <a href="#metallb-v0161-오프라인-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -1493,10 +1493,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#자동화" class="md-nav__link">
+  <a href="#자동화-스크립트-사용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        자동화
+        자동화 (스크립트 사용)
       
     </span>
   </a>
@@ -1504,10 +1504,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#수동" class="md-nav__link">
+  <a href="#수동-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        수동
+        수동 삭제
       
     </span>
   </a>
@@ -2036,6 +2036,62 @@
     
   
     모니터링 운영 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
   
 
     
@@ -4041,7 +4097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4125,7 +4181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4153,7 +4209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -6021,10 +6077,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#자동화" class="md-nav__link">
+  <a href="#자동화-스크립트-사용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        자동화
+        자동화 (스크립트 사용)
       
     </span>
   </a>
@@ -6032,10 +6088,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#수동" class="md-nav__link">
+  <a href="#수동-삭제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        수동
+        수동 삭제
       
     </span>
   </a>
@@ -6078,9 +6134,9 @@
   
 
 
-<h1 id="metallb-v0148-오프라인-설치-가이드">MetalLB v0.14.8 오프라인 설치 가이드</h1>
+<h1 id="metallb-v0161-오프라인-설치-가이드">MetalLB v0.16.1 오프라인 설치 가이드</h1>
 <p>폐쇄망 환경에서 MetalLB(L2 모드)를 설치하여 Bare-metal K8s 클러스터에 LoadBalancer 타입
-서비스를 제공하는 절차입니다. 모든 명령은 <strong>컴포넌트 루트 디렉토리</strong>(<code>metallb-0.14.8/</code>)에서 실행합니다.</p>
+서비스를 제공하는 절차입니다. 모든 명령은 <strong>컴포넌트 루트 디렉토리</strong>(<code>metallb-0.16.1/</code>)에서 실행합니다.</p>
 <h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
 <p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
 <blockquote>
@@ -6094,7 +6150,6 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
 </code></pre></div>
 <p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
-<hr />
 <h2 id="전제-조건">전제 조건</h2>
 <ul>
 <li>Kubernetes 클러스터가 정상 동작 중 (<code>kubectl get nodes</code> → <code>Ready</code>)</li>
@@ -6122,10 +6177,10 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>         ▲
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>         │ spec 제공 (user input)
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>         ▼
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>┌──────────────────────────────────────────────────────┐
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>│  IPAddressPool  :  172.30.235.200-172.30.235.220     │
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>│  L2Advertisement: 위 풀을 L2(ARP)로 광고             │
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>└──────────────────────────────────────────────────────┘
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a> ┌──────────────────────────────────────────────────────┐
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a> │  IPAddressPool  :  172.30.235.200-172.30.235.220     │
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a> │  L2Advertisement: 위 풀을 L2(ARP)로 광고             │
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a> └──────────────────────────────────────────────────────┘
 </code></pre></div>
 <h2 id="0단계-ip-대역-산출">0단계: IP 대역 산출</h2>
 <p>MetalLB L2 모드는 노드와 동일한 물리 네트워크(L2 세그먼트) 내의 <strong>유휴 IP</strong>를 사용합니다.</p>
@@ -6154,8 +6209,8 @@
 <h3 id="방법-a--로컬-이미지-직접-사용-권장-단일-노드테스트">방법 A — 로컬 이미지 직접 사용 (권장: 단일 노드/테스트)</h3>
 <p><code>install.sh</code> 가 자동으로 <code>./images/*.tar*</code> 를 <code>ctr -n k8s.io images import</code> 로 로드합니다.
 수동으로 할 경우:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>./images/quay.io-metallb-controller-v0.14.8.tar
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>./images/quay.io-metallb-speaker-v0.14.8.tar
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>./images/quay.io-metallb-controller-v0.16.1.tar
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span>./images/quay.io-metallb-speaker-v0.16.1.tar
 </code></pre></div>
 <h3 id="방법-b--harbor-레지스트리-사용-멀티-노드-환경-권장">방법 B — Harbor 레지스트리 사용 (멀티 노드 환경 권장)</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./images/upload_images_to_harbor_v3-lite.sh
@@ -6258,20 +6313,21 @@
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>svc<span class="w"> </span>metallb-test<span class="w"> </span>-n<span class="w"> </span>kube-system
 </code></pre></div>
 <h2 id="4단계-삭제-및-초기화">4단계: 삭제 및 초기화</h2>
-<h3 id="자동화">자동화</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>./scripts/install.sh
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># → 메뉴에서 &quot;3) 초기화&quot; 선택</span>
+<h3 id="자동화-스크립트-사용">자동화 (스크립트 사용)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./scripts/uninstall.sh
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>./scripts/uninstall.sh
 </code></pre></div>
-<h3 id="수동">수동</h3>
+<h3 id="수동-삭제">수동 삭제</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>metallb<span class="w"> </span>-n<span class="w"> </span>metallb-system
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># CR finalizer 가 남아 ns 삭제가 지연되는 경우</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">for</span><span class="w"> </span>KIND<span class="w"> </span><span class="k">in</span><span class="w"> </span>ipaddresspool<span class="w"> </span>l2advertisement<span class="w"> </span>bgpadvertisement<span class="w"> </span>bgppeer<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span>kubectl<span class="w"> </span>get<span class="w"> </span><span class="nv">$KIND</span><span class="w"> </span>-n<span class="w"> </span>metallb-system<span class="w"> </span>-o<span class="w"> </span>name<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-r<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>kubectl<span class="w"> </span>patch<span class="w"> </span><span class="o">{}</span><span class="w"> </span>-n<span class="w"> </span>metallb-system<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;</span><span class="w"> </span>--type<span class="o">=</span>merge
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="k">done</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>ns<span class="w"> </span>metallb-system
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>rm<span class="w"> </span>-f<span class="w"> </span>./install.conf
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># CR finalizer가 남아 네임스페이스 삭제가 지연되는 경우 실행</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">for</span><span class="w"> </span>KIND<span class="w"> </span><span class="k">in</span><span class="w"> </span>ipaddresspool<span class="w"> </span>l2advertisement<span class="w"> </span>bgpadvertisement<span class="w"> </span>bgppeer<span class="w"> </span>community<span class="w"> </span>bfdprofile<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span>kubectl<span class="w"> </span>get<span class="w"> </span><span class="nv">$KIND</span><span class="w"> </span>-n<span class="w"> </span>metallb-system<span class="w"> </span>-o<span class="w"> </span>name<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-r<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>kubectl<span class="w"> </span>patch<span class="w"> </span><span class="o">{}</span><span class="w"> </span>-n<span class="w"> </span>metallb-system<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;</span><span class="w"> </span>--type<span class="o">=</span>merge
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="k">done</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>ns<span class="w"> </span>metallb-system
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>rm<span class="w"> </span>-f<span class="w"> </span>./install.conf
 </code></pre></div>
 <h2 id="참고--bgp-모드">참고 — BGP 모드</h2>
 <p>현재 본 설치 패키지는 <strong>L2 모드 전용</strong>입니다. BGP 모드(frr-k8s 기반)는 향후 지원 예정이며,

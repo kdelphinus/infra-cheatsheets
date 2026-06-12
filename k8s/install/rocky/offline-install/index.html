@@ -2555,6 +2555,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4547,7 +4603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-restore/" class="md-nav__link">
+      <a href="../../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4631,7 +4687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-backup-verify/" class="md-nav__link">
+      <a href="../../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4659,7 +4715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -7244,18 +7300,42 @@ containerd v2.2.0을 컨테이너 런타임으로, Calico를 CNI로 사용합니
 <a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a><span class="c1"># 4) GRUB 설정 재빌드 (부팅 시 90초 타임아웃/행 걸림 원천 차단)</span>
 <a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a><span class="c1">#    - UEFI 부팅인 경우:</span>
 <a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a><span class="c1">#      sudo grub2-mkconfig -o /boot/efi/EFI/rocky/grub.cfg</span>
-<a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a><span class="c1">#    - BIOS(Legacy) 부팅인 경우:</span>
-<a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a><span class="c1">#      sudo grub2-mkconfig -o /boot/grub2/grub.cfg</span>
-<a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a>
-<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a><span class="c1"># 5. hosts 파일 등록 (환경에 맞게 수정)</span>
-<a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-<a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a><span class="s">&lt;MASTER1_IP&gt; &lt;MASTER1_HOSTNAME&gt;</span>
-<a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a><span class="s">&lt;MASTER2_IP&gt; &lt;MASTER2_HOSTNAME&gt;</span>
-<a id="__codelineno-6-76" name="__codelineno-6-76" href="#__codelineno-6-76"></a><span class="s">&lt;MASTER3_IP&gt; &lt;MASTER3_HOSTNAME&gt;</span>
-<a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a><span class="s">&lt;WORKER1_IP&gt; &lt;WORKER1_HOSTNAME&gt;</span>
-<a id="__codelineno-6-78" name="__codelineno-6-78" href="#__codelineno-6-78"></a><span class="s">&lt;WORKER2_IP&gt; &lt;WORKER2_HOSTNAME&gt;</span>
-<a id="__codelineno-6-79" name="__codelineno-6-79" href="#__codelineno-6-79"></a><span class="s">&lt;WORKER3_IP&gt; &lt;WORKER3_HOSTNAME&gt;</span>
-<a id="__codelineno-6-80" name="__codelineno-6-80" href="#__codelineno-6-80"></a><span class="s">EOF</span>
+<a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a><span class="c1"># 5. 파일 디스크립터(FD) 및 시스템 Limits 상향</span>
+<a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/sysctl.d/99-kubernetes-limits.conf</span>
+<a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a><span class="s">fs.file-max = 2097152</span>
+<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a><span class="s">fs.inotify.max_user_watches = 524288</span>
+<a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a><span class="s">fs.inotify.max_user_instances = 8192</span>
+<a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a><span class="s">EOF</span>
+<a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+<a id="__codelineno-6-76" name="__codelineno-6-76" href="#__codelineno-6-76"></a>
+<a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/security/limits.d/99-kubernetes-limits.conf</span>
+<a id="__codelineno-6-78" name="__codelineno-6-78" href="#__codelineno-6-78"></a><span class="s">* soft nofile 1048576</span>
+<a id="__codelineno-6-79" name="__codelineno-6-79" href="#__codelineno-6-79"></a><span class="s">* hard nofile 1048576</span>
+<a id="__codelineno-6-80" name="__codelineno-6-80" href="#__codelineno-6-80"></a><span class="s">* soft nproc 1048576</span>
+<a id="__codelineno-6-81" name="__codelineno-6-81" href="#__codelineno-6-81"></a><span class="s">* hard nproc 1048576</span>
+<a id="__codelineno-6-82" name="__codelineno-6-82" href="#__codelineno-6-82"></a><span class="s">root soft nofile 1048576</span>
+<a id="__codelineno-6-83" name="__codelineno-6-83" href="#__codelineno-6-83"></a><span class="s">root hard nofile 1048576</span>
+<a id="__codelineno-6-84" name="__codelineno-6-84" href="#__codelineno-6-84"></a><span class="s">EOF</span>
+<a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a>
+<a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/systemd/system/kubelet.service.d
+<a id="__codelineno-6-87" name="__codelineno-6-87" href="#__codelineno-6-87"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/systemd/system/kubelet.service.d/limits.conf</span>
+<a id="__codelineno-6-88" name="__codelineno-6-88" href="#__codelineno-6-88"></a><span class="s">[Service]</span>
+<a id="__codelineno-6-89" name="__codelineno-6-89" href="#__codelineno-6-89"></a><span class="s">LimitNOFILE=1048576</span>
+<a id="__codelineno-6-90" name="__codelineno-6-90" href="#__codelineno-6-90"></a><span class="s">LimitNPROC=infinity</span>
+<a id="__codelineno-6-91" name="__codelineno-6-91" href="#__codelineno-6-91"></a><span class="s">LimitCORE=infinity</span>
+<a id="__codelineno-6-92" name="__codelineno-6-92" href="#__codelineno-6-92"></a><span class="s">TasksMax=infinity</span>
+<a id="__codelineno-6-93" name="__codelineno-6-93" href="#__codelineno-6-93"></a><span class="s">EOF</span>
+<a id="__codelineno-6-94" name="__codelineno-6-94" href="#__codelineno-6-94"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-6-95" name="__codelineno-6-95" href="#__codelineno-6-95"></a>
+<a id="__codelineno-6-96" name="__codelineno-6-96" href="#__codelineno-6-96"></a><span class="c1"># 6. hosts 파일 등록 (환경에 맞게 수정)</span>
+<a id="__codelineno-6-97" name="__codelineno-6-97" href="#__codelineno-6-97"></a>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-6-98" name="__codelineno-6-98" href="#__codelineno-6-98"></a><span class="s">&lt;MASTER1_IP&gt; &lt;MASTER1_HOSTNAME&gt;</span>
+<a id="__codelineno-6-99" name="__codelineno-6-99" href="#__codelineno-6-99"></a><span class="s">&lt;MASTER2_IP&gt; &lt;MASTER2_HOSTNAME&gt;</span>
+<a id="__codelineno-6-100" name="__codelineno-6-100" href="#__codelineno-6-100"></a><span class="s">&lt;MASTER3_IP&gt; &lt;MASTER3_HOSTNAME&gt;</span>
+<a id="__codelineno-6-101" name="__codelineno-6-101" href="#__codelineno-6-101"></a><span class="s">&lt;WORKER1_IP&gt; &lt;WORKER1_HOSTNAME&gt;</span>
+<a id="__codelineno-6-102" name="__codelineno-6-102" href="#__codelineno-6-102"></a><span class="s">&lt;WORKER2_IP&gt; &lt;WORKER2_HOSTNAME&gt;</span>
+<a id="__codelineno-6-103" name="__codelineno-6-103" href="#__codelineno-6-103"></a><span class="s">&lt;WORKER3_IP&gt; &lt;WORKER3_HOSTNAME&gt;</span>
+<a id="__codelineno-6-104" name="__codelineno-6-104" href="#__codelineno-6-104"></a><span class="s">EOF</span>
 </code></pre></div>
 <h2 id="phase-3-containerd-설정-전체-노드">Phase 3: containerd 설정 (전체 노드)</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># containerd 기본 설정 생성</span>
@@ -7271,10 +7351,26 @@ containerd v2.2.0을 컨테이너 런타임으로, Calico를 CNI로 사용합니
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="c1"># Harbor 인증서 경로 설정</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|config_path = &#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;|config_path = &#39;/etc/containerd/certs.d&#39;|g&quot;</span><span class="w"> </span>/etc/containerd/config.toml
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># containerd 시작 및 활성화</span>
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>containerd
-<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>containerd
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># containerd 서비스 Limits 설정 (systemd override)</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/systemd/system/containerd.service.d
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/systemd/system/containerd.service.d/limits.conf</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="s">[Service]</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="s">LimitNOFILE=1048576</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="s">LimitNPROC=infinity</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="s">LimitCORE=infinity</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="s">TasksMax=infinity</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="s">EOF</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="c1"># containerd 시작 및 활성화</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>containerd
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>containerd
 </code></pre></div>
+<blockquote>
+<p><code>/etc/security/limits.d</code>는 주로 로그인 세션에 적용됩니다. <code>kubelet</code>과
+<code>containerd</code>처럼 systemd가 직접 띄우는 서비스는 위 systemd override까지
+적용해야 FD/프로세스 limits가 일관되게 반영됩니다.</p>
+</blockquote>
 <h3 id="선택-containerd-데이터-경로-변경--소프트링크-방식">(선택) containerd 데이터 경로 변경 — 소프트링크 방식</h3>
 <p>OS 루트 디스크 용량이 작고 별도 데이터 디스크(예: <code>/app</code>)가 마운트되어 있는 경우에 적용합니다.
 <strong>containerd 시작 전</strong> 또는 <strong>서비스를 중지한 상태</strong>에서 진행해야 합니다.</p>

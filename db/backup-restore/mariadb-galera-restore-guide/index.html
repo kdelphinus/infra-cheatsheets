@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-verify/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/db/backup-restore/mariadb-galera-restore-guide/">
       
       
-        <link rel="prev" href="../galera-backup-simple-guide/">
+        <link rel="prev" href="../../ha/galera-recovery/">
       
       
-        <link rel="next" href="../galera-reboot-guide/">
+        <link rel="next" href="../../ha/galera-backup-guide/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Galera Cluster 백업 동작 확인 - Infra Cheatsheets</title>
+        <title>Galera Cluster 복구 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mariadb-galera-cluster-백업-동작-확인-가이드" class="md-skip">
+        <a href="#mariadb-galera-cluster-복구-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Galera Cluster 백업 동작 확인
+              Galera Cluster 복구
             
           </span>
         </div>
@@ -386,7 +386,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../galera-cluster/" class="md-tabs__link">
+        <a href="../../ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -1730,6 +1730,62 @@
     
   
     모니터링 운영 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-collector-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Collector 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/monitoring/opentelemetry-operator-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenTelemetry Operator 설치
   
 
     
@@ -3658,7 +3714,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-cluster/" class="md-nav__link">
+      <a href="../../ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -3686,7 +3742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-cluster-online/" class="md-nav__link">
+      <a href="../../ha/galera-cluster-online/" class="md-nav__link">
         
   
   
@@ -3714,7 +3770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-recovery/" class="md-nav__link">
+      <a href="../../ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -3722,90 +3778,6 @@
     
   
     Galera Cluster 장애 복구
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../galera-restore/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Galera Cluster 복구
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../galera-backup-guide/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Galera Cluster 백업
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../galera-backup-simple-guide/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Galera Cluster 백업 (간소판)
   
 
     
@@ -3842,7 +3814,7 @@
   <span class="md-ellipsis">
     
   
-    Galera Cluster 백업 동작 확인
+    Galera Cluster 복구
   
 
     
@@ -3860,7 +3832,7 @@
   <span class="md-ellipsis">
     
   
-    Galera Cluster 백업 동작 확인
+    Galera Cluster 복구
   
 
     
@@ -3908,22 +3880,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-일일-확인-5분" class="md-nav__link">
+  <a href="#복구-흐름" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 일일 확인 (5분)
+        복구 흐름
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 일일 확인 (5분)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-복구-전-준비" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 복구 전 준비
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 복구 전 준비">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-오늘-백업-파일-확인" class="md-nav__link">
+  <a href="#11-자동-백업-timer-정지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 오늘 백업 파일 확인
+        1.1 자동 백업 timer 정지
       
     </span>
   </a>
@@ -3931,10 +3914,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-백업-로그-확인" class="md-nav__link">
+  <a href="#12-백업-파일-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 백업 로그 확인
+        1.2 백업 파일 확인
       
     </span>
   </a>
@@ -3942,10 +3925,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-wsrep_desync-가-off-인지-확인" class="md-nav__link">
+  <a href="#13-백업-파일-무결성-검증" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3 wsrep_desync 가 OFF 인지 확인
+        1.3 백업 파일 무결성 검증
       
     </span>
   </a>
@@ -3953,10 +3936,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-다음-백업-예약-확인" class="md-nav__link">
+  <a href="#14-백업-사본-보관-필수" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4 다음 백업 예약 확인
+        1.4 백업 사본 보관 (필수)
       
     </span>
   </a>
@@ -3964,10 +3947,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-일일-확인-요약" class="md-nav__link">
+  <a href="#15-백업-내용-미리보기-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5 일일 확인 요약
+        1.5 백업 내용 미리보기 (선택)
       
     </span>
   </a>
@@ -3980,22 +3963,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-주간-확인-10분" class="md-nav__link">
+  <a href="#2-모든-노드-mariadb-정지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 주간 확인 (10분)
+        2. 모든 노드 MariaDB 정지
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 주간 확인 (10분)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-부트스트랩-노드-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 부트스트랩 노드 초기화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-부트스트랩--백업-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 부트스트랩 + 백업 import
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 부트스트랩 + 백업 import">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-nfs-마운트--디스크" class="md-nav__link">
+  <a href="#41-부트스트랩으로-기동" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 NFS 마운트 / 디스크
+        4.1 부트스트랩으로 기동
       
     </span>
   </a>
@@ -4003,10 +4008,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-7일치-백업-파일-점검" class="md-nav__link">
+  <a href="#42-백업-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 7일치 백업 파일 점검
+        4.2 백업 import
       
     </span>
   </a>
@@ -4014,32 +4019,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-보관-정책-동작-확인" class="md-nav__link">
+  <a href="#43-import-결과-1차-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 보관 정책 동작 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-최근-7일-로그에-에러-검색" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 최근 7일 로그에 에러 검색
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25-주간-확인-요약" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5 주간 확인 요약
+        4.3 import 결과 1차 확인
       
     </span>
   </a>
@@ -4052,33 +4035,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-복원-가능-여부-확인-선택-분기-1회-권장" class="md-nav__link">
+  <a href="#5-나머지-노드-순차-join" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 복원 가능 여부 확인 (선택, 분기 1회 권장)
+        5. 나머지 노드 순차 join
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-부록-자주-쓰는-명령어" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 부록: 자주 쓰는 명령어
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 부록: 자주 쓰는 명령어">
+    <nav class="md-nav" aria-label="5. 나머지 노드 순차 join">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-일일-점검-한-번에-보기" class="md-nav__link">
+  <a href="#51-db-node-2-기동" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 일일 점검 한 번에 보기
+        5.1 db-node-2 기동
       
     </span>
   </a>
@@ -4086,21 +4058,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-백업-파일-내용-확인" class="md-nav__link">
+  <a href="#52-db-node-3-기동" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 백업 파일 내용 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43-수동-백업-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 수동 백업 실행
+        5.2 db-node-3 기동
       
     </span>
   </a>
@@ -4113,22 +4074,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-트러블슈팅" class="md-nav__link">
+  <a href="#6-복구-후-검증" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 트러블슈팅
+        6. 복구 후 검증
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 트러블슈팅">
+    <nav class="md-nav" aria-label="6. 복구 후 검증">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-자주-발생하는-증상" class="md-nav__link">
+  <a href="#61-클러스터-최종-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 자주 발생하는 증상
+        6.1 클러스터 최종 확인
       
     </span>
   </a>
@@ -4136,10 +4097,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-백업이-안-도는-경우-점검-순서" class="md-nav__link">
+  <a href="#62-데이터-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 백업이 안 도는 경우 점검 순서
+        6.2 데이터 확인
       
     </span>
   </a>
@@ -4147,10 +4108,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-로그-위치" class="md-nav__link">
+  <a href="#63-애플리케이션-연결-테스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 로그 위치
+        6.3 애플리케이션 연결 테스트
       
     </span>
   </a>
@@ -4163,34 +4124,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-백업-노드-장애-시-이관-절차-3번-노드-장애-대응" class="md-nav__link">
+  <a href="#7-마무리" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 백업 노드 장애 시 이관 절차 (3번 노드 장애 대응)
+        7. 마무리
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. 백업 노드 장애 시 이관 절차 (3번 노드 장애 대응)">
+    <nav class="md-nav" aria-label="7. 마무리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#61-대체-노드로-백업-이관-절차" class="md-nav__link">
+  <a href="#71-자동-백업-timer-재가동-필수" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1 대체 노드로 백업 이관 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.1 대체 노드로 백업 이관 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1단계-nfs-백업-스토리지-마운트-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: NFS 백업 스토리지 마운트 확인
+        7.1 자동 백업 timer 재가동 (필수)
       
     </span>
   </a>
@@ -4198,90 +4147,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2단계-백업-스크립트-및-설정-파일-점검" class="md-nav__link">
+  <a href="#72-정리-24시간-후-권장" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 백업 스크립트 및 설정 파일 점검
+        7.2 정리 (24시간 후 권장)
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3단계-대체-노드에서-백업-타이머-활성화-및-시작" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 대체 노드에서 백업 타이머 활성화 및 시작
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4단계-타이머-작동-여부-및-이관-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 타이머 작동 여부 및 이관 검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62-3번-노드-복구-후-원상-복구원복-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 3번 노드 복구 후 원상 복구(원복) 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.2 3번 노드 복구 후 원상 복구(원복) 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1단계-대체-노드예-1번-노드에서-백업-타이머-정지-및-비활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 대체 노드(예: 1번 노드)에서 백업 타이머 정지 및 비활성화
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2단계-3번-노드db-node-3에서-백업-타이머-활성화-및-시작" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: 3번 노드(db-node-3)에서 백업 타이머 활성화 및 시작
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3단계-양쪽-노드-상태-최종-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 양쪽 노드 상태 최종 검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4291,13 +4163,91 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#변경-이력" class="md-nav__link">
+  <a href="#8-롤백-복구가-잘못된-경우" class="md-nav__link">
     <span class="md-ellipsis">
       
-        변경 이력
+        8. 롤백 (복구가 잘못된 경우)
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-트러블슈팅" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 트러블슈팅
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 트러블슈팅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-로그-위치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 로그 위치
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#부록-자주-쓰는-명령어" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        부록: 자주 쓰는 명령어
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="부록: 자주 쓰는 명령어">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#클러스터-상태-한눈에" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        클러스터 상태 한눈에
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#디스크-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        디스크 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mariadb-서비스-제어" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MariaDB 서비스 제어
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4317,7 +4267,91 @@
   
   
     <li class="md-nav__item">
-      <a href="../galera-reboot-guide/" class="md-nav__link">
+      <a href="../../ha/galera-backup-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ha/galera-backup-simple-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업 (간소판)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mariadb-galera-backup-verify-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 백업 동작 확인
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -5995,22 +6029,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-일일-확인-5분" class="md-nav__link">
+  <a href="#복구-흐름" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 일일 확인 (5분)
+        복구 흐름
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 일일 확인 (5분)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-복구-전-준비" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 복구 전 준비
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 복구 전 준비">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-오늘-백업-파일-확인" class="md-nav__link">
+  <a href="#11-자동-백업-timer-정지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 오늘 백업 파일 확인
+        1.1 자동 백업 timer 정지
       
     </span>
   </a>
@@ -6018,10 +6063,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-백업-로그-확인" class="md-nav__link">
+  <a href="#12-백업-파일-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 백업 로그 확인
+        1.2 백업 파일 확인
       
     </span>
   </a>
@@ -6029,10 +6074,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-wsrep_desync-가-off-인지-확인" class="md-nav__link">
+  <a href="#13-백업-파일-무결성-검증" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3 wsrep_desync 가 OFF 인지 확인
+        1.3 백업 파일 무결성 검증
       
     </span>
   </a>
@@ -6040,10 +6085,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-다음-백업-예약-확인" class="md-nav__link">
+  <a href="#14-백업-사본-보관-필수" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4 다음 백업 예약 확인
+        1.4 백업 사본 보관 (필수)
       
     </span>
   </a>
@@ -6051,10 +6096,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#15-일일-확인-요약" class="md-nav__link">
+  <a href="#15-백업-내용-미리보기-선택" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.5 일일 확인 요약
+        1.5 백업 내용 미리보기 (선택)
       
     </span>
   </a>
@@ -6067,22 +6112,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-주간-확인-10분" class="md-nav__link">
+  <a href="#2-모든-노드-mariadb-정지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 주간 확인 (10분)
+        2. 모든 노드 MariaDB 정지
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 주간 확인 (10분)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-부트스트랩-노드-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 부트스트랩 노드 초기화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-부트스트랩--백업-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 부트스트랩 + 백업 import
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 부트스트랩 + 백업 import">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-nfs-마운트--디스크" class="md-nav__link">
+  <a href="#41-부트스트랩으로-기동" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 NFS 마운트 / 디스크
+        4.1 부트스트랩으로 기동
       
     </span>
   </a>
@@ -6090,10 +6157,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-7일치-백업-파일-점검" class="md-nav__link">
+  <a href="#42-백업-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 7일치 백업 파일 점검
+        4.2 백업 import
       
     </span>
   </a>
@@ -6101,32 +6168,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-보관-정책-동작-확인" class="md-nav__link">
+  <a href="#43-import-결과-1차-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 보관 정책 동작 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-최근-7일-로그에-에러-검색" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 최근 7일 로그에 에러 검색
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25-주간-확인-요약" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5 주간 확인 요약
+        4.3 import 결과 1차 확인
       
     </span>
   </a>
@@ -6139,33 +6184,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-복원-가능-여부-확인-선택-분기-1회-권장" class="md-nav__link">
+  <a href="#5-나머지-노드-순차-join" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 복원 가능 여부 확인 (선택, 분기 1회 권장)
+        5. 나머지 노드 순차 join
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-부록-자주-쓰는-명령어" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 부록: 자주 쓰는 명령어
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 부록: 자주 쓰는 명령어">
+    <nav class="md-nav" aria-label="5. 나머지 노드 순차 join">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-일일-점검-한-번에-보기" class="md-nav__link">
+  <a href="#51-db-node-2-기동" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 일일 점검 한 번에 보기
+        5.1 db-node-2 기동
       
     </span>
   </a>
@@ -6173,21 +6207,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-백업-파일-내용-확인" class="md-nav__link">
+  <a href="#52-db-node-3-기동" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 백업 파일 내용 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43-수동-백업-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 수동 백업 실행
+        5.2 db-node-3 기동
       
     </span>
   </a>
@@ -6200,22 +6223,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-트러블슈팅" class="md-nav__link">
+  <a href="#6-복구-후-검증" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 트러블슈팅
+        6. 복구 후 검증
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 트러블슈팅">
+    <nav class="md-nav" aria-label="6. 복구 후 검증">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-자주-발생하는-증상" class="md-nav__link">
+  <a href="#61-클러스터-최종-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 자주 발생하는 증상
+        6.1 클러스터 최종 확인
       
     </span>
   </a>
@@ -6223,10 +6246,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-백업이-안-도는-경우-점검-순서" class="md-nav__link">
+  <a href="#62-데이터-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 백업이 안 도는 경우 점검 순서
+        6.2 데이터 확인
       
     </span>
   </a>
@@ -6234,10 +6257,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-로그-위치" class="md-nav__link">
+  <a href="#63-애플리케이션-연결-테스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 로그 위치
+        6.3 애플리케이션 연결 테스트
       
     </span>
   </a>
@@ -6250,34 +6273,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-백업-노드-장애-시-이관-절차-3번-노드-장애-대응" class="md-nav__link">
+  <a href="#7-마무리" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 백업 노드 장애 시 이관 절차 (3번 노드 장애 대응)
+        7. 마무리
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. 백업 노드 장애 시 이관 절차 (3번 노드 장애 대응)">
+    <nav class="md-nav" aria-label="7. 마무리">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#61-대체-노드로-백업-이관-절차" class="md-nav__link">
+  <a href="#71-자동-백업-timer-재가동-필수" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1 대체 노드로 백업 이관 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.1 대체 노드로 백업 이관 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1단계-nfs-백업-스토리지-마운트-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: NFS 백업 스토리지 마운트 확인
+        7.1 자동 백업 timer 재가동 (필수)
       
     </span>
   </a>
@@ -6285,90 +6296,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2단계-백업-스크립트-및-설정-파일-점검" class="md-nav__link">
+  <a href="#72-정리-24시간-후-권장" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 백업 스크립트 및 설정 파일 점검
+        7.2 정리 (24시간 후 권장)
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3단계-대체-노드에서-백업-타이머-활성화-및-시작" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 대체 노드에서 백업 타이머 활성화 및 시작
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4단계-타이머-작동-여부-및-이관-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 타이머 작동 여부 및 이관 검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62-3번-노드-복구-후-원상-복구원복-절차" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 3번 노드 복구 후 원상 복구(원복) 절차
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.2 3번 노드 복구 후 원상 복구(원복) 절차">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1단계-대체-노드예-1번-노드에서-백업-타이머-정지-및-비활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1단계: 대체 노드(예: 1번 노드)에서 백업 타이머 정지 및 비활성화
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2단계-3번-노드db-node-3에서-백업-타이머-활성화-및-시작" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2단계: 3번 노드(db-node-3)에서 백업 타이머 활성화 및 시작
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3단계-양쪽-노드-상태-최종-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3단계: 양쪽 노드 상태 최종 검증
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -6378,13 +6312,91 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#변경-이력" class="md-nav__link">
+  <a href="#8-롤백-복구가-잘못된-경우" class="md-nav__link">
     <span class="md-ellipsis">
       
-        변경 이력
+        8. 롤백 (복구가 잘못된 경우)
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-트러블슈팅" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 트러블슈팅
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 트러블슈팅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-로그-위치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 로그 위치
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#부록-자주-쓰는-명령어" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        부록: 자주 쓰는 명령어
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="부록: 자주 쓰는 명령어">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#클러스터-상태-한눈에" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        클러스터 상태 한눈에
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#디스크-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        디스크 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mariadb-서비스-제어" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MariaDB 서비스 제어
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6408,41 +6420,43 @@
   
 
 
-<h1 id="mariadb-galera-cluster-백업-동작-확인-가이드">MariaDB Galera Cluster 백업 동작 확인 가이드</h1>
+<h1 id="mariadb-galera-cluster-복구-가이드">MariaDB Galera Cluster 복구 가이드</h1>
 <blockquote>
-<p><strong>환경</strong>: Rocky Linux 9 + MariaDB 10.11.16 Galera Cluster + NetApp NFS
-<strong>백업 위치</strong>: <code>/bkup001/dump/</code>
-<strong>작성일</strong>: 2026-05-15 / 버전 1.0</p>
+<p><strong>환경</strong>: Rocky Linux 9 + MariaDB 10.11.16 Galera Cluster + NetApp NFS<br />
+<strong>백업 위치</strong>: <code>/bkup001/dump/</code></p>
 </blockquote>
 <hr />
 <h2 id="이-문서는">이 문서는</h2>
-<p>매일 새벽 02:00 에 도는 자동 백업이 <strong>정상적으로 동작하고 있는지</strong> 일상적으로 확인하는 절차입니다.</p>
-<p>실제 복구가 필요할 때는 별도 문서 <code>mariadb-galera-restore-guide.md</code> 를 사용합니다.</p>
+<p><code>mariadb-dump</code> 로 뜬 백업 파일을 사용해 <strong>데이터베이스를 원상 복구</strong> 하는 절차서입니다.</p>
 <hr />
 <h2 id="환경-정보">환경 정보</h2>
 <table>
 <thead>
 <tr>
 <th>항목</th>
-<th>값</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>백업 노드</td>
-<td>백업 전담 노드 (db-node-3)</td>
+<td>클러스터 노드</td>
+<td>db-node-1, db-node-2, db-node-3</td>
 </tr>
 <tr>
-<td>백업 디렉터리</td>
+<td>MariaDB 버전</td>
+<td>10.11.16</td>
+</tr>
+<tr>
+<td>백업 위치</td>
 <td><code>/bkup001/dump/</code></td>
 </tr>
 <tr>
-<td>로그 디렉터리</td>
-<td><code>/bkup001/logs/</code></td>
+<td>데이터 디렉터리</td>
+<td><code>/var/lib/mysql/</code></td>
 </tr>
 <tr>
-<td>백업 정책</td>
-<td>매일 02:00, 7일 보관</td>
+<td>MariaDB 서비스</td>
+<td><code>mariadb</code></td>
 </tr>
 <tr>
 <td>백업 timer</td>
@@ -6450,263 +6464,315 @@
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>⚠️ 명령어 실행 중 묻는 <code>Enter password:</code> 는 모두 <strong>MariaDB root 비밀번호</strong> 입니다.</p>
+</blockquote>
 <hr />
-<h2 id="1-일일-확인-5분">1. 일일 확인 (5분)</h2>
-<p>백업 전담 노드에서 실행.</p>
-<h3 id="11-오늘-백업-파일-확인">1.1 오늘 백업 파일 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-lah<span class="w"> </span>/bkup001/dump/<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-5
+<h2 id="복구-흐름">복구 흐름</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1. 복구 전 준비  →  2. 모든 노드 정지  →  3. 부트스트랩 노드 초기화
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                                ↓
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                  6. 검증  ←  5. 나머지 노드 join  ←  4. 백업 import
+</code></pre></div>
+<p>소요 시간: 데이터 크기에 따라 30분 ~ 2시간.</p>
+<hr />
+<h2 id="1-복구-전-준비">1. 복구 전 준비</h2>
+<h3 id="11-자동-백업-timer-정지">1.1 자동 백업 timer 정지</h3>
+<p>복구 전 반드시 먼저 자동 백업을 정지합니다. 평상시에는 백업 전담 노드인 <strong>3번 노드(db-node-3)</strong>에서 수행하지만, 만약 3번 노드 장애로 인해 백업 노드가 타 노드로 이관되었다면 <strong>현재 백업 타이머가 활성화되어 실행 중인 대체 노드(1번 또는 2번)</strong>에서 아래 명령을 실행해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>mariadb-backup-dump.timer
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.timer<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Active
+</code></pre></div>
+<p><strong>예상 출력</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>   Active: inactive (dead) since Fri 2026-05-15 09:16:00 KST; 2s ago
+</code></pre></div>
+<blockquote>
+<p>⚠️ <strong>중요</strong>: 3번 노드가 완전히 죽어서(다운) 접속할 수 없는 경우, 당연히 3번 노드에서는 중지 명령을 내릴 수 없습니다. 이 경우 백업 노드가 다른 노드로 이관되어 타이머가 작동 중인지 확인하고, 해당 대체 노드에서 타이머를 정지시키십시오.
+복구 완료 후 7장에서 반드시 재가동합니다.</p>
+</blockquote>
+<h3 id="12-백업-파일-확인">1.2 백업 파일 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-lah<span class="w"> </span>/bkup001/dump/
 </code></pre></div>
 <p><strong>예상 출력 예시</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>-rw-r-----. 1 mysql mysql  792M May 14 02:00 mariadb_full_20260514_020001.sql.gz
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>-rw-r-----. 1 mysql mysql  795M May 15 02:00 mariadb_full_20260515_020003.sql.gz
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>-rw-r-----. 1 mysql mysql  795M May 15 02:00 mariadb_full_20260515_020003.sql.gz
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>-rw-r-----. 1 mysql mysql  792M May 14 02:00 mariadb_full_20260514_020001.sql.gz
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>...
 </code></pre></div>
-<p>✅ <strong>확인할 것</strong>:</p>
-<ul>
-<li>마지막 파일이 <strong>오늘 날짜 02:00</strong> 인가?</li>
-<li>크기가 <strong>0 바이트가 아닌가</strong>?</li>
-<li>어제 대비 크기가 <strong>극단적으로 다르지 않은가</strong>? (예: 800MB → 10MB 는 비정상)</li>
-</ul>
-<h3 id="12-백업-로그-확인">1.2 백업 로그 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;ls -t /bkup001/logs/dump_*.log | head -1 | xargs tail -15&#39;</span>
+<p>복구에 사용할 파일을 정합니다 (보통 가장 최근 정상 백업):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">TARGET_BACKUP</span><span class="o">=</span>/bkup001/dump/mariadb_full_20260515_020003.sql.gz
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;사용할 백업: </span><span class="si">${</span><span class="nv">TARGET_BACKUP</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
-<p><strong>예상 출력</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[2026-05-15 02:00:01] === mysqldump Backup Start (MariaDB 10.11.16) ===
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>[2026-05-15 02:00:01] wsrep enabled — will toggle wsrep_desync
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>[2026-05-15 02:00:01] Setting wsrep_desync=ON
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>[2026-05-15 02:42:18] Setting wsrep_desync=OFF
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>[2026-05-15 02:42:18] Gzip integrity OK
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>[2026-05-15 02:42:18] Duration: 2537s, Size: 833000000 bytes
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>[2026-05-15 02:42:18] === mysqldump Backup End ===
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>[2026-05-15 02:42:18] Retention cleanup done (kept last 7 days)
-</code></pre></div>
-<p>✅ <strong>확인할 것</strong>:</p>
-<ul>
-<li><code>=== mysqldump Backup End ===</code> 메시지가 있는가?</li>
-<li><code>Gzip integrity OK</code> 가 있는가?</li>
-<li><code>Setting wsrep_desync=OFF</code> 가 있는가?</li>
-<li><code>ERROR</code> 또는 <code>FAILED</code> 단어가 <strong>없는가</strong>?</li>
-</ul>
-<h3 id="13-wsrep_desync-가-off-인지-확인">1.3 wsrep_desync 가 OFF 인지 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW VARIABLES LIKE &#39;wsrep_desync&#39;;&quot;</span>
+<h3 id="13-백업-파일-무결성-검증">1.3 백업 파일 무결성 검증</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>gzip<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TARGET_BACKUP</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;gzip OK&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;gzip FAILED&quot;</span>
 </code></pre></div>
 <p><strong>예상 출력</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>+---------------+-------+
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>| Variable_name | Value |
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>+---------------+-------+
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>| wsrep_desync  | OFF   |
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>+---------------+-------+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>gzip OK
 </code></pre></div>
-<p>✅ <code>OFF</code> 여야 정상.</p>
 <blockquote>
-<p>⚠️ <code>ON</code> 으로 나오면 백업이 비정상 종료된 상태. 응급조치:</p>
-<p>먼저 백업 프로세스가 끝났는지 확인:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ps<span class="w"> </span>-ef<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;mariadb-dump|backup-dump.sh&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep
-</code></pre></div>
-<p>프로세스가 없으면 수동으로 OFF:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SET GLOBAL wsrep_desync=OFF;&quot;</span>
-</code></pre></div>
+<p>⚠️ <code>gzip FAILED</code> 면 해당 파일 사용 금지. 한 단계 이전 백업으로 재시도.</p>
 </blockquote>
-<h3 id="14-다음-백업-예약-확인">1.4 다음 백업 예약 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-timers<span class="w"> </span>--all<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mariadb
+<h3 id="14-백업-사본-보관-필수">1.4 백업 사본 보관 (필수)</h3>
+<p>복구 도중 원본이 손상되거나 덮어쓰일 위험을 차단합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TARGET_BACKUP</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>/var/tmp/restore_source.sql.gz
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-lh<span class="w"> </span>/var/tmp/restore_source.sql.gz
 </code></pre></div>
-<p><strong>예상 출력</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>NEXT                        LEFT    LAST                        PASSED  UNIT
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Sat 2026-05-16 02:00:00 KST 15h     Fri 2026-05-15 02:00:00 KST 7h ago  mariadb-backup-dump.timer
-</code></pre></div>
-<p>✅ <strong>확인할 것</strong>:</p>
-<ul>
-<li><code>NEXT</code> 가 다음 날 02:00 인가?</li>
-<li><code>LAST</code> 가 오늘 02:00 인가?</li>
-</ul>
-<h3 id="15-일일-확인-요약">1.5 일일 확인 요약</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>□ 오늘 02:00 백업 파일 존재 (크기 정상)
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>□ 로그에 &quot;Backup End&quot; + &quot;Gzip integrity OK&quot;
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>□ wsrep_desync = OFF
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>□ timer NEXT 가 다음 날 02:00
-</code></pre></div>
-<p>4개 모두 통과 → 정상. 하나라도 실패 → 5장 트러블슈팅.</p>
-<hr />
-<h2 id="2-주간-확인-10분">2. 주간 확인 (10분)</h2>
-<p>매주 월요일 (또는 협의된 요일).</p>
-<h3 id="21-nfs-마운트--디스크">2.1 NFS 마운트 / 디스크</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>bkup001
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>df<span class="w"> </span>-h<span class="w"> </span>/bkup001
-</code></pre></div>
-<p><strong>예상 출력</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nas.internal:/vol/mariadb_backup on /bkup001 type nfs (rw,relatime,vers=4.1,...)
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>Filesystem                       Size  Used Avail Use% Mounted on
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>nas.internal:/vol/mariadb_backup 500G  120G  380G  24% /bkup001
-</code></pre></div>
-<p>✅ <strong>확인할 것</strong>:</p>
-<ul>
-<li><code>/bkup001</code> 가 마운트되어 있는가?</li>
-<li>디스크 사용률이 <strong>80% 미만</strong> 인가?</li>
-</ul>
-<h3 id="22-7일치-백업-파일-점검">2.2 7일치 백업 파일 점검</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-lah<span class="w"> </span>/bkup001/dump/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mariadb_full_
+<p><strong>이후 모든 복구 명령은 이 사본을 사용합니다.</strong></p>
+<h3 id="15-백업-내용-미리보기-선택">1.5 백업 내용 미리보기 (선택)</h3>
+<p>복구 전 백업에 어떤 DB 가 들어있는지 확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>zcat<span class="w"> </span>/var/tmp/restore_source.sql.gz<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^-- Current Database:&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
 </code></pre></div>
 <p><strong>예상 출력 예시</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>-rw-r-----. 1 mysql mysql  780M May 09 02:00 mariadb_full_20260509_020001.sql.gz
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>-rw-r-----. 1 mysql mysql  782M May 10 02:00 mariadb_full_20260510_020003.sql.gz
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>-rw-r-----. 1 mysql mysql  785M May 11 02:00 mariadb_full_20260511_020002.sql.gz
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>-rw-r-----. 1 mysql mysql  788M May 12 02:00 mariadb_full_20260512_020001.sql.gz
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>-rw-r-----. 1 mysql mysql  790M May 13 02:00 mariadb_full_20260513_020002.sql.gz
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>-rw-r-----. 1 mysql mysql  792M May 14 02:00 mariadb_full_20260514_020001.sql.gz
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>-rw-r-----. 1 mysql mysql  795M May 15 02:00 mariadb_full_20260515_020003.sql.gz
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>-- Current Database: `mysql`
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>-- Current Database: `app_db`
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>-- Current Database: `log_db`
 </code></pre></div>
-<p>✅ <strong>확인할 것</strong>:</p>
-<ul>
-<li>7일치가 모두 존재하는가?</li>
-<li>크기 추세가 합리적인가? (점진적 증가, 어느 날만 절반 이하 등 없음)</li>
-</ul>
-<h3 id="23-보관-정책-동작-확인">2.3 보관 정책 동작 확인</h3>
-<p>8일 이전 파일이 자동 삭제되고 있는지:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>find<span class="w"> </span>/bkup001/dump<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;mariadb_full_*.sql.gz&quot;</span><span class="w"> </span>-mtime<span class="w"> </span>+7
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>find<span class="w"> </span>/bkup001/logs<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;dump_*.log&quot;</span><span class="w"> </span>-mtime<span class="w"> </span>+7
-</code></pre></div>
-<p><strong>예상 출력</strong>: <strong>출력이 비어있어야 정상</strong>.</p>
-<p>8일 이전 파일이 보이면 retention cleanup 이 동작하지 않은 것입니다.</p>
-<h3 id="24-최근-7일-로그에-에러-검색">2.4 최근 7일 로그에 에러 검색</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;ERROR|FAILED|Access denied&quot;</span><span class="w"> </span>/bkup001/logs/dump_*.log
-</code></pre></div>
-<p><strong>예상 출력</strong>: <strong>비어있어야 정상</strong>.</p>
-<h3 id="25-주간-확인-요약">2.5 주간 확인 요약</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>□ NFS 마운트 정상, 디스크 &lt; 80%
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>□ 7일치 백업 모두 존재, 크기 추세 정상
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>□ 8일 이전 파일 없음 (retention 동작)
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>□ 최근 7일 로그에 에러 없음
-</code></pre></div>
+<p>복구하려는 DB 가 포함되어 있는지 확인합니다.</p>
 <hr />
-<h2 id="3-복원-가능-여부-확인-선택-분기-1회-권장">3. 복원 가능 여부 확인 (선택, 분기 1회 권장)</h2>
-<p>백업 파일이 실제로 복원 가능한지 확인하려면, <strong>별도 검증용 인스턴스</strong> 또는 사용하지 않는 노드에서 실제로 import 해 보는 것이 가장 확실합니다.</p>
-<p>절차는 복구 가이드(<code>mariadb-galera-restore-guide.md</code>) 3~4장과 동일하되, <strong>운영 클러스터가 아닌 별도 환경에서</strong> 진행해야 합니다.</p>
+<h2 id="2-모든-노드-mariadb-정지">2. 모든 노드 MariaDB 정지</h2>
+<p>각 노드에서 실행합니다. 순서는 상관없고, 가능한 빨리 세 노드 모두 정지시킵니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># db-node-1, db-node-2, db-node-3 각각에서</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>mariadb
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Active
+</code></pre></div>
+<p><strong>예상 출력</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>   Active: inactive (dead) since Fri 2026-05-15 09:20:00 KST; 3s ago
+</code></pre></div>
+<p>세 노드 모두 <code>inactive (dead)</code> 인 것을 확인합니다.</p>
+<hr />
+<h2 id="3-부트스트랩-노드-초기화">3. 부트스트랩 노드 초기화</h2>
+<p>부트스트랩 노드 1대를 정합니다(보통 1번 node).</p>
+<p><strong>부트스트랩 노드에서만</strong> 실행:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 기존 데이터 디렉터리를 백업으로 옮김 (삭제 아님 — 만약을 위해 보존)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/var/lib/mysql<span class="w"> </span>/var/lib/mysql.bak.<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>sudo<span class="w"> </span>chown<span class="w"> </span>mysql:mysql<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>ls<span class="w"> </span>-ld<span class="w"> </span>/var/lib/mysql
+</code></pre></div>
+<p><strong>예상 출력</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>drwxr-x---. 2 mysql mysql 6 May 15 09:22 /var/lib/mysql
+</code></pre></div>
 <blockquote>
-<p>⚠️ 운영 클러스터의 한 노드에 import 하면 wsrep 으로 전체 노드에 전파되어 클러스터 전체 데이터가 덮어써집니다. <strong>반드시 운영과 분리된 환경에서.</strong></p>
+<p>⚠️ <code>mv</code> 한 백업 디렉터리 (<code>/var/lib/mysql.bak.*</code>) 는 복구 성공 확인까지 <strong>절대 삭제 금지</strong>. 7장 정리 단계에서 처리합니다.</p>
 </blockquote>
-<p>가벼운 점검으로는 백업 파일에 어떤 DB 가 들어있는지 확인하는 정도면 충분합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>zcat<span class="w"> </span>/bkup001/dump/mariadb_full_&lt;날짜&gt;_020001.sql.gz<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^-- Current Database:&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
-</code></pre></div>
-<p>운영 클러스터에 있는 DB 가 모두 들어있는지 확인합니다.</p>
 <hr />
-<h2 id="4-부록-자주-쓰는-명령어">4. 부록: 자주 쓰는 명령어</h2>
-<h3 id="41-일일-점검-한-번에-보기">4.1 일일 점검 한 번에 보기</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="s1">  echo &quot;=== 최신 백업 파일 ===&quot;</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="s1">  ls -lah /bkup001/dump/ | tail -3</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="s1">  echo &quot;&quot;</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="s1">  echo &quot;=== 최신 로그 (마지막 15줄) ===&quot;</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="s1">  ls -t /bkup001/logs/dump_*.log | head -1 | xargs tail -15</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="s1">  echo &quot;&quot;</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="s1">  echo &quot;=== wsrep_desync ===&quot;</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="s1">  mysql -u root -p -e &quot;SHOW VARIABLES LIKE \&quot;wsrep_desync\&quot;;&quot;</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="s1">  echo &quot;&quot;</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="s1">  echo &quot;=== timer ===&quot;</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="s1">  systemctl list-timers --all | grep mariadb</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="s1">&#39;</span>
+<h2 id="4-부트스트랩--백업-import">4. 부트스트랩 + 백업 import</h2>
+<h3 id="41-부트스트랩으로-기동">4.1 부트스트랩으로 기동</h3>
+<p><strong>부트스트랩 노드에서</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>galera_new_cluster
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sleep<span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Active
 </code></pre></div>
-<h3 id="42-백업-파일-내용-확인">4.2 백업 파일 내용 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># 백업에 포함된 DB 목록</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>zcat<span class="w"> </span>/bkup001/dump/mariadb_full_&lt;날짜&gt;.sql.gz<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^-- Current Database:&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="c1"># 특정 테이블 포함 여부</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>sudo<span class="w"> </span>zcat<span class="w"> </span>/bkup001/dump/mariadb_full_&lt;날짜&gt;.sql.gz<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^-- Table structure for table \`&lt;테이블명&gt;\`&quot;</span>
+<p><strong>예상 출력</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>   Active: active (running) since Fri 2026-05-15 09:24:00 KST; 5s ago
 </code></pre></div>
-<h3 id="43-수동-백업-실행">4.3 수동 백업 실행</h3>
-<p>자동 timer 와 별개로 즉시 백업이 필요할 때:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>-u<span class="w"> </span>mysql<span class="w"> </span>/opt/mariadb-backup/backup-dump.sh
+<p>확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;&quot;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;&quot;</span>
+</code></pre></div>
+<p><strong>예상 출력</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>| wsrep_cluster_size        | 1      |
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>| wsrep_local_state_comment | Synced |
+</code></pre></div>
+<p><code>cluster_size = 1</code> 정상 (아직 부트스트랩 노드만 떠 있음).</p>
+<h3 id="42-백업-import">4.2 백업 import</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>zcat<span class="w"> </span>/var/tmp/restore_source.sql.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</code></pre></div>
+<p>비밀번호 입력 후 import 시작.</p>
+<p><strong>진행 중 주의사항</strong>:</p>
+<ul>
+<li>출력은 거의 없습니다 (조용히 진행)</li>
+<li>데이터 크기에 따라 수 분 ~ 수십 분 소요</li>
+<li><strong>절대 Ctrl+C 누르지 마세요</strong></li>
+</ul>
+<p>진행 상황 모니터링이 필요하면 <strong>별도 터미널</strong> 에서:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s1">&#39;sudo du -sh /var/lib/mysql&#39;</span>
+</code></pre></div>
+<p>데이터 디렉터리 용량이 증가하면 정상 진행 중.</p>
+<h3 id="43-import-결과-1차-확인">4.3 import 결과 1차 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW DATABASES;&quot;</span>
+</code></pre></div>
+<p><strong>예상 출력</strong>: 복구된 DB 목록이 보여야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>+--------------------+
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>| Database           |
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>+--------------------+
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>| app_db             |
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>| information_schema |
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>| log_db             |
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>| mysql              |
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>| performance_schema |
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>| sys                |
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>+--------------------+
+</code></pre></div>
+<p>1.5 절에서 확인한 DB 목록이 모두 들어있는지 비교합니다.</p>
+<hr />
+<h2 id="5-나머지-노드-순차-join">5. 나머지 노드 순차 join</h2>
+<h3 id="51-db-node-2-기동">5.1 db-node-2 기동</h3>
+<p><strong>db-node-2 에서</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 기존 데이터 디렉터리도 보존 후 비우기</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/var/lib/mysql<span class="w"> </span>/var/lib/mysql.bak.<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>sudo<span class="w"> </span>chown<span class="w"> </span>mysql:mysql<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+</code></pre></div>
+<p><strong>기동 후 SST(State Snapshot Transfer) 가 자동으로 시작됩니다.</strong> 부트스트랩 노드에서 데이터를 받아오는 과정이며 데이터 크기에 따라 시간이 걸립니다.</p>
+<p>상태 확인 (Synced 될 때까지 30초 간격으로 반복):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;&quot;</span>
+</code></pre></div>
+<p><strong>예상 진행 순서</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Joining → Joined → Synced
+</code></pre></div>
+<p><code>Synced</code> 가 나오면 다음 노드로.</p>
+<h3 id="52-db-node-3-기동">5.2 db-node-3 기동</h3>
+<p><strong>db-node-3 에서</strong> 5.1 과 동일하게:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/var/lib/mysql<span class="w"> </span>/var/lib/mysql.bak.<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>sudo<span class="w"> </span>chown<span class="w"> </span>mysql:mysql<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb
+</code></pre></div>
+<p>Synced 확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;&quot;</span>
 </code></pre></div>
 <hr />
-<h2 id="5-트러블슈팅">5. 트러블슈팅</h2>
-<h3 id="51-자주-발생하는-증상">5.1 자주 발생하는 증상</h3>
+<h2 id="6-복구-후-검증">6. 복구 후 검증</h2>
+<h3 id="61-클러스터-최종-확인">6.1 클러스터 최종 확인</h3>
+<p><strong>아무 노드에서</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_cluster_status&#39;;</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="s2">&quot;</span>
+</code></pre></div>
+<p>✅ <strong>통과 기준</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>| wsrep_cluster_size        | 3       |
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>| wsrep_cluster_status      | Primary |
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>| wsrep_local_state_comment | Synced  |
+</code></pre></div>
+<p>세 노드 모두에서 같은 결과가 나와야 합니다.</p>
+<h3 id="62-데이터-확인">6.2 데이터 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># DB 별 테이블 개수</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="s2">SELECT table_schema, COUNT(*) AS table_count</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="s2">FROM information_schema.tables</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="s2">WHERE table_schema NOT IN (&#39;information_schema&#39;, &#39;performance_schema&#39;)</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="s2">GROUP BY table_schema;</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="s2">&quot;</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="c1"># 주요 테이블의 행 수 (필요한 만큼 반복)</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SELECT COUNT(*) FROM &lt;DB&gt;.&lt;주요_테이블&gt;;&quot;</span>
+</code></pre></div>
+<p>장애 발생 직전 수치와 비교합니다.</p>
+<blockquote>
+<p>⚠️ 백업이 새벽 02:00 기준이므로 <strong>그 이후 ~ 장애 시점 사이의 데이터는 손실</strong>됩니다. 이는 정상이며 백업 정책(매일 1회)에 따른 결과입니다.</p>
+</blockquote>
+<h3 id="63-애플리케이션-연결-테스트">6.3 애플리케이션 연결 테스트</h3>
+<p>애플리케이션이 정상 동작하는지 확인:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>□ 애플리케이션 → DB 연결 성공
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>□ 주요 화면/기능 정상 동작
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>□ 로그인, 조회, 입력 등 기본 시나리오 통과
+</code></pre></div>
+<hr />
+<h2 id="7-마무리">7. 마무리</h2>
+<h3 id="71-자동-백업-timer-재가동-필수">7.1 자동 백업 timer 재가동 (필수)</h3>
+<p>복구 완료 후 백업이 지속적으로 수행되도록 자동 백업 타이머를 재가동합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb-backup-dump.timer
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-timers<span class="w"> </span>--all<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mariadb
+</code></pre></div>
+<p><strong>예상 출력</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>NEXT                        LEFT    UNIT
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>Sat 2026-05-16 02:00:00 KST 16h     mariadb-backup-dump.timer
+</code></pre></div>
+<p><code>NEXT</code> 가 다음 날 02:00 으로 잡혀 있어야 정상.</p>
+<blockquote>
+<p>⚠️ <strong>백업 노드가 이관되어 복구를 진행한 경우의 타이머 재기동 규칙</strong>:
+1. <strong>3번 노드가 정상 복구되어 정상 기동된 경우</strong>:
+   - 복구 과정에서 3번 노드가 정상 복구(Synced)되어 정상 동작한다면, <strong>3번 노드(db-node-3)</strong>에서 백업 타이머를 재가동하고 활성화(<code>systemctl enable --now</code>)합니다.
+   - 이때 타 노드(1번 혹은 2번)에 임시로 켜두었던 백업 타이머가 있다면 반드시 중지 및 비활성화(<code>systemctl disable --now</code>)하여 중복 백업을 방지합니다.
+2. <strong>3번 노드가 여전히 장애 상태이거나 임시 대체 노드에서 계속 백업을 돌아야 하는 경우</strong>:
+   - 현재 백업을 담당하고 있는 <strong>대체 백업 노드(1번 혹은 2번)</strong>에서 백업 타이머를 재가동합니다.</p>
+</blockquote>
+<h3 id="72-정리-24시간-후-권장">7.2 정리 (24시간 후 권장)</h3>
+<p>복구가 안정적이라고 확인된 후, 아래 파일들을 정리합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># 데이터 디렉터리 백업 (각 노드)</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-ld<span class="w"> </span>/var/lib/mysql.bak.*
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/mysql.bak.&lt;타임스탬프&gt;<span class="w">   </span><span class="c1"># 충분히 확인 후 실행</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="c1"># 복구 작업용 사본</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/var/tmp/restore_source.sql.gz
+</code></pre></div>
+<blockquote>
+<p>⚠️ 정리는 <strong>최소 24시간 모니터링 후</strong> 진행하세요. 그 사이 이상이 발견되면 8장 롤백이 가능합니다.</p>
+</blockquote>
+<hr />
+<h2 id="8-롤백-복구가-잘못된-경우">8. 롤백 (복구가 잘못된 경우)</h2>
+<p>3장에서 <code>mv</code> 로 보존한 <code>/var/lib/mysql.bak.&lt;타임스탬프&gt;</code> 디렉터리를 사용해 원래 상태로 되돌립니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># 1. 모든 노드 MariaDB 정지</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>mariadb<span class="w">   </span><span class="c1"># 각 노드</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="c1"># 2. 각 노드: 새로 만든 디렉터리 제거 후 원본 복원</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/var/lib/mysql.bak.&lt;원래_타임스탬프&gt;<span class="w"> </span>/var/lib/mysql
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="c1"># 3. 부트스트랩 노드부터 재기동</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>sudo<span class="w"> </span>galera_new_cluster<span class="w">      </span><span class="c1"># 부트스트랩 노드</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="c1"># 4. 나머지 노드 순차 기동</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb<span class="w">   </span><span class="c1"># 노드 2, 3 순서대로</span>
+</code></pre></div>
+<p>각 노드 Synced 확인까지 4.1 / 5장 절차와 동일하게 진행합니다.</p>
+<hr />
+<h2 id="9-트러블슈팅">9. 트러블슈팅</h2>
 <table>
 <thead>
 <tr>
 <th>증상</th>
-<th>원인</th>
+<th>단계</th>
 <th>해결</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>오늘 백업 파일 없음</td>
-<td>timer 정지, NFS 끊김, mariadb 정지 등</td>
-<td>5.2 절 차례대로 확인</td>
-</tr>
-<tr>
-<td>백업 파일 크기 0</td>
-<td>백업 도중 실패</td>
-<td>로그(<code>/bkup001/logs/dump_*.log</code>)에서 원인 확인 후 수동 재실행</td>
-</tr>
-<tr>
-<td>백업 파일 크기가 갑자기 작아짐</td>
-<td>일부 DB 빠짐, 또는 실제 데이터 감소</td>
-<td>백업 내용(4.2 절) 확인. DB 가 빠졌으면 권한·접근성 점검</td>
-</tr>
-<tr>
-<td><code>wsrep_desync = ON</code> 으로 잔존</td>
-<td>백업 비정상 종료</td>
-<td>1.3 절 응급조치</td>
-</tr>
-<tr>
 <td><code>gzip: invalid magic</code></td>
-<td>백업 파일 손상</td>
-<td>이전 날짜 백업으로 복구 시도. 7일치 모두 실패하면 백업 시스템 전체 점검</td>
+<td>1.3</td>
+<td>백업 파일 손상. 이전 날짜 백업으로 재시도</td>
 </tr>
 <tr>
-<td><code>Access denied for user 'backup_user'</code> 가 로그에 보임</td>
-<td>자격증명/권한 문제</td>
-<td><code>/etc/mysql/backup.cnf</code> 와 권한 점검 (가이드 5.1 참조)</td>
+<td><code>ERROR 1045: Access denied for user 'root'</code></td>
+<td>전체</td>
+<td>MariaDB root 비밀번호 오류. 비밀번호 재확인</td>
 </tr>
 <tr>
-<td><code>ERROR 1227 (SUPER privilege required)</code></td>
-<td>wsrep_desync 권한 누락</td>
-<td><code>backup_user</code> 에 <code>GRANT SUPER</code> 적용 (백업 가이드 5.1 참조)</td>
+<td><code>galera_new_cluster</code> 후 다른 노드 join 안 됨</td>
+<td>5.1 / 5.2</td>
+<td>부트스트랩 노드의 방화벽/네트워크 확인 (4567, 4568, 4444 포트)</td>
 </tr>
 <tr>
-<td><code>tee: ... No such file or directory</code></td>
-<td><code>/bkup001/logs/</code> 미생성 또는 NFS 끊김</td>
-<td>NFS 마운트 확인 + <code>mkdir -p /bkup001/{dump,logs}</code></td>
+<td><code>wsrep_local_state_comment</code> 가 <code>Joining</code> 에서 멈춤</td>
+<td>5.1 / 5.2</td>
+<td>SST 진행 중. 큰 데이터는 수십 분 걸릴 수 있음. <code>sudo tail -f /var/log/mariadb/mariadb.log</code> 로 확인</td>
 </tr>
 <tr>
-<td>디스크 사용률 80% 초과</td>
-<td>데이터 증가 또는 retention 미동작</td>
-<td>용량 증설 또는 retention 점검</td>
+<td>import 가 비정상적으로 느림</td>
+<td>4.2</td>
+<td>NFS 지연 가능성. <code>df -h /bkup001</code> 확인. 사본을 로컬 디스크로 옮기는 것 고려 (1.4 의 <code>/var/tmp/</code> 가 로컬이면 이미 OK)</td>
 </tr>
 <tr>
-<td><code>Backup already running (lock held)</code></td>
-<td>직전 백업 실행 중이거나 락 파일 잔존</td>
-<td><code>ps -ef | grep backup-dump</code> 로 프로세스 확인. 없으면 <code>sudo rm -f /var/lib/mariadb-backup/backup.lock</code></td>
+<td>import 중 디스크 풀</td>
+<td>4.2</td>
+<td><code>/var/lib/mysql</code> 용량 부족. import 중단 → 8장 롤백 → 디스크 확보 후 재시도</td>
+</tr>
+<tr>
+<td><code>Backup End</code> 메시지 없는 백업 파일</td>
+<td>1.3 통과 후 발견</td>
+<td>import 가 도중에 끊겼던 백업일 수 있음. 이전 날짜 백업으로 재시도</td>
 </tr>
 </tbody>
 </table>
-<h3 id="52-백업이-안-도는-경우-점검-순서">5.2 백업이 안 도는 경우 점검 순서</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 1. timer 상태</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.timer
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># 2. 마지막 실행 결과</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.service<span class="w"> </span>--no-pager
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="c1"># 3. 서비스 저널</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mariadb-backup-dump.service<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>--no-pager
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="c1"># 4. NFS 마운트</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>bkup001
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>df<span class="w"> </span>-h<span class="w"> </span>/bkup001
-<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>
-<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="c1"># 5. MariaDB 상태</span>
-<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Active
-<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;&quot;</span>
-<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>
-<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="c1"># 6. 락 파일 잔존 여부</span>
-<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>sudo<span class="w"> </span>ls<span class="w"> </span>-la<span class="w"> </span>/var/lib/mariadb-backup/
-</code></pre></div>
-<h3 id="53-로그-위치">5.3 로그 위치</h3>
+<h3 id="91-로그-위치">9.1 로그 위치</h3>
 <table>
 <thead>
 <tr>
@@ -6716,98 +6782,39 @@
 </thead>
 <tbody>
 <tr>
-<td>백업 작업 로그 (작업별)</td>
-<td><code>/bkup001/logs/dump_&lt;날짜시각&gt;.log</code></td>
-</tr>
-<tr>
-<td>백업 서비스 저널</td>
-<td><code>sudo journalctl -u mariadb-backup-dump.service -n 200</code></td>
-</tr>
-<tr>
-<td>백업 timer 저널</td>
-<td><code>sudo journalctl -u mariadb-backup-dump.timer -n 100</code></td>
-</tr>
-<tr>
 <td>MariaDB 에러 로그</td>
 <td><code>/var/log/mariadb/mariadb.log</code></td>
 </tr>
+<tr>
+<td>MariaDB 저널</td>
+<td><code>sudo journalctl -u mariadb -n 200</code></td>
+</tr>
+<tr>
+<td>백업 작업 로그</td>
+<td><code>/bkup001/logs/dump_*.log</code></td>
+</tr>
 </tbody>
 </table>
 <hr />
-<h2 id="6-백업-노드-장애-시-이관-절차-3번-노드-장애-대응">6. 백업 노드 장애 시 이관 절차 (3번 노드 장애 대응)</h2>
-<p>백업 전담 노드인 <strong>3번 노드(db-node-3)</strong>에 장애가 발생하여 다운되거나 백업 수행이 불가능한 경우, 백업 연속성을 보장하기 위해 <strong>1번 노드(db-node-1)</strong> 또는 <strong>2번 노드(db-node-2)</strong>로 백업 실행 노드를 신속히 이관해야 합니다.</p>
-<h3 id="61-대체-노드로-백업-이관-절차">6.1 대체 노드로 백업 이관 절차</h3>
-<p>대체할 노드(예: <strong>1번 노드 db-node-1</strong>)에 접속하여 아래 절차를 수행합니다.</p>
-<h4 id="1단계-nfs-백업-스토리지-마운트-확인">1단계: NFS 백업 스토리지 마운트 확인</h4>
-<p>백업 디렉터리 <code>/bkup001</code>이 정상적으로 마운트되어 있는지 확인합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>df<span class="w"> </span>-h<span class="w"> </span>/bkup001
+<h2 id="부록-자주-쓰는-명령어">부록: 자주 쓰는 명령어</h2>
+<h3 id="클러스터-상태-한눈에">클러스터 상태 한눈에</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>sudo<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;;</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_cluster_status&#39;;</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_local_state_comment&#39;;</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="s2">SHOW STATUS LIKE &#39;wsrep_ready&#39;;</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="s2">&quot;</span>
 </code></pre></div>
-만약 마운트되어 있지 않다면 마운트를 수행합니다:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo<span class="w"> </span>mount<span class="w"> </span>-a<span class="w">  </span><span class="c1"># /etc/fstab에 마운트 정보가 등록되어 있는 경우</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="c1"># 또는 수동 마운트</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1"># sudo mount -t nfs -o rw,relatime,vers=4.1 nas.internal:/vol/mariadb_backup /bkup001</span>
-</code></pre></div></p>
-<h4 id="2단계-백업-스크립트-및-설정-파일-점검">2단계: 백업 스크립트 및 설정 파일 점검</h4>
-<p>대체 노드에 백업 스크립트와 설정 파일이 정상적으로 존재하는지 확인합니다.
-- 백업 스크립트: <code>/opt/mariadb-backup/backup-dump.sh</code>
-- 백업 설정 파일: <code>/etc/mysql/backup.cnf</code>
-- 백업 시스템드 서비스 및 타이머 파일 존재 여부 확인:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.timer
-</code></pre></div></p>
-<h4 id="3단계-대체-노드에서-백업-타이머-활성화-및-시작">3단계: 대체 노드에서 백업 타이머 활성화 및 시작</h4>
-<p>3번 노드의 장애 기간 동안 대체 노드에서 자동 백업이 동작하도록 타이머를 활성화하고 시작합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mariadb-backup-dump.timer
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb-backup-dump.timer
-</code></pre></div></p>
-<h4 id="4단계-타이머-작동-여부-및-이관-검증">4단계: 타이머 작동 여부 및 이관 검증</h4>
-<p>타이머가 정상 등록되었고 다음 백업 스케줄이 정상적으로 잡혔는지 확인합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-timers<span class="w"> </span>--all<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mariadb
-</code></pre></div></p>
-<hr />
-<h3 id="62-3번-노드-복구-후-원상-복구원복-절차">6.2 3번 노드 복구 후 원상 복구(원복) 절차</h3>
-<p>3번 노드(db-node-3)가 정상 복구되어 백업 전담 역할을 다시 수행할 수 있게 되면, 이중 백업 방지 및 리소스 관리를 위해 대체 노드의 타이머를 끄고 3번 노드로 원복합니다.</p>
-<h4 id="1단계-대체-노드예-1번-노드에서-백업-타이머-정지-및-비활성화">1단계: 대체 노드(예: 1번 노드)에서 백업 타이머 정지 및 비활성화</h4>
-<p>대체 노드에 접속하여 백업 타이머를 중지하고 비활성화합니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>mariadb-backup-dump.timer
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>mariadb-backup-dump.timer
-</code></pre></div></p>
-<h4 id="2단계-3번-노드db-node-3에서-백업-타이머-활성화-및-시작">2단계: 3번 노드(db-node-3)에서 백업 타이머 활성화 및 시작</h4>
-<p>복구된 3번 노드에 접속하여 백업 타이머를 다시 켭니다.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mariadb-backup-dump.timer
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb-backup-dump.timer
-</code></pre></div></p>
-<h4 id="3단계-양쪽-노드-상태-최종-검증">3단계: 양쪽 노드 상태 최종 검증</h4>
-<ul>
-<li><strong>대체 노드</strong>: 타이머가 <code>inactive (dead)</code> 상태인지 확인
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.timer<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Active
-</code></pre></div></li>
-<li><strong>3번 노드</strong>: 타이머가 <code>active (waiting)</code> 상태인지 확인
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.timer<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Active
-</code></pre></div></li>
-</ul>
-<hr />
-<h2 id="변경-이력">변경 이력</h2>
-<table>
-<thead>
-<tr>
-<th>일자</th>
-<th>버전</th>
-<th>변경 내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2026-05-15</td>
-<td>1.0</td>
-<td>최초 작성. 일일/주간 확인 절차</td>
-</tr>
-<tr>
-<td>2026-06-01</td>
-<td>1.1</td>
-<td>백업 노드 장애 시 이관 및 원복 절차 추가</td>
-</tr>
-</tbody>
-</table>
+<h3 id="디스크-확인">디스크 확인</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>df<span class="w"> </span>-h<span class="w"> </span>/bkup001<span class="w"> </span>/var/lib/mysql<span class="w"> </span>/var/tmp
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>sudo<span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>/var/lib/mysql<span class="w"> </span>/bkup001/dump
+</code></pre></div>
+<h3 id="mariadb-서비스-제어">MariaDB 서비스 제어</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w">   </span>mariadb
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w">  </span>mariadb<span class="w">            </span><span class="c1"># 일반 시작 (기존 클러스터에 join)</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>sudo<span class="w"> </span>galera_new_cluster<span class="w">                   </span><span class="c1"># 부트스트랩 시작 (첫 노드 전용)</span>
+</code></pre></div>
 
 
 

@@ -69,15 +69,23 @@
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/backup-restore/mariadb-galera-backup-verify-guide/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/backup-restore/mariadb-galera-restore-guide/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/galera-restore/galera-reboot-guide/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-guide/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-simple-guide/</loc>
-         <lastmod>2026-06-12</lastmod>
-    </url>
-    <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-backup-verify/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
@@ -89,15 +97,7 @@
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-reboot-guide/</loc>
-         <lastmod>2026-06-12</lastmod>
-    </url>
-    <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-recovery/</loc>
-         <lastmod>2026-06-12</lastmod>
-    </url>
-    <url>
-         <loc>https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-restore/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
@@ -246,6 +246,14 @@
     </url>
     <url>
          <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/002-operation-guide/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/opentelemetry-collector-install/</loc>
+         <lastmod>2026-06-12</lastmod>
+    </url>
+    <url>
+         <loc>https://kdelphinus.github.io/infra-cheatsheets/k8s/monitoring/opentelemetry-operator-install/</loc>
          <lastmod>2026-06-12</lastmod>
     </url>
     <url>
