@@ -34,6 +34,8 @@ hide:
     - [:octicons-arrow-right-24: Ubuntu 24.04 오프라인 설치](k8s/install/ubuntu/offline-install.md)
     - [:octicons-arrow-right-24: Rocky Linux 9.6 설치 파일 준비](k8s/install/rocky/ready-offline.md)
     - [:octicons-arrow-right-24: Rocky Linux 9.6 오프라인 설치](k8s/install/rocky/offline-install.md)
+    - [:octicons-arrow-right-24: 오프라인 빌더 사용 가이드](k8s/install/k8s-offline-builder-guide.md)
+    - [:octicons-arrow-right-24: 오프라인 빌더 재현성 검증 (v1.33.11)](k8s/install/reproducibility-check-ubuntu.md)
     - [:octicons-arrow-right-24: Helm 및 스토리지 프로비저너 설치](k8s/install/base-infra.md)
     - [:octicons-arrow-right-24: Kubernetes Cheat Sheet](k8s/cheatsheet.md)
     - [:octicons-arrow-right-24: Cluster API & 리소스 치트시트](k8s/capi/cheatsheet.md)

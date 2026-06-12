@@ -67,6 +67,8 @@ nav:
         - '3. 온라인 K8s 설치 (v1.33.7)': k8s/install/rocky/online-install.md
         - 'Git CLI 오프라인 설치': k8s/install/rocky/git-cli-install.md
         - 'Docker 오프라인 설치': k8s/install/rocky/docker-offline-install.md
+      - '오프라인 빌더 사용 가이드': k8s/install/k8s-offline-builder-guide.md
+      - '오프라인 빌더 재현성 검증 (v1.33.11)': k8s/install/reproducibility-check-ubuntu.md
     - '기반 인프라':
       - 'Helm & 스토리지 프로비저너 설치': k8s/install/base-infra.md
       - 'MetalLB 설치': k8s/install/metallb-install.md
