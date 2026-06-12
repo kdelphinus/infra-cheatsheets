@@ -113,26 +113,44 @@ kubectl get svc -n envoy-gateway-system
 # EXTERNAL-IP 가 표시되면 정상
 ```
 
-### LoadBalancer — 수동 IP 할당 (온프레미스 + DaemonSet)
+### LoadBalancer — MetalLB 연동 (권장: 온프레미스 VIP 구성)
 
-전체 워커 노드 IP 를 `externalIPs` 에 등록하여 고가용성을 확보합니다.
+온프레미스(Bare-metal) 환경에서는 외부 트래픽을 수신하고 장애 전환(ARP Failover) 및 실 IP 보존을 보장하기 위해 **MetalLB(L2 모드)**를 구축하여 로드밸런서 IP를 광고하는 것을 강력히 권장합니다.
 
+#### 1) MetalLB 설치 및 IP 풀 설정
+- 본 레포의 [MetalLB 설치](../install/metallb-install.md) 가이드를 참고하여 설치하고, 노드 대역의 유휴 IP(예: `10.10.10.81-10.10.10.81`)를 `IPAddressPool`로 등록합니다.
+- `values-infra.yaml`의 서비스 타입이 `LoadBalancer` 상태로 배포되면, MetalLB가 생성된 Envoy Proxy 서비스에 IP풀의 VIP(`10.10.10.81`)를 `EXTERNAL-IP`로 자동 할당하게 됩니다.
+
+#### 2) 게이트웨이(Gateway) 리소스 주소 바인딩
+서비스에 IP가 할당된 후 Gateway 리소스의 주소를 바인딩하여 상태를 동기화(`Programmed: True`)합니다.
+```bash
+# 할당된 VIP(예: 10.10.10.81)를 Gateway 리소스에 바인딩
+kubectl patch gateway cluster-gateway -n envoy-gateway-system --type='merge' \
+  -p '{"spec":{"addresses":[{"type":"IPAddress","value":"10.10.10.81"}]}}'
+```
+
+---
+
+#### ⚠️ [참고] externalIPs 수동 할당 (비권장 - 임시 검증용)
+MetalLB 같은 로드밸런서 컨트롤러가 없는 경우에 임시로 노드 IP를 통해 외부 트래픽을 받기 위한 우회 방법입니다. (ARP 광고 및 고가용성이 보장되지 않으며, 실 IP 보존이 불가능합니다.)
+
+**서비스(Service) 외부 IP 등록:**
 ```bash
 # 서비스 이름 확인
-SVC_NAME=$(kubectl get svc -n envoy-gateway-system \
-  -l gateway.envoyproxy.io/owning-gateway-name=cluster-gateway \
-  -o jsonpath='{.items[0].metadata.name}')
+SVC_NAME=$(kubectl get svc -n envoy-gateway-system -l gateway.envoyproxy.io/owning-gateway-name=cluster-gateway -o jsonpath='{.items[0].metadata.name}')
 
-# 워커 노드 IP 일괄 등록
+# 전체 워커 노드 IP를 externalIPs에 일괄 등록
 kubectl patch svc -n envoy-gateway-system $SVC_NAME --type merge \
-  -p '{"spec":{"externalIPs":["<WORKER1_IP>","<WORKER2_IP>","<WORKER3_IP>"]}}'
+  -p '{"spec":{"externalIPs":["<WORKER1_IP>","<WORKER2_IP>"]}}'
+```
 
-# Gateway 가 1분 이상 False 이면 주소 직접 바인딩
+**게이트웨이(Gateway) 주소 바인딩:**
+```bash
+# 위에서 등록한 노드 IP들을 Gateway 리소스에도 바인딩
 kubectl patch gateway cluster-gateway -n envoy-gateway-system --type='merge' \
   -p '{"spec":{"addresses":[
     {"type":"IPAddress","value":"<WORKER1_IP>"},
-    {"type":"IPAddress","value":"<WORKER2_IP>"},
-    {"type":"IPAddress","value":"<WORKER3_IP>"}
+    {"type":"IPAddress","value":"<WORKER2_IP>"}
   ]}}'
 ```
 
@@ -145,28 +163,41 @@ kubectl get svc -n envoy-gateway-system
 
 L4 스위치 또는 HAProxy 의 Real Server 로 워커 IP:30080 / :30443 등록.
 
-### 와일드카드 TLS 인증서 적용
+### TLS 인증서 및 HTTPS 구성
+
+Envoy Gateway에서 HTTPS(TLS) 서비스를 노출하려면 사전에 인증서 Secret을 생성해 두어야 합니다.
+
+**TLS Secret 생성 (설치 전 또는 완료 후):**
+
+`gateway-infra` 설정(`values-infra.yaml`)에 정의된 Secret 이름(기본값: `gateway-tls`)과 매칭되도록 생성합니다.
 
 ```bash
-kubectl create secret tls wildcard-tls-secret \
-  --cert=fullchain.pem --key=privkey.pem \
+# 인증서 파일이 위치한 디렉토리에서 실행
+kubectl create secret tls gateway-tls \
+  --cert=cert.pem --key=key.pem \
   -n envoy-gateway-system
 ```
 
-`Gateway` 리스너에 추가:
+> [!NOTE]
+> 만약 다른 이름(예: `wildcard-tls-secret`)으로 Secret을 생성할 경우, `values-infra.yaml`의 `gateway.tls.name` 항목을 해당 Secret 이름으로 수정한 뒤 설치 스크립트(`install.sh`)를 실행해야 합니다.
 
+**자동 바인딩 원리:**
+`values-infra.yaml`에서 `gateway.tls.enabled: true` 상태이면 `gateway-infra` 템플릿이 Gateway 리소스에 HTTPS 443 리스너와 Secret 참조 관계를 자동으로 구성합니다.
 ```yaml
-listeners:
-  - name: https
-    port: 443
-    protocol: HTTPS
-    hostname: "*.devops.internal"
-    tls:
-      mode: Terminate
-      certificateRefs:
-        - name: wildcard-tls-secret
-          kind: Secret
+spec:
+  listeners:
+    - name: https
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: gateway-tls  # values-infra.yaml의 gateway.tls.name 값을 동적으로 반영
+            kind: Secret
 ```
+
+---
+
 
 ---
 
