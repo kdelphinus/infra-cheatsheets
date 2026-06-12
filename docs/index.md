@@ -46,7 +46,6 @@ hide:
 
     - [:octicons-arrow-right-24: Envoy Gateway 및 HTTPRoute 설치](k8s/gateway-api/envoy-v1.37.2-install.md)
     - [:octicons-arrow-right-24: Cilium (CNI) 오프라인 설치](k8s/network/cilium-install.md)
-    - [:octicons-arrow-right-24: Calico CNI 라우팅 장애 해결](k8s/network/calico-routing-troubleshooting.md)
     - [:octicons-arrow-right-24: NGINX NIC 마이그레이션 가이드](k8s/gateway-api/nginx-nic-migration.md)
 
 - :material-shield-check: **보안 및 백업**
@@ -69,6 +68,19 @@ hide:
     - [:octicons-arrow-right-24: NFS 동적 스토리지 프로비저너](k8s/use-pv-nas.md)
     - [:octicons-arrow-right-24: NetApp Trident 스토리지 프로비저너](k8s/storage/trident-install.md)
     - [:octicons-arrow-right-24: MetalLB 로드밸런서 설치](k8s/install/metallb-install.md)
+
+- :material-alert-circle-outline: **장애 해결 및 트러블슈팅**
+
+    ---
+
+    클러스터 운영 중 발생하는 장애 대응 가이드
+
+    - [:octicons-arrow-right-24: Calico CNI 라우팅 장애 해결](k8s/troubleshooting/calico-routing-troubleshooting.md)
+    - [:octicons-arrow-right-24: ContainerPort 누락 장애 해결](k8s/troubleshooting/missed-containerport.md)
+    - [:octicons-arrow-right-24: Cilium CNI 설치 트러블슈팅](k8s/troubleshooting/cilium-troubleshooting.md)
+    - [:octicons-arrow-right-24: Falco 런타임 탐지 트러블슈팅](k8s/troubleshooting/falco-troubleshooting.md)
+    - [:octicons-arrow-right-24: Tetragon 런타임 차단 트러블슈팅](k8s/troubleshooting/tetragon-troubleshooting.md)
+    - [:octicons-arrow-right-24: HTTPRoute 라우팅 트러블슈팅](k8s/troubleshooting/httproute-troubleshooting.md)
 
 </div>
 
