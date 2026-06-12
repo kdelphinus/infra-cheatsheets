@@ -85,6 +85,8 @@ nav:
     - 'Monitoring':
       - 'Prometheus & Grafana 설치': k8s/monitoring/001-kube-prometheus-stack.md
       - '모니터링 운영 가이드': k8s/monitoring/002-operation-guide.md
+      - 'OpenTelemetry Collector 설치': k8s/monitoring/opentelemetry-collector-install.md
+      - 'OpenTelemetry Operator 설치': k8s/monitoring/opentelemetry-operator-install.md
     - 'Security':
       - 'Falco 런타임 탐지': k8s/security/001-falco-install.md
       - 'Tetragon 런타임 차단': k8s/security/002-tetragon-install.md
@@ -140,11 +142,11 @@ nav:
       - 'Galera Cluster 설치': db/ha/galera-cluster.md
       - 'Galera Cluster 설치 (온라인)': db/ha/galera-cluster-online.md
       - 'Galera Cluster 장애 복구': db/ha/galera-recovery.md
-      - 'Galera Cluster 복구': db/ha/galera-restore.md
+      - 'Galera Cluster 복구': db/backup-restore/mariadb-galera-restore-guide.md
       - 'Galera Cluster 백업': db/ha/galera-backup-guide.md
       - 'Galera Cluster 백업 (간소판)': db/ha/galera-backup-simple-guide.md
-      - 'Galera Cluster 백업 동작 확인': db/ha/galera-backup-verify.md
-      - 'Galera Cluster 재부팅': db/ha/galera-reboot-guide.md
+      - 'Galera Cluster 백업 동작 확인': db/backup-restore/mariadb-galera-backup-verify-guide.md
+      - 'Galera Cluster 재부팅': db/galera-restore/galera-reboot-guide.md
     - Redis Stream:
       - 'Redis Stream 개발자 가이드': db/redis/001-redis-stream-overview.md
       - '설치 및 운영 가이드': db/redis/002-redis-stream-install.md

@@ -65,6 +65,8 @@ hide:
     모니터링 및 영구 저장소 관리
 
     - [:octicons-arrow-right-24: Prometheus 및 Grafana 통합 모니터링](k8s/monitoring/001-kube-prometheus-stack.md)
+    - [:octicons-arrow-right-24: OpenTelemetry Collector 오프라인 설치](k8s/monitoring/opentelemetry-collector-install.md)
+    - [:octicons-arrow-right-24: OpenTelemetry Operator 오프라인 설치](k8s/monitoring/opentelemetry-operator-install.md)
     - [:octicons-arrow-right-24: NFS 동적 스토리지 프로비저너](k8s/use-pv-nas.md)
     - [:octicons-arrow-right-24: NetApp Trident 스토리지 프로비저너](k8s/storage/trident-install.md)
     - [:octicons-arrow-right-24: MetalLB 로드밸런서 설치](k8s/install/metallb-install.md)
@@ -134,8 +136,8 @@ hide:
     - [:octicons-arrow-right-24: MariaDB Galera Cluster 온라인 설치](db/ha/galera-cluster-online.md)
     - [:octicons-arrow-right-24: MariaDB 폐쇄망 오프라인 설치](db/install/mariadb-air-gapped-install.md)
     - [:octicons-arrow-right-24: DB 장애 복구 및 트러블슈팅](db/ha/galera-recovery.md)
-    - [:octicons-arrow-right-24: Galera Cluster 복구 가이드](db/ha/galera-restore.md)
-    - [:octicons-arrow-right-24: Galera Cluster 백업 동작 확인](db/ha/galera-backup-verify.md)
+    - [:octicons-arrow-right-24: Galera Cluster 복구 가이드](db/backup-restore/mariadb-galera-restore-guide.md)
+    - [:octicons-arrow-right-24: Galera Cluster 백업 동작 확인](db/backup-restore/mariadb-galera-backup-verify-guide.md)
 
 - :simple-redis: **NoSQL 및 캐시**
 
