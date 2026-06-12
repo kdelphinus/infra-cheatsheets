@@ -1,8 +1,7 @@
 # MariaDB Galera Cluster 복구 가이드
 
-> **환경**: Rocky Linux 9 + MariaDB 10.11.16 Galera Cluster + NetApp NFS
+> **환경**: Rocky Linux 9 + MariaDB 10.11.16 Galera Cluster + NetApp NFS  
 > **백업 위치**: `/bkup001/dump/`
-> **작성일**: 2026-05-15 / 버전 1.0
 
 ---
 
@@ -10,13 +9,11 @@
 
 `mariadb-dump` 로 뜬 백업 파일을 사용해 **데이터베이스를 원상 복구** 하는 절차서입니다.
 
-평시 백업 동작 점검은 별도 문서 `mariadb-galera-backup-verify-guide.md` 참고.
-
 ---
 
 ## 환경 정보
 
-| 항목 | 값 |
+| 항목 | Value |
 |------|-----|
 | 클러스터 노드 | db-node-1, db-node-2, db-node-3 |
 | MariaDB 버전 | 10.11.16 |
@@ -480,35 +477,3 @@ sudo systemctl stop   mariadb
 sudo systemctl start  mariadb            # 일반 시작 (기존 클러스터에 join)
 sudo galera_new_cluster                   # 부트스트랩 시작 (첫 노드 전용)
 ```
-
----
-
-## 체크리스트
-
-```text
-□ 1.1  timer 정지
-□ 1.2  사용할 백업 파일 확인
-□ 1.3  gzip 무결성 검증 통과
-□ 1.4  사본 보관 (/var/tmp/restore_source.sql.gz)
-□ 2    모든 노드 mariadb 정지
-□ 3    부트스트랩 노드 데이터 디렉터리 초기화
-□ 4.1  galera_new_cluster 기동, cluster_size=1 + Synced
-□ 4.2  백업 import 완료
-□ 4.3  SHOW DATABASES 결과 정상
-□ 5.1  db-node-2 join, Synced
-□ 5.2  db-node-3 join, Synced
-□ 6.1  cluster_size=3, Primary, 모든 노드 Synced
-□ 6.2  데이터 행 수 확인
-□ 6.3  애플리케이션 정상 동작
-□ 7.1  timer 재가동, 다음 NEXT 가 다음날 02:00
-□ 7.2  24시간 후 정리 (백업 디렉터리, 사본 파일)
-```
-
----
-
-## 변경 이력
-
-| 일자 | 버전 | 변경 내용 |
-|------|------|----------|
-| 2026-05-15 | 1.0 | 최초 작성. 덤프 import 중심의 클러스터 전체 복구 절차 |
-| 2026-06-01 | 1.1 | 백업 노드 장애 시 타이머 제어 지침 추가 |

@@ -1,12 +1,12 @@
 # MariaDB Galera Cluster 재부팅 운영 가이드
 
-> **대상 환경**: Rocky Linux 9.6 + MariaDB **10.11.16** Galera Cluster (3-node, RPM 직접 설치)
-> **작성일**: 2026-05-08
+> **대상 환경**: Rocky Linux 9.6 + MariaDB **10.11.16** Galera Cluster (3-node, RPM 직접 설치)  
+> **작성일**: 2026-05-08  
 > **참고 가이드**:
 >
-> - [galera-cluster-guide.md](./galera-cluster.md) — 신규 구축
-> - [galera-cluster-guide.md Phase 6](./galera-cluster.md) — Full Crash Recovery
-> - [galera-backup-simple-guide.md](./galera-backup-simple-guide.md) — 매일 dump + 7일 보관
+> - [galera-cluster.md](../ha/galera-cluster.md) — 신규 구축
+> - [galera-cluster.md](../ha/galera-cluster.md) — Full Crash Recovery
+> - [galera-backup-simple-guide.md](../ha/galera-backup-simple-guide.md) — 매일 dump + 7일 보관
 
 본 문서는 운영 중인 Galera 3-node 클러스터에서 **계획 재부팅 / 비계획 재부팅 / 전체 정전 복구** 시 따라야 할 절차입니다.
 Galera 는 K8s 와 달리 **노드 간 상태 동기화·quorum·gcache·`safe_to_bootstrap` 플래그** 가 직접 운영자에게 노출되므로
@@ -128,7 +128,7 @@ sudo systemctl status mariadb-backup-dump.service --no-pager
 
 ### 2.5 K8s 애플리케이션 측 영향
 
-DB 가 K8s 워크로드의 backing store 면, 짧은 단절을 견디지 못하는 앱(특히 Spring/Hibernate connection pool, 일부 PHP-FPM)은 `CrashLoopBackOff` 가능. 점검 시간으로 공지하거나 재부팅 후 [Phase 6 4단계 / `kubectl rollout restart`](./galera-cluster.md) 절차로 복구 준비.
+DB 가 K8s 워크로드의 backing store 면, 짧은 단절을 견디지 못하는 앱(특히 Spring/Hibernate connection pool, 일부 PHP-FPM)은 `CrashLoopBackOff` 가능. 점검 시간으로 공지하거나 재부팅 후 [Phase 6 4단계 / `kubectl rollout restart`](../ha/galera-cluster.md) 절차로 복구 준비.
 
 ---
 
@@ -225,7 +225,7 @@ ssh galera-cluster-1 sudo mysql -u root -p -e "SHOW STATUS LIKE 'wsrep_cluster_s
 
 `safe_to_bootstrap` 이 모두 0 일 가능성이 큼. **데이터 유실 회피를 위해 seqno 비교가 필수**.
 
-[galera-cluster-guide.md Phase 6 (Full Crash Recovery)](./galera-cluster.md) 절차를 따르세요. 핵심 요약:
+[galera-cluster.md](../ha/galera-cluster.md) 절차를 따르세요. 핵심 요약:
 
 ```bash
 # 3대 모두에서 실행하여 seqno 추출
@@ -244,7 +244,7 @@ sudo galera_new_cluster
 
 ### 3.5 시나리오 E — 노드 1대만 비정상 재부팅 (다른 2대는 정상)
 
-가장 가벼운 케이스. 부팅 후 자동 시작 → IST 또는 SST 로 합류.
+기장 가벼운 케이스. 부팅 후 자동 시작 → IST 또는 SST 로 합류.
 
 ```bash
 # 부팅 직후
@@ -335,6 +335,7 @@ kubectl get pods -A | grep -E 'CrashLoopBackOff|Error'
 kubectl rollout restart deployment --all -n <namespace>
 kubectl rollout restart statefulset --all -n <namespace>
 
+# 복구 대기
 kubectl get pods -A | grep -vE 'Running|Completed'
 ```
 
@@ -422,7 +423,7 @@ sudo mysql -u root -p -e "SET GLOBAL wsrep_desync=OFF;"
 
 RHEL 9 systemd 보안 정책 (`ProtectSystem=full`) 가 커스텀 datadir 쓰기를 차단.
 
-[galera-cluster-guide.md 부록 A-1](./galera-cluster.md) 의 override 적용:
+[galera-cluster.md](../ha/galera-cluster.md) 의 override 적용:
 
 ```bash
 sudo mkdir -p /etc/systemd/system/mariadb.service.d
@@ -489,7 +490,7 @@ kubectl get pv,pvc -A | grep -vE 'Bound|Available'
 > **운영 팁**:
 >
 > - 점검 창은 **20–30분 / 노드** (Rolling), 전체 정지/시작은 **45–90분**.
-> - 비정상 다운 후 복구는 [galera-cluster-guide.md Phase 6](./galera-cluster.md) 와 본 가이드 5장을 함께 참조.
+> - 비정상 다운 후 복구는 [galera-cluster.md](../ha/galera-cluster.md) 와 본 가이드 5장을 함께 참조.
 > - `safe_to_bootstrap` 을 **임의로 1 로 바꾸지 말 것** — 반드시 `--wsrep-recover` 로 seqno 비교 후 결정.
 > - 점검 직후 백업 1회 수동 실행으로 정상성 재확인 권장:
 >

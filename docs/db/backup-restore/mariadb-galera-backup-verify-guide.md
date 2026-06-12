@@ -1,8 +1,7 @@
 # MariaDB Galera Cluster 백업 동작 확인 가이드
 
-> **환경**: Rocky Linux 9 + MariaDB 10.11.16 Galera Cluster + NetApp NFS
+> **환경**: Rocky Linux 9 + MariaDB 10.11.16 Galera Cluster + NetApp NFS  
 > **백업 위치**: `/bkup001/dump/`
-> **작성일**: 2026-05-15 / 버전 1.0
 
 ---
 
@@ -10,13 +9,11 @@
 
 매일 새벽 02:00 에 도는 자동 백업이 **정상적으로 동작하고 있는지** 일상적으로 확인하는 절차입니다.
 
-실제 복구가 필요할 때는 별도 문서 `mariadb-galera-restore-guide.md` 를 사용합니다.
-
 ---
 
 ## 환경 정보
 
-| 항목 | 값 |
+| 항목 | Value |
 |------|-----|
 | 백업 노드 | 백업 전담 노드 (db-node-3) |
 | 백업 디렉터리 | `/bkup001/dump/` |
@@ -370,7 +367,7 @@ sudo systemctl start mariadb-backup-dump.timer
 ```
 
 #### 4단계: 타이머 작동 여부 및 이관 검증
-타이머가 정상 등록되었고 다음 백업 스케줄이 정상적으로 잡혔는지 확인합니다.
+타이너가 정상 등록되었고 다음 백업 스케줄이 정상적으로 잡혔는지 확인합니다.
 ```bash
 sudo systemctl list-timers --all | grep mariadb
 ```
@@ -404,12 +401,3 @@ sudo systemctl start mariadb-backup-dump.timer
   ```bash
   sudo systemctl status mariadb-backup-dump.timer | grep Active
   ```
-
----
-
-## 변경 이력
-
-| 일자 | 버전 | 변경 내용 |
-|------|------|----------|
-| 2026-05-15 | 1.0 | 최초 작성. 일일/주간 확인 절차 |
-| 2026-06-01 | 1.1 | 백업 노드 장애 시 이관 및 원복 절차 추가 |

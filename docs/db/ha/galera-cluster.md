@@ -318,7 +318,7 @@ kubectl rollout restart deployment --all -n [네임스페이스]
 - [Galera Cluster 장애 복구 가이드](./galera-recovery.md) — 시나리오별 상세 복구 절차
 - [MariaDB 트러블슈팅 및 운영 주의사항](../install/mariadb-troubleshooting.md)
 - [Galera 백업 가이드](./galera-backup-guide.md)
-- [Galera 재부팅 가이드](./galera-reboot-guide.md)
+- [Galera 재부팅 가이드](../galera-restore/galera-reboot-guide.md)
 
 ---
 
