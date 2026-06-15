@@ -1,8 +1,7 @@
-# Kubernetes v1.36.1 온라인 설치 가이드 (Ubuntu 24.04)
+# Kubernetes v1.33.11 온라인 설치 가이드 (Ubuntu 24.04)
 
-인터넷이 가능한 환경에서 kubeadm 기반 Kubernetes v1.36.1 클러스터를 구성하는 절차입니다.
+인터넷이 가능한 환경에서 kubeadm 기반 Kubernetes v1.33.11 클러스터를 구성하는 절차입니다.
 containerd v2.2.x + CNI(Calico 또는 Cilium) 선택 구성이며, 폐쇄망 설치는 [오프라인 설치 가이드](offline-install.md)를 참고하세요.
-Rocky Linux 9.x (RHEL 9 계열) 가이드는 [Rocky Linux 온라인 설치 가이드](../rocky/online-install.md)를 참고하세요.
 
 ## 전제 조건
 
@@ -70,25 +69,24 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# 3. Kubernetes 저장소 (v1.36)
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.36/deb/Release.key | \
+# 3. Kubernetes 저장소 (v1.33)
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key | \
     sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
-https://pkgs.k8s.io/core:/stable:/v1.36/deb/ /" | \
+https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /" | \
     sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
 
 sudo apt-get update
 
 # 4. containerd + kubeadm/kubelet/kubectl
 sudo apt-get install -y containerd.io
-sudo apt-get install -y kubelet=1.36.1-1.1 kubeadm=1.36.1-1.1 kubectl=1.36.1-1.1
+sudo apt-get install -y kubelet=1.33.11-1.1 kubeadm=1.33.11-1.1 kubectl=1.33.11-1.1
 sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo systemctl enable kubelet
 ```
 
-!!! note
-    Kubernetes repo는 v1.24부터 `pkgs.k8s.io`로 이전되었으며 버전별 경로(`/v1.36/`)가 구분됩니다.
+> Kubernetes repo는 v1.24부터 `pkgs.k8s.io`로 이전되었으며 버전별 경로(`/v1.33/`)가 구분됩니다.
 
 ## Phase 2: OS 사전 설정 (전체 노드)
 
@@ -147,7 +145,7 @@ EOF
 sudo aa-status | head -5
 ```
 
-### WSL2 추가 (필요 시)
+### WSL2 추가
 
 ```bash
 # /etc/wsl.conf에 systemd 활성화 후 wsl --shutdown 재기동 필요
@@ -170,7 +168,7 @@ sudo containerd config default | sudo tee /etc/containerd/config.toml
 # cgroup driver 를 systemd 로 변경 (필수)
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 
-# v1.36 호환 pause 이미지
+# v1.33 호환 pause 이미지
 sudo sed -i 's|sandbox_image = ".*"|sandbox_image = "registry.k8s.io/pause:3.10"|' /etc/containerd/config.toml
 
 # Harbor(또는 사설 레지스트리) insecure registry 사용 시 config_path 단일화
@@ -191,18 +189,26 @@ sudo systemctl restart containerd
 sudo systemctl enable containerd
 ```
 
-!!! note
-    `/etc/security/limits.d`는 주로 로그인 세션에 적용됩니다. `kubelet`과 `containerd`처럼 systemd가 직접 띄우는 서비스는 위 systemd override까지 적용해야 FD/프로세스 limits가 일관되게 반영됩니다.
+> `/etc/security/limits.d`는 주로 로그인 세션에 적용됩니다. `kubelet`과
+> `containerd`처럼 systemd가 직접 띄우는 서비스는 위 systemd override까지
+> 적용해야 FD/프로세스 limits가 일관되게 반영됩니다.
 
-!!! note
-    containerd 재시작 후 `SystemdCgroup = true` 적용 여부 확인:
-    ```bash
-    grep SystemdCgroup /etc/containerd/config.toml
-    ```
+
+> containerd 재시작 후 `SystemdCgroup = true` 적용 여부 확인:
+>
+> ```bash
+> grep SystemdCgroup /etc/containerd/config.toml
+> ```
 
 ### (선택) Harbor insecure registry 등록
 
-Harbor를 HTTP(insecure)로 운영하는 경우 각 노드에 아래 설정을 추가합니다.
+> ⚠️ **`scripts/install.sh` 자동화 범위 밖 — 수동 적용 필요**
+>
+> `install.sh` 는 SystemdCgroup / sandbox_image / config_path 단일화까지만 처리합니다.
+> 아래 hosts.toml 등록은 환경별로 Harbor 주소가 다르므로 의도적으로 수동 단계로 남겨둔 것이며,
+> **`install.sh` 실행 후 Harbor 를 사용하는 노드에서 별도로 실행**해야 합니다.
+
+Harbor 를 HTTP(insecure)로 운영하는 경우 각 노드에 아래 설정을 추가합니다.
 
 ```bash
 # Harbor 레지스트리 주소 (예: 192.168.1.10:30002)
@@ -220,31 +226,38 @@ EOF
 sudo systemctl restart containerd
 ```
 
-!!! note
-    **containerd v1.x vs v2.x 플러그인 키 차이**
-    
-    `containerd config default` 로 생성한 `config.toml` 에 `config_path` 가 비어 있다면 containerd 버전에 따라 추가해야 할 플러그인 키 이름이 다릅니다. 본 가이드는 containerd 2.2.x 라인이므로 **v2 키** 가 기본입니다.
-    
-    ```bash
-    # containerd 버전 확인
-    containerd --version
-    ```
-    
-    ```toml
-    # containerd v1.x (io.containerd.grpc.v1.cri)
-    [plugins."io.containerd.grpc.v1.cri".registry]
-      config_path = "/etc/containerd/certs.d"
-    
-    # containerd v2.x (io.containerd.cri.v1.images) — 본 가이드 (2.2.x) 해당
-    [plugins."io.containerd.cri.v1.images".registry]
-      config_path = "/etc/containerd/certs.d"
-    ```
+> **containerd v1.x vs v2.x 플러그인 키 차이**
+>
+> `containerd config default` 로 생성한 `config.toml` 에 `config_path` 가 비어 있다면
+> containerd 버전에 따라 추가해야 할 플러그인 키 이름이 다릅니다. 본 가이드는
+> containerd 2.2.x 라인이므로 **v2 키** 가 기본입니다.
+>
+> ```bash
+> # containerd 버전 확인
+> containerd --version
+> ```
+>
+> ```toml
+> # containerd v1.x (io.containerd.grpc.v1.cri)
+> [plugins."io.containerd.grpc.v1.cri".registry]
+>   config_path = "/etc/containerd/certs.d"
+>
+> # containerd v2.x (io.containerd.cri.v1.images) — 본 가이드 (2.2.x) 해당
+> [plugins."io.containerd.cri.v1.images".registry]
+>   config_path = "/etc/containerd/certs.d"
+> ```
 
 ### (선택) containerd 데이터 경로 변경 — 소프트링크 방식
 
-디스크 레이아웃은 환경마다 다르고 잘못 적용하면 컨테이너 데이터가 유실될 수 있어 자동화 대상에서 제외했습니다. **반드시 수동으로**, 그리고 containerd 를 가동시키기 **전에** 적용해야 합니다 (이미 가동된 뒤라면 아래 절차의 "서비스 중지" 부터 따라가야 함).
+> ⚠️ **`scripts/install.sh` 자동화 범위 밖 — 수동 적용 필요**
+>
+> 디스크 레이아웃은 환경마다 다르고 잘못 적용하면 컨테이너 데이터가 유실될 수 있어
+> 자동화 대상에서 제외했습니다. **반드시 수동으로**, 그리고 `install.sh` 가
+> containerd 를 가동시키기 **전에** 적용해야 합니다 (이미 가동된 뒤라면 아래 절차의
+> "서비스 중지" 부터 따라가야 함).
 
-OS 루트 디스크 용량이 작고 별도 데이터 디스크(예: `/app`)가 마운트되어 있는 경우에 적용합니다. **containerd 시작 전** 또는 **서비스를 중지한 상태**에서 진행해야 합니다.
+OS 루트 디스크 용량이 작고 별도 데이터 디스크(예: `/app`)가 마운트되어 있는 경우에 적용합니다.
+**containerd 시작 전** 또는 **서비스를 중지한 상태**에서 진행해야 합니다.
 
 ```bash
 # 서비스 중지 (이미 실행 중인 경우)
@@ -272,22 +285,19 @@ sudo systemctl start containerd
 sudo systemctl start kubelet
 ```
 
-!!! note
-    `config.toml` 의 `root` 값을 직접 변경하는 방법도 있지만, 소프트링크 방식은 기존 경로를 그대로 유지하므로 다른 툴과의 호환성을 더 쉽게 확보할 수 있습니다.
-
----
+> `config.toml` 의 `root` 값을 직접 변경하는 방법도 있지만, 소프트링크 방식은
+> 기존 경로를 그대로 유지하므로 다른 툴과의 호환성을 더 쉽게 확보할 수 있습니다.
 
 ## Phase 4: 로드밸런서 (HA 3중화 시에만 / 단일 구성이면 Phase 5로)
 
 HA 구성에서 K8s API Server(6443) 앞단에 로드밸런서가 필요합니다.
 
-!!! note
-    **[사전 결정] VIP 주소를 인증서에 직접 설정할지, FQDN으로 추상화할지 먼저 결정하세요.**
-    
-    | 방식 | 장점 | 단점 |
-    | --- | --- | --- |
-    | **FQDN** (`k8s-api.internal`) ← **권장** | VIP 변경 시 `/etc/hosts`만 수정, 인증서 재발급 불필요 | `/etc/hosts` 관리 필요 |
-    | IP 직접 사용 | 설정 단순 | VIP 변경 시 인증서 재발급 필수 |
+> **[사전 결정] VIP 주소를 인증서에 직접 설정할지, FQDN으로 추상화할지 먼저 결정하세요.**
+>
+> | 방식 | 장점 | 단점 |
+> | --- | --- | --- |
+> | **FQDN** (`k8s-api.internal`) ← **권장** | VIP 변경 시 `/etc/hosts`만 수정, 인증서 재발급 불필요 | `/etc/hosts` 관리 필요 |
+> | IP 직접 사용 | 설정 단순 | VIP 변경 시 인증서 재발급 필수 |
 
 ### 옵션 A: 물리 로드밸런서 (Physical LB) 방식 (권장)
 
@@ -345,12 +355,11 @@ sudo sysctl --system
 sudo apt-get install -y haproxy keepalived psmisc
 ```
 
-!!! note
-    `psmisc`는 keepalived 스크립트의 `killall` 을 위해 필요합니다.
+> `psmisc`는 keepalived 스크립트의 `killall` 을 위해 필요합니다.
 
 #### 4-B-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)
 
-내부 DNS 서버가 없다면 관리자에게 요청(레코드 `k8s-api.internal` → VIP)합니다.
+내부 DNS 서버가 있다면 관리자에게 요청(레코드 `k8s-api.internal` → VIP)합니다.
 없다면 `/etc/hosts`에 등록합니다. **마스터 + 워커 전 노드에서** 실행:
 
 ```bash
@@ -460,8 +469,6 @@ sudo systemctl enable --now keepalived
 ip addr show | grep <VIP>
 ```
 
----
-
 ### 옵션 C: Localhost LB 방식 (VIP 사용 불가 환경)
 
 전체 마스터 + 워커 노드에 HAProxy를 띄워 Loopback(`127.0.0.1:8443`)으로 통신합니다.
@@ -497,8 +504,6 @@ EOF
 sudo systemctl enable --now haproxy
 ```
 
----
-
 ## Phase 5: kubeadm init (Master-1)
 
 구성 유형(단일 / HA)과 CNI 선택(Calico / Cilium)에 따라 옵션을 조합합니다.
@@ -518,7 +523,7 @@ sudo kubeadm init \
   --apiserver-cert-extra-sans="k8s-api.internal,<물리_LB_VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
   --pod-network-cidr=192.168.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # kubeadm init — FQDN 사용 + CNI=Cilium
 sudo kubeadm init \
@@ -528,7 +533,7 @@ sudo kubeadm init \
   --apiserver-cert-extra-sans="k8s-api.internal,<물리_LB_VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
   --pod-network-cidr=10.0.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # kubeconfig 설정
 mkdir -p $HOME/.kube
@@ -551,7 +556,7 @@ sudo kubeadm init \
   --apiserver-cert-extra-sans="<VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
   --pod-network-cidr=192.168.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # 2-b. kubeadm init — FQDN 사용 + CNI=Calico (권장)
 sudo kubeadm init \
@@ -560,7 +565,7 @@ sudo kubeadm init \
   --apiserver-cert-extra-sans="k8s-api.internal,<VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
   --pod-network-cidr=192.168.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # 2-c. kubeadm init — FQDN 사용 + CNI=Cilium
 sudo kubeadm init \
@@ -570,14 +575,14 @@ sudo kubeadm init \
   --apiserver-cert-extra-sans="k8s-api.internal,<VIP>,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>,127.0.0.1" \
   --pod-network-cidr=10.0.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # 3. API 서버 bind-address를 Master-1 실제 IP로 수정
 sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
 # - --bind-address=<MASTER1_IP>
 
 # 4. API 서버 재기동 확인 후 HAProxy 시작
-sudo crictl pods --namespace kube-system | grep apiserver   # Running 확인
+sudo crictl pods --namespace kube-system | grep apiserver
 sudo systemctl start haproxy
 
 # 5. kubeconfig
@@ -589,10 +594,11 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ### 옵션 C: HA(3중화) — Localhost LB 방식 (Phase 4 옵션 C 에서 진행한 경우)
 
 각 노드의 HAProxy 가 `127.0.0.1:8443` 만 점유하고, 백엔드는 마스터들의 6443 으로 포워딩합니다.
-**kube-apiserver 의 6443 과 포트가 겹치지 않으므로 HAProxy 중지·재시작 단계가 불필요**하고, `bind-address` 수정도 필요 없습니다(기본 `0.0.0.0` 사용).
+**kube-apiserver 의 6443 과 포트가 겹치지 않으므로 HAProxy 중지·재시작 단계가 불필요**하고,
+`bind-address` 수정도 필요 없습니다(기본 `0.0.0.0` 사용).
 
-!!! note
-    인증서 SAN 에 반드시 `127.0.0.1` 을 포함해야 모든 노드의 kubeconfig(`https://127.0.0.1:8443`)가 동일 인증서로 검증됩니다.
+> 인증서 SAN 에 반드시 `127.0.0.1` 을 포함해야 모든 노드의 kubeconfig(`https://127.0.0.1:8443`)가
+> 동일 인증서로 검증됩니다.
 
 ```bash
 sudo kubeadm init \
@@ -601,7 +607,7 @@ sudo kubeadm init \
   --apiserver-cert-extra-sans="127.0.0.1,<MASTER1_IP>,<MASTER2_IP>,<MASTER3_IP>" \
   --pod-network-cidr=192.168.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # kubeconfig 설정
 mkdir -p $HOME/.kube
@@ -619,21 +625,19 @@ ss -tlnp | grep 8443
 sudo kubeadm init \
   --pod-network-cidr=192.168.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 # Cilium (kube-proxy skip)
 sudo kubeadm init \
   --skip-phases=addon/kube-proxy \
   --pod-network-cidr=10.0.0.0/16 \
   --service-cidr=10.96.0.0/12 \
-  --kubernetes-version v1.36.1
+  --kubernetes-version v1.33.11
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-
----
 
 ## Phase 5-1: 추가 마스터 노드 조인 (Master-2, 3 — HA 구성 시에만)
 
@@ -702,8 +706,6 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 sudo journalctl -u haproxy -n 20 --no-pager
 ```
 
----
-
 ## Phase 6: CNI 설치
 
 ### 옵션 A: Calico
@@ -713,36 +715,35 @@ sudo journalctl -u haproxy -n 20 --no-pager
 #### 방식 1: Tigera Operator 방식 (엔터프라이즈 권장)
 
 ```bash
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.5/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.0/manifests/tigera-operator.yaml
 
 # Operator 준비 대기 (CRD 등록 시간 확보)
 kubectl wait --for=condition=Available deployment/tigera-operator -n tigera-operator --timeout=60s
 
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.5/manifests/custom-resources.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.0/manifests/custom-resources.yaml
 ```
 
 #### 방식 2: Manifest 방식 (경량/학습용 권장)
 
 ```bash
 # 단일 파일로 즉시 설치
-kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.5/manifests/calico.yaml
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.0/manifests/calico.yaml
 ```
 
-!!! note
-    **Pod CIDR을 변경한 경우 (방식 2)**: `calico.yaml`의 `CALICO_IPV4POOL_CIDR` 항목 수정이 필요합니다.
+> **Pod CIDR을 변경한 경우 (방식 2)**: `calico.yaml`의 `CALICO_IPV4POOL_CIDR` 항목 수정이 필요합니다.
 
 ### 옵션 B: Cilium (Helm)
 
-!!! note
-    **L4 vs L7 책임 분리 — 먼저 결정**
-    
-    `kubeProxyReplacement=true` 는 **L4 (Service ClusterIP/NodePort)** 라우팅만 대체합니다.
-    L7 (HTTPRoute / Ingress 같은 path·host 기반 라우팅) 은 별도 Gateway 컨트롤러가 담당해야 하며, 두 가지 선택지가 있습니다.
-    
-    | 방식 | 설치 옵션 | 비고 |
-    | :--- | :--- | :--- |
-    | **별도 Gateway 컨트롤러 사용** (이 레포 표준 — `envoy-1.37.2`) | `--set gatewayAPI.enabled=false` | Cilium 은 CNI + kpr 만, L7 은 Envoy Gateway. **권장** |
-    | **Cilium 내장 Gateway 사용** | `--set gatewayAPI.enabled=true` + Gateway API CRD 별도 설치 | 단일 컴포넌트로 끝낼 때만. Envoy Gateway 와 동시 활성화 시 GatewayClass/HTTPRoute 충돌 |
+> **L4 vs L7 책임 분리 — 먼저 결정**
+>
+> `kubeProxyReplacement=true` 는 **L4 (Service ClusterIP/NodePort)** 라우팅만 대체합니다.
+> L7 (HTTPRoute / Ingress 같은 path·host 기반 라우팅) 은 별도 Gateway 컨트롤러가 담당해야 하며,
+> 두 가지 선택지가 있습니다.
+>
+> | 방식 | 설치 옵션 | 비고 |
+> | :--- | :--- | :--- |
+> | **별도 Gateway 컨트롤러 사용** (이 레포 표준 — `envoy-1.37.2`) | `--set gatewayAPI.enabled=false` | Cilium 은 CNI + kpr 만, L7 은 Envoy Gateway. **권장** |
+> | **Cilium 내장 Gateway 사용** | `--set gatewayAPI.enabled=true` + Gateway API CRD 별도 설치 | 단일 컴포넌트로 끝낼 때만. Envoy Gateway 와 동시 활성화 시 GatewayClass/HTTPRoute 충돌 |
 
 ```bash
 helm repo add cilium https://helm.cilium.io/
@@ -781,8 +782,8 @@ helm upgrade cilium cilium/cilium --version 1.19.3 -n kube-system \
 
 → HTTPRoute 작성 시 `parentRefs` 가 가리키는 Gateway 의 `gatewayClassName: cilium` 으로 지정.
 
-!!! warning
-    Envoy Gateway (`envoy-1.37.2`) 와 **둘 다 활성화된 상태로 운영하지 마세요**. 두 컨트롤러가 같은 HTTPRoute 를 가져가려고 경쟁하며, GatewayClass 가 다르더라도 운영 복잡도가 크게 올라갑니다.
+> ⚠️ Envoy Gateway (`envoy-1.37.2`) 와 **둘 다 활성화된 상태로 운영하지 마세요**. 두 컨트롤러가 같은
+> HTTPRoute 를 가져가려고 경쟁하며, GatewayClass 가 다르더라도 운영 복잡도가 크게 올라갑니다.
 
 #### LoadBalancer IP 발급기 충돌 주의
 
@@ -792,8 +793,6 @@ helm upgrade cilium cilium/cilium --version 1.19.3 -n kube-system \
 - Cilium LB IPAM (`--set loadBalancer.l2.enabled=true` 등)
 
 둘 다 켜면 같은 IP 풀을 두고 경쟁합니다.
-
----
 
 ## Phase 7: 워커 노드 조인
 
@@ -836,8 +835,6 @@ curl -fsSL https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VE
 sudo tar xzf /tmp/nerdctl-full.tar.gz -C /usr/local/
 nerdctl --version
 ```
-
----
 
 ## VIP 변경 시 조치
 
@@ -899,8 +896,8 @@ sudo systemctl restart kubelet
 
 #### 6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회)
 
-!!! note
-    CNI = Cilium 인 경우 `kube-proxy` 가 없으므로 `kube-proxy ConfigMap` 단계는 생략하고, `kubeadm-config` 갱신만 수행 후 `kubectl -n kube-system rollout restart ds cilium` 를 실행합니다.
+> CNI = Cilium 인 경우 `kube-proxy` 가 없으므로 `kube-proxy ConfigMap` 단계는 생략하고,
+> `kubeadm-config` 갱신만 수행 후 `kubectl -n kube-system rollout restart ds cilium` 를 실행합니다.
 
 ```bash
 # Calico 경로
@@ -1004,8 +1001,8 @@ sudo systemctl restart kubelet
 
 #### 6단계: 클러스터 내부 ConfigMap 갱신 (Master-1에서 1회)
 
-!!! note
-    Cilium 구성 시 `kube-proxy ConfigMap` 단계 생략, `kubeadm-config` 갱신 후 `kubectl -n kube-system rollout restart ds cilium` 실행.
+> Cilium 구성 시 `kube-proxy ConfigMap` 단계 생략, `kubeadm-config` 갱신 후
+> `kubectl -n kube-system rollout restart ds cilium` 실행.
 
 ```bash
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
@@ -1027,4 +1024,5 @@ kubectl get pods -n kube-system
 
 ## 참고
 
+- 폐쇄망 배포용 파일은 `scripts/download.sh`로 수집합니다.
 - 오프라인 설치 절차와 동일한 HA 구성이 [오프라인 설치 가이드](offline-install.md) 에 상세히 기술되어 있습니다.

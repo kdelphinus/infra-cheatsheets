@@ -2,7 +2,7 @@
 
 > **대상 환경**: Rocky Linux 9.6 + Kubernetes v1.30 (kubeadm) + containerd
 > **작성일**: 2026-05-08
-> **참고 가이드**: [install-guide.md](../install/rocky/offline-install.md), [install-guide-online.md](../install/rocky/online-install-v1.30.md)
+> **참고 가이드**: [install-guide.md](../install/rocky/v1.30/offline-install.md), [install-guide-online.md](../install/rocky/v1.30/online-install.md)
 
 본 문서는 설치 가이드 기준으로 구축된 클러스터에서 **계획 재부팅 / 비계획 재부팅** 시 따라야 할 운영 절차입니다.
 설치 단계에서 swap 영구 비활성, `systemctl enable kubelet/containerd/haproxy/keepalived`,
@@ -329,7 +329,7 @@ sudo crictl logs <etcd-container-id> 2>&1 | tail -50
 복구 방향:
 
 - 다운된 마스터를 **재부팅으로 복구**하는 것이 1순위
-- 영구 손상 시 [install-guide.md](../install/rocky/offline-install.md) 의 etcd 복원 / 마스터 재합류 절차 참조
+- 영구 손상 시 [install-guide.md](../install/rocky/v1.30/offline-install.md) 의 etcd 복원 / 마스터 재합류 절차 참조
 
 ### 5.4 VIP Split-Brain (두 노드 동시 보유)
 
@@ -415,4 +415,4 @@ sudo systemctl is-active firewalld
 >
 > - 점검 창은 **15–20분 / 노드** 로 잡는 것이 안전합니다.
 > - HA 마스터 3대 순차 재부팅 + 검증 시 총 60–90분 예상.
-> - 사전에 [install-guide.md](../install/rocky/offline-install.md) 의 검증 명령을 한 번 더 훑어두면 좋습니다.
+> - 사전에 [install-guide.md](../install/rocky/v1.30/offline-install.md) 의 검증 명령을 한 번 더 훑어두면 좋습니다.

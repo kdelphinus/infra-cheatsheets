@@ -3,7 +3,7 @@
 인터넷이 가능한 환경에서 kubeadm 기반 Kubernetes v1.30.0 클러스터를 구성하는 절차를 안내합니다.
 containerd를 컨테이너 런타임으로, Calico를 CNI로 사용합니다.
 
-> 오프라인(폐쇄망) 환경은 `offline-install.md`를 참고하세요.
+> 오프라인(폐쇄망) 환경은 [오프라인 설치 가이드](offline-install.md)를 참고하세요.
 
 ## 전제 조건
 
