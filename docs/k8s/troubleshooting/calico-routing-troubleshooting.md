@@ -148,3 +148,74 @@ kubectl exec net-test -- nc -vz -w 2 10.96.0.1 443
 kubectl exec net-test -- nslookup kubernetes.default.svc.cluster.local
 ```
 * **정상 결과**: 타임아웃 오류 없이 포트 오픈 성공 및 DNS 확인이 정상적으로 수행되어야 합니다.
+
+---
+
+## [장애 유형 3] 멀티 홈(다중 IP) 환경에서의 Calico CNI BGP 통신 단절 및 노드 간 Pod 통신 불가
+
+### 1. 증상 (Symptom)
+* 특정 노드에서 실행 중인 Pod가 다른 노드에서 실행 중인 Pod 또는 Service와 통신하지 못합니다.
+* `kubectl get nodes -o wide` 실행 시, 노드의 **`INTERNAL-IP`** 항목에 엉뚱한 인터페이스(예: 가상 브릿지 `virbr0`, 스토리지 전용망, 백업망 등)의 IP가 등록되어 있습니다.
+* Calico의 BGP 상태 확인 명령어 실행 시 Peer 상태가 **`Established`**가 아니라 **`Active`** 또는 **`Connect`** 상태에서 멈춰 있습니다.
+  ```bash
+  # calicoctl 플러그인이 설치된 경우
+  kubectl calico node status
+  ```
+  ```text
+  IPv4 BGP status
+  +--------------+-------------------+-------+----------+-------------+
+  | PEER ADDRESS |     PEER TYPE     | STATE |  SINCE   |    INFO     |
+  +--------------+-------------------+-------+----------+-------------+
+  | 192.168.10.2 | node-to-node mesh | start | 09:35:10 | Connect     |
+  +--------------+-------------------+-------+----------+-------------+
+  ```
+
+### 2. 원인 분석 (Root Cause)
+* Calico는 기본적으로 첫 번째로 발견되는 활성 인터페이스의 IP를 수집하여 클러스터 상의 노드 IP로 자동 감지(Autodetection)하고 BGP 라우팅 피어로 등록합니다.
+* 노드에 2개 이상의 네트워크 카드가 꽂혀 있거나 가상 인터페이스가 생성되어 있을 때, Calico의 감지 우선순위가 꼬여 BGP 통신이 불가능한 대역의 IP를 노드 대표 IP로 잘못 선정함으로써 노드 간 라우트 메시지 교환이 실패하는 현상입니다.
+
+### 3. 영구 해결 방안 (배포 방식별 설정)
+
+주 통신용 물리 어댑터의 대역을 지정하여 Calico가 항상 올바른 주소만 선택하도록 명시적으로 제한합니다.
+
+#### 방법 A. Manifest 기반 배포 환경 (`calico.yaml`)
+`calico-node` DaemonSet의 환경 변수 설정에 `IP_AUTODETECTION_METHOD`를 추가하고 주 대역을 필터링하도록 구성합니다.
+
+```bash
+# 1. calico-node DaemonSet 설정 편집
+kubectl edit daemonset calico-node -n kube-system
+```
+
+```yaml
+# spec.template.spec.containers[0].env 구역으로 이동
+- name: IP_AUTODETECTION_METHOD
+  value: "cidr=10.10.10.0/24" # 주 인터페이스가 속한 대역 주입 (또는 interface=eth0)
+```
+> [!TIP]
+> 변경 사항을 저장하면 `calico-node` DaemonSet이 롤아웃 재기동되며, 재시작된 이후 `kubectl get nodes -o wide`에서 `INTERNAL-IP`가 지정된 대역으로 올바르게 갱신되는지 확인합니다.
+
+#### 방법 B. Tigera Operator 기반 배포 환경 (`Installation` CRD)
+Operator가 관리하는 `Installation` 리소스 스펙에 Autodetection 필터를 추가하여 선언적으로 격리합니다.
+
+```bash
+# 1. 설치 설정 편집
+kubectl edit installation default
+```
+
+```yaml
+spec:
+  calicoNetwork:
+    ipPools:
+    - blockSize: 26
+      cidr: 192.168.0.0/16
+      encapsulation: VXLANCrossSubnet
+      natOutgoing: Enabled
+      nodeSelector: all()
+  # 아래 설정을 spec 하위에 추가
+  nodeAddressAutodetectionV4:
+    cidrs:
+    - 10.10.10.0/24 # 주 인터페이스가 속한 대역 주입
+```
+> [!NOTE]
+> 설정을 반영하면 Tigera Operator가 변경 사항을 감지하여 노드 에이전트(`calico-node`)의 구성을 자동으로 안전하게 갱신합니다.
+

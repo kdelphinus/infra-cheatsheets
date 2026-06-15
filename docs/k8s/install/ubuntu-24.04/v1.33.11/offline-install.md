@@ -942,6 +942,37 @@ cd ../envoy-1.37.2
 > Pod CIDR을 기본(`192.168.0.0/16`)에서 변경한 경우 `k8s/utils/calico.yaml`의
 > `CALICO_IPV4POOL_CIDR` 주석을 해제하고 값을 수정한 뒤 적용합니다.
 
+!!! warning "멀티 홈 IP 환경 대응 (BGP 피어링 오동작 방지)"
+    노드에 네트워크 카드가 여러 개 장착되어 있거나 가상 인터페이스가 많아 IP가 여러 개 할당된 경우, Calico가 BGP 통신에 적합하지 않은 IP를 자동 감지하여 노드 간 Pod 통신이 단절될 수 있습니다. 이를 방지하기 위해 다음 조치가 적극 권장됩니다.
+    
+    * **옵션 A-1 (Manifest) 적용 시**:
+      설치 전 `k8s/utils/calico.yaml` 파일을 열고, `calico-node` DaemonSet의 환경 변수(`env`) 섹션에 `IP_AUTODETECTION_METHOD`를 추가합니다.
+      ```yaml
+      - name: IP_AUTODETECTION_METHOD
+        value: "cidr=10.10.10.0/24" # 주 인터페이스의 서브넷 대역 지정 (또는 "interface=eth0")
+      ```
+      
+    * **옵션 A-2 (Tigera Operator) 적용 시**:
+      설치 전 `k8s/utils/calico-custom-resources.yaml` 파일을 열고, `Installation` 리소스 스펙에 `nodeAddressAutodetectionV4` 설정을 지정합니다.
+      ```yaml
+      apiVersion: operator.tigera.io/v1
+      kind: Installation
+      metadata:
+        name: default
+      spec:
+        calicoNetwork:
+          ipPools:
+          - blockSize: 26
+            cidr: 192.168.0.0/16
+            encapsulation: VXLANCrossSubnet
+            natOutgoing: Enabled
+            nodeSelector: all()
+          # 아래 블록을 추가하여 감지할 주 대역을 고정 (예: 10.10.10.0/24 대역만 사용)
+          nodeAddressAutodetectionV4:
+            cidrs:
+            - 10.10.10.0/24
+      ```
+
 #### 옵션 A-2: Tigera Operator 방식
 
 ```bash
@@ -951,6 +982,7 @@ kubectl create -f k8s/utils/tigera-operator.yaml
 # 2. CRD 등록 확인 후 custom resources 적용
 kubectl wait --for=condition=established crd/installations.operator.tigera.io --timeout=180s
 kubectl create -f k8s/utils/calico-custom-resources.yaml
+
 
 # 3. Calico 파드가 전부 Running이 될 때까지 대기
 kubectl get pods -n calico-system -w
