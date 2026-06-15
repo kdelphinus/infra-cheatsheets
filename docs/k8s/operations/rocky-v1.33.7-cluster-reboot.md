@@ -2,7 +2,7 @@
 
 > **대상 환경**: Rocky Linux 9.6 + Kubernetes v1.33.7 (kubeadm) + containerd v2.2.x
 > **작성일**: 2026-05-08
-> **참고 가이드**: [install-guide-online.md](../install/rocky/v1.33.7/online-install.md)
+> **참고 가이드**: [install-guide-online.md](../install/rocky-9/v1.33.7/online-install.md)
 
 본 문서는 설치 가이드 기준으로 구축된 클러스터에서 **계획 재부팅 / 비계획 재부팅** 시 따라야 할 운영 절차입니다.
 설치 단계에서 swap 영구 비활성, `systemctl enable kubelet/containerd/haproxy/keepalived`,

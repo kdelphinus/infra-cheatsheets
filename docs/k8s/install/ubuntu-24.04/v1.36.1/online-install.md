@@ -2,7 +2,7 @@
 
 인터넷이 가능한 환경에서 kubeadm 기반 Kubernetes v1.36.1 클러스터를 구성하는 절차입니다.
 containerd v2.2.x + CNI(Calico 또는 Cilium) 선택 구성이며, 폐쇄망 설치는 [오프라인 설치 가이드](../v1.33.11/offline-install.md)를 참고하세요.
-Rocky Linux 9.x (RHEL 9 계열) 가이드는 [Rocky Linux 온라인 설치 가이드](../../rocky/v1.33.7/online-install.md)를 참고하세요.
+Rocky Linux 9.x (RHEL 9 계열) 가이드는 [Rocky Linux 온라인 설치 가이드](../../rocky-9/v1.33.7/online-install.md)를 참고하세요.
 
 ## 전제 조건
 

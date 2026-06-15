@@ -2,7 +2,7 @@
 
 > **대상 환경**: Ubuntu 24.04 LTS + Kubernetes v1.33.11 (kubeadm) + containerd v2.2.x
 > **작성일**: 2026-05-08
-> **참고 가이드**: [install-guide.md](../install/ubuntu/v1.33.11/offline-install.md), [install-guide-online.md](../install/ubuntu/v1.33.11/online-install.md)
+> **참고 가이드**: [install-guide.md](../install/ubuntu-24.04/v1.33.11/offline-install.md), [install-guide-online.md](../install/ubuntu-24.04/v1.33.11/online-install.md)
 
 본 문서는 설치 가이드 기준으로 구축된 클러스터에서 **계획 재부팅 / 비계획 재부팅** 시 따라야 할 운영 절차입니다.
 설치 단계에서 swap 영구 비활성, `systemctl enable kubelet/containerd/haproxy/keepalived`,
@@ -389,7 +389,7 @@ sudo crictl logs <etcd-container-id> 2>&1 | tail -50
 복구 방향:
 
 - 다운된 마스터를 **재부팅으로 복구**하는 것이 1순위 (데이터 그대로)
-- 영구 손상 시 [install-guide.md](../install/ubuntu/v1.33.11/offline-install.md) 의 etcd 복원 / 마스터 재합류 절차 참조
+- 영구 손상 시 [install-guide.md](../install/ubuntu-24.04/v1.33.11/offline-install.md) 의 etcd 복원 / 마스터 재합류 절차 참조
 
 ### 6.4 VIP 가 두 노드에 동시에 잡힘 (Split-Brain)
 
@@ -471,4 +471,4 @@ sudo journalctl -k | grep -i apparmor | tail -20
 >
 > - 점검 창은 **15–20분 / 노드** 로 잡는 것이 안전합니다 (drain + 재부팅 + Ready + Pod 정상화).
 > - HA 마스터 3대 순차 재부팅 + 검증 시 총 60–90분 예상.
-> - 사전에 [install-guide.md](../install/ubuntu/v1.33.11/offline-install.md) 의 검증 명령을 한 번 더 훑어두면 좋습니다.
+> - 사전에 [install-guide.md](../install/ubuntu-24.04/v1.33.11/offline-install.md) 의 검증 명령을 한 번 더 훑어두면 좋습니다.
