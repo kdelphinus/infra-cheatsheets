@@ -32,6 +32,7 @@ hide:
 
     - [:octicons-arrow-right-24: Ubuntu 24.04 설치 파일 준비](k8s/install/ubuntu/ready-offline.md)
     - [:octicons-arrow-right-24: Ubuntu 24.04 오프라인 설치](k8s/install/ubuntu/offline-install.md)
+    - [:octicons-arrow-right-24: Ubuntu 24.04 온라인 설치 (v1.36.1)](k8s/install/ubuntu/online-install-v1.36.1.md)
     - [:octicons-arrow-right-24: Rocky Linux 9.6 설치 파일 준비](k8s/install/rocky/ready-offline.md)
     - [:octicons-arrow-right-24: Rocky Linux 9.6 오프라인 설치](k8s/install/rocky/offline-install.md)
     - [:octicons-arrow-right-24: 오프라인 빌더 사용 가이드](k8s/install/k8s-offline-builder-guide.md)
