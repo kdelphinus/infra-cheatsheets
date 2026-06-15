@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/git-cli-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/ubuntu-24.04/v1.33.11/ready-offline/">
       
       
-        <link rel="prev" href="../v1.30/offline-install/">
+        <link rel="prev" href="../../v1.36.1/online-install/">
       
       
-        <link rel="next" href="../docker-offline-install/">
+        <link rel="next" href="../offline-install/">
       
       
         
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Git CLI 오프라인 설치 - Infra Cheatsheets</title>
+        <title>1. 폐쇄망용 설치 파일 준비 - Infra Cheatsheets</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#git-v2430-오프라인-설치-가이드" class="md-skip">
+        <a href="#폐쇄망용-설치-파일-준비-ubuntu" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href="../../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../../../.." title="Infra Cheatsheets" class="md-header__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Git CLI 오프라인 설치
+              1. 폐쇄망용 설치 파일 준비
             
           </span>
         </div>
@@ -225,7 +225,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../.." class="md-tabs__link">
+        <a href="../../../../.." class="md-tabs__link">
           
   
   
@@ -274,7 +274,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../ubuntu/v1.36.1/online-install/" class="md-tabs__link">
+        <a href="../../v1.36.1/online-install/" class="md-tabs__link">
           
   
   
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../vm-template/general-guide/" class="md-tabs__link">
+        <a href="../../../../../vm-template/general-guide/" class="md-tabs__link">
           
   
   
@@ -323,7 +323,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
+        <a href="../../../../../cloud/use_terraform_with_gcp/" class="md-tabs__link">
           
   
   
@@ -350,7 +350,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
+        <a href="../../../../../cicd/offline-install/000-harbor-install/" class="md-tabs__link">
           
   
   
@@ -373,7 +373,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
+        <a href="../../../../../ubuntu/init-ubuntu-env/" class="md-tabs__link">
           
   
   
@@ -400,7 +400,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../db/ha/galera-cluster/" class="md-tabs__link">
+        <a href="../../../../../db/ha/galera-cluster/" class="md-tabs__link">
           
   
   
@@ -423,7 +423,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../git/cheatsheet/" class="md-tabs__link">
+        <a href="../../../../../git/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -443,7 +443,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../ide/vscode_shortcut/" class="md-tabs__link">
+        <a href="../../../../../ide/vscode_shortcut/" class="md-tabs__link">
           
   
   
@@ -470,7 +470,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../network/tip/check-domain-ip/" class="md-tabs__link">
+        <a href="../../../../../network/tip/check-domain-ip/" class="md-tabs__link">
           
   
   
@@ -493,7 +493,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../../openstack/cheatsheet/" class="md-tabs__link">
+        <a href="../../../../../openstack/cheatsheet/" class="md-tabs__link">
           
   
   
@@ -520,7 +520,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
+        <a href="../../../../gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
           
   
   
@@ -557,7 +557,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
+    <a href="../../../../.." title="Infra Cheatsheets" class="md-nav__button md-logo" aria-label="Infra Cheatsheets" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -637,7 +637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../../../../.." class="md-nav__link">
         
   
   
@@ -665,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../guide/infra-standard/" class="md-nav__link">
+      <a href="../../../../../guide/infra-standard/" class="md-nav__link">
         
   
   
@@ -804,6 +804,8 @@
                 
   
   
+    
+  
   
   
     
@@ -814,11 +816,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
@@ -839,7 +841,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -907,7 +909,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.36.1/online-install/" class="md-nav__link">
+      <a href="../../v1.36.1/online-install/" class="md-nav__link">
         
   
   
@@ -940,6 +942,8 @@
                 
   
   
+    
+  
   
   
     
@@ -950,11 +954,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
@@ -975,7 +979,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1_1_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -990,10 +994,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../ubuntu/v1.33.11/ready-offline/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 폐쇄망용 설치 파일 준비
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1009,6 +1040,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#-1단계-작업-환경-준비-인터넷-호스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 1단계: 작업 환경 준비 (인터넷 호스트)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-2단계-설치-파일-다운로드-downloadsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 2단계: 설치 파일 다운로드 (download.sh)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-3단계-폐쇄망용-압축-파일-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 3단계: 폐쇄망용 압축 파일 생성
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1021,7 +1105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.33.11/offline-install/" class="md-nav__link">
+      <a href="../offline-install/" class="md-nav__link">
         
   
   
@@ -1049,7 +1133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.33.11/online-install/" class="md-nav__link">
+      <a href="../online-install/" class="md-nav__link">
         
   
   
@@ -1090,8 +1174,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1102,11 +1184,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
         
           
           <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
@@ -1127,7 +1209,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1195,7 +1277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v1.33.7/online-install/" class="md-nav__link">
+      <a href="../../../rocky-9/v1.33.7/online-install/" class="md-nav__link">
         
   
   
@@ -1228,8 +1310,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1240,11 +1320,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_1_2_2" id="__nav_2_1_2_2_label" tabindex="0">
@@ -1265,7 +1345,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_2_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1283,7 +1363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v1.30/ready-offline/" class="md-nav__link">
+      <a href="../../../rocky-9/v1.30/ready-offline/" class="md-nav__link">
         
   
   
@@ -1311,7 +1391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v1.30/offline-install/" class="md-nav__link">
+      <a href="../../../rocky-9/v1.30/offline-install/" class="md-nav__link">
         
   
   
@@ -1336,37 +1416,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Git CLI 오프라인 설치
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../rocky-9/git-cli-install/" class="md-nav__link">
         
   
   
@@ -1382,70 +1435,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        전제 조건
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-1-외부망-서버에서-번들-준비" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 1: 외부망 서버에서 번들 준비
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-2-폐쇄망-서버에서-설치" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2: 폐쇄망 서버에서 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-설치-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 3: 설치 확인
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1458,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker-offline-install/" class="md-nav__link">
+      <a href="../../../rocky-9/docker-offline-install/" class="md-nav__link">
         
   
   
@@ -1502,7 +1491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../k8s-offline-builder-guide/" class="md-nav__link">
+      <a href="../../../k8s-offline-builder-guide/" class="md-nav__link">
         
   
   
@@ -1530,7 +1519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reproducibility-check-ubuntu/" class="md-nav__link">
+      <a href="../../../reproducibility-check-ubuntu/" class="md-nav__link">
         
   
   
@@ -1616,7 +1605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base-infra/" class="md-nav__link">
+      <a href="../../../base-infra/" class="md-nav__link">
         
   
   
@@ -1644,7 +1633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../metallb-install/" class="md-nav__link">
+      <a href="../../../metallb-install/" class="md-nav__link">
         
   
   
@@ -1672,7 +1661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../network/cilium-install/" class="md-nav__link">
+      <a href="../../../../network/cilium-install/" class="md-nav__link">
         
   
   
@@ -1758,7 +1747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../use-pv-nas/" class="md-nav__link">
+      <a href="../../../../use-pv-nas/" class="md-nav__link">
         
   
   
@@ -1786,7 +1775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../storage/trident-install/" class="md-nav__link">
+      <a href="../../../../storage/trident-install/" class="md-nav__link">
         
   
   
@@ -1872,7 +1861,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
@@ -1900,7 +1889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
         
   
   
@@ -1928,7 +1917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -1956,7 +1945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/nginx-nic-migration/" class="md-nav__link">
+      <a href="../../../../gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -1984,7 +1973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -2012,7 +2001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../../../gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -2040,7 +2029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -2126,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -2154,7 +2143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../../../../monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -2182,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
+      <a href="../../../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
         
   
   
@@ -2210,7 +2199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
+      <a href="../../../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
         
   
   
@@ -2296,7 +2285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../security/001-falco-install/" class="md-nav__link">
+      <a href="../../../../security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -2324,7 +2313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../security/002-tetragon-install/" class="md-nav__link">
+      <a href="../../../../security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -2352,7 +2341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../security/003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../../../security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -2438,7 +2427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../../../backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -2524,7 +2513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
+      <a href="../../../../operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2552,7 +2541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
+      <a href="../../../../operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2580,7 +2569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
+      <a href="../../../../operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2666,7 +2655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../capi/cheatsheet/" class="md-nav__link">
+      <a href="../../../../capi/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2752,7 +2741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cheatsheet/" class="md-nav__link">
+      <a href="../../../../cheatsheet/" class="md-nav__link">
         
   
   
@@ -2780,7 +2769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../container-image-cheatsheet/" class="md-nav__link">
+      <a href="../../../../container-image-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2866,7 +2855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/calico-routing-troubleshooting/" class="md-nav__link">
+      <a href="../../../../troubleshooting/calico-routing-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2894,7 +2883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/missed-containerport/" class="md-nav__link">
+      <a href="../../../../troubleshooting/missed-containerport/" class="md-nav__link">
         
   
   
@@ -2922,7 +2911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/cilium-troubleshooting/" class="md-nav__link">
+      <a href="../../../../troubleshooting/cilium-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2950,7 +2939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/falco-troubleshooting/" class="md-nav__link">
+      <a href="../../../../troubleshooting/falco-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2978,7 +2967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/tetragon-troubleshooting/" class="md-nav__link">
+      <a href="../../../../troubleshooting/tetragon-troubleshooting/" class="md-nav__link">
         
   
   
@@ -3006,7 +2995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/httproute-troubleshooting/" class="md-nav__link">
+      <a href="../../../../troubleshooting/httproute-troubleshooting/" class="md-nav__link">
         
   
   
@@ -3099,7 +3088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../vm-template/general-guide/" class="md-nav__link">
+      <a href="../../../../../vm-template/general-guide/" class="md-nav__link">
         
   
   
@@ -3127,7 +3116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../vm-template/rocky-vagrant-guide/" class="md-nav__link">
+      <a href="../../../../../vm-template/rocky-vagrant-guide/" class="md-nav__link">
         
   
   
@@ -3155,7 +3144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../vm-template/k8s-rocky-template/" class="md-nav__link">
+      <a href="../../../../../vm-template/k8s-rocky-template/" class="md-nav__link">
         
   
   
@@ -3183,7 +3172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../vm-template/k8s-rocky-template-upgrade/" class="md-nav__link">
+      <a href="../../../../../vm-template/k8s-rocky-template-upgrade/" class="md-nav__link">
         
   
   
@@ -3268,7 +3257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
+      <a href="../../../../../cloud/use_terraform_with_gcp/" class="md-nav__link">
         
   
   
@@ -3296,7 +3285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cloud/gcp-cheatsheet/" class="md-nav__link">
+      <a href="../../../../../cloud/gcp-cheatsheet/" class="md-nav__link">
         
   
   
@@ -3431,7 +3420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/000-harbor-install/" class="md-nav__link">
         
   
   
@@ -3459,7 +3448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/harbor-insecure-setup/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/harbor-insecure-setup/" class="md-nav__link">
         
   
   
@@ -3487,7 +3476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/001-gitlab-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/001-gitlab-install/" class="md-nav__link">
         
   
   
@@ -3515,7 +3504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/002-jenkins-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/002-jenkins-install/" class="md-nav__link">
         
   
   
@@ -3543,7 +3532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/003-gitlab-omnibus-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/003-gitlab-omnibus-install/" class="md-nav__link">
         
   
   
@@ -3571,7 +3560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/004-argocd-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/004-argocd-install/" class="md-nav__link">
         
   
   
@@ -3599,7 +3588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/005-argocd-jenkins-harbor-integration/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/005-argocd-jenkins-harbor-integration/" class="md-nav__link">
         
   
   
@@ -3627,7 +3616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/006-nexus-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/006-nexus-install/" class="md-nav__link">
         
   
   
@@ -3655,7 +3644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/007-gitea-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/007-gitea-install/" class="md-nav__link">
         
   
   
@@ -3683,7 +3672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/008-tekton-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/008-tekton-install/" class="md-nav__link">
         
   
   
@@ -3769,7 +3758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
+      <a href="../../../../../cicd/operation/redeploy-with-new-image/" class="md-nav__link">
         
   
   
@@ -3797,7 +3786,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/operation/gitlab-restore-guide-16.11.2/" class="md-nav__link">
+      <a href="../../../../../cicd/operation/gitlab-restore-guide-16.11.2/" class="md-nav__link">
         
   
   
@@ -3825,7 +3814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/operation/gitlab-upgrade-guide-18.11.4/" class="md-nav__link">
+      <a href="../../../../../cicd/operation/gitlab-upgrade-guide-18.11.4/" class="md-nav__link">
         
   
   
@@ -3918,7 +3907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
+      <a href="../../../../../ubuntu/init-ubuntu-env/" class="md-nav__link">
         
   
   
@@ -3996,7 +3985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
+      <a href="../../../../../ubuntu/wsl/wsl-network-setting/" class="md-nav__link">
         
   
   
@@ -4139,7 +4128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../../../../../db/ha/galera-cluster/" class="md-nav__link">
         
   
   
@@ -4167,7 +4156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-cluster-online/" class="md-nav__link">
+      <a href="../../../../../db/ha/galera-cluster-online/" class="md-nav__link">
         
   
   
@@ -4195,7 +4184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../../../../../db/ha/galera-recovery/" class="md-nav__link">
         
   
   
@@ -4223,7 +4212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
+      <a href="../../../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4251,7 +4240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-backup-guide/" class="md-nav__link">
+      <a href="../../../../../db/ha/galera-backup-guide/" class="md-nav__link">
         
   
   
@@ -4279,7 +4268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
+      <a href="../../../../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
         
   
   
@@ -4307,7 +4296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
+      <a href="../../../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4335,7 +4324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -4421,7 +4410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -4449,7 +4438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../../../../db/redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -4535,7 +4524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -4563,7 +4552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -4591,7 +4580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -4684,7 +4673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../git/cheatsheet/" class="md-nav__link">
+      <a href="../../../../../git/cheatsheet/" class="md-nav__link">
         
   
   
@@ -4712,7 +4701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../git/convention/" class="md-nav__link">
+      <a href="../../../../../git/convention/" class="md-nav__link">
         
   
   
@@ -4797,7 +4786,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ide/vscode_shortcut/" class="md-nav__link">
+      <a href="../../../../../ide/vscode_shortcut/" class="md-nav__link">
         
   
   
@@ -4932,7 +4921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../network/tip/check-domain-ip/" class="md-nav__link">
+      <a href="../../../../../network/tip/check-domain-ip/" class="md-nav__link">
         
   
   
@@ -4960,7 +4949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../network/tip/check-network-subnet/" class="md-nav__link">
+      <a href="../../../../../network/tip/check-network-subnet/" class="md-nav__link">
         
   
   
@@ -4988,7 +4977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../network/tip/port-check/" class="md-nav__link">
+      <a href="../../../../../network/tip/port-check/" class="md-nav__link">
         
   
   
@@ -5081,7 +5070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/cheatsheet/" class="md-nav__link">
+      <a href="../../../../../openstack/cheatsheet/" class="md-nav__link">
         
   
   
@@ -5159,7 +5148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/base/reference/" class="md-nav__link">
+      <a href="../../../../../openstack/base/reference/" class="md-nav__link">
         
   
   
@@ -5187,7 +5176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/base/install/" class="md-nav__link">
+      <a href="../../../../../openstack/base/install/" class="md-nav__link">
         
   
   
@@ -5215,7 +5204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/base/api/" class="md-nav__link">
+      <a href="../../../../../openstack/base/api/" class="md-nav__link">
         
   
   
@@ -5301,7 +5290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
+      <a href="../../../../../openstack/gpu/init-gpu-node/" class="md-nav__link">
         
   
   
@@ -5329,7 +5318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/gpu/pci-placement/" class="md-nav__link">
+      <a href="../../../../../openstack/gpu/pci-placement/" class="md-nav__link">
         
   
   
@@ -5415,7 +5404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/utils/cloud-init/" class="md-nav__link">
+      <a href="../../../../../openstack/utils/cloud-init/" class="md-nav__link">
         
   
   
@@ -5443,7 +5432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/utils/golden-image/" class="md-nav__link">
+      <a href="../../../../../openstack/utils/golden-image/" class="md-nav__link">
         
   
   
@@ -5529,7 +5518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
+      <a href="../../../../../openstack/troubleshooting/k8s-network-error/" class="md-nav__link">
         
   
   
@@ -5615,7 +5604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../openstack/tools/add-ironic/" class="md-nav__link">
+      <a href="../../../../../openstack/tools/add-ironic/" class="md-nav__link">
         
   
   
@@ -5758,7 +5747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
         
   
   
@@ -5786,7 +5775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
         
   
   
@@ -5814,7 +5803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
+      <a href="../../../../gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -5842,7 +5831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v1.30/online-install/" class="md-nav__link">
+      <a href="../../../rocky-9/v1.30/online-install/" class="md-nav__link">
         
   
   
@@ -5928,7 +5917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../cicd/offline-install/harbor-v1.14.3-install/" class="md-nav__link">
+      <a href="../../../../../cicd/offline-install/harbor-v1.14.3-install/" class="md-nav__link">
         
   
   
@@ -5991,10 +5980,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
+  <a href="#-1단계-작업-환경-준비-인터넷-호스트" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        📌 1단계: 작업 환경 준비 (인터넷 호스트)
       
     </span>
   </a>
@@ -6002,10 +5991,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-1-외부망-서버에서-번들-준비" class="md-nav__link">
+  <a href="#-2단계-설치-파일-다운로드-downloadsh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: 외부망 서버에서 번들 준비
+        📌 2단계: 설치 파일 다운로드 (download.sh)
       
     </span>
   </a>
@@ -6013,21 +6002,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-폐쇄망-서버에서-설치" class="md-nav__link">
+  <a href="#-3단계-폐쇄망용-압축-파일-생성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2: 폐쇄망 서버에서 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-3-설치-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 3: 설치 확인
+        📌 3단계: 폐쇄망용 압축 파일 생성
       
     </span>
   </a>
@@ -6054,36 +6032,33 @@
   
 
 
-<h1 id="git-v2430-오프라인-설치-가이드">Git v2.43.0 오프라인 설치 가이드</h1>
-<p>Rocky Linux 9.6 폐쇄망 환경에서 Git 2.43.0을 설치하는 절차를 안내합니다.</p>
-<h2 id="전제-조건">전제 조건</h2>
-<ul>
-<li>Rocky Linux 9.6 서버 (폐쇄망)</li>
-<li><code>git_bundle_rocky96_*.tar.gz</code> 파일이 서버에 반입되어 있을 것</li>
-</ul>
-<h2 id="phase-1-외부망-서버에서-번들-준비">Phase 1: 외부망 서버에서 번들 준비</h2>
-<p>인터넷이 연결된 동일 OS(Rocky Linux 9.6) 환경에서 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 스크립트 실행하여 RPM 번들 생성</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./export_git_rpms.sh
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 생성된 번들 파일을 USB 또는 반입 솔루션으로 폐쇄망 서버에 복사</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>scp<span class="w"> </span>git_bundle_rocky96_*.tar.gz<span class="w"> </span>user@air-gapped-server:/tmp/
+<h1 id="폐쇄망용-설치-파일-준비-ubuntu">폐쇄망용 설치 파일 준비 (Ubuntu)</h1>
+<p>이 문서는 Ubuntu 24.04 등 Ubuntu 환경의 폐쇄망 쿠버네티스 구축을 위해 인터넷이 연결된 호스트에서 설치 파일(Debian 패키지, 컨테이너 이미지, 바이너리)을 준비하는 과정을 안내합니다.</p>
+<h2 id="-1단계-작업-환경-준비-인터넷-호스트">📌 1단계: 작업 환경 준비 (인터넷 호스트)</h2>
+<p>인터넷이 가능한 Ubuntu 호스트에서 K8s 설치용 스크립트 디렉토리로 이동합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 작업 디렉토리 생성 및 이동</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/k8s-offline-prep
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>~/k8s-offline-prep
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># (예시) 프로젝트에서 제공하는 설치 스크립트 디렉토리 구조 확보</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># git clone https://github.com/kdelphinus/infra-cheatsheets.git (또는 관련 파일 복사)</span>
 </code></pre></div>
-<h2 id="phase-2-폐쇄망-서버에서-설치">Phase 2: 폐쇄망 서버에서 설치</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1. 압축 해제</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tar<span class="w"> </span>-xzf<span class="w"> </span>git_bundle_rocky96_*.tar.gz
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span>./git_offline_bundle
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 2. 로컬 RPM 설치 (외부 레포지토리 차단, 현재 디렉토리 파일만 사용)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>localinstall<span class="w"> </span>-y<span class="w"> </span>--disablerepo<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>*.rpm
+<h2 id="-2단계-설치-파일-다운로드-downloadsh">📌 2단계: 설치 파일 다운로드 (download.sh)</h2>
+<p>제공된 <code>scripts/download.sh</code> 스크립트를 실행하여 오프라인 설치에 필요한 모든 에셋을 다운로드합니다. 이 스크립트는 <code>apt-get download</code>를 통해 DEB 패키지를 캐싱하고, <code>ctr</code> 또는 <code>docker</code>를 통해 K8s 컨트롤 플레인 및 CNI(Calico/Cilium) 이미지를 <code>tar</code>로 묶어 저장합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># sudo 권한으로 다운로드 스크립트 실행</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>./scripts/download.sh
 </code></pre></div>
-<h2 id="phase-3-설치-확인">Phase 3: 설치 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>--version
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 예상 결과: git version 2.43.0</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>curl<span class="w"> </span>--version
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>nmcli<span class="w"> </span>device<span class="w">  </span><span class="c1"># net-tools 확인</span>
+<p><strong>스크립트 주요 동작:</strong>
+- <strong>DEB 패키지</strong>: <code>kubeadm</code>, <code>kubelet</code>, <code>kubectl</code>, <code>containerd.io</code>, <code>haproxy</code>, <code>keepalived</code> 및 필수 의존성 패키지 다운로드 (<code>k8s/debs/</code>)
+- <strong>컨테이너 이미지</strong>: API Server, etcd, CoreDNS 등 K8s 핵심 이미지 및 CNI 관련 이미지 다운로드 후 tar 저장 (<code>k8s/images/</code>)
+- <strong>바이너리</strong>: <code>helm</code>, <code>nerdctl</code> 등 필수 도구 다운로드 (<code>k8s/binaries/</code>)</p>
+<h2 id="-3단계-폐쇄망용-압축-파일-생성">📌 3단계: 폐쇄망용 압축 파일 생성</h2>
+<p>다운로드가 완료되면 해당 디렉토리 전체를 압축하여 폐쇄망 서버로 반입할 준비를 마칩니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 버전 정보를 포함하여 압축 (예: k8s-ubuntu-offline.tar.gz)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>tar<span class="w"> </span>czf<span class="w"> </span>k8s-ubuntu-offline.tar.gz<span class="w"> </span>./k8s-offline-prep
 </code></pre></div>
+<p>이제 생성된 압축 파일을 USB나 망연계 솔루션을 통해 폐쇄망의 대상 노드들로 이동시킨 후, <a href="../offline-install/">오프라인 설치 가이드</a>를 따라 설치를 진행합니다.</p>
 
 
 
@@ -6133,10 +6108,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "search.highlight", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

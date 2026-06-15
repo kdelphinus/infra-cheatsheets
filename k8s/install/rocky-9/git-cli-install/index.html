@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky/docker-offline-install/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/install/rocky-9/git-cli-install/">
       
       
-        <link rel="prev" href="../git-cli-install/">
+        <link rel="prev" href="../v1.30/offline-install/">
       
       
-        <link rel="next" href="../../k8s-offline-builder-guide/">
+        <link rel="next" href="../docker-offline-install/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Docker 오프라인 설치 - Infra Cheatsheets</title>
+        <title>Git CLI 오프라인 설치 - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#docker-engine-2915-오프라인-설치-가이드" class="md-skip">
+        <a href="#git-v2430-오프라인-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Docker 오프라인 설치
+              Git CLI 오프라인 설치
             
           </span>
         </div>
@@ -274,7 +274,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../ubuntu/v1.36.1/online-install/" class="md-tabs__link">
+        <a href="../../ubuntu-24.04/v1.36.1/online-install/" class="md-tabs__link">
           
   
   
@@ -907,7 +907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.36.1/online-install/" class="md-nav__link">
+      <a href="../../ubuntu-24.04/v1.36.1/online-install/" class="md-nav__link">
         
   
   
@@ -993,7 +993,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.33.11/ready-offline/" class="md-nav__link">
+      <a href="../../ubuntu-24.04/v1.33.11/ready-offline/" class="md-nav__link">
         
   
   
@@ -1021,7 +1021,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.33.11/offline-install/" class="md-nav__link">
+      <a href="../../ubuntu-24.04/v1.33.11/offline-install/" class="md-nav__link">
         
   
   
@@ -1049,7 +1049,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ubuntu/v1.33.11/online-install/" class="md-nav__link">
+      <a href="../../ubuntu-24.04/v1.33.11/online-install/" class="md-nav__link">
         
   
   
@@ -1336,34 +1336,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../git-cli-install/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Git CLI 오프라인 설치
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1383,7 +1355,7 @@
   <span class="md-ellipsis">
     
   
-    Docker 오프라인 설치
+    Git CLI 오프라인 설치
   
 
     
@@ -1401,7 +1373,7 @@
   <span class="md-ellipsis">
     
   
-    Docker 오프라인 설치
+    Git CLI 오프라인 설치
   
 
     
@@ -1438,10 +1410,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-1-rpm-패키지로-설치-권장" class="md-nav__link">
+  <a href="#phase-1-외부망-서버에서-번들-준비" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: RPM 패키지로 설치 (권장)
+        Phase 1: 외부망 서버에서 번들 준비
       
     </span>
   </a>
@@ -1449,10 +1421,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-static-binary로-설치-비상용" class="md-nav__link">
+  <a href="#phase-2-폐쇄망-서버에서-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2: Static Binary로 설치 (비상용)
+        Phase 2: 폐쇄망 서버에서 설치
       
     </span>
   </a>
@@ -1474,6 +1446,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-offline-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker 오프라인 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -6002,10 +6002,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-1-rpm-패키지로-설치-권장" class="md-nav__link">
+  <a href="#phase-1-외부망-서버에서-번들-준비" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: RPM 패키지로 설치 (권장)
+        Phase 1: 외부망 서버에서 번들 준비
       
     </span>
   </a>
@@ -6013,10 +6013,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-static-binary로-설치-비상용" class="md-nav__link">
+  <a href="#phase-2-폐쇄망-서버에서-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2: Static Binary로 설치 (비상용)
+        Phase 2: 폐쇄망 서버에서 설치
       
     </span>
   </a>
@@ -6054,49 +6054,35 @@
   
 
 
-<h1 id="docker-engine-2915-오프라인-설치-가이드">Docker Engine 29.1.5 오프라인 설치 가이드</h1>
-<p>폐쇄망 환경에서 Docker Engine 29.1.5를 설치하는 절차를 안내합니다.</p>
+<h1 id="git-v2430-오프라인-설치-가이드">Git v2.43.0 오프라인 설치 가이드</h1>
+<p>Rocky Linux 9.6 폐쇄망 환경에서 Git 2.43.0을 설치하는 절차를 안내합니다.</p>
 <h2 id="전제-조건">전제 조건</h2>
 <ul>
-<li>Rocky Linux 9.6 (RHEL 계열) 서버</li>
-<li><code>rpm/</code> 또는 <code>static/</code> 디렉토리 내 설치 파일이 준비되어 있을 것</li>
+<li>Rocky Linux 9.6 서버 (폐쇄망)</li>
+<li><code>git_bundle_rocky96_*.tar.gz</code> 파일이 서버에 반입되어 있을 것</li>
 </ul>
-<h2 id="phase-1-rpm-패키지로-설치-권장">Phase 1: RPM 패키지로 설치 (권장)</h2>
-<p>가장 안정적인 방법입니다. 의존성 문제가 없다면 이 방법을 사용하세요.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. rpm 파일이 있는 폴더로 이동</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>~/docker-offline/rpm
+<h2 id="phase-1-외부망-서버에서-번들-준비">Phase 1: 외부망 서버에서 번들 준비</h2>
+<p>인터넷이 연결된 동일 OS(Rocky Linux 9.6) 환경에서 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 스크립트 실행하여 RPM 번들 생성</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./export_git_rpms.sh
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 2. 폴더 내 모든 rpm 일괄 설치 (의존성 포함)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>localinstall<span class="w"> </span>-y<span class="w"> </span>--disablerepo<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>./*.rpm
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 3. Docker 실행 및 자동 시작 등록</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>docker
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># 4. 상태 확인 (Active: running 확인)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>docker
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 생성된 번들 파일을 USB 또는 반입 솔루션으로 폐쇄망 서버에 복사</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>scp<span class="w"> </span>git_bundle_rocky96_*.tar.gz<span class="w"> </span>user@air-gapped-server:/tmp/
 </code></pre></div>
-<h2 id="phase-2-static-binary로-설치-비상용">Phase 2: Static Binary로 설치 (비상용)</h2>
-<p>RPM 설치가 실패했을 때만 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1. 파일이 있는 폴더로 이동 및 압축 해제</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~/docker-offline/static
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>tar<span class="w"> </span>-xzvf<span class="w"> </span>docker-*.tgz
+<h2 id="phase-2-폐쇄망-서버에서-설치">Phase 2: 폐쇄망 서버에서 설치</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1. 압축 해제</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tar<span class="w"> </span>-xzf<span class="w"> </span>git_bundle_rocky96_*.tar.gz
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">cd</span><span class="w"> </span>./git_offline_bundle
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 2. 실행 파일을 시스템 경로로 복사</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>cp<span class="w"> </span>docker/*<span class="w"> </span>/usr/bin/
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 3. Docker 데몬 실행 (백그라운드)</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># 주의: 정식 운영 시에는 docker.service 파일 등록이 필요합니다</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>sudo<span class="w"> </span>dockerd<span class="w"> </span>&gt;<span class="w"> </span>/var/log/dockerd.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># 4. 버전 확인</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>docker<span class="w"> </span>--version
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 2. 로컬 RPM 설치 (외부 레포지토리 차단, 현재 디렉토리 파일만 사용)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>localinstall<span class="w"> </span>-y<span class="w"> </span>--disablerepo<span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="w"> </span>*.rpm
 </code></pre></div>
 <h2 id="phase-3-설치-확인">Phase 3: 설치 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Docker 버전 및 정보 확인</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>info
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>--version
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 예상 결과: git version 2.43.0</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 이미지 로드 테스트 (tar 파일이 있는 경우)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>&lt;이미지파일&gt;.tar
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>curl<span class="w"> </span>--version
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>nmcli<span class="w"> </span>device<span class="w">  </span><span class="c1"># net-tools 확인</span>
 </code></pre></div>
 
 
