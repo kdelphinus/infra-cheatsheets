@@ -169,6 +169,7 @@ hide:
 
     - [:octicons-arrow-right-24: OpenStack Cheat Sheet](openstack/cheatsheet.md)
     - [:octicons-arrow-right-24: 인프라 서비스 설치 가이드](openstack/base/install.md)
+    - [:octicons-arrow-right-24: 신규 노드 추가 가이드 (Kolla)](openstack/base/add-node.md)
     - [:octicons-arrow-right-24: GPU 노드 (PCI Passthrough)](openstack/gpu/init-gpu-node.md)
     - [:octicons-arrow-right-24: K8s 네트워크 통신 장애 해결](openstack/troubleshooting/k8s-network-error.md)
 

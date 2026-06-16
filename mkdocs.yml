@@ -176,6 +176,7 @@ nav:
     - Base:
       - 'Openstack 서비스 목록': openstack/base/reference.md
       - '설치': openstack/base/install.md
+      - '신규 노드 추가': openstack/base/add-node.md
       - 'API 명세': openstack/base/api.md
     - About GPU:
       - 'GPU 노드 초기화': openstack/gpu/init-gpu-node.md
