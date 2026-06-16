@@ -130,3 +130,30 @@ openstack network agent list
 *   **증상**: 팩트 수집(`Gather facts`) 단계 등에서 타 노드로 SSH 대행 연결 시 `Host key verification failed.` 발생.
 *   **원인**: 배포 노드의 SSH `known_hosts` 파일에 대상 노드들의 지문이 없어서 확인 대기 상태로 머물다 끊어지는 현상입니다.
 *   **해결책**: 명령어 맨 앞에 `ANSIBLE_HOST_KEY_CHECKING=False` 환경 변수를 추가하여 호스트 키 검증을 무시하도록 강제합니다.
+
+### 3. `TooOldComputeService` 에러 (동일 태그 이미지 내 버전 불일치)
+*   **증상**: 배포 완료 후 `nova_compute` 컨테이너가 정상적으로 뜨지 않고 즉시 종료(`Exited (1)`)되며, 로그 파일(`/var/log/kolla/nova/nova-compute.log`)에 `TooOldComputeService: Current Nova version does not support computes older than ...` 에러가 기록되는 경우.
+*   **원인**: `globals.yml`에 `openstack_release`가 `master`와 같이 가변(Floating) 태그로 설정되어 있는 상황에서, 신규 노드 추가 시점에 새로 다운로드된 최신 마스터 이미지와 기존 노드들이 실행 중인 과거 마스터 이미지 간에 코드(Service Level) 차이가 나기 때문입니다.
+*   **해결책**: 기존 정상 구동 중인 컴퓨트 노드에서 컨테이너 이미지를 백업받아 신규 노드에 수동으로 덮어씁니다.
+    
+    1. **[기존 노드에서 실행] 이미지 백업 및 전송**:
+       ```bash
+       # 6개 전의 이미지 백업
+       sudo docker save quay.io/openstack.kolla/nova-compute:master-ubuntu-noble -o ~/nova-compute-old.tar
+       # 신규 노드로 전송
+       scp ~/nova-compute-old.tar strato@<신규노드_IP>:~/
+       ```
+    2. **[신규 노드에서 실행] 기존 찌꺼기 제거 및 구버전 복구**:
+       ```bash
+       # 1. 찌꺼기 컨테이너 제거
+       sudo docker rm -f nova_compute
+       # 2. 새로 받아진 최신 버전 이미지 제거
+       sudo docker rmi quay.io/openstack.kolla/nova-compute:master-ubuntu-noble
+       # 3. 전송받은 구버전 이미지 로드
+       sudo docker load -i ~/nova-compute-old.tar
+       ```
+    3. **[배포 노드에서 실행] 배포 재실행**:
+       ```bash
+       ANSIBLE_HOST_KEY_CHECKING=False kolla-ansible deploy -i multinode --limit <신규노드_IP>
+       ```
+
