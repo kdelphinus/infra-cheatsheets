@@ -1,4 +1,4 @@
-# OpenTelemetry Operator v0.114.1 / v0.152.0 오프라인 설치 가이드
+# OpenTelemetry Operator v0.152.0 오프라인 설치 가이드
 
 폐쇄망 환경에서 OpenTelemetry Operator를 Kubernetes(K8s) 위에 설치하는 절차를 안내합니다.
 
@@ -17,7 +17,7 @@ chmod +x download_assets_offline.sh
 ./download_assets_offline.sh
 ```
 
-스크립트 실행이 완료되면 `charts/` 디렉토리에 `opentelemetry-operator-0.114.1.tgz` 파일이, `images/` 디렉토리에 `ghcr.io-open-telemetry-opentelemetry-operator-opentelemetry-operator-v0.152.0.tar` 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
+스크립트 실행이 완료되면 `charts/` 디렉토리에 `opentelemetry-operator-0.152.0.tgz` 파일이, `images/` 디렉토리에 `ghcr.io-open-telemetry-opentelemetry-operator-opentelemetry-operator-v0.152.0.tar` 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
 ---
 
@@ -78,7 +78,7 @@ chmod +x scripts/install.sh
 자동화 스크립트를 우회하고 명시적으로 자원을 전개해야 하는 특수 환경에서는 아래와 같이 배포합니다.
 
 #### 1) `values.yaml` 환경 설정
-`opentelemetry-operator-0.114.1/values.yaml` 파일을 에디터로 엽니다. 오프라인 이미지 정보에 맞춰 수정합니다.
+`opentelemetry-operator-0.152.0/values.yaml` 파일을 에디터로 엽니다. 오프라인 이미지 정보에 맞춰 수정합니다.
 
 * **Harbor 레지스트리 주소를 사용하는 경우:**
   ```yaml
@@ -98,7 +98,7 @@ chmod +x scripts/install.sh
 
 ```bash
 # 컴포넌트 루트 디렉토리에서 실행
-helm upgrade --install otel-operator ./charts/opentelemetry-operator-0.114.1.tgz \
+helm upgrade --install otel-operator ./charts/opentelemetry-operator-0.152.0.tgz \
   -n opentelemetry --create-namespace \
   -f ./values.yaml
 ```
