@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-jenkins-v25283-오프라인-설치-가이드" class="md-skip">
+        <a href="#-jenkins-v25553-오프라인-빌드--설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -3476,10 +3476,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-가능-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 오프라인 설치 자산 준비 (인터넷 환경)
+        0. 오프라인 설치 자산 준비 (인터넷 가능 환경)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. 오프라인 설치 자산 준비 (인터넷 가능 환경)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-기본-이미지-및-helm-차트-다운로드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1. 기본 이미지 및 Helm 차트 다운로드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-opentofu-내장-커스텀-이미지-조율-및-빌드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2. OpenTofu 내장 커스텀 이미지 조율 및 빌드
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-전제-조건-폐쇄망-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 전제 조건 (폐쇄망 환경)
       
     </span>
   </a>
@@ -3487,10 +3526,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
+  <a href="#2-1단계-컨테이너-이미지-harbor-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        2. 1단계: 컨테이너 이미지 Harbor 업로드
       
     </span>
   </a>
@@ -3498,87 +3537,94 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-호스트-디렉토리-생성" class="md-nav__link">
+  <a href="#3-2단계-설치-및-구성-실행-대화형" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 호스트 디렉토리 생성
+        3. 2단계: 설치 및 구성 실행 (대화형)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 2단계: 설치 및 구성 실행 (대화형)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#주요-입력-정보-및-처리-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 입력 정보 및 처리 방식
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#2단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#4-3단계-초기-로그인-및-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 이미지 Harbor 업로드
+        4. 3단계: 초기 로그인 및 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 3단계: 초기 로그인 및 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#웹-ui-접속-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        웹 UI 접속 방법
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3단계-운영-설정-valuesyaml-및-pv" class="md-nav__link">
+  <a href="#5-수동-설치-및-업그레이드-가이드-manual-installation--upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 운영 설정 (values.yaml 및 PV)
+        5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-수동-설치-진행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 수동 설치 진행
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4단계-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 설치 실행
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5단계-설치-확인" class="md-nav__link">
+  <a href="#6-서비스-삭제-및-초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 설치 확인
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-참고-사항" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💡 참고 사항
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-gitlab-연동-가이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔗 GitLab 연동 가이드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삭제
+        6. 서비스 삭제 및 초기화
       
     </span>
   </a>
@@ -4564,7 +4610,7 @@
   <span class="md-ellipsis">
     
   
-    Install
+    Kafka
   
 
     
@@ -4577,6 +4623,120 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kafka
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/kafka/kafka-3.9.0-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka v3.9.0 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/kafka/kafka-4.0.0-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka v4.0.0 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -5253,6 +5413,34 @@
     
   
     설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../openstack/base/add-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    신규 노드 추가
   
 
     
@@ -6049,10 +6237,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-오프라인-설치-자산-준비-인터넷-환경" class="md-nav__link">
+  <a href="#0-오프라인-설치-자산-준비-인터넷-가능-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 오프라인 설치 자산 준비 (인터넷 환경)
+        0. 오프라인 설치 자산 준비 (인터넷 가능 환경)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. 오프라인 설치 자산 준비 (인터넷 가능 환경)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-기본-이미지-및-helm-차트-다운로드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1. 기본 이미지 및 Helm 차트 다운로드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-opentofu-내장-커스텀-이미지-조율-및-빌드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2. OpenTofu 내장 커스텀 이미지 조율 및 빌드
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-전제-조건-폐쇄망-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 전제 조건 (폐쇄망 환경)
       
     </span>
   </a>
@@ -6060,10 +6287,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#전제-조건" class="md-nav__link">
+  <a href="#2-1단계-컨테이너-이미지-harbor-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        2. 1단계: 컨테이너 이미지 Harbor 업로드
       
     </span>
   </a>
@@ -6071,87 +6298,94 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-호스트-디렉토리-생성" class="md-nav__link">
+  <a href="#3-2단계-설치-및-구성-실행-대화형" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 호스트 디렉토리 생성
+        3. 2단계: 설치 및 구성 실행 (대화형)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 2단계: 설치 및 구성 실행 (대화형)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#주요-입력-정보-및-처리-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 입력 정보 및 처리 방식
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#2단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#4-3단계-초기-로그인-및-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 이미지 Harbor 업로드
+        4. 3단계: 초기 로그인 및 확인
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 3단계: 초기 로그인 및 확인">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#웹-ui-접속-방법" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        웹 UI 접속 방법
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3단계-운영-설정-valuesyaml-및-pv" class="md-nav__link">
+  <a href="#5-수동-설치-및-업그레이드-가이드-manual-installation--upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 운영 설정 (values.yaml 및 PV)
+        5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-수동-설치-진행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 수동 설치 진행
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4단계-설치-실행" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4단계: 설치 실행
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5단계-설치-확인" class="md-nav__link">
+  <a href="#6-서비스-삭제-및-초기화" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 설치 확인
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-참고-사항" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💡 참고 사항
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-gitlab-연동-가이드" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔗 GitLab 연동 가이드
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        삭제
+        6. 서비스 삭제 및 초기화
       
     </span>
   </a>
@@ -6178,126 +6412,120 @@
   
 
 
-<h1 id="-jenkins-v25283-오프라인-설치-가이드">🚀 Jenkins v2.528.3 오프라인 설치 가이드</h1>
-<p>폐쇄망 환경에서 Jenkins v2.528.3을 Kubernetes 위에 Helm으로 설치하는 절차를 안내합니다.</p>
-<h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
-<p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
-<blockquote>
-<p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./download_assets_offline.sh
-</code></pre></div>
-<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
+<h1 id="-jenkins-v25553-오프라인-빌드--설치-가이드">🚀 Jenkins v2.555.3 오프라인 빌드 &amp; 설치 가이드</h1>
+<p>폐쇄망 환경에서 OpenTofu가 포함된 Jenkins v2.555.3 (LTS)을 Kubernetes에 설치하는 통합 가이드입니다.</p>
 <hr />
-<h2 id="전제-조건">전제 조건</h2>
+<h2 id="0-오프라인-설치-자산-준비-인터넷-가능-환경">0. 오프라인 설치 자산 준비 (인터넷 가능 환경)</h2>
+<p>폐쇄망 내부 컴퓨터로 반입할 헬름 차트와 컨테이너 이미지(.tar) 자산이 없는 경우, <strong>인터넷이 연결된 외부 리눅스 PC</strong>에서 아래 단계를 진행해야 합니다.</p>
+<h3 id="01-기본-이미지-및-helm-차트-다운로드">0.1. 기본 이미지 및 Helm 차트 다운로드</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>jenkins-2.555.3/scripts/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>./download_assets_offline.sh
+</code></pre></div>
+실행이 끝나면 <code>charts/</code>와 <code>images/</code> 폴더에 기본 헬름 차트 및 이미지 3종이 저장됩니다.</p>
+<h3 id="02-opentofu-내장-커스텀-이미지-조율-및-빌드">0.2. OpenTofu 내장 커스텀 이미지 조율 및 빌드</h3>
+<p>사용자의 인프라 사양(대상 CSP, Tofu 버전 등)에 맞추어 <strong>가변형 이미지 빌드 툴체인</strong>을 실행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>../jenkins-build/
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>*.sh
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>./build-tofu-jenkins.sh
+</code></pre></div>
 <ul>
-<li>Kubernetes 클러스터 구성 완료</li>
-<li>Helm v3.14.0 설치 완료</li>
-<li><code>kubectl</code> CLI 사용 가능</li>
-<li>Harbor 레지스트리 접근 가능 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li><strong>대화형 선택 옵션</strong>:</li>
+<li><strong>OpenTofu 버전 지정</strong>: 원하시는 버전을 기재합니다. (기본값: <code>1.6.0</code>)</li>
+<li><strong>설치 대상 CSP 프로바이더</strong>: 띄어쓰기나 쉼표로 구분하여 입력합니다 (예: <code>aws,azure</code> 또는 <code>vmware</code>).<ul>
+<li><code>aws</code>, <code>azure</code>, <code>vmware</code>, <code>openstack</code> 프로바이더 자동 매핑을 지원합니다.</li>
 </ul>
-<h2 id="1단계-호스트-디렉토리-생성">1단계: 호스트 디렉토리 생성</h2>
-<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다. PV 데이터 저장 경로를 대상 노드에 미리 생성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/setup-host-dirs.sh
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./scripts/setup-host-dirs.sh
-</code></pre></div>
-<h2 id="2단계-이미지-harbor-업로드">2단계: 이미지 Harbor 업로드</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>./images/upload_images_to_harbor_v3-lite.sh
-</code></pre></div>
-<h2 id="3단계-운영-설정-valuesyaml-및-pv">3단계: 운영 설정 (values.yaml 및 PV)</h2>
-<p>루트 디렉토리의 설정 파일들을 환경에 맞게 수정합니다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">파일명</th>
-<th style="text-align: left;">용도</th>
-<th style="text-align: left;">주요 수정 항목</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong><code>values.yaml</code></strong></td>
-<td style="text-align: left;">Jenkins 운영 설정</td>
-<td style="text-align: left;">이미지 경로, 리소스 제한, 서비스 타입 등</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>manifests/pv-volume.yaml</code></strong></td>
-<td style="text-align: left;">Jenkins 홈 PV 정의</td>
-<td style="text-align: left;">노드 이름(<code>nodeAffinity</code>), 저장 경로</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong><code>manifests/gradle-cache-pv-pvc.yaml</code></strong></td>
-<td style="text-align: left;">Gradle 캐시 PV/PVC</td>
-<td style="text-align: left;">저장 경로</td>
-</tr>
-</tbody>
-</table>
-<h2 id="4단계-설치-실행">4단계: 설치 실행</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./scripts/install.sh
-</code></pre></div>
-<p>스크립트 실행 중 Jenkins를 배포할 노드 이름을 입력합니다.</p>
-<p>스크립트 자동 처리 항목:</p>
+</li>
+<li><strong>플러그인 다운로드 여부</strong>: <code>plugins.txt</code> 파일에 지정된 필수 Jenkins 플러그인 18종을 사전에 내려받아 이미지 내부에 패키징할지 선택합니다. (기본 권장)</li>
+<li>빌드가 완료되면 <code>cmp-jenkins-full.tar</code> 파일이 자동 빌드되어 컴포넌트의 <code>../images/</code> 디렉터리로 이동됩니다.</li>
+<li>이 상태에서 전체 컴포넌트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</li>
+</ul>
+<hr />
+<h2 id="1-전제-조건-폐쇄망-환경">1. 전제 조건 (폐쇄망 환경)</h2>
 <ul>
-<li>네임스페이스 및 PV/PVC 적용</li>
-<li>노드 라벨 적용 (<code>jenkins-node=true</code>)</li>
-<li>Helm 배포 및 초기 관리자 비밀번호 출력</li>
-<li>CoreDNS 도메인 자동 등록 (<code>DOMAIN</code> 설정 시)</li>
+<li>Kubernetes v1.25.0 이상 클러스터 구성 완료</li>
+<li>Helm v3.14.0 이상 설치 완료</li>
+<li><code>kubectl</code> CLI 사용 및 적절한 네임스페이스 권한 소유</li>
+<li>Harbor 사설 레지스트리 작동 상태 확인 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li>(HostPath PV 사용 시) <code>/data/jenkins</code> 디렉토리 사전 생성 권장</li>
 </ul>
-<h2 id="5단계-설치-확인">5단계: 설치 확인</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 파드 및 서비스 상태 확인</span>
+<hr />
+<h2 id="2-1단계-컨테이너-이미지-harbor-업로드">2. 1단계: 컨테이너 이미지 Harbor 업로드</h2>
+<p>폐쇄망 내 반입 완료 후, 컴포넌트 루트 디렉토리(<code>jenkins-2.555.3/</code>) 기준에서 마이그레이션 스크립트를 실행합니다.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 이미지 업로드 스크립트 실행 (sudo 권한 필요)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>./scripts/upload_images_to_harbor_v3-lite.sh
+</code></pre></div>
+* <strong>동작 원리</strong>: 
+  * docker, skopeo, ctr 도구를 자동 감지하여 업로드를 처리합니다.
+  * <strong><code>skopeo</code></strong>가 설치된 머신인 경우, 로컬 containerd에 로드하지 않고 tar 아카이브에서 Harbor 레지스트리로 바로 이미지 복사(Copy)를 진행하여 업로드 속도를 극대화합니다.
+  * 최후의 수단으로 <code>ctr</code>을 활용해 안전하게 Containerd에 로드합니다.</p>
+<hr />
+<h2 id="3-2단계-설치-및-구성-실행-대화형">3. 2단계: 설치 및 구성 실행 (대화형)</h2>
+<p>설치 자동화 스크립트는 실행 시 필요한 설정값들을 대화식 CLI로 입력받아 설치 및 업그레이드를 수행합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 설치 스크립트 실행 (sudo 권한 필요)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>./scripts/install.sh
+</code></pre></div>
+<h3 id="주요-입력-정보-및-처리-방식">주요 입력 정보 및 처리 방식</h3>
+<ul>
+<li><strong>OpenTofu 커스텀 이미지 활성화 여부</strong>: "y"를 선택하면, 빌드하여 업로드해 둔 <code>cmp-jenkins-full:2.555.3</code> 이미지를 <code>controller.image</code>로 오버라이드하여 배포합니다.</li>
+<li><strong>스토리지 유형</strong>: </li>
+<li><code>hostpath</code> 선택 시 워커 노드의 특정 로컬 디바이스 경로(기본 <code>/data/jenkins</code>)를 영구 마운트하며, <code>manifests/pv-volume.yaml</code> 리소스를 먼저 생성해줍니다.</li>
+<li><code>dynamic</code> 선택 시 사전에 준비된 <code>StorageClass</code>(예: NFS dynamic provisioner) 이름을 입력받아 동적으로 PVC를 구성합니다.</li>
+<li><strong>YAML 동기화</strong>:</li>
+<li>입력된 설정은 <code>--set</code> 인자를 사용하는 대신 <code>values-override.yaml</code>을 생성하여 base인 <code>values.yaml</code>과 병합 배포하므로 <strong>Single Source of Truth</strong>가 보장됩니다.</li>
+</ul>
+<hr />
+<h2 id="4-3단계-초기-로그인-및-확인">4. 3단계: 초기 로그인 및 확인</h2>
+<p>설치가 완료되면 기동을 점검하고 초기 어드민 비밀번호를 획득합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 포드 및 서비스 기동 확인</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods,svc<span class="w"> </span>-n<span class="w"> </span>jenkins
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 초기 관리자 비밀번호 확인</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>jenkins<span class="w"> </span>-n<span class="w"> </span>jenkins<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.jenkins-admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 초기 관리자(admin) 비밀번호 조회</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>jenkins<span class="w"> </span>-n<span class="w"> </span>jenkins<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.jenkins-admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
 </code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">접속 방식</th>
-<th style="text-align: left;">주소</th>
-<th style="text-align: left;">비고</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>NodePort</strong></td>
-<td style="text-align: left;"><code>http://&lt;NODE_IP&gt;:30000</code></td>
-<td style="text-align: left;">기본 접속 포트</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>관리자 계정</strong></td>
-<td style="text-align: left;"><code>admin</code></td>
-<td style="text-align: left;">초기 ID</td>
-</tr>
-</tbody>
-</table>
-<h2 id="-참고-사항">💡 참고 사항</h2>
+<h3 id="웹-ui-접속-방법">웹 UI 접속 방법</h3>
 <ul>
-<li><strong>마이그레이션</strong>: 파이프라인 이전 절차는 <code>export_import/guide.md</code>를 참조하십시오.</li>
-<li><strong>빌드 이미지</strong>: Jenkins 관리 메뉴에서 <code>docker-registry</code> 시크릿을 등록하여 빌드 노드에서 Harbor 이미지를 사용할 수 있습니다.</li>
+<li><strong>NodePort 방식</strong>: <code>http://&lt;NODE_IP&gt;:30000</code></li>
+<li><strong>도메인 라우팅 방식</strong>: <code>http://jenkins.test.com</code></li>
 </ul>
-<h2 id="-gitlab-연동-가이드">🔗 GitLab 연동 가이드</h2>
-<p>GitLab과 Jenkins를 함께 운영할 경우 다음 절차로 트리거를 연결할 수 있습니다.</p>
+<hr />
+<h2 id="5-수동-설치-및-업그레이드-가이드-manual-installation--upgrade">5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)</h2>
+<p>자동화 스크립트 장애 대처용 수동 반영 가이드라인입니다.</p>
+<h3 id="51-수동-설치-진행">5.1. 수동 설치 진행</h3>
 <ol>
-<li><strong>GitLab Access Token 생성</strong>: Jenkins가 GitLab API에 접근할 수 있도록 Personal Access Token을 발급합니다.</li>
-<li><strong>Jenkins GitLab Plugin 설정</strong>: Jenkins 관리 &gt; 시스템 설정에서 GitLab 서버 정보를 등록합니다.</li>
-<li><strong>WebHook 설정</strong>: GitLab 프로젝트 설정 &gt; Webhooks에서 Jenkins 빌드 트리거 URL을 등록합니다.</li>
-<li><strong>OpenTofu IaC 파이프라인</strong>: <code>jenkins-2.528.3</code> 디렉토리에 제공된 <code>Jenkinsfile-opentofu</code> 템플릿을 기반으로 OpenTofu IaC 파이프라인을 구축할 수 있습니다.</li>
+<li><code>values.yaml</code> 내의 이미지 레지스트리 주소(예: <code>jenkins/jenkins</code> 등)를 사내 사설 Harbor 도메인 주소로 교체합니다.</li>
+<li>OpenTofu 커스텀 이미지를 쓸 경우 <code>cmp-jenkins-full</code>로 변경합니다.</li>
+<li><code>values-override.yaml</code> 파일을 작성하여 로컬 사양(스토리지, NodePort 노출 사양)을 지정합니다.
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">controller</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">serviceType</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NodePort&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30000</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">persistence</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">storageClass</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;manual&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;20Gi&quot;</span>
+</code></pre></div></li>
+<li>Kubernetes 볼륨 매니페스트 및 Helm 배포를 직접 적용합니다.
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># HostPath PV 적용 (HostPath 사용 시)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/pv-volume.yaml
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Gradle 캐시 공유 PV/PVC 적용</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/gradle-cache-pv-pvc.yaml<span class="w"> </span>-n<span class="w"> </span>jenkins
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Helm 배포</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>jenkins<span class="w"> </span>./charts/jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span>-n<span class="w"> </span>jenkins<span class="w"> </span>--create-namespace<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span>-f<span class="w"> </span>./values-override.yaml
+</code></pre></div></li>
 </ol>
-<h2 id="삭제">삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./scripts/uninstall.sh
+<hr />
+<h2 id="6-서비스-삭제-및-초기화">6. 서비스 삭제 및 초기화</h2>
+<p>Jenkins를 완전히 제거하려면 다음 명령을 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 리소스 삭제 (설정 파일 보존)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>./scripts/uninstall.sh
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 완전 초기화 (설정 파일 및 로컬 백업 복원 등 완전 제거)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>sudo<span class="w"> </span>./scripts/uninstall.sh<span class="w"> </span>--reset
 </code></pre></div>
 
 

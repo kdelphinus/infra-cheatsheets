@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#opentelemetry-operator-v01141--v01520-오프라인-설치-가이드" class="md-skip">
+        <a href="#opentelemetry-operator-v01520-오프라인-설치-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -4664,7 +4664,7 @@
   <span class="md-ellipsis">
     
   
-    Install
+    Kafka
   
 
     
@@ -4677,6 +4677,120 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kafka
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/kafka/kafka-3.9.0-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka v3.9.0 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/kafka/kafka-4.0.0-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka v4.0.0 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -5353,6 +5467,34 @@
     
   
     설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../openstack/base/add-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    신규 노드 추가
   
 
     
@@ -6374,7 +6516,7 @@
   
 
 
-<h1 id="opentelemetry-operator-v01141--v01520-오프라인-설치-가이드">OpenTelemetry Operator v0.114.1 / v0.152.0 오프라인 설치 가이드</h1>
+<h1 id="opentelemetry-operator-v01520-오프라인-설치-가이드">OpenTelemetry Operator v0.152.0 오프라인 설치 가이드</h1>
 <p>폐쇄망 환경에서 OpenTelemetry Operator를 Kubernetes(K8s) 위에 설치하는 절차를 안내합니다.</p>
 <h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
 <p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
@@ -6388,7 +6530,7 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>download_assets_offline.sh
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>./download_assets_offline.sh
 </code></pre></div>
-<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>opentelemetry-operator-0.114.1.tgz</code> 파일이, <code>images/</code> 디렉토리에 <code>ghcr.io-open-telemetry-opentelemetry-operator-opentelemetry-operator-v0.152.0.tar</code> 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
+<p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>opentelemetry-operator-0.152.0.tgz</code> 파일이, <code>images/</code> 디렉토리에 <code>ghcr.io-open-telemetry-opentelemetry-operator-opentelemetry-operator-v0.152.0.tar</code> 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
 <hr />
 <h2 id="-필수-사전-조건-prerequisites">🚨 필수 사전 조건 (Prerequisites)</h2>
 <p>OpenTelemetry Operator는 내부 어드미션 웹훅의 보안 인증서 서명을 위해 <strong><code>cert-manager</code></strong>를 필수로 요구합니다.</p>
@@ -6426,7 +6568,7 @@
 <h3 id="방법-2-수동-설치-및-업그레이드-manual-fallback">방법 2. 수동 설치 및 업그레이드 (Manual Fallback)</h3>
 <p>자동화 스크립트를 우회하고 명시적으로 자원을 전개해야 하는 특수 환경에서는 아래와 같이 배포합니다.</p>
 <h4 id="1-valuesyaml-환경-설정">1) <code>values.yaml</code> 환경 설정</h4>
-<p><code>opentelemetry-operator-0.114.1/values.yaml</code> 파일을 에디터로 엽니다. 오프라인 이미지 정보에 맞춰 수정합니다.</p>
+<p><code>opentelemetry-operator-0.152.0/values.yaml</code> 파일을 에디터로 엽니다. 오프라인 이미지 정보에 맞춰 수정합니다.</p>
 <ul>
 <li><strong>Harbor 레지스트리 주소를 사용하는 경우:</strong>
   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">image</span><span class="p">:</span>
@@ -6442,7 +6584,7 @@
 <h4 id="2-helm-릴리스-배포-실행">2) Helm 릴리스 배포 실행</h4>
 <p>타겟 네임스페이스(예: <code>opentelemetry</code>)를 지정하여 Helm 설치 및 업그레이드를 수행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 컴포넌트 루트 디렉토리에서 실행</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>otel-operator<span class="w"> </span>./charts/opentelemetry-operator-0.114.1.tgz<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>otel-operator<span class="w"> </span>./charts/opentelemetry-operator-0.152.0.tgz<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-n<span class="w"> </span>opentelemetry<span class="w"> </span>--create-namespace<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml
 </code></pre></div>
