@@ -151,6 +151,15 @@ hide:
     - [:octicons-arrow-right-24: Redis Stream 개발 가이드](db/redis/001-redis-stream-overview.md)
     - [:octicons-arrow-right-24: Redis Stream 설치 및 운영](db/redis/002-redis-stream-install.md)
 
+- :simple-apachekafka: **분산 메시징 플랫폼**
+
+    ---
+
+    Apache Kafka 고가용성 클러스터 (KRaft)
+
+    - [:octicons-arrow-right-24: Apache Kafka v3.9.0 설치](db/kafka/kafka-3.9.0-install.md)
+    - [:octicons-arrow-right-24: Apache Kafka v4.0.0 설치](db/kafka/kafka-4.0.0-install.md)
+
 </div>
 
 ---
