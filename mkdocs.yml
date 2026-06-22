@@ -98,6 +98,7 @@ nav:
       - 'Falco 런타임 탐지': k8s/security/001-falco-install.md
       - 'Tetragon 런타임 차단': k8s/security/002-tetragon-install.md
       - 'Tetragon 보안 정책 전략': k8s/security/003-tetragon-security-policy.md
+      - 'Gatekeeper 정책 통제': k8s/security/004-gatekeeper-install.md
     - 'Backup & Restore':
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Operations':
@@ -118,7 +119,7 @@ nav:
       - 'HTTPRoute 라우팅 트러블슈팅': k8s/troubleshooting/httproute-troubleshooting.md
   - VM Template:
       - '1. VM 템플릿 일반 제작 가이드': vm-template/general-guide.md
-      - '2. Rocky 9.6 Vagrant 기반 빌드': vm-template/rocky-vagrant-guide.md
+      - '2. Rocky 9.6 Vagrant 기반 빌드 (v3.1)': vm-template/rocky-vagrant-guide.md
       - '3. Rocky 9 K8s 노드 템플릿 제작': vm-template/k8s-rocky-template.md
       - '4. Rocky 9 K8s 템플릿 업그레이드': vm-template/k8s-rocky-template-upgrade.md
   - Cloud:

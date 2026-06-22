@@ -59,6 +59,7 @@ hide:
 
     - [:octicons-arrow-right-24: Tetragon 런타임 보안 전략](k8s/security/003-tetragon-security-policy.md)
     - [:octicons-arrow-right-24: Falco 이상행위 탐지 가이드](k8s/security/001-falco-install.md)
+    - [:octicons-arrow-right-24: Gatekeeper 정책 통제 가이드](k8s/security/004-gatekeeper-install.md)
     - [:octicons-arrow-right-24: Velero 백업 및 복구 구성](k8s/backup-restore/001-velero-install.md)
 
 - :material-cog: **운영 및 스토리지**
@@ -198,7 +199,7 @@ hide:
     VMware 최적화 템플릿 빌드 및 리소스 관리
 
     - [:octicons-arrow-right-24: VM 템플릿 일반 제작 표준 가이드](vm-template/general-guide.md)
-    - [:octicons-arrow-right-24: Rocky 9.6 Vagrant 기반 템플릿 빌드](vm-template/rocky-vagrant-guide.md)
+    - [:octicons-arrow-right-24: Rocky 9.6 Vagrant 기반 템플릿 빌드 (v3.1)](vm-template/rocky-vagrant-guide.md)
     - [:octicons-arrow-right-24: Rocky 9 K8s 노드 템플릿 제작 실무](vm-template/k8s-rocky-template.md)
     - [:octicons-arrow-right-24: Rocky 9 K8s 노드 템플릿 업그레이드](vm-template/k8s-rocky-template-upgrade.md)
 
