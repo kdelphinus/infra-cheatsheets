@@ -6,7 +6,7 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 > 스크립트를 이용한 빠른 설치는 아래 **스크립트 사용 가이드** 섹션을 먼저 참고하세요.
 > 수동 절차(Phase 0~10)는 내부 동작 이해 및 트러블슈팅용입니다.
 >
-> 온라인 설치는 [온라인 설치 가이드](online-install.md)를 참고하세요.
+> 온라인 설치는 `install-guide-online.md`를 참고하세요.
 
 ## 스크립트 사용 가이드
 
@@ -40,7 +40,7 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 
 #### 단일 구성 (WSL2 / 단일 VM)
 
-```
+```text
 [WSL2만] scripts/wsl2_prep.sh  →  wsl --shutdown 재기동
     ↓
 [Master-1] scripts/install.sh
@@ -55,7 +55,7 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 
 #### HA 구성 (Master 3대 + Worker N대)
 
-```
+```text
 [전체 노드] 파일 배포 (scp + tar 해제)
 
 [전체 마스터] 🔧 수동: Phase 5 — HAProxy + Keepalived 설치/설정 + VIP 확인
@@ -123,9 +123,10 @@ sudo ./scripts/install.sh
 #   1) 환경 확인 (wsl2 / vm)
 #   2) CNI 선택 (calico / cilium) + Pod CIDR
 #   3) CNI 설치 모드 (auto / manual)
-#   4) Envoy Gateway 모드 (calico+auto 선택 시)
-#   5) Service CIDR
-#   6) 컨트롤 플레인 엔드포인트
+#   4) Calico 설치 방식 (manifest / operator, calico 선택 시)
+#   5) Envoy Gateway 모드 (calico+auto 선택 시)
+#   6) Service CIDR
+#   7) 컨트롤 플레인 엔드포인트
 #      → 단일: 노드 IP (WSL2는 자동 감지)
 #      → HA  : VIP 또는 FQDN
 ```
@@ -218,7 +219,7 @@ sudo ./scripts/uninstall.sh --purge  # 바이너리까지 완전 제거
 | `k8s/debs/` | kubeadm, kubelet, kubectl, cri-tools, containerd.io + 시스템 유틸 DEB |
 | `k8s/binaries/` | helm, nerdctl tarball |
 | `k8s/images/` | kubeadm 코어 + Calico 이미지 `.tar` |
-| `k8s/utils/` | `calico.yaml`, `local-path-storage.yaml` 등 매니페스트 |
+| `k8s/utils/` | `calico.yaml`, `tigera-operator.yaml`, `calico-custom-resources.yaml`, `local-path-storage.yaml` 등 매니페스트 |
 | `scripts/` | `download.sh`, `install.sh`, `uninstall.sh`, `wsl2_prep.sh` |
 
 ## Phase 0: 설치 파일 배포 (Bastion → 전체 노드)
@@ -492,6 +493,8 @@ server = "${HARBOR_SCHEME}://${HARBOR_HOST}"
   capabilities = ["pull", "resolve", "push"]
   ca = ["strato.co.kr_chain.crt"]
 EOF
+
+sudo systemctl restart containerd
 
 # TLS 검증을 유지한 상태로 이미지 pull 확인
 sudo ctr -n k8s.io image pull \
@@ -1004,37 +1007,6 @@ cd ../envoy-1.37.2
 > Pod CIDR을 기본(`192.168.0.0/16`)에서 변경한 경우 `k8s/utils/calico.yaml`의
 > `CALICO_IPV4POOL_CIDR` 주석을 해제하고 값을 수정한 뒤 적용합니다.
 
-!!! warning "멀티 홈 IP 환경 대응 (BGP 피어링 오동작 방지)"
-    노드에 네트워크 카드가 여러 개 장착되어 있거나 가상 인터페이스가 많아 IP가 여러 개 할당된 경우, Calico가 BGP 통신에 적합하지 않은 IP를 자동 감지하여 노드 간 Pod 통신이 단절될 수 있습니다. 이를 방지하기 위해 다음 조치가 적극 권장됩니다.
-    
-    * **옵션 A-1 (Manifest) 적용 시**:
-      설치 전 `k8s/utils/calico.yaml` 파일을 열고, `calico-node` DaemonSet의 환경 변수(`env`) 섹션에 `IP_AUTODETECTION_METHOD`를 추가합니다.
-      ```yaml
-      - name: IP_AUTODETECTION_METHOD
-        value: "cidr=10.10.10.0/24" # 주 인터페이스의 서브넷 대역 지정 (또는 "interface=eth0")
-      ```
-      
-    * **옵션 A-2 (Tigera Operator) 적용 시**:
-      설치 전 `k8s/utils/calico-custom-resources.yaml` 파일을 열고, `Installation` 리소스 스펙에 `nodeAddressAutodetectionV4` 설정을 지정합니다.
-      ```yaml
-      apiVersion: operator.tigera.io/v1
-      kind: Installation
-      metadata:
-        name: default
-      spec:
-        calicoNetwork:
-          ipPools:
-          - blockSize: 26
-            cidr: 192.168.0.0/16
-            encapsulation: VXLANCrossSubnet
-            natOutgoing: Enabled
-            nodeSelector: all()
-          # 아래 블록을 추가하여 감지할 주 대역을 고정 (예: 10.10.10.0/24 대역만 사용)
-          nodeAddressAutodetectionV4:
-            cidrs:
-            - 10.10.10.0/24
-      ```
-
 #### 옵션 A-2: Tigera Operator 방식
 
 ```bash
@@ -1044,7 +1016,6 @@ kubectl create -f k8s/utils/tigera-operator.yaml
 # 2. CRD 등록 확인 후 custom resources 적용
 kubectl wait --for=condition=established crd/installations.operator.tigera.io --timeout=180s
 kubectl create -f k8s/utils/calico-custom-resources.yaml
-
 
 # 3. Calico 파드가 전부 Running이 될 때까지 대기
 kubectl get pods -n calico-system -w
@@ -1056,6 +1027,29 @@ cd ../envoy-1.37.2
 
 > Pod CIDR을 기본(`192.168.0.0/16`)에서 변경한 경우
 > `k8s/utils/calico-custom-resources.yaml`의 `cidr:` 값을 수정한 뒤 적용합니다.
+
+!!! warning "멀티 홈 IP 환경 대응 (BGP 피어링 오동작 방지)"
+    노드에 네트워크 카드가 여러 개 장착되어 있거나 가상 인터페이스가 많아 IP가 여러 개 할당된 경우, Calico가 BGP 통신에 적합하지 않은 IP를 자동 감지하여 노드 간 Pod 통신이 단절될 수 있습니다. 이를 방지하기 위해 다음 조치가 적극 권장됩니다.
+    
+    * **옵션 A-1 (manifest) 적용 시**:
+      `k8s/utils/calico.yaml` 내 `calico-node` DaemonSet 환경 변수에 `IP_AUTODETECTION_METHOD` 설정을 추가합니다.
+      ```yaml
+      - name: IP_AUTODETECTION_METHOD
+        value: "cidr=10.10.10.0/24"  # 주 인터페이스 대역 지정
+      ```
+      
+    * **옵션 A-2 (operator) 적용 시**:
+      `k8s/utils/calico-custom-resources.yaml` 내 `Installation` 리소스에 `nodeAddressAutodetectionV4` 설정을 지정합니다.
+      ```yaml
+      spec:
+        calicoNetwork:
+          ipPools:
+          - cidr: 192.168.0.0/16
+            # ... 생략 ...
+          nodeAddressAutodetectionV4:
+            cidrs:
+            - 10.10.10.0/24  # 주 인터페이스 대역 지정
+      ```
 
 ### 옵션 B: Cilium
 

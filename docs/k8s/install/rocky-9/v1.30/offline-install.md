@@ -149,6 +149,9 @@ sudo systemctl daemon-reload
 # 4) GRUB 설정 재빌드 (부팅 시 90초 타임아웃/행 걸림 원천 차단)
 #    - UEFI 부팅인 경우:
 #      sudo grub2-mkconfig -o /boot/efi/EFI/rocky/grub.cfg
+#    - BIOS(Legacy) 부팅인 경우:
+#      sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
 # 5. 파일 디스크립터(FD) 및 시스템 Limits 상향
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-limits.conf
 fs.file-max = 2097152
@@ -286,7 +289,6 @@ sudo systemctl restart containerd
 sudo ctr -n k8s.io image pull \
   harbor-product.strato.co.kr:8443/lgcns/strato-landing-frontend:10.0.0
 ```
-
 
 ### (선택) containerd 데이터 경로 변경 — 소프트링크 방식
 
@@ -778,13 +780,13 @@ sudo journalctl -u haproxy -n 20 --no-pager
 
 !!! warning "멀티 홈 IP 환경 대응 (BGP 피어링 오동작 방지)"
     노드에 네트워크 카드가 여러 개 장착되어 있거나 가상 인터페이스가 많아 IP가 여러 개 할당된 경우, Calico가 BGP 통신에 적합하지 않은 IP를 자동 감지하여 노드 간 Pod 통신이 단절될 수 있습니다. 이를 방지하기 위해 다음 조치가 적극 권장됩니다.
-    
-    * **Manifest (calico.yaml) 수정**:
-      설치 전에 `k8s/utils/calico.yaml` 파일을 열고, `calico-node` DaemonSet의 환경변수(`env`) 섹션에 `IP_AUTODETECTION_METHOD` 변수를 추가하여 주 대역을 고정합니다.
-      ```yaml
-      - name: IP_AUTODETECTION_METHOD
-        value: "cidr=10.10.10.0/24" # 주 인터페이스의 서브넷 대역 지정 (또는 "interface=eth0")
-      ```
+
+    `k8s/utils/calico.yaml` 파일 내 `calico-node` DaemonSet 환경 변수 설정에 `IP_AUTODETECTION_METHOD`를 추가하고 주 대역을 필터링하도록 구성합니다.
+    ```yaml
+    # k8s/utils/calico.yaml 내 calico-node env 섹션에 아래 설정 추가
+    - name: IP_AUTODETECTION_METHOD
+      value: "cidr=10.10.10.0/24"  # 주 인터페이스 대역 지정 (또는 interface=eth0)
+    ```
 
 ```bash
 kubectl apply -f k8s/utils/calico.yaml
@@ -862,8 +864,8 @@ nerdctl --version
 # containerd k8s.io 네임스페이스 이미지 목록 확인
 sudo nerdctl -n k8s.io images
 
-# Harbor에서 이미지 pull (insecure registry)
-sudo nerdctl -n k8s.io pull --insecure-registry <NODE_IP>:30002/library/myapp:1.0.0
+# Harbor에서 이미지 pull (TLS 검증)
+sudo nerdctl -n k8s.io pull harbor-product.strato.co.kr:8443/library/myapp:1.0.0
 ```
 
 ## Phase 8-2: skopeo 설치 (선택, 전체 노드)
@@ -888,16 +890,16 @@ skopeo --version
 주요 사용 예시:
 
 ```bash
-# Harbor 이미지 목록 조회 (insecure registry)
-skopeo list-tags --tls-verify=false docker://<NODE_IP>:30002/library/myapp
+# Harbor 이미지 목록 조회 (TLS 검증)
+skopeo list-tags docker://harbor-product.strato.co.kr:8443/library/myapp
 
 # 레지스트리 간 이미지 복사
-skopeo copy --src-tls-verify=false --dest-tls-verify=false \
+skopeo copy \
   docker://<SRC_REGISTRY>/myapp:1.0.0 \
-  docker://<NODE_IP>:30002/library/myapp:1.0.0
+  docker://harbor-product.strato.co.kr:8443/library/myapp:1.0.0
 
 # 이미지 메타데이터 확인
-skopeo inspect --tls-verify=false docker://<NODE_IP>:30002/library/myapp:1.0.0
+skopeo inspect docker://harbor-product.strato.co.kr:8443/library/myapp:1.0.0
 ```
 
 ## Phase 9: 워커 노드 조인
