@@ -3328,6 +3328,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../security/004-gatekeeper-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gatekeeper 정책 통제
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4089,7 +4117,7 @@
   <span class="md-ellipsis">
     
   
-    2. Rocky 9.6 Vagrant 기반 빌드
+    2. Rocky 9.6 Vagrant 기반 빌드 (v3.1)
   
 
     
@@ -8112,7 +8140,7 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 <strong>Calico(+ Envoy
 <blockquote>
 <p>스크립트를 이용한 빠른 설치는 아래 <strong>스크립트 사용 가이드</strong> 섹션을 먼저 참고하세요.
 수동 절차(Phase 0~10)는 내부 동작 이해 및 트러블슈팅용입니다.</p>
-<p>온라인 설치는 <a href="../online-install/">온라인 설치 가이드</a>를 참고하세요.</p>
+<p>온라인 설치는 <code>install-guide-online.md</code>를 참고하세요.</p>
 </blockquote>
 <h2 id="스크립트-사용-가이드">스크립트 사용 가이드</h2>
 <h3 id="자동--수동-처리-범위">자동 / 수동 처리 범위</h3>
@@ -8279,11 +8307,12 @@ HAProxy + Keepalived로 VIP를 확보한 뒤, 아래 스크립트 실행 시 엔
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">#   1) 환경 확인 (wsl2 / vm)</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">#   2) CNI 선택 (calico / cilium) + Pod CIDR</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1">#   3) CNI 설치 모드 (auto / manual)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">#   4) Envoy Gateway 모드 (calico+auto 선택 시)</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1">#   5) Service CIDR</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">#   6) 컨트롤 플레인 엔드포인트</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1">#      → 단일: 노드 IP (WSL2는 자동 감지)</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1">#      → HA  : VIP 또는 FQDN</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">#   4) Calico 설치 방식 (manifest / operator, calico 선택 시)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1">#   5) Envoy Gateway 모드 (calico+auto 선택 시)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">#   6) Service CIDR</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1">#   7) 컨트롤 플레인 엔드포인트</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1">#      → 단일: 노드 IP (WSL2는 자동 감지)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1">#      → HA  : VIP 또는 FQDN</span>
 </code></pre></div>
 <p><strong>HA 구성이라면</strong> 완료 후 즉시 아래를 수동으로 수행합니다.</p>
 <h4 id="-ha-전용-kube-apiserver-bind-address-설정">🔧 [HA 전용] kube-apiserver bind-address 설정</h4>
@@ -8382,7 +8411,7 @@ certificate-key가 만료됐다면 Master-1에서 재생성 후 사용하세요.
 </tr>
 <tr>
 <td><code>k8s/utils/</code></td>
-<td><code>calico.yaml</code>, <code>local-path-storage.yaml</code> 등 매니페스트</td>
+<td><code>calico.yaml</code>, <code>tigera-operator.yaml</code>, <code>calico-custom-resources.yaml</code>, <code>local-path-storage.yaml</code> 등 매니페스트</td>
 </tr>
 <tr>
 <td><code>scripts/</code></td>
@@ -8631,9 +8660,11 @@ certificate-key가 만료됐다면 Master-1에서 재생성 후 사용하세요.
 <a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="s">  ca = [&quot;strato.co.kr_chain.crt&quot;]</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="s">EOF</span>
 <a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>
-<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="c1"># TLS 검증을 유지한 상태로 이미지 pull 확인</span>
-<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>image<span class="w"> </span>pull<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="w">  </span>harbor-product.strato.co.kr:8443/lgcns/strato-landing-frontend:10.0.0
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="c1"># TLS 검증을 유지한 상태로 이미지 pull 확인</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>image<span class="w"> </span>pull<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="w">  </span>harbor-product.strato.co.kr:8443/lgcns/strato-landing-frontend:10.0.0
 </code></pre></div>
 <h2 id="phase-4-이미지-로드-전체-노드">Phase 4: 이미지 로드 (전체 노드)</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">for</span><span class="w"> </span>tar_file<span class="w"> </span><span class="k">in</span><span class="w"> </span>k8s/images/*.tar<span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -9121,60 +9152,51 @@ Master-1 의 <code>kubeadm init</code> 출력에 표시된 join 명령은 endpoi
 <p>Pod CIDR을 기본(<code>192.168.0.0/16</code>)에서 변경한 경우 <code>k8s/utils/calico.yaml</code>의
 <code>CALICO_IPV4POOL_CIDR</code> 주석을 해제하고 값을 수정한 뒤 적용합니다.</p>
 </blockquote>
-<div class="admonition warning">
-<p class="admonition-title">멀티 홈 IP 환경 대응 (BGP 피어링 오동작 방지)</p>
-<p>노드에 네트워크 카드가 여러 개 장착되어 있거나 가상 인터페이스가 많아 IP가 여러 개 할당된 경우, Calico가 BGP 통신에 적합하지 않은 IP를 자동 감지하여 노드 간 Pod 통신이 단절될 수 있습니다. 이를 방지하기 위해 다음 조치가 적극 권장됩니다.</p>
-<ul>
-<li>
-<p><strong>옵션 A-1 (Manifest) 적용 시</strong>:
-  설치 전 <code>k8s/utils/calico.yaml</code> 파일을 열고, <code>calico-node</code> DaemonSet의 환경 변수(<code>env</code>) 섹션에 <code>IP_AUTODETECTION_METHOD</code>를 추가합니다.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IP_AUTODETECTION_METHOD</span>
-<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cidr=10.10.10.0/24&quot;</span><span class="w"> </span><span class="c1"># 주 인터페이스의 서브넷 대역 지정 (또는 &quot;interface=eth0&quot;)</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>옵션 A-2 (Tigera Operator) 적용 시</strong>:
-  설치 전 <code>k8s/utils/calico-custom-resources.yaml</code> 파일을 열고, <code>Installation</code> 리소스 스펙에 <code>nodeAddressAutodetectionV4</code> 설정을 지정합니다.
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">operator.tigera.io/v1</span>
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Installation</span>
-<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
-<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="w">  </span><span class="nt">calicoNetwork</span><span class="p">:</span>
-<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="w">    </span><span class="nt">ipPools</span><span class="p">:</span>
-<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">blockSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26</span>
-<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a><span class="w">      </span><span class="nt">cidr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.0.0/16</span>
-<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a><span class="w">      </span><span class="nt">encapsulation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VXLANCrossSubnet</span>
-<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a><span class="w">      </span><span class="nt">natOutgoing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Enabled</span>
-<a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a><span class="w">      </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all()</span>
-<a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a><span class="w">    </span><span class="c1"># 아래 블록을 추가하여 감지할 주 대역을 고정 (예: 10.10.10.0/24 대역만 사용)</span>
-<a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a><span class="w">    </span><span class="nt">nodeAddressAutodetectionV4</span><span class="p">:</span>
-<a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a><span class="w">      </span><span class="nt">cidrs</span><span class="p">:</span>
-<a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.10.10.0/24</span>
-</code></pre></div></p>
-</li>
-</ul>
-</div>
 <h4 id="옵션-a-2-tigera-operator-방식">옵션 A-2: Tigera Operator 방식</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="c1"># 1. Tigera Operator 설치</span>
-<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>k8s/utils/tigera-operator.yaml
-<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>
-<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="c1"># 2. CRD 등록 확인 후 custom resources 적용</span>
-<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>established<span class="w"> </span>crd/installations.operator.tigera.io<span class="w"> </span>--timeout<span class="o">=</span>180s
-<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>k8s/utils/calico-custom-resources.yaml
-<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>
-<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>
-<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="c1"># 3. Calico 파드가 전부 Running이 될 때까지 대기</span>
-<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>calico-system<span class="w"> </span>-w
-<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a>
-<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="c1"># 4. Envoy Gateway 설치 (L7 라우팅)</span>
-<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="nb">cd</span><span class="w"> </span>../envoy-1.37.2
-<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a>./scripts/install.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="c1"># 1. Tigera Operator 설치</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>k8s/utils/tigera-operator.yaml
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="c1"># 2. CRD 등록 확인 후 custom resources 적용</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>established<span class="w"> </span>crd/installations.operator.tigera.io<span class="w"> </span>--timeout<span class="o">=</span>180s
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a>kubectl<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>k8s/utils/calico-custom-resources.yaml
+<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a>
+<a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="c1"># 3. Calico 파드가 전부 Running이 될 때까지 대기</span>
+<a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>calico-system<span class="w"> </span>-w
+<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a>
+<a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a><span class="c1"># 4. Envoy Gateway 설치 (L7 라우팅)</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a><span class="nb">cd</span><span class="w"> </span>../envoy-1.37.2
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a>./scripts/install.sh
 </code></pre></div>
 <blockquote>
 <p>Pod CIDR을 기본(<code>192.168.0.0/16</code>)에서 변경한 경우
 <code>k8s/utils/calico-custom-resources.yaml</code>의 <code>cidr:</code> 값을 수정한 뒤 적용합니다.</p>
 </blockquote>
+<div class="admonition warning">
+<p class="admonition-title">멀티 홈 IP 환경 대응 (BGP 피어링 오동작 방지)</p>
+<p>노드에 네트워크 카드가 여러 개 장착되어 있거나 가상 인터페이스가 많아 IP가 여러 개 할당된 경우, Calico가 BGP 통신에 적합하지 않은 IP를 자동 감지하여 노드 간 Pod 통신이 단절될 수 있습니다. 이를 방지하기 위해 다음 조치가 적극 권장됩니다.</p>
+<ul>
+<li>
+<p><strong>옵션 A-1 (manifest) 적용 시</strong>:
+  <code>k8s/utils/calico.yaml</code> 내 <code>calico-node</code> DaemonSet 환경 변수에 <code>IP_AUTODETECTION_METHOD</code> 설정을 추가합니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IP_AUTODETECTION_METHOD</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cidr=10.10.10.0/24&quot;</span><span class="w">  </span><span class="c1"># 주 인터페이스 대역 지정</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>옵션 A-2 (operator) 적용 시</strong>:
+  <code>k8s/utils/calico-custom-resources.yaml</code> 내 <code>Installation</code> 리소스에 <code>nodeAddressAutodetectionV4</code> 설정을 지정합니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="nt">calicoNetwork</span><span class="p">:</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">    </span><span class="nt">ipPools</span><span class="p">:</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cidr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.0.0/16</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">      </span><span class="c1"># ... 생략 ...</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="w">    </span><span class="nt">nodeAddressAutodetectionV4</span><span class="p">:</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="w">      </span><span class="nt">cidrs</span><span class="p">:</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.10.10.0/24</span><span class="w">  </span><span class="c1"># 주 인터페이스 대역 지정</span>
+</code></pre></div></p>
+</li>
+</ul>
+</div>
 <h3 id="옵션-b-cilium">옵션 B: Cilium</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="c1"># Cilium은 별도 컴포넌트에서 설치 (이미지 pre-load + helm install 포함)</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="nb">cd</span><span class="w"> </span>../cilium-1.19.3
