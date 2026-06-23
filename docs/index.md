@@ -74,6 +74,7 @@ hide:
     - [:octicons-arrow-right-24: NFS 동적 스토리지 프로비저너](k8s/use-pv-nas.md)
     - [:octicons-arrow-right-24: NetApp Trident 스토리지 프로비저너](k8s/storage/trident-install.md)
     - [:octicons-arrow-right-24: MetalLB 로드밸런서 설치](k8s/install/metallb-install.md)
+    - [:octicons-arrow-right-24: etcd 전용 디스크 마이그레이션 SOP](k8s/operations/etcd-disk-migration-sop.md)
 
 - :material-alert-circle-outline: **장애 해결 및 트러블슈팅**
 

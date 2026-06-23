@@ -105,6 +105,7 @@ nav:
       - 'Rocky 9.6 (v1.30) 클러스터 재부팅': k8s/operations/rocky-v1.30-cluster-reboot.md
       - 'Rocky 9.6 (v1.33.7) 클러스터 재부팅': k8s/operations/rocky-v1.33.7-cluster-reboot.md
       - 'Ubuntu 24.04 (v1.33.11) 클러스터 재부팅': k8s/operations/ubuntu-v1.33.11-cluster-reboot.md
+      - 'etcd 전용 디스크 마이그레이션 SOP': k8s/operations/etcd-disk-migration-sop.md
     - 'Cluster API':
       - 'Cluster API & 리소스 치트시트': k8s/capi/cheatsheet.md
     - 'Cheat Sheets':
