@@ -10,7 +10,6 @@ hide:
 잊어버리기 쉬운 명령어, 표준화된 설치 절차, 트러블슈팅 가이드를 체계적으로 관리합니다.
 
 [:fontawesome-brands-github: GitHub](https://github.com/kdelphinus/infra-cheatsheets){ .md-button .md-button--primary }
-[:fontawesome-brands-google-drive: 설치 파일 드라이브](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko/){ .md-button }
 [:fontawesome-solid-book: 인프라 표준 가이드](guide/infra-standard.md){ .md-button }
 
 !!! info "인프라 설치 및 구성 표준 가이드"
