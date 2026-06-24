@@ -14,8 +14,6 @@
 
 > 설치 문서는 설치 파일 GitHub에 가장 먼저 업데이트됩니다.
 
-### 👉 [설치 파일 드라이브](https://drive.google.com/drive/folders/1joMQRpZPWzKgU9BBsdxy3b0qzJMWpBC8?hl=ko/)
-
 ## 🛠️ Built With
 
 이 프로젝트는 문서를 코드로 관리(Docs as Code)하기 위해 아래 도구들을 사용합니다.
