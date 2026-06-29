@@ -57,6 +57,7 @@ nav:
       - '인프라 설치 및 구성 표준 가이드': guide/infra-standard.md
   - Kubernetes:
     - '설치 및 구성':
+      - 'K8s 설치 전 사전 확인 가이드': k8s/install/k8s-precheck-checklist.md
       - Ubuntu 24.04:
         - v1.36.1:
           - '3. 온라인 K8s 설치': k8s/install/ubuntu-24.04/v1.36.1/online-install.md
@@ -66,6 +67,7 @@ nav:
           - '3. 온라인 설치 가이드': k8s/install/ubuntu-24.04/v1.33.11/online-install.md
       - Rocky Linux:
         - v1.33.7:
+          - '2. 오프라인 K8s 설치': k8s/install/rocky-9/v1.33.7/offline-install.md
           - '3. 온라인 K8s 설치': k8s/install/rocky-9/v1.33.7/online-install.md
         - v1.30:
           - '1. 폐쇄망용 설치 파일 준비': k8s/install/rocky-9/v1.30/ready-offline.md

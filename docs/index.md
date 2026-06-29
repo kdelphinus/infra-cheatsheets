@@ -29,6 +29,7 @@ hide:
 
     클러스터 구축 및 OS별 최적 설정
 
+    - [:octicons-arrow-right-24: K8s 설치 전 사전 확인 가이드](k8s/install/k8s-precheck-checklist.md)
     - [:octicons-arrow-right-24: Ubuntu 24.04 설치 파일 준비 (v1.33.11)](k8s/install/ubuntu-24.04/v1.33.11/ready-offline.md)
     - [:octicons-arrow-right-24: Ubuntu 24.04 오프라인 설치 (v1.33.11)](k8s/install/ubuntu-24.04/v1.33.11/offline-install.md)
     - [:octicons-arrow-right-24: Ubuntu 24.04 온라인 설치 (v1.36.1)](k8s/install/ubuntu-24.04/v1.36.1/online-install.md)

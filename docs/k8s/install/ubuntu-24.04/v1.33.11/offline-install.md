@@ -8,6 +8,11 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 >
 > 온라인 설치는 `install-guide-online.md`를 참고하세요.
 
+## 설치 전 체크리스트
+
+!!! important "Kubernetes 설치 전 사전 점검 필수"
+    Kubernetes 클러스터를 설치하기 전에 반드시 **[Kubernetes 설치 전 사전 확인 가이드 및 체크리스트](../../k8s-precheck-checklist.md)**를 먼저 확인하여 대상 서버들의 네트워크 대역, swap 비활성화, 시간 동기화(NTP), 포트 점유 여부 등을 철저히 검증하십시오. 사전 검증이 누락될 경우 설치 도중 심각한 오류가 발생할 수 있습니다.
+
 ## 스크립트 사용 가이드
 
 ### 자동 / 수동 처리 범위
@@ -27,7 +32,7 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 
 | 스크립트 | 실행 위치 | 설명 |
 | --- | --- | --- |
-| `scripts/download.sh` | 인터넷 호스트 (root) | 오프라인 설치 파일 수집 → `k8s/` 채움 |
+| `scripts/download_assets_offline.sh` | 인터넷 호스트 (root) | 오프라인 설치 파일 수집 → `k8s/` 채움 |
 | `scripts/wsl2_prep.sh` | WSL2 노드 (root) | systemd 활성화 + iptables-legacy 전환 |
 | `scripts/install.sh` | Master-1 (root) | 컨트롤 플레인 설치 (CNI·Gateway 포함) |
 | `scripts/install.sh --join <token> <hash> <ep>` | Worker (root) | 워커 노드 합류 |
@@ -95,7 +100,7 @@ containerd v2.2.x를 컨테이너 런타임으로, CNI는 **Calico(+ Envoy Gatew
 
 ```bash
 cd k8s-1.33.11-ubuntu24.04
-sudo ./scripts/download.sh
+sudo ./scripts/download_assets_offline.sh
 # 완료 후 tar 묶음 생성 안내가 출력됨
 
 cd ..
@@ -220,7 +225,7 @@ sudo ./scripts/uninstall.sh --purge  # 바이너리까지 완전 제거
 | `k8s/binaries/` | helm, nerdctl tarball |
 | `k8s/images/` | kubeadm 코어 + Calico 이미지 `.tar` |
 | `k8s/utils/` | `calico.yaml`, `tigera-operator.yaml`, `calico-custom-resources.yaml`, `local-path-storage.yaml` 등 매니페스트 |
-| `scripts/` | `download.sh`, `install.sh`, `uninstall.sh`, `wsl2_prep.sh` |
+| `scripts/` | `download_assets_offline.sh`, `install.sh`, `uninstall.sh`, `wsl2_prep.sh` |
 
 ## Phase 0: 설치 파일 배포 (Bastion → 전체 노드)
 
@@ -588,7 +593,7 @@ sudo sysctl --system
 Master 3대와 가상 IP(VIP) 환경을 가정합니다.
 
 > Ubuntu 24.04에서는 `haproxy` / `keepalived` DEB를 `k8s/debs/`에 포함시켜 두었어야 합니다.
-> `scripts/download.sh`가 `apt-get download haproxy keepalived` + 의존성을 함께 수집합니다.
+> `scripts/download_assets_offline.sh`가 `apt-get download haproxy keepalived` + 의존성을 함께 수집합니다.
 
 #### 5-B-1. (FQDN 방식 선택 시) FQDN 등록 (전체 노드)
 

@@ -11,6 +11,9 @@ containerd v2.2.x + CNI(Calico 또는 Cilium) 선택 구성이며, 폐쇄망 설
 - swap 비활성화
 - `sudo` 권한
 
+!!! important "Kubernetes 설치 전 사전 점검 필수"
+    Kubernetes 클러스터를 설치하기 전에 반드시 **[Kubernetes 설치 전 사전 확인 가이드 및 체크리스트](../../k8s-precheck-checklist.md)**를 먼저 확인하여 대상 서버들의 네트워크 대역, swap 비활성화, 시간 동기화(NTP), 포트 점유 여부 등을 철저히 검증하십시오. 사전 검증이 누락될 경우 설치 도중 심각한 오류가 발생할 수 있습니다.
+
 ## Phase 0.5: 시간 동기화 설정 (Chrony / systemd-timesyncd) — 전체 노드 필수
 
 Kubernetes 클러스터는 노드 간 시간 동기화가 필수적입니다. 시간이 틀어지면 인증서 유효기간 오류, 클러스터 합류 실패 등이 발생하므로, 설치 전에 모든 노드의 시간을 동기화해야 합니다.
@@ -1101,5 +1104,5 @@ kubectl get pods -n kube-system
 
 ## 참고
 
-- 폐쇄망 배포용 파일은 `scripts/download.sh`로 수집합니다.
+- 폐쇄망 배포용 파일은 `scripts/download_assets_offline.sh`로 수집합니다.
 - 오프라인 설치 절차와 동일한 HA 구성이 `install-guide.md` 에 상세히 기술되어 있습니다.

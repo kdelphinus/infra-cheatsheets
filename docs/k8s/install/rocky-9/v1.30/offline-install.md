@@ -11,6 +11,11 @@ containerd v2.2.0을 컨테이너 런타임으로, Calico를 CNI로 사용합니
 - 모든 노드에서 아래 설치 파일 접근 가능
 - swap 비활성화 완료 (`swapoff -a` 및 `/etc/fstab` 주석 처리)
 
+## 설치 전 체크리스트
+
+!!! important "Kubernetes 설치 전 사전 점검 필수"
+    Kubernetes 클러스터를 설치하기 전에 반드시 **[Kubernetes 설치 전 사전 확인 가이드 및 체크리스트](../../k8s-precheck-checklist.md)**를 먼저 확인하여 대상 서버들의 네트워크 대역, swap 비활성화, 시간 동기화(NTP), 포트 점유 여부 등을 철저히 검증하십시오. 사전 검증이 누락될 경우 설치 도중 심각한 오류가 발생할 수 있습니다.
+
 ## 디렉토리 구조
 
 | 경로 | 설명 |
@@ -21,6 +26,22 @@ containerd v2.2.0을 컨테이너 런타임으로, Calico를 CNI로 사용합니
 | `k8s/images/` | kubeadm, Calico 등 컨테이너 이미지 `.tar` |
 | `k8s/charts/` | Helm 차트 |
 | `k8s/utils/` | calico.yaml 등 매니페스트 |
+
+## Phase -1: 인터넷 연결 호스트에서 에셋 다운로드
+
+폐쇄망에 반입할 오프라인 패키지(RPM/DEB, 외부 바이너리, 컨테이너 이미지)를 다운로드하려면 인터넷에 연결된 호스트에서 다음 스크립트를 먼저 실행합니다.
+
+```bash
+# 컴포넌트 루트 디렉토리에서 실행
+sudo ./scripts/download_assets_offline.sh
+```
+
+- Rocky Linux/RHEL 환경에서 실행 시 `k8s/rpms/` 및 `common/rpms/`에 RPM이 다운로드됩니다.
+- Ubuntu/Debian 환경에서 실행 시 `k8s/debs/` 및 `common/debs/`에 DEB이 다운로드됩니다.
+- 단, 본 v1.30.0 설치 가이드의 본문 절차는 아직 Rocky Linux 9.6 기준입니다. Ubuntu 설치 절차는 별도 검증 후 반영해야 합니다.
+- 감지된 실행 호스트의 OS 버전에 맞춰 패키지가 다운로드되므로, 실제 타겟 노드와 동일한 OS 메이저 버전을 갖춘 외부망 호스트에서 구동하는 것을 권장합니다.
+
+다운로드가 완료되면 컴포넌트 디렉토리를 압축하여 폐쇄망용 Bastion 또는 마스터 노드로 이관합니다.
 
 ## Phase 0: 설치 파일 배포 (Bastion → 전체 노드)
 
