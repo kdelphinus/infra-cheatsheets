@@ -1,28 +1,56 @@
-# MariaDB v10.11.14 오프라인 설치 가이드 (Rocky Linux 9.6)
+# MariaDB v10.11.14 오프라인 설치 가이드 (Rocky Linux 9.6 / Ubuntu)
 
-폐쇄망 환경에서 MariaDB v10.11.14를 Rocky Linux 9.6에 RPM으로 설치하는 절차를 안내합니다.
+폐쇄망 환경에서 MariaDB v10.11.14를 Rocky Linux 계열 또는 Ubuntu/Debian 계열 서버에 오프라인 패키지로 설치하는 절차를 안내합니다.
+
+## Phase 0: 인터넷 연결 호스트에서 에셋 다운로드
+
+폐쇄망 환경으로 반입할 오프라인 설치 파일(RPM/DEB 및 의존성 패키지)을 다운로드하기 위해 인터넷이 작동하는 외부망 호스트에서 다음 스크립트를 먼저 실행합니다.
+
+```bash
+# 컴포넌트 루트 디렉토리에서 실행
+sudo ./scripts/download_assets_offline.sh
+```
+
+- Rocky Linux/RHEL 환경에서 실행 시 `db/rpms/` 및 `common/rpms/`에 RPM이 다운로드됩니다.
+- Ubuntu/Debian 환경에서 실행 시 `db/debs/` 및 `common/debs/`에 DEB이 다운로드됩니다.
+- 감지된 실행 호스트의 OS 버전에 맞춰 패키지가 다운로드되므로, 실제 타겟 노드와 동일한 OS 버전을 갖춘 외부망 호스트에서 구동하는 것을 권장합니다.
+
+다운로드가 완료되면 컴포넌트 디렉토리를 압축하여 폐쇄망 내부 DB 서버로 이관합니다.
 
 ## 전제 조건
 
-- Rocky Linux 9.6 서버 (폐쇄망)
-- `common/rpms/` 및 `db/rpms/` 디렉토리 내 RPM 파일이 서버에 반입되어 있을 것
+- Rocky Linux (RHEL 계열) 또는 Ubuntu (Debian 계열) 서버 (폐쇄망)
+- `common/rpms/` (`common/debs/`) 및 `db/rpms/` (`db/debs/`) 디렉토리 내 설치 파일이 서버에 반입되어 있을 것
 
 ## 디렉토리 구조
 
 | 경로 | 설명 |
 | :--- | :--- |
-| `common/rpms/` | 공통 의존성 RPM |
-| `db/rpms/` | MariaDB 10.11.14 RPM 패키지 |
+| `common/rpms/` / `common/debs/` | 공통 의존성 패키지 |
+| `db/rpms/` / `db/debs/` | MariaDB 10.11.14 패키지 |
 | `backup/` | mariabackup 기반 백업 구성 및 가이드 |
 
-## Phase 1: RPM 설치
+## Phase 1: RPM 설치 (Rocky/RHEL)
 
 ```bash
 # 1. 공통 의존성 RPM 먼저 설치
-sudo dnf localinstall -y --disablerepo='*' common/rpms/*.rpm
+sudo dnf localinstall -y --disablerepo='*' --skip-broken common/rpms/*.rpm
 
 # 2. MariaDB RPM 설치
-sudo dnf localinstall -y --disablerepo='*' db/rpms/*.rpm
+sudo dnf localinstall -y --disablerepo='*' --skip-broken db/rpms/*.rpm
+```
+
+## Phase 1-1: DEB 설치 (Ubuntu/Debian)
+
+```bash
+# 1. 공통 의존성 DEB 먼저 설치
+sudo dpkg -i common/debs/*.deb
+
+# 2. MariaDB DEB 설치
+sudo dpkg -i db/debs/*.deb
+
+# 3. 의존성 오류가 남은 경우, 반입된 deb만으로 재시도
+sudo apt install -y --no-index common/debs/*.deb db/debs/*.deb
 ```
 
 ## Phase 2: MariaDB 초기 설정
@@ -53,37 +81,32 @@ sudo mysql_secure_installation
 
 `/etc/my.cnf.d/` 아래 설정 파일을 생성하여 핵심 파라미터를 구성합니다.
 
-!!! warning "lower_case_table_names 주의"
-    `lower_case_table_names=1` 은 **DB 초기화(데이터 디렉토리가 비어 있는 상태) 전**에 적용되어야 합니다.
-    이미 데이터가 있는 서버에서 이 값을 변경하면 기존 테이블에 접근할 수 없게 될 수 있습니다.
-
 ```bash
 sudo tee /etc/my.cnf.d/custom.cnf <<'EOF'
-[mysqld]
-# ── 문자셋 ──────────────────────────────────────────────────────────────
-character-set-server    = utf8mb4
-collation-server        = utf8mb4_unicode_ci
+[mariadb]
+# ----------------------------------------------
+# 1. 기본 및 호환성 설정 (Basic & Compatibility)
+# ----------------------------------------------
+# 데이터 경로를 옮길 때만 사용
+# datadir=/app/mariadb_data
+# 소켓 파일은 가급적 기본 위치 유지 권장 (클라이언트 접속 편의성)
+# 만약 소켓도 옮기고 싶다면 socket=/app/mariadb_data/mysql.sock 추가
 
-# ── 네트워크 ────────────────────────────────────────────────────────────
-# 모든 인터페이스에서 접속 허용 (특정 IP만 허용하려면 해당 IP 입력)
-bind-address            = 0.0.0.0
+bind-address=0.0.0.0
+default_storage_engine=InnoDB
+binlog_format=ROW
+innodb_autoinc_lock_mode=2
 
-# ── 스토리지 엔진 ────────────────────────────────────────────────────────
-default_storage_engine  = InnoDB
+# [튜닝] 대소문자 구분 안 함 (1 = 무시, 소문자로 저장)
+# 주의: 이 설정은 DB 초기화 전에 적용되어야 합니다.
+lower_case_table_names=1
 
-# ── 호환성 ──────────────────────────────────────────────────────────────
-# 테이블명 대소문자 구분 안 함 (1 = 소문자로 저장)
-lower_case_table_names  = 1
+# [튜닝] 커넥션 증설 (기본 151 -> 1000)
+max_connections=1000
 
-# SQL Mode 완화: ONLY_FULL_GROUP_BY 제거하여 레거시 쿼리 호환성 확보
-sql_mode                = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
-
-# 바이너리 로그 포맷 (향후 복제 구성 또는 Galera 전환 시 필수)
-binlog_format           = ROW
-
-# ── 성능 ────────────────────────────────────────────────────────────────
-max_connections         = 200
-innodb_buffer_pool_size = 512M
+# [튜닝] SQL Mode 완화 (ONLY_FULL_GROUP_BY 제거)
+# 쿼리 작성 시 GROUP BY 절 제약을 완화하여 호환성 확보
+sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
 EOF
 
 sudo systemctl restart mariadb
@@ -121,10 +144,6 @@ sudo firewall-cmd --reload
 
 mariabackup 기반 백업 설정은 `backup/README.md` 를 참조하세요.
 
----
+## 참고: Galera Cluster 구성
 
-## 참고 문서
-
-- [Galera Cluster 구성 가이드](../ha/galera-cluster.md) — Galera Cluster 3중화 구성 절차 및 가이드
-- [Galera Cluster 장애 복구 가이드](../ha/galera-recovery.md) — 전체 클러스터 다운 시 복구 절차
-- [MariaDB 트러블슈팅 가이드](./mariadb-troubleshooting.md) — Systemd/SELinux/HA 구성 관련 주요 이슈 해결
+Galera Cluster 3중화 구성, 장애 복구, RHEL 9 트러블슈팅은 `galera-cluster-guide.md` 를 참조하세요.

@@ -13,11 +13,11 @@
 cd scripts/
 
 # 실행 권한 부여 및 다운로드 스크립트 실행
-chmod +x download_assets_offline.sh
-sudo ./download_assets_offline.sh
+chmod +x ./scripts/download_assets_offline.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
-스크립트 실행이 완료되면 `charts/` 디렉토리에 `opentelemetry-collector-0.153.0.tgz` 파일이, `images/` 디렉토리에 `otel-opentelemetry-collector-contrib-0.153.0.tar` 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
+스크립트 실행이 완료되면 `charts/` 디렉토리에 `opentelemetry-collector-0.158.0.tgz` 파일이, `images/` 디렉토리에 `otel-opentelemetry-collector-contrib-0.153.0.tar` 이미지 파일이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
 ---
 
@@ -101,7 +101,7 @@ chmod +x scripts/install.sh
 
 ```bash
 # 컴포넌트 루트 디렉토리에서 실행
-helm upgrade --install otel-collector ./charts/opentelemetry-collector-0.153.0.tgz \
+helm upgrade --install otel-collector ./charts/opentelemetry-collector-0.158.0.tgz \
   -n monitoring --create-namespace \
   -f ./values.yaml
 ```

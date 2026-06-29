@@ -1,6 +1,5 @@
 # Redis Stream 7.2 공식 이미지 — Helm Chart 설치 가이드
 
-
 ## 0. 오프라인 설치 자산 준비 (인터넷 환경)
 
 폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 `charts/` 및 `images/` 디렉토리에 없는 경우, **인터넷이 연결된 외부 PC(리눅스)**에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.
@@ -12,13 +11,13 @@
 cd scripts/
 
 # 실행 권한 부여 및 다운로드 스크립트 실행
-chmod +x download_assets_offline.sh
-sudo ./download_assets_offline.sh
+chmod +x ./scripts/download_assets_offline.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
 스크립트 실행이 완료되면 `charts/` 디렉토리에 `.tgz` 차트 파일이, `images/` 디렉토리에 `.tar` 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
----
+
 
 ## 1. 사전 준비
 
@@ -204,4 +203,6 @@ PV는 `Retain` policy로 데이터가 보존됩니다.
 
 | 문서 | 내용 |
 | :--- | :--- |
-| [001-redis-stream-overview.md](./001-redis-stream-overview.md) | Kafka 전환 매핑, Spring Boot 구현 가이드, At-least-once 보장 전략 |
+| `DEVELOPER-GUIDE.md` (패키지 내 제공) | Spring Boot 연결 설정, Producer/Consumer 구현, at-least-once 보장, 폐쇄망 빌드 설정 |
+| `KAFKA-REPLACEMENT-GUIDE.md` (패키지 내 제공) | Kafka → Redis Stream 마이그레이션 가이드 |
+| `REPORT.md` (패키지 내 제공) | 검증 및 수정 이력 |

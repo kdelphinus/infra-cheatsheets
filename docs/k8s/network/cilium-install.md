@@ -2,6 +2,7 @@
 
 본 문서는 외부 인터넷 연결이 차단된 **폐쇄망(Air-Gapped) 쿠버네티스 환경**에서 Cilium 1.19.3을 성공적으로 설치하기 위한 상세 가이드를 제공합니다.
 
+---
 
 ## 0. 오프라인 설치 자산 준비 (인터넷 환경)
 
@@ -14,13 +15,13 @@
 cd scripts/
 
 # 실행 권한 부여 및 다운로드 스크립트 실행
-chmod +x download_assets_offline.sh
-sudo ./download_assets_offline.sh
+chmod +x ./scripts/download_assets_offline.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
 스크립트 실행이 완료되면 `charts/` 디렉토리에 `.tgz` 차트 파일이, `images/` 디렉토리에 `.tar` 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
----
+
 
 ## 📋 사전 준비 사항
 
@@ -64,9 +65,7 @@ sudo ./install.sh
 
 ---
 
-## ✅ 설치 검증
-
-설치가 완료되면 컴포넌트의 정상 동작 상태를 검증합니다. 자세한 장애 진단 및 트러블슈팅 정보는 [Cilium CNI 설치 트러블슈팅 가이드](../troubleshooting/cilium-troubleshooting.md)를 참조하십시오.
+## ✅ 설치 검증 및 트러블슈팅
 
 ### 1. 포드 상태 확인
 모든 Cilium 관련 포드가 `Running` 상태여야 합니다.
@@ -74,7 +73,27 @@ sudo ./install.sh
 kubectl get pods -n kube-system -l "app.kubernetes.io/part-of=cilium"
 ```
 
-### 2. Cilium 에이전트 상태 상세 확인
+### 2. 포트 충돌 이슈 (FailedScheduling)
+재설치 시 `0/1 nodes are available: 1 node(s) didn't have free ports...` 에러와 함께 포드가 `Pending` 상태로 머물 수 있습니다.
+- **원인**: 이전 Cilium 설치 시 생성된 바이너리 프로세스가 호스트 포트(9234, 9963 등)를 여전히 점유하고 있는 경우입니다.
+- **해결**: `install.sh`의 `2) 재설치` 또는 `3) 초기화` 옵션을 사용하면 자동으로 해당 프로세스를 찾아 종료합니다. 
+
+#### ⚠️ 주의: 포트를 변경한 경우
+만약 `values.yaml`에서 Cilium의 기본 포트를 변경하여 운영 중이라면, **스크립트의 자동 클린업이 작동하지 않습니다.** 이 경우 아래 명령어를 사용하여 직접 포트 점유 여부를 확인하고 종료해야 합니다.
+
+| 컴포넌트 | 기본 포트 | 용도 |
+| :--- | :--- | :--- |
+| Operator | 9234, 9963 | Health Check, Metrics |
+| Agent | 4240, 4244 | Health, Hubble Server |
+| Agent API | 9876, 9890 | Local API, Metrics |
+
+**수동 해결 명령어:**
+```bash
+# 특정 포트(예: 9234)를 사용하는 프로세스 강제 종료
+sudo fuser -k -9 9234/tcp
+```
+
+### 3. Cilium 에이전트 상태 상세 확인
 ```bash
 kubectl exec -it -n kube-system ds/cilium -- cilium status
 ```

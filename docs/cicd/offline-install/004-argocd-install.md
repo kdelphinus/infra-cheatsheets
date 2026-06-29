@@ -14,10 +14,10 @@
 cd argocd-3.4.3/scripts/
 
 # 실행 권한 부여
-chmod +x download_assets_offline.sh
+chmod +x ./scripts/download_assets_offline.sh
 
 # 자산 다운로드 스크립트 실행 (sudo 권한 필요)
-sudo ./download_assets_offline.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
 스크립트가 완료되면 `charts/` 디렉토리에 `.tgz` 차트 파일이, `images/` 디렉토리에 필수 컨테이너 이미지 6종의 `.tar` 파일이 생성됩니다. 이 전체 디렉토리를 압축하여 폐쇄망 내부로 반입하십시오.
@@ -63,7 +63,6 @@ sudo ./scripts/install.sh
 1. **기존 상태 감지**: 기존 헬름 릴리즈가 존재하거나 `install.conf`가 존재할 시, `Upgrade(업그레이드)`, `Reinstall(재설치)`, `Reset(초기화)` 분기 메뉴를 제공합니다.
 2. **설정값 수집 및 보존**: 사용자가 입력한 모든 정보는 `install.conf` 파일에 저장되어 멱등성을 보장합니다.
 3. **YAML 동기화**: 입력된 설정은 `--set` 인자를 사용하는 대신 `values-override.yaml`을 생성하여 base인 `values.yaml`과 병합 배포하므로 **Single Source of Truth**가 보장됩니다.
-4. **HostPath 노드 고정 (`TARGET_NODE`)**: HostPath 볼륨 사용 시 데이터 유실을 막기 위해 파드를 특정 노드에 명시적으로 고정하는 설정을 적용합니다.
 
 ---
 

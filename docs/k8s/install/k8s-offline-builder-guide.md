@@ -1,141 +1,149 @@
-# Kubernetes 오프라인 빌더 (k8s-offline-builder) 사용 가이드
+# Kubernetes Offline Builder 설치 및 사용 가이드
 
-이 문서는 Kubernetes 오프라인 설치 번들을 동적으로 생성하기 위한 빌더 도구의 사용 절차를 다룹니다.
-
----
+이 문서는 Kubernetes 오프라인 설치 번들을 생성하기 위한 빌더 사용 절차입니다.
 
 ## 1. 전제 조건
 
 - 온라인 Ubuntu 24.04 또는 Rocky Linux 9.6 호스트
-- `root` 또는 `sudo` 권한
-- 외부 인터넷 접근 가능
+- root 또는 sudo 권한
+- 인터넷 접근 가능
 - `curl`, `tar`, `bash`, `apt-get` 사용 가능
 
-> [!NOTE]
 > Rocky/RHEL 계열은 현재 `rocky9.6`을 1차 검증 대상으로 지원합니다.
 
----
+## 2. 설정 파일
 
-## 2. 설정 파일 구성
-
-빌더의 수집 및 릴리스 설정은 `install.conf` 파일에 저장하여 관리합니다.
+기본 설정은 `install.conf`에 저장합니다.
 
 ```bash
 cd k8s-offline-builder
 vi install.conf
 ```
 
-### 주요 설정 매개변수 정책
+주요 항목:
 
 | 항목 | 설명 |
 | --- | --- |
-| `K8S_VERSION` | 생성할 Kubernetes patch 버전 (예: `v1.33.11`) |
-| `TARGET_OS` | 대상 OS 식별자 (`ubuntu24.04` 또는 `rocky9.6` 등) |
-| `CONTAINER_RUNTIME` | 컨테이너 런타임 (현재 `containerd` 고정) |
-| `CONTAINERD_VERSION` | containerd 버전 정책. Ubuntu/Rocky는 `auto` 입력 시 `2.1.*` 라인으로 자동 정규화 |
-| `CNI_CHOICE` | 설치할 CNI 선택 (`calico` 또는 `cilium`) |
+| `K8S_VERSION` | 생성할 Kubernetes patch 버전 |
+| `TARGET_OS` | 대상 OS 식별자 |
+| `CONTAINER_RUNTIME` | 컨테이너 런타임 |
+| `CONTAINERD_VERSION` | containerd 버전 정책. Ubuntu는 `auto`, Rocky 9.6은 `auto` 입력 시 `2.1.*`로 정규화 |
+| `CNI_CHOICE` | CNI 선택값 |
 | `CALICO_VERSION` | Calico 버전 |
-| `CALICO_INSTALL_METHOD` | Calico 설치 방식 (`manifest` 또는 `operator`) |
+| `CALICO_INSTALL_METHOD` | `manifest` 또는 `operator` |
 | `CILIUM_VERSION` | Cilium 버전 |
 | `ENABLE_HUBBLE` | Cilium Hubble 활성화 여부 |
-| `MTU_VALUE` | CNI(Cilium 등) 설치 시 적용할 MTU 설정값 |
-| `BUNDLE_OUTPUT_DIR` | 생성된 아카이브 산출물이 저장될 루트 디렉터리 경로 |
+| `MTU_VALUE` | Cilium 설치 시 적용할 MTU |
+| `BUNDLE_OUTPUT_DIR` | 생성 산출물 루트 |
 
----
-
-## 3. 온라인 자산 수집 (Download Phase)
-
-외부망과 연동되는 호스트에서 아래 명령어를 실행하여 오프라인 설치에 필요한 모든 패키지 및 이미지를 수집합니다.
+## 3. 온라인 수집
 
 ```bash
-sudo ./scripts/download.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
-### 내부 수행 작업
-- Kubernetes minor 리포지토리 주소 자동 계산 및 등록
-- `kubeadm`, `kubelet`, `kubectl` 패키지와 종속성 패키지 수집
-- 컨테이너 런타임 패키지 수집 (Rocky 9.6의 경우, Kubernetes v1.33 호환성 기준인 `containerd.io-2.1.*` 라인 적용)
-- `kubeadm` 설정 기준 핵심 컨트롤 플레인 이미지 목록 생성 및 `.tar` 파일로 Export
-- 선택된 CNI 매니페스트, Helm chart, 이미지 수집
-- 번들 패키징을 위한 staging 디렉터리 구성
+이 단계는 다음 작업을 수행합니다.
 
-> [!IMPORTANT]
-> 이 단계는 외부 네트워크와의 통신 및 시스템 APT/DNF 리포지토리 등록 과정이 포함되므로 반드시 `sudo` 권한으로 실행해야 합니다.
+- Kubernetes minor repo 자동 계산
+- kubeadm/kubelet/kubectl 패키지와 의존성 수집
+- containerd 패키지 수집. Rocky 9.6은 Kubernetes 1.33 호환성 기준으로 `containerd.io-2.1.*` 라인을 사용합니다.
+- kubeadm 기준 core image 목록 생성 및 export
+- CNI 매니페스트, Helm chart, 이미지 수집
+- 번들 생성용 staging 디렉터리 구성
 
-### 설정값 및 호환성 검증
-`scripts/download.sh` 및 `scripts/build_bundle.sh` 실행 시, 공통 함수 모듈(`scripts/lib/common.sh`)을 통해 설정 파라미터 유효성 검사 및 버정 호환성 정책 검증을 우선 수행합니다.
+현재 구현은 Ubuntu 24.04와 Rocky Linux 9.6 기준으로 실제 수집을 수행합니다. 외부 네트워크와 APT/DNF repo 등록이 필요하므로 `sudo`로 실행합니다.
 
-- **설정값 유효성 검사**: `K8S_VERSION` 포맷 자동 교정(v 누락 시 자동 보정), `TARGET_OS`, `ARCH`, `CNI_CHOICE` 파라미터 적합 여부 확인.
-- **호환성 정책 검증 (`manifests/compatibility.yaml`)**: Kubernetes 공식 호환성 기준(Version Skew Policy) 및 각 컴포넌트(containerd, Calico, Cilium)의 OS별/K8s 버전별 공식 검증 매트릭스 정보를 기준으로 대조 작업을 선행합니다. 정의되지 않은 조합의 수집 요청은 실행 전 차단됩니다.
+### 설정값 검증
 
----
+`scripts/download_assets_offline.sh`와 `scripts/build_bundle.sh`는 공통 함수 파일 `scripts/lib/common.sh`를 통해 다음 항목을 먼저 검증합니다.
 
-## 4. 오프라인 설치 번들 빌드
+- `K8S_VERSION`: `v1.33.11` 형식. `1.33.11`처럼 `v`를 생략하면 자동으로 `v1.33.11`로 보정합니다.
+- `TARGET_OS`: 현재 `ubuntu24.04` 또는 `rocky9.6`을 허용합니다.
+- `ARCH`: 현재 `amd64`만 허용합니다.
+- `CONTAINER_RUNTIME`: 현재 `containerd`만 허용합니다.
+- `CNI_CHOICE`: `calico` 또는 `cilium`
+- `CALICO_INSTALL_METHOD`: `manifest` 또는 `operator`
 
-자산 수집이 완료되면 에어갭(폐쇄망) 환경에서 사용 가능한 단일 압축 번들을 생성합니다.
+### 호환성 정책 검증
+
+컴포넌트 간 버전 호환성은 `manifests/compatibility.yaml`에 기록합니다. 이 파일은 자동 생성 결과가 아니라, 공식 문서와 실제 검증 결과를 반영하는 내부 정책 파일입니다.
+
+체크 기준:
+
+- Kubernetes 핵심 컴포넌트: Kubernetes Version Skew Policy 기준
+- containerd: Kubernetes CRI 요구사항과 containerd 릴리스 지원 범위 기준
+- Calico: Tigera/Calico의 Kubernetes 지원 범위 기준
+- Cilium: Cilium의 Kubernetes compatibility matrix 기준
+
+`download_assets_offline.sh`와 `build_bundle.sh`는 실제 수집/생성 전에 다음 값을 정책 파일과 대조합니다.
+
+- Kubernetes minor 버전
+- 대상 OS와 아키텍처
+- container runtime과 containerd 버전 정책
+- CNI 종류, CNI 버전, 설치 방식
+- `policy.validatedTuples`에 명시된 전체 조합
+
+정책에 없는 조합은 네트워크 수집을 시작하기 전에 오류로 중단됩니다.
+
+## 4. 번들 생성
 
 ```bash
 ./scripts/build_bundle.sh
 ```
 
-### 실행 옵션 및 산출물
-*   **Dry-run 모드 (경로 및 빌드 정보 확인)**:
-    ```bash
-    ./scripts/build_bundle.sh --dry-run
-    ```
-*   **빌드 수행 (Staging 디렉터리 구성 및 tar.gz 아카이브 생성)**:
-    ```bash
-    ./scripts/build_bundle.sh
-    ```
+예상 산출물:
 
-### 예상 산출물 구조
 ```text
-bundles/
-├── k8s-v1.33.11-ubuntu24.04/         # 폐쇄망 노드 배포용 staging 폴더
-├── k8s-v1.33.11-ubuntu24.04.tar.gz   # 폐쇄망 노드로 전송할 압축 번들 파일
-├── k8s-v1.33.11-rocky9.6/
-└── k8s-v1.33.11-rocky9.6.tar.gz
+bundles/k8s-v1.33.11-ubuntu24.04/
+bundles/k8s-v1.33.11-ubuntu24.04.tar.gz
+bundles/k8s-v1.33.11-rocky9.6/
+bundles/k8s-v1.33.11-rocky9.6.tar.gz
 ```
 
----
-
-## 5. 폐쇄망 설치 진행
-
-빌드된 `tar.gz` 파일을 폐쇄망 환경의 대상 노드로 전송하고 압축을 해제한 뒤, 내부의 설치 진입 스크립트를 사용하여 설치를 진행합니다.
+`build_bundle.sh`는 staging 디렉터리를 만들고, 수집된 자산, 번들 내부용 스크립트와 `install.conf`를 배치한 뒤 tar.gz 아카이브를 생성합니다.
 
 ```bash
-# 압축 해제 후 번들 내부로 진입
-tar -zxvf k8s-v1.33.11-ubuntu24.04.tar.gz
-cd k8s-v1.33.11-ubuntu24.04
-
-# 설치 스크립트 가동 (Master-1 기준)
-sudo ./scripts/install.sh
+./scripts/build_bundle.sh --dry-run  # 경로만 확인
+./scripts/build_bundle.sh            # staging 생성 + tar.gz 생성
 ```
 
-### 번들 내부 설치 스크립트 주요 처리 범위
-- OS 환경 확인 (WSL2 여부 및 가상머신 감지)
-- 오프라인 DEB/RPM 패키지 설치 및 Kernel 모듈/sysctl 최적화
-- 파일 디스크립터(FD) 및 systemd limits override 설정 적용
-- containerd 컨테이너 런타임 오프라인 설정 및 활성화
-- 수집된 핵심 컨테이너 이미지 사전 로드 (`ctr` 이미지 임포트)
-- `kubeadm init` 및 `kubeadm join` 자동화 제어
-- CNI 설치 (`Calico manifest`, `Calico Tigera operator`, `Cilium Helm` 중 설정된 방식 적용)
-- WSL2 환경 대상 systemd 활성화 및 iptables-legacy 사전 설정 보조
+## 5. 폐쇄망 설치
 
-> [!WARNING]
-> 빌더 패키지 루트 디렉터리에 존재하는 `scripts/install.sh`는 오프라인 설치 작업을 수행하지 않으며, 혼선을 막기 위한 안내문 진입점 역할만 수행합니다. 실제 에어갭 설치는 반드시 빌드된 **`bundles/` 하위 번들 폴더 내부의 `scripts/install.sh`**를 통해 가동해야 합니다.
+생성된 번들 내부의 `scripts/install.sh`가 실제 폐쇄망 노드에서 실행될 설치 스크립트입니다.
+실제 클러스터 설치 전에는 생성된 버전 고정 번들의 `install-guide.md`에 있는 설치 전 체크리스트를 먼저 확인합니다.
 
----
+빌더 루트의 `scripts/install.sh`는 실수로 빌더 자체를 설치 대상으로 사용하는 것을 막기 위한 안내용 진입점입니다.
 
-## 6. 수동 점검 및 유지보수
+현재 번들 설치 지원 범위:
 
-빌더 자체는 설치 도구 패키징 역할을 하므로, `helm`이나 `kubectl` 서비스 형태로 클러스터에 배포되지 않습니다. 빌더 도구의 문법 및 수동 점검 사항은 아래 명령으로 검증합니다.
+- Ubuntu 24.04
+- Rocky Linux 9.6
+- containerd
+- kubeadm 기반 control-plane init
+- worker/control-plane join
+- Calico manifest 설치
+- Calico Tigera operator 설치
+- Cilium Helm chart 설치
+- WSL2 사전 설정 보조 스크립트
+
+Cilium 선택 시 kube-proxy phase를 건너뛰고 Cilium의 `kubeProxyReplacement=true` 설정으로 설치합니다.
+
+## 6. Manual Installation & Upgrade
+
+이 빌더는 Kubernetes 번들을 생성하는 도구이므로 직접 `helm upgrade --install`이나 `kubectl apply`로 배포되는 서비스가 아닙니다.
+
+수동 절차는 생성된 버전 고정 번들의 `install-guide.md`를 따릅니다. 빌더 자체에서 수동으로 확인할 항목은 다음과 같습니다.
 
 ```bash
-# 쉘 스크립트 정적 구문 분석 검증
-bash -n scripts/download.sh
+# 설정 로드 가능 여부 확인
+bash -n scripts/download_assets_offline.sh
 bash -n scripts/build_bundle.sh
 
-# 생성될 빌드 정보 및 타겟 경로 정합성 검증
+# 생성 대상 이름 확인
 ./scripts/build_bundle.sh --dry-run
 ```
+
+## 7. 다음 구현 단계
+
+1. Rocky 9.6 실환경 RPM 수집/설치 스모크 테스트
+2. 기존 `k8s-1.33.11-ubuntu24.04` 산출물 재현 검증

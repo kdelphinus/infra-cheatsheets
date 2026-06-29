@@ -2,7 +2,6 @@
 
 폐쇄망 환경에서 Envoy Gateway를 Kubernetes 위에 설치하는 절차를 안내합니다.
 
-
 ## 0. 오프라인 설치 자산 준비 (인터넷 환경)
 
 폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 `charts/` 및 `images/` 디렉토리에 없는 경우, **인터넷이 연결된 외부 PC(리눅스)**에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.
@@ -14,13 +13,13 @@
 cd scripts/
 
 # 실행 권한 부여 및 다운로드 스크립트 실행
-chmod +x download_assets_offline.sh
-sudo ./download_assets_offline.sh
+chmod +x ./scripts/download_assets_offline.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
 스크립트 실행이 완료되면 `charts/` 디렉토리에 `.tgz` 차트 파일이, `images/` 디렉토리에 `.tar` 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
----
+
 
 ## 전제 조건
 
@@ -129,7 +128,7 @@ kubectl get svc -n envoy-gateway-system
 온프레미스(Bare-metal) 환경에서는 외부 트래픽을 수신하고 장애 전환(ARP Failover) 및 실 IP 보존을 보장하기 위해 **MetalLB(L2 모드)**를 구축하여 로드밸런서 IP를 광고하는 것을 강력히 권장합니다.
 
 **1) MetalLB 설치 및 IP 풀 설정:**
-- 본 레포의 [MetalLB 설치](../install/metallb-install.md) 가이드를 참고하여 설치하고, 노드 대역의 유휴 IP(예: `10.10.10.81-10.10.10.81`)를 `IPAddressPool`로 등록합니다.
+- 본 레포의 [metallb-0.16.1](../install/metallb-install.md) 컴포넌트를 참고하여 설치하고, 노드 대역의 유휴 IP(예: `10.10.10.81-10.10.10.81`)를 `IPAddressPool`로 등록합니다.
 - 서비스 타입이 `LoadBalancer` 상태로 배포되면, MetalLB가 생성된 Envoy Proxy 서비스에 IP풀의 VIP(`10.10.10.81`)를 `EXTERNAL-IP`로 자동 할당하게 됩니다.
 
 **2) 게이트웨이(Gateway) 리소스 주소 바인딩:**
@@ -163,7 +162,6 @@ kubectl patch gateway cluster-gateway -n envoy-gateway-system --type='merge' \
     {"type":"IPAddress","value":"{WORKER2_IP}"}
   ]}}'
 ```
-
 
 ### Case C: NodePort — VIP(HAProxy) 연동
 

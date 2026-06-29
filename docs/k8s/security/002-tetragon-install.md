@@ -2,7 +2,6 @@
 
 폐쇄망 환경에서 Tetragon을 Kubernetes 위에 설치하고 런타임 차단 정책을 적용하는 절차를 안내합니다.
 
-
 ## 0. 오프라인 설치 자산 준비 (인터넷 환경)
 
 폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 `charts/` 및 `images/` 디렉토리에 없는 경우, **인터넷이 연결된 외부 PC(리눅스)**에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.
@@ -14,13 +13,13 @@
 cd scripts/
 
 # 실행 권한 부여 및 다운로드 스크립트 실행
-chmod +x download_assets_offline.sh
-sudo ./download_assets_offline.sh
+chmod +x ./scripts/download_assets_offline.sh
+sudo ./scripts/download_assets_offline.sh
 ```
 
 스크립트 실행이 완료되면 `charts/` 디렉토리에 `.tgz` 차트 파일이, `images/` 디렉토리에 `.tar` 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.
 
----
+
 
 ## 사전 요건
 
@@ -217,7 +216,34 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -f
 
 ## 트러블슈팅
 
-상세한 장애 진단 및 해결 방법은 [Tetragon 런타임 차단 트러블슈팅 가이드](../troubleshooting/tetragon-troubleshooting.md)를 참조하십시오.
+### 차단이 동작하지 않는 경우
+
+1. 커널 함수 심볼 확인
+
+   ```bash
+   grep -w fd_install /proc/kallsyms | head -3
+   grep -w security_file_open /proc/kallsyms | head -3
+   ```
+
+   `fd_install` 심볼이 없으면 `manifests/block-sensitive-read.yaml`의
+   `call` 값을 `security_file_open`으로 변경 후 재적용합니다.
+
+2. `CONFIG_BPF_KPROBE_OVERRIDE` 확인
+
+   ```bash
+   grep CONFIG_BPF_KPROBE_OVERRIDE /boot/config-$(uname -r) 2>/dev/null \
+     || zcat /proc/config.gz 2>/dev/null | grep CONFIG_BPF_KPROBE_OVERRIDE
+   ```
+
+   `=y`가 아니면 Sigkill 차단이 불가합니다. WSL2의 경우 `wsl --update` 후 재시작하면 해결되는 경우가 있습니다.
+
+### Tetragon 파드가 Pending인 경우
+
+```bash
+kubectl describe pod -n kube-system -l app.kubernetes.io/name=tetragon
+```
+
+이미지 pull 실패라면 Harbor 업로드 및 `values.yaml` 이미지 경로를 재확인합니다.
 
 ## 삭제
 
