@@ -10,7 +10,7 @@
 
 ### 0.1. 기본 이미지 및 Helm 차트 다운로드
 ```bash
-cd jenkins-2.555.3/scripts/
+# 컴포넌트 루트 디렉토리에서 실행 권한 부여 및 다운로드 스크립트 실행
 chmod +x ./scripts/download_assets_offline.sh
 sudo ./scripts/download_assets_offline.sh
 ```
@@ -20,7 +20,7 @@ sudo ./scripts/download_assets_offline.sh
 사용자의 인프라 사양(대상 CSP, Tofu 버전 등)에 맞추어 **가변형 이미지 빌드 툴체인**을 실행합니다.
 
 ```bash
-cd ../jenkins-build/
+cd ./jenkins-build/
 chmod +x *.sh
 sudo ./build-tofu-jenkins.sh
 ```
@@ -41,7 +41,8 @@ sudo ./build-tofu-jenkins.sh
 - Helm v3.14.0 이상 설치 완료
 - `kubectl` CLI 사용 및 적절한 네임스페이스 권한 소유
 - Harbor 사설 레지스트리 작동 상태 확인 (`<NODE_IP>:30002`)
-- (HostPath PV 사용 시) `/data/jenkins` 디렉토리 사전 생성 권장
+- (HostPath 사용 시) Jenkins를 고정 배치할 노드에 `/data/jenkins` 디렉토리 준비 권장
+- (NAS 정적 할당 사용 시) NFS 서버와 export 경로 준비
 
 ---
 
@@ -70,12 +71,21 @@ sudo ./scripts/install.sh
 ```
 
 ### 주요 입력 정보 및 처리 방식
+* **이미지 소스**:
+  * Harbor 방식은 `<HARBOR_REGISTRY>/<HARBOR_PROJECT>/...` 이미지를 사용합니다.
+  * 로컬 방식은 `./images/*.tar*`를 클러스터 런타임에 먼저 로드합니다.
+  * 온라인 방식은 공개 레지스트리(`docker.io`)에서 Jenkins 기본 이미지를 pull합니다.
+  * kind context에서는 `kind load image-archive --name <cluster>`를 자동 사용합니다.
+  * 일반 멀티노드 클러스터에서는 모든 스케줄 가능 노드에 이미지를 로드해야 합니다.
+  * `cmp-jenkins-full` 커스텀 이미지는 Harbor 또는 로컬 방식에서 사용합니다.
 * **OpenTofu 커스텀 이미지 활성화 여부**: "y"를 선택하면, 빌드하여 업로드해 둔 `cmp-jenkins-full:2.555.3` 이미지를 `controller.image`로 오버라이드하여 배포합니다.
-* **스토리지 유형**: 
-  * `hostpath` 선택 시 워커 노드의 특정 로컬 디바이스 경로(기본 `/data/jenkins`)를 영구 마운트하며, `manifests/pv-volume.yaml` 리소스를 먼저 생성해줍니다.
+* **스토리지 유형**:
+  * `hostpath` 선택 시 특정 노드의 로컬 경로(기본 `/data/jenkins`)를 사용하는 HostPath PV(`manifests/pv-volume.yaml`)를 생성하고 Jenkins PVC를 `manual` StorageClass로 바인딩합니다.
+  * `nas` 선택 시 NFS 서버와 export 경로를 입력받아 NAS 정적 PV(`manifests/nas-pv.yaml`)를 생성하고 Jenkins PVC를 `manual` StorageClass로 바인딩합니다.
   * `dynamic` 선택 시 사전에 준비된 `StorageClass`(예: NFS dynamic provisioner) 이름을 입력받아 동적으로 PVC를 구성합니다.
+  * 기존 `install.conf`에 남아 있는 `static` 값은 호환성을 위해 `hostpath`와 동일하게 처리합니다.
 * **YAML 동기화**:
-  * 입력된 설정은 `--set` 인자를 사용하는 대신 `values-override.yaml`을 생성하여 base인 `values.yaml`과 병합 배포하므로 **Single Source of Truth**가 보장됩니다.
+  * 입력된 설정은 `--set` 인자를 사용하는 대신 `values-infra.yaml`을 생성하여 base인 `values.yaml`과 병합 배포하므로 **Single Source of Truth**가 보장됩니다.
 
 ---
 
@@ -104,29 +114,35 @@ kubectl get secret jenkins -n jenkins -o jsonpath="{.data.jenkins-admin-password
 ### 5.1. 수동 설치 진행
 1. `values.yaml` 내의 이미지 레지스트리 주소(예: `jenkins/jenkins` 등)를 사내 사설 Harbor 도메인 주소로 교체합니다.
    * OpenTofu 커스텀 이미지를 쓸 경우 `cmp-jenkins-full`로 변경합니다.
-2. `values-override.yaml` 파일을 작성하여 로컬 사양(스토리지, NodePort 노출 사양)을 지정합니다.
+2. `values-infra.yaml` 파일을 작성하여 로컬 사양(스토리지, NodePort 노출 사양)을 지정합니다.
    ```yaml
    controller:
      serviceType: "NodePort"
      nodePort: 30000
-     persistence:
-       enabled: true
-       storageClass: "manual"
-       size: "20Gi"
+   persistence:
+     enabled: true
+     storageClass: "manual"
+     size: "20Gi"
    ```
 3. Kubernetes 볼륨 매니페스트 및 Helm 배포를 직접 적용합니다.
    ```bash
-   # HostPath PV 적용 (HostPath 사용 시)
+   # 1. 네임스페이스 생성
+   kubectl create namespace jenkins --dry-run=client -o yaml | kubectl apply -f -
+
+   # 2. HostPath PV 적용 (HostPath 선택 시)
    kubectl apply -f ./manifests/pv-volume.yaml
+
+   # 3. NAS 정적 PV 적용 (NAS 정적 할당 선택 시)
+   kubectl apply -f ./manifests/nas-pv.yaml
    
-   # Gradle 캐시 공유 PV/PVC 적용
+   # 4. Gradle 캐시 공유 PV/PVC 적용
    kubectl apply -f ./manifests/gradle-cache-pv-pvc.yaml -n jenkins
    
-   # Helm 배포
+   # 5. Helm 배포
    helm upgrade --install jenkins ./charts/jenkins \
-     -n jenkins --create-namespace \
+     -n jenkins \
      -f ./values.yaml \
-     -f ./values-override.yaml
+     -f ./values-infra.yaml
    ```
 
 ---
@@ -142,3 +158,39 @@ sudo ./scripts/uninstall.sh
 # 완전 초기화 (설정 파일 및 로컬 백업 복원 등 완전 제거)
 sudo ./scripts/uninstall.sh --reset
 ```
+
+---
+
+## 7. CI/CD Buildah agent 구성
+
+Jenkins에서 애플리케이션 컨테이너 이미지를 빌드하려면 기본 설치 이후
+`cicd-buildah-guide.md` 절차를 적용합니다.
+
+기본 구성은 Kubernetes agent Pod에서 Buildah rootless 런타임을 사용합니다.
+Kaniko와 Docker-in-Docker는 기본 경로에서 제외합니다.
+
+```bash
+# 온라인 준비 환경에서 Buildah agent 이미지 생성
+cd jenkins-2.555.3/jenkins-build/buildah-agent
+chmod +x build-buildah-agent.sh
+./build-buildah-agent.sh
+
+# 폐쇄망에서 Harbor 업로드
+cd ../../
+sudo ./scripts/upload_images_to_harbor_v3-lite.sh
+
+# Jenkins에 Buildah agent podTemplate 적용
+# (자동화 install.sh를 사용하지 않는 경우, 아래 예시처럼 values-infra.yaml에 해당 설정을 수동 병합해 설치합니다)
+helm upgrade --install jenkins ./charts/jenkins \
+  -n jenkins \
+  -f values.yaml \
+  -f values-infra.yaml
+```
+
+표준 Jenkinsfile 예시는 `examples/Jenkinsfile.buildah`를 사용합니다.
+Argo CD Application 예시는 `examples/argocd-application-sample.yaml`을 사용합니다.
+
+Harbor 도메인은 Jenkins buildah agent Pod와 Kubernetes worker node가 모두
+해석할 수 있는 동일한 주소로 지정합니다. DNS에 등록되어 있지 않은 테스트
+환경에서는 `cicd-buildah-guide.md`의 Harbor 주소 및 DNS 기준 절차에 따라
+agent Pod `hostAliases`와 노드의 registry 접근 설정을 함께 검토합니다.

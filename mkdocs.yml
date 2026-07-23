@@ -101,6 +101,7 @@ nav:
       - 'Tetragon 런타임 차단': k8s/security/002-tetragon-install.md
       - 'Tetragon 보안 정책 전략': k8s/security/003-tetragon-security-policy.md
       - 'Gatekeeper 정책 통제': k8s/security/004-gatekeeper-install.md
+      - 'K8s 취약점 점검 및 조치 가이드': k8s/security/005-vulnerability-check-remediation.md
     - 'Backup & Restore':
       - 'Velero 설치 및 백업 구성': k8s/backup-restore/001-velero-install.md
     - 'Operations':
@@ -140,7 +141,12 @@ nav:
       - 'Nexus Repository 설치': cicd/offline-install/006-nexus-install.md
       - 'Gitea 설치': cicd/offline-install/007-gitea-install.md
       - 'Tekton Pipelines 설치': cicd/offline-install/008-tekton-install.md
+      - 'Keycloak 설치': cicd/offline-install/009-keycloak-install.md
+    - 'SSO 통합 인증':
+      - 'Keycloak SSO 통합 연동 표준': cicd/sso-integration-guide.md
+      - 'Keycloak SSO 로컬 실습 예시': cicd/sso-integration-local-example.md
     - 운영:
+      - 'Jenkins Buildah 파이프라인 구성': cicd/jenkins-buildah-guide.md
       - 'Harbor 기반 이미지 업데이트 및 재배포': cicd/operation/redeploy-with-new-image.md
       - 'GitLab Omnibus 16.11.2 백업 및 복원': cicd/operation/gitlab-restore-guide-16.11.2.md
       - 'GitLab Omnibus 업그레이드 (v16.11.2 → v18.11.4)': cicd/operation/gitlab-upgrade-guide-18.11.4.md

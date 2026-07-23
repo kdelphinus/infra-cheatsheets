@@ -23,8 +23,9 @@ sudo ./scripts/download_assets_offline.sh
 
 ## 설치 전 필수 확인 사항
 
-- **TLS 없이 IP로만 접속 시**: `EXTERNAL_HOSTNAME` 을 Harbor NodePort IP와 동일하게 설정
-- **TLS 도메인 접속 시**: 사전에 인증서로 Kubernetes Secret 생성 필요, `EXTERNAL_HOSTNAME` 을 도메인명으로 설정
+- **NodePort로 직접 접속 시**: Harbor 접속 URL에 NodePort를 포함합니다. 예: `http://<NODE_IP>:30002`
+- **Envoy 또는 Ingress로 접속 시**: Harbor 접속 URL에 실제 외부 도메인 또는 VIP를 입력합니다.
+- **TLS 도메인 접속 시**: 사전에 인증서로 Kubernetes Secret 생성 필요, 접속 URL의 호스트명과 인증서 도메인이 일치해야 합니다.
 - **저장 경로**: `SAVE_PATH` (데이터 저장 경로)는 `NODE_NAME` 노드에서 디렉토리가 생성되어 있어야 함 (권한: `chmod 777`)
 
 ## 1단계: 구성 이미지 로드 (ctr import)
@@ -44,40 +45,47 @@ sudo ./scripts/load_images.sh
 sudo ctr -n k8s.io images list | grep harbor
 ```
 
-## 2단계: 설치 스크립트 설정
+## 2단계: 설치 및 환경 정보 입력
 
-`scripts/install.sh` 상단 Config 블록을 환경에 맞게 수정합니다.
+`install.sh`를 구동하면, 환경 정보가 대화식 인터프리터 프롬프트(CLI)로 안전하게 수집됩니다. 스크립트 파일을 직접 수정할 필요 없이, 입력된 변수 값은 컴포넌트 루트의 `install.conf` 및 `values-infra.yaml`에 보존되어 멱등성 있는 생명주기 제어가 가능하게 관리됩니다.
 
-| 변수 | 설명 | 예시 |
+| 인프라 환경 변수 | 설명 | 예시 |
 | :--- | :--- | :--- |
-| `HARBOR_NAMESPACE` | Harbor 설치 네임스페이스 | `harbor` |
-| `HARBOR_RELEASE_NAME` | Helm release 이름 | `harbor` |
-| `HELM_CHART_PATH` | Helm 차트 경로 | `./charts/harbor` |
-| `EXTERNAL_HOSTNAME` | Harbor 접근 호스트명 또는 IP | `<NODE_IP>` 또는 도메인 |
-| `SAVE_PATH` | PV 데이터 저장 경로 (호스트) | `/harbor/data` |
-| `NODE_NAME` | PV가 위치할 노드 이름 | `worker-node-01` |
-| `STORAGE_SIZE` | PVC 요청 크기 | `40Gi` |
+| `EXTERNAL_HOSTNAME` | Harbor 외부 접속 도메인명 또는 IP 주소 | `harbor.devops.internal` 또는 `<NODE_IP>` |
+| `TLS_ENABLED` / `TLS_SECRET_NAME` | 외부 HTTPS TLS 적용 여부 및 인증서 Secret 명 | `true` / `harbor-tls-secret` |
+| `STORAGE_MODE` | 볼륨 백엔드 모드 (HostPath 정적 / NFS 정적 / NFS SC 동적) | `hostpath`, `nfs`, `nfs-dynamic` |
+| `SAVE_PATH` / `NODE_NAME` | HostPath 볼륨 사용 시 디렉토리 경로 및 매핑 노드명 | `/data/harbor` / `worker-01` |
+| `NFS_SERVER` / `NFS_PATH` | NFS 정적 PV 매핑 서버 IP 및 내보내기 디렉토리 경로 | `192.168.1.100` / `/nfs/harbor` |
+| `STORAGE_CLASS` | NFS 동적 프로비저닝을 위한 K8s StorageClass 명칭 | `nfs-client` |
+| `MINIMIZE_RESOURCES` | 개발/검증 목적의 리소스(Limits/Requests) 제한 최소화 여부 | `true` (기본값 `false`) |
 
-## 3단계: 설치 실행
+## 3단계: 설치 실행 및 대화형 설정
 
 ```bash
-chmod +x scripts/install.sh
+chmod +x scripts/install.sh scripts/uninstall.sh
 ./scripts/install.sh
 ```
 
 스크립트 실행 중 아래 항목을 인터랙티브하게 선택/입력합니다.
 
 1. **이미지 로드 방식 선택**:
-   - **`1` 로컬 tar 직접 import (권장)**: 하버가 아직 설치되지 않은 경우 선택합니다. (1단계에서 `load_images.sh`를 이미 실행했다면 이미 로드되어 있으므로 금방 넘어갑니다.)
-   - **`2` Harbor 레지스트리 사용**: 하버가 이미 설치되어 있고 재설치하거나 이미지가 이미 로드된 경우 선택합니다.
-2. **노출 방식 선택**: `1` NodePort + Envoy Gateway (기본) / `2` nginx Ingress
-3. **스토리지 타입 선택**:
-   - **`1` HostPath**: 단일 노드 테스트 환경용. 특정 노드 경로에 데이터를 저장합니다.
-   - **`2` NFS (정적 할당)**: 미리 생성된 NFS 서버/경로 정보를 입력하여 정적 PV/PVC를 생성합니다.
-   - **`3` NFS (동적 할당)**: `nfs-client` 등 클러스터에 설치된 StorageClass를 통해 볼륨을 자동 할당받습니다.
-4. **Harbor 관리자(`admin`) 비밀번호**: 최소 8자 이상의 비밀번호를 입력합니다.
+   - **`1` 로컬 tar 직접 import (권장)**: 하버가 아직 설치되지 않은 최초 기동 단계에 선택하며 `images/*.tar`를 자동으로 임포트합니다.
+   - **`2` 로컬 이미지 수동 로드 완료**: 이미 각 노드에 컨테이너 이미지 캐싱이 완료된 경우 스킵할 때 사용합니다.
+2. **노출 방식 선택**:
+   - **`1` Envoy Gateway (기본)**: `http://harbor.devops.internal` 등 Envoy HTTPRoute를 통해 외부 주소 해석을 매핑할 도메인을 수집합니다.
+   - **`2` NodePort 직접 접속**: 포트 포워딩 또는 로컬 노드 포트로 직접 타겟팅해 기동합니다. (기본 HTTP 30002, HTTPS 30003 포트 오버라이드 가능)
+   - **`3` nginx Ingress**: 인그레스 제어기를 활용해 도메인 접근을 처리합니다.
+3. **리소스 사양 설정**:
+   - **개발 환경 리소스 최소화 (y/N)**: 가상머신 등 리소스가 한정된 로컬 개발 장비에서 테스트할 경우, nginx/core/database 등 주요 파드의 Requests/Limits 제한을 최하위 사양(64Mi/128Mi 단위)으로 축소 오버라이드하여 가동 안정성을 확보합니다.
+4. **스토리지 타입 선택**:
+   - **`1` HostPath**: 특정 단일 노드의 로컬 디렉토리를 정적 PV로 사용합니다. 고정 타겟 노드 이름과 로컬 호스트 절대 경로를 지정합니다.
+   - **`2` NFS 정적 할당**: NFS 서버 및 익스포트 디렉토리를 입력받아 정적 PV/PVC를 생성합니다.
+   - **`3` NFS SC 동적 할당**: 클러스터의 StorageClass와 컴포넌트별 개별 DB/Redis 용량을 조절해 자동 스토리지 프로비저닝을 위임합니다.
+5. **Harbor 관리자(`admin`) 비밀번호**: 최초/재설치 시에만 대화식으로 패스워드 입력을 요구하며, 평문으로 설정파일에 저장되지 않고 보안을 보존합니다. (Upgrade 시에는 기존 K8s Secret에서 자동 추출 및 상속 기동)
 
-## 4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)
+> **주의**: 기존 `install.conf`가 있는 상태에서 `업그레이드`를 선택하면 저장된 `STORAGE_MODE`를 그대로 사용합니다. HostPath에서 NFS 정적 또는 Dynamic으로 바꾸려면 `재설치` 또는 `초기화`를 선택해 스토리지 설정을 다시 입력하세요.
+
+## 4단계: Envoy HTTPRoute 적용 (Envoy Gateway 선택 시)
 
 `manifests/route-harbor.yaml`의 `hostnames`와 `parentRefs.name`을
 실제 환경에 맞게 수정 후 적용합니다.
@@ -245,10 +253,14 @@ sudo ctr -n k8s.io images push \
   <NODE_IP>:30002/library/my-image:v1
 ```
 
-## 삭제
+## 삭제 및 리셋
 
 ```bash
+# 기본 삭제 (설정 및 생성된 인프라 values 파일 유지)
 ./scripts/uninstall.sh
+
+# 완전 리셋 (저장된 설정 및 인프라 values 파일도 모두 삭제)
+./scripts/uninstall.sh --reset
 ```
 
 ## 보안 고려사항
@@ -270,3 +282,137 @@ sudo ctr -n k8s.io images push \
 - **이미지 Push 실패**: 모든 노드에서 insecure registry 등록 여부 확인 (`scripts/insecurity_registry_add.sh`)
 - **TLS 인증서 오류**: Secret 이름과 `EXTERNAL_HOSTNAME` 도메인 일치 여부, 인증서 만료일 확인
 - **PVC Pending**: `NODE_NAME`이 실제 노드 이름과 일치하는지, nodeAffinity 설정 확인
+
+## 부록: HTTP Harbor 로그인 및 Pull 확인
+
+HTTP Harbor를 사용할 때 이미지 주소에는 `http://` 또는 `https://` 프로토콜을 포함하지 않습니다. 프로토콜은 클라이언트 옵션과 containerd registry 설정으로 처리합니다.
+
+```text
+좋은 예: harbor.example.local:30002/library/my-image:v1
+나쁜 예: http://harbor.example.local:30002/library/my-image:v1
+```
+
+Harbor project가 public이면 Kubernetes에서 `imagePullSecrets` 없이 이미지를 pull할 수 있습니다. private project인 경우에는 애플리케이션 namespace에 `docker-registry` Secret을 생성하고 Pod 또는 ServiceAccount에 연결합니다.
+
+```bash
+kubectl create secret docker-registry harbor-regcred \
+  --docker-server=<HARBOR_REGISTRY> \
+  --docker-username=admin \
+  --docker-password='<PASSWORD>' \
+  -n <APP_NAMESPACE>
+```
+
+Docker 또는 Buildah로 HTTP Harbor에 로그인할 때는 HTTPS를 강제하지 않도록 옵션을 명시합니다.
+
+```bash
+printf '%s' '<PASSWORD>' | docker login <HARBOR_REGISTRY> \
+  -u admin --password-stdin
+
+buildah login --tls-verify=false \
+  --username admin \
+  --password '<PASSWORD>' \
+  <HARBOR_REGISTRY>
+
+buildah push --tls-verify=false <HARBOR_REGISTRY>/library/my-image:v1
+```
+
+containerd에서 직접 push할 때는 `--plain-http`를 사용합니다.
+
+```bash
+sudo ctr -n k8s.io images push \
+  --plain-http \
+  --user admin:<PASSWORD> \
+  <HARBOR_REGISTRY>/library/my-image:v1
+```
+
+kind 클러스터처럼 Kubernetes 노드가 Docker 컨테이너로 실행되는 환경에서는 호스트가 아니라 kind 노드 컨테이너 안에서 insecure registry를 설정해야 합니다. 즉 `systemctl restart containerd`도 kind 노드 컨테이너 안에서 실행되어야 합니다.
+
+```bash
+KIND_NODE_NAME="test-cluster-worker"
+HARBOR_REGISTRY="harbor.example.local:30002"
+
+# hosts.toml 파일은 kind 노드 컨테이너 내부에 생성합니다.
+docker exec "${KIND_NODE_NAME}" mkdir -p "/etc/containerd/certs.d/${HARBOR_REGISTRY}"
+
+docker exec "${KIND_NODE_NAME}" sh -c "cat > '/etc/containerd/certs.d/${HARBOR_REGISTRY}/hosts.toml'" <<EOF
+server = "http://${HARBOR_REGISTRY}"
+
+[host."http://${HARBOR_REGISTRY}"]
+  capabilities = ["pull", "resolve", "push"]
+  skip_verify = true
+EOF
+
+docker exec "${KIND_NODE_NAME}" systemctl restart containerd
+```
+
+실제 운영 환경에서는 위 예시의 `harbor.example.local:30002` 대신 DNS에 등록된 Harbor 도메인 또는 로드밸런서 주소를 사용합니다. DNS 서버에 등록하지 않았다면 Jenkins agent Pod의 `hostAliases`, Kubernetes worker 노드의 `/etc/hosts`, 또는 사내 DNS 중 하나로 동일한 이름이 해석되도록 맞춰야 합니다.
+
+## Manual Installation & Upgrade
+
+자동화 설치 스크립트(`install.sh`)를 사용하지 않고, 수동으로 Harbor 리소스 및 Helm 릴리스를 배포하고자 할 때 아래 절차를 수행합니다.
+
+### 1. K8s 영구 스토리지(PV/PVC) 수동 생성
+
+볼륨 구성을 위해 `manifests/harbor-persistence-infra.yaml` 파일을 수동으로 편집하여 작성한 뒤 적용합니다 (StorageClass를 사용할 경우 이 단계는 생략 가능).
+
+```bash
+# PV 및 PVC 리소스 배포
+kubectl apply -f manifests/harbor-persistence-infra.yaml
+```
+
+### 2. Helm 오버라이드 설정 파일 생성 (`values-infra.yaml`)
+
+패스워드 정보를 제외한 인프라 사양을 `values-infra.yaml`에 작성합니다.
+
+```yaml
+# values-infra.yaml 수동 예시
+externalURL: http://harbor.devops.internal:30002
+
+expose:
+  type: nodePort
+  nodePort:
+    name: harbor
+    ports:
+      http:
+        port: 80
+        nodePort: 30002
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      existingClaim: "harbor-pvc"
+      subPath: registry
+    database:
+      existingClaim: "harbor-pvc"
+      subPath: database
+    jobservice:
+      jobLog:
+        existingClaim: "harbor-pvc"
+        subPath: jobservice-logs
+    redis:
+      existingClaim: "harbor-pvc"
+      subPath: redis
+    trivy:
+      existingClaim: "harbor-pvc"
+      subPath: trivy
+```
+
+### 3. Helm 차트 수동 설치 및 업그레이드
+
+컴포넌트 루트 디렉토리에서 Helm 명령어를 사용하여 릴리스를 배포합니다. 비밀번호(`harborAdminPassword`)는 보안을 위해 명령줄 파라미터(`--set`)로 직접 주입합니다.
+
+```bash
+# 1. Harbor 네임스페이스 생성
+kubectl create namespace harbor --dry-run=client -o yaml | kubectl apply -f -
+
+# 2. Helm 설치 및 업그레이드 구동
+helm upgrade --install harbor ./charts/harbor \
+  --namespace harbor \
+  -f ./values.yaml \
+  -f ./values-infra.yaml \
+  --set harborAdminPassword="<원하는_비밀번호_입력>" \
+  --atomic \
+  --wait
+```

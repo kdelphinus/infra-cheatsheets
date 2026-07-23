@@ -57,6 +57,7 @@ hide:
 
     런타임 보안 탐지 및 데이터 보호
 
+    - [:octicons-arrow-right-24: K8s 취약점 점검 및 조치 가이드](k8s/security/005-vulnerability-check-remediation.md)
     - [:octicons-arrow-right-24: Tetragon 런타임 보안 전략](k8s/security/003-tetragon-security-policy.md)
     - [:octicons-arrow-right-24: Falco 이상행위 탐지 가이드](k8s/security/001-falco-install.md)
     - [:octicons-arrow-right-24: Gatekeeper 정책 통제 가이드](k8s/security/004-gatekeeper-install.md)
@@ -107,6 +108,7 @@ hide:
 
     - [:octicons-arrow-right-24: Harbor 레지스트리 설치](cicd/offline-install/000-harbor-install.md)
     - [:octicons-arrow-right-24: Nexus Repository 설치](cicd/offline-install/006-nexus-install.md)
+    - [:octicons-arrow-right-24: Keycloak SSO 설치 및 구성](cicd/offline-install/009-keycloak-install.md)
 
 - :material-sync: **CI/CD 파이프라인**
 
@@ -114,6 +116,8 @@ hide:
 
     지속적 통합 및 배포 플랫폼
 
+    - [:octicons-arrow-right-24: Keycloak SSO 통합 연동 표준](cicd/sso-integration-guide.md)
+    - [:octicons-arrow-right-24: Jenkins Buildah 파이프라인 구성](cicd/jenkins-buildah-guide.md)
     - [:octicons-arrow-right-24: GitLab 설치](cicd/offline-install/001-gitlab-install.md)
     - [:octicons-arrow-right-24: Jenkins 설치](cicd/offline-install/002-jenkins-install.md)
     - [:octicons-arrow-right-24: GitLab Omnibus 설치](cicd/offline-install/003-gitlab-omnibus-install.md)
