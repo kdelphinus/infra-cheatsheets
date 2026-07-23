@@ -2331,6 +2331,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/security/005-vulnerability-check-remediation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K8s 취약점 점검 및 조치 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3583,6 +3611,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#부록-dockerbuildah-로그인-및-kind-노드-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        부록: Docker/Buildah 로그인 및 kind 노드 설정
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3816,6 +3855,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../009-keycloak-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3852,7 +3919,7 @@
   <span class="md-ellipsis">
     
   
-    운영
+    SSO 통합 인증
   
 
     
@@ -3868,11 +3935,153 @@
             <span class="md-nav__icon md-icon"></span>
             
   
+    SSO 통합 인증
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sso-integration-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 통합 연동 표준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sso-integration-local-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 로컬 실습 예시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
     운영
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jenkins-buildah-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins Buildah 파이프라인 구성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6316,6 +6525,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#부록-dockerbuildah-로그인-및-kind-노드-설정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        부록: Docker/Buildah 로그인 및 kind 노드 설정
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6337,7 +6557,7 @@
 
 
 <h1 id="harbor-insecure-registry-등록">Harbor Insecure Registry 등록</h1>
-<p>Harbor와 HTTP 통신을 위해 Insecure 등록이 필요합니다.</p>
+<p>Harbor와 HTTP 통신을 위해 Insecure 등록이 필요합니다. 이 설정은 이미지를 push하거나 Kubernetes 노드가 이미지를 pull하는 런타임마다 적용해야 합니다.</p>
 <h2 id="설정">설정</h2>
 <h3 id="1-containerd-버전-확인">1. containerd 버전 확인</h3>
 <p>containerd v2.x에서 CRI 플러그인 경로가 변경되었습니다. 버전에 따라 <code>config.toml</code>에 작성해야 할 섹션 키가 다르므로 반드시 먼저 확인하세요.</p>
@@ -6379,6 +6599,51 @@
 <h3 id="4-설정-확인">4. 설정 확인</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>grep<span class="w"> </span><span class="s2">&quot;config_path&quot;</span><span class="w"> </span>/etc/containerd/config.toml
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>cat<span class="w"> </span>/etc/containerd/certs.d/10.185.40.43:30002/hosts.toml
+</code></pre></div>
+<h2 id="부록-dockerbuildah-로그인-및-kind-노드-설정">부록: Docker/Buildah 로그인 및 kind 노드 설정</h2>
+<p>HTTP Harbor 주소를 이미지 이름으로 사용할 때는 <code>http://</code> 또는 <code>https://</code>를 붙이지 않습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>좋은 예: harbor.example.local:30002/library/sample-app:1.0.0
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>나쁜 예: http://harbor.example.local:30002/library/sample-app:1.0.0
+</code></pre></div>
+<p>Docker CLI는 registry 주소가 Docker daemon의 insecure registry로 등록되어 있어야 HTTP 로그인과 push가 가능합니다. Buildah는 명령별로 <code>--tls-verify=false</code>를 지정할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;harbor.example.local:30002&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s1">&#39;&lt;PASSWORD&gt;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span>-u<span class="w"> </span>admin<span class="w"> </span>--password-stdin
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>buildah<span class="w"> </span>login<span class="w"> </span>--tls-verify<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>--username<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span>--password<span class="w"> </span><span class="s1">&#39;&lt;PASSWORD&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>buildah<span class="w"> </span>push<span class="w"> </span>--tls-verify<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">/library/sample-app:1.0.0&quot;</span>
+</code></pre></div>
+<p>Harbor project가 public이면 Kubernetes pull에는 별도 Secret이 필요하지 않습니다. 다만 manifest에 <code>imagePullSecrets</code>가 남아 있으면 해당 Secret이 없는 namespace에서 pull 경고가 발생할 수 있으므로 public project를 사용할 때는 manifest에서 제거합니다. private project를 사용할 때만 애플리케이션 namespace에 Secret을 생성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>docker-registry<span class="w"> </span>harbor-regcred<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>--docker-server<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>--docker-username<span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>--docker-password<span class="o">=</span><span class="s1">&#39;&lt;PASSWORD&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>-n<span class="w"> </span>&lt;APP_NAMESPACE&gt;
+</code></pre></div>
+<p>kind 환경에서는 호스트 OS가 아니라 kind 노드 컨테이너 내부의 containerd 설정을 수정해야 합니다. worker 노드가 여러 대라면 이미지를 pull하는 모든 worker 노드에 동일하게 적용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">KIND_NODE_NAME</span><span class="o">=</span><span class="s2">&quot;test-cluster-worker&quot;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;harbor.example.local:30002&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d/</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat &gt; &#39;/etc/containerd/certs.d/</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">/hosts.toml&#39;&quot;</span><span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="s">server = &quot;http://${HARBOR_REGISTRY}&quot;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="s">[host.&quot;http://${HARBOR_REGISTRY}&quot;]</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;, &quot;push&quot;]</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="s">  skip_verify = true</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="s">EOF</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+</code></pre></div>
+<p>설정 후에는 실제 노드 컨테이너 내부 파일과 containerd 상태를 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>cat<span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d/</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">/hosts.toml&quot;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>containerd<span class="w"> </span>--no-pager
 </code></pre></div>
 
 

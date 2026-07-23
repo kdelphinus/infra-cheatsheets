@@ -2331,6 +2331,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/security/005-vulnerability-check-remediation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K8s 취약점 점검 및 조치 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3528,10 +3556,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2단계-설치-스크립트-설정" class="md-nav__link">
+  <a href="#2단계-설치-및-환경-정보-입력" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 설치 스크립트 설정
+        2단계: 설치 및 환경 정보 입력
       
     </span>
   </a>
@@ -3539,10 +3567,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-설치-실행" class="md-nav__link">
+  <a href="#3단계-설치-실행-및-대화형-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 설치 실행
+        3단계: 설치 실행 및 대화형 설정
       
     </span>
   </a>
@@ -3550,10 +3578,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4단계-envoy-httproute-적용-nodeport--envoy-선택-시" class="md-nav__link">
+  <a href="#4단계-envoy-httproute-적용-envoy-gateway-선택-시" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)
+        4단계: Envoy HTTPRoute 적용 (Envoy Gateway 선택 시)
       
     </span>
   </a>
@@ -3733,10 +3761,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
+  <a href="#삭제-및-리셋" class="md-nav__link">
     <span class="md-ellipsis">
       
-        삭제
+        삭제 및 리셋
       
     </span>
   </a>
@@ -3762,6 +3790,67 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#부록-http-harbor-로그인-및-pull-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        부록: HTTP Harbor 로그인 및 Pull 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-installation--upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual Installation &amp; Upgrade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual Installation &amp; Upgrade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-k8s-영구-스토리지pvpvc-수동-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. K8s 영구 스토리지(PV/PVC) 수동 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-helm-오버라이드-설정-파일-생성-values-infrayaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Helm 오버라이드 설정 파일 생성 (values-infra.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-helm-차트-수동-설치-및-업그레이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Helm 차트 수동 설치 및 업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4026,6 +4115,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../009-keycloak-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4062,7 +4179,7 @@
   <span class="md-ellipsis">
     
   
-    운영
+    SSO 통합 인증
   
 
     
@@ -4078,11 +4195,153 @@
             <span class="md-nav__icon md-icon"></span>
             
   
+    SSO 통합 인증
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sso-integration-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 통합 연동 표준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sso-integration-local-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 로컬 실습 예시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
     운영
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jenkins-buildah-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins Buildah 파이프라인 구성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6499,10 +6758,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2단계-설치-스크립트-설정" class="md-nav__link">
+  <a href="#2단계-설치-및-환경-정보-입력" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 설치 스크립트 설정
+        2단계: 설치 및 환경 정보 입력
       
     </span>
   </a>
@@ -6510,10 +6769,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-설치-실행" class="md-nav__link">
+  <a href="#3단계-설치-실행-및-대화형-설정" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: 설치 실행
+        3단계: 설치 실행 및 대화형 설정
       
     </span>
   </a>
@@ -6521,10 +6780,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4단계-envoy-httproute-적용-nodeport--envoy-선택-시" class="md-nav__link">
+  <a href="#4단계-envoy-httproute-적용-envoy-gateway-선택-시" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)
+        4단계: Envoy HTTPRoute 적용 (Envoy Gateway 선택 시)
       
     </span>
   </a>
@@ -6704,10 +6963,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
+  <a href="#삭제-및-리셋" class="md-nav__link">
     <span class="md-ellipsis">
       
-        삭제
+        삭제 및 리셋
       
     </span>
   </a>
@@ -6733,6 +6992,67 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#부록-http-harbor-로그인-및-pull-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        부록: HTTP Harbor 로그인 및 Pull 확인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-installation--upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual Installation &amp; Upgrade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual Installation &amp; Upgrade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-k8s-영구-스토리지pvpvc-수동-생성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. K8s 영구 스토리지(PV/PVC) 수동 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-helm-오버라이드-설정-파일-생성-values-infrayaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Helm 오버라이드 설정 파일 생성 (values-infra.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-helm-차트-수동-설치-및-업그레이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Helm 차트 수동 설치 및 업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6776,8 +7096,9 @@
 </ul>
 <h2 id="설치-전-필수-확인-사항">설치 전 필수 확인 사항</h2>
 <ul>
-<li><strong>TLS 없이 IP로만 접속 시</strong>: <code>EXTERNAL_HOSTNAME</code> 을 Harbor NodePort IP와 동일하게 설정</li>
-<li><strong>TLS 도메인 접속 시</strong>: 사전에 인증서로 Kubernetes Secret 생성 필요, <code>EXTERNAL_HOSTNAME</code> 을 도메인명으로 설정</li>
+<li><strong>NodePort로 직접 접속 시</strong>: Harbor 접속 URL에 NodePort를 포함합니다. 예: <code>http://&lt;NODE_IP&gt;:30002</code></li>
+<li><strong>Envoy 또는 Ingress로 접속 시</strong>: Harbor 접속 URL에 실제 외부 도메인 또는 VIP를 입력합니다.</li>
+<li><strong>TLS 도메인 접속 시</strong>: 사전에 인증서로 Kubernetes Secret 생성 필요, 접속 URL의 호스트명과 인증서 도메인이 일치해야 합니다.</li>
 <li><strong>저장 경로</strong>: <code>SAVE_PATH</code> (데이터 저장 경로)는 <code>NODE_NAME</code> 노드에서 디렉토리가 생성되어 있어야 함 (권한: <code>chmod 777</code>)</li>
 </ul>
 <h2 id="1단계-구성-이미지-로드-ctr-import">1단계: 구성 이미지 로드 (ctr import)</h2>
@@ -6789,71 +7110,79 @@
 <p>이미지 로드 확인:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>harbor
 </code></pre></div>
-<h2 id="2단계-설치-스크립트-설정">2단계: 설치 스크립트 설정</h2>
-<p><code>scripts/install.sh</code> 상단 Config 블록을 환경에 맞게 수정합니다.</p>
+<h2 id="2단계-설치-및-환경-정보-입력">2단계: 설치 및 환경 정보 입력</h2>
+<p><code>install.sh</code>를 구동하면, 환경 정보가 대화식 인터프리터 프롬프트(CLI)로 안전하게 수집됩니다. 스크립트 파일을 직접 수정할 필요 없이, 입력된 변수 값은 컴포넌트 루트의 <code>install.conf</code> 및 <code>values-infra.yaml</code>에 보존되어 멱등성 있는 생명주기 제어가 가능하게 관리됩니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">변수</th>
+<th style="text-align: left;">인프라 환경 변수</th>
 <th style="text-align: left;">설명</th>
 <th style="text-align: left;">예시</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>HARBOR_NAMESPACE</code></td>
-<td style="text-align: left;">Harbor 설치 네임스페이스</td>
-<td style="text-align: left;"><code>harbor</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>HARBOR_RELEASE_NAME</code></td>
-<td style="text-align: left;">Helm release 이름</td>
-<td style="text-align: left;"><code>harbor</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>HELM_CHART_PATH</code></td>
-<td style="text-align: left;">Helm 차트 경로</td>
-<td style="text-align: left;"><code>./charts/harbor</code></td>
-</tr>
-<tr>
 <td style="text-align: left;"><code>EXTERNAL_HOSTNAME</code></td>
-<td style="text-align: left;">Harbor 접근 호스트명 또는 IP</td>
-<td style="text-align: left;"><code>&lt;NODE_IP&gt;</code> 또는 도메인</td>
+<td style="text-align: left;">Harbor 외부 접속 도메인명 또는 IP 주소</td>
+<td style="text-align: left;"><code>harbor.devops.internal</code> 또는 <code>&lt;NODE_IP&gt;</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>SAVE_PATH</code></td>
-<td style="text-align: left;">PV 데이터 저장 경로 (호스트)</td>
-<td style="text-align: left;"><code>/harbor/data</code></td>
+<td style="text-align: left;"><code>TLS_ENABLED</code> / <code>TLS_SECRET_NAME</code></td>
+<td style="text-align: left;">외부 HTTPS TLS 적용 여부 및 인증서 Secret 명</td>
+<td style="text-align: left;"><code>true</code> / <code>harbor-tls-secret</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>NODE_NAME</code></td>
-<td style="text-align: left;">PV가 위치할 노드 이름</td>
-<td style="text-align: left;"><code>worker-node-01</code></td>
+<td style="text-align: left;"><code>STORAGE_MODE</code></td>
+<td style="text-align: left;">볼륨 백엔드 모드 (HostPath 정적 / NFS 정적 / NFS SC 동적)</td>
+<td style="text-align: left;"><code>hostpath</code>, <code>nfs</code>, <code>nfs-dynamic</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>STORAGE_SIZE</code></td>
-<td style="text-align: left;">PVC 요청 크기</td>
-<td style="text-align: left;"><code>40Gi</code></td>
+<td style="text-align: left;"><code>SAVE_PATH</code> / <code>NODE_NAME</code></td>
+<td style="text-align: left;">HostPath 볼륨 사용 시 디렉토리 경로 및 매핑 노드명</td>
+<td style="text-align: left;"><code>/data/harbor</code> / <code>worker-01</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NFS_SERVER</code> / <code>NFS_PATH</code></td>
+<td style="text-align: left;">NFS 정적 PV 매핑 서버 IP 및 내보내기 디렉토리 경로</td>
+<td style="text-align: left;"><code>192.168.1.100</code> / <code>/nfs/harbor</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>STORAGE_CLASS</code></td>
+<td style="text-align: left;">NFS 동적 프로비저닝을 위한 K8s StorageClass 명칭</td>
+<td style="text-align: left;"><code>nfs-client</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>MINIMIZE_RESOURCES</code></td>
+<td style="text-align: left;">개발/검증 목적의 리소스(Limits/Requests) 제한 최소화 여부</td>
+<td style="text-align: left;"><code>true</code> (기본값 <code>false</code>)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="3단계-설치-실행">3단계: 설치 실행</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
+<h2 id="3단계-설치-실행-및-대화형-설정">3단계: 설치 실행 및 대화형 설정</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh<span class="w"> </span>scripts/uninstall.sh
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./scripts/install.sh
 </code></pre></div>
 <p>스크립트 실행 중 아래 항목을 인터랙티브하게 선택/입력합니다.</p>
 <ol>
 <li><strong>이미지 로드 방식 선택</strong>:</li>
-<li><strong><code>1</code> 로컬 tar 직접 import (권장)</strong>: 하버가 아직 설치되지 않은 경우 선택합니다. (1단계에서 <code>load_images.sh</code>를 이미 실행했다면 이미 로드되어 있으므로 금방 넘어갑니다.)</li>
-<li><strong><code>2</code> Harbor 레지스트리 사용</strong>: 하버가 이미 설치되어 있고 재설치하거나 이미지가 이미 로드된 경우 선택합니다.</li>
-<li><strong>노출 방식 선택</strong>: <code>1</code> NodePort + Envoy Gateway (기본) / <code>2</code> nginx Ingress</li>
+<li><strong><code>1</code> 로컬 tar 직접 import (권장)</strong>: 하버가 아직 설치되지 않은 최초 기동 단계에 선택하며 <code>images/*.tar</code>를 자동으로 임포트합니다.</li>
+<li><strong><code>2</code> 로컬 이미지 수동 로드 완료</strong>: 이미 각 노드에 컨테이너 이미지 캐싱이 완료된 경우 스킵할 때 사용합니다.</li>
+<li><strong>노출 방식 선택</strong>:</li>
+<li><strong><code>1</code> Envoy Gateway (기본)</strong>: <code>http://harbor.devops.internal</code> 등 Envoy HTTPRoute를 통해 외부 주소 해석을 매핑할 도메인을 수집합니다.</li>
+<li><strong><code>2</code> NodePort 직접 접속</strong>: 포트 포워딩 또는 로컬 노드 포트로 직접 타겟팅해 기동합니다. (기본 HTTP 30002, HTTPS 30003 포트 오버라이드 가능)</li>
+<li><strong><code>3</code> nginx Ingress</strong>: 인그레스 제어기를 활용해 도메인 접근을 처리합니다.</li>
+<li><strong>리소스 사양 설정</strong>:</li>
+<li><strong>개발 환경 리소스 최소화 (y/N)</strong>: 가상머신 등 리소스가 한정된 로컬 개발 장비에서 테스트할 경우, nginx/core/database 등 주요 파드의 Requests/Limits 제한을 최하위 사양(64Mi/128Mi 단위)으로 축소 오버라이드하여 가동 안정성을 확보합니다.</li>
 <li><strong>스토리지 타입 선택</strong>:</li>
-<li><strong><code>1</code> HostPath</strong>: 단일 노드 테스트 환경용. 특정 노드 경로에 데이터를 저장합니다.</li>
-<li><strong><code>2</code> NFS (정적 할당)</strong>: 미리 생성된 NFS 서버/경로 정보를 입력하여 정적 PV/PVC를 생성합니다.</li>
-<li><strong><code>3</code> NFS (동적 할당)</strong>: <code>nfs-client</code> 등 클러스터에 설치된 StorageClass를 통해 볼륨을 자동 할당받습니다.</li>
-<li><strong>Harbor 관리자(<code>admin</code>) 비밀번호</strong>: 최소 8자 이상의 비밀번호를 입력합니다.</li>
+<li><strong><code>1</code> HostPath</strong>: 특정 단일 노드의 로컬 디렉토리를 정적 PV로 사용합니다. 고정 타겟 노드 이름과 로컬 호스트 절대 경로를 지정합니다.</li>
+<li><strong><code>2</code> NFS 정적 할당</strong>: NFS 서버 및 익스포트 디렉토리를 입력받아 정적 PV/PVC를 생성합니다.</li>
+<li><strong><code>3</code> NFS SC 동적 할당</strong>: 클러스터의 StorageClass와 컴포넌트별 개별 DB/Redis 용량을 조절해 자동 스토리지 프로비저닝을 위임합니다.</li>
+<li><strong>Harbor 관리자(<code>admin</code>) 비밀번호</strong>: 최초/재설치 시에만 대화식으로 패스워드 입력을 요구하며, 평문으로 설정파일에 저장되지 않고 보안을 보존합니다. (Upgrade 시에는 기존 K8s Secret에서 자동 추출 및 상속 기동)</li>
 </ol>
-<h2 id="4단계-envoy-httproute-적용-nodeport--envoy-선택-시">4단계: Envoy HTTPRoute 적용 (NodePort + Envoy 선택 시)</h2>
+<blockquote>
+<p><strong>주의</strong>: 기존 <code>install.conf</code>가 있는 상태에서 <code>업그레이드</code>를 선택하면 저장된 <code>STORAGE_MODE</code>를 그대로 사용합니다. HostPath에서 NFS 정적 또는 Dynamic으로 바꾸려면 <code>재설치</code> 또는 <code>초기화</code>를 선택해 스토리지 설정을 다시 입력하세요.</p>
+</blockquote>
+<h2 id="4단계-envoy-httproute-적용-envoy-gateway-선택-시">4단계: Envoy HTTPRoute 적용 (Envoy Gateway 선택 시)</h2>
 <p><code>manifests/route-harbor.yaml</code>의 <code>hostnames</code>와 <code>parentRefs.name</code>을
 실제 환경에 맞게 수정 후 적용합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># hostnames: 를 실제 도메인으로 수정 후:</span>
@@ -6972,8 +7301,12 @@
 <a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">  </span>--user<span class="w"> </span>admin:&lt;PASSWORD&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">  </span>&lt;NODE_IP&gt;:30002/library/my-image:v1
 </code></pre></div>
-<h2 id="삭제">삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>./scripts/uninstall.sh
+<h2 id="삭제-및-리셋">삭제 및 리셋</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># 기본 삭제 (설정 및 생성된 인프라 values 파일 유지)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>./scripts/uninstall.sh
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># 완전 리셋 (저장된 설정 및 인프라 values 파일도 모두 삭제)</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>./scripts/uninstall.sh<span class="w"> </span>--reset
 </code></pre></div>
 <h2 id="보안-고려사항">보안 고려사항</h2>
 <ul>
@@ -6995,6 +7328,109 @@
 <li><strong>TLS 인증서 오류</strong>: Secret 이름과 <code>EXTERNAL_HOSTNAME</code> 도메인 일치 여부, 인증서 만료일 확인</li>
 <li><strong>PVC Pending</strong>: <code>NODE_NAME</code>이 실제 노드 이름과 일치하는지, nodeAffinity 설정 확인</li>
 </ul>
+<h2 id="부록-http-harbor-로그인-및-pull-확인">부록: HTTP Harbor 로그인 및 Pull 확인</h2>
+<p>HTTP Harbor를 사용할 때 이미지 주소에는 <code>http://</code> 또는 <code>https://</code> 프로토콜을 포함하지 않습니다. 프로토콜은 클라이언트 옵션과 containerd registry 설정으로 처리합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>좋은 예: harbor.example.local:30002/library/my-image:v1
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>나쁜 예: http://harbor.example.local:30002/library/my-image:v1
+</code></pre></div>
+<p>Harbor project가 public이면 Kubernetes에서 <code>imagePullSecrets</code> 없이 이미지를 pull할 수 있습니다. private project인 경우에는 애플리케이션 namespace에 <code>docker-registry</code> Secret을 생성하고 Pod 또는 ServiceAccount에 연결합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>docker-registry<span class="w"> </span>harbor-regcred<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>--docker-server<span class="o">=</span>&lt;HARBOR_REGISTRY&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>--docker-username<span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span>--docker-password<span class="o">=</span><span class="s1">&#39;&lt;PASSWORD&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span>-n<span class="w"> </span>&lt;APP_NAMESPACE&gt;
+</code></pre></div>
+<p>Docker 또는 Buildah로 HTTP Harbor에 로그인할 때는 HTTPS를 강제하지 않도록 옵션을 명시합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s1">&#39;&lt;PASSWORD&gt;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>&lt;HARBOR_REGISTRY&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span>-u<span class="w"> </span>admin<span class="w"> </span>--password-stdin
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>buildah<span class="w"> </span>login<span class="w"> </span>--tls-verify<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span>--username<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span>--password<span class="w"> </span><span class="s1">&#39;&lt;PASSWORD&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span>&lt;HARBOR_REGISTRY&gt;
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>buildah<span class="w"> </span>push<span class="w"> </span>--tls-verify<span class="o">=</span><span class="nb">false</span><span class="w"> </span>&lt;HARBOR_REGISTRY&gt;/library/my-image:v1
+</code></pre></div>
+<p>containerd에서 직접 push할 때는 <code>--plain-http</code>를 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>push<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span>--plain-http<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span>--user<span class="w"> </span>admin:&lt;PASSWORD&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span>&lt;HARBOR_REGISTRY&gt;/library/my-image:v1
+</code></pre></div>
+<p>kind 클러스터처럼 Kubernetes 노드가 Docker 컨테이너로 실행되는 환경에서는 호스트가 아니라 kind 노드 컨테이너 안에서 insecure registry를 설정해야 합니다. 즉 <code>systemctl restart containerd</code>도 kind 노드 컨테이너 안에서 실행되어야 합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nv">KIND_NODE_NAME</span><span class="o">=</span><span class="s2">&quot;test-cluster-worker&quot;</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nv">HARBOR_REGISTRY</span><span class="o">=</span><span class="s2">&quot;harbor.example.local:30002&quot;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># hosts.toml 파일은 kind 노드 컨테이너 내부에 생성합니다.</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d/</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat &gt; &#39;/etc/containerd/certs.d/</span><span class="si">${</span><span class="nv">HARBOR_REGISTRY</span><span class="si">}</span><span class="s2">/hosts.toml&#39;&quot;</span><span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="s">server = &quot;http://${HARBOR_REGISTRY}&quot;</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="s">[host.&quot;http://${HARBOR_REGISTRY}&quot;]</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;, &quot;push&quot;]</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="s">  skip_verify = true</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="s">EOF</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KIND_NODE_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd
+</code></pre></div>
+<p>실제 운영 환경에서는 위 예시의 <code>harbor.example.local:30002</code> 대신 DNS에 등록된 Harbor 도메인 또는 로드밸런서 주소를 사용합니다. DNS 서버에 등록하지 않았다면 Jenkins agent Pod의 <code>hostAliases</code>, Kubernetes worker 노드의 <code>/etc/hosts</code>, 또는 사내 DNS 중 하나로 동일한 이름이 해석되도록 맞춰야 합니다.</p>
+<h2 id="manual-installation--upgrade">Manual Installation &amp; Upgrade</h2>
+<p>자동화 설치 스크립트(<code>install.sh</code>)를 사용하지 않고, 수동으로 Harbor 리소스 및 Helm 릴리스를 배포하고자 할 때 아래 절차를 수행합니다.</p>
+<h3 id="1-k8s-영구-스토리지pvpvc-수동-생성">1. K8s 영구 스토리지(PV/PVC) 수동 생성</h3>
+<p>볼륨 구성을 위해 <code>manifests/harbor-persistence-infra.yaml</code> 파일을 수동으로 편집하여 작성한 뒤 적용합니다 (StorageClass를 사용할 경우 이 단계는 생략 가능).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># PV 및 PVC 리소스 배포</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/harbor-persistence-infra.yaml
+</code></pre></div>
+<h3 id="2-helm-오버라이드-설정-파일-생성-values-infrayaml">2. Helm 오버라이드 설정 파일 생성 (<code>values-infra.yaml</code>)</h3>
+<p>패스워드 정보를 제외한 인프라 사양을 <code>values-infra.yaml</code>에 작성합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># values-infra.yaml 수동 예시</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nt">externalURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://harbor.devops.internal:30002</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nt">expose</span><span class="p">:</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nodePort</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">  </span><span class="nt">nodePort</span><span class="p">:</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">harbor</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="w">        </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30002</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="nt">persistence</span><span class="p">:</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a><span class="w">  </span><span class="nt">resourcePolicy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;keep&quot;</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="w">  </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="w">    </span><span class="nt">registry</span><span class="p">:</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a><span class="w">      </span><span class="nt">existingClaim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;harbor-pvc&quot;</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a><span class="w">      </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">registry</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="w">    </span><span class="nt">database</span><span class="p">:</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a><span class="w">      </span><span class="nt">existingClaim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;harbor-pvc&quot;</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a><span class="w">      </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a><span class="w">    </span><span class="nt">jobservice</span><span class="p">:</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a><span class="w">      </span><span class="nt">jobLog</span><span class="p">:</span>
+<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a><span class="w">        </span><span class="nt">existingClaim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;harbor-pvc&quot;</span>
+<a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a><span class="w">        </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobservice-logs</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a><span class="w">    </span><span class="nt">redis</span><span class="p">:</span>
+<a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a><span class="w">      </span><span class="nt">existingClaim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;harbor-pvc&quot;</span>
+<a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a><span class="w">      </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a><span class="w">    </span><span class="nt">trivy</span><span class="p">:</span>
+<a id="__codelineno-24-31" name="__codelineno-24-31" href="#__codelineno-24-31"></a><span class="w">      </span><span class="nt">existingClaim</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;harbor-pvc&quot;</span>
+<a id="__codelineno-24-32" name="__codelineno-24-32" href="#__codelineno-24-32"></a><span class="w">      </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trivy</span>
+</code></pre></div>
+<h3 id="3-helm-차트-수동-설치-및-업그레이드">3. Helm 차트 수동 설치 및 업그레이드</h3>
+<p>컴포넌트 루트 디렉토리에서 Helm 명령어를 사용하여 릴리스를 배포합니다. 비밀번호(<code>harborAdminPassword</code>)는 보안을 위해 명령줄 파라미터(<code>--set</code>)로 직접 주입합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 1. Harbor 네임스페이스 생성</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>harbor<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># 2. Helm 설치 및 업그레이드 구동</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>harbor<span class="w"> </span>./charts/harbor<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span>--namespace<span class="w"> </span>harbor<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">  </span>-f<span class="w"> </span>./values-infra.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">  </span>--set<span class="w"> </span><span class="nv">harborAdminPassword</span><span class="o">=</span><span class="s2">&quot;&lt;원하는_비밀번호_입력&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">  </span>--atomic<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">  </span>--wait
+</code></pre></div>
 
 
 

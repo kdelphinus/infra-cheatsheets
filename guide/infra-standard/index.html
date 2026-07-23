@@ -748,17 +748,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#23-에셋-및-다운로드-관리-표준-asset-management-standard" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. 에셋 및 다운로드 관리 표준 (Asset Management Standard)
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2520,6 +2509,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k8s/security/005-vulnerability-check-remediation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K8s 취약점 점검 및 조치 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3879,6 +3896,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd/offline-install/009-keycloak-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3915,7 +3960,7 @@
   <span class="md-ellipsis">
     
   
-    운영
+    SSO 통합 인증
   
 
     
@@ -3931,11 +3976,153 @@
             <span class="md-nav__icon md-icon"></span>
             
   
+    SSO 통합 인증
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd/sso-integration-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 통합 연동 표준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd/sso-integration-local-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 로컬 실습 예시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
     운영
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cicd/jenkins-buildah-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins Buildah 파이프라인 구성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6352,17 +6539,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#23-에셋-및-다운로드-관리-표준-asset-management-standard" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. 에셋 및 다운로드 관리 표준 (Asset Management Standard)
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -6510,24 +6686,6 @@
 </ul>
 </li>
 </ol>
-<h3 id="23-에셋-및-다운로드-관리-표준-asset-management-standard">2.3. 에셋 및 다운로드 관리 표준 (Asset Management Standard)</h3>
-<p>폐쇄망 환경 구축에 필요한 모든 설치 파일(컨테이너 이미지, 바이너리, RPM/DEB 패키지 등)은 다음과 같은 원칙을 준수해야 해요.</p>
-<ol>
-<li><strong>외부 공유 드라이브 업로드 금지</strong>:<ul>
-<li>컨테이너 이미지(<code>.tar</code>)나 패키지 파일을 구글 드라이브나 외부 개인 저장소에 직접 업로드하여 공유하는 방식은 엄격히 금지해요.</li>
-<li>이는 파일 유실, 버전 불일치, 외부 파일 도입으로 인한 보안 취약점 전파를 방지하기 위함이에요.</li>
-</ul>
-</li>
-<li><strong>에셋 수집 스크립트 제공</strong>:<ul>
-<li>모든 오프라인 패키지는 인터넷 연결이 가능한 외부망 호스트에서 직접 수집할 수 있도록 에셋 다운로드 스크립트(예: <code>scripts/download_assets_offline.sh</code> 또는 <code>ready-offline.md</code> 내 가이드)를 반드시 제공해야 해요.</li>
-<li>다운로드 스크립트는 공식 레포지토리나 신뢰할 수 있는 소스(GitHub 공식 릴리스 등)로부터 파일을 직접 다운로드하도록 설계해야 해요.</li>
-</ul>
-</li>
-<li><strong>패키징 재현성 확보</strong>:<ul>
-<li>스크립트 실행 후 수집된 파일들의 구조는 <a href="#1-directory-structure-디렉토리-표준-구조">1. Directory Structure</a> 규격을 충족해야 하며, 언제 실행하더라도 동일한 구성 요소가 동일한 버전으로 수집되어 오프라인 환경에 재현될 수 있어야 해요.</li>
-</ul>
-</li>
-</ol>
 <h2 id="3-installation-guides-문서화-표준">3. Installation Guides (문서화 표준)</h2>
 <h3 id="31-실행-지침">3.1. 실행 지침</h3>
 <ul>
@@ -6543,28 +6701,26 @@
 <h2 id="4-standardization-status-표준화-현황">4. Standardization Status (표준화 현황)</h2>
 <p>현재 프로젝트 내 서비스 중 본 표준에 따라 업데이트가 필요한 리스트입니다. (2026-04-22 기준)</p>
 <h3 id="-업데이트-필요-non-compliant">⚠️ 업데이트 필요 (Non-compliant)</h3>
+<h3 id="-준수-완료-compliant">✅ 준수 완료 (Compliant)</h3>
 <ul>
-<li><strong>ArgoCD</strong>: <code>argocd-2.12.1</code></li>
+<li><strong>ArgoCD</strong>: <code>argocd-2.12.1</code>, <code>argocd-3.4.3</code></li>
 <li><strong>Harbor</strong>: <code>harbor-2.10.3</code></li>
+<li><strong>Gitea</strong>: <code>gitea-1.25.5</code></li>
 <li><strong>Nexus</strong>: <code>nexus-3.70.1</code></li>
 <li><strong>Jenkins</strong>: <code>jenkins-2.528.3</code></li>
-<li><strong>Gitea</strong>: <code>gitea-1.25.5</code></li>
-<li><strong>Monitoring</strong>: <code>monitoring-0.89.0</code></li>
 <li><strong>NGINX Ingress Controller</strong>: <code>nginx-nic-5.3.1</code></li>
+<li><strong>Monitoring</strong>: <code>monitoring-0.89.0</code></li>
 <li><strong>Falco</strong>: <code>falco-0.43.0</code></li>
 <li><strong>Tetragon</strong>: <code>tetragon-1.6.0</code></li>
 <li><strong>Tekton</strong>: <code>tekton-1.9.0</code></li>
 <li><strong>Redis Stream</strong>: <code>redis-stream-8.6.2-official</code></li>
 <li><strong>NFS Provisioner</strong>: <code>nfs-provisioner-4.0.2</code></li>
-</ul>
-<h3 id="-준수-완료-compliant">✅ 준수 완료 (Compliant)</h3>
-<ul>
 <li><strong>Envoy</strong>: <code>envoy-1.37.2</code> (Standard Reference / 표준 모델)</li>
 <li><strong>Cilium</strong>: <code>cilium-1.19.3</code></li>
 <li><strong>GitLab</strong>: <code>gitlab-18.7</code>, <code>gitlab-omnibus-18.7</code></li>
 <li><strong>Velero</strong>: <code>velero-1.18.0</code></li>
 <li><strong>K8s Installation</strong>: <code>k8s-1.33.11-ubuntu24.04</code></li>
-<li><strong>MetalLB</strong>: <code>metallb-0.14.8</code></li>
+<li><strong>MetalLB</strong>: <code>metallb-0.14.8</code>, <code>metallb-0.16.1</code></li>
 </ul>
 
 

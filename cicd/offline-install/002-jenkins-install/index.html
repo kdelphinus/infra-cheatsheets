@@ -2331,6 +2331,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../k8s/security/005-vulnerability-check-remediation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K8s 취약점 점검 및 조치 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3723,6 +3751,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-cicd-buildah-agent-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. CI/CD Buildah agent 구성
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3900,6 +3939,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../009-keycloak-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3936,7 +4003,7 @@
   <span class="md-ellipsis">
     
   
-    운영
+    SSO 통합 인증
   
 
     
@@ -3952,11 +4019,153 @@
             <span class="md-nav__icon md-icon"></span>
             
   
+    SSO 통합 인증
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sso-integration-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 통합 연동 표준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sso-integration-local-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak SSO 로컬 실습 예시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
     운영
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jenkins-buildah-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins Buildah 파이프라인 구성
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6484,6 +6693,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-cicd-buildah-agent-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. CI/CD Buildah agent 구성
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6510,14 +6730,14 @@
 <h2 id="0-오프라인-설치-자산-준비-인터넷-가능-환경">0. 오프라인 설치 자산 준비 (인터넷 가능 환경)</h2>
 <p>폐쇄망 내부 컴퓨터로 반입할 헬름 차트와 컨테이너 이미지(.tar) 자산이 없는 경우, <strong>인터넷이 연결된 외부 리눅스 PC</strong>에서 아래 단계를 진행해야 합니다.</p>
 <h3 id="01-기본-이미지-및-helm-차트-다운로드">0.1. 기본 이미지 및 Helm 차트 다운로드</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>jenkins-2.555.3/scripts/
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 루트 디렉토리에서 실행 권한 부여 및 다운로드 스크립트 실행</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./scripts/download_assets_offline.sh
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>./scripts/download_assets_offline.sh
 </code></pre></div>
 실행이 끝나면 <code>charts/</code>와 <code>images/</code> 폴더에 기본 헬름 차트 및 이미지 3종이 저장됩니다.</p>
 <h3 id="02-opentofu-내장-커스텀-이미지-조율-및-빌드">0.2. OpenTofu 내장 커스텀 이미지 조율 및 빌드</h3>
 <p>사용자의 인프라 사양(대상 CSP, Tofu 버전 등)에 맞추어 <strong>가변형 이미지 빌드 툴체인</strong>을 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>../jenkins-build/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>./jenkins-build/
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>*.sh
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>./build-tofu-jenkins.sh
 </code></pre></div>
@@ -6539,7 +6759,8 @@
 <li>Helm v3.14.0 이상 설치 완료</li>
 <li><code>kubectl</code> CLI 사용 및 적절한 네임스페이스 권한 소유</li>
 <li>Harbor 사설 레지스트리 작동 상태 확인 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
-<li>(HostPath PV 사용 시) <code>/data/jenkins</code> 디렉토리 사전 생성 권장</li>
+<li>(HostPath 사용 시) Jenkins를 고정 배치할 노드에 <code>/data/jenkins</code> 디렉토리 준비 권장</li>
+<li>(NAS 정적 할당 사용 시) NFS 서버와 export 경로 준비</li>
 </ul>
 <hr />
 <h2 id="2-1단계-컨테이너-이미지-harbor-업로드">2. 1단계: 컨테이너 이미지 Harbor 업로드</h2>
@@ -6559,12 +6780,21 @@
 </code></pre></div>
 <h3 id="주요-입력-정보-및-처리-방식">주요 입력 정보 및 처리 방식</h3>
 <ul>
+<li><strong>이미지 소스</strong>:</li>
+<li>Harbor 방식은 <code>&lt;HARBOR_REGISTRY&gt;/&lt;HARBOR_PROJECT&gt;/...</code> 이미지를 사용합니다.</li>
+<li>로컬 방식은 <code>./images/*.tar*</code>를 클러스터 런타임에 먼저 로드합니다.</li>
+<li>온라인 방식은 공개 레지스트리(<code>docker.io</code>)에서 Jenkins 기본 이미지를 pull합니다.</li>
+<li>kind context에서는 <code>kind load image-archive --name &lt;cluster&gt;</code>를 자동 사용합니다.</li>
+<li>일반 멀티노드 클러스터에서는 모든 스케줄 가능 노드에 이미지를 로드해야 합니다.</li>
+<li><code>cmp-jenkins-full</code> 커스텀 이미지는 Harbor 또는 로컬 방식에서 사용합니다.</li>
 <li><strong>OpenTofu 커스텀 이미지 활성화 여부</strong>: "y"를 선택하면, 빌드하여 업로드해 둔 <code>cmp-jenkins-full:2.555.3</code> 이미지를 <code>controller.image</code>로 오버라이드하여 배포합니다.</li>
-<li><strong>스토리지 유형</strong>: </li>
-<li><code>hostpath</code> 선택 시 워커 노드의 특정 로컬 디바이스 경로(기본 <code>/data/jenkins</code>)를 영구 마운트하며, <code>manifests/pv-volume.yaml</code> 리소스를 먼저 생성해줍니다.</li>
+<li><strong>스토리지 유형</strong>:</li>
+<li><code>hostpath</code> 선택 시 특정 노드의 로컬 경로(기본 <code>/data/jenkins</code>)를 사용하는 HostPath PV(<code>manifests/pv-volume.yaml</code>)를 생성하고 Jenkins PVC를 <code>manual</code> StorageClass로 바인딩합니다.</li>
+<li><code>nas</code> 선택 시 NFS 서버와 export 경로를 입력받아 NAS 정적 PV(<code>manifests/nas-pv.yaml</code>)를 생성하고 Jenkins PVC를 <code>manual</code> StorageClass로 바인딩합니다.</li>
 <li><code>dynamic</code> 선택 시 사전에 준비된 <code>StorageClass</code>(예: NFS dynamic provisioner) 이름을 입력받아 동적으로 PVC를 구성합니다.</li>
+<li>기존 <code>install.conf</code>에 남아 있는 <code>static</code> 값은 호환성을 위해 <code>hostpath</code>와 동일하게 처리합니다.</li>
 <li><strong>YAML 동기화</strong>:</li>
-<li>입력된 설정은 <code>--set</code> 인자를 사용하는 대신 <code>values-override.yaml</code>을 생성하여 base인 <code>values.yaml</code>과 병합 배포하므로 <strong>Single Source of Truth</strong>가 보장됩니다.</li>
+<li>입력된 설정은 <code>--set</code> 인자를 사용하는 대신 <code>values-infra.yaml</code>을 생성하여 base인 <code>values.yaml</code>과 병합 배포하므로 <strong>Single Source of Truth</strong>가 보장됩니다.</li>
 </ul>
 <hr />
 <h2 id="4-3단계-초기-로그인-및-확인">4. 3단계: 초기 로그인 및 확인</h2>
@@ -6587,27 +6817,33 @@
 <ol>
 <li><code>values.yaml</code> 내의 이미지 레지스트리 주소(예: <code>jenkins/jenkins</code> 등)를 사내 사설 Harbor 도메인 주소로 교체합니다.</li>
 <li>OpenTofu 커스텀 이미지를 쓸 경우 <code>cmp-jenkins-full</code>로 변경합니다.</li>
-<li><code>values-override.yaml</code> 파일을 작성하여 로컬 사양(스토리지, NodePort 노출 사양)을 지정합니다.
+<li><code>values-infra.yaml</code> 파일을 작성하여 로컬 사양(스토리지, NodePort 노출 사양)을 지정합니다.
    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">controller</span><span class="p">:</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">serviceType</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NodePort&quot;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30000</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">persistence</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">storageClass</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;manual&quot;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;20Gi&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nt">persistence</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">storageClass</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;manual&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;20Gi&quot;</span>
 </code></pre></div></li>
 <li>Kubernetes 볼륨 매니페스트 및 Helm 배포를 직접 적용합니다.
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># HostPath PV 적용 (HostPath 사용 시)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/pv-volume.yaml
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 1. 네임스페이스 생성</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>jenkins<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Gradle 캐시 공유 PV/PVC 적용</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/gradle-cache-pv-pvc.yaml<span class="w"> </span>-n<span class="w"> </span>jenkins
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 2. HostPath PV 적용 (HostPath 선택 시)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/pv-volume.yaml
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Helm 배포</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>jenkins<span class="w"> </span>./charts/jenkins<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span>-n<span class="w"> </span>jenkins<span class="w"> </span>--create-namespace<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span>-f<span class="w"> </span>./values-override.yaml
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># 3. NAS 정적 PV 적용 (NAS 정적 할당 선택 시)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/nas-pv.yaml
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># 4. Gradle 캐시 공유 PV/PVC 적용</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/gradle-cache-pv-pvc.yaml<span class="w"> </span>-n<span class="w"> </span>jenkins
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># 5. Helm 배포</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>jenkins<span class="w"> </span>./charts/jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span>-n<span class="w"> </span>jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">  </span>-f<span class="w"> </span>./values-infra.yaml
 </code></pre></div></li>
 </ol>
 <hr />
@@ -6619,6 +6855,34 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 완전 초기화 (설정 파일 및 로컬 백업 복원 등 완전 제거)</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>sudo<span class="w"> </span>./scripts/uninstall.sh<span class="w"> </span>--reset
 </code></pre></div>
+<hr />
+<h2 id="7-cicd-buildah-agent-구성">7. CI/CD Buildah agent 구성</h2>
+<p>Jenkins에서 애플리케이션 컨테이너 이미지를 빌드하려면 기본 설치 이후
+<code>cicd-buildah-guide.md</code> 절차를 적용합니다.</p>
+<p>기본 구성은 Kubernetes agent Pod에서 Buildah rootless 런타임을 사용합니다.
+Kaniko와 Docker-in-Docker는 기본 경로에서 제외합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 온라인 준비 환경에서 Buildah agent 이미지 생성</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">cd</span><span class="w"> </span>jenkins-2.555.3/jenkins-build/buildah-agent
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>build-buildah-agent.sh
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>./build-buildah-agent.sh
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># 폐쇄망에서 Harbor 업로드</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">cd</span><span class="w"> </span>../../
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>sudo<span class="w"> </span>./scripts/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># Jenkins에 Buildah agent podTemplate 적용</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="c1"># (자동화 install.sh를 사용하지 않는 경우, 아래 예시처럼 values-infra.yaml에 해당 설정을 수동 병합해 설치합니다)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>jenkins<span class="w"> </span>./charts/jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">  </span>-n<span class="w"> </span>jenkins<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span>-f<span class="w"> </span>values.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">  </span>-f<span class="w"> </span>values-infra.yaml
+</code></pre></div>
+<p>표준 Jenkinsfile 예시는 <code>examples/Jenkinsfile.buildah</code>를 사용합니다.
+Argo CD Application 예시는 <code>examples/argocd-application-sample.yaml</code>을 사용합니다.</p>
+<p>Harbor 도메인은 Jenkins buildah agent Pod와 Kubernetes worker node가 모두
+해석할 수 있는 동일한 주소로 지정합니다. DNS에 등록되어 있지 않은 테스트
+환경에서는 <code>cicd-buildah-guide.md</code>의 Harbor 주소 및 DNS 기준 절차에 따라
+agent Pod <code>hostAliases</code>와 노드의 registry 접근 설정을 함께 검토합니다.</p>
 
 
 
