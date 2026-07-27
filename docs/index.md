@@ -147,6 +147,8 @@ hide:
     - [:octicons-arrow-right-24: DB 장애 복구 및 트러블슈팅](db/ha/galera-recovery.md)
     - [:octicons-arrow-right-24: Galera Cluster 복구 가이드](db/backup-restore/mariadb-galera-restore-guide.md)
     - [:octicons-arrow-right-24: Galera Cluster 백업 동작 확인](db/backup-restore/mariadb-galera-backup-verify-guide.md)
+    - [:octicons-arrow-right-24: Galera Cluster 롤링 업그레이드 (v10.11.14 → v10.11.18)](db/ha/galera-cluster-upgrade-guide.md)
+    - [:octicons-arrow-right-24: Galera Cluster 업그레이드 트러블슈팅](db/ha/galera-upgrade-troubleshooting.md)
 
 - :simple-redis: **NoSQL 및 캐시**
 

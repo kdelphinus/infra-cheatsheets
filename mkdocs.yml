@@ -164,6 +164,8 @@ nav:
       - 'Galera Cluster 백업 (간소판)': db/ha/galera-backup-simple-guide.md
       - 'Galera Cluster 백업 동작 확인': db/backup-restore/mariadb-galera-backup-verify-guide.md
       - 'Galera Cluster 재부팅': db/galera-restore/galera-reboot-guide.md
+      - 'Galera Cluster 롤링 업그레이드 (v10.11.14 → v10.11.18)': db/ha/galera-cluster-upgrade-guide.md
+      - 'Galera Cluster 업그레이드 트러블슈팅': db/ha/galera-upgrade-troubleshooting.md
     - Redis Stream:
       - 'Redis Stream 개발자 가이드': db/redis/001-redis-stream-overview.md
       - '설치 및 운영 가이드': db/redis/002-redis-stream-install.md
