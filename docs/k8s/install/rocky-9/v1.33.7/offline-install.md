@@ -28,8 +28,43 @@ sudo ./scripts/download_assets_offline.sh
 
 ## 설치 전 체크리스트
 
-!!! important "Kubernetes 설치 전 사전 점검 필수"
-    Kubernetes 클러스터를 설치하기 전에 반드시 **[Kubernetes 설치 전 사전 확인 가이드 및 체크리스트](../../k8s-precheck-checklist.md)**를 먼저 확인하여 대상 서버들의 네트워크 대역, swap 비활성화, 시간 동기화(NTP), 포트 점유 여부 등을 철저히 검증하십시오. 사전 검증이 누락될 경우 설치 도중 심각한 오류가 발생할 수 있습니다.
+아래 항목은 단일 구성과 HA 구성 모두 설치 전에 확정합니다. 확정한 값은 `/etc/hosts`, 로드밸런서 설정, `kubeadm init` 인자에 동일하게 반영해야 합니다.
+
+### 1. 구성 및 작업 범위
+
+- [ ] 구성 유형 확정: 단일 컨트롤 플레인, HA 3중화, 물리 서버, 가상 서버 여부
+- [ ] 노드별 역할, hostname, 관리 IP, Kubernetes 통신 NIC, gateway, DNS, NTP 서버 확정
+- [ ] 작업 가능 시간과 금지 작업 확인: reboot, 네트워크 서비스 재시작, 방화벽 reload, Docker/containerd 재시작, OS 전체 업데이트
+- [ ] 기존 서비스, 기존 컨테이너, 6443 포트 사용 서비스, NodePort 사용 서비스, HAProxy/keepalived 사용 여부 확인
+
+### 2. 네트워크 대역 및 엔드포인트
+
+- [ ] Pod CIDR 확정: `/20` 권장, 최소 `/22` 수준으로 환경 규모에 맞게 조정
+- [ ] Service CIDR 확정: `/24` 가능, 여유가 필요하면 `/22` 권장
+- [ ] Pod CIDR과 Service CIDR이 서버 실제 IP, 사내망, VPN, DB망, 관리망, 백업망, 스토리지망과 겹치지 않음 확인
+- [ ] API endpoint 확정: 단일 노드 IP, VIP, FQDN 중 선택하고 인증서 SAN, DNS 또는 `/etc/hosts` 반영 방식 확정
+- [ ] VIP 사용 시 미사용 IP 여부, 로드밸런서 방식, keepalived VRRP protocol 112 허용 여부, HAProxy 6443 bind 충돌 여부 확인
+
+### 3. 방화벽 및 포트
+
+- [ ] Control Plane 포트 허용: 6443/TCP, 2379-2380/TCP, 10250/TCP, 10257/TCP, 10259/TCP
+- [ ] Worker 포트 허용: 10250/TCP, 10256/TCP, NodePort 기본 범위 30000-32767/TCP,UDP
+- [ ] CNI, Ingress, 스토리지, Harbor, DNS, NTP 등 부가 구성에서 필요한 추가 포트 확인
+- [ ] 방화벽 flush, iptables/nftables 초기화, firewalld reload가 금지된 환경이면 허용 규칙 방식으로 사전 합의
+
+### 4. 런타임, OS, 폐쇄망 자산
+
+- [ ] Docker/containerd 설치 상태, 기존 컨테이너 사용 여부, containerd 또는 Docker 재시작 가능 여부 확인
+- [ ] kubelet과 containerd의 cgroup driver를 `systemd`로 맞출 수 있는지 확인
+- [ ] OS 버전, 커널 버전, Kubernetes 버전, containerd 버전, CNI 버전의 호환성 확인
+- [ ] swap 비활성화 가능 여부, 시간 동기화 상태, 디스크 여유 공간, inode 여유, hostname/MAC address/product UUID 중복 없음 확인
+- [ ] 폐쇄망 반입 자산 확인: RPM/DEB, 바이너리, 이미지, 매니페스트, Helm chart, Harbor 인증서와 레지스트리 접속 정보
+
+### 5. 설치 진행 판단
+
+- [ ] 미확정 항목이 없고, 운영 영향이 있는 조치의 승인 범위가 명확한지 확인
+- [ ] 장애 발생 시 되돌릴 범위와 담당자 연락 경로 확인
+- [ ] API Server 설정, etcd TLS, 인증서 취약점은 `[Kubernetes 취약점 점검 및 보완 가이드](../../../security/005-vulnerability-check-remediation.md)` 기준으로 점검
 
 ## 디렉토리 구조
 
@@ -40,6 +75,7 @@ sudo ./scripts/download_assets_offline.sh
 | `k8s/binaries/` | helm, cri-dockerd, nerdctl 등 바이너리 |
 | `k8s/images/` | Kubernetes 코어 및 Calico CNI 컨테이너 이미지 `.tar` |
 | `k8s/utils/` | calico.yaml 등 구성 매니페스트 |
+| `[Kubernetes 취약점 점검 및 보완 가이드](../../../security/005-vulnerability-check-remediation.md)` | Kubernetes kubeadm API Server 설정, etcd TLS, 인증서 취약점 점검 및 보완 절차 |
 
 ## Phase 1: 패키지 설치 (전체 노드)
 
@@ -89,7 +125,34 @@ net.ipv4.ip_forward                 = 1
 EOF
 sudo sysctl --system
 
-# 4. 방화벽 비활성화 (보안 정책에 따라 포트 설정도 가능)
+# 4. 파일 디스크립터(FD) 및 시스템 Limits 상향 (정석 설정)
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-limits.conf
+fs.file-max = 2097152
+fs.inotify.max_user_watches = 524288
+fs.inotify.max_user_instances = 8192
+EOF
+sudo sysctl --system
+
+cat <<EOF | sudo tee /etc/security/limits.d/99-kubernetes-limits.conf
+* soft nofile 1048576
+* hard nofile 1048576
+* soft nproc 1048576
+* hard nproc 1048576
+root soft nofile 1048576
+root hard nofile 1048576
+EOF
+
+sudo mkdir -p /etc/systemd/system/kubelet.service.d
+cat <<EOF | sudo tee /etc/systemd/system/kubelet.service.d/limits.conf
+[Service]
+LimitNOFILE=1048576
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
+EOF
+sudo systemctl daemon-reload
+
+# 5. 방화벽 비활성화 (보안 정책에 따라 포트 설정도 가능)
 sudo systemctl stop firewalld 2>/dev/null || true
 sudo systemctl disable firewalld 2>/dev/null || true
 sudo systemctl stop ufw 2>/dev/null || true
@@ -112,3 +175,7 @@ sudo systemctl restart containerd
 ```
 
 이후 설치 상세 절차(HA 프록시 구성 및 `kubeadm init`)는 `install-guide-online.md`를 참고하여 동일하게 수행하되, 패키지 및 이미지 pull 부분만 오프라인으로 대체됩니다.
+
+## 참고: 취약점 점검 및 보완
+
+Kubernetes kubeadm API Server 설정, etcd TLS, 인증서 취약점 점검 및 보완 절차는 `[Kubernetes 취약점 점검 및 보완 가이드](../../../security/005-vulnerability-check-remediation.md)`를 참조하세요.

@@ -19,9 +19,6 @@ Cilium 중 선택하며, Rocky Linux 9.6 (RHEL 9 계열) 환경에 최적화되�
 - `sudo` 권한 및 Root 권한
 - 최소 사양: CPU 2 Core, RAM 2GB 이상
 
-!!! important "Kubernetes 설치 전 사전 점검 필수"
-    Kubernetes 클러스터를 설치하기 전에 반드시 **[Kubernetes 설치 전 사전 확인 가이드 및 체크리스트](../../k8s-precheck-checklist.md)**를 먼저 확인하여 대상 서버들의 네트워크 대역, swap 비활성화, 시간 동기화(NTP), 포트 점유 여부 등을 철저히 검증하십시오. 사전 검증이 누락될 경우 설치 도중 심각한 오류가 발생할 수 있습니다.
-
 ## Phase 0: WSL2 환경 사전 준비 (WSL 환경인 경우에만)
 
 WSL2에서 진행하는 경우, kubelet/containerd가 systemd 단위로 동작해야 하므로
@@ -1268,3 +1265,7 @@ kubectl get pods -n kube-system
 **주의**: Rocky Linux 8에서는 `nftables`와 `iptables` 간섭이 있을 수 있으므로,
 방화벽 설정 시 주의가 필요합니다. 상기 가이드는 방화벽을 끄는 것을 전제로 합니다.
 `iptables` 명령어는 Rocky 8에서 `iptables-nft` 백엔드로 alias 되어 동작합니다.
+
+## 참고: 취약점 점검 및 보완
+
+Kubernetes kubeadm API Server 설정, etcd TLS, 인증서 취약점 점검 및 보완 절차는 `[Kubernetes 취약점 점검 및 보완 가이드](../../../security/005-vulnerability-check-remediation.md)`를 참조하세요.
