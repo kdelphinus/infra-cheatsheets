@@ -87,7 +87,7 @@ sudo mariadb \
 ```
 
 백업 구성과 운영 절차는
-[Galera Simple Backup 가이드](../backup-restore/galera-backup-simple-guide.md)를
+[Galera Simple Backup 가이드](galera-backup-simple-guide.md)를
 참조한다.
 
 ### 5.2 업그레이드 전 Dump 보존
