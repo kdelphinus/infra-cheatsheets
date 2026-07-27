@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-monitoring-오프라인-설치-가이드-ctr-기반" class="md-skip">
+        <a href="#-monitoring-오프라인-설치-가이드-kube-prometheus-stack" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -2134,10 +2134,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#1-전제-조건" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 Harbor 업로드
+        1. 전제 조건
       
     </span>
   </a>
@@ -2145,10 +2145,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2단계-설치-실행" class="md-nav__link">
+  <a href="#2-1단계-이미지-harbor-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 설치 실행
+        2. 1단계: 이미지 Harbor 업로드
       
     </span>
   </a>
@@ -2156,10 +2156,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-httproute-적용-envoy-gateway-사용-시" class="md-nav__link">
+  <a href="#3-2단계-설치-실행-대화형" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)
+        3. 2단계: 설치 실행 (대화형)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 2단계: 설치 실행 (대화형)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#주요-입력-정보-및-처리-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 입력 정보 및 처리 방식
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-3단계-httproute-적용-envoy-gateway-사용-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)
       
     </span>
   </a>
@@ -2167,10 +2195,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4단계-재설치-시-pvc-처리-선택" class="md-nav__link">
+  <a href="#5-수동-설치-및-업그레이드-가이드-manual-installation--upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: 재설치 시 PVC 처리 (선택)
+        5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-수동-설치-진행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 수동 설치 진행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-서비스-삭제-및-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 서비스 삭제 및 초기화
       
     </span>
   </a>
@@ -2178,24 +2234,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
+  <a href="#7-설치-확인-및-접속" class="md-nav__link">
     <span class="md-ellipsis">
       
-        삭제
+        7. 설치 확인 및 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 설치 확인 및 접속">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#초기-로그인-및-비밀번호-획득" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        초기 로그인 및 비밀번호 획득
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#5단계-설치-확인-및-접속" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5단계: 설치 확인 및 접속
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4671,6 +4733,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/ha/galera-cluster-upgrade-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 롤링 업그레이드 (v10.11.14 → v10.11.18)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../db/ha/galera-upgrade-troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 업그레이드 트러블슈팅
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6459,10 +6577,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1단계-이미지-harbor-업로드" class="md-nav__link">
+  <a href="#1-전제-조건" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1단계: 이미지 Harbor 업로드
+        1. 전제 조건
       
     </span>
   </a>
@@ -6470,10 +6588,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2단계-설치-실행" class="md-nav__link">
+  <a href="#2-1단계-이미지-harbor-업로드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2단계: 설치 실행
+        2. 1단계: 이미지 Harbor 업로드
       
     </span>
   </a>
@@ -6481,10 +6599,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3단계-httproute-적용-envoy-gateway-사용-시" class="md-nav__link">
+  <a href="#3-2단계-설치-실행-대화형" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)
+        3. 2단계: 설치 실행 (대화형)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 2단계: 설치 실행 (대화형)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#주요-입력-정보-및-처리-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주요 입력 정보 및 처리 방식
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-3단계-httproute-적용-envoy-gateway-사용-시" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)
       
     </span>
   </a>
@@ -6492,10 +6638,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4단계-재설치-시-pvc-처리-선택" class="md-nav__link">
+  <a href="#5-수동-설치-및-업그레이드-가이드-manual-installation--upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4단계: 재설치 시 PVC 처리 (선택)
+        5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-수동-설치-진행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 수동 설치 진행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-서비스-삭제-및-초기화" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 서비스 삭제 및 초기화
       
     </span>
   </a>
@@ -6503,24 +6677,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#삭제" class="md-nav__link">
+  <a href="#7-설치-확인-및-접속" class="md-nav__link">
     <span class="md-ellipsis">
       
-        삭제
+        7. 설치 확인 및 접속
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 설치 확인 및 접속">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#초기-로그인-및-비밀번호-획득" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        초기 로그인 및 비밀번호 획득
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#5단계-설치-확인-및-접속" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5단계: 설치 확인 및 접속
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6544,81 +6724,123 @@
   
 
 
-<h1 id="-monitoring-오프라인-설치-가이드-ctr-기반">🚀 Monitoring 오프라인 설치 가이드 (ctr 기반)</h1>
-<p>폐쇄망 환경에서 <code>ctr</code>을 사용하여 통합 모니터링(Prometheus/Grafana)을 구축하는 절차입니다.</p>
+<h1 id="-monitoring-오프라인-설치-가이드-kube-prometheus-stack">🚀 Monitoring 오프라인 설치 가이드 (kube-prometheus-stack)</h1>
+<p>폐쇄망 환경에서 kube-prometheus-stack을 사용하여 통합 모니터링(Prometheus/Grafana)을 구축하는 절차입니다.</p>
+<hr />
 <h2 id="0-오프라인-설치-자산-준비-인터넷-환경">0. 오프라인 설치 자산 준비 (인터넷 환경)</h2>
 <p>폐쇄망에 반입할 Helm 차트와 컨테이너 이미지(.tar)가 <code>charts/</code> 및 <code>images/</code> 디렉토리에 없는 경우, <strong>인터넷이 연결된 외부 PC(리눅스)</strong>에서 아래 스크립트를 실행하여 자산을 다운로드해야 합니다.</p>
 <blockquote>
 <p><strong>주의</strong>: 이 작업은 폐쇄망 내부가 아닌, 외부망에서 사전에 수행되어야 합니다. (Docker 또는 containerd(<code>ctr</code>), <code>helm</code> CLI 설치 필수)</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 스크립트 디렉토리로 이동</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>scripts/
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 실행 권한 부여 및 다운로드 스크립트 실행</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./scripts/download_assets_offline.sh
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>./scripts/download_assets_offline.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 컴포넌트 루트 디렉토리에서 실행 권한 부여 및 다운로드 스크립트 실행</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./scripts/download_assets_offline.sh
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>./scripts/download_assets_offline.sh
 </code></pre></div>
 <p>스크립트 실행이 완료되면 <code>charts/</code> 디렉토리에 <code>.tgz</code> 차트 파일이, <code>images/</code> 디렉토리에 <code>.tar</code> 이미지 파일들이 생성됩니다. 전체 프로젝트 폴더를 압축하여 폐쇄망 내부로 반입하십시오.</p>
-<h2 id="1단계-이미지-harbor-업로드">1단계: 이미지 Harbor 업로드</h2>
-<p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
+<hr />
+<h2 id="1-전제-조건">1. 전제 조건</h2>
+<ul>
+<li>Kubernetes 클러스터 구성 완료 (1.25.0 이상 권장)</li>
+<li><code>kubectl</code> 및 <code>helm</code> CLI 사용 가능</li>
+<li>Harbor 레지스트리 구축 완료 (<code>&lt;NODE_IP&gt;:30002</code>)</li>
+<li>인터넷 연결 환경에서 이미지 및 Helm 차트 사전 준비 완료</li>
+</ul>
+<hr />
+<h2 id="2-1단계-이미지-harbor-업로드">2. 1단계: 이미지 Harbor 업로드</h2>
+<p>모든 작업은 컴포넌트 루트 디렉토리(<code>monitoring-0.89.0/</code>)에서 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1. 이미지 로드 (ctr 사용)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>images/*.tar<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sudo<span class="w"> </span>ctr<span class="w"> </span>-n<span class="w"> </span>k8s.io<span class="w"> </span>images<span class="w"> </span>import<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 2. upload_images_to_harbor_v3-lite.sh 상단 Config 수정</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># IMAGE_DIR      : ./images (현재 디렉터리의 이미지 폴더 지정)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># HARBOR_REGISTRY: &lt;NODE_IP&gt;:30002</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>./images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 2. 이미지 마이그레이션 및 Harbor 푸시 실행</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>chmod<span class="w"> </span>+x<span class="w"> </span>images/upload_images_to_harbor_v3-lite.sh
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>./images/upload_images_to_harbor_v3-lite.sh
 </code></pre></div>
-<h2 id="2단계-설치-실행">2단계: 설치 실행</h2>
+<hr />
+<h2 id="3-2단계-설치-실행-대화형">3. 2단계: 설치 실행 (대화형)</h2>
 <p>모든 작업은 컴포넌트 루트 디렉토리에서 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 헬름 설치 (루트의 values.yaml 자동 반영)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 헬름 설치 (values-infra.yaml 자동 생성 및 base values.yaml 병합)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/install.sh
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>./scripts/install.sh
 </code></pre></div>
-<h2 id="3단계-httproute-적용-envoy-gateway-사용-시">3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)</h2>
+<h3 id="주요-입력-정보-및-처리-방식">주요 입력 정보 및 처리 방식</h3>
+<ul>
+<li><strong>이미지 소스</strong>:</li>
+<li>Harbor 방식은 <code>&lt;HARBOR_REGISTRY&gt;/&lt;HARBOR_PROJECT&gt;/...</code> 이미지를 사용합니다.</li>
+<li>로컬 방식은 각 노드에 사전 로드된 기본 컨테이너 이미지를 활용합니다.</li>
+<li><strong>설정 동기화</strong>:</li>
+<li>입력된 설정은 base인 <code>values.yaml</code>을 변경하지 않고, 가변 인프라 설정 전용 파일인 <code>values-infra.yaml</code>을 생성하여 병합 배포하므로 <strong>Single Source of Truth</strong>가 보장됩니다.</li>
+<li>생성된 <code>values-infra.yaml</code> 및 <code>install.conf</code>는 일반 삭제 시에도 디렉토리에 보존되어 재설치 및 업그레이드 시 멱등 배포를 보장하며, 오직 <code>--reset</code> 초기화 명령 시에만 소거됩니다.</li>
+</ul>
+<hr />
+<h2 id="4-3단계-httproute-적용-envoy-gateway-사용-시">4. 3단계: HTTPRoute 적용 (Envoy Gateway 사용 시)</h2>
 <p>Envoy Gateway를 Ingress로 사용하는 경우 HTTPRoute를 적용합니다.
 <code>manifests/httproute.yaml</code> 상단의 hostname을 실제 도메인으로 수정한 뒤 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># hostname 확인 및 수정</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># grafana.devops.internal / prometheus.devops.internal / alertmanager.devops.internal</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>manifests/httproute.yaml
 </code></pre></div>
-<h2 id="4단계-재설치-시-pvc-처리-선택">4단계: 재설치 시 PVC 처리 (선택)</h2>
-<p>Helm은 <code>uninstall</code> 시 PVC를 삭제하지 않습니다. 데이터를 초기화하려면 수동으로 삭제해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 1. Helm 릴리즈 제거</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 2. 데이터 초기화 필요 시 PVC/PV 삭제</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pvc<span class="w"> </span>--all<span class="w"> </span>-n<span class="w"> </span>monitoring
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># (ReclaimPolicy가 Retain인 경우 PV도 수동 삭제 필요)</span>
+<hr />
+<h2 id="5-수동-설치-및-업그레이드-가이드-manual-installation--upgrade">5. 수동 설치 및 업그레이드 가이드 (Manual Installation &amp; Upgrade)</h2>
+<p>자동화 스크립트 장애 대처용 수동 반영 가이드라인입니다.</p>
+<h3 id="51-수동-설치-진행">5.1. 수동 설치 진행</h3>
+<ol>
+<li><code>values.yaml</code> 을 수정하지 않고 그대로 두고, <code>values-infra.yaml</code> 파일을 작성하여 로컬 사양(이미지 레지스트리 경로, 스토리지 클래스, 스토리지 크기)을 오버라이드합니다.</li>
+<li><strong>보안 가이드</strong>: Grafana의 초기 <code>adminPassword</code>는 values 파일에 평문 기재하지 않고 비워둠으로써, Helm 차트 템플릿의 무작위 비밀번호 자동 생성 기능을 보존 계승합니다.
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">global</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">imageRegistry</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;192.168.1.10:30002&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">imageNamePrefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;library/&quot;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nt">prometheus</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">prometheusSpec</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">storageSpec</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="nt">volumeClaimTemplate</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">          </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;manual&quot;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">          </span><span class="nt">accessModes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;ReadWriteOnce&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">          </span><span class="nt">resources</span><span class="p">:</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">            </span><span class="nt">requests</span><span class="p">:</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">              </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;50Gi&quot;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="nt">grafana</span><span class="p">:</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">  </span><span class="nt">persistence</span><span class="p">:</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;manual&quot;</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="nt">size</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10Gi&quot;</span>
+</code></pre></div></li>
+<li>Kubernetes 영구 볼륨 매니페스트 및 Helm 배포를 직접 적용합니다.
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 1. 네임스페이스 생성</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>monitoring<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 2. Prometheus 및 Grafana용 정적 PV 배포 (HostPath/정적 PV 환경 시)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># (manifests 디렉토리에 정의해 둔 영구 볼륨 리소스를 적용합니다)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>./manifests/pv-volume.yaml
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># 3. Helm 배포 (멱등 배포)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>prometheus<span class="w"> </span>./charts/kube-prometheus-stack<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span>-f<span class="w"> </span>./values.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span>-f<span class="w"> </span>./values-infra.yaml
+</code></pre></div></li>
+</ol>
+<hr />
+<h2 id="6-서비스-삭제-및-초기화">6. 서비스 삭제 및 초기화</h2>
+<p>Monitoring 스택을 완전히 제거하려면 다음 명령을 사용합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 리소스 삭제 (설정 파일 및 데이터 볼륨 보존)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>./scripts/uninstall.sh
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># 완전 초기화 (설정 파일 및 데이터 볼륨 완전 제거)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>sudo<span class="w"> </span>./scripts/uninstall.sh<span class="w"> </span>--reset
 </code></pre></div>
-<h2 id="삭제">삭제</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./scripts/uninstall.sh
+<hr />
+<h2 id="7-설치-확인-및-접속">7. 설치 확인 및 접속</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Grafana 접속 (Port-forward 테스트)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/prometheus-grafana<span class="w"> </span><span class="m">3000</span>:80<span class="w"> </span>-n<span class="w"> </span>monitoring
 </code></pre></div>
-<h2 id="5단계-설치-확인-및-접속">5단계: 설치 확인 및 접속</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Grafana 접속 (Port-forward 테스트)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/prometheus-grafana<span class="w"> </span><span class="m">3000</span>:80<span class="w"> </span>-n<span class="w"> </span>monitoring
-</code></pre></div>
-<p>Grafana 초기 로그인 정보 (변경 시 <code>values.yaml</code>의 <code>grafana.adminUser</code> / <code>grafana.adminPassword</code> 참고):</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">항목</th>
-<th style="text-align: left;">기본값</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">ID</td>
-<td style="text-align: left;"><code>admin</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">Password</td>
-<td style="text-align: left;"><code>admin</code></td>
-</tr>
-</tbody>
-</table>
+<h3 id="초기-로그인-및-비밀번호-획득">초기 로그인 및 비밀번호 획득</h3>
+<ul>
+<li><strong>ID</strong>: <code>admin</code></li>
+<li><strong>Password</strong>: <code>values-infra.yaml</code>에 패스워드를 지정하지 않았으므로, 헬름이 자동 생성한 K8s Secret에서 디코딩하여 조회합니다.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>prometheus-grafana<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span>
+</code></pre></div></li>
+</ul>
 
 
 
@@ -6671,7 +6893,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

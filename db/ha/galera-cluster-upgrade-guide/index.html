@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/">
+        <link rel="canonical" href="https://kdelphinus.github.io/infra-cheatsheets/db/ha/galera-cluster-upgrade-guide/">
       
       
-        <link rel="prev" href="../envoy-v1.36.3-install-online/">
+        <link rel="prev" href="../../galera-restore/galera-reboot-guide/">
       
       
-        <link rel="next" href="../../install/rocky-9/v1.30/online-install/">
+        <link rel="next" href="../galera-upgrade-troubleshooting/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Envoy 클라이언트 IP 보존 (v1.36.3) - Infra Cheatsheets</title>
+        <title>Galera Cluster 롤링 업그레이드 (v10.11.14 → v10.11.18) - Infra Cheatsheets</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#클라이언트-ip-보존-가이드-haproxy--proxy-protocol" class="md-skip">
+        <a href="#mariadb-galera-101114에서-101118-업그레이드-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Envoy 클라이언트 IP 보존 (v1.36.3)
+              Galera Cluster 롤링 업그레이드 (v10.11.14 → v10.11.18)
             
           </span>
         </div>
@@ -252,7 +252,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../install/k8s-precheck-checklist/" class="md-tabs__link">
+        <a href="../../../k8s/install/k8s-precheck-checklist/" class="md-tabs__link">
           
   
   
@@ -361,6 +361,8 @@
   
   
   
+    
+  
   
     
     
@@ -368,11 +370,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../db/ha/galera-cluster/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../galera-cluster/" class="md-tabs__link">
           
   
   
@@ -481,8 +485,6 @@
   
   
   
-    
-  
   
     
     
@@ -490,13 +492,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../envoy-v1.36.3-install/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-tabs__link">
           
   
   
@@ -776,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/k8s-precheck-checklist/" class="md-nav__link">
+      <a href="../../../k8s/install/k8s-precheck-checklist/" class="md-nav__link">
         
   
   
@@ -904,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ubuntu-24.04/v1.36.1/online-install/" class="md-nav__link">
+      <a href="../../../k8s/install/ubuntu-24.04/v1.36.1/online-install/" class="md-nav__link">
         
   
   
@@ -990,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ubuntu-24.04/v1.33.11/ready-offline/" class="md-nav__link">
+      <a href="../../../k8s/install/ubuntu-24.04/v1.33.11/ready-offline/" class="md-nav__link">
         
   
   
@@ -1018,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ubuntu-24.04/v1.33.11/offline-install/" class="md-nav__link">
+      <a href="../../../k8s/install/ubuntu-24.04/v1.33.11/offline-install/" class="md-nav__link">
         
   
   
@@ -1046,7 +1046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/ubuntu-24.04/v1.33.11/online-install/" class="md-nav__link">
+      <a href="../../../k8s/install/ubuntu-24.04/v1.33.11/online-install/" class="md-nav__link">
         
   
   
@@ -1190,7 +1190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/v1.33.7/offline-install/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/v1.33.7/offline-install/" class="md-nav__link">
         
   
   
@@ -1218,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/v1.33.7/online-install/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/v1.33.7/online-install/" class="md-nav__link">
         
   
   
@@ -1304,7 +1304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/v1.30/ready-offline/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/v1.30/ready-offline/" class="md-nav__link">
         
   
   
@@ -1332,7 +1332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/v1.30/offline-install/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/v1.30/offline-install/" class="md-nav__link">
         
   
   
@@ -1360,7 +1360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/git-cli-install/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/git-cli-install/" class="md-nav__link">
         
   
   
@@ -1388,7 +1388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/docker-offline-install/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/docker-offline-install/" class="md-nav__link">
         
   
   
@@ -1432,7 +1432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/k8s-offline-builder-guide/" class="md-nav__link">
+      <a href="../../../k8s/install/k8s-offline-builder-guide/" class="md-nav__link">
         
   
   
@@ -1460,7 +1460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/reproducibility-check-ubuntu/" class="md-nav__link">
+      <a href="../../../k8s/install/reproducibility-check-ubuntu/" class="md-nav__link">
         
   
   
@@ -1546,7 +1546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/base-infra/" class="md-nav__link">
+      <a href="../../../k8s/install/base-infra/" class="md-nav__link">
         
   
   
@@ -1574,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/metallb-install/" class="md-nav__link">
+      <a href="../../../k8s/install/metallb-install/" class="md-nav__link">
         
   
   
@@ -1602,7 +1602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../network/cilium-install/" class="md-nav__link">
+      <a href="../../../k8s/network/cilium-install/" class="md-nav__link">
         
   
   
@@ -1688,7 +1688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-pv-nas/" class="md-nav__link">
+      <a href="../../../k8s/use-pv-nas/" class="md-nav__link">
         
   
   
@@ -1716,7 +1716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../storage/trident-install/" class="md-nav__link">
+      <a href="../../../k8s/storage/trident-install/" class="md-nav__link">
         
   
   
@@ -1802,7 +1802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.37.2-install/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install/" class="md-nav__link">
         
   
   
@@ -1830,7 +1830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.37.2-install-online/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-v1.37.2-install-online/" class="md-nav__link">
         
   
   
@@ -1858,7 +1858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-v1.37.2-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -1886,7 +1886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx-nic-migration/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/nginx-nic-migration/" class="md-nav__link">
         
   
   
@@ -1914,7 +1914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-ops-checklist/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-ops-checklist/" class="md-nav__link">
         
   
   
@@ -1942,7 +1942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../002-convert_ingress_to_httproute/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/002-convert_ingress_to_httproute/" class="md-nav__link">
         
   
   
@@ -1970,7 +1970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-gateway-network-config/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-gateway-network-config/" class="md-nav__link">
         
   
   
@@ -2056,7 +2056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/001-kube-prometheus-stack/" class="md-nav__link">
+      <a href="../../../k8s/monitoring/001-kube-prometheus-stack/" class="md-nav__link">
         
   
   
@@ -2084,7 +2084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/002-operation-guide/" class="md-nav__link">
+      <a href="../../../k8s/monitoring/002-operation-guide/" class="md-nav__link">
         
   
   
@@ -2112,7 +2112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/opentelemetry-collector-install/" class="md-nav__link">
+      <a href="../../../k8s/monitoring/opentelemetry-collector-install/" class="md-nav__link">
         
   
   
@@ -2140,7 +2140,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../monitoring/opentelemetry-operator-install/" class="md-nav__link">
+      <a href="../../../k8s/monitoring/opentelemetry-operator-install/" class="md-nav__link">
         
   
   
@@ -2226,7 +2226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/001-falco-install/" class="md-nav__link">
+      <a href="../../../k8s/security/001-falco-install/" class="md-nav__link">
         
   
   
@@ -2254,7 +2254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/002-tetragon-install/" class="md-nav__link">
+      <a href="../../../k8s/security/002-tetragon-install/" class="md-nav__link">
         
   
   
@@ -2282,7 +2282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/003-tetragon-security-policy/" class="md-nav__link">
+      <a href="../../../k8s/security/003-tetragon-security-policy/" class="md-nav__link">
         
   
   
@@ -2310,7 +2310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/004-gatekeeper-install/" class="md-nav__link">
+      <a href="../../../k8s/security/004-gatekeeper-install/" class="md-nav__link">
         
   
   
@@ -2338,7 +2338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/005-vulnerability-check-remediation/" class="md-nav__link">
+      <a href="../../../k8s/security/005-vulnerability-check-remediation/" class="md-nav__link">
         
   
   
@@ -2424,7 +2424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../backup-restore/001-velero-install/" class="md-nav__link">
+      <a href="../../../k8s/backup-restore/001-velero-install/" class="md-nav__link">
         
   
   
@@ -2510,7 +2510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
+      <a href="../../../k8s/operations/rocky-v1.30-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2538,7 +2538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
+      <a href="../../../k8s/operations/rocky-v1.33.7-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2566,7 +2566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
+      <a href="../../../k8s/operations/ubuntu-v1.33.11-cluster-reboot/" class="md-nav__link">
         
   
   
@@ -2594,7 +2594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/etcd-disk-migration-sop/" class="md-nav__link">
+      <a href="../../../k8s/operations/etcd-disk-migration-sop/" class="md-nav__link">
         
   
   
@@ -2680,7 +2680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../capi/cheatsheet/" class="md-nav__link">
+      <a href="../../../k8s/capi/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2766,7 +2766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cheatsheet/" class="md-nav__link">
+      <a href="../../../k8s/cheatsheet/" class="md-nav__link">
         
   
   
@@ -2794,7 +2794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../container-image-cheatsheet/" class="md-nav__link">
+      <a href="../../../k8s/container-image-cheatsheet/" class="md-nav__link">
         
   
   
@@ -2880,7 +2880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/calico-routing-troubleshooting/" class="md-nav__link">
+      <a href="../../../k8s/troubleshooting/calico-routing-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2908,7 +2908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/missed-containerport/" class="md-nav__link">
+      <a href="../../../k8s/troubleshooting/missed-containerport/" class="md-nav__link">
         
   
   
@@ -2936,7 +2936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/cilium-troubleshooting/" class="md-nav__link">
+      <a href="../../../k8s/troubleshooting/cilium-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2964,7 +2964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/falco-troubleshooting/" class="md-nav__link">
+      <a href="../../../k8s/troubleshooting/falco-troubleshooting/" class="md-nav__link">
         
   
   
@@ -2992,7 +2992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/tetragon-troubleshooting/" class="md-nav__link">
+      <a href="../../../k8s/troubleshooting/tetragon-troubleshooting/" class="md-nav__link">
         
   
   
@@ -3020,7 +3020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/httproute-troubleshooting/" class="md-nav__link">
+      <a href="../../../k8s/troubleshooting/httproute-troubleshooting/" class="md-nav__link">
         
   
   
@@ -4220,24 +4220,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   
@@ -4255,7 +4260,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4270,6 +4275,8 @@
                 
   
   
+    
+  
   
   
     
@@ -4280,11 +4287,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
         
           
           <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
@@ -4305,7 +4312,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4323,7 +4330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster/" class="md-nav__link">
+      <a href="../galera-cluster/" class="md-nav__link">
         
   
   
@@ -4351,7 +4358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster-online/" class="md-nav__link">
+      <a href="../galera-cluster-online/" class="md-nav__link">
         
   
   
@@ -4379,7 +4386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-recovery/" class="md-nav__link">
+      <a href="../galera-recovery/" class="md-nav__link">
         
   
   
@@ -4407,7 +4414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
+      <a href="../../backup-restore/mariadb-galera-restore-guide/" class="md-nav__link">
         
   
   
@@ -4435,7 +4442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-guide/" class="md-nav__link">
+      <a href="../galera-backup-guide/" class="md-nav__link">
         
   
   
@@ -4463,7 +4470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-backup-simple-guide/" class="md-nav__link">
+      <a href="../galera-backup-simple-guide/" class="md-nav__link">
         
   
   
@@ -4491,7 +4498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
+      <a href="../../backup-restore/mariadb-galera-backup-verify-guide/" class="md-nav__link">
         
   
   
@@ -4519,7 +4526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/galera-restore/galera-reboot-guide/" class="md-nav__link">
+      <a href="../../galera-restore/galera-reboot-guide/" class="md-nav__link">
         
   
   
@@ -4544,10 +4551,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../db/ha/galera-cluster-upgrade-guide/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Galera Cluster 롤링 업그레이드 (v10.11.14 → v10.11.18)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -4563,6 +4597,325 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-문서-목적" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 문서 목적
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-완료-범위" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 완료 범위
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-테스트-환경" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 테스트 환경
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-버전-및-작업-정책" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 버전 및 작업 정책
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-업그레이드-전-백업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 업그레이드 전 백업
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 업그레이드 전 백업">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-simple-backup-구성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Simple Backup 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-업그레이드-전-dump-보존" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 업그레이드 전 Dump 보존
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-무결성-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 무결성 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-업그레이드-전-점검" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 업그레이드 전 점검
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-노드별-롤링-업그레이드-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 노드별 롤링 업그레이드 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 노드별 롤링 업그레이드 절차">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-mariadb-중지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 MariaDB 중지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-정확한-버전으로-패키지-업그레이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 정확한 버전으로 패키지 업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-mariadb-시작-및-동기화-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 MariaDB 시작 및 동기화 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-시스템-테이블-및-전체-업그레이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 시스템 테이블 및 전체 업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-노드-완료-판정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 노드 완료 판정
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-테스트-중-발생한-주요-문제" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 테스트 중 발생한 주요 문제
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 테스트 중 발생한 주요 문제">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-dnf-버전-고정-정책에-의한-설치-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 DNF 버전 고정 정책에 의한 설치 차단
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-selinux에-의한-sst-및-ist-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 SELinux에 의한 SST 및 IST 차단
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-실패한-sst-프로세스가-종료-대기-상태에-머묾" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 실패한 SST 프로세스가 종료 대기 상태에 머묾
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-mariadb-upgrade-phase-3-잠금-대기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 mariadb-upgrade Phase 3 잠금 대기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-최종-검증-결과" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 최종 검증 결과
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 최종 검증 결과">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-패키지-및-클러스터" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 패키지 및 클러스터
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-db1-백업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 DB1 백업
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-최종-체크리스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 최종 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-완료-판정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 완료 판정
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4575,7 +4928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/ha/galera-upgrade-troubleshooting/" class="md-nav__link">
+      <a href="../galera-upgrade-troubleshooting/" class="md-nav__link">
         
   
   
@@ -4661,7 +5014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/001-redis-stream-overview/" class="md-nav__link">
+      <a href="../../redis/001-redis-stream-overview/" class="md-nav__link">
         
   
   
@@ -4689,7 +5042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/redis/002-redis-stream-install/" class="md-nav__link">
+      <a href="../../redis/002-redis-stream-install/" class="md-nav__link">
         
   
   
@@ -4775,7 +5128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/kafka/kafka-3.9.0-install/" class="md-nav__link">
+      <a href="../../kafka/kafka-3.9.0-install/" class="md-nav__link">
         
   
   
@@ -4803,7 +5156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/kafka/kafka-4.0.0-install/" class="md-nav__link">
+      <a href="../../kafka/kafka-4.0.0-install/" class="md-nav__link">
         
   
   
@@ -4889,7 +5242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/ready-mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../install/ready-mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -4917,7 +5270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-air-gapped-install/" class="md-nav__link">
+      <a href="../../install/mariadb-air-gapped-install/" class="md-nav__link">
         
   
   
@@ -4945,7 +5298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/install/mariadb-troubleshooting/" class="md-nav__link">
+      <a href="../../install/mariadb-troubleshooting/" class="md-nav__link">
         
   
   
@@ -6037,29 +6390,24 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
             
   
   
@@ -6077,7 +6425,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
@@ -6092,8 +6440,6 @@
                 
   
   
-    
-  
   
   
     
@@ -6104,11 +6450,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_1" >
         
           
           <label class="md-nav__link" for="__nav_12_1" id="__nav_12_1_label" tabindex="0">
@@ -6129,7 +6475,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_12_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -6147,7 +6493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.36.3-install/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install/" class="md-nav__link">
         
   
   
@@ -6175,7 +6521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy-v1.36.3-install-online/" class="md-nav__link">
+      <a href="../../../k8s/gateway-api/envoy-v1.36.3-install-online/" class="md-nav__link">
         
   
   
@@ -6200,37 +6546,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Envoy 클라이언트 IP 보존 (v1.36.3)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../k8s/gateway-api/envoy-v1.36.3-client-ip-preservation/" class="md-nav__link">
         
   
   
@@ -6246,192 +6565,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#개요" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        개요
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#배경-externalips-방식의-한계" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        배경: externalIPs 방식의 한계
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#트래픽-흐름" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        트래픽 흐름
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#수정된-파일-목록" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        수정된 파일 목록
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#적용-방법" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        적용 방법
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="적용 방법">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-haproxy-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. HAProxy 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-helm-upgrade-nodeport--proxy-protocol-활성화" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Helm upgrade (NodePort + PROXY Protocol 활성화)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-nodeport-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. NodePort 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-hosts-파일-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. hosts 파일 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        검증
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="검증">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#클라이언트-ip-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        클라이언트 IP 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nodeport-직접-접근-차단-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NodePort 직접 접근 차단 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clienttrafficpolicy-상태-확인" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ClientTrafficPolicy 상태 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#주의-사항" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        주의 사항
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -6444,7 +6577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/rocky-9/v1.30/online-install/" class="md-nav__link">
+      <a href="../../../k8s/install/rocky-9/v1.30/online-install/" class="md-nav__link">
         
   
   
@@ -6593,10 +6726,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#개요" class="md-nav__link">
+  <a href="#1-문서-목적" class="md-nav__link">
     <span class="md-ellipsis">
       
-        개요
+        1. 문서 목적
       
     </span>
   </a>
@@ -6604,10 +6737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#배경-externalips-방식의-한계" class="md-nav__link">
+  <a href="#2-완료-범위" class="md-nav__link">
     <span class="md-ellipsis">
       
-        배경: externalIPs 방식의 한계
+        2. 완료 범위
       
     </span>
   </a>
@@ -6615,10 +6748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#트래픽-흐름" class="md-nav__link">
+  <a href="#3-테스트-환경" class="md-nav__link">
     <span class="md-ellipsis">
       
-        트래픽 흐름
+        3. 테스트 환경
       
     </span>
   </a>
@@ -6626,10 +6759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#수정된-파일-목록" class="md-nav__link">
+  <a href="#4-버전-및-작업-정책" class="md-nav__link">
     <span class="md-ellipsis">
       
-        수정된 파일 목록
+        4. 버전 및 작업 정책
       
     </span>
   </a>
@@ -6637,22 +6770,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#적용-방법" class="md-nav__link">
+  <a href="#5-업그레이드-전-백업" class="md-nav__link">
     <span class="md-ellipsis">
       
-        적용 방법
+        5. 업그레이드 전 백업
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="적용 방법">
+    <nav class="md-nav" aria-label="5. 업그레이드 전 백업">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-haproxy-설정" class="md-nav__link">
+  <a href="#51-simple-backup-구성" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. HAProxy 설정
+        5.1 Simple Backup 구성
       
     </span>
   </a>
@@ -6660,10 +6793,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-helm-upgrade-nodeport--proxy-protocol-활성화" class="md-nav__link">
+  <a href="#52-업그레이드-전-dump-보존" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Helm upgrade (NodePort + PROXY Protocol 활성화)
+        5.2 업그레이드 전 Dump 보존
       
     </span>
   </a>
@@ -6671,21 +6804,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-nodeport-확인" class="md-nav__link">
+  <a href="#53-무결성-검증" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. NodePort 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-hosts-파일-설정" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. hosts 파일 설정
+        5.3 무결성 검증
       
     </span>
   </a>
@@ -6698,22 +6820,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#검증" class="md-nav__link">
+  <a href="#6-업그레이드-전-점검" class="md-nav__link">
     <span class="md-ellipsis">
       
-        검증
+        6. 업그레이드 전 점검
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="검증">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-노드별-롤링-업그레이드-절차" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 노드별 롤링 업그레이드 절차
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 노드별 롤링 업그레이드 절차">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#클라이언트-ip-확인" class="md-nav__link">
+  <a href="#71-mariadb-중지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        클라이언트 IP 확인
+        7.1 MariaDB 중지
       
     </span>
   </a>
@@ -6721,10 +6854,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nodeport-직접-접근-차단-확인" class="md-nav__link">
+  <a href="#72-정확한-버전으로-패키지-업그레이드" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NodePort 직접 접근 차단 확인
+        7.2 정확한 버전으로 패키지 업그레이드
       
     </span>
   </a>
@@ -6732,10 +6865,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clienttrafficpolicy-상태-확인" class="md-nav__link">
+  <a href="#73-mariadb-시작-및-동기화-확인" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ClientTrafficPolicy 상태 확인
+        7.3 MariaDB 시작 및 동기화 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-시스템-테이블-및-전체-업그레이드" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 시스템 테이블 및 전체 업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-노드-완료-판정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 노드 완료 판정
       
     </span>
   </a>
@@ -6748,10 +6903,121 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#주의-사항" class="md-nav__link">
+  <a href="#8-테스트-중-발생한-주요-문제" class="md-nav__link">
     <span class="md-ellipsis">
       
-        주의 사항
+        8. 테스트 중 발생한 주요 문제
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 테스트 중 발생한 주요 문제">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-dnf-버전-고정-정책에-의한-설치-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 DNF 버전 고정 정책에 의한 설치 차단
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-selinux에-의한-sst-및-ist-차단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 SELinux에 의한 SST 및 IST 차단
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-실패한-sst-프로세스가-종료-대기-상태에-머묾" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 실패한 SST 프로세스가 종료 대기 상태에 머묾
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-mariadb-upgrade-phase-3-잠금-대기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 mariadb-upgrade Phase 3 잠금 대기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-최종-검증-결과" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 최종 검증 결과
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 최종 검증 결과">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-패키지-및-클러스터" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 패키지 및 클러스터
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-db1-백업" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 DB1 백업
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-최종-체크리스트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 최종 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-완료-판정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 완료 판정
       
     </span>
   </a>
@@ -6778,103 +7044,398 @@
   
 
 
-<h1 id="클라이언트-ip-보존-가이드-haproxy--proxy-protocol">클라이언트 IP 보존 가이드 (HAProxy + PROXY Protocol)</h1>
-<h2 id="개요">개요</h2>
-<p>Envoy Gateway NodePort 앞단에 HAProxy를 두고, PROXY Protocol로 실제
-클라이언트 IP를 Envoy에 전달하는 구성입니다.</p>
-<p>로컬 k3s 환경에서 검증 완료되었습니다.</p>
-<h2 id="배경-externalips-방식의-한계">배경: externalIPs 방식의 한계</h2>
-<p>아래 조합으로는 클라이언트 IP 보존이 되지 않습니다.</p>
+<h1 id="mariadb-galera-101114에서-101118-업그레이드-가이드">MariaDB Galera 10.11.14에서 10.11.18 업그레이드 가이드</h1>
+<h2 id="1-문서-목적">1. 문서 목적</h2>
+<p>Rocky Linux 9 기반 3노드 MariaDB Galera Cluster를 MariaDB
+<code>10.11.14</code>에서 <code>10.11.18</code>로 롤링 업그레이드한 결과와 재수행 절차를
+기록한다.</p>
+<p>이 문서는 실제 테스트에서 확인한 명령, 장애 원인, 복구 방법 및 최종
+검증 결과를 기준으로 작성했다. 상세 장애 대응은
+<a href="../galera-upgrade-troubleshooting/">트러블슈팅 문서</a>를
+참조한다.</p>
+<h2 id="2-완료-범위">2. 완료 범위</h2>
 <ul>
-<li>Service type <code>LoadBalancer</code> + <code>externalIPs</code>(노드 IP 수동 패치)</li>
-<li><code>externalTrafficPolicy: Local</code> 설정</li>
+<li>MariaDB <code>10.11.14</code>에서 <code>10.11.18</code>로 3노드 롤링 업그레이드</li>
+<li>Galera <code>26.4.23</code>에서 <code>26.4.27</code>로 업그레이드</li>
+<li>업그레이드 순서 <code>DB3 -&gt; DB2 -&gt; DB1</code> 준수</li>
+<li>각 노드의 <code>mariadb-upgrade</code> 완료</li>
+<li>최종 3노드 <code>Primary</code>, <code>Synced</code>, <code>Ready</code> 상태 확인</li>
+<li>DB1 Simple Backup의 업그레이드 전후 정상 동작 확인</li>
+<li>업그레이드 전 Dump 별도 보존 및 SHA256, gzip 무결성 확인</li>
 </ul>
-<p><code>externalIPs</code>는 kube-proxy의 <code>KUBE-EXTERNAL-IP</code> chain을 사용하며
-<code>externalTrafficPolicy: Local</code>이 적용되지 않아 SNAT가 항상 발생합니다.
-결과적으로 Envoy Pod이 받는 소스 IP가 노드 IP로 고정됩니다.</p>
-<h2 id="트래픽-흐름">트래픽 흐름</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>클라이언트
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → HAProxy (80/443, PROXY Protocol 헤더 추가)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → Envoy NodePort (30080/30443)
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  → Envoy Pod (PROXY Protocol 헤더에서 실제 클라이언트 IP 추출)
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  → Backend Pod (X-Forwarded-For에 실제 클라이언트 IP 포함)
-</code></pre></div>
-<p>TCP 레벨에서 SNAT가 발생해도 PROXY Protocol 헤더는 애플리케이션 레이어에
-있으므로 영향받지 않습니다.</p>
-<h2 id="수정된-파일-목록">수정된 파일 목록</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>envoy-1.36.3/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── gateway-infra/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│   ├── values.yaml            # clientIP.proxyProtocol 항목 추가
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   ├── nodeport-values.yaml   # NodePort + proxyProtocol: true 설정
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   └── templates/
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│       └── main.yaml          # ClientTrafficPolicy 조건부 추가
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>└── haproxy-proxy-protocol.cfg # HAProxy 샘플 설정 (노드 IP 수정 필요)
-</code></pre></div>
-<h2 id="적용-방법">적용 방법</h2>
-<h3 id="1-haproxy-설정">1. HAProxy 설정</h3>
-<p><code>haproxy-proxy-protocol.cfg</code>를 참고해 <code>/etc/haproxy/haproxy.cfg</code>에 추가합니다.
-<code>&lt;NODE_IP&gt;</code> 부분을 실제 Kubernetes 노드 IP로 교체하세요.</p>
-<p>NodePort가 기본값(30080/30443)이 아닌 경우 포트도 함께 수정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 문법 검증</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>haproxy<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span>/etc/haproxy/haproxy.cfg
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 적용</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>haproxy
-</code></pre></div>
-<p>keepalived VIP가 있는 환경이라면 모든 마스터 노드에 동일하게 적용합니다.</p>
-<h3 id="2-helm-upgrade-nodeport--proxy-protocol-활성화">2. Helm upgrade (NodePort + PROXY Protocol 활성화)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>envoy-1.36.3/
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>gateway-infra<span class="w"> </span>./gateway-infra<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>-n<span class="w"> </span>envoy-gateway-system<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>-f<span class="w"> </span>gateway-infra/nodeport-values.yaml
-</code></pre></div>
-<p><code>nodeport-values.yaml</code>에 포함된 내용:</p>
+<p>다음 항목은 이 업그레이드 완료 범위와 별개다.</p>
 <ul>
-<li><code>service.type: NodePort</code></li>
-<li><code>service.trafficPolicy: Local</code></li>
-<li><code>clientIP.proxyProtocol: true</code> → <code>ClientTrafficPolicy</code> 생성</li>
+<li>별도 인스턴스를 이용한 전체 복원 리허설</li>
+<li>업무 애플리케이션별 기능 및 성능 시험</li>
+<li>MariaDB, Galera, SST/IST의 TLS 및 Cipher 정책 변경</li>
 </ul>
-<h3 id="3-nodeport-확인">3. NodePort 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># 80:30080/TCP, 443:30443/TCP 확인</span>
-</code></pre></div>
-<p>기본값(30080/30443)과 다르면 HAProxy 설정의 포트도 맞춰 수정합니다.</p>
-<h3 id="4-hosts-파일-설정">4. hosts 파일 설정</h3>
-<p>DNS 서버 없이 hosts 파일을 사용하는 경우, HAProxy가 떠 있는 노드 IP를
-도메인에 매핑합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;HAProxy-노드-IP&gt;  domain.example.com
-</code></pre></div>
-<p>keepalived VIP가 있다면 VIP를 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&lt;VIP&gt;  domain.example.com
-</code></pre></div>
-<h2 id="검증">검증</h2>
-<h3 id="클라이언트-ip-확인">클라이언트 IP 확인</h3>
-<p>X-Forwarded-For 헤더에 실제 클라이언트 IP가 찍히는지 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Host: &lt;도메인&gt;&quot;</span><span class="w"> </span>http://&lt;HAProxy-IP&gt;/
-</code></pre></div>
-<p>백엔드 앱 로그에서 <code>X-Forwarded-For</code> 값이 클라이언트 IP인지 확인합니다.</p>
-<h3 id="nodeport-직접-접근-차단-확인">NodePort 직접 접근 차단 확인</h3>
-<p><code>clientIP.proxyProtocol: true</code> 적용 후 NodePort 직접 접근은 차단됩니다.
-이것이 정상입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 차단 확인 (timeout 또는 connection reset이 정상)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>curl<span class="w"> </span>--max-time<span class="w"> </span><span class="m">3</span><span class="w"> </span>http://&lt;노드-IP&gt;:30080/
-</code></pre></div>
-<h3 id="clienttrafficpolicy-상태-확인">ClientTrafficPolicy 상태 확인</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>clienttrafficpolicy<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>clienttrafficpolicy<span class="w"> </span>enable-proxy-protocol<span class="w"> </span>-n<span class="w"> </span>envoy-gateway-system
-</code></pre></div>
-<h2 id="주의-사항">주의 사항</h2>
+<h2 id="3-테스트-환경">3. 테스트 환경</h2>
+<table>
+<thead>
+<tr>
+<th>노드</th>
+<th>호스트 이름</th>
+<th>Galera Fixed IP</th>
+<th>관리용 Floating IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DB1</td>
+<td><code>db-upgrade-test-1</code></td>
+<td><code>1.1.1.233</code></td>
+<td><code>10.10.10.101</code></td>
+</tr>
+<tr>
+<td>DB2</td>
+<td><code>db-upgrade-test-2</code></td>
+<td><code>1.1.1.73</code></td>
+<td><code>10.10.10.103</code></td>
+</tr>
+<tr>
+<td>DB3</td>
+<td><code>db-upgrade-test-3</code></td>
+<td><code>1.1.1.156</code></td>
+<td><code>10.10.10.105</code></td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>HAProxy는 반드시 <code>mode tcp</code>를 사용합니다. <code>mode http</code>는 TLS 트래픽을
-  처리할 수 없습니다.</li>
-<li><code>clientIP.proxyProtocol: true</code> 적용 후 NodePort 직접 접근이 차단됩니다.
-  디버깅이 필요하면 임시로 <code>false</code>로 변경 후 upgrade합니다.</li>
-<li><code>send-proxy-v2</code>는 PROXY Protocol v2(바이너리 형식)입니다. 구버전 HAProxy와
-  호환이 필요하면 <code>send-proxy</code>(v1)를 사용할 수 있습니다.</li>
-<li>keepalived + HAProxy HA 구성 환경이라면 모든 마스터 노드에 HAProxy 설정을
-  동일하게 적용해야 합니다.</li>
+<li>Galera 복제에는 OpenStack Fixed IP만 사용했다.</li>
+<li>Floating IP는 SSH와 관리 접속에만 사용했다.</li>
+<li><code>wsrep_cluster_address</code>는 다음과 같이 구성했다.</li>
 </ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://1.1.1.233,1.1.1.73,1.1.1.156&quot;</span>
+</code></pre></div>
+<h2 id="4-버전-및-작업-정책">4. 버전 및 작업 정책</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>업그레이드 전</th>
+<th>업그레이드 후</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MariaDB</td>
+<td><code>10.11.14-1.el9</code></td>
+<td><code>10.11.18-1.el9</code></td>
+</tr>
+<tr>
+<td>Galera</td>
+<td><code>26.4.23-1.el9</code></td>
+<td><code>26.4.27-1.el9</code></td>
+</tr>
+<tr>
+<td>운영체제</td>
+<td>Rocky Linux 9</td>
+<td>변경 없음</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>MariaDB 공식 온라인 DNF 저장소를 사용했다.</li>
+<li>저장소에 여러 <code>10.11.x</code> 버전이 함께 노출되므로 패키지 버전을 정확히
+  지정했다.</li>
+<li>모든 노드를 동시에 중지하지 않고 <code>DB3 -&gt; DB2 -&gt; DB1</code> 순서로 한
+  노드씩 작업했다.</li>
+<li>작업 중 항상 나머지 노드가 <code>Primary</code> 상태를 유지하는지 확인했다.</li>
+</ul>
+<h2 id="5-업그레이드-전-백업">5. 업그레이드 전 백업</h2>
+<h3 id="51-simple-backup-구성">5.1 Simple Backup 구성</h3>
+<p>논리 백업은 DB1에서만 수행했다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>경로</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>백업 스크립트</td>
+<td><code>/opt/mariadb-backup/backup-dump.sh</code></td>
+</tr>
+<tr>
+<td>인증 파일</td>
+<td><code>/etc/mariadb-backup.cnf</code></td>
+</tr>
+<tr>
+<td>일일 Dump</td>
+<td><code>/backup/dump</code></td>
+</tr>
+<tr>
+<td>업그레이드 전 보존본</td>
+<td><code>/backup/pre-upgrade-10.11.14</code></td>
+</tr>
+</tbody>
+</table>
+<p>백업 계정은 <code>backup_user@localhost</code>이며 다음 최소 권한을 사용했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="k">VIEW</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT</span><span class="p">,</span><span class="w"> </span><span class="k">TRIGGER</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;backup_user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p>인증 파일의 계정과 비밀번호가 실제 DB 계정과 일치하는지 확인했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--defaults-extra-file<span class="o">=</span>/etc/mariadb-backup.cnf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-NBe<span class="w"> </span><span class="s2">&quot;SELECT CURRENT_USER(), VERSION();&quot;</span>
+</code></pre></div>
+<p>백업 구성과 운영 절차는
+<a href="../galera-backup-simple-guide/">Galera Simple Backup 가이드</a>를
+참조한다.</p>
+<h3 id="52-업그레이드-전-dump-보존">5.2 업그레이드 전 Dump 보존</h3>
+<p>일일 보존 주기의 정리 대상에서 제외하기 위해 최신 Dump를 별도
+디렉터리에 복사했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-o<span class="w"> </span>root<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-g<span class="w"> </span>root<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>-m<span class="w"> </span><span class="m">700</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>/backup/pre-upgrade-10.11.14
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="s1">set -Eeuo pipefail</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="s1">latest_dump=$(find /backup/dump \</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="s1">  -maxdepth 1 \</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="s1">  -type f \</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s1">  -name &quot;mariadb_full_*.sql.gz&quot; \</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s1">  -printf &quot;%T@ %p\n&quot; |</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s1">  sort -nr |</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s1">  head -1 |</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s1">  cut -d&quot; &quot; -f2-)</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="s1">test -n &quot;${latest_dump}&quot;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="s1">cp -a -- &quot;${latest_dump}&quot; /backup/pre-upgrade-10.11.14/</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="s1">&#39;</span>
+</code></pre></div>
+<h3 id="53-무결성-검증">5.3 무결성 검증</h3>
+<p>보존 디렉터리는 root 전용이므로 root 셸 안에서 와일드카드를 확장했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s1">set -Eeuo pipefail</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s1">cd /backup/pre-upgrade-10.11.14</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s1">sha256sum -- *.sql.gz &gt; SHA256SUMS</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s1">sha256sum -c SHA256SUMS</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s1">gzip -t -- *.sql.gz</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s1">chmod 600 -- *.sql.gz SHA256SUMS</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s1">&#39;</span>
+</code></pre></div>
+<p>테스트 결과 SHA256 검사는 <code>OK</code>, gzip 검사는 종료 코드 <code>0</code>이었다.</p>
+<h2 id="6-업그레이드-전-점검">6. 업그레이드 전 점검</h2>
+<p>각 노드에서 현재 패키지와 클러스터 상태를 기록했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rpm<span class="w"> </span>-qa<span class="w"> </span>--qf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="s1">&#39;%{NAME} %{EPOCHNUM}:%{VERSION}-%{RELEASE}.%{ARCH}\n&#39;</span><span class="w"> </span><span class="p">|</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">&#39;^(MariaDB|galera-4)&#39;</span><span class="w"> </span><span class="p">|</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>sort
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-NBe<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="s2">SELECT @@hostname, VERSION();</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="s2">SHOW GLOBAL STATUS WHERE Variable_name IN (</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="s2">  &#39;wsrep_cluster_size&#39;,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="s2">  &#39;wsrep_cluster_status&#39;,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="s2">  &#39;wsrep_local_state_comment&#39;,</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="s2">  &#39;wsrep_ready&#39;,</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="s2">  &#39;wsrep_connected&#39;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="s2">);</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="s2">SHOW GLOBAL VARIABLES LIKE &#39;wsrep_desync&#39;;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="s2">&quot;</span>
+</code></pre></div>
+<p>작업 시작 기준은 다음과 같다.</p>
+<ul>
+<li><code>wsrep_cluster_size = 3</code></li>
+<li><code>wsrep_cluster_status = Primary</code></li>
+<li>모든 노드의 <code>wsrep_local_state_comment = Synced</code></li>
+<li><code>wsrep_ready = ON</code></li>
+<li><code>wsrep_connected = ON</code></li>
+<li><code>wsrep_desync = OFF</code></li>
+</ul>
+<h2 id="7-노드별-롤링-업그레이드-절차">7. 노드별 롤링 업그레이드 절차</h2>
+<p>다음 절차를 DB3, DB2, DB1 순서로 한 노드씩 수행했다. 현재 작업 중인
+노드가 정상화되기 전에는 다음 노드로 진행하지 않는다.</p>
+<h3 id="71-mariadb-중지">7.1 MariaDB 중지</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>mariadb
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb<span class="w"> </span>--no-pager
+</code></pre></div>
+<h3 id="72-정확한-버전으로-패키지-업그레이드">7.2 정확한 버전으로 패키지 업그레이드</h3>
+<p>기존 <code>exclude</code> 또는 <code>versionlock</code>은 이 명령에서만 우회했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--disableexcludes<span class="o">=</span>all<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--disableplugin<span class="o">=</span>versionlock<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span>MariaDB-server-10.11.18-1.el9.x86_64<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span>MariaDB-client-10.11.18-1.el9.x86_64<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>MariaDB-common-10.11.18-1.el9.x86_64<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span>MariaDB-shared-10.11.18-1.el9.x86_64<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span>MariaDB-backup-10.11.18-1.el9.x86_64<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span>galera-4-26.4.27-1.el9.x86_64
+</code></pre></div>
+<p>설치된 패키지를 확인했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>rpm<span class="w"> </span>-qa<span class="w"> </span>--qf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="s1">&#39;%{NAME} %{EPOCHNUM}:%{VERSION}-%{RELEASE}.%{ARCH}\n&#39;</span><span class="w"> </span><span class="p">|</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>grep<span class="w"> </span>-Ei<span class="w"> </span><span class="s1">&#39;^(MariaDB|galera-4)&#39;</span><span class="w"> </span><span class="p">|</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>sort
+</code></pre></div>
+<h3 id="73-mariadb-시작-및-동기화-확인">7.3 MariaDB 시작 및 동기화 확인</h3>
+<p>SST 또는 IST가 발생할 수 있으므로 비동기로 시작하고 로그를 확인했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>--no-block<span class="w"> </span>mariadb
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mariadb<span class="w"> </span>-f
+</code></pre></div>
+<p>별도 터미널에서 서비스와 클러스터 상태를 확인했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb<span class="w"> </span>--no-pager
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-NBe<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="s2">SHOW GLOBAL STATUS WHERE Variable_name IN (</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="s2">  &#39;wsrep_cluster_size&#39;,</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="s2">  &#39;wsrep_cluster_status&#39;,</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="s2">  &#39;wsrep_local_state_comment&#39;,</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="s2">  &#39;wsrep_ready&#39;,</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="s2">  &#39;wsrep_connected&#39;</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="s2">);</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="s2">&quot;</span>
+</code></pre></div>
+<p>해당 노드가 <code>Synced</code>, <code>Ready=ON</code>, <code>Connected=ON</code>이 된 후 다음 단계로
+진행했다.</p>
+<h3 id="74-시스템-테이블-및-전체-업그레이드">7.4 시스템 테이블 및 전체 업그레이드</h3>
+<p>테스트 중 Phase 3 메타데이터 잠금을 경험했으므로 DB1에서는 시스템
+테이블을 먼저 처리한 후 전체 검사를 수행했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>mariadb-upgrade<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--force<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--skip-write-binlog<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>--upgrade-system-tables
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>sudo<span class="w"> </span>mariadb-upgrade<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">  </span>--force<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span>--skip-write-binlog
+</code></pre></div>
+<p>완료 버전을 확인했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>cat<span class="w"> </span>/var/lib/mysql/mysql_upgrade_info
+</code></pre></div>
+<p>기대값은 다음과 같다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>10.11.18-MariaDB
+</code></pre></div>
+<h3 id="75-노드-완료-판정">7.5 노드 완료 판정</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>mariadb<span class="w"> </span>-NBe<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="s2">SELECT @@hostname, VERSION();</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="s2">SHOW GLOBAL STATUS WHERE Variable_name IN (</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="s2">  &#39;wsrep_cluster_size&#39;,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="s2">  &#39;wsrep_cluster_status&#39;,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="s2">  &#39;wsrep_local_state_comment&#39;,</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="s2">  &#39;wsrep_ready&#39;,</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="s2">  &#39;wsrep_connected&#39;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="s2">);</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="s2">SHOW GLOBAL VARIABLES LIKE &#39;wsrep_desync&#39;;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="s2">&quot;</span>
+</code></pre></div>
+<p>다음 조건을 모두 만족해야 해당 노드의 작업이 완료된 것이다.</p>
+<ul>
+<li>MariaDB 버전이 <code>10.11.18-MariaDB</code></li>
+<li><code>wsrep_cluster_size = 3</code></li>
+<li><code>wsrep_cluster_status = Primary</code></li>
+<li><code>wsrep_local_state_comment = Synced</code></li>
+<li><code>wsrep_ready = ON</code></li>
+<li><code>wsrep_connected = ON</code></li>
+<li><code>wsrep_desync = OFF</code></li>
+</ul>
+<h2 id="8-테스트-중-발생한-주요-문제">8. 테스트 중 발생한 주요 문제</h2>
+<h3 id="81-dnf-버전-고정-정책에-의한-설치-차단">8.1 DNF 버전 고정 정책에 의한 설치 차단</h3>
+<p><code>All matches were filtered out by exclude filtering</code> 오류가 발생했다.
+정확한 패키지 버전을 지정하고 해당 설치 명령에서만 <code>exclude</code>와
+<code>versionlock</code>을 우회해 해결했다.</p>
+<h3 id="82-selinux에-의한-sst-및-ist-차단">8.2 SELinux에 의한 SST 및 IST 차단</h3>
+<p>SELinux가 <code>4444/TCP</code>, <code>4568/TCP</code> 리스닝과 SST 내부 <code>timeout</code> 프로세스의
+<code>setpgid</code> 동작을 차단했다. Galera 포트를 <code>mysqld_port_t</code>로 등록하고
+최소 권한 SELinux 정책 모듈을 적용해 해결했다.</p>
+<p>Rocky Linux 9에서는 <code>4444/TCP</code>가 <code>kerberos_port_t</code>로 등록되어 있을 수
+있으므로 Kerberos 사용 여부를 먼저 확인해야 한다.</p>
+<h3 id="83-실패한-sst-프로세스가-종료-대기-상태에-머묾">8.3 실패한 SST 프로세스가 종료 대기 상태에 머묾</h3>
+<p>서비스가 <code>deactivating/stop-sigterm</code> 상태에서 멈췄다. 나머지 두 노드가
+정상 <code>Primary</code>이고 장애 노드가 Joiner임을 확인한 후 해당 노드의
+MariaDB 서비스 cgroup만 종료하고 재시작했다.</p>
+<h3 id="84-mariadb-upgrade-phase-3-잠금-대기">8.4 mariadb-upgrade Phase 3 잠금 대기</h3>
+<p>DB2에서 <code>mysql.proc</code> 변경 작업이 메타데이터 잠금을 기다리며 멈췄다.
+남아 있는 업그레이드 세션을 정리한 후 시스템 테이블 전용 업그레이드와
+전체 업그레이드를 순서대로 실행해 완료했다.</p>
+<p>세부 진단 및 복구 명령은
+<a href="../galera-upgrade-troubleshooting/">트러블슈팅 문서</a>를
+참조한다.</p>
+<h2 id="9-최종-검증-결과">9. 최종 검증 결과</h2>
+<h3 id="91-패키지-및-클러스터">9.1 패키지 및 클러스터</h3>
+<table>
+<thead>
+<tr>
+<th>노드</th>
+<th>MariaDB</th>
+<th>Galera</th>
+<th>클러스터 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DB1</td>
+<td><code>10.11.18-1.el9</code></td>
+<td><code>26.4.27-1.el9</code></td>
+<td><code>Primary</code>, <code>Synced</code></td>
+</tr>
+<tr>
+<td>DB2</td>
+<td><code>10.11.18-1.el9</code></td>
+<td><code>26.4.27-1.el9</code></td>
+<td><code>Primary</code>, <code>Synced</code></td>
+</tr>
+<tr>
+<td>DB3</td>
+<td><code>10.11.18-1.el9</code></td>
+<td><code>26.4.27-1.el9</code></td>
+<td><code>Primary</code>, <code>Synced</code></td>
+</tr>
+</tbody>
+</table>
+<p>최종 확인 시 클러스터 크기는 <code>3</code>, 모든 노드는 <code>Ready=ON</code>,
+<code>Connected=ON</code>, <code>wsrep_desync=OFF</code>였다.</p>
+<h3 id="92-db1-백업">9.2 DB1 백업</h3>
+<p>업그레이드 후 DB1에서 백업 서비스를 수동 실행했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mariadb-backup-dump.service
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb-backup-dump.service<span class="w"> </span>--no-pager
+</code></pre></div>
+<p><code>Type=oneshot</code> 서비스이므로 작업 후 <code>inactive (dead)</code>로 표시되는 것은
+정상이다. 성공 기준은 <code>code=exited, status=0/SUCCESS</code>이다.</p>
+<p>생성된 백업은 다음과 같다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>/backup/dump/mariadb_full_20260723_101137.sql.gz
+</code></pre></div>
+<p>확인된 SHA256은 다음과 같다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>f7fe556695f1ea1f497873a592af9efe68b3f3846b4173545874e3366cd46e60
+</code></pre></div>
+<p>gzip 무결성 검사, <code>backup_user</code> 인증, <code>wsrep_desync=OFF</code>,
+<code>wsrep_local_state_comment=Synced</code>를 확인했다.</p>
+<p>백업 타이머도 다시 활성화했다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mariadb-backup-dump.timer
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>list-timers<span class="w"> </span>mariadb-backup-dump.timer<span class="w"> </span>--all
+</code></pre></div>
+<p>서버 표시 기준 <code>17:00 UTC</code>는 다음 날 <code>02:00 Asia/Seoul</code>에 해당한다.</p>
+<h2 id="10-최종-체크리스트">10. 최종 체크리스트</h2>
+<ul>
+<li>[x] 3노드 Galera Cluster 사전 정상 상태 확인</li>
+<li>[x] DB1 업그레이드 전 논리 백업 생성</li>
+<li>[x] 업그레이드 전 Dump 별도 보존</li>
+<li>[x] SHA256 및 gzip 무결성 확인</li>
+<li>[x] DB3를 MariaDB 10.11.18로 업그레이드</li>
+<li>[x] DB3의 SST/IST 및 <code>Synced</code> 상태 확인</li>
+<li>[x] DB2를 MariaDB 10.11.18로 업그레이드</li>
+<li>[x] DB2의 시스템 테이블과 전체 <code>mariadb-upgrade</code> 완료</li>
+<li>[x] DB1을 MariaDB 10.11.18로 업그레이드</li>
+<li>[x] DB1의 시스템 테이블과 전체 <code>mariadb-upgrade</code> 완료</li>
+<li>[x] 전체 노드의 패키지 버전 확인</li>
+<li>[x] 클러스터 크기 <code>3</code>, <code>Primary</code>, 전체 <code>Synced</code> 확인</li>
+<li>[x] 업그레이드 후 DB1 논리 백업 성공</li>
+<li>[x] 백업 계정 인증 및 백업 타이머 확인</li>
+<li>[ ] 별도 인스턴스 전체 복원 리허설</li>
+<li>[ ] 업무 애플리케이션별 접속 및 기능 검증</li>
+<li>[ ] TLS/HMAC 점검 대상 포트와 Cipher 확인 및 별도 조치</li>
+</ul>
+<h2 id="11-완료-판정">11. 완료 판정</h2>
+<p>2026-07-23 기준 MariaDB Galera 3노드의 <code>10.11.14</code>에서 <code>10.11.18</code>로
+롤링 업그레이드와 업그레이드 후 논리 백업 검증을 완료했다.</p>
+<p>운영 반영 시에도 이 문서의 순서와 중단 조건을 적용하고, 한 노드가
+완전히 <code>Synced</code> 상태로 복귀한 뒤 다음 노드를 작업한다.</p>
 
 
 
